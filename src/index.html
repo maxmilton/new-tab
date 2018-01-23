@@ -1,22 +1,6 @@
-<!--
-  README:
-    This template is interpreted as a string template literal. "d" is an
-    object with the data that's is passed in.
--->
-
 <!doctype html>
-<html>
-<head>
-  <meta charset="utf-8">
-  <title>NEW TAB</title>
-
-  <!-- CSS includes -->
-  ${d.head}
-</head>
-<body>
-  <div id="app"></div>
-
-  <!-- JS includes -->
-  ${d.body}
-</body>
-</html>
+<meta charset=utf-8>
+<title>New Tab</title>
+<style>${d.css}</style>
+<div id=app></div>
+<script src=${d.js}></script>
