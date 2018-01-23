@@ -1,0 +1,32 @@
+{
+  "name": "chrome-new-tab",
+  "version": "0.0.0",
+  "description": "An experimental Google Chrome new tab page extension",
+  "author": "Max Milton <max@wearegenki.com>",
+  "license": "MIT",
+  "private": true,
+  "scripts": {
+    "start": "npm run dev",
+    "dev": "NODE_ENV=development browser-refresh server.js",
+    "prebuild": "rm -rf ./cache ./dist",
+    "build": "NODE_ENV=production node build.js",
+    "make": "npm run build && http-server -o ./dist"
+  },
+  "dependencies": {
+    "marko": "^4.7.5"
+  },
+  "devDependencies": {
+    "eslint": "^4.16.0",
+    "eslint-config-airbnb-base": "^12.1.0",
+    "eslint-plugin-import": "^2.8.0",
+    "lasso": "^3.1.2",
+    "lasso-marko": "^2.4.0"
+  },
+  "engines": {
+    "node": ">= 9.4.0",
+    "npm": ">= 3.10.10"
+  },
+  "browserslist": [
+    "last 2 Chrome versions"
+  ]
+}

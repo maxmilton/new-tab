@@ -1,0 +1,15 @@
+:root {
+  --font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Cantarell, "Helvetica Neue", sans-serif;
+  --font-size: 1rem;
+  --font-weight: 500;
+  --body-font-colour: #fff;
+  --body-bg-colour: #000;
+}
+
+body {
+  font-family: var(--font-family);
+  font-size: var(--font-size);
+  font-weight: var(--font-weight);
+  color: var(--body-font-colour);
+  background-color: var(--body-bg-colour);
+}

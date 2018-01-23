@@ -1,0 +1,9 @@
+node_modules/
+dist/
+test/unit/coverage/
+package-lock.json*
+*.log
+.cache/
+*.marko.js
+*.bak.js
+*.bak

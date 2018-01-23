@@ -1,0 +1,11 @@
+{
+  "manifest_version": 2,
+  "name": "Chrome New Tab",
+  "short_name": "cnt",
+  "version": "0.0.0",
+  "description": "An experimental Google Chrome new tab page extension",
+  "permissions": ["tabs", "bookmarks", "history"],
+  "chrome_url_overrides": {
+    "newtab": "index.html"
+  }
+}
