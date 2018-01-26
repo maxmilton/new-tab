@@ -23,13 +23,14 @@
   },
   "dependencies": {
     "marko": "^4.7.5",
-    "marko-bind": "^0.0.0"
+    "marko-bind": "^0.1.0"
   },
   "devDependencies": {
-    "@wearegenki/ui-stylelint": "^0.3.0",
+    "@types/chrome": "^0.0.58",
+    "@types/lasso": "^2.4.0",
+    "@wearegenki/eslint-config": "0.4.0-alpha.09cfe267",
+    "@wearegenki/stylelint-config": "0.4.0-alpha.09cfe267",
     "eslint": "^4.16.0",
-    "eslint-config-airbnb-base": "^12.1.0",
-    "eslint-plugin-import": "^2.8.0",
     "lasso": "^3.1.2",
     "lasso-marko": "^2.4.0",
     "stylelint": "^8.4.0"
