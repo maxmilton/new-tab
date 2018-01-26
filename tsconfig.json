@@ -1,0 +1,29 @@
+// config for rich intelliSence in VS Code
+{
+  "compilerOptions": {
+    "target": "es2017",
+    "module": "es6",
+    "moduleResolution": "node",
+    "allowSyntheticDefaultImports": true,
+    "esModuleInterop": true,
+    "allowJs": true,
+    "checkJs": true,
+
+    "strict": true,
+    "noUnusedLocals": true,
+    "noUnusedParameters": true,
+    "noImplicitReturns": true,
+    "noFallthroughCasesInSwitch": true,
+
+    "baseUrl": "."
+  },
+  "exclude": [
+    "node_modules",
+    "dist",
+    ".cache",
+    ".vscode"
+  ],
+  "typeAcquisition": {
+    "enable": true
+  }
+}
