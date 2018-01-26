@@ -1,23 +1,27 @@
-// TODO: Minify HTML
-
 'use strict'; // eslint-disable-line
 
 const fs = require('fs');
 const path = require('path');
-const lasso = require('lasso');
+const lasso = require('lasso'); // eslint-disable-line import/no-extraneous-dependencies
+const pkg = require('./package.json');
+const manifest = require('./manifest.json');
 
 const isProduction = process.env.NODE_ENV === 'production';
+
+const banner = `/*!
+ * new-tab v${pkg.version}
+ * Copyright ${new Date().getFullYear()} ${pkg.author}
+ * MIT licensed (https://github.com/MaxMilton/chrome-new-tab/blob/master/LICENCE)
+ */`;
 
 lasso.configure({
   plugins: ['lasso-marko'],
   urlPrefix: '',
   outputDir: path.join(__dirname, 'dist'),
-  bundlingEnabled: isProduction,
+  bundlingEnabled: true,
   minify: isProduction,
   fingerprintsEnabled: false,
   includeSlotNames: false,
-  // relativeUrlsEnabled: true,
-  // resolveCssUrls: false,
 });
 
 // ultra-minimal template engine
@@ -44,12 +48,13 @@ lasso.lassoPage({
   fs.unlinkSync(cssFile);
 
   // all JS in a single file; append ready function
-  fs.writeFileSync(jsFile, `${fs.readFileSync(jsFile)}\n$_mod.ready();`);
+  fs.writeFileSync(jsFile, `${banner}\n${fs.readFileSync(jsFile)}\n$_mod.ready();`);
 }).catch((err) => {
   throw err;
 });
 
-// copy manifest
+// write manifest
 fs.mkdir('dist', () => {
-  fs.copyFileSync('manifest.json', 'dist/manifest.json');
+  manifest.version = pkg.version;
+  fs.writeFileSync('dist/manifest.json', JSON.stringify(manifest));
 });

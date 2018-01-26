@@ -1,8 +1,8 @@
 {
   "manifest_version": 2,
 
-  "name": "Chrome New Tab",
-  "description": "An experimental Google Chrome new tab page extension",
+  "name": "New Tab",
+  "description": "A minimal and high performance Google Chrome new tab page (NTP) extension.",
   "version": "0.0.0",
 
   "permissions": ["tabs", "bookmarks", "history"],

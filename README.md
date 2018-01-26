@@ -3,6 +3,7 @@
   TODO: Come up with a good name.
   TODO: Create app icons.
   TODO: Set up test framework and write tests.
+  TODO: Update manifest in preparation for publishing..
   TODO: Publish on the Chrome web store.
   TODO: Add links to the extension in the Chrome web store (readme, changelog, github, etc.).
 -->
