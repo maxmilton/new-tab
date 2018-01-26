@@ -1,0 +1,18 @@
+// FIXME: REMOVE THIS FILE, it's just an example component
+
+class {
+  onCreate() {
+    this.state = {
+      count: 0,
+    }
+  }
+
+  increment() {
+    this.state.count++;
+  }
+}
+
+button.btn type="button" on-click('increment')
+  -- Click me
+
+p -- Count: ${state.count}

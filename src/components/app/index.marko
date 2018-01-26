@@ -1,7 +1,9 @@
+/// <reference types="chrome" />
+
 class {
   onCreate() {
     this.state = {
-      count: 0,
+      search: 'xxxXXX',
     }
   }
 
@@ -9,12 +11,23 @@ class {
     console.debug('Mounted in the browser!');
   }
 
-  increment() {
-    this.state.count++;
+  handleInput(key, event) {
+   this.setState(key, event.target.value);
+  }
+
+  searchDynamic() {
+    return 'search';
   }
 }
 
-button.btn type="button" on-click('increment')
-  -- Click me
+div#menu
+  a href="chrome://apps/" -- Show Apps
+  a href="chrome-search://local-ntp/local-ntp.html" -- Open Default Tab
 
-p -- Count: ${state.count}
+input#search bind('search') type="text"
+
+input#search2 bind(searchDynamic) type="text"
+
+input#search3 type="text" value=state.search on-input('handleInput', 'search')
+
+p -- ${state.search}
