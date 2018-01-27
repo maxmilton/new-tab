@@ -1,5 +1,5 @@
 {
-  "name": "chrome-new-tab",
+  "name": "new-tab",
   "version": "0.0.0",
   "description": "A minimal and high performance Google Chrome new tab page (NTP) extension.",
   "keywords": [
@@ -15,8 +15,8 @@
   "private": true,
   "scripts": {
     "start": "npm run dev",
-    "__dev": "NODE_ENV=development browser-refresh build.js",
-    "dev": "NODE_ENV=development node build.js",
+    "__dev": "NODE_ENV=development browser-refresh build.js --development",
+    "dev": "NODE_ENV=development node build.js --development",
     "prebuild": "rm -rf ./cache ./dist",
     "build": "NODE_ENV=production node build.js",
     "make": "npm run build && http-server -o ./dist"
@@ -28,18 +28,23 @@
   "devDependencies": {
     "@types/chrome": "^0.0.58",
     "@types/lasso": "^2.4.0",
-    "@wearegenki/eslint-config": "0.4.0-alpha.09cfe267",
-    "@wearegenki/stylelint-config": "0.4.0-alpha.09cfe267",
+    "@wearegenki/eslint-config": "^0.4.1",
+    "@wearegenki/postcss-config": "^0.4.1",
+    "@wearegenki/stylelint-config": "^0.4.1",
+    "clean-css": "^4.1.9",
     "eslint": "^4.16.0",
     "lasso": "^3.1.2",
     "lasso-marko": "^2.4.0",
-    "stylelint": "^8.4.0"
+    "lasso-postcss": "^0.4.0",
+    "postcss": "^6.0.16",
+    "stylelint": "^8.4.0",
+    "uglify-es": "^3.3.9"
   },
   "engines": {
     "node": ">= 9.4.0",
     "npm": ">= 3.10.10"
   },
   "browserslist": [
-    "last 2 Chrome major versions"
+    "last 2 Chrome versions"
   ]
 }
