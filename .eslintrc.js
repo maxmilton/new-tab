@@ -5,7 +5,7 @@
 module.exports = {
   root: true,
   extends: [
-    '@wearegenki/eslint-config',
+    '@wearegenki/eslint-config/marko',
   ],
   parserOptions: {
     ecmaVersion: 8,
@@ -17,6 +17,5 @@ module.exports = {
   env: {
     webextensions: true,
     es6: true,
-    browser: true,
   },
 };

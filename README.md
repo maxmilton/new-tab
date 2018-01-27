@@ -8,7 +8,7 @@
   TODO: Add links to the extension in the Chrome web store (readme, changelog, github, etc.).
 -->
 
-# Chrome New Tab
+# New Tab
 
 A minimal and high performance Google Chrome new tab page (NTP) extension.
 
@@ -19,7 +19,7 @@ This is an experimental project there's no set feature set yet. At the moment it
 Features:
 
 * Access — you'll still have access to common links like your bookmarks bar etc.
-* Speed — the default new tab page can be slow (it requires network requests etc. before one elements display) so a major focus area of this extension is performance. Page load performance, file size, and runtime performance are all scrupulously optimised.
+* Speed — the default new tab page can be slow (it requires network requests etc. before some elements display) but a major focus area of this extension is performance. Page load performance, file size, and runtime performance are all scrupulously optimised.
 * Privacy — most NTPs add user tracking scripts... not this one!
 * Unobtrusive — doesn't add annoying things like entries to your right click context menu.
 
