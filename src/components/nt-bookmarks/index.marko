@@ -1,0 +1,51 @@
+class {
+  onCreate() {
+    this.state = {
+      bookmarksBar: [],
+      bookmarksOther: [],
+    }
+  }
+
+  onMount() {
+    chrome.bookmarks.getTree((tree) => {
+      // console.log('@ BOOKMARKS', tree);
+      this.state.bookmarksBar = tree[0].children[0].children;
+      this.state.bookmarksOther = tree[0].children[1].children;
+    });
+  }
+}
+
+style {
+  #bookmarks-bar {
+    display: flex;
+    align-items: stretch;
+    overflow: hidden;
+    background: var(--grey-dark);
+  }
+
+  .folder,
+  .bookmark {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: clip;
+    max-width: 13ch; /* "ch" ~ characters; width of the "0" character */
+    padding: 9px 18px;
+    color: var(--grey-light);
+    text-decoration: none;
+  }
+
+  .folder-other {
+    max-width: fit-content;
+    overflow: initial;
+  }
+}
+
+<!-- FIXME: Add favicons -->
+div#bookmarks-bar
+  for(bookmark in state.bookmarksBar)
+    if(bookmark.children)
+      div.folder -- ${bookmark.title}
+    else
+      a.bookmark href=bookmark.url -- ${bookmark.title}
+
+  div.folder.folder-other -- Other bookmarks
