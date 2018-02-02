@@ -4,8 +4,13 @@
  * @author Max Milton <max@wearegenki.com>
  */
 
-const app = require('./components/app');
+const app = require('./components/ntp');
+const { onClick } = require('./helpers');
 
 app
-  .renderSync()
-  .replace(document.getElementById('app'));
+  .renderSync({
+    $global: {
+      onClick,
+    },
+  })
+  .replace(document.getElementById('ntp'));
