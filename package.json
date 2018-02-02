@@ -1,6 +1,6 @@
 {
   "name": "new-tab",
-  "version": "0.0.0",
+  "version": "0.1.0",
   "description": "A minimal and high performance Google Chrome new tab page (NTP) extension.",
   "keywords": [
     "chrome-extension",
@@ -18,7 +18,7 @@
     "dev": "APP_RELEASE=$(git describe --always) NODE_ENV=development node dev-server.js",
     "prebuild": "rm -rf ./cache ./dist",
     "build": "APP_RELEASE=$(git describe --always) NODE_ENV=production node build.js",
-    "make": "npm run build && http-server -o ./dist"
+    "postbuild": "zip -9 -j dist/new-tab.zip dist/*"
   },
   "dependencies": {
     "fast-memoize": "^2.2.8"
