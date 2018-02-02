@@ -22,20 +22,21 @@
     "make": "npm run build && http-server -o ./dist"
   },
   "dependencies": {
-    "marko": "^4.7.5",
-    "marko-bind": "^0.1.0"
+    "fast-memoize": "^2.2.8"
   },
   "devDependencies": {
-    "@types/chrome": "^0.0.58",
-    "@types/lasso": "^2.4.0",
-    "@wearegenki/eslint-config": "^0.4.1",
-    "@wearegenki/postcss-config": "^0.4.1",
-    "@wearegenki/stylelint-config": "^0.4.1",
+    "@types/chrome": "^0.0.59",
+    "@wearegenki/eslint-config": "^0.4.2",
+    "@wearegenki/postcss-config": "^0.4.2",
+    "@wearegenki/stylelint-config": "^0.4.2",
+    "browser-sync": "^2.23.6",
     "clean-css": "^4.1.9",
     "eslint": "^4.16.0",
     "lasso": "^3.1.2",
     "lasso-marko": "^2.4.0",
     "lasso-postcss": "^0.4.0",
+    "marko": "^4.7.5",
+    "marko-bind": "^0.1.0",
     "postcss": "^6.0.16",
     "stylelint": "^8.4.0",
     "uglify-es": "^3.3.9"
