@@ -15,10 +15,9 @@
   "private": true,
   "scripts": {
     "start": "npm run dev",
-    "__dev": "NODE_ENV=development browser-refresh build.js --development",
-    "dev": "NODE_ENV=development node build.js --development",
+    "dev": "APP_RELEASE=$(git describe --always) NODE_ENV=development node dev-server.js",
     "prebuild": "rm -rf ./cache ./dist",
-    "build": "NODE_ENV=production node build.js",
+    "build": "APP_RELEASE=$(git describe --always) NODE_ENV=production node build.js",
     "make": "npm run build && http-server -o ./dist"
   },
   "dependencies": {
