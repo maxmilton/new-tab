@@ -9,11 +9,29 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ## [Unreleased]
 
-## [0.2.0] - 2018-TBA
+## [0.2.0] - 2018-02-03
 
 ### Added
 
-- TBA
+- Subtle shadows to show depth and highlight areas of interest.
+- New menu items and menu open animation.
+- Listen to tab events and update tabs list when something changes.
+
+### Fixed
+
+- Bookmark folders open to the right if there's not enough space to show the folder in the window.
+
+### Changed
+
+- Renamed all files and directories for consistency.
+- A more logical file layout including most Marko components as single files rather than directories with multiple files.
+- Better build flow.
+- Performance improvements:
+  - Inline CSS in HTML + add minimal page markup to template for near-instant initial page load.
+  - Better minification in builds — even though Chrome extensions serve local files from the filesystem, minification still improves browser parsing times.
+  - Short CSS classes for faster DOM parsing and matching.
+  - Set many elements as `no-update` for much faster Marko rendering passes.
+  - Use `key` on repeating elements for faster rendering when elements move in the DOM (e.g. during search/filtering).
 
 ## 0.1.0 - 2018-01-25
 
