@@ -1,0 +1,66 @@
+class {
+  onCreate(input, out) {
+    // workaround to open internal chrome links
+    this.onClick = out.global.onClick;
+  }
+}
+
+style {
+  #m { /* menu */
+    position: absolute;
+    padding: 18px 84px 84px 42px;
+    margin: -28px -84px -84px 0;
+    display: inline-block;
+    font-size: 20px;
+  }
+
+  #i { /* menu icon */
+    font-size: 30px;
+    color: var(--g4);
+  }
+
+  #d { /* menu dropdown */
+    position: absolute;
+    z-index: 1;
+    top: 18px;
+    left: 42px;
+    padding: 18px;
+    white-space: nowrap;
+    background: var(--g1);
+    filter: drop-shadow(0 18px 18px rgba(0,0,0,.3));
+    opacity: 0;
+    transition: scale 150ms ease-out;
+    transform-origin: 0 18px;
+    scale: 0.5 0.5;
+
+    #m:hover > &,
+    #m:focus > & {
+      opacity: 1;
+      scale: 1 1;
+    }
+  }
+
+  .m { /* menu item */
+    display: block;
+    padding: 9px 0;
+    color: var(--g5);
+  }
+
+  hr {
+    width: 100%;
+    border: 0;
+    border-bottom: 1px solid var(--g0);
+  }
+}
+
+div#m no-update
+  div#i -- ☰
+
+  div#d
+    a.m on-click('onClick') href="chrome-search://local-ntp/local-ntp.html" -- Open Default Tab
+    a.m on-click('onClick') href="chrome://bookmarks/" -- Bookmarks Manager
+    // a.m on-click('onClick') href="chrome://apps/" -- Show Apps
+
+    hr
+
+    a.m href="https://github.com/MaxMilton/new-tab/issues" -- Submit Bug

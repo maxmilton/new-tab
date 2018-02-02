@@ -1,0 +1,69 @@
+/**
+ * GLOBAL STYLES
+ */
+
+:root {
+  /* Colours inspired by https://github.com/Binaryify/OneDark-Pro */
+  --g0: #21252b;
+  --g1: #2f333d;
+  --g2: #282c34;
+  --g4: #383e4a;
+  --g5: #9da5b4;
+}
+
+html,
+body,
+div,
+a,
+h2,
+p,
+ul,
+li,
+input {
+  box-sizing: border-box;
+}
+
+body {
+  padding-bottom: 54px;
+  margin: 100px 0 0;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Cantarell, "Helvetica Neue", sans-serif;
+  font-size: 18px;
+  text-rendering: optimizeLegibility;
+  color: var(--g5);
+  background-color: var(--g0);
+}
+
+h2 {
+  color: var(--g4);
+}
+
+a {
+  text-decoration: none;
+
+  &:hover,
+  &:focus {
+    text-decoration: underline;
+  }
+}
+
+.c { /* container */
+  max-width: 60rem;
+  padding-right: 18px;
+  padding-left: 18px;
+  margin-right: auto;
+  margin-left: auto;
+}
+
+.g { /* muted grey colour */
+  color: var(--g4);
+}
+
+button {
+  width: 100%;
+  padding: 18px;
+  font-size: 20px;
+  color: var(--g5);
+  cursor: pointer;
+  background: var(--g2);
+  border: 1px solid var(--g4);
+}

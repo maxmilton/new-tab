@@ -1,0 +1,88 @@
+import ntpFolder from './ntp-folder';
+
+class {
+  onCreate(input, out) {
+    this.state = {
+      bookmarksOther: { title: 'Other bookmarks' },
+      bookmarksBar: [],
+    }
+
+    // workaround to open internal chrome links
+    this.onClick = out.global.onClick;
+
+    chrome.bookmarks.getTree((tree) => {
+      this.state.bookmarksBar = tree[0].children[0].children;
+      this.state.bookmarksOther = tree[0].children[1];
+    });
+  }
+}
+
+style {
+  #b { /* bookmarks */
+    position: fixed;
+    z-index: 2;
+    display: flex;
+    top: 0;
+    right: 0;
+    left: 0;
+    min-height: 41px;
+    padding: 0 7px;
+    background: var(--g1);
+    filter: drop-shadow(0 9px 9px rgba(0,0,0,.14));
+
+    &:last-child {
+      margin-left: auto;
+    }
+  }
+
+  #bb { /* bookmarks bar */
+    display: flex;
+    flex-wrap: wrap; /* the best I can do without sacrificing performance */
+    align-items: center;
+    margin-right: auto;
+  }
+
+  .b { /* bookmark item */
+    display: inline-flex;
+    align-items: center;
+    padding: 9px 7px;
+    color: var(--g5);
+    text-decoration: none;
+    white-space: nowrap;
+
+    &:hover {
+      background-color: var(--g2);
+    }
+  }
+
+  .i,
+  .t {
+    z-index: -1;
+  }
+
+  .i { /* favicon */
+    width: 16px;
+    height: 16px;
+  }
+
+  .t { /* bookmark title */
+    max-width: 15ch;
+    padding-left: 9px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+}
+
+div#b
+  div#bb
+    for(bookmark in state.bookmarksBar)
+      if(bookmark.children)
+        <!-- folder -->
+        include(ntpFolder, bookmark)
+      else
+        <!-- bookmark link -->
+        a.b on-click('onClick') href=bookmark.url no-update
+          img.i src=`chrome://favicon/${bookmark.url}` decoding="async"
+          span.t if(bookmark.title) -- ${bookmark.title}
+
+  include(ntpFolder, state.bookmarksOther)

@@ -1,0 +1,112 @@
+// FIXME: Add delay in opening folder for subfolders to prevent accidental opening when hovering past
+
+// FIXME: Close any other open folders when opening subsequent folders
+
+import ntpFolder from './ntp-folder';
+
+class {
+  onCreate(input, out) {
+    this.state = {
+      show: false,
+    }
+    this.closeTimer = null;
+
+    // workaround to open internal chrome links
+    this.onClick = out.global.onClick;
+  }
+
+  onFolderMouseLeave(event) {
+    // set up close timer
+    if (this.state.show) {
+      this.closeTimer = setTimeout(() => {
+        this.state.show = false;
+      }, 400); // close delay
+    }
+  }
+
+  onFolderMouseEnter() {
+    if (this.state.show) {
+      // reset close timer
+      if (this.closeTimer !== null) {
+        clearTimeout(this.closeTimer);
+        this.closeTimer = null;
+      }
+    } else {
+      this.state.show = true;
+
+      // push to end of execution queue; after subfolder renders to the DOM
+      setTimeout(() => {
+        // reposition the subfolder if it's outside the document
+        const el = this.getEl('s');
+        const rect = el.getBoundingClientRect();
+
+        if ((rect.left + rect.width) > document.body.clientWidth) {
+          el.classList.add('l');
+        }
+      }, 0);
+    }
+  }
+}
+
+style {
+  .f { /* folder */
+    position: relative;
+    cursor: pointer;
+  }
+
+  .e { /* triangle; caret */
+    margin-left: auto;
+  }
+
+  .s { /* subfolder */
+    position: absolute;
+    top: 41px;
+    left: 0;
+    display: flex;
+    flex-direction: column;
+    background: var(--g1);
+    filter: drop-shadow(0 18px 18px rgba(0,0,0,.3));
+
+    .b { /* bookmark */
+      padding: 9px;
+    }
+
+    .t { /* bookmark title */
+      max-width: 40ch;
+    }
+
+    & & {
+      top: 0;
+      left: 100%;
+    }
+  }
+
+  .l { /* left side folder */
+    right: 0;
+    left: initial;
+
+    .s { /* subfolder */
+      right: 100%;
+      left: initial;
+    }
+  }
+}
+
+div.b.f on-mouseleave('onFolderMouseLeave') on-mouseenter('onFolderMouseEnter')
+  -- ${input.title}
+
+  if(input.parentId > 1)
+    // span.e -- ▸
+    span.e -- ▶
+
+  if(state.show)
+    div.s key="s"
+      for(bookmark in input.children)
+        if(bookmark.children)
+          <!-- folder -->
+          include(ntpFolder, bookmark)
+        else
+          <!-- bookmark -->
+          a.b on-click('onClick') href=bookmark.url no-update
+            img.i src=`chrome://favicon/${bookmark.url}` decoding="async"
+            span.t -- ${bookmark.title}

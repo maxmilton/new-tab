@@ -1,0 +1,163 @@
+import memoize from 'fast-memoize';
+
+static const doSearch = memoize((text, array) =>
+  array.filter(item =>
+    item.title.toLowerCase().indexOf(text) > -1 ||
+    item.url.toLowerCase().indexOf(text) > -1));
+
+class {
+  onCreate(input, out) {
+    this.state = {
+      search: '',
+      tabsRaw: [],
+      tabs: [],
+      bookmarksRaw: [],
+      bookmarks: [],
+    }
+    this.lastSearch = '';
+
+    // workaround to open internal chrome links
+    this.onClick = out.global.onClick;
+
+    this.getTabs();
+  }
+
+  onMount() {
+    // update tab list on tab events
+    chrome.tabs.onUpdated.addListener((tabId, changeInfo) => {
+      // once the tab has a new title
+      if (changeInfo.title !== undefined) {
+        this.getTabs();
+      }
+    });
+    chrome.tabs.onMoved.addListener(() => this.getTabs());
+    chrome.tabs.onRemoved.addListener(() => this.getTabs());
+
+    // bring focus to search input on non-specific clicks
+    const el = this.getEl('s');
+    this.subscribeTo(window).on('click', (event) => {
+      if (
+        event.target.tagName === 'BODY' ||
+        event.target.tagName === 'HTML'
+      ) {
+        el.focus();
+      }
+    });
+  }
+
+  onRender() {
+    if (this.state.search !== this.lastSearch) {
+      // reset when input is empty
+      if (this.state.search === '') {
+        this.state.tabs = this.state.tabsRaw;
+        this.state.bookmarks.length = 0;
+        return;
+      }
+
+      // search bookmarks
+      chrome.bookmarks.search(this.state.search, (results) => {
+        this.state.bookmarksRaw = results;
+        this.state.bookmarks = this.state.bookmarksRaw.slice(0, 50);
+      });
+
+      // search open tabs
+      this.state.tabs = doSearch(this.state.search.toLowerCase(), this.state.tabsRaw);
+
+      this.lastSearch = this.state.search;
+    }
+  }
+
+  getTabs() {
+    chrome.tabs.query({}, (tabs) => {
+      this.state.tabsRaw = tabs;
+
+      if (this.state.search === '') {
+        this.state.tabs = tabs;
+      }
+    });
+  }
+
+  onTabClick(tab, event) {
+    // update current tab
+    chrome.tabs.update(tab.id, { active: true });
+
+    // switch active window if the tab isn't in the current window
+    chrome.windows.getCurrent({}, currentWindow => {
+      if (currentWindow.id !== tab.windowId) {
+        chrome.windows.update(tab.windowId, { focused: true });
+      }
+    });
+
+    // close this tab
+    chrome.tabs.getCurrent((tab) => {
+      chrome.tabs.remove(tab.id);
+    });
+
+    event.preventDefault();
+  }
+
+  cancelSearch(event) {
+    if (event.key === 'Escape') {
+      this.state.search = '';
+      this.state.tabs = this.state.tabs;
+      this.state.bookmarks.length = 0;
+    }
+  }
+
+  loadMoreBookmarks() {
+    this.state.bookmarks = this.state.bookmarksRaw.slice(0, this.state.bookmarks.length + 50);
+  }
+}
+
+style {
+  #s { /* search */
+    width: 100%;
+    padding: 11px 20px;
+    margin: 0 0 18px;
+    font-size: 22px;
+    color: var(--g5);
+    background: var(--g2);
+    border: 0;
+    filter: drop-shadow(0 5px 6px rgba(0,0,0,0.1));
+  }
+
+  .r { /* search result */
+    display: flex;
+    align-items: center;
+    padding: 9px 0;
+    color: var(--g-light);
+
+    & > .i {
+      padding-right: 9px;
+    }
+  }
+}
+
+div.c
+  input#s on-keyup('cancelSearch') bind('search') type="text" placeholder="Filter..." autocomplete="off" key="s"
+
+  h2 -- Open Tabs (${state.tabs.length})
+
+  for(tab in state.tabs)
+    a.r on-click('onTabClick', tab) href=tab.url key=tab.id
+      if(tab.favIconUrl)
+        img.i src=tab.favIconUrl decoding="async"
+      else
+        span.i
+
+      -- ${tab.title}
+
+  if(state.bookmarks.length)
+    h2 -- Bookmarks (${state.bookmarks.length}/${state.bookmarksRaw.length})
+
+    for(bookmark in state.bookmarks)
+      a.r on-click('onClick') href=bookmark.url key=bookmark.id no-update
+        img.i src=`chrome://favicon/${bookmark.url}` decoding="async"
+        -- ${bookmark.title}
+
+    if(state.bookmarks.length < state.bookmarksRaw.length)
+      button on-click('loadMoreBookmarks') -- Show more results
+  <!-- else
+    h2 -- Bookmarks
+
+    p.g -- Filter for results... -->
