@@ -1,14 +1,15 @@
 {
   "name": "new-tab",
   "version": "0.1.0",
-  "description": "A minimal and high performance Google Chrome new tab page (NTP) extension.",
+  "description": "A high performance new tab page that gets you where you need to go faster.",
   "keywords": [
+    "google-chrome",
+    "ntp",
     "chrome-extension",
     "chrome",
-    "chrome-app",
     "marko",
     "markojs",
-    "css-grid"
+    "lasso"
   ],
   "author": "Max Milton <max@wearegenki.com>",
   "license": "MIT",
