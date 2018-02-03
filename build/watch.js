@@ -2,13 +2,15 @@
 
 'use strict';
 
+const path = require('path');
 const { fork } = require('child_process');
 const bs = require('browser-sync').create();
 
+const buildFile = path.join(__dirname, 'build');
 let browserSync = '';
 
 function doBuild() {
-  const buildTask = fork('./build', {
+  const buildTask = fork(buildFile, {
     env: { browserSync },
   });
 
@@ -20,21 +22,24 @@ function doBuild() {
   buildTask.on('error', console.error.bind(console));
 }
 
-bs.init({
+const config = {
   host: 'localhost',
-  port: 3000,
-  socket: { domain: 'http://localhost:3000' },
-  script: { domain: 'http://localhost:3000' },
+  port: 3003,
+  socket: { domain: 'http://localhost:3003' },
+  script: { domain: 'http://localhost:3003' },
   open: false,
   ghostMode: false,
   logSnippet: false,
   logConnections: true,
-}, (_, data) => {
-  browserSync = data.options.get('snippet');
+};
+
+bs.init(config, (err, _bs) => {
+  if (err) throw err;
+  browserSync = _bs.options.get('snippet');
   doBuild();
 });
 
-bs.watch('src/**/*', (event) => {
+bs.watch('../src/**/*', (event) => {
   if (event === 'change') {
     doBuild();
   }

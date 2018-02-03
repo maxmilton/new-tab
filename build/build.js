@@ -1,4 +1,4 @@
-/* eslint-disable strict, import/no-extraneous-dependencies */
+/* eslint-disable strict, import/no-extraneous-dependencies, no-console */
 
 'use strict';
 
@@ -7,8 +7,8 @@ const path = require('path');
 const lasso = require('lasso');
 const CleanCSS = require('clean-css');
 const UglifyJS = require('uglify-es');
-const pkg = require('./package');
-const manifest = require('./manifest');
+const pkg = require('../package');
+const manifest = require('../manifest');
 
 const isProduction = process.env.NODE_ENV === 'production';
 
@@ -18,27 +18,37 @@ const banner = `/*
  * MIT licensed (https://github.com/MaxMilton/new-tab/blob/master/LICENCE)
  */`;
 
+/**
+ * Handle node async method errors.
+ * @param {Error} err
+ */
+function cb(err) { if (err) throw err; }
+
+/**
+* Ultra-minimal template engine.
+* @see https://github.com/Drulac/template-literal
+* @param {string} template
+* @returns {string}
+*/
+function compile(template) {
+ return new Function('d', 'return `' + template + '`'); // eslint-disable-line
+}
+
 lasso.configure({
   plugins: [
     'lasso-marko',
     'lasso-postcss',
   ],
   urlPrefix: '',
-  outputDir: path.join(__dirname, 'dist'),
+  outputDir: path.join(__dirname, '../dist'),
   bundlingEnabled: true,
   minify: false, // custom CSS and JS minification below
+  resolveCssUrls: false,
   fingerprintsEnabled: false,
-  includeSlotNames: false,
+  includeSlotNames: !isProduction,
 });
 
-// ultra-minimal template engine
-// @see https://github.com/Drulac/template-literal
-function compile() {
-  const template = fs.readFileSync('src/template.html');
-  return new Function('d', 'return `' + template + '`'); // eslint-disable-line
-}
-
-// create JS, CSS, and HTML
+// generate JS, CSS, and HTML
 lasso.lassoPage({
   name: 'ntp',
   dependencies: ['require-run: ./src/index'],
@@ -46,14 +56,16 @@ lasso.lassoPage({
   const cssFile = result.getCSSFiles()[0];
   const jsFile = result.getJavaScriptFiles()[0];
 
-  const css = isProduction
-    ? new CleanCSS().minify(fs.readFileSync(cssFile)).styles
-    : fs.readFileSync(cssFile);
-
   const js = result.getJavaScriptUrls()[0].substr(1); // "app.js"
+  let css = fs.readFileSync(cssFile);
+  let src = `${fs.readFileSync(jsFile, 'utf8')}\n$_mod.ready();`;
 
-  const src = isProduction
-    ? UglifyJS.minify(`${fs.readFileSync(jsFile)}$_mod.ready();`, {
+  if (isProduction) {
+    // minify CSS
+    css = new CleanCSS().minify(css).styles;
+
+    // minify JS
+    src = UglifyJS.minify(src, {
       compress: {
         drop_console: true,
         drop_debugger: true,
@@ -68,31 +80,34 @@ lasso.lassoPage({
       ecma: 8,
       toplevel: true,
       warnings: true,
-    }).code
-    : `${fs.readFileSync(jsFile)}$_mod.ready();`;
+    }).code;
 
-  if (src.error) throw src.error;
-  if (src.warnings) console.log(src.warnings); // eslint-disable-line no-console
+    if (src.error) throw src.error;
+    if (src.warnings) console.log(src.warnings);
+  }
 
-  // browser sync script
+  // browser-sync script
   const bs = isProduction ? '' : `\n${process.env.browserSync}`;
 
   // inject into HTML template
-  fs.writeFileSync('dist/ntp.html', compile()({ banner, css, js, bs }), 'utf8');
+  const template = path.join(__dirname, '../src/template.html');
+  const out = path.join(__dirname, '../dist/ntp.html');
+  fs.readFile(template, 'utf8', (err, html) => {
+    if (err) throw err;
+    fs.writeFile(out, compile(html)({ banner, css, js, bs }), cb);
+  });
 
   // clean up leftover CSS file
-  fs.unlinkSync(cssFile);
+  fs.unlink(cssFile, cb);
 
   // write JS to disk
-  fs.writeFileSync(jsFile, src);
+  fs.writeFile(jsFile, src, cb);
 }).catch((err) => {
   throw err;
 });
 
 // write manifest to disk as JSON
-fs.mkdir('dist', () => {
-  fs.writeFileSync('dist/manifest.json', JSON.stringify(manifest));
-});
+fs.writeFile('../dist/manifest.json', JSON.stringify(manifest), cb);
 
 // REF: https://developer.chrome.com/webstore/publish (dev docs)
 // REF: https://developer.chrome.com/webstore/launching#pre-launch-checklist (checklist)
@@ -101,11 +116,9 @@ fs.mkdir('dist', () => {
 // REF: https://developer.chrome.com/extensions/packaging (local packing, only installable on Linux?)
 //  ↳ REF: https://developer.chrome.com/extensions/linux_hosting
 
-// TODO: Create a packing step
-//  ↳ Zip dist contents
-
 // TODO: Create a publish step
 //  ↳ Can this be automated from this script?
+//    ↳ Probably put in another file, possibly a bash script or Makefile
 //  ↳ Canary release flow
 //    ↳ Separate package which is only published in the wearegenki.com domain (?)
 //    ↳ There is a test account feature we should leverage for this
