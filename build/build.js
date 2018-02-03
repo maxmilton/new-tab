@@ -107,7 +107,8 @@ lasso.lassoPage({
 });
 
 // write manifest to disk as JSON
-fs.writeFile('../dist/manifest.json', JSON.stringify(manifest), cb);
+const manifestPath = path.join(__dirname, '../dist/manifest.json');
+fs.writeFile(manifestPath, JSON.stringify(manifest), cb);
 
 // REF: https://developer.chrome.com/webstore/publish (dev docs)
 // REF: https://developer.chrome.com/webstore/launching#pre-launch-checklist (checklist)
