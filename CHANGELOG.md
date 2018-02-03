@@ -9,39 +9,23 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ## [Unreleased]
 
-## [0.3.0] - 2018-02-04
+## [0.2.0] - 2018-02-04
 
 ### Added
 
-- Now published on the Google Chrome web store: <https://chrome.google.com/webstore/detail/new-tab/cpcibnbdmpmcmnkhoiilpnlaepkepknb>
+- Now published on the Google Chrome web store: <https://chrome.google.com/webstore/detail/new-tab/cpcibnbdmpmcmnkhoiilpnlaepkepknb>.
 - Search now also finds matches in your browsing history.
-- Show message when there are no matching search results for a category.
-- Wrote a better readme.
-
-### Changed
-
-- Clean up, improve, and move build scripts into `/build`.
-
-### Removed
-
-- Dependency `fast-memoize` as the benefit was not really there.
-
-### Fixed
-
-- Debounce search input to help prevent layout thrashing when search results appear.
-- Add `title` attribute to bookmarks to view long bookmark titles on hover.
-
-## [0.2.0] - 2018-02-03
-
-### Added
-
 - Subtle shadows to show depth and highlight areas of interest.
 - New menu items and menu open animation.
 - Listen to tab events and update tabs list when something changes.
+- Show message when there are no matching search results for a category.
+- Wrote a better readme.
 
 ### Fixed
 
 - Bookmark folders open to the right if there's not enough space to show the folder in the window.
+- Debounce search input to help prevent layout thrashing when search results appear.
+- Add `title` attribute to bookmarks to view long bookmark titles on hover.
 
 ### Changed
 
@@ -54,6 +38,11 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
   - Short CSS classes for faster DOM parsing and matching.
   - Set many elements as `no-update` for much faster Marko rendering passes.
   - Use `key` on repeating elements for faster rendering when elements move in the DOM (e.g. during search/filtering).
+- Clean up, improve, and move build scripts into `/build`.
+
+### Removed
+
+- Dependency `fast-memoize` as the benefit was not really there.
 
 ## 0.1.0 - 2018-01-25
 
@@ -61,6 +50,5 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 - Initial public version including all the basics; working proof of concept code, readme, etc. Not ready for release yet though, it's still far from being actually useful!
 
-[Unreleased]: https://github.com/MaxMilton/new-tab/compare/v0.3.0...HEAD
-[0.3.0]: https://github.com/MaxMilton/new-tab/compare/v0.2.0...v0.3.0
+[Unreleased]: https://github.com/MaxMilton/new-tab/compare/v0.2.0...HEAD
 [0.2.0]: https://github.com/MaxMilton/new-tab/compare/v0.1.0...v0.2.0
