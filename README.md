@@ -29,9 +29,9 @@ Originally an experimental project to give me a chance for me to play with the C
 Issue | Why / How
 --|--
 Access | Still have access to common things like the bookmarks bar<sup>[*1](#known-issues)</sup> etc.
-Speed | Functionality should be available near instantly. Page load performance, file size, and runtime performance should all be scrupulously optimised.
-Privacy | Don't add user tracking scripts (unlike most other extensions).
-Unobtrusive | Doesn't add annoying things like entries to your right click menu.
+Speed | Near instant access to functionality. Page load performance, runtime performance, and file size should all be scrupulously optimised.
+Privacy | No user tracking scripts (unlike most other extensions).
+Unobtrusive | No annoying things like entries to your right click menu.
 
 ### Technology
 
@@ -45,7 +45,7 @@ Unobtrusive | Doesn't add annoying things like entries to your right click menu.
 1. No overflow menu on the bookmarks bar. I haven't been able to implement this with the level performance I'm after from the extension so this is purposely left out.
     * _Workaround:_ Limit the number of bookmarks in your bookmarks bar folder or group your bookmarks into folders (it's nice to have it clean and minimal anyway!).
 1. The extension's bookmarks bar is lacking in functionality. Chrome doesn't have an API to control the native bookmarks bar via extensions so I've recreated a simplistic version. The goal here is _high performance_ and not to emulate all the native bookmarks bar features.
-1. Needs to be reload after adding, editing, or removing bookmarks. Because bookmarks don't change often, I prefer not to add bookmark event listeners as most users simply don't need this.
+1. Page needs to be reload after adding, editing, or removing bookmarks. Because bookmarks don't change often, I prefer not to add bookmark event listeners as most users simply don't need live bookmark changes.
 1. Searching the browsing history is slow when you history is _very_ big. This is just a reality of Chrome. 😢
 
 ## Browser support
