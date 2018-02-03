@@ -1,9 +1,4 @@
-class {
-  onCreate(input, out) {
-    // workaround to open internal chrome links
-    this.onClick = out.global.onClick;
-  }
-}
+import { onClick } from '../helpers';
 
 style {
   #m { /* menu */
@@ -57,12 +52,12 @@ div#m no-update
   div#i -- ☰
 
   div#d
-    a.m on-click('onClick') href="chrome-search://local-ntp/local-ntp.html" -- Open Default Tab
-    a.m on-click('onClick') href="chrome://bookmarks/" -- Bookmarks Manager
-    a.m on-click('onClick') href="chrome://downloads/" -- Downloads
-    a.m on-click('onClick') href="chrome://history/" -- History
-    a.m on-click('onClick') href="chrome://settings/passwords" -- Show Passwords
-    <!-- a.m on-click('onClick') href="chrome://apps/" -- Show Apps -->
+    a.m on-click(onClick) href="chrome-search://local-ntp/local-ntp.html" -- Open Default Tab
+    a.m on-click(onClick) href="chrome://bookmarks/" -- Bookmarks Manager
+    a.m on-click(onClick) href="chrome://downloads/" -- Downloads
+    a.m on-click(onClick) href="chrome://history/" -- History
+    a.m on-click(onClick) href="chrome://settings/passwords" -- Show Passwords
+    <!-- a.m on-click(onClick) href="chrome://apps/" -- Show Apps -->
 
     hr
 

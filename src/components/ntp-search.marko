@@ -1,9 +1,4 @@
-import memoize from 'fast-memoize';
-
-static const doSearch = memoize((text, array) =>
-  array.filter(item =>
-    item.title.toLowerCase().indexOf(text) > -1 ||
-    item.url.toLowerCase().indexOf(text) > -1));
+import { debounce, onClick } from '../helpers';
 
 class {
   onCreate(input, out) {
@@ -13,11 +8,12 @@ class {
       tabs: [],
       bookmarksRaw: [],
       bookmarks: [],
-    }
+      historyRaw: [],
+      history: [],
+    };
     this.lastSearch = '';
 
-    // workaround to open internal chrome links
-    this.onClick = out.global.onClick;
+    this.search = debounce(this.doSearch, 200);
 
     this.getTabs();
   }
@@ -25,7 +21,6 @@ class {
   onMount() {
     // update tab list on tab events
     chrome.tabs.onUpdated.addListener((tabId, changeInfo) => {
-      // once the tab has a new title
       if (changeInfo.title !== undefined) {
         this.getTabs();
       }
@@ -33,38 +28,46 @@ class {
     chrome.tabs.onMoved.addListener(() => this.getTabs());
     chrome.tabs.onRemoved.addListener(() => this.getTabs());
 
-    // bring focus to search input on non-specific clicks
-    const el = this.getEl('s');
-    this.subscribeTo(window).on('click', (event) => {
-      if (
-        event.target.tagName === 'BODY' ||
-        event.target.tagName === 'HTML'
-      ) {
-        el.focus();
-      }
-    });
+    // bring focus to search input on click
+    const el = this.getEl('i');
+    this.subscribeTo(window).on('click', () => el.focus());
   }
 
   onRender() {
     if (this.state.search !== this.lastSearch) {
-      // reset when input is empty
-      if (this.state.search === '') {
-        this.state.tabs = this.state.tabsRaw;
-        this.state.bookmarks.length = 0;
-        return;
-      }
-
-      // search bookmarks
-      chrome.bookmarks.search(this.state.search, (results) => {
-        this.state.bookmarksRaw = results;
-        this.state.bookmarks = this.state.bookmarksRaw.slice(0, 50);
-      });
-
-      // search open tabs
-      this.state.tabs = doSearch(this.state.search.toLowerCase(), this.state.tabsRaw);
-
-      this.lastSearch = this.state.search;
+      this.search();
     }
+  }
+
+  doSearch() {
+    const { search } = this.state;
+
+    this.lastSearch = search;
+
+    // reset search when input is empty
+    if (search === '') {
+      this.state.tabs = this.state.tabsRaw;
+      this.state.bookmarks.length = 0;
+      this.state.history.length = 0;
+      return;
+    }
+
+    // search history (run first since it takes the longest)
+    chrome.history.search({ text: search }, (results) => {
+      this.state.historyRaw = results;
+      this.state.history = this.state.historyRaw.slice(0, 10);
+    });
+
+    // search bookmarks
+    chrome.bookmarks.search(search, (results) => {
+      this.state.bookmarksRaw = results;
+      this.state.bookmarks = this.state.bookmarksRaw.slice(0, 10);
+    });
+
+    // search open tabs
+    this.state.tabs = this.state.tabsRaw.filter(item =>
+        item.title.toLowerCase().indexOf(search) > -1 ||
+        item.url.toLowerCase().indexOf(search) > -1);
   }
 
   getTabs() {
@@ -101,15 +104,26 @@ class {
       this.state.search = '';
       this.state.tabs = this.state.tabs;
       this.state.bookmarks.length = 0;
+      this.state.history.length = 0;
     }
   }
 
   loadMoreBookmarks() {
-    this.state.bookmarks = this.state.bookmarksRaw.slice(0, this.state.bookmarks.length + 50);
+    this.state.bookmarks = this.state.bookmarksRaw.slice(0, this.state.bookmarks.length + 100);
+  }
+
+  loadMoreHistory() {
+    this.state.history = this.state.historyRaw.slice(0, this.state.history.length + 100);
   }
 }
 
 style {
+  .c { /* container */
+    max-width: 60rem;
+    padding: 0 18px;
+    margin: 0 auto;
+  }
+
   #s { /* search */
     width: 100%;
     padding: 11px 20px;
@@ -124,40 +138,70 @@ style {
   .r { /* search result */
     display: flex;
     align-items: center;
+    white-space: nowrap;
     padding: 9px 0;
+    overflow: hidden;
     color: var(--g-light);
 
     & > .i {
       padding-right: 9px;
     }
   }
+
+  button {
+    padding: 9px 18px;
+    font-size: 20px;
+    color: var(--g5);
+    background: var(--g2);
+    border: 0;
+  }
 }
 
 div.c
-  input#s on-keyup('cancelSearch') bind('search') type="text" placeholder="Filter..." autocomplete="off" key="s"
+  input#s on-keyup('cancelSearch') bind('search') type="text" placeholder="Search tabs, bookmarks, and history..." autocomplete="off" key="i"
 
-  h2 -- Open Tabs (${state.tabs.length})
+  <!-- Tabs -->
+  $ let tabsCount = state.tabs.length;
+  $ let isSearching = state.search !== '';
+  if(tabsCount)
+    h2 -- Open Tabs (${tabsCount})
 
-  for(tab in state.tabs)
-    a.r on-click('onTabClick', tab) href=tab.url key=tab.id
-      if(tab.favIconUrl)
-        img.i src=tab.favIconUrl decoding="async"
-      else
-        span.i
+    for(tab in state.tabs)
+      a.r on-click('onTabClick', tab) href=tab.url key=`t${tab.id}`
+        img.i src=tab.favIconUrl||'#'
 
-      -- ${tab.title}
+        -- ${tab.title}
+  else-if(isSearching)
+    p.g -- No matching open tabs
 
-  if(state.bookmarks.length)
-    h2 -- Bookmarks (${state.bookmarks.length}/${state.bookmarksRaw.length})
+  <!-- Bookmarks -->
+  $ let bookmarksCount = state.bookmarks.length;
+  if(bookmarksCount)
+    h2 -- Bookmarks (${bookmarksCount}/${state.bookmarksRaw.length})
 
     for(bookmark in state.bookmarks)
-      a.r on-click('onClick') href=bookmark.url key=bookmark.id no-update
-        img.i src=`chrome://favicon/${bookmark.url}` decoding="async"
-        -- ${bookmark.title}
+      <!-- a.r on-click(onClick) href=bookmark.url key=`b${bookmark.id}` no-update -->
+      a.r on-click(onClick) href=bookmark.url key=`b${bookmark.id}`
+        img.i src=`chrome://favicon/${bookmark.url}`
+        -- ${bookmark.title || bookmark.url}
 
-    if(state.bookmarks.length < state.bookmarksRaw.length)
-      button on-click('loadMoreBookmarks') -- Show more results
-  <!-- else
-    h2 -- Bookmarks
+    if(bookmarksCount < state.bookmarksRaw.length)
+      button.f on-click('loadMoreBookmarks') -- Show more...
+  else-if(isSearching)
+    p.g -- No matching bookmarks
 
-    p.g -- Filter for results... -->
+  <!-- History -->
+  $ let historyCount = state.history.length;
+  if(historyCount)
+    h2 -- History (${historyCount}/${state.historyRaw.length})
+
+    for(item in state.history)
+      <!-- a.r on-click(onClick) href=item.url key=`h${item.id}` no-update -->
+      a.r on-click(onClick) href=item.url key=`h${item.id}`
+        img.i src=`chrome://favicon/${item.url}`
+        -- ${item.title || item.url}
+
+    if(historyCount < state.historyRaw.length)
+      button.f on-click('loadMoreHistory') -- Show more...
+  else-if(isSearching)
+    p.g -- No matching history entries

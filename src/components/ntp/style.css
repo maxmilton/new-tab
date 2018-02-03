@@ -33,6 +33,7 @@ body {
   background-color: var(--g0);
 }
 
+.g, /* muted grey colour */
 h2 {
   color: var(--g4);
 }
@@ -44,26 +45,4 @@ a {
   &:focus {
     text-decoration: underline;
   }
-}
-
-.c { /* container */
-  max-width: 60rem;
-  padding-right: 18px;
-  padding-left: 18px;
-  margin-right: auto;
-  margin-left: auto;
-}
-
-.g { /* muted grey colour */
-  color: var(--g4);
-}
-
-button {
-  width: 100%;
-  padding: 18px;
-  font-size: 20px;
-  color: var(--g5);
-  cursor: pointer;
-  background: var(--g2);
-  border: 1px solid var(--g4);
 }

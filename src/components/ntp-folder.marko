@@ -2,6 +2,7 @@
 
 // FIXME: Close any other open folders when opening subsequent folders
 
+import { onClick } from '../helpers';
 import ntpFolder from './ntp-folder';
 
 class {
@@ -10,9 +11,6 @@ class {
       show: false,
     }
     this.closeTimer = null;
-
-    // workaround to open internal chrome links
-    this.onClick = out.global.onClick;
   }
 
   onFolderMouseLeave(event) {
@@ -92,7 +90,7 @@ style {
   }
 }
 
-div.b.f on-mouseleave('onFolderMouseLeave') on-mouseenter('onFolderMouseEnter')
+div.b.f on-mouseleave('onFolderMouseLeave') on-mouseenter('onFolderMouseEnter') title=input.title
   -- ${input.title}
 
   if(input.parentId > 1)
@@ -107,6 +105,6 @@ div.b.f on-mouseleave('onFolderMouseLeave') on-mouseenter('onFolderMouseEnter')
           include(ntpFolder, bookmark)
         else
           <!-- bookmark -->
-          a.b on-click('onClick') href=bookmark.url no-update
-            img.i src=`chrome://favicon/${bookmark.url}` decoding="async"
+          a.b on-click(onClick) href=bookmark.url no-update
+            img.i src=`chrome://favicon/${bookmark.url}`
             span.t -- ${bookmark.title}

@@ -16,6 +16,7 @@ module.exports = {
   permissions: [
     'bookmarks',
     'chrome://favicon/',
+    'history',
     'tabs',
   ],
   chrome_url_overrides: {

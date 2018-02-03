@@ -5,12 +5,7 @@
  */
 
 const app = require('./components/ntp');
-const { onClick } = require('./helpers');
 
 app
-  .renderSync({
-    $global: {
-      onClick,
-    },
-  })
+  .renderSync()
   .replace(document.getElementById('ntp'));

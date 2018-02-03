@@ -1,3 +1,4 @@
+import { onClick } from '../helpers';
 import ntpFolder from './ntp-folder';
 
 class {
@@ -7,9 +8,6 @@ class {
       bookmarksBar: [],
     }
 
-    // workaround to open internal chrome links
-    this.onClick = out.global.onClick;
-
     chrome.bookmarks.getTree((tree) => {
       this.state.bookmarksBar = tree[0].children[0].children;
       this.state.bookmarksOther = tree[0].children[1];
@@ -18,7 +16,7 @@ class {
 }
 
 style {
-  #b { /* bookmarks */
+  #a { /* all bookmarks */
     position: fixed;
     z-index: 2;
     display: flex;
@@ -35,7 +33,7 @@ style {
     }
   }
 
-  #bb { /* bookmarks bar */
+  #b { /* bookmarks bar */
     display: flex;
     flex-wrap: wrap; /* the best I can do without sacrificing performance */
     align-items: center;
@@ -73,16 +71,16 @@ style {
   }
 }
 
-div#b
-  div#bb
+div#a
+  div#b
     for(bookmark in state.bookmarksBar)
       if(bookmark.children)
         <!-- folder -->
         include(ntpFolder, bookmark)
       else
         <!-- bookmark link -->
-        a.b on-click('onClick') href=bookmark.url no-update
-          img.i src=`chrome://favicon/${bookmark.url}` decoding="async"
+        a.b on-click(onClick) href=bookmark.url title=bookmark.title no-update
+          img.i src=`chrome://favicon/${bookmark.url}`
           span.t if(bookmark.title) -- ${bookmark.title}
 
   include(ntpFolder, state.bookmarksOther)
