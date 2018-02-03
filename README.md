@@ -1,8 +1,7 @@
 <!--
   TODO: Create app icons.
-  TODO: Set up test framework and write tests.
   TODO: Add screenshots to web store.
-  TODO: Add links to the extension in the Chrome web store (readme, changelog, github, etc.).
+  TODO: Set up test framework and write tests.
 -->
 
 # New Tab
@@ -29,16 +28,16 @@ Originally an experimental project to give me a chance for me to play with the C
 
 Issue | Why / How
 --|--
-Access | Still have access to common things like your bookmarks bar<sup>[*1](#Known%20issues)</sup> etc.
-Speed | The default new tab page can be slow (it requires network requests etc. before some elements display). A major focus area of this extension is performance. Page load performance, file size, and runtime performance are all scrupulously optimised.
+Access | Still have access to common things like the bookmarks bar<sup>[*1](#known-issues)</sup> etc.
+Speed | Functionality should be available near instantly. Page load performance, file size, and runtime performance should all be scrupulously optimised.
 Privacy | Most NTPs add user tracking scripts... not this one!
 Unobtrusive | Doesn't add annoying things like entries to your right click context menu.
 
 ### Technology
 
-* [Marko](https://markojs.com) JS framework
+* [Marko](https://markojs.com) JavaScript framework
 * [PostCSS](http://postcss.org/)
-* [Lasso](https://github.com/lasso-js/lasso) JS bundler
+* [Lasso](https://github.com/lasso-js/lasso) resource bundler
 * [Chrome browser APIs](https://developer.chrome.com/apps/api_index)
 
 ## Known issues
@@ -55,7 +54,7 @@ Each release will support the 2 latest versions of Google Chrome.
 
 ## Bugs
 
-Please report any bugs you encounter on the [GitHub issue tracker](https://github.com/MaxMilton/chrome-new-tab/issues). Feature requests are welcome but keep in mind the goal is to keep things quite minimal and fast.
+Please report any bugs you encounter on the [GitHub issue tracker](https://github.com/MaxMilton/new-tab/issues). Feature requests are welcome but keep in mind the goal is to keep things quite minimal and fast.
 
 ## Changelog
 
