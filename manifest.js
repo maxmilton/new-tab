@@ -24,6 +24,10 @@ module.exports = {
   },
   offline_enabled: true,
 
-  // allow connections from http://localhost during local development
-  ...(isProduction ? {} : { content_security_policy: "script-src 'self' blob: filesystem: chrome-extension-resource: http://localhost:*; object-src 'self'" }),
+  ...(isProduction
+    // tighter security than default
+    ? { content_security_policy: "script-src 'self'; object-src 'self'" }
+    // allow connections from http://localhost during local development
+    : { content_security_policy: "script-src 'self' blob: filesystem: chrome-extension-resource: http://localhost:*; object-src 'self'" }
+  ),
 };
