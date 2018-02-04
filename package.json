@@ -16,14 +16,15 @@
   "private": true,
   "scripts": {
     "start": "npm run dev",
-    "dev": "APP_RELEASE=$(git describe --always) NODE_ENV=development node build/watch.js",
+    "dev": "NODE_ENV=development node build/watch.js",
+    "watch": "NODE_ENV=production node build/watch.js",
     "prebuild": "rm -rf .cache dist && mkdir dist",
     "build": "APP_RELEASE=$(git describe --always) NODE_ENV=production node build/build.js",
     "postbuild": "zip -9 -j dist/new-tab.zip dist/*",
     "lint": "npm run lint:css && npm run lint:js",
     "lint:css": "stylelint \"{src,test}/**/*.{marko,html,css}\"",
     "lint:js": "eslint --ext '.js,.marko' src/ test/ build/",
-    "test": "echo 'TODO' && exit 1"
+    "test": "echo 'TODO: Test suite and tests' && exit 1"
   },
   "dependencies": {},
   "devDependencies": {
