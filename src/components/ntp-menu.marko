@@ -23,15 +23,15 @@ style {
     white-space: nowrap;
     background: var(--g1);
     filter: drop-shadow(0 18px 18px rgba(0,0,0,.3));
+    transition: all 150ms ease-out;
     opacity: 0;
-    transition: scale 150ms ease-out;
+    transform: scale(0.5);
     transform-origin: 0 18px;
-    scale: 0.5 0.5;
 
     #m:hover > &,
     #m:focus > & {
       opacity: 1;
-      scale: 1 1;
+      transform: scale(1);
     }
   }
 
@@ -57,7 +57,6 @@ div#m no-update
     a.m on-click(onClick) href="chrome://downloads/" -- Downloads
     a.m on-click(onClick) href="chrome://history/" -- History
     a.m on-click(onClick) href="chrome://settings/passwords" -- Show Passwords
-    <!-- a.m on-click(onClick) href="chrome://apps/" -- Show Apps -->
 
     hr
 
