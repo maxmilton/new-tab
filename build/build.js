@@ -45,7 +45,7 @@ lasso.configure({
   minify: false, // custom CSS and JS minification below
   resolveCssUrls: false,
   fingerprintsEnabled: false,
-  includeSlotNames: !isProduction,
+  includeSlotNames: false,
 });
 
 // generate JS, CSS, and HTML
@@ -56,7 +56,7 @@ lasso.lassoPage({
   const cssFile = result.getCSSFiles()[0];
   const jsFile = result.getJavaScriptFiles()[0];
 
-  const js = result.getJavaScriptUrls()[0].substr(1); // "ntp.js"
+  const js = result.getJavaScriptUrls()[0].substr(1); // filename; "ntp.js"
   let css = fs.readFileSync(cssFile);
   let src = `${fs.readFileSync(jsFile, 'utf8')}\n$_mod.ready();`;
 
@@ -119,7 +119,7 @@ lasso.lassoPage({
   fs.unlink(cssFile, cb);
 
   // write JS to disk
-  fs.writeFile(jsFile, src.code, cb);
+  fs.writeFile(jsFile, src.code || src, cb);
   // fs.writeFile(`${jsFile}.map`, src.map, cb);
 }).catch((err) => {
   throw err;
