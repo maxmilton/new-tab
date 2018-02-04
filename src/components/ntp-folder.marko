@@ -1,19 +1,32 @@
-// FIXME: Add delay in opening folder for subfolders to prevent accidental opening when hovering past
-
-// FIXME: Close any other open folders when opening subsequent folders
-
 import { onClick } from '../helpers';
 import ntpFolder from './ntp-folder';
+
+static const folderOpenEvent = new Event('o', { bubbles: true });
 
 class {
   onCreate(input, out) {
     this.state = {
       show: false,
     }
+    this.openTimer = null;
     this.closeTimer = null;
+
+    this.subscribeTo(document).on('o', (event) => {
+      const isSubfolder = event.path.some(el => el === this.el);
+      if (!isSubfolder) {
+        this.state.show = false;
+        this.resetCloseTimer();
+      }
+    });
   }
 
   onFolderMouseLeave(event) {
+    // reset open timer
+    if (this.openTimer !== null) {
+      clearTimeout(this.openTimer);
+      this.openTimer = null;
+    }
+
     // set up close timer
     if (this.state.show) {
       this.closeTimer = setTimeout(() => {
@@ -24,24 +37,37 @@ class {
 
   onFolderMouseEnter() {
     if (this.state.show) {
-      // reset close timer
-      if (this.closeTimer !== null) {
-        clearTimeout(this.closeTimer);
-        this.closeTimer = null;
-      }
+      this.resetCloseTimer();
     } else {
-      this.state.show = true;
+      // delay to prevent accidental folder open
+      this.openTimer = setTimeout(() => {
+        // trigger other folders to close
+        this.el.dispatchEvent(folderOpenEvent);
 
-      // push to end of execution queue; after subfolder renders to the DOM
-      setTimeout(() => {
-        // reposition the subfolder if it's outside the document
-        const el = this.getEl('s');
-        const rect = el.getBoundingClientRect();
+        this.state.show = true;
 
-        if ((rect.left + rect.width) > document.body.clientWidth) {
-          el.classList.add('l');
-        }
-      }, 0);
+        // push to end of execution queue; after subfolder renders to the DOM
+        setTimeout(() => {
+          const el = this.getEl('s');
+
+          // check it exists because the folder may have already been closed
+          if (el !== undefined) {
+            // reposition the subfolder if it's outside the document
+            const rect = el.getBoundingClientRect();
+
+            if ((rect.left + rect.width) > document.body.clientWidth) {
+              el.classList.add('l');
+            }
+          }
+        }, 0);
+      }, 200); // open delay
+    }
+  }
+
+  resetCloseTimer() {
+    if (this.closeTimer !== null) {
+      clearTimeout(this.closeTimer);
+      this.closeTimer = null;
     }
   }
 }
@@ -93,6 +119,7 @@ style {
 div.b.f on-mouseleave('onFolderMouseLeave') on-mouseenter('onFolderMouseEnter') title=input.title
   -- ${input.title}
 
+  // only show if folder is at least 1 level deep
   if(input.parentId > 1)
     // span.e -- ▸
     span.e -- ▶
