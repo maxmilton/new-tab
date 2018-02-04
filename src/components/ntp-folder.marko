@@ -48,16 +48,12 @@ class {
 
         // push to end of execution queue; after subfolder renders to the DOM
         setTimeout(() => {
+          // reposition the subfolder if it's outside the document
           const el = this.getEl('s');
+          const rect = el.getBoundingClientRect();
 
-          // check it exists because the folder may have already been closed
-          if (el !== undefined) {
-            // reposition the subfolder if it's outside the document
-            const rect = el.getBoundingClientRect();
-
-            if ((rect.left + rect.width) > document.body.clientWidth) {
-              el.classList.add('l');
-            }
+          if ((rect.left + rect.width) > document.body.clientWidth) {
+            el.classList.add('l');
           }
         }, 0);
       }, 200); // open delay
