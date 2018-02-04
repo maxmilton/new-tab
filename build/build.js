@@ -42,7 +42,7 @@ lasso.configure({
   urlPrefix: '',
   outputDir: path.join(__dirname, '../dist'),
   bundlingEnabled: true,
-  minify: false, // custom CSS and JS minification below
+  minify: false, // custom minification below
   resolveCssUrls: false,
   fingerprintsEnabled: false,
   includeSlotNames: false,
@@ -53,16 +53,19 @@ lasso.lassoPage({
   name: 'ntp',
   dependencies: ['require-run: ./src/index'],
 }).then((result) => {
+  // paths to files
   const cssFile = result.getCSSFiles()[0];
   const jsFile = result.getJavaScriptFiles()[0];
 
-  const js = result.getJavaScriptUrls()[0].substr(1); // filename; "ntp.js"
+  // filenames
+  const js = result.getJavaScriptUrls()[0].substr(1); // "ntp.js"
+
+  // source code
   let css = fs.readFileSync(cssFile);
   let src = `${fs.readFileSync(jsFile, 'utf8')}\n$_mod.ready();`;
 
   if (isProduction) {
     // minify CSS
-    // https://github.com/jakubpawlowicz/clean-css
     css = new CleanCSS({
       level: {
         1: { all: true },
@@ -70,21 +73,8 @@ lasso.lassoPage({
       },
     }).minify(css).styles;
 
-    // // write unminified JS to disk (for source map)
-    // const file = path.parse(jsFile);
-    // file.dir += '/src';
-    // fs.writeFile(path.format(file), src, cb);
-
     // minify JS
-    // https://github.com/mishoo/UglifyJS2/tree/harmony
     src = UglifyJS.minify(src, {
-    // src = UglifyJS.minify({ [js]: src }, {
-      // sourceMap: {
-      //   root: 'src',
-      //   // root: '.',
-      //   filename: js,
-      //   url: `${js}.map`,
-      // },
       compress: {
         drop_console: true,
         drop_debugger: true,
@@ -98,7 +88,7 @@ lasso.lassoPage({
       },
       ecma: 8,
       toplevel: true,
-      warnings: true,
+      warnings: !process.env.SILENT,
     });
 
     if (src.error) throw src.error;
@@ -128,19 +118,3 @@ lasso.lassoPage({
 // write manifest to disk as JSON
 const manifestPath = path.join(__dirname, '../dist/manifest.json');
 fs.writeFile(manifestPath, JSON.stringify(manifest), cb);
-
-// REF: https://developer.chrome.com/webstore/publish (dev docs)
-// REF: https://developer.chrome.com/webstore/launching#pre-launch-checklist (checklist)
-// REF: http://humaan.com/checklist/ (long checklist)
-// REF: https://chrome.google.com/webstore/developer/dashboard (publishing dashboard)
-// REF: https://developer.chrome.com/extensions/packaging (local packing, only installable on Linux?)
-//  ↳ REF: https://developer.chrome.com/extensions/linux_hosting
-
-// TODO: Create a publish step
-//  ↳ Can this be automated from this script?
-//    ↳ Probably put in another file, possibly a bash script or Makefile
-//  ↳ Canary release flow
-//    ↳ Separate package which is only published in the wearegenki.com domain (?)
-//    ↳ There is a test account feature we should leverage for this
-//  ↳ Update version
-//  ↳ Upload packaged zip file

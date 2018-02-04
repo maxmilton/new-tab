@@ -1,9 +1,3 @@
-<!--
-  TODO: Create app icons.
-  TODO: Add screenshots to web store.
-  TODO: Set up test framework and write tests.
--->
-
 # New Tab
 
 A high performance new tab page that gets you where you need to go faster. Utilises the latest tools and tech, packaged into a Google Chrome extension.

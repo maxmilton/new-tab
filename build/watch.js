@@ -13,7 +13,7 @@ let browserSync = '';
 function doBuild() {
   const t0 = performance.now();
   const buildTask = fork(buildFile, {
-    env: { ...process.env, browserSync },
+    env: { ...process.env, SILENT: true, browserSync },
   });
 
   buildTask.on('exit', () => {
