@@ -56,16 +56,35 @@ lasso.lassoPage({
   const cssFile = result.getCSSFiles()[0];
   const jsFile = result.getJavaScriptFiles()[0];
 
-  const js = result.getJavaScriptUrls()[0].substr(1); // "app.js"
+  const js = result.getJavaScriptUrls()[0].substr(1); // "ntp.js"
   let css = fs.readFileSync(cssFile);
   let src = `${fs.readFileSync(jsFile, 'utf8')}\n$_mod.ready();`;
 
   if (isProduction) {
     // minify CSS
-    css = new CleanCSS().minify(css).styles;
+    // https://github.com/jakubpawlowicz/clean-css
+    css = new CleanCSS({
+      level: {
+        1: { all: true },
+        2: { all: true },
+      },
+    }).minify(css).styles;
+
+    // // write unminified JS to disk (for source map)
+    // const file = path.parse(jsFile);
+    // file.dir += '/src';
+    // fs.writeFile(path.format(file), src, cb);
 
     // minify JS
+    // https://github.com/mishoo/UglifyJS2/tree/harmony
     src = UglifyJS.minify(src, {
+    // src = UglifyJS.minify({ [js]: src }, {
+      // sourceMap: {
+      //   root: 'src',
+      //   // root: '.',
+      //   filename: js,
+      //   url: `${js}.map`,
+      // },
       compress: {
         drop_console: true,
         drop_debugger: true,
@@ -80,28 +99,28 @@ lasso.lassoPage({
       ecma: 8,
       toplevel: true,
       warnings: true,
-    }).code;
+    });
 
     if (src.error) throw src.error;
     if (src.warnings) console.log(src.warnings);
   }
 
-  // browser-sync script
-  const bs = isProduction ? '' : `\n${process.env.browserSync}`;
+  const head = isProduction ? '' : `\n${process.env.browserSync}`;
 
   // inject into HTML template
   const template = path.join(__dirname, '../src/template.html');
   const out = path.join(__dirname, '../dist/ntp.html');
   fs.readFile(template, 'utf8', (err, html) => {
     if (err) throw err;
-    fs.writeFile(out, compile(html)({ banner, css, js, bs }), cb);
+    fs.writeFile(out, compile(html)({ banner, css, js, head }), cb);
   });
 
   // clean up leftover CSS file
   fs.unlink(cssFile, cb);
 
   // write JS to disk
-  fs.writeFile(jsFile, src, cb);
+  fs.writeFile(jsFile, src.code, cb);
+  // fs.writeFile(`${jsFile}.map`, src.map, cb);
 }).catch((err) => {
   throw err;
 });
