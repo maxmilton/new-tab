@@ -3,6 +3,7 @@
 'use strict';
 
 const path = require('path');
+const { performance } = require('perf_hooks'); // eslint-disable-line
 const { fork } = require('child_process');
 const bs = require('browser-sync').create();
 
@@ -10,12 +11,14 @@ const buildFile = path.join(__dirname, 'build');
 let browserSync = '';
 
 function doBuild() {
+  const t0 = performance.now();
   const buildTask = fork(buildFile, {
-    env: { browserSync },
+    env: { ...process.env, browserSync },
   });
 
   buildTask.on('exit', () => {
-    console.log('✔ Build successful');
+    const t1 = performance.now();
+    console.log('\x1b[1;32m%s\x1b[0m', `✔ Build OK (${Math.round(t1 - t0)}ms)`);
     bs.reload();
   });
 
