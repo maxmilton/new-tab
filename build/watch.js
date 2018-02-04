@@ -18,7 +18,7 @@ function doBuild() {
 
   buildTask.on('exit', () => {
     const t1 = performance.now();
-    console.log('\x1b[1;32m%s\x1b[0m', `✔ Build OK (${Math.round(t1 - t0)}ms)`);
+    console.log('\x1b[1;32m%s\x1b[0m', `✔ Build OK - ${Math.round(t1 - t0)}ms`);
     bs.reload();
   });
 
