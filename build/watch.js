@@ -15,7 +15,7 @@ function doBuild() {
   });
 
   buildTask.on('exit', () => {
-    console.log('Build complete');
+    console.log('✔ Build successful');
     bs.reload();
   });
 
@@ -39,7 +39,7 @@ bs.init(config, (err, _bs) => {
   doBuild();
 });
 
-bs.watch('../src/**/*', (event) => {
+bs.watch('src/**/*', (event) => {
   if (event === 'change') {
     doBuild();
   }
