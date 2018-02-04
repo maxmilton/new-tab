@@ -1,3 +1,5 @@
+<!-- markdownlint-disable no-inline-html -->
+
 # New Tab
 
 A high performance new tab page that gets you where you need to go faster. Utilises the latest tools and tech, packaged into a Google Chrome extension.

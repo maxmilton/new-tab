@@ -1,4 +1,4 @@
-<!-- markdownlint-disable MD024 -->
+<!-- markdownlint-disable no-duplicate-header no-inline-html -->
 
 # Changelog
 
