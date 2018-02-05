@@ -91,7 +91,7 @@ class {
       }
     });
 
-    // close this tab
+    // close this NTP
     chrome.tabs.getCurrent((tab) => {
       chrome.tabs.remove(tab.id);
     });
