@@ -8,6 +8,7 @@ const path = require('path');
 const lasso = require('lasso');
 const CleanCSS = require('clean-css');
 const UglifyJS = require('uglify-es');
+const optimizeJs = require('optimize-js');
 const pkg = require('../package');
 const manifest = require('../manifest');
 
@@ -65,7 +66,7 @@ lasso.lassoPage({
   let css = fs.readFileSync(cssFile);
   let jsCode = `${fs.readFileSync(jsFile, 'utf8')}\n$_mod.ready();`;
 
-  // resources for body, e.g. script tags
+  // script tags for body
   let body = '';
 
   if (isProduction) {
@@ -86,20 +87,6 @@ lasso.lassoPage({
         passes: 2,
         unsafe: true,
       },
-      // FIXME: Mangle properties for significant byte savings
-      // mangle: {
-      //   properties: {
-      //     reserved: [
-      //       '$_mod',
-      //       // '$_def',
-      //       // '$_exports',
-      //       // '$_run',
-      //       // '$_ready',
-      //       // '$_out',
-      //     ],
-      //     // debug: 'XX',
-      //   },
-      // },
       output: {
         wrap_iife: true,
       },
@@ -107,16 +94,32 @@ lasso.lassoPage({
       toplevel: true,
       warnings: !process.env.QUIET,
     };
-    const uglifyOptsBanner = Object.assign({}, uglifyOpts, {
+    const uglifyOptsMain = Object.assign({}, uglifyOpts, {
+      mangle: {
+        // FIXME: Mangle properties for significant byte savings
+        // properties: {
+        //   reserved: [
+        //     '$_mod',
+        //     // '$_def',
+        //     // '$_exports',
+        //     // '$_run',
+        //     // '$_ready',
+        //     // '$_out',
+        //   ],
+        //   // regex: /x/,
+        //   // keep_quoted: true,
+        //   // debug: 'XXXX',
+        // },
+      },
       output: {
         preamble: banner,
       },
     });
 
-    const src = UglifyJS.minify(jsCode, uglifyOptsBanner);
+    const src = UglifyJS.minify(jsCode, uglifyOptsMain);
     if (src.error) throw src.error;
     if (src.warnings) console.log(src.warnings);
-    jsCode = src.code;
+    jsCode = optimizeJs(src.code);
 
     // extra JS file loader
     const loader = fs.readFileSync(path.join(__dirname, '../src/loader.js'), 'utf8');
@@ -131,7 +134,7 @@ lasso.lassoPage({
     const errSrc = UglifyJS.minify({ 'raven.js': raven, 'errors.js': errors }, uglifyOpts);
     if (errSrc.error) throw errSrc.error;
     if (errSrc.warnings) console.log(errSrc.warnings);
-    fs.writeFile(path.join(__dirname, '../dist/err.js'), errSrc.code, cb);
+    fs.writeFile(path.join(__dirname, '../dist/err.js'), optimizeJs(errSrc.code), cb);
   } else {
     // Browsersync client script
     body = `\n${process.env.BROWSERSYNC}`;

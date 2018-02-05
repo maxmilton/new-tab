@@ -44,6 +44,7 @@
     "lasso-postcss": "^0.4.0",
     "marko": "^4.7.5",
     "marko-bind": "^0.1.0",
+    "optimize-js": "^1.0.3",
     "postcss": "^6.0.17",
     "stylelint": "^8.4.0",
     "uglify-es": "^3.3.9"
