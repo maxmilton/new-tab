@@ -9,6 +9,28 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ## [Unreleased]
 
+## [0.3.0] - 2018-02-05
+
+### Added
+
+- Better handle when to open and close bookmark folders for a smoother experience.
+- Error tracking. Async and non-invasive. Since the performance impact is low it's also on by default but is easy to opt-out of.
+
+### Fixed
+
+- Menu animation no longer stutters.
+- Menu is a bit more usable on small screens.
+- Bug where the document is loaded multiple times due to an incorrect `<img>` src attribute.
+
+### Changed
+
+- Higher priority main JavaScript file loading for better load performance.
+- Better CSS minification for smaller code final size and faster browser parsing.
+- Build and development process improvements.
+- Tighter <abbr title="Content Security Policy">CSP</abbr> than Chrome defaults for better security.
+- JavaScript bundle size reductions.
+- General code clean up.
+
 ## [0.2.0] - 2018-02-04
 
 ### Added
@@ -50,5 +72,6 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 - Initial public version including all the basics; working proof of concept code, readme, etc. Not ready for release yet though, it's still far from being actually useful!
 
-[Unreleased]: https://github.com/MaxMilton/new-tab/compare/v0.2.0...HEAD
+[Unreleased]: https://github.com/MaxMilton/new-tab/compare/v0.3.0...HEAD
+[0.3.0]: https://github.com/MaxMilton/new-tab/compare/v0.2.0...v0.3.0
 [0.2.0]: https://github.com/MaxMilton/new-tab/compare/v0.1.0...v0.2.0
