@@ -108,12 +108,8 @@ class {
     }
   }
 
-  loadMoreBookmarks() {
-    this.state.bookmarks = this.state.bookmarksRaw.slice(0, this.state.bookmarks.length + 100);
-  }
-
-  loadMoreHistory() {
-    this.state.history = this.state.historyRaw.slice(0, this.state.history.length + 100);
+  loadMore(key, rawList, length) {
+    this.setState(key, rawList.slice(0, length + 100));
   }
 }
 
@@ -157,51 +153,44 @@ style {
   }
 }
 
+$ let isSearching = state.search !== '';
+
+macro itemList(title, list, rawList, key)
+  $ let count = list.length;
+  $ let length = rawList.length;
+
+  if(count)
+    h2 -- ${title} (${count}/${length})
+
+    for(item in list)
+      a.r on-click(onClick) href=item.url key=key+item.id
+        img.i src=`chrome://favicon/${item.url}`
+        -- ${item.title || item.url}
+
+    if(count < length)
+      button.f on-click('loadMore', title, rawList, count) -- Show more...
+  else-if(isSearching)
+    p.g -- No matching ${title}
+
 div.c
   input#s on-keyup('cancelSearch') bind('search') type="text" placeholder="Search tabs, bookmarks, and history..." autocomplete="off" key="i"
 
   <!-- Tabs -->
   $ let tabsCount = state.tabs.length;
-  $ let isSearching = state.search !== '';
   if(tabsCount)
-    h2 -- Open Tabs (${tabsCount})
+    h2 -- Open Tabs (${tabsCount}/${state.tabsRaw.length})
 
     for(tab in state.tabs)
-      a.r on-click('onTabClick', tab) href=tab.url key=`t${tab.id}`
-        img.i src=tab.favIconUrl||'#'
+      a.r on-click('onTabClick', tab) href=tab.url key='t'+tab.id
+        <!-- img.i src=tab.favIconUrl||'' -->
+        img.i src=tab.favIconUrl
 
         -- ${tab.title}
   else-if(isSearching)
     p.g -- No matching open tabs
 
   <!-- Bookmarks -->
-  $ let bookmarksCount = state.bookmarks.length;
-  if(bookmarksCount)
-    h2 -- Bookmarks (${bookmarksCount}/${state.bookmarksRaw.length})
-
-    for(bookmark in state.bookmarks)
-      <!-- a.r on-click(onClick) href=bookmark.url key=`b${bookmark.id}` no-update -->
-      a.r on-click(onClick) href=bookmark.url key=`b${bookmark.id}`
-        img.i src=`chrome://favicon/${bookmark.url}`
-        -- ${bookmark.title || bookmark.url}
-
-    if(bookmarksCount < state.bookmarksRaw.length)
-      button.f on-click('loadMoreBookmarks') -- Show more...
-  else-if(isSearching)
-    p.g -- No matching bookmarks
+  itemList('bookmarks', state.bookmarks, state.bookmarksRaw, 'b')
 
   <!-- History -->
-  $ let historyCount = state.history.length;
-  if(historyCount)
-    h2 -- History (${historyCount}/${state.historyRaw.length})
-
-    for(item in state.history)
-      <!-- a.r on-click(onClick) href=item.url key=`h${item.id}` no-update -->
-      a.r on-click(onClick) href=item.url key=`h${item.id}`
-        img.i src=`chrome://favicon/${item.url}`
-        -- ${item.title || item.url}
-
-    if(historyCount < state.historyRaw.length)
-      button.f on-click('loadMoreHistory') -- Show more...
-  else-if(isSearching)
-    p.g -- No matching history entries
+  itemList('history', state.history, state.historyRaw, 'h')
