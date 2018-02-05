@@ -118,14 +118,31 @@ lasso.lassoPage({
     if (src.warnings) console.log(src.warnings);
     jsCode = src.code;
 
-  const head = isProduction ? '' : `\n${process.env.browserSync}`;
+    // extra JS file loader
+    const loader = fs.readFileSync(path.join(__dirname, '../src/loader.js'), 'utf8');
+    const loaderSrc = UglifyJS.minify(loader, uglifyOpts);
+    if (loaderSrc.error) throw loaderSrc.error;
+    if (loaderSrc.warnings) console.log(loaderSrc.warnings);
+    body = `<script>${loaderSrc.code}</script>`;
+
+    // JS error tracking
+    const raven = fs.readFileSync(require.resolve('raven-js/dist/raven'), 'utf8');
+    const errors = fs.readFileSync(path.join(__dirname, '../src/errors.js'), 'utf8');
+    const errSrc = UglifyJS.minify({ 'raven.js': raven, 'errors.js': errors }, uglifyOpts);
+    if (errSrc.error) throw errSrc.error;
+    if (errSrc.warnings) console.log(errSrc.warnings);
+    fs.writeFile(path.join(__dirname, '../dist/err.js'), errSrc.code, cb);
+  } else {
+    // Browsersync client script
+    body = `\n${process.env.BROWSERSYNC}`;
+  }
 
   // inject into HTML template
   const template = path.join(__dirname, '../src/template.html');
   const out = path.join(__dirname, '../dist/ntp.html');
   fs.readFile(template, 'utf8', (err, html) => {
     if (err) throw err;
-    fs.writeFile(out, compile(html)({ banner, css, js, head }), cb);
+    fs.writeFile(out, compile(html)({ banner, css, js, body }), cb);
   });
 
   // clean up leftover CSS file

@@ -1,3 +1,5 @@
+/* tslint:disable:quotemark max-line-length */
+
 'use strict'; // eslint-disable-line
 
 const pkg = require('./package.json');
@@ -17,6 +19,7 @@ module.exports = {
     'bookmarks',
     'chrome://favicon/',
     'history',
+    'storage',
     'tabs',
   ],
   chrome_url_overrides: {
@@ -26,7 +29,7 @@ module.exports = {
 
   ...(isProduction
     // tighter security than default
-    ? { content_security_policy: "script-src 'self'; object-src 'self'" }
+    ? { content_security_policy: "script-src 'self' 'sha256-9ZafaBDGXOcwQYKP+Hsudqam1mR8yiH5XNgc0tPs1Qo='; object-src 'self'" }
     // allow connections from http://localhost during local development
     : { content_security_policy: "script-src 'self' blob: filesystem: chrome-extension-resource: http://localhost:*; object-src 'self'" }
   ),
