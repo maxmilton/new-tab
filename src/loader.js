@@ -1,7 +1,4 @@
-/* eslint-disable no-var, no-unused-vars */
 // XXX: Update manifest CSP hash after any changes to this file!
-
-// TODO: Shold event listeners be removed if opt-out=true?
 
 // capture errors (before error tracking script is ready)
 const win = window;

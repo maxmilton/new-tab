@@ -2,6 +2,7 @@
 
 const win = window;
 
+// clean up listeners for error capture before Sentry is loaded
 win.removeEventListener('error', win.l);
 win.removeEventListener('unhandledrejection', win.u);
 
