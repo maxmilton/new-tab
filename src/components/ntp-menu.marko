@@ -1,5 +1,23 @@
 import { onClick } from '../helpers';
 
+class {
+  onCreate() {
+    this.state = {
+      trackErrors: true,
+    }
+
+    // check for error tracking opt-out
+    chrome.storage.local.get('e', (isOptOut) => {
+      this.state.trackErrors = !isOptOut.e;
+    });
+  }
+
+  toggleErrorTracking() {
+    chrome.storage.local.set({ e: this.state.trackErrors });
+    this.state.trackErrors = !this.state.trackErrors;
+  }
+}
+
 style {
   #m { /* menu */
     position: absolute;
@@ -48,7 +66,7 @@ style {
   }
 }
 
-div#m no-update
+div#m
   div#i -- ☰
 
   div#d
@@ -56,8 +74,11 @@ div#m no-update
     a.m on-click(onClick) href="chrome://bookmarks/" -- Bookmarks Manager
     a.m on-click(onClick) href="chrome://downloads/" -- Downloads
     a.m on-click(onClick) href="chrome://history/" -- History
-    a.m on-click(onClick) href="chrome://settings/passwords" -- Show Passwords
+    a.m on-click(onClick) href="chrome://settings/passwords" -- Passwords
 
     hr
 
-    a.m href="https://github.com/MaxMilton/new-tab/issues" -- Submit Bug
+    a.m href="#" on-click('toggleErrorTracking') title="Opt-out from error tracking"
+      -- ${state.trackErrors ? '✅' : '❌'} Track errors
+
+    a.m href="https://github.com/MaxMilton/new-tab/issues" -- Submit bug
