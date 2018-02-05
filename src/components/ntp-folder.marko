@@ -45,17 +45,6 @@ class {
         this.el.dispatchEvent(folderOpenEvent);
 
         this.state.show = true;
-
-        // push to end of execution queue; after subfolder renders to the DOM
-        setTimeout(() => {
-          // reposition the subfolder if it's outside the document
-          const el = this.getEl('s');
-          const rect = el.getBoundingClientRect();
-
-          if ((rect.left + rect.width) > document.body.clientWidth) {
-            el.classList.add('l');
-          }
-        }, 0);
       }, 200); // open delay
     }
   }
@@ -115,19 +104,17 @@ style {
 div.b.f on-mouseleave('onFolderMouseLeave') on-mouseenter('onFolderMouseEnter') title=input.title
   -- ${input.title}
 
-  // only show if folder is at least 1 level deep
-  if(input.parentId > 1)
-    // span.e -- ▸
-    span.e -- ▶
+  // show subfolder indicator
+  span.e if(input.parentId > 1) -- ▶
 
   if(state.show)
-    div.s key="s"
+    div.s class=(input.left && 'l')
       for(bookmark in input.children)
         if(bookmark.children !== undefined)
           <!-- folder -->
           include(ntpFolder, bookmark)
         else
           <!-- bookmark -->
-          a.b on-click(onClick) href=bookmark.url no-update
+          a.b on-click(onClick) href=bookmark.url
             img.i src=`chrome://favicon/${bookmark.url}`
             span.t -- ${bookmark.title}

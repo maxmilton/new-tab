@@ -79,8 +79,8 @@ div#a
         include(ntpFolder, bookmark)
       else
         <!-- bookmark link -->
-        a.b on-click(onClick) href=bookmark.url title=bookmark.title no-update
+        a.b on-click(onClick) href=bookmark.url title=bookmark.title
           img.i src=`chrome://favicon/${bookmark.url}`
           span.t if(bookmark.title) -- ${bookmark.title}
 
-  include(ntpFolder, state.bookmarksOther)
+  include(ntpFolder, state.bookmarksOther) left=true
