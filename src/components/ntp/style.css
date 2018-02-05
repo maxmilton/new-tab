@@ -1,5 +1,5 @@
 /**
- * GLOBAL STYLES
+ * Global styles.
  */
 
 :root {
@@ -36,6 +36,10 @@ body {
 .g, /* muted grey colour */
 h2 {
   color: var(--g4);
+}
+
+h2 {
+  text-transform: capitalize;
 }
 
 a {
