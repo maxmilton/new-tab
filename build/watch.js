@@ -1,4 +1,5 @@
 /* eslint-disable strict, import/no-extraneous-dependencies, no-console */
+/* tslint:disable:no-console */
 
 'use strict';
 
@@ -8,12 +9,16 @@ const { fork } = require('child_process');
 const bs = require('browser-sync').create();
 
 const buildFile = path.join(__dirname, 'build');
-let browserSync = '';
+let browsersync = '';
 
 function doBuild() {
   const t0 = performance.now();
-  const buildTask = fork(buildFile, {
-    env: { ...process.env, SILENT: true, browserSync },
+  const buildTask = fork(buildFile, [], {
+    env: {
+      ...process.env, // same env vars as this script
+      QUIET: true, // no verbose logs
+      BROWSERSYNC: browsersync,
+    },
   });
 
   buildTask.on('exit', () => {
@@ -42,7 +47,7 @@ const config = {
 
 bs.init(config, (err, _bs) => {
   if (err) throw err;
-  browserSync = _bs.options.get('snippet');
+  browsersync = _bs.options.get('snippet');
   doBuild();
 });
 

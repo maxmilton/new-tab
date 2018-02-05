@@ -1,4 +1,5 @@
 /* eslint-disable strict, import/no-extraneous-dependencies, no-console */
+/* tslint:disable:no-console prefer-template */
 
 'use strict';
 
@@ -25,11 +26,11 @@ const banner = `/*
 function cb(err) { if (err) throw err; }
 
 /**
-* Ultra-minimal template engine.
-* @see https://github.com/Drulac/template-literal
-* @param {string} template
-* @returns {string}
-*/
+ * Ultra-minimal template engine.
+ * @see https://github.com/Drulac/template-literal
+ * @param {string} template
+ * @returns {Function}
+ */
 function compile(template) {
  return new Function('d', 'return `' + template + '`'); // eslint-disable-line
 }
@@ -48,7 +49,7 @@ lasso.configure({
   includeSlotNames: false,
 });
 
-// generate JS, CSS, and HTML
+// process marko components; generate JS, CSS, and HTML
 lasso.lassoPage({
   name: 'ntp',
   dependencies: ['require-run: ./src/index'],
@@ -62,7 +63,10 @@ lasso.lassoPage({
 
   // source code
   let css = fs.readFileSync(cssFile);
-  let src = `${fs.readFileSync(jsFile, 'utf8')}\n$_mod.ready();`;
+  let jsCode = `${fs.readFileSync(jsFile, 'utf8')}\n$_mod.ready();`;
+
+  // resources for body, e.g. script tags
+  let body = '';
 
   if (isProduction) {
     // minify CSS
@@ -74,7 +78,7 @@ lasso.lassoPage({
     }).minify(css).styles;
 
     // minify JS
-    src = UglifyJS.minify(src, {
+    const uglifyOpts = {
       compress: {
         drop_console: true,
         drop_debugger: true,
@@ -82,18 +86,37 @@ lasso.lassoPage({
         passes: 2,
         unsafe: true,
       },
+      // FIXME: Mangle properties for significant byte savings
+      // mangle: {
+      //   properties: {
+      //     reserved: [
+      //       '$_mod',
+      //       // '$_def',
+      //       // '$_exports',
+      //       // '$_run',
+      //       // '$_ready',
+      //       // '$_out',
+      //     ],
+      //     // debug: 'XX',
+      //   },
+      // },
       output: {
-        preamble: banner,
         wrap_iife: true,
       },
       ecma: 8,
       toplevel: true,
-      warnings: !process.env.SILENT,
+      warnings: !process.env.QUIET,
+    };
+    const uglifyOptsBanner = Object.assign({}, uglifyOpts, {
+      output: {
+        preamble: banner,
+      },
     });
 
+    const src = UglifyJS.minify(jsCode, uglifyOptsBanner);
     if (src.error) throw src.error;
     if (src.warnings) console.log(src.warnings);
-  }
+    jsCode = src.code;
 
   const head = isProduction ? '' : `\n${process.env.browserSync}`;
 
@@ -109,8 +132,7 @@ lasso.lassoPage({
   fs.unlink(cssFile, cb);
 
   // write JS to disk
-  fs.writeFile(jsFile, src.code || src, cb);
-  // fs.writeFile(`${jsFile}.map`, src.map, cb);
+  fs.writeFile(jsFile, jsCode, cb);
 }).catch((err) => {
   throw err;
 });
