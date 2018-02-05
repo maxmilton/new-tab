@@ -15,6 +15,11 @@ win.addEventListener('unhandledrejection', (event) => {
   Raven.captureException(event.reason);
 });
 
+// report any error queued before Sentry tracker was loaded
 win.q.forEach((event) => {
-  Raven.captureException(event.reason);
+  Raven.captureException(event.reason || event, {
+    extra: {
+      event,
+    },
+  });
 });
