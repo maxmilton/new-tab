@@ -163,7 +163,7 @@ macro itemList(title, list, rawList, key)
     h2 -- ${title} (${count}/${length})
 
     for(item in list)
-      a.r on-click(onClick) href=item.url key=key+item.id
+      a.r on-click(onClick) key=key+item.id href=item.url
         img.i src=`chrome://favicon/${item.url}`
         -- ${item.title || item.url}
 
@@ -173,16 +173,15 @@ macro itemList(title, list, rawList, key)
     p.g -- No matching ${title}
 
 div.c
-  input#s on-keyup('cancelSearch') bind('search') type="text" placeholder="Search tabs, bookmarks, and history..." autocomplete="off" key="i"
+  input#s on-keyup('cancelSearch') bind('search') key="i" type="text" placeholder="Search tabs, bookmarks, and history..." autocomplete="off"
 
-  <!-- Tabs -->
+  <!-- Open Tabs -->
   $ let tabsCount = state.tabs.length;
   if(tabsCount)
-    h2 -- Open Tabs (${tabsCount}/${state.tabsRaw.length})
+    h2 -- open tabs (${tabsCount}/${state.tabsRaw.length})
 
     for(tab in state.tabs)
-      a.r on-click('onTabClick', tab) href=tab.url key='t'+tab.id
-        <!-- img.i src=tab.favIconUrl||'' -->
+      a.r on-click('onTabClick', tab) key='t'+tab.id href=tab.url
         img.i src=tab.favIconUrl
 
         -- ${tab.title}
