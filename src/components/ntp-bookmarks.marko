@@ -2,7 +2,7 @@ import { onClick } from '../helpers';
 import ntpFolder from './ntp-folder';
 
 class {
-  onCreate(input, out) {
+  onCreate() {
     this.state = {
       bookmarksOther: { title: 'Other bookmarks' },
       bookmarksBar: [],
@@ -74,7 +74,7 @@ style {
 div#a
   div#b
     for(bookmark in state.bookmarksBar)
-      if(bookmark.children)
+      if(bookmark.children !== undefined)
         <!-- folder -->
         include(ntpFolder, bookmark)
       else
