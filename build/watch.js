@@ -12,6 +12,7 @@ const buildFile = path.join(__dirname, 'build');
 let browsersync = '';
 
 function doBuild() {
+  console.log('Build started...');
   const t0 = performance.now();
   const buildTask = fork(buildFile, [], {
     env: {
