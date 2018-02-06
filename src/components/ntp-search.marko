@@ -109,7 +109,7 @@ class {
   }
 
   loadMore(key, rawList, length) {
-    this.setState(key, rawList.slice(0, length + 100));
+    this.state[key] = rawList.slice(0, length + 100);
   }
 }
 
