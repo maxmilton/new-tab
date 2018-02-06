@@ -1,21 +1,23 @@
 import { onClick } from '../helpers';
 import ntpFolder from './ntp-folder';
 
-static const folderOpenEvent = new Event('o', { bubbles: true });
-
 class {
-  onCreate() {
+  onCreate(input) {
     this.state = {
       show: false,
     }
+    this.level = input.level;
+    this.target = input.target;
     this.openTimer = null;
     this.closeTimer = null;
 
-    this.subscribeTo(document).on('o', (event) => {
-      const isSubfolder = event.path.some(el => el === this.el);
-      if (!isSubfolder) {
-        this.state.show = false;
-        this.resetCloseTimer();
+    // close when another folder opens
+    this.target.on('open', (level) => {
+      if (this.state.show) {
+        if (level === input.level) {
+          this.state.show = false;
+          this.resetCloseTimer();
+        }
       }
     });
   }
@@ -41,9 +43,7 @@ class {
     } else {
       // delay to prevent accidental folder open
       this.openTimer = setTimeout(() => {
-        // trigger other folders to close
-        this.el.dispatchEvent(folderOpenEvent);
-
+        this.target.emit('open', this.input.level);
         this.state.show = true;
       }, 200); // open delay
     }
@@ -104,7 +104,7 @@ style {
 div.b.f on-mouseleave('onFolderMouseLeave') on-mouseenter('onFolderMouseEnter') title=input.title
   -- ${input.title}
 
-  // show subfolder indicator
+  <!-- subfolder indicator -->
   span.e if(input.parentId > 1) -- ▶
 
   if(state.show)
@@ -112,7 +112,7 @@ div.b.f on-mouseleave('onFolderMouseLeave') on-mouseenter('onFolderMouseEnter') 
       for(bookmark in input.children)
         if(bookmark.children !== undefined)
           <!-- folder -->
-          include(ntpFolder, bookmark)
+          include(ntpFolder, bookmark) level=input.level+1 target=input.target
         else
           <!-- bookmark -->
           a.b on-click(onClick) href=bookmark.url

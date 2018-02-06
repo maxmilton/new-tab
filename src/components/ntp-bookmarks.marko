@@ -76,11 +76,11 @@ div#a
     for(bookmark in state.bookmarksBar)
       if(bookmark.children !== undefined)
         <!-- folder -->
-        include(ntpFolder, bookmark)
+        include(ntpFolder, bookmark) level=0 target=component
       else
         <!-- bookmark link -->
         a.b on-click(onClick) href=bookmark.url title=bookmark.title
           img.i src=`chrome://favicon/${bookmark.url}`
           span.t if(bookmark.title) -- ${bookmark.title}
 
-  include(ntpFolder, state.bookmarksOther) left=true
+  include(ntpFolder, state.bookmarksOther) level=0 target=component left=true
