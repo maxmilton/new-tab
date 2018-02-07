@@ -78,8 +78,6 @@ lasso.lassoPage({
       },
     }).minify(css).styles;
 
-    // TODO: Replace module ("/path/to/module") with a short form or new module resolve strategy
-
     // set up JS minification
     const uglifyOpts = {
       compress: {
