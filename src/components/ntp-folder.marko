@@ -21,7 +21,8 @@ class {
     });
   }
 
-  onFolderMouseLeave(event) {
+  // on mouse leave
+  onOut(event) {
     // reset open timer
     if (this.__openTimer !== null) {
       clearTimeout(this.__openTimer);
@@ -36,7 +37,8 @@ class {
     }
   }
 
-  onFolderMouseEnter() {
+  // on mouse enter
+  onIn() {
     if (this.state.__show) {
       this.__resetCloseTimer();
     } else {
@@ -100,7 +102,7 @@ style {
   }
 }
 
-div.b.f on-mouseleave('onFolderMouseLeave') on-mouseenter('onFolderMouseEnter') title=input.title
+div.b.f on-mouseleave('onOut') on-mouseenter('onIn') title=input.title
   -- ${input.title}
 
   <!-- subfolder indicator -->
