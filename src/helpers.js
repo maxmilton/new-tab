@@ -48,13 +48,15 @@ function onClick(event) {
   const { target, ctrlKey } = event;
   const url = target.href;
 
-  if (target.target === '_blank' || ctrlKey) {
-    openNewTab(url);
-  } else {
-    updateTabLocation(url);
-  }
+  if (url.charAt(0) !== 'h') {
+    if (target.target === '_blank' || ctrlKey) {
+      openNewTab(url);
+    } else {
+      updateTabLocation(url);
+    }
 
-  event.preventDefault();
+    event.preventDefault();
+  }
 }
 
 module.exports = {
