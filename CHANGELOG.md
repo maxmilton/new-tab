@@ -11,12 +11,16 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ## [0.3.1] - 2018-02-07
 
+### Fixed
+
+- "Load more" bug in search results.
+
 ### Changed
 
-- Use the more efficient native Marko event system to trigger bookmark folder close.
+- Use Marko event system to trigger bookmark folder close for better efficiency than browser native events.
 - Simplify logic for opening a bookmark folder to the left; avoids a bunch of complex calculations on every folder open.
-- Small development watch script CLI feedback improvement.
 - Custom JavaScript object property mangling for even more file size savings.
+- Small development watch script CLI feedback improvement.
 
 ## [0.3.0] - 2018-02-05
 
