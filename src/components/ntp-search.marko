@@ -107,13 +107,12 @@ class {
     }
   }
 
-  // loadMore(key, rawList, length) {
-  //   this.state[key] = rawList.slice(0, length + 100);
-  // }
-  // FIXME: Set state (dynamic key)
-  loadMore(list, rawList, length) {
-    console.log('##', list);
-    list = rawList.slice(0, length + 100);
+  loadMore(title, length) {
+    if (title === 'Bookmarks') {
+      this.state.__bookmarks = this.state.__bookmarksRaw.slice(0, length + 100);
+    } else {
+      this.state.__history = this.state.__historyRaw.slice(0, length + 100);
+    }
   }
 }
 
@@ -159,7 +158,7 @@ style {
 
 $ let isSearching = state.search !== '';
 
-macro itemList(title, list, rawList, key)
+macro itemList(title, list, rawList, keyPrefix)
   $ let count = list.length;
   $ let length = rawList.length;
 
@@ -167,13 +166,12 @@ macro itemList(title, list, rawList, key)
     h2 -- ${title} (${count}/${length})
 
     for(item in list)
-      a.r on-click(onClick) key=key+item.id href=item.url
+      a.r on-click(onClick) key=keyPrefix+item.id href=item.url
         img.i src=`chrome://favicon/${item.url}`
         -- ${item.title || item.url}
 
     if(count < length)
-      // button.f on-click('loadMore', title, rawList, count) -- Show more...
-      button.f on-click('loadMore', list, rawList, count) -- Show more...
+      button.f on-click('loadMore', title, count) -- Show more...
   else-if(isSearching)
     p.g -- No matching ${title}
 
@@ -183,7 +181,7 @@ div.c
   <!-- Open Tabs -->
   $ let tabsCount = state.__tabs.length;
   if(tabsCount)
-    h2 -- open tabs (${tabsCount}/${state.__tabsRaw.length})
+    h2 -- Open Tabs (${tabsCount}/${state.__tabsRaw.length})
 
     for(tab in state.__tabs)
       a.r on-click('onTabClick', tab) key='t'+tab.id href=tab.url
@@ -191,10 +189,10 @@ div.c
 
         -- ${tab.title}
   else-if(isSearching)
-    p.g -- No matching open tabs
+    p.g -- No matching Open Tabs
 
   <!-- Bookmarks -->
-  itemList('bookmarks', state.__bookmarks, state.__bookmarksRaw, 'b')
+  itemList('Bookmarks', state.__bookmarks, state.__bookmarksRaw, 'b')
 
   <!-- History -->
-  itemList('history', state.__history, state.__historyRaw, 'h')
+  itemList('History', state.__history, state.__historyRaw, 'h')

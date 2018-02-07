@@ -38,10 +38,6 @@ h2 {
   color: var(--g4);
 }
 
-h2 {
-  text-transform: capitalize;
-}
-
 a {
   text-decoration: none;
 
