@@ -96,15 +96,15 @@ lasso.lassoPage({
     const uglifyOptsMain = Object.assign({}, uglifyOpts, {
       mangle: {
         properties: {
+          // XXX: Potentially fragile; needs adjustment if a future property conflicts
+          //  ↳ Bad: key, input, update (chrome.tabs.update)
+          //  ↳ Suspect: \w{1,2}, default, super (es6 classes)
+          regex: /^(\$.*|_.*|.*_|\w{1,2}|def|installed|run(time)?|main|remap|builtin|require|resolve|ready|search(Path)?|load(ed|erMetadata)?|pending|code|cache|exports?|component|const|state|out|globals|data|subscribeTo|setState|default|filename|wait|createOut|template|emit|prependListener|once|removeListener|removeAllListeners|listenerCount|addDestroyListener|createTracker|appendTo|prependTo|replaceChildrenOf|insertAfter|getComponents?|afterInsert|getNode|getOutput|document|selectedIndex|correspondingUseElement|element|node|comment|html|beginElement|endElement|end|error|beginAsync|flush|sync|isSync|onLast|isVDOM|parentOut|render(ToString|sync|er)?|path|meta|elId|getEl(s|Id)?|destroy|isDestroyed|setStateDirty|replaceState|forceUpdate|shouldUpdate|els|getComponentForEl|init|register|renderBody|safeHTML|write)$/i,
           reserved: [
             '$_mod', // lasso module
             'ax_', // fixes broken element placeholder attribute
             'id', // element attribute
           ],
-          // XXX: Potentially fragile; needs adjustment if a future property conflicts
-          //  ↳ Bad: key, input, update (chrome.tabs.update)
-          //  ↳ Suspect: \w{1,2}, default, super (es6 classes)
-          regex: /^(\$.*|_.*|.*_|\w{1,2}|def|installed|run(time)?|main|remap|builtin|require|resolve|ready|search(Path)?|load(ed|erMetadata)?|pending|code|cache|exports?|component|const|state|out|globals|data|subscribeTo|setState|default|filename|wait|createOut|template|emit|prependListener|once|removeListener|removeAllListeners|listenerCount|addDestroyListener|createTracker|appendTo|prependTo|replaceChildrenOf|insertAfter|getComponents?|afterInsert|getNode|getOutput|document|selectedIndex|correspondingUseElement|element|node|comment|html|beginElement|endElement|end|error|beginAsync|flush|sync|isSync|onLast|isVDOM|parentOut|render(ToString|sync|er)?|path|meta|elId|getEl(s|Id)?|destroy|isDestroyed|setStateDirty|replaceState|forceUpdate|shouldUpdate|els|getComponentForEl|init|register|renderBody|safeHTML|write)$/i,
           // debug: 'XX',
         },
         eval: true,
@@ -112,13 +112,6 @@ lasso.lassoPage({
       output: {
         preamble: banner,
       },
-    });
-    // FIXME: Just use uglifyOpts if there's no cusomisation needed
-    const uglifyOptsErr = Object.assign({}, uglifyOpts, {
-      // mangle: {
-      //   // TODO: Custom property mangle settings
-      //   properties: false,
-      // },
     });
 
     // minify JS
@@ -138,7 +131,7 @@ lasso.lassoPage({
     // JS error tracking
     const raven = fs.readFileSync(require.resolve('raven-js/dist/raven'), 'utf8');
     const errors = fs.readFileSync(path.join(__dirname, '../src/errors.js'), 'utf8');
-    const errSrc = UglifyJS.minify({ 'raven.js': raven, 'errors.js': errors }, uglifyOptsErr);
+    const errSrc = UglifyJS.minify({ 'raven.js': raven, 'errors.js': errors }, uglifyOpts);
     if (errSrc.error) throw errSrc.error;
     if (errSrc.warnings) console.log(errSrc.warnings);
     fs.writeFile(path.join(__dirname, '../dist/err.js'), optimizeJs(errSrc.code), cb);
