@@ -104,6 +104,7 @@ lasso.lassoPage({
             '$_mod', // lasso module
             'ax_', // fixes broken element placeholder attribute
             'id', // element attribute
+            'e', // error tracking opt-out
           ],
           // debug: 'XX',
         },
