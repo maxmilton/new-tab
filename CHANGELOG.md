@@ -9,6 +9,15 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ## [Unreleased]
 
+## [0.3.1] - 2018-02-07
+
+### Changed
+
+- Use the more efficient native Marko event system to trigger bookmark folder close.
+- Simplify logic for opening a bookmark folder to the left; avoids a bunch of complex calculations on every folder open.
+- Small development watch script CLI feedback improvement.
+- Custom JavaScript object property mangling for even more file size savings.
+
 ## [0.3.0] - 2018-02-05
 
 ### Added
@@ -72,6 +81,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 - Initial public version including all the basics; working proof of concept code, readme, etc. Not ready for release yet though, it's still far from being actually useful!
 
-[Unreleased]: https://github.com/MaxMilton/new-tab/compare/v0.3.0...HEAD
+[Unreleased]: https://github.com/MaxMilton/new-tab/compare/v0.3.1...HEAD
+[0.3.1]: https://github.com/MaxMilton/new-tab/compare/v0.3.0...v0.3.1
 [0.3.0]: https://github.com/MaxMilton/new-tab/compare/v0.2.0...v0.3.0
 [0.2.0]: https://github.com/MaxMilton/new-tab/compare/v0.1.0...v0.2.0

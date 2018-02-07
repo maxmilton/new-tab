@@ -4,19 +4,18 @@ import ntpFolder from './ntp-folder';
 class {
   onCreate(input) {
     this.state = {
-      show: false,
+      __show: false,
     }
-    this.level = input.level;
-    this.target = input.target;
-    this.openTimer = null;
-    this.closeTimer = null;
+    this.__target = input.target;
+    this.__openTimer = null;
+    this.__closeTimer = null;
 
     // close when another folder opens
-    this.target.on('open', (level) => {
-      if (this.state.show) {
+    this.__target.on('open', (level) => {
+      if (this.state.__show) {
         if (level === input.level) {
-          this.state.show = false;
-          this.resetCloseTimer();
+          this.state.__show = false;
+          this.__resetCloseTimer();
         }
       }
     });
@@ -24,35 +23,35 @@ class {
 
   onFolderMouseLeave(event) {
     // reset open timer
-    if (this.openTimer !== null) {
-      clearTimeout(this.openTimer);
-      this.openTimer = null;
+    if (this.__openTimer !== null) {
+      clearTimeout(this.__openTimer);
+      this.__openTimer = null;
     }
 
     // set up close timer
-    if (this.state.show) {
-      this.closeTimer = setTimeout(() => {
-        this.state.show = false;
+    if (this.state.__show) {
+      this.__closeTimer = setTimeout(() => {
+        this.state.__show = false;
       }, 400); // close delay
     }
   }
 
   onFolderMouseEnter() {
-    if (this.state.show) {
-      this.resetCloseTimer();
+    if (this.state.__show) {
+      this.__resetCloseTimer();
     } else {
       // delay to prevent accidental folder open
-      this.openTimer = setTimeout(() => {
-        this.target.emit('open', this.input.level);
-        this.state.show = true;
+      this.__openTimer = setTimeout(() => {
+        this.__target.emit('open', this.input.level);
+        this.state.__show = true;
       }, 200); // open delay
     }
   }
 
-  resetCloseTimer() {
-    if (this.closeTimer !== null) {
-      clearTimeout(this.closeTimer);
-      this.closeTimer = null;
+  __resetCloseTimer() {
+    if (this.__closeTimer !== null) {
+      clearTimeout(this.__closeTimer);
+      this.__closeTimer = null;
     }
   }
 }
@@ -107,7 +106,7 @@ div.b.f on-mouseleave('onFolderMouseLeave') on-mouseenter('onFolderMouseEnter') 
   <!-- subfolder indicator -->
   span.e if(input.parentId > 1) -- ▶
 
-  if(state.show)
+  if(state.__show)
     div.s class=(input.left && 'l')
       for(bookmark in input.children)
         if(bookmark.children !== undefined)

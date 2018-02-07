@@ -3,30 +3,29 @@ import { debounce, onClick } from '../helpers';
 class {
   onCreate() {
     this.state = {
-      search: '',
-      tabsRaw: [],
-      tabs: [],
-      bookmarksRaw: [],
-      bookmarks: [],
-      historyRaw: [],
-      history: [],
+      search: '', // don't __mangle; used with bind()
+      __tabsRaw: [],
+      __tabs: [],
+      __bookmarksRaw: [],
+      __bookmarks: [],
+      __historyRaw: [],
+      __history: [],
     };
-    this.lastSearch = '';
+    this.__lastSearch = '';
+    this.__search = debounce(this.__doSearch, 200);
 
-    this.search = debounce(this.doSearch, 200);
-
-    this.getTabs();
+    this.__getTabs();
   }
 
   onMount() {
     // update tab list on tab events
     chrome.tabs.onUpdated.addListener((tabId, changeInfo) => {
       if (changeInfo.title !== undefined) {
-        this.getTabs();
+        this.__getTabs();
       }
     });
-    chrome.tabs.onMoved.addListener(() => this.getTabs());
-    chrome.tabs.onRemoved.addListener(() => this.getTabs());
+    chrome.tabs.onMoved.addListener(() => this.__getTabs());
+    chrome.tabs.onRemoved.addListener(() => this.__getTabs());
 
     // bring focus to search input on click
     const el = this.getEl('i');
@@ -34,48 +33,48 @@ class {
   }
 
   onRender() {
-    if (this.state.search !== this.lastSearch) {
-      this.search();
+    if (this.state.search !== this.__lastSearch) {
+      this.__search();
     }
   }
 
-  doSearch() {
+  __doSearch() {
     const { search } = this.state;
 
-    this.lastSearch = search;
+    this.__lastSearch = search;
 
     // reset search when input is empty
     if (search === '') {
-      this.state.tabs = this.state.tabsRaw;
-      this.state.bookmarks.length = 0;
-      this.state.history.length = 0;
+      this.state.__tabs = this.state.__tabsRaw;
+      this.state.__bookmarks.length = 0;
+      this.state.__history.length = 0;
       return;
     }
 
     // search history (run first since it takes the longest)
     chrome.history.search({ text: search }, (results) => {
-      this.state.historyRaw = results;
-      this.state.history = this.state.historyRaw.slice(0, 10);
+      this.state.__historyRaw = results;
+      this.state.__history = this.state.__historyRaw.slice(0, 10);
     });
 
     // search bookmarks
     chrome.bookmarks.search(search, (results) => {
-      this.state.bookmarksRaw = results;
-      this.state.bookmarks = this.state.bookmarksRaw.slice(0, 10);
+      this.state.__bookmarksRaw = results;
+      this.state.__bookmarks = this.state.__bookmarksRaw.slice(0, 10);
     });
 
     // search open tabs
-    this.state.tabs = this.state.tabsRaw.filter(item =>
+    this.state.__tabs = this.state.__tabsRaw.filter(item =>
         item.title.toLowerCase().indexOf(search) > -1 ||
         item.url.toLowerCase().indexOf(search) > -1);
   }
 
-  getTabs() {
+  __getTabs() {
     chrome.tabs.query({}, (tabs) => {
-      this.state.tabsRaw = tabs;
+      this.state.__tabsRaw = tabs;
 
       if (this.state.search === '') {
-        this.state.tabs = tabs;
+        this.state.__tabs = tabs;
       }
     });
   }
@@ -102,14 +101,19 @@ class {
   cancelSearch(event) {
     if (event.key === 'Escape') {
       this.state.search = '';
-      this.state.tabs = this.state.tabs;
-      this.state.bookmarks.length = 0;
-      this.state.history.length = 0;
+      this.state.__tabs = this.state.__tabs;
+      this.state.__bookmarks.length = 0;
+      this.state.__history.length = 0;
     }
   }
 
-  loadMore(key, rawList, length) {
-    this.state[key] = rawList.slice(0, length + 100);
+  // loadMore(key, rawList, length) {
+  //   this.state[key] = rawList.slice(0, length + 100);
+  // }
+  // FIXME: Set state (dynamic key)
+  loadMore(list, rawList, length) {
+    console.log('##', list);
+    list = rawList.slice(0, length + 100);
   }
 }
 
@@ -168,7 +172,8 @@ macro itemList(title, list, rawList, key)
         -- ${item.title || item.url}
 
     if(count < length)
-      button.f on-click('loadMore', title, rawList, count) -- Show more...
+      // button.f on-click('loadMore', title, rawList, count) -- Show more...
+      button.f on-click('loadMore', list, rawList, count) -- Show more...
   else-if(isSearching)
     p.g -- No matching ${title}
 
@@ -176,11 +181,11 @@ div.c
   input#s on-keyup('cancelSearch') bind('search') key="i" type="text" placeholder="Search tabs, bookmarks, and history..." autocomplete="off"
 
   <!-- Open Tabs -->
-  $ let tabsCount = state.tabs.length;
+  $ let tabsCount = state.__tabs.length;
   if(tabsCount)
-    h2 -- open tabs (${tabsCount}/${state.tabsRaw.length})
+    h2 -- open tabs (${tabsCount}/${state.__tabsRaw.length})
 
-    for(tab in state.tabs)
+    for(tab in state.__tabs)
       a.r on-click('onTabClick', tab) key='t'+tab.id href=tab.url
         img.i src=tab.favIconUrl
 
@@ -189,7 +194,7 @@ div.c
     p.g -- No matching open tabs
 
   <!-- Bookmarks -->
-  itemList('bookmarks', state.bookmarks, state.bookmarksRaw, 'b')
+  itemList('bookmarks', state.__bookmarks, state.__bookmarksRaw, 'b')
 
   <!-- History -->
-  itemList('history', state.history, state.historyRaw, 'h')
+  itemList('history', state.__history, state.__historyRaw, 'h')

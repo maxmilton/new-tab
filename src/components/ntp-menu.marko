@@ -3,18 +3,18 @@ import { onClick } from '../helpers';
 class {
   onCreate() {
     this.state = {
-      trackErrors: true,
+      __trackErrors: true,
     }
 
     // check for error tracking opt-out
     chrome.storage.local.get('e', (isOptOut) => {
-      this.state.trackErrors = !isOptOut.e;
+      this.state.__trackErrors = !isOptOut.e;
     });
   }
 
-  toggleErrorTracking() {
-    chrome.storage.local.set({ e: this.state.trackErrors });
-    this.state.trackErrors = !this.state.trackErrors;
+  toggleOptOut() {
+    chrome.storage.local.set({ e: this.state.__trackErrors });
+    this.state.__trackErrors = !this.state.__trackErrors;
   }
 }
 
@@ -82,7 +82,7 @@ div#m
 
     hr
 
-    a.m href="#" on-click('toggleErrorTracking') title="Opt-out from error tracking"
-      -- ${state.trackErrors ? '✅' : '❌'} Track errors
+    a.m href="#" on-click('toggleOptOut') title="Opt-out from error tracking"
+      -- ${state.__trackErrors ? '✅' : '❌'} Track errors
 
     a.m href="https://github.com/MaxMilton/new-tab/issues" -- Submit bug

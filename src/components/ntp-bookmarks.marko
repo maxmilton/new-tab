@@ -4,13 +4,13 @@ import ntpFolder from './ntp-folder';
 class {
   onCreate() {
     this.state = {
-      bookmarksOther: { title: 'Other bookmarks' },
-      bookmarksBar: [],
+      __bookmarksOther: { title: 'Other bookmarks' },
+      __bookmarksBar: [],
     }
 
     chrome.bookmarks.getTree((tree) => {
-      this.state.bookmarksBar = tree[0].children[0].children;
-      this.state.bookmarksOther = tree[0].children[1];
+      this.state.__bookmarksBar = tree[0].children[0].children;
+      this.state.__bookmarksOther = tree[0].children[1];
     });
   }
 }
@@ -73,7 +73,7 @@ style {
 
 div#a
   div#b
-    for(bookmark in state.bookmarksBar)
+    for(bookmark in state.__bookmarksBar)
       if(bookmark.children !== undefined)
         <!-- folder -->
         include(ntpFolder, bookmark) level=0 target=component
@@ -83,4 +83,4 @@ div#a
           img.i src=`chrome://favicon/${bookmark.url}`
           span.t if(bookmark.title) -- ${bookmark.title}
 
-  include(ntpFolder, state.bookmarksOther) level=0 target=component left=true
+  include(ntpFolder, state.__bookmarksOther) level=0 target=component left=true
