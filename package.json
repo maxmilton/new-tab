@@ -29,7 +29,7 @@
     "test": "echo 'TODO: Test suite and tests' && exit 1"
   },
   "dependencies": {
-    "raven-js": "^3.22.1"
+    "raven-js": "^3.22.2"
   },
   "devDependencies": {
     "@types/chrome": "^0.0.59",
@@ -47,7 +47,7 @@
     "optimize-js": "^1.0.3",
     "postcss": "^6.0.17",
     "stylelint": "^8.4.0",
-    "uglify-es": "^3.3.9"
+    "uglify-es": "^3.3.10"
   },
   "engines": {
     "node": ">= 6.9.0"
