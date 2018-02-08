@@ -78,6 +78,11 @@ lasso.lassoPage({
       },
     }).minify(css).styles;
 
+    // write unminified source JS to disk
+    const jsSrcPath = path.parse(jsFile);
+    jsSrcPath.dir += '/src';
+    fs.writeFile(path.format(jsSrcPath), jsCode, cb);
+
     // set up JS minification
     const uglifyOpts = {
       compress: {
