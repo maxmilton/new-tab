@@ -22,9 +22,9 @@ echo_info() { echo -e "\n\e[33m$1\e[0m\n" >&1; }
 
 # run script relative to project root
 DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
-cd $DIR/..
+cd "$DIR"/..
 
-make_zip() { zip -9 -j dist/$NAME.zip dist/*; }
+make_zip() { zip -9 -j "dist/$NAME.zip" dist/*; }
 
 # create zip file and exit if requested
 if [[ "$1" == "--zip-only" ]]; then
@@ -42,6 +42,7 @@ GIT_BRANCH=$(git symbolic-ref --short HEAD)
 echo -e "\n\e[1;97;44m$NAME $VERSION\e[0m\n"
 read -p "Create release for this version? (y/n) " -n 1 -r
 [[ ! $REPLY =~ ^[Yy]$ ]] && exit 1
+echo
 read -p "Publish to Google Chrome Webstore? (y/n) " -n 1 -r
 [[ $REPLY =~ ^[Yy]$ ]] && publish_chrome=1
 
@@ -63,13 +64,13 @@ if [[ ! -z "$publish_chrome" ]]; then
   # get access token
   echo_info "[3/7] Getting Google access token..."
   GOOGLE_ACCESS_TOKEN="$(curl https://www.googleapis.com/oauth2/v4/token -q \
-    -d "client_id=${GOOGLE_CLIENT_ID}&client_secret=${GOOGLE_CLIENT_SECRET}&refresh_token=${GOOGLE_REFRESH_TOKEN}&grant_type=refresh_token&redirect_uri=urn:ietf:wg:oauth:2.0:oob" \
+    -d "client_id=$GOOGLE_CLIENT_ID&client_secret=$GOOGLE_CLIENT_SECRET&refresh_token=$GOOGLE_REFRESH_TOKEN&grant_type=refresh_token&redirect_uri=urn:ietf:wg:oauth:2.0:oob" \
     | jq --raw-output .access_token)"
 
   # upload to Google Chrome Webstore
   echo_info "[4/7] Uploading to Google Chrome Webstore..."
-  curl "https://www.googleapis.com/upload/chromewebstore/v1.1/items/${APP_ID}" \
-    -H "Authorization: Bearer ${GOOGLE_ACCESS_TOKEN}"  \
+  curl "https://www.googleapis.com/upload/chromewebstore/v1.1/items/$APP_ID" \
+    -H "Authorization: Bearer $GOOGLE_ACCESS_TOKEN"  \
     -H "x-goog-api-version: 2" \
     -X PUT \
     -T "$NAME.zip" \
@@ -77,8 +78,8 @@ if [[ ! -z "$publish_chrome" ]]; then
 
   # publish chrome extension
   echo_info "[5/7] Publishing Chrome extension..."
-  curl "https://www.googleapis.com/chromewebstore/v1.1/items/${APP_ID}/publish" \
-    -H "Authorization: Bearer ${GOOGLE_ACCESS_TOKEN}"  \
+  curl "https://www.googleapis.com/chromewebstore/v1.1/items/$APP_ID/publish" \
+    -H "Authorization: Bearer $GOOGLE_ACCESS_TOKEN"  \
     -X POST \
     -d ""
 fi
@@ -86,25 +87,28 @@ fi
 # Sentry variables
 SENTRY_API_KEY="${SENTRY_API_KEY:?Environment variable not found}"
 
+# FIXME: this borrowed code is out of date; use https://docs.sentry.io/learn/releases/
+
 # create release in Sentry
 echo_info "[6/7] Creating Sentry release..."
-curl https://app.getsentry.com/api/0/projects/we-are-genki/$NAME/releases/ \
-  -u "${SENTRY_API_KEY}": \
+curl "https://app.getsentry.com/api/0/projects/we-are-genki/$NAME/releases/" \
+  -u "$SENTRY_API_KEY": \
   -X POST \
-  -d '{"version": "'"${VERSION}"'"}' \
+  -d '{"version": "'"$VERSION"'"}' \
   -H 'Content-Type: application/json'
 
 # upload source files to Sentry
 echo_info "[7/7] Uploading source files to Sentry..."
 for file in dist/src/*.js*; do
-  echo "${file}"
-  NAME="chrome-extension://$APP_ID/src/$(basename ${file})"
+  echo "$file"
+  NAME="chrome-extension://$APP_ID/src/$(basename "$file")"
 
-  curl "https://app.getsentry.com/api/0/projects/simon-weber/autoplaylists-extension/releases/${VERSION}/files/" \
-    -u "${SENTRY_API_KEY}": \
+  curl "https://app.getsentry.com/api/0/projects/we-are-genki/$NAME/releases/$VERSION/files/" \
+    -u "$SENTRY_API_KEY": \
     -X POST \
-    -F file=@"${file}" \
-    -F name="${NAME}"
+    -F file=@"$file" \
+    -F name="$NAME" \
+    -w "%{http_code}\n"
 done
 
 echo -e "\n\e[1;32m✅ RELEASE COMPLETE\e[0m"
