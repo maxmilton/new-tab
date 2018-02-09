@@ -111,7 +111,7 @@ lasso.lassoPage({
           //  ↳ Suspect: \w{1,2}, default, super (es classes)
           regex: /^(\$.*|_.*|.*_|\w{1,2}|def|installed|run(time)?|main|remap|builtin|require|resolve|ready|search(Path)?|load(ed|erMetadata)?|pending|code|cache|exports?|component|const|state|out|globals|data|subscribeTo|setState|default|filename|wait|createOut|template|emit|prependListener|once|removeListener|removeAllListeners|listenerCount|addDestroyListener|createTracker|appendTo|prependTo|replaceChildrenOf|insertAfter|getComponents?|afterInsert|getNode|getOutput|document|selectedIndex|correspondingUseElement|element|node|comment|html|beginElement|endElement|end|error|beginAsync|flush|sync|isSync|onLast|isVDOM|parentOut|render(ToString|sync|er)?|path|meta|elId|getEl(s|Id)?|destroy|isDestroyed|setStateDirty|replaceState|forceUpdate|shouldUpdate|els|getComponentForEl|init|register|renderBody|safeHTML|write|toHTML)$/i,
           reserved: [
-            '$_mod', // lasso module
+            '$$', // lasso module (short version of '$_mod')
             'ax_', // fixes broken element placeholder attribute
             'id', // element attribute
             'e', // error tracking opt-out
@@ -126,12 +126,15 @@ lasso.lassoPage({
     });
 
     // minify JS
+    jsCode = jsCode.replace(/\$_mod/g, '$$$$'); // shorten module object; $_mod >> $$
     const src = UglifyJS.minify({ [js]: jsCode }, uglifyOptsMain);
     if (src.error) throw src.error;
     if (src.warnings) console.log(src.warnings);
-    jsCode = src.code.replace(/\$_mod/g, '$$$$'); // shorter module object; $_mod >> $$
-    jsCode = optimizeJs(jsCode);
-    fs.writeFile(`${jsSrcPath}/${js}.map`, src.map, cb); // source map
+    jsCode = src.code;
+    jsCode = optimizeJs(jsCode); // FIXME: Breaks source maps :'(
+
+    // write JS source map to disk
+    fs.writeFile(`${jsSrcPath}/${js}.map`, src.map, cb);
 
     // extra JS file loader
     const loader = fs.readFileSync(path.join(__dirname, '../src/loader.js'), 'utf8');
