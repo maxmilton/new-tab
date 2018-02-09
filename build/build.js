@@ -82,16 +82,23 @@ lasso.lassoPage({
     const uglifyOpts = {
       compress: {
         drop_console: true,
-        drop_debugger: true,
         negate_iife: false,
         passes: 2,
+        pure_getters: true,
         unsafe: true,
+        unsafe_proto: true,
       },
       ecma: 8,
       toplevel: true,
       warnings: !process.env.QUIET,
     };
     const uglifyOptsMain = Object.assign({}, uglifyOpts, {
+      compress: {
+        ...uglifyOpts.compress, // because Object.assign() only does a shallow clone
+        // pure_funcs: [],
+        unsafe_arrows: true,
+        unsafe_methods: true,
+      },
       mangle: {
         properties: {
           // XXX: Potentially fragile; needs adjustment if a future property conflicts
