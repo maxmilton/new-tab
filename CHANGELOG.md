@@ -9,6 +9,12 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ## [Unreleased]
 
+### Changed
+
+- Shorter code banner.
+- More JavaScript minification tweaks for smaller file size.
+- Error reporting improvements.
+
 ## [0.3.1] - 2018-02-07
 
 ### Fixed
