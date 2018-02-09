@@ -21,7 +21,7 @@
     "watch": "NODE_ENV=production node build/watch.js",
     "prep": "rm -rf .cache dist && mkdir -p dist/src",
     "prebuild": "npm run prep",
-    "build": "APP_RELEASE=$(git describe --always) NODE_ENV=production node build/build.js",
+    "build": "APP_RELEASE=$(git describe --always --dirty=\"-dev\") NODE_ENV=production node build/build.js",
     "lint": "npm run lint:css && npm run lint:js",
     "lint:css": "stylelint \"{src,test}/**/*.{marko,html,css}\"",
     "lint:js": "eslint --ext '.js,.marko' src/ test/ build/",
