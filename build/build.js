@@ -113,8 +113,8 @@ lasso.lassoPage({
           reserved: [
             '$$', // lasso module (short version of '$_mod')
             'ax_', // fixes broken element placeholder attribute
-            'id', // element attribute
             'e', // error tracking opt-out
+            'id', // element attribute
           ],
           // debug: 'XX',
         },
