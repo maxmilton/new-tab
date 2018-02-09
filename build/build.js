@@ -50,11 +50,11 @@ lasso.lassoPage({
   name: 'ntp',
   dependencies: ['require-run: ./src/index'],
 }).then((result) => {
-  // paths to files
+  // file paths
   const cssFile = result.getCSSFiles()[0];
   const jsFile = result.getJavaScriptFiles()[0];
 
-  // filenames
+  // file names
   const js = result.getJavaScriptUrls()[0].substr(1); // "ntp.js"
 
   // source code
@@ -65,6 +65,11 @@ lasso.lassoPage({
   let body = '';
 
   if (isProduction) {
+    const jsSrcPath = `${path.dirname(jsFile)}/src`;
+
+    // write unminified source JS to disk
+    fs.writeFile(`${jsSrcPath}/${js}`, jsCode, cb);
+
     // minify CSS
     css = new CleanCSS({
       level: {
@@ -72,11 +77,6 @@ lasso.lassoPage({
         2: { all: true },
       },
     }).minify(css).styles;
-
-    // write unminified source JS to disk
-    const jsSrcPath = path.parse(jsFile);
-    jsSrcPath.dir += '/src';
-    fs.writeFile(path.format(jsSrcPath), jsCode, cb);
 
     // set up JS minification
     const uglifyOpts = {
@@ -93,6 +93,11 @@ lasso.lassoPage({
       warnings: !process.env.QUIET,
     };
     const uglifyOptsMain = Object.assign({}, uglifyOpts, {
+      sourceMap: {
+        filename: js,
+        // don't include the source map link in released versions
+        ...(process.env.NO_SOURCE_MAP_URL ? {} : { url: `src/${js}.map` }),
+      },
       compress: {
         ...uglifyOpts.compress, // because Object.assign() only does a shallow clone
         // pure_funcs: [],
@@ -103,7 +108,7 @@ lasso.lassoPage({
         properties: {
           // XXX: Potentially fragile; needs adjustment if a future property conflicts
           //  ↳ Bad: key, input, update (chrome.tabs.update)
-          //  ↳ Suspect: \w{1,2}, default, super (es6 classes)
+          //  ↳ Suspect: \w{1,2}, default, super (es classes)
           regex: /^(\$.*|_.*|.*_|\w{1,2}|def|installed|run(time)?|main|remap|builtin|require|resolve|ready|search(Path)?|load(ed|erMetadata)?|pending|code|cache|exports?|component|const|state|out|globals|data|subscribeTo|setState|default|filename|wait|createOut|template|emit|prependListener|once|removeListener|removeAllListeners|listenerCount|addDestroyListener|createTracker|appendTo|prependTo|replaceChildrenOf|insertAfter|getComponents?|afterInsert|getNode|getOutput|document|selectedIndex|correspondingUseElement|element|node|comment|html|beginElement|endElement|end|error|beginAsync|flush|sync|isSync|onLast|isVDOM|parentOut|render(ToString|sync|er)?|path|meta|elId|getEl(s|Id)?|destroy|isDestroyed|setStateDirty|replaceState|forceUpdate|shouldUpdate|els|getComponentForEl|init|register|renderBody|safeHTML|write|toHTML)$/i,
           reserved: [
             '$_mod', // lasso module
@@ -121,11 +126,12 @@ lasso.lassoPage({
     });
 
     // minify JS
-    const src = UglifyJS.minify(jsCode, uglifyOptsMain);
+    const src = UglifyJS.minify({ [js]: jsCode }, uglifyOptsMain);
     if (src.error) throw src.error;
     if (src.warnings) console.log(src.warnings);
-    jsCode = src.code.replace(/\$_mod/g, '$$$$'); // short module object; $_mod >> $$
+    jsCode = src.code.replace(/\$_mod/g, '$$$$'); // shorter module object; $_mod >> $$
     jsCode = optimizeJs(jsCode);
+    fs.writeFile(`${jsSrcPath}/${js}.map`, src.map, cb); // source map
 
     // extra JS file loader
     const loader = fs.readFileSync(path.join(__dirname, '../src/loader.js'), 'utf8');
