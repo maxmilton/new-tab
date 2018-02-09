@@ -9,16 +9,11 @@ const lasso = require('lasso');
 const CleanCSS = require('clean-css');
 const UglifyJS = require('uglify-es');
 const optimizeJs = require('optimize-js');
-const pkg = require('../package');
 const manifest = require('../manifest');
 
 const isProduction = process.env.NODE_ENV === 'production';
 
-const banner = `/*
- * New Tab v${pkg.version}
- * Copyright ${new Date().getFullYear()} ${pkg.author}
- * MIT licensed (https://github.com/MaxMilton/new-tab/blob/master/LICENCE)
- */`;
+const banner = `New Tab ${process.env.APP_RELEASE} | github.com/MaxMilton/new-tab`;
 
 /**
  * Handle node async method errors.
@@ -114,7 +109,7 @@ lasso.lassoPage({
         eval: true,
       },
       output: {
-        preamble: banner,
+        preamble: `/* ${banner} */`,
       },
     });
 
