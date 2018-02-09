@@ -100,7 +100,7 @@ lasso.lassoPage({
       },
       compress: {
         ...uglifyOpts.compress, // because Object.assign() only does a shallow clone
-        // pure_funcs: [],
+        // pure_funcs: [], // TODO: Find pure functions that could be replaced with their output
         unsafe_arrows: true,
         unsafe_methods: true,
       },
