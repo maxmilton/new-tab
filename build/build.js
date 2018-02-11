@@ -9,7 +9,7 @@ const lasso = require('lasso');
 const CleanCSS = require('clean-css');
 const UglifyJS = require('uglify-es');
 const optimizeJs = require('optimize-js');
-const manifest = require('../manifest');
+const manifest = require('../src/manifest');
 
 const isProduction = process.env.NODE_ENV === 'production';
 
@@ -172,6 +172,6 @@ lasso.lassoPage({
   throw err;
 });
 
-// write manifest to disk as JSON
+// write extension manifest to disk
 const manifestPath = path.join(__dirname, '../dist/manifest.json');
 fs.writeFile(manifestPath, JSON.stringify(manifest), cb);

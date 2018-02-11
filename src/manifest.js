@@ -2,7 +2,7 @@
 
 'use strict'; // eslint-disable-line
 
-const pkg = require('./package.json');
+const pkg = require('../package.json');
 
 const isProduction = process.env.NODE_ENV === 'production';
 
@@ -24,6 +24,10 @@ module.exports = {
   ],
   chrome_url_overrides: {
     newtab: 'ntp.html',
+  },
+  options_ui: {
+    page: 'settings.html',
+    chrome_style: true,
   },
   offline_enabled: true,
 
