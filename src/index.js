@@ -1,11 +1,11 @@
 /**
- * Chrome New Tab
- * @overview A minimal and high performance Google Chrome new tab page (NTP) extension.
+ * New Tab
+ * @overview A high performance new tab page that gets you where you need to go faster.
  * @author Max Milton <max@wearegenki.com>
  */
 
-const app = require('./components/ntp');
+const ntp = require('./components/ntp');
 
-app
+ntp
   .renderSync()
   .replace(document.getElementById('ntp'));
