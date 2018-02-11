@@ -128,10 +128,14 @@ style {
     padding: 11px 20px;
     margin: 0 0 18px;
     font-size: 22px;
-    color: var(--g5);
-    background: var(--g2);
+    color: var(--t);
+    background: var(--c8);
     border: 0;
-    filter: drop-shadow(0 5px 6px rgba(0,0,0,0.1));
+    filter: drop-shadow(0 5px 6px var(--s));
+
+    &::placeholder {
+      color: var(--c29);
+    }
   }
 
   .r { /* search result */
@@ -140,7 +144,7 @@ style {
     white-space: nowrap;
     padding: 9px 0;
     overflow: hidden;
-    color: var(--g-light);
+    color: var(--t);
 
     & > .i {
       padding-right: 9px;
@@ -150,8 +154,8 @@ style {
   button {
     padding: 9px 18px;
     font-size: 20px;
-    color: var(--g5);
-    background: var(--g2);
+    color: var(--t);
+    background: var(--c6);
     border: 0;
   }
 }

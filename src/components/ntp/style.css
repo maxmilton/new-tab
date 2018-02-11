@@ -1,14 +1,94 @@
 /**
- * Global styles.
+ * Global Styles
  */
 
 :root {
   /* Colours inspired by https://github.com/Binaryify/OneDark-Pro */
-  --g0: #21252b;
-  --g1: #2f333d;
-  --g2: #282c34;
-  --g4: #383e4a;
-  --g5: #9da5b4;
+  --b: var(--c1); /* body background colour */
+  --t: var(--c41); /* text colour */
+  /* FIXME: Replace rgba with hex */
+  --s: rgba(0, 0, 0, 0.14); /* shadow colour */
+  --s2: rgba(0, 0, 0, 0.3); /* shadow colour darker */
+
+  /* FIXME: Remove unused colours and rename */
+  --c0: #00809b33;
+  --c1: #181a1f; /* y FIXME: Tweak */
+  --c2: #1d1f23;
+  --c3: #21252b; /* y */
+  --c4: #282c34;
+  --c5: #29244b;
+  --c6: #292d35; /* y */
+  --c7: #2bbac5;
+  --c8: #2c313a; /* y */
+  --c9: #2d3139;
+  --c10: #2e8ccf;
+  --c11: #2f333d;
+  --c12: #314365;
+  --c13: #323842;
+  --c14: #383e4a; /* y */
+  --c15: #3b4048;
+  --c16: #3f5de6da;
+  --c17: #404754;
+  --c18: #42557b;
+  --c19: #484e5b;
+  --c21: #495162;
+  --c22: #4d78cc;
+  --c23: #4e566680;
+  --c24: #52adf2;
+  --c25: #569cd6;
+  --c26: #57adb8;
+  --c27: #57b6c2;
+  --c28: #5a637580;
+  --c29: #5c6370; /* y */
+  --c30: #66017a;
+  --c31: #67769660;
+  --c32: #6796e6;
+  --c33: #6b717d;
+  --c34: #747369;
+  --c35: #747d9180;
+  --c36: #7e0097;
+  --c37: #89ca78;
+  --c38: #98c378;
+  --c39: #98c379;
+  --c40: #98c379ff;
+  --c41: #9da5b4;
+  --c42: #a6b2c0;
+  --c43: #aab1c0;
+  --c44: #aab1c026;
+  --c45: #b267e6;
+  --c46: #b4881d;
+  --c47: #b9c0ca;
+  --c48: #bbb;
+  --c49: #be4f44;
+  --c50: #c178dd;
+  --c51: #c24038;
+  --c52: #c5c5c5;
+  --c53: #c679dd;
+  --c54: #c8c8c8;
+  --c55: #cd9731;
+  --c56: #d18c4e;
+  --c57: #d19a66;
+  --c58: #d19a66ff;
+  --c59: #d27b53;
+  --c60: #d2945d;
+  --c61: #d55fde;
+  --c62: #d55fdeff;
+  --c63: #d7dae0;
+  --c64: #d8985f;
+  --c65: #e05252;
+  --c66: #e06c60;
+  --c67: #e06c75ff;
+  --c68: #e0c285;
+  --c69: #e5c07b;
+  --c70: #e5c07bff;
+  --c71: #ef596f;
+  --c72: #ef596fff;
+  --c73: #f44747;
+  --c74: #f8fafd;
+  --c75: #f00;
+  --c76: #fff;
+  --c77: #ffffff10;
+  --c78: #ffffffc9;
 }
 
 html,
@@ -29,13 +109,13 @@ body {
   font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Cantarell, "Helvetica Neue", sans-serif;
   font-size: 18px;
   text-rendering: optimizeLegibility;
-  color: var(--g5);
-  background-color: var(--g0);
+  color: var(--t);
+  background-color: var(--b);
 }
 
-.g, /* muted grey colour */
+.g, /* muted colour */
 h2 {
-  color: var(--g4);
+  color: var(--c14);
 }
 
 a {
