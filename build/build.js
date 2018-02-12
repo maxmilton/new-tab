@@ -15,6 +15,7 @@ const template = fs.readFileSync(path.join(__dirname, '../src/template.html'), '
 const banner = `New Tab ${process.env.APP_RELEASE} | github.com/MaxMilton/new-tab`;
 const isProduction = process.env.NODE_ENV === 'production';
 
+// CSS minification options
 const cleanCssOpts = {
   level: {
     1: { all: true },
@@ -22,6 +23,7 @@ const cleanCssOpts = {
   },
 };
 
+// JS minification options
 const uglifyOpts = {
   compress: {
     drop_console: true,
@@ -36,21 +38,26 @@ const uglifyOpts = {
   warnings: !process.env.QUIET,
 };
 
+// lasso resource bundler options
+lasso.configure({
+  plugins: [
+    'lasso-marko',
+    'lasso-postcss',
+  ],
+  urlPrefix: '',
+  outputDir: path.join(__dirname, '../dist'),
+  bundlingEnabled: true,
+  minify: false, // custom minification below
+  resolveCssUrls: false,
+  fingerprintsEnabled: false,
+  includeSlotNames: false,
+});
+
 /**
- * Handle node async method errors.
+ * Node async method error handler.
  * @param {Error} err
  */
 function cb(err) { if (err) throw err; }
-
-/**
- * Ultra-minimal template engine.
- * @see https://github.com/Drulac/template-literal
- * @param {string} template
- * @returns {Function}
- */
-function compile() {
- return new Function('d', 'return `' + template + '`'); // eslint-disable-line
-}
 
 function minifyCss(code, opts) {
   return new CleanCSS(opts || cleanCssOpts).minify(code).styles;
@@ -73,19 +80,24 @@ function minifyJs(code, optimize, opts, sourceMapPath) {
   return result.code;
 }
 
-lasso.configure({
-  plugins: [
-    'lasso-marko',
-    'lasso-postcss',
-  ],
-  urlPrefix: '',
-  outputDir: path.join(__dirname, '../dist'),
-  bundlingEnabled: true,
-  minify: false, // custom minification below
-  resolveCssUrls: false,
-  fingerprintsEnabled: false,
-  includeSlotNames: false,
-});
+/**
+ * Ultra-minimal template engine.
+ * @see https://github.com/Drulac/template-literal
+ * @returns {Function}
+ */
+function compile() {
+  return new Function('d', 'return `' + template + '`'); // eslint-disable-line
+}
+
+// runtime file loader
+const loader = fs.readFileSync(path.join(__dirname, '../src/loader.js'), 'utf8');
+const loaderCode = minifyJs(loader);
+
+// JS error tracking
+const raven = fs.readFileSync(require.resolve('raven-js/dist/raven'), 'utf8');
+const errors = fs.readFileSync(path.join(__dirname, '../src/errors.js'), 'utf8');
+const errCode = minifyJs({ 'raven.js': raven, 'errors.js': errors }, true);
+fs.writeFile(path.join(__dirname, '../dist/err.js'), errCode, cb);
 
 // new tab page app
 lasso.lassoPage({
@@ -103,8 +115,8 @@ lasso.lassoPage({
   // clean up leftover files
   fs.unlink(cssFilePath, cb);
 
-  // script tags for body
-  let scripts = '';
+  // runtime file loader + other script tags for body
+  let scripts = `<script>${loaderCode}</script>`;
 
   if (isProduction) {
     // minify CSS
@@ -156,31 +168,20 @@ lasso.lassoPage({
       uglifyOptsMain,
       `${jsSrcPath}/${jsFileName}.map`
     );
-
-    // runtime file loader
-    const loader = fs.readFileSync(path.join(__dirname, '../src/loader.js'), 'utf8');
-    const loaderCode = minifyJs(loader);
-    scripts = `<script>${loaderCode}</script>`;
-
-    // JS error tracking
-    const raven = fs.readFileSync(require.resolve('raven-js/dist/raven'), 'utf8');
-    const errors = fs.readFileSync(path.join(__dirname, '../src/errors.js'), 'utf8');
-    const errCode = minifyJs({ 'raven.js': raven, 'errors.js': errors }, true);
-    fs.writeFile(path.join(__dirname, '../dist/err.js'), errCode, cb);
   } else {
     // Browsersync client script
-    scripts = `\n${process.env.BROWSERSYNC}`;
+    scripts += `\n${process.env.BROWSERSYNC}`;
   }
 
-  const content = '<div id=ntp><div id=a><div id=b></div><div class="b f">Other bookmarks</div></div><div id=m><div id=i>☰</div></div><div class=c><input type=text placeholder="Search tabs, bookmarks, and history..." id=s><h2>Open Tabs (</h2></div></div>';
+  const body = '<div id=ntp><div id=a><div id=b></div><div class="b f">Other bookmarks</div></div><div id=m><div id=i>☰</div></div><div class=c><input type=text placeholder="Search tabs, bookmarks, and history..." id=s><h2>Open Tabs (</h2></div></div>';
 
   // HTML template
   fs.writeFile(path.join(__dirname, '../dist/ntp.html'), compile()({
-    banner,
+    banner: `<!-- ${banner} -->`,
     title: 'New Tab',
     head: `<style>${cssCode}</style>`,
-    content,
-    body: `${scripts}\n<script src=${jsFileName}></script>`,
+    body,
+    foot: `${scripts}\n<script src=${jsFileName}></script>`,
   }), cb);
 
   // write JS to disk
@@ -190,17 +191,40 @@ lasso.lassoPage({
 });
 
 // settings page app
+// XXX: Could easily do this as plain HTML but may as well use Lasso+Marko for fun
 lasso.lassoPage({
   name: 'settings',
   dependencies: ['require-run: ./src/settings'],
+  // bundles: [{
+  //   name: 'bunbun',
+  //   dependencies: [
+  //     'require: ./src/components/settings',
+  //   ],
+  // }],
 }).then((result) => {
+  console.log('@@ SETTINGS RES', result);
+
+  const cssFilePath = result.getCSSFiles()[0];
+  const jsFilePath = result.getJavaScriptFiles()[0];
+  const jsFileName = result.getJavaScriptUrls()[0].substr(1);
+
+  // source code
+  const cssCode = fs.readFileSync(cssFilePath, 'utf8');
+  const jsCode = `${fs.readFileSync(jsFilePath, 'utf8')}\n$_mod.ready();`;
+
+  // clean up leftover files
+  fs.unlink(cssFilePath, cb);
+
+  // write JS to disk
+  fs.writeFile(jsFilePath, minifyJs(jsCode), cb);
+
   // HTML template
   fs.writeFile(path.join(__dirname, '../dist/settings.html'), compile()({
-    banner,
+    banner: '',
     title: 'New Tab Settings',
-    head: result.getHeadHtml(),
-    content: '<div id=settings></div>',
-    body: result.getBodyHtml(),
+    head: `<style>${minifyCss(cssCode)}</style>`,
+    body: '<div id=settings></div>',
+    foot: `<script>${loaderCode}</script>\n<script src=${jsFileName}></script>`,
   }), cb);
 }).catch((err) => {
   throw err;

@@ -6,6 +6,8 @@ const pkg = require('../package.json');
 
 const isProduction = process.env.NODE_ENV === 'production';
 
+const hashes = "'sha256-9ZafaBDGXOcwQYKP+Hsudqam1mR8yiH5XNgc0tPs1Qo='"; // file loader
+
 module.exports = {
   manifest_version: 2,
 
@@ -33,8 +35,8 @@ module.exports = {
 
   ...(isProduction
     // tighter security than default
-    ? { content_security_policy: "script-src 'self' 'sha256-9ZafaBDGXOcwQYKP+Hsudqam1mR8yiH5XNgc0tPs1Qo='; object-src 'self'" }
+    ? { content_security_policy: `script-src 'self' ${hashes}; object-src 'self'` }
     // allow connections from http://localhost during local development
-    : { content_security_policy: "script-src 'self' blob: filesystem: chrome-extension-resource: http://localhost:*; object-src 'self'" }
+    : { content_security_policy: `script-src 'self' blob: filesystem: chrome-extension-resource: http://localhost:* ${hashes}; object-src 'self'` }
   ),
 };
