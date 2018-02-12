@@ -1,4 +1,29 @@
-import { de, cL } from '../helpers';
+import { cL } from '../helpers';
+
+/**
+ * Delay running a function until X ms have passed since its last call.
+ * @see https://github.com/developit/decko/blob/master/src/decko.js
+ * @param {Function} fn The function to debounce.
+ * @param {Number} delay How long to wait for more function calls before executing the function.
+ * @returns {Function}
+ */
+static function debounce(fn, delay) {
+  let args;
+  let context;
+  let timer;
+
+  return function (...a) { // eslint-disable-line func-names
+    args = a;
+    context = this;
+
+    if (!timer) {
+      timer = setTimeout(() => {
+        fn.apply(context, args);
+        args = context = timer = null; // eslint-disable-line no-multi-assign
+      }, delay);
+    }
+  };
+}
 
 class {
   onCreate() {
@@ -12,7 +37,7 @@ class {
       __history: [],
     };
     this.__lastSearch = '';
-    this.__search = de(this.__doSearch, 200);
+    this.__search = debounce(this.__doSearch, 200);
 
     this.__getTabs();
   }
@@ -79,7 +104,7 @@ class {
     });
   }
 
-  onTabClick(tab, event) {
+  tabClick(tab, event) {
     // update current tab
     chrome.tabs.update(tab.id, { active: true });
 
@@ -98,7 +123,7 @@ class {
     event.preventDefault();
   }
 
-  cancelSearch(event) {
+  cancel(event) {
     if (event.key === 'Escape') {
       this.state.search = '';
       this.state.__tabs = this.state.__tabs;
@@ -180,7 +205,7 @@ macro itemList(title, list, rawList, keyPrefix)
     p.g -- No matching ${title}
 
 div.c
-  input#s on-keyup('cancelSearch') bind('search') key="i" type="text" placeholder="Search tabs, bookmarks, and history..." autocomplete="off"
+  input#s on-keyup('cancel') bind('search') key="i" type="text" placeholder="Search tabs, bookmarks, and history..." autocomplete="off"
 
   <!-- Open Tabs -->
   $ let tabsCount = state.__tabs.length;
@@ -188,7 +213,7 @@ div.c
     h2 -- Open Tabs (${tabsCount}/${state.__tabsRaw.length})
 
     for(tab in state.__tabs)
-      a.r on-click('onTabClick', tab) key='t'+tab.id href=tab.url
+      a.r on-click('tabClick', tab) key='t'+tab.id href=tab.url
         img.i src=tab.favIconUrl
 
         -- ${tab.title}
