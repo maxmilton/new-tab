@@ -1,11 +1,12 @@
 /**
+ * Debounce function calls.
  * Delay running a function until X ms have passed since its last call.
  * @see https://github.com/developit/decko/blob/master/src/decko.js
  * @param {Function} fn The function to debounce.
  * @param {Number} delay How long to wait for more function calls before executing the function.
  * @returns {Function}
  */
-function debounce(fn, delay) {
+function de(fn, delay) {
   let args;
   let context;
   let timer;
@@ -27,7 +28,7 @@ function debounce(fn, delay) {
  * Open the location in a new tab.
  * @param {string} url The new URL.
  */
-function openNewTab(url) {
+function __openNewTab(url) {
   chrome.tabs.create({ url });
 }
 
@@ -35,7 +36,7 @@ function openNewTab(url) {
  * Update the location in the current tab.
  * @param {string} url The new URL.
  */
-function updateTabLocation(url) {
+function __updateTabLocation(url) {
   chrome.tabs.update({ url });
 }
 
@@ -44,15 +45,15 @@ function updateTabLocation(url) {
  * Special case for internal links in an extention.
  * @param {MouseEvent} event the click event
  */
-function onClick(event) {
+function cL(event) {
   const { target, ctrlKey } = event;
   const url = target.href;
 
   if (url.charAt(0) !== 'h') {
     if (target.target === '_blank' || ctrlKey) {
-      openNewTab(url);
+      __openNewTab(url);
     } else {
-      updateTabLocation(url);
+      __updateTabLocation(url);
     }
 
     event.preventDefault();
@@ -60,6 +61,6 @@ function onClick(event) {
 }
 
 module.exports = {
-  debounce,
-  onClick,
+  de,
+  cL,
 };

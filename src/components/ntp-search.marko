@@ -1,4 +1,4 @@
-import { debounce, onClick } from '../helpers';
+import { de, cL } from '../helpers';
 
 class {
   onCreate() {
@@ -12,7 +12,7 @@ class {
       __history: [],
     };
     this.__lastSearch = '';
-    this.__search = debounce(this.__doSearch, 200);
+    this.__search = de(this.__doSearch, 200);
 
     this.__getTabs();
   }
@@ -170,7 +170,7 @@ macro itemList(title, list, rawList, keyPrefix)
     h2 -- ${title} (${count}/${length})
 
     for(item in list)
-      a.r on-click(onClick) key=keyPrefix+item.id href=item.url
+      a.r on-click(cL) key=keyPrefix+item.id href=item.url
         img.i src=`chrome://favicon/${item.url}`
         -- ${item.title || item.url}
 

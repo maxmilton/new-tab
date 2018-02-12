@@ -1,4 +1,4 @@
-import { onClick } from '../helpers';
+import { cL } from '../helpers';
 import ntpFolder from './ntp-folder';
 
 class {
@@ -116,6 +116,6 @@ div.b.f on-mouseleave('onOut') on-mouseenter('onIn') title=input.title
           include(ntpFolder, bookmark) level=input.level+1 target=input.target
         else
           <!-- bookmark -->
-          a.b on-click(onClick) href=bookmark.url
+          a.b on-click(cL) href=bookmark.url
             img.i src=`chrome://favicon/${bookmark.url}`
             span.t -- ${bookmark.title}
