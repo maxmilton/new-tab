@@ -1,20 +1,9 @@
 import { onClick } from '../helpers';
 
 class {
-  onCreate() {
-    this.state = {
-      __trackErrors: true,
-    }
-
-    // check for error tracking opt-out
-    chrome.storage.local.get('e', (isOptOut) => {
-      this.state.__trackErrors = !isOptOut.e;
-    });
-  }
-
-  toggleOptOut() {
-    chrome.storage.local.set({ e: this.state.__trackErrors });
-    this.state.__trackErrors = !this.state.__trackErrors;
+  settings(event) {
+    chrome.runtime.openOptionsPage();
+    event.preventDefault();
   }
 }
 
@@ -82,7 +71,5 @@ div#m
 
     hr
 
-    a.m href="#" on-click('toggleOptOut') title="Opt-out from error tracking"
-      -- ${state.__trackErrors ? '✅' : '❌'} Track errors
-
+    a.m href="" on-click('settings') -- New Tab Settings
     a.m href="https://github.com/MaxMilton/new-tab/issues" -- Submit bug
