@@ -15,14 +15,15 @@ function updateTabLocation(url) {
 }
 
 /**
- * Handle menu item click.
- * Special case for internal links in an extention.
+ * Handle link click.
+ * Special case for internal Chrome links in an extention.
  * @param {MouseEvent} event the click event
  */
 module.exports.chromeLink = function chromeLink(event) {
   const { target, ctrlKey } = event;
   const url = target.href;
 
+  // only apply special handling to non-http links
   if (url.charAt(0) !== 'h') {
     if (target.target === '_blank' || ctrlKey) {
       openNewTab(url);
