@@ -3,92 +3,98 @@
  */
 
 :root {
-  /* Colours inspired by https://github.com/Binaryify/OneDark-Pro */
-  --b: var(--c1); /* body background colour */
-  --t: var(--c41); /* text colour */
-  /* FIXME: Replace rgba with hex */
-  --s: rgba(0, 0, 0, 0.14); /* shadow colour */
-  --s2: rgba(0, 0, 0, 0.3); /* shadow colour darker */
+  --b: #1d1f25; /* background colour */
+  --t: #9da5b4; /* text colour */
+  --s: #06001124; /* shadow colour */
+  --s1: drop-shadow(0 18px 18px #0600114d); /* shadow dark */
+  --c: #21252b;
+  --c1: #292d35;
+  --c2: #2f333d;
+  --c3: #2c313a;
+  --c4: #383e4a;
+  --c5: #5c6370;
 
-  /* FIXME: Remove unused colours and rename */
-  --c0: #00809b33;
-  --c1: #181a1f; /* y FIXME: Tweak */
-  --c2: #1d1f23;
-  --c3: #21252b; /* y */
-  --c4: #282c34;
-  --c5: #29244b;
-  --c6: #292d35; /* y */
-  --c7: #2bbac5;
-  --c8: #2c313a; /* y */
-  --c9: #2d3139;
-  --c10: #2e8ccf;
-  --c11: #2f333d;
-  --c12: #314365;
-  --c13: #323842;
-  --c14: #383e4a; /* y */
-  --c15: #3b4048;
-  --c16: #3f5de6da;
-  --c17: #404754;
-  --c18: #42557b;
-  --c19: #484e5b;
-  --c21: #495162;
-  --c22: #4d78cc;
-  --c23: #4e566680;
-  --c24: #52adf2;
-  --c25: #569cd6;
-  --c26: #57adb8;
-  --c27: #57b6c2;
-  --c28: #5a637580;
-  --c29: #5c6370; /* y */
-  --c30: #66017a;
-  --c31: #67769660;
-  --c32: #6796e6;
-  --c33: #6b717d;
-  --c34: #747369;
-  --c35: #747d9180;
-  --c36: #7e0097;
-  --c37: #89ca78;
-  --c38: #98c378;
-  --c39: #98c379;
-  --c40: #98c379ff;
-  --c41: #9da5b4;
-  --c42: #a6b2c0;
-  --c43: #aab1c0;
-  --c44: #aab1c026;
-  --c45: #b267e6;
-  --c46: #b4881d;
-  --c47: #b9c0ca;
-  --c48: #bbb;
-  --c49: #be4f44;
-  --c50: #c178dd;
-  --c51: #c24038;
-  --c52: #c5c5c5;
-  --c53: #c679dd;
-  --c54: #c8c8c8;
-  --c55: #cd9731;
-  --c56: #d18c4e;
-  --c57: #d19a66;
-  --c58: #d19a66ff;
-  --c59: #d27b53;
-  --c60: #d2945d;
-  --c61: #d55fde;
-  --c62: #d55fdeff;
-  --c63: #d7dae0;
-  --c64: #d8985f;
-  --c65: #e05252;
-  --c66: #e06c60;
-  --c67: #e06c75ff;
-  --c68: #e0c285;
-  --c69: #e5c07b;
-  --c70: #e5c07bff;
-  --c71: #ef596f;
-  --c72: #ef596fff;
-  --c73: #f44747;
-  --c74: #f8fafd;
-  --c75: #f00;
-  --c76: #fff;
-  --c77: #ffffff10;
-  --c78: #ffffffc9;
+  /* Colour palette - REF: https://github.com/Binaryify/OneDark-Pro */
+  /*
+  --ref0: #00809b33;
+  --ref1: #181a1f;
+  --ref2: #1d1f23;
+  --ref3: #21252b;
+  --ref4: #282c34;
+  --ref5: #29244b;
+  --ref6: #292d35;
+  --ref7: #2bbac5;
+  --ref8: #2c313a;
+  --ref9: #2d3139;
+  --ref10: #2e8ccf;
+  --ref11: #2f333d;
+  --ref12: #314365;
+  --ref13: #323842;
+  --ref14: #383e4a;
+  --ref15: #3b4048;
+  --ref16: #3f5de6da;
+  --ref17: #404754;
+  --ref18: #42557b;
+  --ref19: #484e5b;
+  --ref21: #495162;
+  --ref22: #4d78cc;
+  --ref23: #4e566680;
+  --ref24: #52adf2;
+  --ref25: #569cd6;
+  --ref26: #57adb8;
+  --ref27: #57b6c2;
+  --ref28: #5a637580;
+  --ref29: #5c6370;
+  --ref30: #66017a;
+  --ref31: #67769660;
+  --ref32: #6796e6;
+  --ref33: #6b717d;
+  --ref34: #747369;
+  --ref35: #747d9180;
+  --ref36: #7e0097;
+  --ref37: #89ca78;
+  --ref38: #98c378;
+  --ref39: #98c379;
+  --ref40: #98c379ff;
+  --ref41: #9da5b4;
+  --ref42: #a6b2c0;
+  --ref43: #aab1c0;
+  --ref44: #aab1c026;
+  --ref45: #b267e6;
+  --ref46: #b4881d;
+  --ref47: #b9c0ca;
+  --ref48: #bbb;
+  --ref49: #be4f44;
+  --ref50: #c178dd;
+  --ref51: #c24038;
+  --ref52: #c5c5c5;
+  --ref53: #c679dd;
+  --ref54: #c8c8c8;
+  --ref55: #cd9731;
+  --ref56: #d18c4e;
+  --ref57: #d19a66;
+  --ref58: #d19a66ff;
+  --ref59: #d27b53;
+  --ref60: #d2945d;
+  --ref61: #d55fde;
+  --ref62: #d55fdeff;
+  --ref63: #d7dae0;
+  --ref64: #d8985f;
+  --ref65: #e05252;
+  --ref66: #e06c60;
+  --ref67: #e06c75ff;
+  --ref68: #e0c285;
+  --ref69: #e5c07b;
+  --ref70: #e5c07bff;
+  --ref71: #ef596f;
+  --ref72: #ef596fff;
+  --ref73: #f44747;
+  --ref74: #f8fafd;
+  --ref75: #f00;
+  --ref76: #fff;
+  --ref77: #ffffff10;
+  --ref78: #ffffffc9;
+  */
 }
 
 html,
@@ -115,7 +121,7 @@ body {
 
 .g, /* muted colour */
 h2 {
-  color: var(--c14);
+  color: var(--c4);
 }
 
 a {
