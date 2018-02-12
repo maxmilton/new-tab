@@ -2,7 +2,7 @@
  * Open the location in a new tab.
  * @param {string} url The new URL.
  */
-function __openNewTab(url) {
+function openNewTab(url) {
   chrome.tabs.create({ url });
 }
 
@@ -10,7 +10,7 @@ function __openNewTab(url) {
  * Update the location in the current tab.
  * @param {string} url The new URL.
  */
-function __updateTabLocation(url) {
+function updateTabLocation(url) {
   chrome.tabs.update({ url });
 }
 
@@ -19,21 +19,17 @@ function __updateTabLocation(url) {
  * Special case for internal links in an extention.
  * @param {MouseEvent} event the click event
  */
-function cL(event) {
+module.exports.chromeLink = function chromeLink(event) {
   const { target, ctrlKey } = event;
   const url = target.href;
 
   if (url.charAt(0) !== 'h') {
     if (target.target === '_blank' || ctrlKey) {
-      __openNewTab(url);
+      openNewTab(url);
     } else {
-      __updateTabLocation(url);
+      updateTabLocation(url);
     }
 
     event.preventDefault();
   }
-}
-
-module.exports = {
-  cL,
 };

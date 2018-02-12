@@ -1,4 +1,4 @@
-import { cL } from '../helpers';
+import { chromeLink } from '../helpers';
 
 class {
   settings(event) {
@@ -63,11 +63,11 @@ div#m
   div#i -- ☰
 
   div#d
-    a.m on-click(cL) href="chrome-search://local-ntp/local-ntp.html" -- Open Default Tab
-    a.m on-click(cL) href="chrome://bookmarks/" -- Bookmarks Manager
-    a.m on-click(cL) href="chrome://downloads/" -- Downloads
-    a.m on-click(cL) href="chrome://history/" -- History
-    a.m on-click(cL) href="chrome://settings/passwords" -- Passwords
+    a.m on-click(chromeLink) href="chrome-search://local-ntp/local-ntp.html" -- Open Default Tab
+    a.m on-click(chromeLink) href="chrome://bookmarks/" -- Bookmarks Manager
+    a.m on-click(chromeLink) href="chrome://downloads/" -- Downloads
+    a.m on-click(chromeLink) href="chrome://history/" -- History
+    a.m on-click(chromeLink) href="chrome://settings/passwords" -- Passwords
 
     hr
 

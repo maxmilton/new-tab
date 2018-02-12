@@ -1,4 +1,4 @@
-import { cL } from '../helpers';
+import { chromeLink } from '../helpers';
 
 /**
  * Delay running a function until X ms have passed since its last call.
@@ -196,7 +196,7 @@ macro itemList(title, list, rawList, keyPrefix)
     h2 -- ${title} (${count}/${length})
 
     for(item in list)
-      a.r on-click(cL) key=keyPrefix+item.id href=item.url
+      a.r on-click(chromeLink) key=keyPrefix+item.id href=item.url
         img.i src=`chrome://favicon/${item.url}`
         -- ${item.title || item.url}
 

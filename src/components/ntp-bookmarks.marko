@@ -1,4 +1,4 @@
-import { cL } from '../helpers';
+import { chromeLink } from '../helpers';
 import ntpFolder from './ntp-folder';
 
 class {
@@ -79,7 +79,7 @@ div#a
         include(ntpFolder, bookmark) level=0 target=component
       else
         <!-- bookmark link -->
-        a.b on-click(cL) href=bookmark.url title=bookmark.title
+        a.b on-click(chromeLink) href=bookmark.url title=bookmark.title
           img.i src=`chrome://favicon/${bookmark.url}`
           span.t if(bookmark.title) -- ${bookmark.title}
 
