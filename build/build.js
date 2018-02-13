@@ -14,6 +14,7 @@ const manifest = require('../src/manifest');
 const template = fs.readFileSync(path.join(__dirname, '../src/template.html'), 'utf8');
 const banner = `New Tab ${process.env.APP_RELEASE} | github.com/MaxMilton/new-tab`;
 const isProduction = process.env.NODE_ENV === 'production';
+const nameCache = {};
 
 // CSS minification options
 const cleanCssOpts = {
@@ -33,6 +34,10 @@ const uglifyOpts = {
     unsafe: true,
     unsafe_proto: true,
   },
+  mangle: {
+    reserved: ['d', 'w'], // fixes conflict in loader + error tracking script
+  },
+  nameCache,
   ecma: 8,
   toplevel: true,
   warnings: !process.env.QUIET,
