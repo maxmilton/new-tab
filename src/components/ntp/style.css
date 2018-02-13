@@ -3,16 +3,16 @@
  */
 
 :root {
-  --b: #1d1f25; /* background colour */
-  --t: #9da5b4; /* text colour */
   --s: #06001124; /* shadow colour */
   --s1: drop-shadow(0 18px 18px #0600114d); /* shadow dark */
-  --c: #21252b;
-  --c1: #292d35;
-  --c2: #2f333d;
-  --c3: #2c313a;
-  --c4: #383e4a;
-  --c5: #5c6370;
+  --b: #1d1f25; /* background colour */
+  --t: #9da5b4; /* text colour */
+  --c: #21252b; /* bookmark item hover background */
+  --c1: #292d35; /* bookmarks bar, load more button */
+  --c2: #2f333d; /* menu dropdown */
+  --c3: #2c313a; /* search input */
+  --c4: #383e4a; /* menu hamberger icon, h2, muted text */
+  --c5: #5c6370; /* search input placeholder */
 
   /* Colour palette - REF: https://github.com/Binaryify/OneDark-Pro */
   /*

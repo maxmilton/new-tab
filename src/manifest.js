@@ -5,7 +5,7 @@
 const pkg = require('../package.json');
 
 const isProduction = process.env.NODE_ENV === 'production';
-const hashes = "'sha256-TH/GLc6p8EkRFTXPKTT6vPbCTNF4uIdkw5VMjZ3nSp8='"; // file loader
+const hashes = "'sha256-sRcSAAj4ZwPU9swceTK3zzN//6FK9lOpIjnliU+GTCY='"; // file loader
 
 module.exports = {
   manifest_version: 2,

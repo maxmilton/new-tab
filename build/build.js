@@ -97,7 +97,7 @@ const loaderCode = minifyJs(loader);
 const raven = fs.readFileSync(require.resolve('raven-js/dist/raven'), 'utf8');
 const errors = fs.readFileSync(path.join(__dirname, '../src/errors.js'), 'utf8');
 const errCode = minifyJs({ 'raven.js': raven, 'errors.js': errors }, true);
-fs.writeFile(path.join(__dirname, '../dist/err.js'), errCode, cb);
+fs.writeFile(path.join(__dirname, '../dist/e.js'), errCode, cb);
 
 // new tab page app
 lasso.lassoPage({
@@ -233,7 +233,6 @@ lasso.lassoPage({
           reserved: [
             '$$', // lasso module (short version of '$_mod')
             'ax_', // fixes broken element placeholder attribute
-            'e', // error tracking opt-out
             'id', // element attribute
             's', // state.s in ntp-search.marko
           ],
@@ -275,6 +274,15 @@ lasso.lassoPage({
 }).catch((err) => {
   throw err;
 });
+
+// themes
+function makeTheme(nameLong, nameShort) {
+  fs.readFile(path.join(__dirname, `../src/themes/${nameLong}.css`), 'utf8', (err, res) => {
+    if (err) throw err;
+    fs.writeFile(path.join(__dirname, `../dist/${nameShort}.css`), minifyCss(res), cb);
+  });
+}
+makeTheme('light', 'l');
 
 // settings page
 fs.copyFile(path.join(__dirname, '../src/settings.html'), path.join(__dirname, '../dist/settings.html'), cb);
