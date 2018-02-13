@@ -64,10 +64,25 @@ lasso.configure({
  */
 function cb(err) { if (err) throw err; }
 
+/**
+ * Make CSS code smaller and faster.
+ * @param {string} code The CSS code to minify.
+ * @param {object} [opts] Custom CleanCSS options.
+ * @returns {string} The minified CSS code.
+ */
 function minifyCss(code, opts) {
   return new CleanCSS(opts || cleanCssOpts).minify(code).styles;
 }
 
+/**
+ * Make JavaScript code smaller and faster.
+ * @param {string} code The JavaScript source code to minify.
+ * @param {boolean} optimize If true code will be run through optimize-js.
+ * @param {object} opts Custom UglifyJS options.
+ * @param {string} sourceMapPath An absolute path where to save a source map. If
+ * this is omitted, no source map will be saved.
+ * @returns {string} The minified JavaScript code.
+ */
 function minifyJs(code, optimize, opts, sourceMapPath) {
   const result = UglifyJS.minify(code, opts || uglifyOpts);
 
@@ -92,6 +107,18 @@ function minifyJs(code, optimize, opts, sourceMapPath) {
  */
 function compile() {
   return new Function('d', 'return `' + template + '`'); // eslint-disable-line
+}
+
+/**
+ * Generate and save a New Tab theme.
+ * @param {string} nameLong The input filename.
+ * @param {string} nameShort The out filename.
+ */
+function makeTheme(nameLong, nameShort) {
+  fs.readFile(path.join(__dirname, `../src/themes/${nameLong}.css`), 'utf8', (err, res) => {
+    if (err) throw err;
+    fs.writeFile(path.join(__dirname, `../dist/${nameShort}.css`), minifyCss(res), cb);
+  });
 }
 
 // runtime file loader
@@ -281,12 +308,6 @@ lasso.lassoPage({
 });
 
 // themes
-function makeTheme(nameLong, nameShort) {
-  fs.readFile(path.join(__dirname, `../src/themes/${nameLong}.css`), 'utf8', (err, res) => {
-    if (err) throw err;
-    fs.writeFile(path.join(__dirname, `../dist/${nameShort}.css`), minifyCss(res), cb);
-  });
-}
 makeTheme('light', 'l');
 makeTheme('black', 'b');
 
@@ -294,6 +315,6 @@ makeTheme('black', 'b');
 fs.copyFile(path.join(__dirname, '../src/settings.html'), path.join(__dirname, '../dist/settings.html'), cb);
 fs.copyFile(path.join(__dirname, '../src/settings.js'), path.join(__dirname, '../dist/settings.js'), cb);
 
-// write extension manifest to disk
+// extension manifest
 const manifestPath = path.join(__dirname, '../dist/manifest.json');
 fs.writeFile(manifestPath, JSON.stringify(manifest), cb);
