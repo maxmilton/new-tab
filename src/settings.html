@@ -3,34 +3,28 @@
 <title>New Tab Settings</title>
 
 <style>
-  body {
-    font-size: 18px;
-    text-rendering: optimizeLegibility;
-    background: #fafafa;
-  }
-
-  select {
-    margin-left: 9px;
-  }
-
-  input[type="checkbox"] {
-    margin-right: 9px;
-    vertical-align: 0;
-  }
-
-  hr,
-  .form-row {
-    margin-bottom: 18px;
-  }
-
-  hr {
-    border: 0;
-    border-bottom: 1px solid #ddd;
-  }
-
-  footer {
-    margin-top: 18px;
-  }
+body {
+  font-size: 18px;
+  text-rendering: optimizeLegibility;
+  background: #fafafa;
+}
+select {
+  margin-left: 9px;
+}
+input[type="checkbox"] {
+  margin-right: 9px;
+  vertical-align: 0;
+}
+hr, .form-row {
+  margin-bottom: 18px;
+}
+hr {
+  border: 0;
+  border-bottom: 1px solid #ddd;
+}
+footer {
+  margin-top: 18px;
+}
 </style>
 
 <div class="form-row">
@@ -53,16 +47,13 @@
 </footer>
 
 <script>
-// capture errors (before error tracking script is ready)
 const w = window;
 const d = document;
 const cb = (event) => { w.q.push(event); };
 w.q = [];
 w.l = w.addEventListener('error', cb);
 w.u = w.addEventListener('unhandledrejection', cb);
-
 chrome.storage.sync.get('e', (settings) => {
-  // load error tracking unless opt-out
   if (!settings.e) {
     const script = d.createElement('script');
     script.src = 'e.js';
@@ -70,5 +61,4 @@ chrome.storage.sync.get('e', (settings) => {
   }
 });
 </script>
-
 <script src="settings.js"></script>
