@@ -288,6 +288,7 @@ function makeTheme(nameLong, nameShort) {
   });
 }
 makeTheme('light', 'l');
+makeTheme('black', 'b');
 
 // settings page
 fs.copyFile(path.join(__dirname, '../src/settings.html'), path.join(__dirname, '../dist/settings.html'), cb);
