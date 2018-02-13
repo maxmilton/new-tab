@@ -28,8 +28,8 @@ module.exports = {
     newtab: 'ntp.html',
   },
   options_ui: {
-    page: 'settings.html',
     chrome_style: true,
+    page: 's.html',
   },
   background: {
     page: 'b.html',

@@ -233,10 +233,10 @@ makeTheme('light', 'l');
 makeTheme('black', 'b');
 
 // settings page
-fs.copyFile(path.join(__dirname, '../src/settings.html'), path.join(__dirname, '../dist/settings.html'), cb);
+fs.copyFile(path.join(__dirname, '../src/settings.html'), path.join(__dirname, '../dist/s.html'), cb);
 fs.readFile(path.join(__dirname, '../src/settings.js'), 'utf8', (err, res) => {
   if (err) throw err;
-  fs.writeFile(path.join(__dirname, '../dist/settings.js'), minifyJs(res), cb);
+  fs.writeFile(path.join(__dirname, '../dist/s.js'), minifyJs(res), cb);
 });
 
 // background page
