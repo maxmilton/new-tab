@@ -20,8 +20,9 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 - Settings now sync to your account.
 - Improved file loader to handle themes.
-- Make build steps more generic; modularise minification, simplify HTML template.
 - Some internal improvements to make the file size a tiny bit smaller and faster to parse.
+- Make build steps more generic; modularise minification, simplify HTML template.
+- Other general build improvements.
 
 ## [0.3.2] - 2018-02-09
 
