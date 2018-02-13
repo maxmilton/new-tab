@@ -26,7 +26,7 @@ const cleanCssOpts = {
 // JS minification options
 const uglifyOpts = {
   compress: {
-    // drop_console: true, // FIXME: TEMP!!
+    drop_console: true,
     negate_iife: false,
     passes: 2,
     pure_getters: true,
@@ -276,47 +276,7 @@ lasso.lassoPage({
   throw err;
 });
 
-// // settings page app
-// // XXX: Could easily do this as plain HTML but may as well use Lasso+Marko for fun
-// lasso.lassoPage({
-//   name: 'settings',
-//   dependencies: ['require-run: ./src/settings'],
-//   // bundles: [{
-//   //   name: 'bunbun',
-//   //   dependencies: [
-//   //     'require: ./src/components/settings',
-//   //   ],
-//   // }],
-// }).then((result) => {
-//   // console.log('@@ SETTINGS RES', result);
-//
-//   const cssFilePath = result.getCSSFiles()[0];
-//   const jsFilePath = result.getJavaScriptFiles()[0];
-//   const jsFileName = result.getJavaScriptUrls()[0].substr(1);
-//
-//   // source code
-//   const cssCode = fs.readFileSync(cssFilePath, 'utf8');
-//   const jsCode = `${fs.readFileSync(jsFilePath, 'utf8')}\n$_mod.ready();`;
-//
-//   // clean up leftover files
-//   fs.unlink(cssFilePath, cb);
-//
-//   // write JS to disk
-//   fs.writeFile(jsFilePath, isProduction ? minifyJs(jsCode) : jsCode, cb);
-//
-//   // HTML template
-//   fs.writeFile(path.join(__dirname, '../dist/settings.html'), compile()({
-//     banner: '',
-//     title: 'New Tab Settings',
-//     head: `<style>${minifyCss(cssCode)}</style>`,
-//     body: '<div id=settings></div>',
-//     foot: `<script>${loaderCode}</script>\n<script src=${jsFileName}></script>`,
-//   }), cb);
-// }).catch((err) => {
-//   throw err;
-// });
-
-// settings page app
+// settings page
 fs.copyFile(path.join(__dirname, '../src/settings.html'), path.join(__dirname, '../dist/settings.html'), cb);
 fs.copyFile(path.join(__dirname, '../src/settings.js'), path.join(__dirname, '../dist/settings.js'), cb);
 
