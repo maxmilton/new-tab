@@ -118,7 +118,8 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 - Initial public version including all the basics; working proof of concept code, readme, etc. Not ready for release yet though, it's still far from being actually useful!
 
-[Unreleased]: https://github.com/MaxMilton/new-tab/compare/v0.4.0...HEAD
+[Unreleased]: https://github.com/MaxMilton/new-tab/compare/v0.4.1...HEAD
+[0.4.1]: https://github.com/MaxMilton/new-tab/compare/v0.4.0...v0.4.1
 [0.4.0]: https://github.com/MaxMilton/new-tab/compare/v0.3.2...v0.4.0
 [0.3.2]: https://github.com/MaxMilton/new-tab/compare/v0.3.1...v0.3.2
 [0.3.1]: https://github.com/MaxMilton/new-tab/compare/v0.3.0...v0.3.1
