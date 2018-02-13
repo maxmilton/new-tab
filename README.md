@@ -14,7 +14,7 @@ Originally an experimental project to give me a chance for me to play with the C
 
 ### Features
 
-* Minimal, dark aesthetic.
+* Minimal design aesthetic with multiple theme.
 * See a list of your open tabs.
 * Quickly search open tabs, bookmarks, and history in one place.
 * Simple bookmarks bar.
