@@ -71,7 +71,13 @@ function cb(err) { if (err) throw err; }
  * @returns {string} The minified CSS code.
  */
 function minifyCss(code, opts) {
-  return new CleanCSS(opts || cleanCssOpts).minify(code).styles;
+  const result = new CleanCSS(opts || cleanCssOpts).minify(code);
+
+  if (result.errors.length) throw result.errors;
+  if (result.warnings.length) console.log('[CSS]', result.warnings);
+  if (!process.env.QUIET) console.log('[CSS]', result.stats);
+
+  return result.styles;
 }
 
 /**
@@ -87,7 +93,7 @@ function minifyJs(code, optimize, opts, sourceMapPath) {
   const result = UglifyJS.minify(code, opts || uglifyOpts);
 
   if (result.error) throw result.error;
-  if (result.warnings) console.log(result.warnings);
+  if (result.warnings) console.log('[JS]', result.warnings);
 
   if (optimize) {
     result.code = optimizeJs(result.code); // breaks source maps; https://git.io/vAq4g
