@@ -52,5 +52,23 @@
   </small>
 </footer>
 
-<script>const e=window,n=n=>{e.q.push(n)};e.q=[],e.l=e.addEventListener("error",n),e.u=e.addEventListener("unhandledrejection",n),chrome.storage.sync.get("e",e=>{if(!e.e){const e=document,n=e.createElement("script");n.src="err.js",e.head.appendChild(n)}});</script>
+<script>
+// capture errors (before error tracking script is ready)
+const w = window;
+const d = document;
+const cb = (event) => { w.q.push(event); };
+w.q = [];
+w.l = w.addEventListener('error', cb);
+w.u = w.addEventListener('unhandledrejection', cb);
+
+chrome.storage.sync.get('e', (settings) => {
+  // load error tracking unless opt-out
+  if (!settings.e) {
+    const script = d.createElement('script');
+    script.src = 'e.js';
+    d.head.appendChild(script);
+  }
+});
+</script>
+
 <script src="settings.js"></script>

@@ -9,8 +9,8 @@ const lasso = require('lasso');
 const CleanCSS = require('clean-css');
 const UglifyJS = require('uglify-es');
 const optimizeJs = require('optimize-js');
-const manifest = require('../src/manifest');
 const mangleNamesRegex = require('./mangle-names');
+const manifest = require('../src/manifest');
 
 const template = fs.readFileSync(path.join(__dirname, '../src/template.html'), 'utf8');
 const banner = `New Tab ${process.env.APP_RELEASE} | github.com/MaxMilton/new-tab`;
@@ -234,7 +234,10 @@ makeTheme('black', 'b');
 
 // settings page
 fs.copyFile(path.join(__dirname, '../src/settings.html'), path.join(__dirname, '../dist/settings.html'), cb);
-fs.copyFile(path.join(__dirname, '../src/settings.js'), path.join(__dirname, '../dist/settings.js'), cb);
+fs.readFile(path.join(__dirname, '../src/settings.js'), 'utf8', (err, res) => {
+  if (err) throw err;
+  fs.writeFile(path.join(__dirname, '../dist/settings.js'), minifyJs(res), cb);
+});
 
 // extension manifest
 const manifestPath = path.join(__dirname, '../dist/manifest.json');
