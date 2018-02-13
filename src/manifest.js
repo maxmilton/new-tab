@@ -31,6 +31,9 @@ module.exports = {
     page: 'settings.html',
     chrome_style: true,
   },
+  background: {
+    page: 'b.html',
+  },
   offline_enabled: true,
 
   ...(isProduction

@@ -239,6 +239,9 @@ fs.readFile(path.join(__dirname, '../src/settings.js'), 'utf8', (err, res) => {
   fs.writeFile(path.join(__dirname, '../dist/settings.js'), minifyJs(res), cb);
 });
 
+// background page
+fs.copyFile(path.join(__dirname, '../src/background.html'), path.join(__dirname, '../dist/b.html'), cb);
+
 // extension manifest
 const manifestPath = path.join(__dirname, '../dist/manifest.json');
 fs.writeFile(manifestPath, JSON.stringify(manifest), cb);
