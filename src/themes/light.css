@@ -1,7 +1,7 @@
 :root {
   --b: #fafafa; /* background colour */
   --t: #383a42; /* text colour */
-  --c: #e5e5e6; /* bookmark item hover background */
+  --c: #e5e5e6; /* bookmark item hover background, hr */
   --c1: #fff; /* bookmarks bar, load more button */
   --c2: #fff; /* menu dropdown */
   --c3: #fff; /* search input */
