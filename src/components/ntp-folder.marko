@@ -21,6 +21,19 @@ class {
     });
   }
 
+  // on mouse enter
+  onIn() {
+    if (this.state.__show) {
+      this.__resetCloseTimer();
+    } else {
+      // delay to prevent accidental folder open
+      this.__openTimer = setTimeout(() => {
+        this.__target.emit('open', this.input.level);
+        this.state.__show = true;
+      }, 200); // open delay
+    }
+  }
+
   // on mouse leave
   onOut(event) {
     // reset open timer
@@ -34,19 +47,6 @@ class {
       this.__closeTimer = setTimeout(() => {
         this.state.__show = false;
       }, 400); // close delay
-    }
-  }
-
-  // on mouse enter
-  onIn() {
-    if (this.state.__show) {
-      this.__resetCloseTimer();
-    } else {
-      // delay to prevent accidental folder open
-      this.__openTimer = setTimeout(() => {
-        this.__target.emit('open', this.input.level);
-        this.state.__show = true;
-      }, 200); // open delay
     }
   }
 
@@ -102,7 +102,7 @@ style {
   }
 }
 
-div.b.f on-mouseleave('onOut') on-mouseenter('onIn') title=input.title
+div.b.f on-mouseenter('onIn') on-mouseleave('onOut') title=input.title
   -- ${input.title}
 
   <!-- subfolder indicator -->
