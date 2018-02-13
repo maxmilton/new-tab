@@ -14,6 +14,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 ### Added
 
 - Experimental background page, which does nothing itself, but should keep the extension in memory.
+- Tweaked extension manifest; now disallowed in incognito.
 
 ### Fixed
 
