@@ -1,7 +1,7 @@
 import { chromeLink } from '../helpers';
 
 class {
-  settings(event) {
+  __settings(event) {
     chrome.runtime.openOptionsPage();
     event.preventDefault();
   }
@@ -53,7 +53,6 @@ style {
   }
 
   hr {
-    width: 100%;
     border: 0;
     border-bottom: 1px solid var(--c);
   }
@@ -71,5 +70,5 @@ div#m
 
     hr
 
-    a.m href="" on-click('settings') -- New Tab Settings
+    a.m href="" on-click(component.__settings) -- New Tab Settings
     a.m href="https://github.com/MaxMilton/new-tab/issues" -- Submit bug

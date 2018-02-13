@@ -8,7 +8,7 @@ win.l = win.addEventListener('error', cb);
 win.u = win.addEventListener('unhandledrejection', cb);
 
 // load error tracking unless opt-out
-chrome.storage.local.get('e', (state) => {
+chrome.storage.sync.get('e', (state) => {
   if (!state.e) {
     const doc = document;
     const script = doc.createElement('script');

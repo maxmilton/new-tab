@@ -1,0 +1,99 @@
+class {
+  onCreate() {
+    this.state = {
+      theme: 'd',
+      trackErrors: true,
+    }
+
+    // check for existing settings
+    chrome.storage.sync.get(['t', 'e'], (settings) => {
+      // theme - fall back to default d (dark)
+      this.state.theme = settings.t || 'd';
+
+      // error tracking opt-out
+      this.state.trackErrors = !settings.e;
+    });
+  }
+
+  setTheme() {
+    chrome.storage.sync.set({ t: this.state.theme });
+  }
+
+  setOptOut() {
+    chrome.storage.sync.set({ e: !this.state.trackErrors });
+  }
+}
+
+style {
+  body {
+    font-size: 18px;
+    text-rendering: optimizeLegibility;
+    background: #fafafa;
+  }
+
+  select {
+    margin-left: 9px;
+  }
+
+  input[type="checkbox"] {
+    margin-right: 9px;
+    vertical-align: 0;
+  }
+
+  hr,
+  .form-row {
+    margin-bottom: 18px;
+  }
+
+  hr {
+    border: 0;
+    border-bottom: 1px solid #ddd;
+  }
+
+  footer {
+    margin-top: 18px;
+  }
+}
+
+div.form-row
+  label for="theme00" -- Theme
+  select id="theme00"
+    option value="d" -- Dark
+    option value="l" -- Light
+
+hr
+
+p -- ${state.theme}
+
+div.form-row
+  label for="theme1" -- Theme
+  select bind('theme')=component.setTheme id="theme1"
+    option value="d" selected=state.theme==='d' -- Dark
+    option value="l" selected=state.theme==='l' -- Light
+
+div.form-row
+  label for="theme2" -- Theme
+  select bind('theme')=component.setTheme id="theme2"
+    option value="d" -- Dark
+    option value="l" -- Light
+
+div.form-row
+  label for="theme3" -- Theme
+  select bind('theme')=component.setTheme id="theme3"
+    option value="d" -- Dark
+    option value="l" -- Light
+
+div.form-row
+  label for="theme4" -- Theme
+  select bind('theme')=component.setTheme id="theme4"
+    option value="d" -- Dark
+    option value="l" -- Light
+hr
+
+div.form-row
+  input bind('trackErrors')=component.setOptOut type="checkbox" id="track-errors"
+  label for="track-errors" -- Allow error tracking
+
+footer
+  small
+    em -- Tip: Settings sync accross accounts.

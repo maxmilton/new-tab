@@ -1,0 +1,28 @@
+body {
+  font-size: 18px;
+  text-rendering: optimizeLegibility;
+  background: #fafafa;
+}
+
+select {
+  margin-left: 9px;
+}
+
+input[type="checkbox"] {
+  margin-right: 9px;
+  vertical-align: 0;
+}
+
+hr,
+.form-row {
+  margin-bottom: 18px;
+}
+
+hr {
+  border: 0;
+  border-bottom: 1px solid #ddd;
+}
+
+footer {
+  margin-top: 18px;
+}

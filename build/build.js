@@ -26,7 +26,7 @@ const cleanCssOpts = {
 // JS minification options
 const uglifyOpts = {
   compress: {
-    drop_console: true,
+    // drop_console: true, // FIXME: TEMP!!
     negate_iife: false,
     passes: 2,
     pure_getters: true,
@@ -143,13 +143,99 @@ lasso.lassoPage({
         properties: {
           // XXX: Potentially fragile; needs adjustment if a future property conflicts
           //  ↳ Bad: key, input, update (chrome.tabs.update), runtime (chrome.runtime)
-          //  ↳ Suspect: \w{1,2}, default, super (es classes)
-          regex: /^(\$.*|_.*|.*_|\w{1,2}|def|installed|run|main|remap|builtin|require|resolve|ready|search(Path)?|load(ed|erMetadata)?|pending|code|cache|exports?|component|const|state|out|globals|data|subscribeTo|setState|default|filename|wait|createOut|template|emit|prependListener|once|removeListener|removeAllListeners|listenerCount|addDestroyListener|createTracker|appendTo|prependTo|replaceChildrenOf|insertAfter|getComponents?|afterInsert|getNode|getOutput|document|selectedIndex|correspondingUseElement|element|node|comment|html|beginElement|endElement|end|error|beginAsync|flush|sync|isSync|onLast|isVDOM|parentOut|render(ToString|sync|er)?|path|meta|elId|getEl(s|Id)?|destroy|isDestroyed|setStateDirty|replaceState|forceUpdate|shouldUpdate|els|getComponentForEl|init|register|renderBody|safeHTML|write|toHTML)$/i,
+          regex: new RegExp(`^(${[
+            '\\$.*',
+            '_.*',
+            '.*_',
+            '\\w{1,2}', // suspect
+            'addDestroyListener',
+            'afterInsert',
+            'appendTo',
+            'beginAsync',
+            'beginElement',
+            'builtin',
+            'cache',
+            'code',
+            'comment',
+            'component',
+            'const',
+            'correspondingUseElement',
+            'createOut',
+            'createTracker',
+            'data',
+            'def',
+            'default', // suspect
+            'destroy',
+            'document',
+            'elId',
+            'element',
+            'els',
+            'emit',
+            'end',
+            'endElement',
+            'error',
+            'exports?',
+            'filename',
+            'flush',
+            'forceUpdate',
+            'getComponentForEl',
+            'getComponents?',
+            'getEl(s|Id)?',
+            'getNode',
+            'getOutput',
+            'globals',
+            'html',
+            'init',
+            'insertAfter',
+            'installed',
+            'isDestroyed',
+            'isSync',
+            'isVDOM',
+            'listenerCount',
+            'load(ed|erMetadata)?',
+            'main',
+            'meta',
+            'node',
+            'onLast',
+            'once',
+            'out',
+            'parentOut',
+            'path',
+            'pending',
+            'prependListener',
+            'prependTo',
+            'ready',
+            'register',
+            'remap',
+            'removeAllListeners',
+            'removeListener',
+            'render(ToString|sync|er)?',
+            'renderBody',
+            'replaceChildrenOf',
+            'replaceState',
+            'require',
+            'resolve',
+            'run',
+            'safeHTML',
+            'search(Path)?',
+            'selectedIndex',
+            'setState',
+            'setStateDirty',
+            'shouldUpdate',
+            'state',
+            'subscribeTo',
+            'sync',
+            'template',
+            'toHTML',
+            'wait',
+            'write',
+          ].join('|')})$`, 'i'),
           reserved: [
             '$$', // lasso module (short version of '$_mod')
             'ax_', // fixes broken element placeholder attribute
             'e', // error tracking opt-out
             'id', // element attribute
+            's', // state.s in ntp-search.marko
           ],
           // debug: 'XX',
         },
@@ -190,45 +276,49 @@ lasso.lassoPage({
   throw err;
 });
 
+// // settings page app
+// // XXX: Could easily do this as plain HTML but may as well use Lasso+Marko for fun
+// lasso.lassoPage({
+//   name: 'settings',
+//   dependencies: ['require-run: ./src/settings'],
+//   // bundles: [{
+//   //   name: 'bunbun',
+//   //   dependencies: [
+//   //     'require: ./src/components/settings',
+//   //   ],
+//   // }],
+// }).then((result) => {
+//   // console.log('@@ SETTINGS RES', result);
+//
+//   const cssFilePath = result.getCSSFiles()[0];
+//   const jsFilePath = result.getJavaScriptFiles()[0];
+//   const jsFileName = result.getJavaScriptUrls()[0].substr(1);
+//
+//   // source code
+//   const cssCode = fs.readFileSync(cssFilePath, 'utf8');
+//   const jsCode = `${fs.readFileSync(jsFilePath, 'utf8')}\n$_mod.ready();`;
+//
+//   // clean up leftover files
+//   fs.unlink(cssFilePath, cb);
+//
+//   // write JS to disk
+//   fs.writeFile(jsFilePath, isProduction ? minifyJs(jsCode) : jsCode, cb);
+//
+//   // HTML template
+//   fs.writeFile(path.join(__dirname, '../dist/settings.html'), compile()({
+//     banner: '',
+//     title: 'New Tab Settings',
+//     head: `<style>${minifyCss(cssCode)}</style>`,
+//     body: '<div id=settings></div>',
+//     foot: `<script>${loaderCode}</script>\n<script src=${jsFileName}></script>`,
+//   }), cb);
+// }).catch((err) => {
+//   throw err;
+// });
+
 // settings page app
-// XXX: Could easily do this as plain HTML but may as well use Lasso+Marko for fun
-lasso.lassoPage({
-  name: 'settings',
-  dependencies: ['require-run: ./src/settings'],
-  // bundles: [{
-  //   name: 'bunbun',
-  //   dependencies: [
-  //     'require: ./src/components/settings',
-  //   ],
-  // }],
-}).then((result) => {
-  console.log('@@ SETTINGS RES', result);
-
-  const cssFilePath = result.getCSSFiles()[0];
-  const jsFilePath = result.getJavaScriptFiles()[0];
-  const jsFileName = result.getJavaScriptUrls()[0].substr(1);
-
-  // source code
-  const cssCode = fs.readFileSync(cssFilePath, 'utf8');
-  const jsCode = `${fs.readFileSync(jsFilePath, 'utf8')}\n$_mod.ready();`;
-
-  // clean up leftover files
-  fs.unlink(cssFilePath, cb);
-
-  // write JS to disk
-  fs.writeFile(jsFilePath, minifyJs(jsCode), cb);
-
-  // HTML template
-  fs.writeFile(path.join(__dirname, '../dist/settings.html'), compile()({
-    banner: '',
-    title: 'New Tab Settings',
-    head: `<style>${minifyCss(cssCode)}</style>`,
-    body: '<div id=settings></div>',
-    foot: `<script>${loaderCode}</script>\n<script src=${jsFileName}></script>`,
-  }), cb);
-}).catch((err) => {
-  throw err;
-});
+fs.copyFile(path.join(__dirname, '../src/settings.html'), path.join(__dirname, '../dist/settings.html'), cb);
+fs.copyFile(path.join(__dirname, '../src/settings.js'), path.join(__dirname, '../dist/settings.js'), cb);
 
 // write extension manifest to disk
 const manifestPath = path.join(__dirname, '../dist/manifest.json');

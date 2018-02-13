@@ -29,7 +29,7 @@ static function debounce(fn, delay) {
 class {
   onCreate() {
     this.state = {
-      search: '', // don't __mangle; used with bind()
+      s: '', // search; manually mangled since it's used with bind()
       __tabsRaw: [],
       __tabs: [],
       __bookmarksRaw: [],
@@ -38,7 +38,7 @@ class {
       __history: [],
     };
     this.__lastSearch = '';
-    this.__search = debounce(this.__doSearch, 230);
+    this.__onSearch = debounce(this.__doSearch, 260);
 
     this.__getTabs();
   }
@@ -59,53 +59,53 @@ class {
   }
 
   onRender() {
-    if (this.state.search !== this.__lastSearch) {
-      this.__search();
+    if (this.state.s !== this.__lastSearch) {
+      this.__onSearch();
     }
   }
 
   __doSearch() {
-    const { search } = this.state;
+    const state = this.state;
 
-    this.__lastSearch = search;
+    this.__lastSearch = state.s;
 
     // reset search when input is empty
-    if (search === '') {
-      this.state.__tabs = this.state.__tabsRaw;
-      this.state.__bookmarks.length = 0;
-      this.state.__history.length = 0;
+    if (state.s === '') {
+      state.__tabs = state.__tabsRaw;
+      state.__bookmarks.length = 0;
+      state.__history.length = 0;
       return;
     }
 
     // search history (run first since it takes the longest)
-    chrome.history.search({ text: search }, (results) => {
-      this.state.__historyRaw = results;
-      this.state.__history = this.state.__historyRaw.slice(0, 10);
+    chrome.history.search({ text: state.s }, (results) => {
+      state.__historyRaw = results;
+      state.__history = state.__historyRaw.slice(0, 10);
     });
 
     // search bookmarks
-    chrome.bookmarks.search(search, (results) => {
-      this.state.__bookmarksRaw = results;
-      this.state.__bookmarks = this.state.__bookmarksRaw.slice(0, 10);
+    chrome.bookmarks.search(state.s, (results) => {
+      state.__bookmarksRaw = results;
+      state.__bookmarks = state.__bookmarksRaw.slice(0, 10);
     });
 
     // search open tabs
-    this.state.__tabs = this.state.__tabsRaw.filter(item =>
-        item.title.toLowerCase().indexOf(search) > -1 ||
-        item.url.toLowerCase().indexOf(search) > -1);
+    state.__tabs = state.__tabsRaw.filter(item =>
+        item.title.toLowerCase().indexOf(state.s) > -1 ||
+        item.url.toLowerCase().indexOf(state.s) > -1);
   }
 
   __getTabs() {
     chrome.tabs.query({}, (tabs) => {
       this.state.__tabsRaw = tabs;
 
-      if (this.state.search === '') {
+      if (this.state.s === '') {
         this.state.__tabs = tabs;
       }
     });
   }
 
-  tabClick(tab, event) {
+  __onTabClick(tab, event) {
     // update current tab
     chrome.tabs.update(tab.id, { active: true });
 
@@ -124,16 +124,16 @@ class {
     event.preventDefault();
   }
 
-  cancel(event) {
+  __cancelSearch(event) {
     if (event.key === 'Escape') {
-      this.state.search = '';
+      this.state.s = '';
       this.state.__tabs = this.state.__tabs;
       this.state.__bookmarks.length = 0;
       this.state.__history.length = 0;
     }
   }
 
-  loadMore(title, length) {
+  __loadMore(title, length) {
     if (title === 'Bookmarks') {
       this.state.__bookmarks = this.state.__bookmarksRaw.slice(0, length + 100);
     } else {
@@ -186,7 +186,7 @@ style {
   }
 }
 
-$ let isSearching = state.search !== '';
+$ let isSearching = state.s !== '';
 
 macro itemList(title, list, rawList, keyPrefix)
   $ let count = list.length;
@@ -201,12 +201,12 @@ macro itemList(title, list, rawList, keyPrefix)
         -- ${item.title || item.url}
 
     if(count < length)
-      button.f on-click('loadMore', title, count) -- Show more...
+      button.f on-click(component.__loadMore, title, count) -- Show more...
   else-if(isSearching)
     p.g -- No matching ${title}
 
 div.c
-  input#s on-keyup('cancel') bind('search') key="i" type="text" placeholder="Search tabs, bookmarks, and history..." autocomplete="off"
+  input#s on-keyup(component.__cancelSearch) bind('s') key="i" type="text" placeholder="Search tabs, bookmarks, and history..." autocomplete="off"
 
   <!-- Open Tabs -->
   $ let tabsCount = state.__tabs.length;
@@ -214,7 +214,7 @@ div.c
     h2 -- Open Tabs (${tabsCount}/${state.__tabsRaw.length})
 
     for(tab in state.__tabs)
-      a.r on-click('tabClick', tab) key='t'+tab.id href=tab.url
+      a.r on-click(component.__tabClick, tab) key='t'+tab.id href=tab.url
         img.i src=tab.favIconUrl
 
         -- ${tab.title}

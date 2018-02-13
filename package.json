@@ -15,6 +15,7 @@
   "license": "MIT",
   "private": true,
   "scripts": {
+    "__EXPERIMENT": "node build/EXPERIMENT-build.js",
     "start": "npm run dev",
     "dev": "NODE_ENV=development node build/watch.js",
     "prewatch": "npm run prep",
@@ -53,5 +54,9 @@
   },
   "browserslist": [
     "last 2 Chrome versions"
-  ]
+  ],
+  "browser": {
+    "src/components/settings/backup.settings.js": "src/components/settings/backup.settings.browser.js",
+    "src/components/settings/index.js": "src/components/settings/index.browser.js"
+  }
 }
