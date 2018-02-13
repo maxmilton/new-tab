@@ -9,6 +9,20 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ## [Unreleased]
 
+## [0.4.0] - 2018-02-13
+
+### Added
+
+- Themes! Now comes with light, dark, and black. The dark was also improved and is still the default option.
+- Dedicated settings page. With the new themes it would be too cluttered to have the settings in the NTP itself. It also means there's slightly less computation when loading the NTP.
+
+### Changed
+
+- Settings now sync to your account.
+- Improved file loader to handle themes.
+- Make build steps more generic; modularise minification, simplify HTML template.
+- Some internal improvements to make the file size a tiny bit smaller and faster to parse.
+
 ## [0.3.2] - 2018-02-09
 
 ### Added
@@ -97,7 +111,8 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 - Initial public version including all the basics; working proof of concept code, readme, etc. Not ready for release yet though, it's still far from being actually useful!
 
-[Unreleased]: https://github.com/MaxMilton/new-tab/compare/v0.3.2...HEAD
+[Unreleased]: https://github.com/MaxMilton/new-tab/compare/v0.4.0...HEAD
+[0.4.0]: https://github.com/MaxMilton/new-tab/compare/v0.3.2...v0.4.0
 [0.3.2]: https://github.com/MaxMilton/new-tab/compare/v0.3.1...v0.3.2
 [0.3.1]: https://github.com/MaxMilton/new-tab/compare/v0.3.0...v0.3.1
 [0.3.0]: https://github.com/MaxMilton/new-tab/compare/v0.2.0...v0.3.0
