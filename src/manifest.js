@@ -35,6 +35,7 @@ module.exports = {
     page: 'b.html',
   },
   offline_enabled: true,
+  incognito: 'not_allowed',
 
   ...(isProduction
     // tighter security than default
