@@ -5,7 +5,7 @@
 :root {
   --s: #06001124; /* shadow colour */
   --s1: drop-shadow(0 18px 18px #0600114d); /* shadow dark */
-  --b: #1d1f25; /* background colour */
+  --b: #23252d; /* background colour */
   --t: #9da5b4; /* text colour */
   --c: #21252b; /* bookmark item hover background */
   --c1: #292d35; /* bookmarks bar, load more button */
