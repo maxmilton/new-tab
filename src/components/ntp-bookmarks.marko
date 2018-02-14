@@ -35,7 +35,7 @@ style {
 
   #b { /* bookmarks bar */
     display: flex;
-    flex-wrap: wrap; /* the best I can do without sacrificing performance */
+    overflow: hidden; /* FIXME: This is only a temporary workaround */
     align-items: center;
     margin-right: auto;
   }
