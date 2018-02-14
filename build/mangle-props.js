@@ -1,3 +1,7 @@
+/**
+ * A list of object property names which are safe to mangle.
+ * Each array item is a part of the final regex.
+ */
 const mangleNames = [
   '\\$.*',
   '_.*',
@@ -86,4 +90,17 @@ const mangleNames = [
   'write',
 ];
 
-module.exports = new RegExp(`^(${mangleNames.join('|')})$`, 'i');
+// regex constructor
+const mangleRegex = new RegExp(`^(${mangleNames.join('|')})$`, 'i');
+
+// list of property names that are not safe to mangle
+const mangleUnsafe = [
+  '$$', // lasso module (short version of '$_mod')
+  'ax_', // fixes broken element placeholder attribute
+  'id', // element attribute
+];
+
+module.exports = {
+  mangleRegex,
+  mangleUnsafe,
+};

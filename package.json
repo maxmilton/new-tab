@@ -47,7 +47,8 @@
     "optimize-js": "^1.0.3",
     "postcss": "^6.0.17",
     "stylelint": "^8.4.0",
-    "uglify-es": "^3.3.10"
+    "uglify-es": "^3.3.10",
+    "worker-nodes": "^1.6.0"
   },
   "engines": {
     "node": ">= 6.9.0"

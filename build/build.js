@@ -1,48 +1,71 @@
-/* eslint-disable strict, import/no-extraneous-dependencies, no-console */
-/* tslint:disable:no-console prefer-template max-line-length */
+/* eslint-disable strict, import/no-extraneous-dependencies */
+/* tslint:disable:max-line-length */
 
 'use strict';
 
 const fs = require('fs');
 const path = require('path');
 const lasso = require('lasso');
-const CleanCSS = require('clean-css');
-const UglifyJS = require('uglify-es');
-const optimizeJs = require('optimize-js');
-const mangleNamesRegex = require('./mangle-names');
+const {
+  mangleRegex,
+  mangleUnsafe,
+  uglifyOpts,
+  catchErr,
+  minifyCss,
+  minifyJs,
+  shortenLassoModule,
+  compileHtml,
+  finished,
+} = require('./utils');
 const manifest = require('../src/manifest');
 
 const template = fs.readFileSync(path.join(__dirname, '../src/template.html'), 'utf8');
 const banner = `New Tab ${process.env.APP_RELEASE} | github.com/MaxMilton/new-tab`;
 const isProduction = process.env.NODE_ENV === 'production';
-const nameCache = {};
 
-// CSS minification options
-const cleanCssOpts = {
-  level: {
-    1: { all: true },
-    2: { all: true },
+const ravenjs = require.resolve('raven-js/dist/raven');
+const src = path.join(__dirname, '../src');
+const dist = path.join(__dirname, '../dist');
+const paths = {
+  sourceMapDir: `${dist}/src`,
+  loader: `${src}/loader.js`,
+  errors: {
+    in: `${src}/errors.js`,
+    out: `${dist}/e.js`,
   },
+  ntp: `${dist}/ntp.html`,
+  settings: {
+    html: {
+      in: `${src}/settings.html`,
+      out: `${dist}/s.html`,
+    },
+    js: {
+      in: `${src}/settings.js`,
+      out: `${dist}/s.js`,
+    },
+  },
+  background: {
+    in: `${src}/background.html`,
+    out: `${dist}/b.html`,
+  },
+  manifest: `${dist}/manifest.json`,
 };
 
-// JS minification options
-const uglifyOpts = {
-  compress: {
-    drop_console: true,
-    negate_iife: false,
-    passes: 2,
-    pure_getters: true,
-    unsafe: true,
-    unsafe_proto: true,
-  },
-  mangle: {
-    reserved: ['d', 'w'], // fixes conflict in loader + error tracking script
-  },
-  nameCache,
-  ecma: 8,
-  toplevel: true,
-  warnings: !process.env.QUIET,
-};
+/**
+ * Compile a New Tab theme.
+ * @param {string} nameLong The input filename.
+ * @param {string} nameShort The output filename.
+ */
+function makeTheme(nameLong, nameShort) {
+  fs.readFile(`${src}/themes/${nameLong}.css`, 'utf8', (err, res) => {
+    if (err) throw err;
+    fs.writeFile(`${dist}/${nameShort}.css`, minifyCss(res), catchErr);
+  });
+}
+
+// runtime file loader
+const loader = fs.readFileSync(paths.loader, 'utf8');
+const loaderCode = minifyJs(loader);
 
 // lasso resource bundler options
 lasso.configure({
@@ -51,7 +74,7 @@ lasso.configure({
     'lasso-postcss',
   ],
   urlPrefix: '',
-  outputDir: path.join(__dirname, '../dist'),
+  outputDir: dist,
   bundlingEnabled: true,
   minify: false, // custom minification below
   resolveCssUrls: false,
@@ -59,173 +82,101 @@ lasso.configure({
   includeSlotNames: false,
 });
 
-/**
- * Node async method error handler.
- * @param {Error} err
- */
-function cb(err) { if (err) throw err; }
+// new tab page app
+lasso
+  .lassoPage({
+    name: 'ntp',
+    dependencies: ['require-run: ./src/index'],
+  })
+  .then(async (result) => {
+    const cssFilePath = result.getCSSFiles()[0];
+    const jsFilePath = result.getJavaScriptFiles()[0];
+    const jsFileName = result.getJavaScriptUrls()[0].substr(1);
 
-/**
- * Make CSS code smaller and faster.
- * @param {string} code The CSS code to minify.
- * @param {object} [opts] Custom CleanCSS options.
- * @returns {string} The minified CSS code.
- */
-function minifyCss(code, opts) {
-  const result = new CleanCSS(opts || cleanCssOpts).minify(code);
+    // source code
+    let cssCode = fs.readFileSync(cssFilePath, 'utf8');
+    let jsCode = `${fs.readFileSync(jsFilePath, 'utf8')}\n$_mod.ready();`;
 
-  if (result.errors.length) throw result.errors;
-  if (result.warnings.length) console.log('[CSS]', result.warnings);
-  if (!process.env.QUIET) console.log('[CSS]', result.stats);
+    // clean up leftover files
+    fs.unlink(cssFilePath, catchErr);
 
-  return result.styles;
-}
+    // runtime file loader + other script tags for body
+    let scripts = '';
 
-/**
- * Make JavaScript code smaller and faster.
- * @param {string} code The JavaScript source code to minify.
- * @param {boolean} optimize If true code will be run through optimize-js.
- * @param {object} opts Custom UglifyJS options.
- * @param {string} sourceMapPath An absolute path where to save a source map. If
- * this is omitted, no source map will be saved.
- * @returns {string} The minified JavaScript code.
- */
-function minifyJs(code, optimize, opts, sourceMapPath) {
-  const result = UglifyJS.minify(code, opts || uglifyOpts);
+    if (isProduction) {
+      // write unminified source JS to disk
+      fs.writeFile(`${paths.sourceMapDir}/${jsFileName}`, jsCode, catchErr);
+      
+      // custom uglify options for main JS bundle
+      const uglifyOptsMain = Object.assign({}, uglifyOpts, {
+        sourceMap: {
+          filename: jsFileName,
+          // don't include the source map link in released versions
+          ...(process.env.NO_SOURCE_MAP_URL ? {} : { url: `src/${jsFileName}.map` }),
+        },
+        compress: {
+          ...uglifyOpts.compress, // because Object.assign() only does a shallow clone
+          // pure_funcs: [], // TODO: Find pure functions that could be replaced with their output
+          unsafe_arrows: true,
+          unsafe_methods: true,
+        },
+        mangle: {
+          properties: {
+            // XXX: Potentially fragile; needs adjustment if a future property conflicts
+            //  ↳ Bad: key, input, update (chrome.tabs.update), runtime (chrome.runtime)
+            regex: mangleRegex,
+            reserved: [
+              ...mangleUnsafe,
+              's', // state.s in ntp-search.marko
+            ],
+            // debug: 'XX',
+          },
+          eval: true,
+        },
+        output: {
+          preamble: `/* ${banner} */`,
+        },
+      });
 
-  if (result.error) throw result.error;
-  if (result.warnings) console.log('[JS]', result.warnings);
+      // minify JS
+      jsCode = minifyJs(
+        { [jsFileName]: shortenLassoModule(jsCode) },
+        true,
+        uglifyOptsMain,
+        `${paths.sourceMapDir}/${jsFileName}.map`
+      );
 
-  if (optimize) {
-    result.code = optimizeJs(result.code); // breaks source maps; https://git.io/vAq4g
-  }
+      // minify CSS
+      cssCode = minifyCss(cssCode);
+    } else {
+      // Browsersync client script
+      scripts += `\n${process.env.BROWSERSYNC}`;
+    }
 
-  if (sourceMapPath) {
-    fs.writeFile(sourceMapPath, result.map, cb);
-  }
+    const body = '<div id=ntp><div id=a><div id=b></div><div class="b f">Other bookmarks</div></div><div id=m><div id=i>☰</div></div><div class=c><input type=text placeholder="Search tabs, bookmarks, and history..." id=s><h2>Open Tabs (</h2></div></div>';
 
-  return result.code;
-}
+    // HTML template
+    fs.writeFile(paths.ntp, compileHtml(template)({
+      banner: `<!-- ${banner} -->`,
+      title: 'New Tab',
+      head: `<style>${cssCode}</style>`,
+      body,
+      foot: `${scripts}<script>${await loaderCode}</script>\n<script src=${jsFileName}></script>`,
+    }), catchErr);
 
-/**
- * Ultra-minimal template engine.
- * @see https://github.com/Drulac/template-literal
- * @returns {Function}
- */
-function compile() {
-  return new Function('d', 'return `' + template + '`'); // eslint-disable-line
-}
-
-/**
- * Generate and save a New Tab theme.
- * @param {string} nameLong The input filename.
- * @param {string} nameShort The out filename.
- */
-function makeTheme(nameLong, nameShort) {
-  fs.readFile(path.join(__dirname, `../src/themes/${nameLong}.css`), 'utf8', (err, res) => {
-    if (err) throw err;
-    fs.writeFile(path.join(__dirname, `../dist/${nameShort}.css`), minifyCss(res), cb);
-  });
-}
-
-// runtime file loader
-const loader = fs.readFileSync(path.join(__dirname, '../src/loader.js'), 'utf8');
-const loaderCode = minifyJs(loader);
+    // write JS to disk
+    fs.writeFile(jsFilePath, await jsCode, catchErr);
+  })
+  .then(finished)
+  .catch(catchErr);
 
 // JS error tracking
-const raven = fs.readFileSync(require.resolve('raven-js/dist/raven'), 'utf8');
-const errors = fs.readFileSync(path.join(__dirname, '../src/errors.js'), 'utf8');
-const errCode = minifyJs({ 'raven.js': raven, 'errors.js': errors }, true);
-fs.writeFile(path.join(__dirname, '../dist/e.js'), errCode, cb);
-
-// new tab page app
-lasso.lassoPage({
-  name: 'ntp',
-  dependencies: ['require-run: ./src/index'],
-}).then((result) => {
-  const cssFilePath = result.getCSSFiles()[0];
-  const jsFilePath = result.getJavaScriptFiles()[0];
-  const jsFileName = result.getJavaScriptUrls()[0].substr(1);
-
-  // source code
-  let cssCode = fs.readFileSync(cssFilePath, 'utf8');
-  let jsCode = `${fs.readFileSync(jsFilePath, 'utf8')}\n$_mod.ready();`;
-
-  // clean up leftover files
-  fs.unlink(cssFilePath, cb);
-
-  // runtime file loader + other script tags for body
-  let scripts = `<script>${loaderCode}</script>`;
-
-  if (isProduction) {
-    // minify CSS
-    cssCode = minifyCss(cssCode);
-
-    // write unminified source JS to disk
-    const jsSrcPath = `${path.dirname(jsFilePath)}/src`;
-    fs.writeFile(`${jsSrcPath}/${jsFileName}`, jsCode, cb);
-
-    // custom uglify options for main JS bundle
-    const uglifyOptsMain = Object.assign({}, uglifyOpts, {
-      sourceMap: {
-        filename: jsFileName,
-        // don't include the source map link in released versions
-        ...(process.env.NO_SOURCE_MAP_URL ? {} : { url: `src/${jsFileName}.map` }),
-      },
-      compress: {
-        ...uglifyOpts.compress, // because Object.assign() only does a shallow clone
-        // pure_funcs: [], // TODO: Find pure functions that could be replaced with their output
-        unsafe_arrows: true,
-        unsafe_methods: true,
-      },
-      mangle: {
-        properties: {
-          // XXX: Potentially fragile; needs adjustment if a future property conflicts
-          //  ↳ Bad: key, input, update (chrome.tabs.update), runtime (chrome.runtime)
-          regex: mangleNamesRegex,
-          reserved: [
-            '$$', // lasso module (short version of '$_mod')
-            'ax_', // fixes broken element placeholder attribute
-            'id', // element attribute
-            's', // state.s in ntp-search.marko
-          ],
-          // debug: 'XX',
-        },
-        eval: true,
-      },
-      output: {
-        preamble: `/* ${banner} */`,
-      },
-    });
-
-    // minify JS
-    jsCode = jsCode.replace(/\$_mod/g, '$$$$'); // shorten module object; $_mod >> $$
-    jsCode = minifyJs(
-      { [jsFileName]: jsCode },
-      true,
-      uglifyOptsMain,
-      `${jsSrcPath}/${jsFileName}.map`
-    );
-  } else {
-    // Browsersync client script
-    scripts += `\n${process.env.BROWSERSYNC}`;
-  }
-
-  const body = '<div id=ntp><div id=a><div id=b></div><div class="b f">Other bookmarks</div></div><div id=m><div id=i>☰</div></div><div class=c><input type=text placeholder="Search tabs, bookmarks, and history..." id=s><h2>Open Tabs (</h2></div></div>';
-
-  // HTML template
-  fs.writeFile(path.join(__dirname, '../dist/ntp.html'), compile()({
-    banner: `<!-- ${banner} -->`,
-    title: 'New Tab',
-    head: `<style>${cssCode}</style>`,
-    body,
-    foot: `${scripts}\n<script src=${jsFileName}></script>`,
-  }), cb);
-
-  // write JS to disk
-  fs.writeFile(jsFilePath, jsCode, cb);
-}).catch((err) => {
-  throw err;
+const raven = fs.readFileSync(ravenjs, 'utf8');
+const errors = fs.readFileSync(paths.errors.in, 'utf8');
+// const errCode = minifyJs({ 'raven.js': raven, 'errors.js': errors }, true);
+// fs.writeFile(paths.errors.out, errCode, catchErr);
+minifyJs({ 'raven.js': raven, 'errors.js': errors }, true).then((errCode) => {
+  fs.writeFile(paths.errors.out, errCode, catchErr);
 });
 
 // themes
@@ -233,15 +184,14 @@ makeTheme('light', 'l');
 makeTheme('black', 'b');
 
 // settings page
-fs.copyFile(path.join(__dirname, '../src/settings.html'), path.join(__dirname, '../dist/s.html'), cb);
-fs.readFile(path.join(__dirname, '../src/settings.js'), 'utf8', (err, res) => {
+fs.copyFile(paths.settings.html.in, paths.settings.html.out, catchErr);
+fs.readFile(paths.settings.js.in, 'utf8', async (err, res) => {
   if (err) throw err;
-  fs.writeFile(path.join(__dirname, '../dist/s.js'), minifyJs(res), cb);
+  fs.writeFile(paths.settings.js.out, await minifyJs(res), catchErr);
 });
 
 // background page
-fs.copyFile(path.join(__dirname, '../src/background.html'), path.join(__dirname, '../dist/b.html'), cb);
+fs.copyFile(paths.background.in, paths.background.out, catchErr);
 
 // extension manifest
-const manifestPath = path.join(__dirname, '../dist/manifest.json');
-fs.writeFile(manifestPath, JSON.stringify(manifest), cb);
+fs.writeFile(paths.manifest, JSON.stringify(manifest), catchErr);
