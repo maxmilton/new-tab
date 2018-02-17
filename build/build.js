@@ -28,7 +28,7 @@ const ravenjs = require.resolve('raven-js/dist/raven');
 const src = path.join(__dirname, '../src');
 const dist = path.join(__dirname, '../dist');
 const paths = {
-  sourceMapDir: `${dist}/src`,
+  // sourceMapDir: `${dist}/src`,
   loader: `${src}/loader.js`,
   errors: {
     in: `${src}/errors.js`,
@@ -110,15 +110,15 @@ lasso
 
     if (isProduction) {
       // write unminified source JS to disk
-      fs.writeFile(`${paths.sourceMapDir}/${jsFileName}`, jsCode, catchErr);
+      // fs.writeFile(`${paths.sourceMapDir}/${jsFileName}`, jsCode, catchErr);
 
       // custom uglify options for main JS bundle
       const uglifyOptsMain = Object.assign({}, uglifyOpts, {
-        sourceMap: {
-          filename: jsFileName,
-          // don't include the source map link in released versions
-          ...(process.env.NO_SOURCE_MAP_URL ? {} : { url: `src/${jsFileName}.map` }),
-        },
+        // sourceMap: {
+        //   filename: jsFileName,
+        //   // don't include the source map link in released versions
+        //   ...(process.env.NO_SOURCE_MAP_URL ? {} : { url: `src/${jsFileName}.map` }),
+        // },
         compress: {
           ...uglifyOpts.compress, // because Object.assign() only does a shallow clone
           // pure_funcs: [], // TODO: Find pure functions that could be replaced with their output
@@ -147,7 +147,7 @@ lasso
         { [jsFileName]: shortenLassoModule(jsCode) },
         true,
         uglifyOptsMain,
-        `${paths.sourceMapDir}/${jsFileName}.map`
+        // `${paths.sourceMapDir}/${jsFileName}.map`
       );
 
       // minify CSS
