@@ -177,8 +177,6 @@ lasso
 // JS error tracking
 const raven = fs.readFileSync(ravenjs, 'utf8');
 const errors = fs.readFileSync(paths.errors.in, 'utf8');
-// const errCode = minifyJs({ 'raven.js': raven, 'errors.js': errors }, true);
-// fs.writeFile(paths.errors.out, errCode, catchErr);
 minifyJs({ 'raven.js': raven, 'errors.js': errors }, true).then((errCode) => {
   fs.writeFile(paths.errors.out, errCode, catchErr);
 });
