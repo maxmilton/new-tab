@@ -52,7 +52,7 @@ function catchErr(err) { if (err) throw err; }
  * @param {object} [opts] Custom CleanCSS options.
  * @returns {string} The minified CSS code.
  */
-function minifyCss(code, opts) {
+function _minifyCss(code, opts) {
   const result = new CleanCSS(opts || cleanCssOpts).minify(code);
 
   if (result.errors.length) throw result.errors;
@@ -128,9 +128,10 @@ function compileHtml(template) {
   return new Function('d', 'return `' + template + '`'); // eslint-disable-line
 }
 
-// run the most CPU intensive tasks async in a seperate thread
+// run the most CPU intensive tasks async in a separate thread
 const workers = new WorkerNodes(__filename);
 
+const minifyCss = workers.call._minifyCss;
 const minifyJs = workers.call._minifyJs;
 const finished = () => workers.terminate();
 
@@ -140,6 +141,7 @@ module.exports = {
   cleanCssOpts,
   uglifyOpts,
   catchErr,
+  _minifyCss,
   minifyCss,
   _minifyJs,
   minifyJs,

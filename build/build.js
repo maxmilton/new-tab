@@ -58,9 +58,9 @@ const paths = {
  * @param {string} nameShort The output filename.
  */
 function makeTheme(nameLong, nameShort) {
-  fs.readFile(`${src}/themes/${nameLong}.css`, 'utf8', (err, res) => {
+  fs.readFile(`${src}/themes/${nameLong}.css`, 'utf8', async (err, res) => {
     if (err) throw err;
-    fs.writeFile(`${dist}/${nameShort}.css`, minifyCss(res), catchErr);
+    fs.writeFile(`${dist}/${nameShort}.css`, await minifyCss(res), catchErr);
   });
 }
 
@@ -163,7 +163,7 @@ lasso
     fs.writeFile(paths.ntp, compileHtml(template)({
       banner: `<!-- ${banner} -->`,
       title: 'New Tab',
-      head: `<style>${cssCode}</style>`,
+      head: `<style>${await cssCode}</style>`,
       body,
       foot: `${scripts}<script>${await loaderCode}</script>\n<script src=${jsFileName}></script>`,
     }), catchErr);
@@ -171,7 +171,7 @@ lasso
     // write JS to disk
     fs.writeFile(jsFilePath, await jsCode, catchErr);
   })
-  .then(finished)
+  .then(finished) // this must be called after all tasks are finished; race condition
   .catch(catchErr);
 
 // JS error tracking
