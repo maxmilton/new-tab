@@ -4,7 +4,6 @@
 'use strict';
 
 const fs = require('fs');
-const path = require('path');
 const { performance } = require('perf_hooks'); // eslint-disable-line
 const WorkerNodes = require('worker-nodes');
 const CleanCSS = require('clean-css');
@@ -129,9 +128,8 @@ function compileHtml(template) {
   return new Function('d', 'return `' + template + '`'); // eslint-disable-line
 }
 
-const workers = new WorkerNodes(__filename, {
-
-});
+// run the most CPU intensive tasks async in a seperate thread
+const workers = new WorkerNodes(__filename);
 
 const minifyJs = workers.call._minifyJs;
 const finished = () => workers.terminate();

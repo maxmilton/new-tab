@@ -1,10 +1,11 @@
-/* eslint-disable strict, import/no-extraneous-dependencies */
-/* tslint:disable:max-line-length */
+/* eslint-disable strict, import/no-extraneous-dependencies, no-console */
+/* tslint:disable:no-console max-line-length */
 
 'use strict';
 
 const fs = require('fs');
 const path = require('path');
+const { performance } = require('perf_hooks'); // eslint-disable-line
 const lasso = require('lasso');
 const {
   mangleRegex,
@@ -83,12 +84,16 @@ lasso.configure({
 });
 
 // new tab page app
+const t0 = performance.now();
 lasso
   .lassoPage({
     name: 'ntp',
     dependencies: ['require-run: ./src/index'],
   })
   .then(async (result) => {
+    const t1 = performance.now();
+    console.log(`[lasso] ntp 🕑 ${Math.round(t1 - t0)}ms`);
+
     const cssFilePath = result.getCSSFiles()[0];
     const jsFilePath = result.getJavaScriptFiles()[0];
     const jsFileName = result.getJavaScriptUrls()[0].substr(1);
@@ -106,7 +111,7 @@ lasso
     if (isProduction) {
       // write unminified source JS to disk
       fs.writeFile(`${paths.sourceMapDir}/${jsFileName}`, jsCode, catchErr);
-      
+
       // custom uglify options for main JS bundle
       const uglifyOptsMain = Object.assign({}, uglifyOpts, {
         sourceMap: {
@@ -123,7 +128,6 @@ lasso
         mangle: {
           properties: {
             // XXX: Potentially fragile; needs adjustment if a future property conflicts
-            //  ↳ Bad: key, input, update (chrome.tabs.update), runtime (chrome.runtime)
             regex: mangleRegex,
             reserved: [
               ...mangleUnsafe,

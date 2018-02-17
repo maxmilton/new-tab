@@ -1,6 +1,7 @@
 /**
  * A list of object property names which are safe to mangle.
  * Each array item is a part of the final regex.
+ * Known bad: key, input, update (chrome.tabs.update), runtime (chrome.runtime)
  */
 const mangleNames = [
   '\\$.*',
