@@ -164,9 +164,8 @@ lasso
     fs.writeFile(paths.ntp, compileHtml(template)({
       banner: `<!-- ${banner} -->`,
       title: 'New Tab',
-      head: `<style>${await cssCode}</style>`,
+      head: `<style>${await cssCode}</style>\n${scripts}<script>${await loaderCode}</script>\n<script src=${jsFileName} defer></script>`,
       body,
-      foot: `${scripts}<script>${await loaderCode}</script>\n<script src=${jsFileName}></script>`,
     }), catchErr);
 
     // write JS to disk
