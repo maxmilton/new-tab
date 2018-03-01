@@ -15,7 +15,6 @@
   "license": "MIT",
   "private": true,
   "scripts": {
-    "__EXPERIMENT": "node build/EXPERIMENT-build.js",
     "start": "npm run dev",
     "dev": "NODE_ENV=development node build/watch.js",
     "prewatch": "npm run prep",
@@ -29,24 +28,24 @@
     "test": "echo 'TODO: Test suite and tests' && exit 1"
   },
   "dependencies": {
-    "raven-js": "^3.22.3"
+    "raven-js": "^3.22.4"
   },
   "devDependencies": {
-    "@types/chrome": "^0.0.59",
+    "@types/chrome": "^0.0.60",
     "@wearegenki/eslint-config": "^0.4.2",
     "@wearegenki/postcss-config": "^0.4.2",
     "@wearegenki/stylelint-config": "^0.4.2",
     "browser-sync": "^2.23.6",
     "clean-css": "^4.1.9",
-    "eslint": "^4.18.0",
+    "eslint": "^4.18.1",
     "lasso": "^3.1.2",
     "lasso-marko": "^2.4.0",
     "lasso-postcss": "^0.4.0",
-    "marko": "^4.7.5",
+    "marko": "^4.8.0",
     "marko-bind": "^0.1.0",
     "optimize-js": "^1.0.3",
-    "postcss": "^6.0.18",
-    "stylelint": "^8.4.0",
+    "postcss": "^6.0.19",
+    "stylelint": "^9.1.1",
     "uglify-es": "^3.3.10",
     "worker-nodes": "^1.6.0"
   },
