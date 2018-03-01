@@ -164,7 +164,7 @@ lasso
     fs.writeFile(paths.ntp, compileHtml(template)({
       banner: `<!-- ${banner} -->\n`,
       title: 'New Tab',
-      head: `<style>${await cssCode}</style>\n${scripts}<script>${await loaderCode}</script>\n<script src=${jsFileName} defer></script>`,
+      head: `<script src=${jsFileName} defer></script>\n<style>${await cssCode}</style>\n${scripts}<script>${await loaderCode}</script>`,
       body,
     }), catchErr);
 
