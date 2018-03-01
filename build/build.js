@@ -113,6 +113,7 @@ lasso
       // fs.writeFile(`${paths.sourceMapDir}/${jsFileName}`, jsCode, catchErr);
 
       // custom uglify options for main JS bundle
+      // FIXME: Implement a deep clone function so I don't have to extend compress below: https://dassur.ma/things/deep-copy/
       const uglifyOptsMain = Object.assign({}, uglifyOpts, {
         // sourceMap: {
         //   filename: jsFileName,
