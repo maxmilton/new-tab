@@ -162,7 +162,7 @@ lasso
 
     // HTML template
     fs.writeFile(paths.ntp, compileHtml(template)({
-      banner: `<!-- ${banner} -->`,
+      banner: `<!-- ${banner} -->\n`,
       title: 'New Tab',
       head: `<style>${await cssCode}</style>\n${scripts}<script>${await loaderCode}</script>\n<script src=${jsFileName} defer></script>`,
       body,
