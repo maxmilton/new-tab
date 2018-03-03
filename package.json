@@ -32,7 +32,7 @@
     "raven-js": "3.22.3"
   },
   "devDependencies": {
-    "@types/chrome": "0.0.59",
+    "@types/chrome": "0.0.60",
     "@wearegenki/eslint-config": "0.4.2",
     "@wearegenki/postcss-config": "0.4.2",
     "@wearegenki/stylelint-config": "0.4.2",
