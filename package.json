@@ -42,7 +42,7 @@
     "lasso": "3.1.2",
     "lasso-marko": "2.4.0",
     "lasso-postcss": "0.4.0",
-    "marko": "4.7.5",
+    "marko": "4.9.0",
     "marko-bind": "0.1.0",
     "optimize-js": "1.0.3",
     "postcss": "6.0.18",
