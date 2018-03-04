@@ -46,7 +46,7 @@
     "marko-bind": "0.1.0",
     "optimize-js": "1.0.3",
     "postcss": "6.0.19",
-    "stylelint": "8.4.0",
+    "stylelint": "9.1.1",
     "uglify-es": "3.3.10",
     "worker-nodes": "1.6.0"
   },
