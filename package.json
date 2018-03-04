@@ -29,7 +29,7 @@
     "test": "echo 'TODO: Test suite and tests' && exit 1"
   },
   "dependencies": {
-    "raven-js": "3.22.3"
+    "raven-js": "3.23.1"
   },
   "devDependencies": {
     "@types/chrome": "0.0.60",
