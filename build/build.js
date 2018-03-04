@@ -128,7 +128,7 @@ lasso
         },
         mangle: {
           properties: {
-            // XXX: Potentially fragile; needs adjustment if a future property conflicts
+            /** XXX: Potentially fragile; needs adjustment if a future property conflicts. */
             regex: mangleRegex,
             reserved: [
               ...mangleUnsafe,

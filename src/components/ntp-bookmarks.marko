@@ -28,14 +28,15 @@ style {
     background: var(--c1);
     filter: drop-shadow(0 9px 9px var(--s));
 
-    &:last-child {
+    &:last-child { /* "other bookmarks" folder */
       margin-left: auto;
     }
   }
 
   #b { /* bookmarks bar */
     display: flex;
-    overflow: hidden; /* FIXME: This is only a temporary workaround */
+    // overflow: hidden; /* FIXME: Breaks subfolders; Was only a temporary workaround */
+    max-width: 100%;
     align-items: center;
     margin-right: auto;
   }
@@ -60,7 +61,7 @@ style {
 
   .i { /* favicon */
     width: 16px;
-    height: auto; /* hide broken img when src is missing */
+    height: auto; /* hides broken img when src is missing */
   }
 
   .t { /* bookmark title */
@@ -68,6 +69,12 @@ style {
     padding-left: 9px;
     overflow: hidden;
     text-overflow: ellipsis;
+  }
+
+  /* FIXME: Shorten selector name */
+  .title-overflowing {
+    max-width: 15ch;
+    overflow: hidden;
   }
 }
 
@@ -79,8 +86,11 @@ div#a
         include(ntpFolder, bookmark) level=0 target=component
       else
         <!-- bookmark link -->
-        a.b on-click(chromeLink) href=bookmark.url title=bookmark.title
+        $ let isOverflowing = bookmark.title.length > 14;
+        // a.b on-click(chromeLink) href=bookmark.url title=bookmark.title class=(bookmark.title.length > 14 && 'title-overflowing')
+        a.b on-click(chromeLink) href=bookmark.url class=(isOverflowing && 'title-overflowing') title=(isOverflowing && bookmark.title)
           img.i src=`chrome://favicon/${bookmark.url}`
-          span.t if(bookmark.title) -- ${bookmark.title}
+          // span.t if(bookmark.title) -- ${bookmark.title}
+          -- ${bookmark.title}
 
   include(ntpFolder, state.__bookmarksOther) level=0 target=component left=true
