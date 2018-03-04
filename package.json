@@ -35,12 +35,14 @@
   },
   "devDependencies": {
     "@types/chrome": "0.0.60",
-    "@wearegenki/eslint-config": "0.4.2",
-    "@wearegenki/postcss-config": "0.4.2",
-    "@wearegenki/stylelint-config": "0.4.2",
+    "@wearegenki/eslint-config": "0.5.0-alpha.9dd6da21",
+    "@wearegenki/postcss-config": "0.5.0-alpha.9dd6da21",
+    "@wearegenki/stylelint-config": "0.5.0-alpha.9dd6da21",
+    "@wearegenki/test": "0.5.0-alpha.9dd6da21",
     "browser-sync": "2.23.6",
     "clean-css": "4.1.9",
     "eslint": "4.18.2",
+    "jest": "^22.4.2",
     "lasso": "3.1.2",
     "lasso-marko": "2.4.0",
     "lasso-postcss": "0.4.0",
@@ -48,6 +50,7 @@
     "marko-bind": "0.1.0",
     "optimize-js": "1.0.3",
     "postcss": "6.0.19",
+    "puppeteer": "^1.1.1",
     "stylelint": "9.1.1",
     "uglify-es": "3.3.10",
     "worker-nodes": "1.6.0"
@@ -57,9 +60,5 @@
   },
   "browserslist": [
     "last 2 Chrome versions"
-  ],
-  "browser": {
-    "src/components/settings/backup.settings.js": "src/components/settings/backup.settings.browser.js",
-    "src/components/settings/index.js": "src/components/settings/index.browser.js"
-  }
+  ]
 }
