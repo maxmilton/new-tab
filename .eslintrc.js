@@ -8,11 +8,8 @@ module.exports = {
     '@wearegenki/eslint-config/marko',
   ],
   parserOptions: {
-    ecmaVersion: 8,
+    ecmaVersion: 9,
     sourceType: 'module',
-    ecmaFeatures: {
-      experimentalObjectRestSpread: true,
-    },
   },
   env: {
     webextensions: true,
