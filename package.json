@@ -22,10 +22,13 @@
     "prep": "rm -rf .cache dist && mkdir -p dist/src",
     "prebuild": "npm run prep",
     "build": "APP_RELEASE=$(git describe --always --dirty=\"-dev\") NODE_ENV=production node build/build.js",
-    "lint": "npm run lint:css && npm run lint:js",
     "lint:css": "stylelint \"{src,test}/**/*.{marko,html,css}\"",
-    "lint:js": "eslint --ext '.js,.marko' src/ test/ build/",
-    "test": "echo 'TODO: Test suite and tests' && exit 1"
+    "lint:js": "eslint --ignore-path .gitignore --ext .js,.marko src test",
+    "lint": "npm run lint:css && npm run lint:js",
+    "pretest": "npm run lint",
+    "test": "jest --config test/jest.config.js --coverage",
+    "test-ci": "yarn test --runInBand",
+    "test:watch": "yarn test --notify --watch"
   },
   "dependencies": {
     "raven-js": "^3.22.4"
@@ -35,9 +38,11 @@
     "@wearegenki/eslint-config": "^0.4.2",
     "@wearegenki/postcss-config": "^0.4.2",
     "@wearegenki/stylelint-config": "^0.4.2",
+    "@wearegenki/test": "0.5.0-alpha.9dd6da21",
     "browser-sync": "^2.23.6",
     "clean-css": "^4.1.9",
     "eslint": "^4.18.1",
+    "jest": "^22.4.2",
     "lasso": "^3.1.2",
     "lasso-marko": "^2.4.0",
     "lasso-postcss": "^0.4.0",
@@ -45,6 +50,7 @@
     "marko-bind": "^0.1.0",
     "optimize-js": "^1.0.3",
     "postcss": "^6.0.19",
+    "puppeteer": "^1.1.1",
     "stylelint": "^9.1.1",
     "uglify-es": "^3.3.10",
     "worker-nodes": "^1.6.0"
