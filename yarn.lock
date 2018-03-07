@@ -467,9 +467,9 @@
     eslint-plugin-jest "^21.13.0"
     eslint-plugin-vue "^4.3.0"
 
-"@wearegenki/postcss-config@0.5.0-alpha.9dd6da21":
-  version "0.5.0-alpha.9dd6da21"
-  resolved "https://registry.yarnpkg.com/@wearegenki/postcss-config/-/postcss-config-0.5.0-alpha.9dd6da21.tgz#26febce23ecb7dbe3ec2e0ebef4c51a3bc513656"
+"@wearegenki/postcss-config@0.5.0-alpha.f1eec7f5":
+  version "0.5.0-alpha.f1eec7f5"
+  resolved "https://registry.yarnpkg.com/@wearegenki/postcss-config/-/postcss-config-0.5.0-alpha.f1eec7f5.tgz#d4799fd4d3f08d071f94a883ceb9c89b3b451f5a"
   dependencies:
     autoprefixer "^8.1.0"
     css-mqpacker "^6.0.2"
