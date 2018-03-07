@@ -2,7 +2,7 @@
 # yarn lockfile v1
 
 
-"@babel/code-frame@7.0.0-beta.40", "@babel/code-frame@^7.0.0-beta.35":
+"@babel/code-frame@7.0.0-beta.40", "@babel/code-frame@^7.0.0-beta.35", "@babel/code-frame@^7.0.0-beta.40":
   version "7.0.0-beta.40"
   resolved "https://registry.yarnpkg.com/@babel/code-frame/-/code-frame-7.0.0-beta.40.tgz#37e2b0cf7c56026b4b21d3927cadf81adec32ac6"
   dependencies:
@@ -413,7 +413,7 @@
     babylon "7.0.0-beta.40"
     lodash "^4.2.0"
 
-"@babel/traverse@7.0.0-beta.40":
+"@babel/traverse@7.0.0-beta.40", "@babel/traverse@^7.0.0-beta.40":
   version "7.0.0-beta.40"
   resolved "https://registry.yarnpkg.com/@babel/traverse/-/traverse-7.0.0-beta.40.tgz#d140e449b2e093ef9fe1a2eecc28421ffb4e521e"
   dependencies:
@@ -427,7 +427,7 @@
     invariant "^2.2.0"
     lodash "^4.2.0"
 
-"@babel/types@7.0.0-beta.40":
+"@babel/types@7.0.0-beta.40", "@babel/types@^7.0.0-beta.40":
   version "7.0.0-beta.40"
   resolved "https://registry.yarnpkg.com/@babel/types/-/types-7.0.0-beta.40.tgz#25c3d7aae14126abe05fcb098c65a66b6d6b8c14"
   dependencies:
@@ -455,14 +455,16 @@
   version "22.2.0"
   resolved "https://registry.yarnpkg.com/@types/jest/-/jest-22.2.0.tgz#55ce83139f7ad1b48b414c3927746614c6963c0f"
 
-"@wearegenki/eslint-config@0.5.0-alpha.9dd6da21":
-  version "0.5.0-alpha.9dd6da21"
-  resolved "https://registry.yarnpkg.com/@wearegenki/eslint-config/-/eslint-config-0.5.0-alpha.9dd6da21.tgz#2786a377512328c96271f6ffdef8f96e6e02d2c2"
+"@wearegenki/eslint-config@0.5.0-alpha.f1eec7f5":
+  version "0.5.0-alpha.f1eec7f5"
+  resolved "https://registry.yarnpkg.com/@wearegenki/eslint-config/-/eslint-config-0.5.0-alpha.f1eec7f5.tgz#322b760d962f60d29bcdde2456c8da04d48d272c"
   dependencies:
+    babel-eslint "^8.2.2"
     eslint-config-airbnb-base "^12.1.0"
     eslint-plugin-compat "^2.2.0"
     eslint-plugin-html "^4.0.2"
     eslint-plugin-import "^2.9.0"
+    eslint-plugin-jest "^21.13.0"
     eslint-plugin-vue "^4.3.0"
 
 "@wearegenki/postcss-config@0.5.0-alpha.9dd6da21":
@@ -834,6 +836,17 @@ babel-core@^7.0.0-bridge.0:
   version "7.0.0-bridge.0"
   resolved "https://registry.yarnpkg.com/babel-core/-/babel-core-7.0.0-bridge.0.tgz#95a492ddd90f9b4e9a4a1da14eb335b87b634ece"
 
+babel-eslint@^8.2.2:
+  version "8.2.2"
+  resolved "https://registry.yarnpkg.com/babel-eslint/-/babel-eslint-8.2.2.tgz#1102273354c6f0b29b4ea28a65f97d122296b68b"
+  dependencies:
+    "@babel/code-frame" "^7.0.0-beta.40"
+    "@babel/traverse" "^7.0.0-beta.40"
+    "@babel/types" "^7.0.0-beta.40"
+    babylon "^7.0.0-beta.40"
+    eslint-scope "~3.7.1"
+    eslint-visitor-keys "^1.0.0"
+
 babel-generator@^6.18.0, babel-generator@^6.26.0:
   version "6.26.1"
   resolved "https://registry.yarnpkg.com/babel-generator/-/babel-generator-6.26.1.tgz#1844408d3b8f0d35a404ea7ac180f087a601bd90"
@@ -952,7 +965,7 @@ babel-types@^6.18.0, babel-types@^6.26.0:
     lodash "^4.17.4"
     to-fast-properties "^1.0.3"
 
-babylon@7.0.0-beta.40:
+babylon@7.0.0-beta.40, babylon@^7.0.0-beta.40:
   version "7.0.0-beta.40"
   resolved "https://registry.yarnpkg.com/babylon/-/babylon-7.0.0-beta.40.tgz#91fc8cd56d5eb98b28e6fde41045f2957779940a"
 
@@ -2047,6 +2060,10 @@ eslint-plugin-import@^2.9.0:
     minimatch "^3.0.3"
     read-pkg-up "^2.0.0"
 
+eslint-plugin-jest@^21.13.0:
+  version "21.13.0"
+  resolved "https://registry.yarnpkg.com/eslint-plugin-jest/-/eslint-plugin-jest-21.13.0.tgz#9fc903158d79e953aefd861a55e8a8c9f6ab3d36"
+
 eslint-plugin-vue@^4.3.0:
   version "4.3.0"
   resolved "https://registry.yarnpkg.com/eslint-plugin-vue/-/eslint-plugin-vue-4.3.0.tgz#478c6267269dbaa20f6e8b2cfae7a0ccc98c1d72"
@@ -2057,7 +2074,7 @@ eslint-restricted-globals@^0.1.1:
   version "0.1.1"
   resolved "https://registry.yarnpkg.com/eslint-restricted-globals/-/eslint-restricted-globals-0.1.1.tgz#35f0d5cbc64c2e3ed62e93b4b1a7af05ba7ed4d7"
 
-eslint-scope@^3.7.1:
+eslint-scope@^3.7.1, eslint-scope@~3.7.1:
   version "3.7.1"
   resolved "https://registry.yarnpkg.com/eslint-scope/-/eslint-scope-3.7.1.tgz#3d63c3edfda02e06e01a452ad88caacc7cdcb6e8"
   dependencies:
