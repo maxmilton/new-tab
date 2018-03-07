@@ -32,7 +32,7 @@
   version "0.0.28"
   resolved "https://registry.yarnpkg.com/@types/filewriter/-/filewriter-0.0.28.tgz#c054e8af4d9dd75db4e63abc76f885168714d4b3"
 
-"@types/jest@^22.2.0":
+"@types/jest@22.2.0":
   version "22.2.0"
   resolved "https://registry.yarnpkg.com/@types/jest/-/jest-22.2.0.tgz#55ce83139f7ad1b48b414c3927746614c6963c0f"
 
@@ -3052,7 +3052,7 @@ jest-worker@^22.2.2:
   dependencies:
     merge-stream "^1.0.1"
 
-jest@^22.4.2:
+jest@22.4.2:
   version "22.4.2"
   resolved "https://registry.yarnpkg.com/jest/-/jest-22.4.2.tgz#34012834a49bf1bdd3bc783850ab44e4499afc20"
   dependencies:
@@ -3425,9 +3425,13 @@ makeerror@1.0.x:
   dependencies:
     tmpl "1.0.x"
 
-map-obj@^1.0.0:
+map-obj@^1.0.0, markdown-escapes@^1.0.0:
   version "1.0.1"
   resolved "https://registry.yarnpkg.com/markdown-escapes/-/markdown-escapes-1.0.1.tgz#1994df2d3af4811de59a6714934c2b2292734518"
+
+map-obj@^2.0.0:
+  version "2.0.0"
+  resolved "https://registry.yarnpkg.com/map-obj/-/map-obj-2.0.0.tgz#a65cd29087a92598b8791257a523e021222ac1f9"
 
 markdown-table@^1.1.0:
   version "1.1.1"
@@ -3436,42 +3440,6 @@ markdown-table@^1.1.0:
 marko-bind@0.1.0:
   version "0.1.0"
   resolved "https://registry.yarnpkg.com/marko-bind/-/marko-bind-0.1.0.tgz#60e55e16ca1149d4147cfae4be38b1b9054f087b"
-
-marko@4.9.1:
-  version "4.9.1"
-  resolved "https://registry.yarnpkg.com/marko/-/marko-4.9.1.tgz#8617df81b6b8369713a97bd85a2a63fe39c3136a"
-  dependencies:
-    app-module-path "^2.2.0"
-    argly "^1.0.0"
-    browser-refresh-client "^1.0.0"
-    char-props "~0.1.5"
-    complain "^1.2.0"
-    deresolve "^1.1.2"
-    escodegen "^1.8.1"
-    esprima "^4.0.0"
-    estraverse "^4.2.0"
-    events "^1.0.2"
-    events-light "^1.0.0"
-    he "^1.1.0"
-    htmljs-parser "^2.3.2"
-    lasso-caching-fs "^1.0.1"
-    lasso-modules-client "^2.0.4"
-    lasso-package-root "^1.0.1"
-    listener-tracker "^2.0.0"
-    minimatch "^3.0.2"
-    object-assign "^4.1.0"
-    property-handlers "^1.0.0"
-    raptor-json "^1.0.1"
-    raptor-polyfill "^1.0.0"
-    raptor-promises "^1.0.1"
-    raptor-regexp "^1.0.0"
-    raptor-util "^3.2.0"
-    resolve-from "^2.0.0"
-    shorthash "0.0.2"
-    simple-sha1 "^2.1.0"
-    strip-json-comments "^2.0.1"
-    try-require "^1.2.1"
-    warp10 "^1.0.0"
 
 marko@4.9.1, marko@^4.2.8:
   version "4.9.1"
@@ -4379,7 +4347,7 @@ punycode@^2.1.0:
   version "2.1.0"
   resolved "https://registry.yarnpkg.com/punycode/-/punycode-2.1.0.tgz#5f863edc89b96db09074bad7947bf09056ca4e7d"
 
-puppeteer@^1.1.1:
+puppeteer@1.1.1:
   version "1.1.1"
   resolved "https://registry.yarnpkg.com/puppeteer/-/puppeteer-1.1.1.tgz#adbf25e49f5ef03443c10ab8e09a954ca0c7bfee"
   dependencies:
