@@ -39,7 +39,7 @@
     "@wearegenki/eslint-config": "0.5.0",
     "@wearegenki/postcss-config": "0.5.0",
     "@wearegenki/stylelint-config": "0.5.0",
-    "@wearegenki/test": "0.5.0-nightly.8dc8f30",
+    "@wearegenki/test": "0.5.0",
     "browser-sync": "2.23.6",
     "clean-css": "4.1.11",
     "eslint": "4.18.2",
