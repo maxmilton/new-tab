@@ -467,9 +467,9 @@
     eslint-plugin-jest "^21.14.0"
     eslint-plugin-vue "^4.3.0"
 
-"@wearegenki/postcss-config@0.5.0-alpha.f1eec7f5":
-  version "0.5.0-alpha.f1eec7f5"
-  resolved "https://registry.yarnpkg.com/@wearegenki/postcss-config/-/postcss-config-0.5.0-alpha.f1eec7f5.tgz#d4799fd4d3f08d071f94a883ceb9c89b3b451f5a"
+"@wearegenki/postcss-config@0.5.0":
+  version "0.5.0"
+  resolved "https://registry.yarnpkg.com/@wearegenki/postcss-config/-/postcss-config-0.5.0.tgz#aea11a466a4ed3f1c979fe359d835447c4d1ddec"
   dependencies:
     autoprefixer "^8.1.0"
     css-mqpacker "^6.0.2"
@@ -481,6 +481,7 @@
     postcss-css-variables "^0.8.0"
     postcss-custom-media "^6.0.0"
     postcss-custom-properties "^7.0.0"
+    postcss-debug "0.4.2"
     postcss-each "^0.10.0"
     postcss-import "^11.1.0"
     postcss-load-config "^1.2.0"
@@ -2466,6 +2467,10 @@ functional-red-black-tree@^1.0.1:
   version "1.0.1"
   resolved "https://registry.yarnpkg.com/functional-red-black-tree/-/functional-red-black-tree-1.0.1.tgz#1b0ab3bd553b2a0d6399d29c0e3ea0b252078327"
 
+gather-stream@^1.0.0:
+  version "1.0.0"
+  resolved "https://registry.yarnpkg.com/gather-stream/-/gather-stream-1.0.0.tgz#b33994af457a8115700d410f317733cbe7a0904b"
+
 gauge@~2.7.3:
   version "2.7.4"
   resolved "https://registry.yarnpkg.com/gauge/-/gauge-2.7.4.tgz#2c03405c7538c39d7eb37b317022e325fb018bf7"
@@ -2739,6 +2744,10 @@ html-encoding-sniffer@^1.0.2:
   resolved "https://registry.yarnpkg.com/html-encoding-sniffer/-/html-encoding-sniffer-1.0.2.tgz#e70d84b94da53aa375e11fe3a351be6642ca46f8"
   dependencies:
     whatwg-encoding "^1.0.1"
+
+html-tags@^1.1.1:
+  version "1.2.0"
+  resolved "https://registry.yarnpkg.com/html-tags/-/html-tags-1.2.0.tgz#c78de65b5663aa597989dd2b7ab49200d7e4db98"
 
 html-tags@^2.0.0:
   version "2.0.0"
@@ -4011,6 +4020,18 @@ micromatch@2.3.11, micromatch@^2.1.5, micromatch@^2.3.11:
     parse-glob "^3.0.4"
     regex-cache "^0.4.2"
 
+midas@^1.2.1:
+  version "1.2.2"
+  resolved "https://registry.yarnpkg.com/midas/-/midas-1.2.2.tgz#2e863e52023f619435f5395dac362beb16beece3"
+  dependencies:
+    html-tags "^1.1.1"
+    minimist "^1.2.0"
+    postcss "^5.0.4"
+    postcss-selector-parser "^2.0.0"
+    postcss-value-parser "^3.3.0"
+    read-file-stdin "^0.2.0"
+    write-file-stdout "0.0.2"
+
 mime-db@~1.33.0:
   version "1.33.0"
   resolved "https://registry.yarnpkg.com/mime-db/-/mime-db-1.33.0.tgz#a3492050a5cb9b63450541e39d9788d2272783db"
@@ -4260,6 +4281,10 @@ onetime@^2.0.0:
   resolved "https://registry.yarnpkg.com/onetime/-/onetime-2.0.1.tgz#067428230fd67443b2794b22bba528b6867962d4"
   dependencies:
     mimic-fn "^1.0.0"
+
+opener@^1.4.1:
+  version "1.4.3"
+  resolved "https://registry.yarnpkg.com/opener/-/opener-1.4.3.tgz#5c6da2c5d7e5831e8ffa3964950f8d6674ac90b8"
 
 openurl@1.1.1:
   version "1.1.1"
@@ -4570,6 +4595,15 @@ postcss-custom-properties@^7.0.0:
     balanced-match "^1.0.0"
     postcss "^6.0.18"
 
+postcss-debug@0.4.2:
+  version "0.4.2"
+  resolved "https://registry.yarnpkg.com/postcss-debug/-/postcss-debug-0.4.2.tgz#8b161ba2f7f2c55f3549e4b2fa0e95197baa2e3d"
+  dependencies:
+    midas "^1.2.1"
+    opener "^1.4.1"
+    postcss "^5.0.19"
+    yargs "^4.7.1"
+
 postcss-each@^0.10.0:
   version "0.10.0"
   resolved "https://registry.yarnpkg.com/postcss-each/-/postcss-each-0.10.0.tgz#0877c6aea504bffd8a5d1f789d47d06a3e5feea1"
@@ -4693,7 +4727,7 @@ postcss-scss@^1.0.2:
   dependencies:
     postcss "^6.0.19"
 
-postcss-selector-parser@^2.2.2:
+postcss-selector-parser@^2.0.0, postcss-selector-parser@^2.2.2:
   version "2.2.3"
   resolved "https://registry.yarnpkg.com/postcss-selector-parser/-/postcss-selector-parser-2.2.3.tgz#f9437788606c3c9acee16ffe8d8b16297f27bb90"
   dependencies:
@@ -4744,7 +4778,7 @@ postcss@6.0.19, postcss@^6.0.0, postcss@^6.0.1, postcss@^6.0.11, postcss@^6.0.13
     source-map "^0.6.1"
     supports-color "^5.2.0"
 
-postcss@^5.2.16, postcss@^5.2.5:
+postcss@^5.0.19, postcss@^5.0.4, postcss@^5.2.16, postcss@^5.2.5:
   version "5.2.18"
   resolved "https://registry.yarnpkg.com/postcss/-/postcss-5.2.18.tgz#badfa1497d46244f6390f58b319830d9107853c5"
   dependencies:
@@ -4988,6 +5022,12 @@ read-cache@^1.0.0:
   resolved "https://registry.yarnpkg.com/read-cache/-/read-cache-1.0.0.tgz#e664ef31161166c9751cdbe8dbcf86b5fb58f774"
   dependencies:
     pify "^2.3.0"
+
+read-file-stdin@^0.2.0:
+  version "0.2.1"
+  resolved "https://registry.yarnpkg.com/read-file-stdin/-/read-file-stdin-0.2.1.tgz#25eccff3a153b6809afacb23ee15387db9e0ee61"
+  dependencies:
+    gather-stream "^1.0.0"
 
 read-pkg-up@^1.0.1:
   version "1.0.1"
@@ -6376,6 +6416,10 @@ write-file-atomic@^2.1.0:
     imurmurhash "^0.1.4"
     signal-exit "^3.0.2"
 
+write-file-stdout@0.0.2:
+  version "0.0.2"
+  resolved "https://registry.yarnpkg.com/write-file-stdout/-/write-file-stdout-0.0.2.tgz#c252d7c7c5b1b402897630e3453c7bfe690d9ca1"
+
 write@^0.2.1:
   version "0.2.1"
   resolved "https://registry.yarnpkg.com/write/-/write-0.2.1.tgz#5fc03828e264cea3fe91455476f7a3c566cb0757"
@@ -6497,7 +6541,7 @@ yargs@^10.0.3:
     y18n "^3.2.1"
     yargs-parser "^8.1.0"
 
-yargs@^4.8.1:
+yargs@^4.7.1, yargs@^4.8.1:
   version "4.8.1"
   resolved "https://registry.yarnpkg.com/yargs/-/yargs-4.8.1.tgz#c0c42924ca4aaa6b0e6da1739dfb216439f9ddc0"
   dependencies:
