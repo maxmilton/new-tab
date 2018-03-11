@@ -38,7 +38,7 @@
     "@types/jest": "22.2.0",
     "@wearegenki/eslint-config": "0.5.0-alpha.f1eec7f5",
     "@wearegenki/postcss-config": "0.5.0-alpha.f1eec7f5",
-    "@wearegenki/stylelint-config": "0.5.0-alpha.f1eec7f5",
+    "@wearegenki/stylelint-config": "0.5.0",
     "@wearegenki/test": "0.5.0-nightly.8dc8f30",
     "browser-sync": "2.23.6",
     "clean-css": "4.1.11",

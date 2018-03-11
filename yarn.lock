@@ -488,9 +488,9 @@
     postcss-nested "^3.0.0"
     postcss-url "^7.3.1"
 
-"@wearegenki/stylelint-config@0.5.0-alpha.f1eec7f5":
-  version "0.5.0-alpha.f1eec7f5"
-  resolved "https://registry.yarnpkg.com/@wearegenki/stylelint-config/-/stylelint-config-0.5.0-alpha.f1eec7f5.tgz#704cd4ccf3676b74662f46e4035cb8141339ad89"
+"@wearegenki/stylelint-config@0.5.0":
+  version "0.5.0"
+  resolved "https://registry.yarnpkg.com/@wearegenki/stylelint-config/-/stylelint-config-0.5.0.tgz#99161b2ae0eae4bf1ed2c39b2830bd3d0d11b59b"
   dependencies:
     stylelint-config-standard "^18.2.0"
     stylelint-order "^0.8.1"
