@@ -1,4 +1,7 @@
-<!-- markdownlint-disable no-inline-html -->
+<!-- markdownlint-disable first-line-h1 no-inline-html -->
+
+[![Build Status](https://travis-ci.org/MaxMilton/new-tab.svg?branch=master)](https://travis-ci.org/MaxMilton/new-tab)
+[![Known Vulnerabilities](https://snyk.io/test/github/MaxMilton/new-tab/badge.svg)](https://snyk.io/test/github/MaxMilton/new-tab)
 
 # New Tab
 
