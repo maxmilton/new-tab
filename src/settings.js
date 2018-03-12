@@ -1,4 +1,4 @@
-'use strict';
+'use strict'; // eslint-disable-line
 
 const elTheme = document.getElementById('theme');
 const elOptOut = document.getElementById('opt-out');
@@ -16,7 +16,7 @@ chrome.storage.sync.get(['t', 'e'], (settings) => {
 
 // set up handlers for changes
 elTheme.addEventListener('change', (event) => {
-  const value = event.target.value;
+  const { value } = event.target;
   // FIXME: Reloading is buggy; it's a problem with Chrome not the extension
   // chrome.storage.sync.set({ t: value }, () => {
   //   // reload the extension for the theme to take effect
