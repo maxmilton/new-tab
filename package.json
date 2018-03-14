@@ -49,7 +49,7 @@
     "optimize-js": "1.0.3",
     "postcss": "6.0.19",
     "puppeteer": "1.1.1",
-    "stylelint": "9.1.1",
+    "stylelint": "9.1.2",
     "uglify-es": "3.3.10",
     "worker-nodes": "1.6.0"
   },
