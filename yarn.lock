@@ -5697,9 +5697,9 @@ raptor-util@^3.2.0:
   version "3.2.0"
   resolved "https://registry.yarnpkg.com/raptor-util/-/raptor-util-3.2.0.tgz#23b0c803c8f1ac8a1cae67d9a6388b49161c9758"
 
-raven-js@3.23.1:
-  version "3.23.1"
-  resolved "https://registry.yarnpkg.com/raven-js/-/raven-js-3.23.1.tgz#34a5d7b5b3dd626a3d59e7a264e1d19a4c799cdb"
+raven-js@3.23.2:
+  version "3.23.2"
+  resolved "https://registry.yarnpkg.com/raven-js/-/raven-js-3.23.2.tgz#b71df14a066e450326b5356cc7fcc035510fdb26"
 
 rc@^1.1.7:
   version "1.2.5"
