@@ -576,9 +576,9 @@
     eslint-plugin-jest "^21.15.0"
     eslint-plugin-vue "^4.3.0"
 
-"@wearegenki/postcss-config@0.5.0":
-  version "0.5.0"
-  resolved "https://registry.yarnpkg.com/@wearegenki/postcss-config/-/postcss-config-0.5.0.tgz#aea11a466a4ed3f1c979fe359d835447c4d1ddec"
+"@wearegenki/postcss-config@0.5.1":
+  version "0.5.1"
+  resolved "https://registry.yarnpkg.com/@wearegenki/postcss-config/-/postcss-config-0.5.1.tgz#a2170d8416cff79d97cca7b34da18a8f79b8b13d"
   dependencies:
     autoprefixer "^8.1.0"
     css-mqpacker "^6.0.2"

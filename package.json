@@ -36,7 +36,7 @@
   "devDependencies": {
     "@types/chrome": "0.0.60",
     "@wearegenki/eslint-config": "0.5.1",
-    "@wearegenki/postcss-config": "0.5.0",
+    "@wearegenki/postcss-config": "0.5.1",
     "@wearegenki/stylelint-config": "0.5.0",
     "@wearegenki/test": "0.5.0",
     "browser-sync": "2.23.6",
