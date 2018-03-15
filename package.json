@@ -29,7 +29,7 @@
     "test:watch": "yarn test --coverage --notify --watch"
   },
   "dependencies": {
-    "marko": "4.9.1",
+    "marko": "4.9.2",
     "marko-bind": "0.1.0",
     "raven-js": "3.23.2"
   },
