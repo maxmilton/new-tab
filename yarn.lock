@@ -687,9 +687,9 @@
     lodash "^4.2.0"
     to-fast-properties "^2.0.0"
 
-"@types/chrome@0.0.60":
-  version "0.0.60"
-  resolved "https://registry.yarnpkg.com/@types/chrome/-/chrome-0.0.60.tgz#058eed1587b7aec3b83d4be905c8758ea145ba84"
+"@types/chrome@0.0.61":
+  version "0.0.61"
+  resolved "https://registry.yarnpkg.com/@types/chrome/-/chrome-0.0.61.tgz#bfcfd15d0d81806b701ebd9c3933f2467d7aab1c"
   dependencies:
     "@types/filesystem" "*"
 
