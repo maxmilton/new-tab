@@ -14,7 +14,7 @@ chrome.storage.sync.get(['t', 'e'], (settings) => {
   elOptOut.checked = !isOptOut;
 });
 
-// set up handlers for changes
+// handle theme changes
 elTheme.addEventListener('change', (event) => {
   const { value } = event.target;
   // FIXME: Reloading is buggy; it's a problem with Chrome not the extension
@@ -22,9 +22,11 @@ elTheme.addEventListener('change', (event) => {
   //   // reload the extension for the theme to take effect
   //   chrome.runtime.reload();
   // });
-  chrome.storage.sync.set({ t: value });
+  chrome.storage.sync.set({ t: value, td: Date.now() });
 });
+
+// handle error tracking changes
 elOptOut.addEventListener('change', (event) => {
   const value = event.target.checked;
-  chrome.storage.sync.set({ e: !value });
+  chrome.storage.sync.set({ e: !value, ed: Date.now() });
 });
