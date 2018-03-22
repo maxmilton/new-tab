@@ -126,18 +126,18 @@ lasso
           unsafe_arrows: true,
           unsafe_methods: true,
         },
-        mangle: {
-          properties: {
-            /** XXX: Potentially fragile; needs adjustment if a future property conflicts. */
-            regex: mangleRegex,
-            reserved: [
-              ...mangleUnsafe,
-              's', // state.s in ntp-search.marko
-            ],
-            // debug: 'XX',
-          },
-          eval: true,
-        },
+        // mangle: {
+        //   properties: {
+        //     /** XXX: Potentially fragile; needs adjustment if a future property conflicts. */
+        //     regex: mangleRegex,
+        //     reserved: [
+        //       ...mangleUnsafe,
+        //       's', // state.s in ntp-search.marko
+        //     ],
+        //     // debug: 'XX',
+        //   },
+        //   eval: true,
+        // },
         output: {
           preamble: `/* ${banner} */`,
         },
