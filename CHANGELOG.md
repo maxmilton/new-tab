@@ -9,9 +9,21 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ## [Unreleased]
 
+### Added
+
+- Initial test suite and testing automation setup.
+
+### Fixed
+
+- Temporarily disable JS advanced property mangling to prevent any related errors.
+
 ### Changed
 
+- Move main JavaScript bundle to higher for a small performance improvement.
 - Use a background script instead of a background page and set up an event handler for new installs and updates which saves the default settings.
+- Build process improvements.
+- Update dependencies.
+- Developer tooling configuration tweaks.
 
 ## [0.5.0] - 2018-02-13
 
