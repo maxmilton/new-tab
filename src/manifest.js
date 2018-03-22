@@ -32,7 +32,8 @@ module.exports = {
     page: 's.html',
   },
   background: {
-    page: 'b.html',
+    scripts: ['b.js'],
+    persistent: true, // keep the extension in memory for fast load
   },
   offline_enabled: true,
   incognito: 'not_allowed',

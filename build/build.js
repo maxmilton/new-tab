@@ -46,8 +46,8 @@ const paths = {
     },
   },
   background: {
-    in: `${src}/background.html`,
-    out: `${dist}/b.html`,
+    in: `${src}/background.js`,
+    out: `${dist}/b.js`,
   },
   manifest: `${dist}/manifest.json`,
 };
@@ -192,8 +192,11 @@ fs.readFile(paths.settings.js.in, 'utf8', async (err, res) => {
   fs.writeFile(paths.settings.js.out, await minifyJs(res), catchErr);
 });
 
-// background page
-fs.copyFile(paths.background.in, paths.background.out, catchErr);
+// background script
+const background = fs.readFileSync(paths.background.in, 'utf8');
+minifyJs({ 'background.js': background }, true).then((bgCode) => {
+  fs.writeFile(paths.background.out, bgCode, catchErr);
+});
 
 // extension manifest
 fs.writeFile(paths.manifest, JSON.stringify(manifest), catchErr);
