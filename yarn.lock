@@ -736,9 +736,9 @@
   dependencies:
     lodash "^4.17.4"
 
-"@wearegenki/eslint-config@0.5.1":
-  version "0.5.1"
-  resolved "https://registry.yarnpkg.com/@wearegenki/eslint-config/-/eslint-config-0.5.1.tgz#bccf0696434a3166d94f39d02110ce9cf94c9a89"
+"@wearegenki/eslint-config@0.7.0":
+  version "0.7.0"
+  resolved "https://registry.yarnpkg.com/@wearegenki/eslint-config/-/eslint-config-0.7.0.tgz#231908ced90288c2c6d3de4926ca8d9e338b96e7"
   dependencies:
     babel-eslint "^8.2.2"
     eslint-config-airbnb-base "^12.1.0"
@@ -746,7 +746,7 @@
     eslint-plugin-html "^4.0.2"
     eslint-plugin-import "^2.9.0"
     eslint-plugin-jest "^21.15.0"
-    eslint-plugin-vue "^4.3.0"
+    eslint-plugin-vue "^4.4.0"
 
 "@wearegenki/postcss-config@0.5.1":
   version "0.5.1"
@@ -2558,9 +2558,9 @@ eslint-plugin-jest@^21.15.0:
   version "21.15.0"
   resolved "https://registry.yarnpkg.com/eslint-plugin-jest/-/eslint-plugin-jest-21.15.0.tgz#645a3f560d3e61d99611b215adc80b4f31e6d896"
 
-eslint-plugin-vue@^4.3.0:
-  version "4.3.0"
-  resolved "https://registry.yarnpkg.com/eslint-plugin-vue/-/eslint-plugin-vue-4.3.0.tgz#478c6267269dbaa20f6e8b2cfae7a0ccc98c1d72"
+eslint-plugin-vue@^4.4.0:
+  version "4.4.0"
+  resolved "https://registry.yarnpkg.com/eslint-plugin-vue/-/eslint-plugin-vue-4.4.0.tgz#bfc3a71f76bd0e139313e4425a807257ae42f768"
   dependencies:
     vue-eslint-parser "^2.0.3"
 
