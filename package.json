@@ -23,9 +23,9 @@
     "lint:css": "stylelint --cache --cache-location=/tmp/ \"**/*.{html,css}\"",
     "lint:js": "eslint --ignore-path .gitignore --ext .js,.marko src test",
     "lint": "yarn lint:css && yarn lint:js",
-    "pretest": "yarn lint",
     "test": "jest",
     "test-ci": "yarn test --coverage --runInBand --ci",
+    "pretest:watch": "yarn lint",
     "test:watch": "yarn test --coverage --notify --watch"
   },
   "dependencies": {
