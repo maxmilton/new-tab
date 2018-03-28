@@ -4612,9 +4612,9 @@ marko-bind@0.1.0:
   version "0.1.0"
   resolved "https://registry.yarnpkg.com/marko-bind/-/marko-bind-0.1.0.tgz#60e55e16ca1149d4147cfae4be38b1b9054f087b"
 
-marko@4.9.3:
-  version "4.9.3"
-  resolved "https://registry.yarnpkg.com/marko/-/marko-4.9.3.tgz#0b64b5ad5d1ae9b53a71cebab942018748c995fc"
+marko@4.9.4:
+  version "4.9.4"
+  resolved "https://registry.yarnpkg.com/marko/-/marko-4.9.4.tgz#1d0bce9e6df5ccae4e6323afe1ef4e9f77eb3750"
   dependencies:
     app-module-path "^2.2.0"
     argly "^1.0.0"
