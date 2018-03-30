@@ -4383,9 +4383,9 @@ lasso-resolve-from@^1.2.0:
     raptor-util "^1.0.10"
     resolve-from "^2.0.0"
 
-lasso@3.1.3:
-  version "3.1.3"
-  resolved "https://registry.yarnpkg.com/lasso/-/lasso-3.1.3.tgz#f326f2cee434f4816418e825a24b6fbe9e7a5b6d"
+lasso@3.1.4:
+  version "3.1.4"
+  resolved "https://registry.yarnpkg.com/lasso/-/lasso-3.1.4.tgz#2b9891beb75004918641e833ba5d5217e31ec610"
   dependencies:
     app-module-path "^1.1.0"
     app-root-dir "^1.0.2"
