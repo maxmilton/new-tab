@@ -760,9 +760,9 @@
     stylelint-config-standard "^18.2.0"
     stylelint-order "^0.8.1"
 
-"@wearegenki/test@0.7.0":
-  version "0.7.0"
-  resolved "https://registry.yarnpkg.com/@wearegenki/test/-/test-0.7.0.tgz#3f88824747b0a6fee0f539a0e8728f93f2766bc8"
+"@wearegenki/test@0.8.0":
+  version "0.8.0"
+  resolved "https://registry.yarnpkg.com/@wearegenki/test/-/test-0.8.0.tgz#e9ba503bfa5226b8251a6a2a963f87e06ca087ef"
   dependencies:
     "@babel/core" "^7.0.0-beta.42"
     "@babel/plugin-transform-modules-commonjs" "^7.0.0-beta.42"
@@ -777,7 +777,7 @@
     babel-plugin-dynamic-import-node-babel-7 "^2.0.7"
     chalk "^2.3.2"
     jest-environment-node "^22.4.3"
-    jest-puppeteer "^2.2.0"
+    jest-puppeteer "^2.2.1"
     node-static "^0.7.10"
     portfinder "^1.0.13"
 
@@ -4085,7 +4085,7 @@ jest-mock@^22.4.3:
   version "22.4.3"
   resolved "https://registry.yarnpkg.com/jest-mock/-/jest-mock-22.4.3.tgz#f63ba2f07a1511772cdc7979733397df770aabc7"
 
-jest-puppeteer@^2.2.0:
+jest-puppeteer@^2.2.1:
   version "2.2.1"
   resolved "https://registry.yarnpkg.com/jest-puppeteer/-/jest-puppeteer-2.2.1.tgz#1b27eb1f8ea9226e9b48eb2f34caa430af167d7c"
   dependencies:

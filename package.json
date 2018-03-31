@@ -39,7 +39,7 @@
     "@wearegenki/eslint-config": "0.7.0",
     "@wearegenki/postcss-config": "0.7.0",
     "@wearegenki/stylelint-config": "0.7.0",
-    "@wearegenki/test": "0.7.0",
+    "@wearegenki/test": "0.8.0",
     "browser-sync": "2.23.6",
     "clean-css": "4.1.11",
     "codecov": "3.0.0",
