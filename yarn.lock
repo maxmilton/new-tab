@@ -719,13 +719,13 @@
     "@types/events" "*"
     "@types/node" "*"
 
-"@wearegenki/dev@0.8.0":
-  version "0.8.0"
-  resolved "https://registry.yarnpkg.com/@wearegenki/dev/-/dev-0.8.0.tgz#a27348b21cc2337a84f50874e6b245076778695a"
+"@wearegenki/dev@0.9.0":
+  version "0.9.0"
+  resolved "https://registry.yarnpkg.com/@wearegenki/dev/-/dev-0.9.0.tgz#dd7e5dfa9df1dcc680d384d9f0ab8f372713cef4"
   dependencies:
     "@wearegenki/eslint-config" "^0.7.0"
     "@wearegenki/postcss-config" "^0.7.0"
-    "@wearegenki/stylelint-config" "^0.7.0"
+    "@wearegenki/stylelint-config" "^0.9.0"
 
 "@wearegenki/eslint-config@^0.7.0":
   version "0.7.0"
@@ -761,9 +761,9 @@
     postcss-nested "^3.0.0"
     postcss-url "^7.3.1"
 
-"@wearegenki/stylelint-config@^0.7.0":
-  version "0.7.0"
-  resolved "https://registry.yarnpkg.com/@wearegenki/stylelint-config/-/stylelint-config-0.7.0.tgz#9ccd89d46a773b4797c648ff92dc465f8acf5b18"
+"@wearegenki/stylelint-config@^0.9.0":
+  version "0.9.0"
+  resolved "https://registry.yarnpkg.com/@wearegenki/stylelint-config/-/stylelint-config-0.9.0.tgz#b60a2a0e4a97bba91812a3dd7f24193b4a72c081"
   dependencies:
     stylelint-config-standard "^18.2.0"
     stylelint-order "^0.8.1"
