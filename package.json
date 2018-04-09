@@ -32,7 +32,7 @@
   "dependencies": {
     "marko": "4.9.6",
     "marko-bind": "0.1.0",
-    "raven-js": "3.24.0"
+    "raven-js": "3.24.1"
   },
   "devDependencies": {
     "@types/chrome": "0.0.63",
