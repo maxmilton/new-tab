@@ -35,7 +35,7 @@
     "raven-js": "3.24.1"
   },
   "devDependencies": {
-    "@types/chrome": "0.0.63",
+    "@types/chrome": "0.0.64",
     "@wearegenki/dev": "0.10.0",
     "browser-sync": "2.23.6",
     "clean-css": "4.1.11",
