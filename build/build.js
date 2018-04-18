@@ -8,8 +8,8 @@ const path = require('path');
 const { performance } = require('perf_hooks'); // eslint-disable-line
 const lasso = require('lasso');
 const {
-  mangleRegex,
-  mangleUnsafe,
+  // mangleRegex,
+  // mangleUnsafe,
   uglifyOpts,
   catchErr,
   minifyCss,

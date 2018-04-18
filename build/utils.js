@@ -88,7 +88,7 @@ function _minifyJs(code, optimize, opts, sourceMapPath) {
   if (result.warnings) console.log('[minify JS] Warnings:\n', result.warnings);
 
   if (optimize) {
-    // optimise so Chrome egerly compiles and caches more JS
+    // optimise so Chrome eagerly compiles and caches more JS
     result.code = optimizeJs(result.code); // breaks source maps; https://git.io/vAq4g
   }
 
