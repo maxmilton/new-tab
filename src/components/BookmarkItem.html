@@ -1,0 +1,147 @@
+{#if input.children !== undefined}
+  <!-- folder -->
+  <div
+    class="b f"
+    title="{input.title}"
+    on:mouseenter="__onEnter()"
+    on:mouseleave="__onLeave(event)"
+  >
+    {input.title}
+
+    {#if input.parentId > 1}
+      <!-- subfolder indicator -->
+      <span class="e">▶</span>
+    {/if}
+
+    {#if __show}
+      <!-- subfolder -->
+      <div class="s {input.left && 'l'}">
+        {#each input.children as bookmark}
+          {#if bookmark.children !== undefined}
+            <!-- folder -->
+            <svelte:self level="{input.level+1}"/>
+          {:else}
+            <!-- bookmark -->
+            <a href="{bookmark.url}" class="b" on:click="__link(event)">
+              <img src="chrome://favicon/{bookmark.url}" class="i">
+              <span class="t">{bookmark.title}</span>
+            </a>
+          {/if}
+        {/each}
+      </div>
+    {/if}
+  </div>
+{:else}
+  <!-- bookmark link -->
+  <a href="{input.url}" on:click="__link(event)" class="b">
+    <img src="chrome://favicon/{input.url}" class="i">
+    <span class="t">{input.title}</span>
+  </a>
+{/if}
+
+<script>
+  import { chromeLink } from '../helpers';
+
+  export default {
+    data: () => ({
+      __show: false,
+    }),
+    oncreate() {
+      this.__openTimer = null;
+      this.__closeTimer = null;
+
+      // set up listener to close subfolder when another opens
+      this.root.on('open', (level) => {
+        if (this.get().__show) {
+          if (level === this.level) {
+            this.set({ __show: false });
+            this.__resetCloseTimer();
+          }
+        }
+      });
+    },
+    methods: {
+      __link: chromeLink,
+
+      // subfolder mouse enter
+      __onEnter() {
+        if (this.get().__show) {
+          this.__resetCloseTimer();
+        } else {
+          // delay to prevent accidental folder open
+          this.__openTimer = setTimeout(() => {
+            this.root.fire('open', this.level);
+            this.set({ __show: true });
+          }, 200); // open delay
+        }
+      },
+
+      // subfolder mouse leave
+      __onLeave(event) {
+        // reset open timer
+        if (this.__openTimer !== null) {
+          clearTimeout(this.__openTimer);
+          this.__openTimer = null;
+        }
+
+        // set up subfolder close timer
+        if (this.get().__show) {
+          this.__closeTimer = setTimeout(() => {
+            this.set({ __show: false });
+          }, 400); // close delay
+        }
+      },
+
+      __resetCloseTimer() {
+        if (this.__closeTimer !== null) {
+          clearTimeout(this.__closeTimer);
+          this.__closeTimer = null;
+        }
+      },
+    },
+  };
+</script>
+
+<style>
+  :global(.f) { /* folder */
+    position: relative;
+    cursor: pointer;
+  }
+
+  :global(.e) { /* triangle; caret */
+    margin-left: auto;
+  }
+
+  :global(.s) { /* subfolder */
+    position: absolute;
+    top: 40px;
+    left: 0;
+    display: flex;
+    flex-direction: column;
+    background: var(--c1);
+    filter: var(--s1);
+
+    .b { /* bookmark */
+      padding: 9px;
+    }
+
+    .t { /* bookmark title */
+      max-width: 40ch;
+    }
+
+    & & {
+      top: 0;
+      left: 100%;
+    }
+  }
+
+  :global(.l) { /* left side folder */
+    right: 0;
+    left: initial;
+
+    .s { /* subfolder */
+      right: 100%;
+      left: initial;
+    }
+  }
+</style>

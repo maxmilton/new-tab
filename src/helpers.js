@@ -20,6 +20,8 @@ function updateTabLocation(url) {
  * @param {MouseEvent} event the click event
  */
 export function chromeLink(event) {
+  event.preventDefault();
+
   const { target, ctrlKey } = event;
   const url = target.href;
 
@@ -30,7 +32,5 @@ export function chromeLink(event) {
     } else {
       updateTabLocation(url);
     }
-
-    event.preventDefault();
   }
 };

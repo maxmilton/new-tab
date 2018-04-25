@@ -1,11 +1,14 @@
 import App from './App.html';
 
+const target = document.body;
+
+// clear static html content
+// TODO: Try to use hydration instead
+target.innerHTML = '';
+
 const app = new App({
-  target: document.body,
-  // target: document.getElementById('ntp'),
-  // data: {
-  //   name: 'world',
-  // },
+  target,
+  // hydrate: true,
 });
 
 export default app;

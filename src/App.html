@@ -1,17 +1,15 @@
-<div id="ntp">
-  <Bookmarks/>
-  <Menu/>
-  <Search/>
-</div>
+<BookmarkGroup/>
+<Menu/>
+<Search/>
 
 <script>
-  import Bookmarks from './components/Bookmarks.html';
+  import BookmarkGroup from './components/BookmarkGroup.html';
   import Menu from './components/Menu.html';
   import Search from './components/Search.html';
 
   export default {
     components: {
-      Bookmarks,
+      BookmarkGroup,
       Menu,
       Search,
     },
@@ -21,7 +19,7 @@
 <style>
   /* @import "./main.css"; */
 
-  :root {
+  :global(:root) {
     /* default dark theme */
     --s: #06001124; /* shadow colour */
     --s1: drop-shadow(0 18px 18px #0600114d); /* shadow dark */

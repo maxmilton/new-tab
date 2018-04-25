@@ -36,10 +36,8 @@
     methods: {
       __link: chromeLink,
 
-      // FIXME: Not working
       __settings(event) {
         event.preventDefault();
-        console.log('123123');
         chrome.runtime.openOptionsPage();
       },
     },
@@ -78,8 +76,8 @@
     transform: scale(0.5);
     transform-origin: 0 18px;
 
-    #m:hover > &,
-    #m:focus > & {
+    :global(#m):hover > &,
+    :global(#m):focus > & {
       opacity: 1;
       transform: scale(1);
     }

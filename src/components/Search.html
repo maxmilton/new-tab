@@ -51,12 +51,6 @@ div.c
   export default {
     methods: {
       __link: chromeLink,
-
-      // FIXME: Not working + get rid of prevDef too
-      __settings(event) {
-        chrome.runtime.openOptionsPage();
-        event.preventDefault();
-      },
     },
   };
 

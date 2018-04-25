@@ -1,53 +1,35 @@
-<!--
-div#a
-  div#b
-    for(bookmark in state.__bookmarksBar)
-      if(bookmark.children !== undefined)
-        </!-- folder --/>
-        include(ntpFolder, bookmark) level=0 target=component
-      else
-        </!-- bookmark link --/>
-        $ let isOverflowing = bookmark.title.length > 14;
-        // a.b on-click(chromeLink) href=bookmark.url title=bookmark.title class=(bookmark.title.length > 14 && 'title-overflowing')
-        a.b on-click(chromeLink) href=bookmark.url class=(isOverflowing && 'title-overflowing') title=(isOverflowing && bookmark.title)
-          img.i src=`chrome://favicon/${bookmark.url}`
-          // span.t if(bookmark.title) -- ${bookmark.title}
-          -- ${bookmark.title}
-
-  include(ntpFolder, state.__bookmarksOther) level=0 target=component left=true
--->
-
 <div id="a">
   <div id="b">
-    <Folder/>
+    {#each __bookmarksBar as bookmark}
+      <BookmarkItem input="{bookmark}" level="0"/>
+    {/each}
   </div>
+
+  <BookmarkItem input="{__bookmarksOther}" level="0" left="true"/>
 </div>
 
 <script>
-  import Folder from './Folder.html';
+  import { chromeLink } from '../helpers';
+  import BookmarkItem from './BookmarkItem.html';
 
   export default {
     components: {
-      Folder,
+      BookmarkItem,
+    },
+    data: () => ({
+      __bookmarksOther: { title: 'Other bookmarks' },
+      __bookmarksBar: [],
+    }),
+    oncreate() {
+      chrome.bookmarks.getTree((tree) => {
+        this.set({ __bookmarksBar: tree[0].children[0].children });
+        this.set({ __bookmarksOther: tree[0].children[1] });
+      });
+    },
+    methods: {
+      __link: chromeLink,
     },
   };
-
-  // import { chromeLink } from '../helpers';
-  // import ntpFolder from './ntp-folder';
-
-  // class {
-  //   onCreate() {
-  //     this.state = {
-  //       __bookmarksOther: { title: 'Other bookmarks' },
-  //       __bookmarksBar: [],
-  //     }
-
-  //     chrome.bookmarks.getTree((tree) => {
-  //       this.state.__bookmarksBar = tree[0].children[0].children;
-  //       this.state.__bookmarksOther = tree[0].children[1];
-  //     });
-  //   }
-  // }
 </script>
 
 <style>
