@@ -1,51 +1,10 @@
 :root {
-  --b: #fafafa; /* background colour */
-  --t: #383a42; /* text colour */
-  --c: #e5e5e6; /* bookmark item hover background, hr */
-  --c1: #fff; /* bookmarks bar, load more button */
-  --c2: #fff; /* menu dropdown */
-  --c3: #fff; /* search input */
-  --c4: #dbdbdc; /* menu hamberger icon, h2, muted text */
-  --c5: #dbdbdc; /* search input placeholder */
-
-  /* colour palette reference */
-  /*
-  --ref0: #000000;
-  --ref1: #00809b33;
-  --ref2: #0184bc;
-  --ref3: #11c4c6;
-  --ref4: #121417;
-  --ref5: #232324;
-  --ref6: #333333;
-  --ref7: #373b41;
-  --ref8: #383a42;
-  --ref9: #4078f2;
-  --ref10: #424243;
-  --ref11: #4e566680;
-  --ref12: #50a14f;
-  --ref13: #526fff;
-  --ref14: #5871ef;
-  --ref15: #5a637580;
-  --ref16: #606135;
-  --ref17: #696c77;
-  --ref18: #6b83ed;
-  --ref19: #747d9180;
-  --ref20: #882328;
-  --ref21: #986801;
-  --ref22: #9d9d9f;
-  --ref23: #a0a1a7;
-  --ref24: #a626a4;
-  --ref25: #c18401;
-  --ref26: #ca1243;
-  --ref27: #d3d4d5;
-  --ref28: #dbdbdc;
-  --ref29: #dbdbdc66;
-  --ref30: #e45649;
-  --ref31: #e5e5e6;
-  --ref32: #eaeaeb;
-  --ref33: #f2f2f2;
-  --ref34: #fafafa;
-  --ref35: #ff1414;
-  --ref36: #ffffff;
-  */
+  --b: hsl(0, 0%, 98%); /* background colour */
+  --t: hsl(229, 8%, 24%); /* text colour */
+  --c: hsl(240, 2%, 90%); /* bookmark item hover background, hr */
+  --c1: hsl(0, 0%, 100%); /* bookmarks bar, load more button */
+  --c2: hsl(0, 0%, 100%); /* menu dropdown */
+  --c3: hsl(0, 0%, 100%); /* search input */
+  --c4: hsl(240, 1%, 86%); /* menu hamburger icon, h2, muted text */
+  --c5: hsl(240, 1%, 86%); /* search input placeholder */
 }
