@@ -24,14 +24,14 @@ export default {
   chrome_url_overrides: {
     newtab: 'ntp.html',
   },
-  // options_ui: {
-  //   chrome_style: true,
-  //   page: 's.html',
-  // },
-  // background: {
-  //   scripts: ['b.js'],
-  //   persistent: true, // keep the extension in memory for fast load
-  // },
+  options_ui: {
+    chrome_style: true,
+    page: 's.html',
+  },
+  background: {
+    scripts: ['b.js'],
+    persistent: true, // keep the extension in memory for fast load
+  },
   offline_enabled: true,
   incognito: 'not_allowed',
 

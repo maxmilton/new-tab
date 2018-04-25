@@ -1,0 +1,85 @@
+<div>
+  <label for="theme">Theme</label>
+  <select id="theme" bind:value="__theme">
+    <option value="l">Light</option>
+    <option value="d">Dark</option>
+    <option value="b">Black</option>
+  </select>
+</div>
+
+<hr>
+
+<div>
+  <label for="opt-out">
+    <input id="opt-out" type="checkbox" bind:checked="__errTrack">
+    Allow error tracking
+  </label>
+</div>
+
+<footer>
+  <small>
+    <em>Tip: Settings sync to your account.</em>
+  </small>
+</footer>
+
+<script>
+  export default {
+    data: () => ({
+      __theme: 'd', // frontend theme
+      __errTrack: true, // error tracking opt-out
+    }),
+    oncreate() {
+      // check existing settings
+      chrome.storage.sync.get(null, (settings) => {
+        this.set({
+          __theme: settings.t || 'd',
+          __errTrack: !settings.e,
+        });
+      });
+    },
+    onstate({ changed, current, previous }) {
+      if (previous) {
+        if (changed.__theme) {
+          console.log('__changeTheme', current.__theme);
+          chrome.storage.sync.set({ t: current.__theme, td: Date.now() });
+        }
+
+        if (changed.__errTrack) {
+          console.log('__changeOptOut', current.__errTrack);
+          chrome.storage.sync.set({ e: !current.__errTrack, ed: Date.now() });
+        }
+      }
+    },
+  };
+</script>
+
+<style>
+  :global(body) {
+    font-size: 18px;
+    text-rendering: optimizeLegibility;
+    background: #fafafa;
+  }
+
+  :global(select) {
+    margin-left: 9px;
+  }
+
+  :global(input[type="checkbox"]) {
+    margin-right: 9px;
+    vertical-align: 0;
+  }
+
+  :global(hr),
+  :global(.form-row) {
+    margin-bottom: 18px;
+  }
+
+  :global(hr) {
+    border: 0;
+    border-bottom: 1px solid #ddd;
+  }
+
+  :global(footer) {
+    margin-top: 18px;
+  }
+</style>

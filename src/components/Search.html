@@ -109,6 +109,7 @@
     computed: {
       isSearching: ({ __search }) => __search !== '',
     },
+
     oncreate() {
       this.__onSearch = debounce(this.__doSearch, 260); // ms delay
 
@@ -123,11 +124,13 @@
       chrome.tabs.onMoved.addListener(() => this.__getTabs());
       chrome.tabs.onRemoved.addListener(() => this.__getTabs());
     },
+
     onstate({ changed, previous }) {
       if (previous !== undefined && changed.__search !== undefined) {
         this.__onSearch();
       }
     },
+
     methods: {
       __link: chromeLink,
 

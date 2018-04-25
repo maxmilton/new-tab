@@ -6,9 +6,7 @@ const target = document.body;
 // TODO: Try to use hydration instead
 target.innerHTML = '';
 
-const app = new App({
+export default new App({
   target,
   // hydrate: true,
 });
-
-export default app;

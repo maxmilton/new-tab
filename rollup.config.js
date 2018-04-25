@@ -1,7 +1,7 @@
 import fs from 'fs';
 import svelte from 'rollup-plugin-svelte';
-import resolve from 'rollup-plugin-node-resolve';
-import commonjs from 'rollup-plugin-commonjs';
+// import resolve from 'rollup-plugin-node-resolve';
+// import commonjs from 'rollup-plugin-commonjs';
 // import buble from 'rollup-plugin-buble';
 import uglify from 'rollup-plugin-uglify';
 import postcssLoadConfig from 'postcss-load-config';
@@ -49,6 +49,27 @@ const uglifyOpts = {
 function catchErr(err) { if (err) throw err; }
 
 /**
+ * Preprocess PostCSS code into CSS for Svelte.
+ * @param {object} obj
+ * @param {string} obj.content Contents of the style elements or CSS.
+ * @param {string} obj.filename Full path to the file containing the CSS.
+ * @returns {object} An object containing CSS code and source map.
+ */
+function sveltePostcss({ content, filename }) {
+  return postcssLoadConfig({}).then(({ plugins }) =>
+    postcss(plugins)
+      .process(content, {
+        from: filename,
+        to: filename,
+      })
+      .then(result => ({
+        code: result.css,
+        map: result.map,
+      }))
+  ); // eslint-disable-line function-paren-newline
+}
+
+/**
  * Ultra-minimal template engine.
  * @see https://github.com/Drulac/template-literal
  * @param {string} html A HTML template to compile.
@@ -58,72 +79,109 @@ function compileHtml(html) {
   return new Function('d', 'return `' + html + '`'); // eslint-disable-line
 }
 
-// TODO: Make this generic and also use it to load the settings page
 /**
  * Compile HTML from template
  */
-function renderHtml() {
+function renderHtml({ filename, title, head, body }) {
   return {
     name: 'renderHtml',
-    onwrite(opts, bundle) {
-      // console.log('\n\n@@ 111', opts);
-      // console.log('\n\n@@ 222', bundle);
-
-      return fs.writeFile(`${__dirname}/dist/ntp.html`, compileHtml(template)({
-        banner: `<!-- ${banner} -->\n`,
-        title: 'New Tab',
-        // head: `<script src=${jsFileName} defer></script>\n<style>${await cssCode}</style>\n${scripts}<script>${await loaderCode}</script>`,
-        head: '<script src=ntp.js defer></script><link rel=stylesheet href=ntp.css>',
-        body: '<div id=a><div id=b></div><div class="b f">Other bookmarks</div></div><div id=m><div id=i>☰</div></div><div class=c><input type=text placeholder="Search tabs, bookmarks, and history..." id=s><h2>Open Tabs (</h2></div>',
-      }), catchErr);
-    },
+    onwrite: () => fs.writeFile(`${__dirname}/dist/${filename}`, compileHtml(template)({
+      banner: `<!-- ${banner} -->\n`,
+      title,
+      head,
+      body,
+    }), catchErr),
   };
 }
 
-// NTP
-export default {
-  input: 'src/main.js',
-  output: {
-    sourcemap: true,
-    format: 'iife',
-    name: 'ntp',
-    file: 'dist/ntp.js',
+export default [
+  // App: NTP
+  {
+    input: 'src/app.js',
+    output: {
+      sourcemap: true,
+      banner: `/* ${banner} */`,
+      format: 'iife',
+      name: 'ntp',
+      file: 'dist/ntp.js',
+    },
+    plugins: [
+      // TODO: Review and add anything interesting from: https://github.com/sveltejs/svelte#api
+      svelte({
+        dev: !production,
+        preprocess: {
+          style: sveltePostcss,
+        },
+        css: (css) => {
+          css.write('dist/ntp.css');
+        },
+        // css: false,
+      }),
+
+      // resolve(),
+      // commonjs(),
+
+      // production && buble({ exclude: 'node_modules/**' }),
+      production && uglify(uglifyOpts),
+
+      renderHtml({
+        filename: 'ntp.html',
+        title: 'New Tab',
+        // head: `<script src=${jsFileName} defer></script>\n<style>${await cssCode}</style>\n${scripts}<script>${await loaderCode}</script>`,
+        head: '<script src=ntp.js defer></script><link rel=stylesheet href=ntp.css>',
+        // head: `<script src=ntp.js defer></script>\n<style>${ntpCss}</style>`,
+        body: '<div id=a><div id=b></div><div class="b f">Other bookmarks</div></div><div id=m><div id=i>☰</div></div><div class=c><input type=text placeholder="Search tabs, bookmarks, and history..." id=s><h2>Open Tabs (</h2></div>',
+      }),
+    ],
   },
-  plugins: [
-    // TODO: Review and add anything interesting from: https://github.com/sveltejs/svelte#api
-    svelte({
-      // enable run-time checks when not in production
-      dev: !production,
 
-      preprocess: {
-        // TODO: Source map support
-        style: ({ content, filename }) =>
-          postcssLoadConfig({}).then(({ plugins }) =>
-            postcss(plugins)
-              .process(content, {
-                from: filename,
-              })
-              .then((code) => ({ code }))
-          ),
-      },
+  // App: Settings
+  {
+    input: 'src/settings.js',
+    output: {
+      sourcemap: true,
+      banner: `/* ${banner} */`,
+      format: 'iife',
+      name: 's',
+      file: 'dist/s.js',
+    },
+    plugins: [
+      svelte({
+        dev: !production,
+        preprocess: {
+          style: sveltePostcss,
+        },
+        css: (css) => {
+          css.write('dist/s.css');
+        },
+      }),
 
-      // extract component CSS into a separate file
-      css: (css) => {
-        css.write('dist/ntp.css');
-      },
-      // css: false,
-    }),
+      // production && buble({ exclude: 'node_modules/**' }),
+      production && uglify(uglifyOpts),
 
-    resolve(),
-    commonjs(),
+      renderHtml({
+        filename: 's.html',
+        title: 'Settings | New Tab',
+        head: '<script src=s.js defer></script><link rel=stylesheet href=s.css>',
+        body: '',
+      }),
+    ],
+  },
 
-    // production && buble({ exclude: 'node_modules/**' }),
-    production && uglify(uglifyOpts),
-
-    // compile HTML
-    renderHtml(),
-  ],
-};
+  // Background process
+  {
+    input: 'src/background.js',
+    output: {
+      sourcemap: true,
+      format: 'iife',
+      name: 'b',
+      file: 'dist/b.js',
+    },
+    plugins: [
+      production && uglify(uglifyOpts),
+    ],
+  },
+];
 
 // extension manifest
 fs.writeFile(`${__dirname}/dist/manifest.json`, JSON.stringify(manifest), catchErr);
