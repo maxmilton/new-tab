@@ -18,7 +18,7 @@
 
     {#each __tabs as __tab}
       <a href="{__tab.url}" class="r" on:click="__onTabClick(__tab, event)">
-        <img src="{__tab.favIconUrl}" class="i">
+        <img src="{__tab.favIconUrl||'chrome://favicon/#'}" class="i">
         {__tab.title}
       </a>
     {/each}
@@ -141,7 +141,6 @@
         if (__search === '') {
           this.set({
             __tabs: __tabsRaw,
-            // FIXME: Check these arrays are correctly reset
             __bookmarks: [],
             __history: [],
           });
@@ -166,7 +165,7 @@
 
         // search open tabs
         this.set({
-          tabs: __tabsRaw.filter(item =>
+          __tabs: __tabsRaw.filter(item =>
             item.title.toLowerCase().indexOf(__search) > -1 ||
             item.url.toLowerCase().indexOf(__search) > -1),
         });
@@ -206,7 +205,6 @@
           this.set({
             __search: '',
             __tabs: this.get().__tabsRaw,
-            // FIXME: Check these arrays are correctly reset
             __bookmarks: [],
             __history: [],
           });
@@ -225,25 +223,18 @@
 </script>
 
 <style>
+  :global(button) {
+    padding: 9px 18px;
+    font-size: 20px;
+    color: var(--t);
+    background: var(--c1);
+    border: 0;
+  }
+
   :global(.c) { /* container */
     max-width: 60rem;
     padding: 0 18px;
     margin: 0 auto;
-  }
-
-  :global(#s) { /* search */
-    width: 100%;
-    padding: 11px 20px;
-    margin: 0 0 18px;
-    font-size: 22px;
-    color: var(--t);
-    background: var(--c3);
-    filter: drop-shadow(0 5px 6px var(--s));
-    border: 0;
-
-    &::placeholder {
-      color: var(--c5);
-    }
   }
 
   :global(.r) { /* search result */
@@ -259,11 +250,18 @@
     }
   }
 
-  :global(button) {
-    padding: 9px 18px;
-    font-size: 20px;
+  :global(#s) { /* search */
+    width: 100%;
+    padding: 11px 20px;
+    margin: 0 0 18px;
+    font-size: 22px;
     color: var(--t);
-    background: var(--c1);
+    background: var(--c3);
+    filter: drop-shadow(0 5px 6px var(--s));
     border: 0;
+
+    &::placeholder {
+      color: var(--c5);
+    }
   }
 </style>
