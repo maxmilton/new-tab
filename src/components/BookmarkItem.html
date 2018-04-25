@@ -4,7 +4,7 @@
     class="b f"
     title="{input.title}"
     on:mouseenter="__onEnter()"
-    on:mouseleave="__onLeave(event)"
+    on:mouseleave="__onLeave()"
   >
     {input.title}
 
@@ -19,7 +19,7 @@
         {#each input.children as bookmark}
           {#if bookmark.children !== undefined}
             <!-- folder -->
-            <svelte:self level="{input.level+1}"/>
+            <svelte:self input="{bookmark}" lvl="{lvl + 1}"/>
           {:else}
             <!-- bookmark -->
             <a href="{bookmark.url}" class="b" on:click="__link(event)">
@@ -51,9 +51,9 @@
       this.__closeTimer = null;
 
       // set up listener to close subfolder when another opens
-      this.root.on('open', (level) => {
+      this.root.on('open', (lvl) => {
         if (this.get().__show) {
-          if (level === this.level) {
+          if (lvl === this.get().lvl) {
             this.set({ __show: false });
             this.__resetCloseTimer();
           }
@@ -70,14 +70,14 @@
         } else {
           // delay to prevent accidental folder open
           this.__openTimer = setTimeout(() => {
-            this.root.fire('open', this.level);
+            this.root.fire('open', this.get().lvl);
             this.set({ __show: true });
           }, 200); // open delay
         }
       },
 
       // subfolder mouse leave
-      __onLeave(event) {
+      __onLeave() {
         // reset open timer
         if (this.__openTimer !== null) {
           clearTimeout(this.__openTimer);
