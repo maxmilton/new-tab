@@ -2,13 +2,13 @@ import fs from 'fs';
 import svelte from 'rollup-plugin-svelte';
 import resolve from 'rollup-plugin-node-resolve';
 import commonjs from 'rollup-plugin-commonjs';
-// import buble from 'rollup-plugin-buble';
 import uglify from 'rollup-plugin-uglify';
 import postcssLoadConfig from 'postcss-load-config';
 import postcss from 'postcss';
 import manifest from './manifest';
 
 const production = !process.env.ROLLUP_WATCH;
+const nameCache = {};
 
 const template = fs.readFileSync(`${__dirname}/src/template.html`, 'utf8');
 const banner = `New Tab ${process.env.APP_RELEASE} | github.com/MaxMilton/new-tab`;
@@ -24,13 +24,9 @@ const uglifyOpts = {
     unsafe: true,
     unsafe_proto: true,
   },
-  // FIXME: Redo this as which props are safe to mangle has changed between releases
   mangle: {
     properties: {
-      // Bad patterns: children, pathname, previous
-      // Suspect: nodeName
-      // regex: /^(__.*|state|actions|attributes|isExact|exact|subscribe|detail|params|render|oncreate|onupdate|onremove|ondestroy|nodeName)$/,
-      regex: /^(__.*)$/,
+      regex: /^(_.*)$/,
       // debug: 'XX',
     },
   },
@@ -38,6 +34,7 @@ const uglifyOpts = {
     comments: !!process.env.DEBUG,
     wrap_iife: true,
   },
+  nameCache,
   ecma: 8,
   toplevel: true,
   warnings: !!process.env.DEBUG,
@@ -115,14 +112,9 @@ export default {
       // css: false,
     }),
 
-    // resolve(),
-    resolve({
-      jsnext: true,
-      extensions: ['.js', '.json', '.css'],
-    }),
+    resolve(),
     commonjs(),
 
-    // production && buble({ exclude: 'node_modules/**' }),
     production && uglify(uglifyOpts),
 
     // compile HTML
