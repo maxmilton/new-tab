@@ -112,6 +112,16 @@
     margin-left: auto;
   }
 
+  :global(.l) { /* left side folder */
+    right: 0;
+    left: initial;
+
+    .s { /* subfolder */
+      right: 100%;
+      left: initial;
+    }
+  }
+
   :global(.s) { /* subfolder */
     position: absolute;
     top: 40px;
@@ -132,16 +142,6 @@
     & & {
       top: 0;
       left: 100%;
-    }
-  }
-
-  :global(.l) { /* left side folder */
-    right: 0;
-    left: initial;
-
-    .s { /* subfolder */
-      right: 100%;
-      left: initial;
     }
   }
 </style>

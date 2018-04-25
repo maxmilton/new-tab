@@ -45,6 +45,17 @@
 </script>
 
 <style>
+  :global(hr) {
+    border: 0;
+    border-bottom: 1px solid var(--c);
+  }
+
+  :global(.m) { /* menu item */
+    display: block;
+    padding: 9px 0;
+    color: var(--t);
+  }
+
   :global(#m) { /* menu */
     position: absolute;
     display: inline-block;
@@ -81,16 +92,5 @@
       opacity: 1;
       transform: scale(1);
     }
-  }
-
-  :global(.m) { /* menu item */
-    display: block;
-    padding: 9px 0;
-    color: var(--t);
-  }
-
-  :global(hr) {
-    border: 0;
-    border-bottom: 1px solid var(--c);
   }
 </style>
