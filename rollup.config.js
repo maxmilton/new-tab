@@ -1,7 +1,7 @@
 import fs from 'fs';
 import svelte from 'rollup-plugin-svelte';
-// import resolve from 'rollup-plugin-node-resolve';
-// import commonjs from 'rollup-plugin-commonjs';
+import resolve from 'rollup-plugin-node-resolve';
+import commonjs from 'rollup-plugin-commonjs';
 // import buble from 'rollup-plugin-buble';
 import uglify from 'rollup-plugin-uglify';
 import postcssLoadConfig from 'postcss-load-config';
@@ -11,8 +11,8 @@ import manifest from './manifest';
 const production = !process.env.ROLLUP_WATCH;
 const nameCache = {};
 
-const template = fs.readFileSync(`${__dirname}/src/template.html`, 'utf8');
 const banner = `New Tab ${process.env.APP_RELEASE} | github.com/MaxMilton/new-tab`;
+const template = fs.readFileSync(`${__dirname}/src/template.html`, 'utf8');
 
 // configuration for UglifyJS
 const uglifyOpts = {
@@ -118,8 +118,8 @@ export default [
         // css: false,
       }),
 
-      // resolve(),
-      // commonjs(),
+      resolve(),
+      commonjs(),
 
       // production && buble({ exclude: 'node_modules/**' }),
       production && uglify(uglifyOpts),
@@ -139,7 +139,7 @@ export default [
   {
     input: 'src/settings.js',
     output: {
-      sourcemap: true,
+      sourcemap: false,
       banner: `/* ${banner} */`,
       format: 'iife',
       name: 's',
@@ -168,11 +168,27 @@ export default [
     ],
   },
 
+  // Error tracking
+  {
+    input: 'src/errors.js',
+    output: {
+      sourcemap: false,
+      format: 'iife',
+      name: 'e',
+      file: 'dist/e.js',
+    },
+    plugins: [
+      resolve(),
+      commonjs(),
+      production && uglify(uglifyOpts),
+    ],
+  },
+
   // Background process
   {
     input: 'src/background.js',
     output: {
-      sourcemap: true,
+      sourcemap: false,
       format: 'iife',
       name: 'b',
       file: 'dist/b.js',

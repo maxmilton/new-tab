@@ -1,4 +1,4 @@
-/* global Raven */
+import Raven from 'raven-js';
 
 // clean up listeners for error capture before Sentry is loaded
 window.removeEventListener('error', window.l);
