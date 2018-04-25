@@ -36,7 +36,7 @@
   },
   "devDependencies": {
     "@types/chrome": "0.0.64",
-    "@wearegenki/dev": "0.10.0",
+    "@wearegenki/dev": "0.12.0",
     "browser-sync": "2.23.6",
     "clean-css": "4.1.11",
     "codecov": "3.0.0",
