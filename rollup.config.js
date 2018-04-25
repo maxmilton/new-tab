@@ -2,6 +2,7 @@ import fs from 'fs';
 import svelte from 'rollup-plugin-svelte';
 import resolve from 'rollup-plugin-node-resolve';
 import commonjs from 'rollup-plugin-commonjs';
+// import buble from 'rollup-plugin-buble';
 import uglify from 'rollup-plugin-uglify';
 import postcssLoadConfig from 'postcss-load-config';
 import postcss from 'postcss';
@@ -115,6 +116,7 @@ export default {
     resolve(),
     commonjs(),
 
+    // production && buble({ exclude: 'node_modules/**' }),
     production && uglify(uglifyOpts),
 
     // compile HTML
