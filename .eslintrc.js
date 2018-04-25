@@ -5,7 +5,7 @@
 module.exports = {
   root: true,
   extends: [
-    '@wearegenki/eslint-config/marko',
+    '@wearegenki/eslint-config',
   ],
   parserOptions: {
     ecmaVersion: 9,
