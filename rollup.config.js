@@ -27,7 +27,8 @@ const uglifyOpts = {
   },
   mangle: {
     properties: {
-      regex: /^(_.*)$/,
+      // NOTE: Fragile; needs close attention especially between Svelte releases!
+      regex: /^(_.*|each_value.*|.*_index.*|component|changed|previous|destroy)$/,
       // debug: 'XX',
     },
   },

@@ -1,11 +1,11 @@
 <div id="a">
   <div id="b">
-    {#each __bookmarksBar as bookmark}
-      <BookmarkItem input="{bookmark}" lvl="{0}"/>
+    {#each __bookmarksBar as __bookmark}
+      <BookmarkItem __input="{__bookmark}" lvl="{0}"/>
     {/each}
   </div>
 
-  <BookmarkItem input="{__bookmarksOther}" lvl="{0}" left="true"/>
+  <BookmarkItem __input="{__bookmarksOther}" lvl="{0}" left/>
 </div>
 
 <script>

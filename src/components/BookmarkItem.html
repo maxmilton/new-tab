@@ -1,30 +1,30 @@
-{#if input.children !== undefined}
+{#if __input.children !== undefined}
   <!-- folder -->
   <div
     class="b f"
-    title="{input.title}"
+    title="{__input.title}"
     on:mouseenter="__onEnter()"
     on:mouseleave="__onLeave()"
   >
-    {input.title}
+    {__input.title}
 
-    {#if input.parentId > 1}
+    {#if __input.parentId > 1}
       <!-- subfolder indicator -->
       <span class="e">▶</span>
     {/if}
 
     {#if __show}
       <!-- subfolder -->
-      <div class="s {input.left && 'l'}">
-        {#each input.children as bookmark}
-          {#if bookmark.children !== undefined}
+      <div class="s {__input.left && 'l'}">
+        {#each __input.children as __bookmark}
+          {#if __bookmark.children !== undefined}
             <!-- folder -->
-            <svelte:self input="{bookmark}" lvl="{lvl + 1}"/>
+            <svelte:self __input="{__bookmark}" lvl="{lvl + 1}"/>
           {:else}
             <!-- bookmark -->
-            <a href="{bookmark.url}" class="b" on:click="__link(event)">
-              <img src="chrome://favicon/{bookmark.url}" class="i">
-              <span class="t">{bookmark.title}</span>
+            <a href="{__bookmark.url}" class="b" on:click="__link(event)">
+              <img src="chrome://favicon/{__bookmark.url}" class="i">
+              <span class="t">{__bookmark.title}</span>
             </a>
           {/if}
         {/each}
@@ -33,9 +33,9 @@
   </div>
 {:else}
   <!-- bookmark link -->
-  <a href="{input.url}" on:click="__link(event)" class="b">
-    <img src="chrome://favicon/{input.url}" class="i">
-    <span class="t">{input.title}</span>
+  <a href="{__input.url}" on:click="__link(event)" class="b">
+    <img src="chrome://favicon/{__input.url}" class="i">
+    <span class="t">{__input.title}</span>
   </a>
 {/if}
 
