@@ -1,0 +1,140 @@
+<!--
+div.b.f on-mouseenter('onIn') on-mouseleave('onOut') title=input.title
+  -- ${input.title}
+
+  </!-- subfolder indicator --/>
+  span.e if(input.parentId > 1) -- ▶
+
+  if(state.__show)
+    div.s class=(input.left && 'l')
+      for(bookmark in input.children)
+        if(bookmark.children !== undefined)
+          </!-- folder --/>
+          include(ntpFolder, bookmark) level=input.level+1 target=input.target
+        else
+          </!-- bookmark --/>
+          a.b on-click(chromeLink) href=bookmark.url
+            img.i src=`chrome://favicon/${bookmark.url}`
+            span.t -- ${bookmark.title}
+-->
+
+<div class="b f">
+</div>
+
+<script>
+  // XXX: It's better to use `<svelte:self/>`
+
+  // import Folder from './Folder.html';
+
+  // export default {
+  //   components: {
+  //     Folder,
+  //   },
+  // };
+
+  // //////////////////////////////////////////////////////////////////
+
+  // import { chromeLink } from '../helpers';
+  // import ntpFolder from './ntp-folder';
+
+  // class {
+  //   onCreate(input) {
+  //     this.state = {
+  //       __show: false,
+  //     }
+  //     this.__target = input.target;
+  //     this.__openTimer = null;
+  //     this.__closeTimer = null;
+
+  //     // close when another folder opens
+  //     this.__target.on('open', (level) => {
+  //       if (this.state.__show) {
+  //         if (level === input.level) {
+  //           this.state.__show = false;
+  //           this.__resetCloseTimer();
+  //         }
+  //       }
+  //     });
+  //   }
+
+  //   // on mouse enter
+  //   onIn() {
+  //     if (this.state.__show) {
+  //       this.__resetCloseTimer();
+  //     } else {
+  //       // delay to prevent accidental folder open
+  //       this.__openTimer = setTimeout(() => {
+  //         this.__target.emit('open', this.input.level);
+  //         this.state.__show = true;
+  //       }, 200); // open delay
+  //     }
+  //   }
+
+  //   // on mouse leave
+  //   onOut(event) {
+  //     // reset open timer
+  //     if (this.__openTimer !== null) {
+  //       clearTimeout(this.__openTimer);
+  //       this.__openTimer = null;
+  //     }
+
+  //     // set up close timer
+  //     if (this.state.__show) {
+  //       this.__closeTimer = setTimeout(() => {
+  //         this.state.__show = false;
+  //       }, 400); // close delay
+  //     }
+  //   }
+
+  //   __resetCloseTimer() {
+  //     if (this.__closeTimer !== null) {
+  //       clearTimeout(this.__closeTimer);
+  //       this.__closeTimer = null;
+  //     }
+  //   }
+  // }
+</script>
+
+<style>
+  :global(.f) { /* folder */
+    position: relative;
+    cursor: pointer;
+  }
+
+  :global(.e) { /* triangle; caret */
+    margin-left: auto;
+  }
+
+  :global(.s) { /* subfolder */
+    position: absolute;
+    top: 40px;
+    left: 0;
+    display: flex;
+    flex-direction: column;
+    background: var(--c1);
+    filter: var(--s1);
+
+    .b { /* bookmark */
+      padding: 9px;
+    }
+
+    .t { /* bookmark title */
+      max-width: 40ch;
+    }
+
+    & & {
+      top: 0;
+      left: 100%;
+    }
+  }
+
+  :global(.l) { /* left side folder */
+    right: 0;
+    left: initial;
+
+    .s { /* subfolder */
+      right: 100%;
+      left: initial;
+    }
+  }
+</style>

@@ -1,7 +1,73 @@
-<h1>Hello {name}!</h1>
+<div id="ntp">
+  <Bookmarks/>
+  <Menu/>
+  <Search/>
+</div>
+
+<script>
+  import Bookmarks from './components/Bookmarks.html';
+  import Menu from './components/Menu.html';
+  import Search from './components/Search.html';
+
+  export default {
+    components: {
+      Bookmarks,
+      Menu,
+      Search,
+    },
+  };
+</script>
 
 <style>
-  h1 {
-    color: purple;
+  /* @import "./main.css"; */
+
+  :root {
+    /* default dark theme */
+    --s: #06001124; /* shadow colour */
+    --s1: drop-shadow(0 18px 18px #0600114d); /* shadow dark */
+    --b: #23252d; /* background colour */
+    --t: #9da5b4; /* text colour */
+    --c: #21252b; /* bookmark item hover background, hr */
+    --c1: #292d35; /* bookmarks bar, load more button */
+    --c2: #2f333d; /* menu dropdown */
+    --c3: #2c313a; /* search input */
+    --c4: #383e4a; /* menu hamberger icon, h2, muted text */
+    --c5: #5c6370; /* search input placeholder */
+  }
+
+  :global(html),
+  :global(body),
+  :global(div),
+  :global(a),
+  :global(h2),
+  :global(p),
+  :global(ul),
+  :global(li),
+  :global(input) {
+    box-sizing: border-box;
+  }
+
+  :global(body) {
+    padding-bottom: 54px;
+    margin: 100px 0 0;
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Cantarell, "Helvetica Neue", sans-serif;
+    font-size: 18px;
+    text-rendering: optimizeLegibility;
+    color: var(--t);
+    background-color: var(--b);
+  }
+
+  :global(.g), /* muted colour */
+  :global(h2) {
+    color: var(--c4);
+  }
+
+  :global(a) {
+    text-decoration: none;
+
+    &:hover,
+    &:focus {
+      text-decoration: underline;
+    }
   }
 </style>

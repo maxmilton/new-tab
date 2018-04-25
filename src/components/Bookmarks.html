@@ -1,0 +1,114 @@
+<!--
+div#a
+  div#b
+    for(bookmark in state.__bookmarksBar)
+      if(bookmark.children !== undefined)
+        </!-- folder --/>
+        include(ntpFolder, bookmark) level=0 target=component
+      else
+        </!-- bookmark link --/>
+        $ let isOverflowing = bookmark.title.length > 14;
+        // a.b on-click(chromeLink) href=bookmark.url title=bookmark.title class=(bookmark.title.length > 14 && 'title-overflowing')
+        a.b on-click(chromeLink) href=bookmark.url class=(isOverflowing && 'title-overflowing') title=(isOverflowing && bookmark.title)
+          img.i src=`chrome://favicon/${bookmark.url}`
+          // span.t if(bookmark.title) -- ${bookmark.title}
+          -- ${bookmark.title}
+
+  include(ntpFolder, state.__bookmarksOther) level=0 target=component left=true
+-->
+
+<div id="a">
+  <div id="b">
+    <Folder/>
+  </div>
+</div>
+
+<script>
+  import Folder from './Folder.html';
+
+  export default {
+    components: {
+      Folder,
+    },
+  };
+
+  // import { chromeLink } from '../helpers';
+  // import ntpFolder from './ntp-folder';
+
+  // class {
+  //   onCreate() {
+  //     this.state = {
+  //       __bookmarksOther: { title: 'Other bookmarks' },
+  //       __bookmarksBar: [],
+  //     }
+
+  //     chrome.bookmarks.getTree((tree) => {
+  //       this.state.__bookmarksBar = tree[0].children[0].children;
+  //       this.state.__bookmarksOther = tree[0].children[1];
+  //     });
+  //   }
+  // }
+</script>
+
+<style>
+  :global(#a) { /* all bookmarks */
+    position: fixed;
+    top: 0;
+    right: 0;
+    left: 0;
+    z-index: 2;
+    display: flex;
+    min-height: 41px;
+    padding: 0 7px;
+    background: var(--c1);
+    filter: drop-shadow(0 9px 9px var(--s));
+
+    &:last-child { /* "other bookmarks" folder */
+      margin-left: auto;
+    }
+  }
+
+  :global(#b) { /* bookmarks bar */
+    display: flex;
+    /* overflow: hidden; *//* FIXME: Breaks subfolders; Was only a temporary workaround */
+    align-items: center;
+    max-width: 100%;
+    margin-right: auto;
+  }
+
+  :global(.b) { /* bookmark item */
+    display: inline-flex;
+    align-items: center;
+    padding: 9px 7px;
+    color: var(--t);
+    text-decoration: none;
+    white-space: nowrap;
+
+    &:hover {
+      background-color: var(--c);
+    }
+  }
+
+  :global(.i),
+  :global(.t) {
+    pointer-events: none; /* prevent being the MouseEvent target */
+  }
+
+  :global(.i) { /* favicon */
+    width: 16px;
+    height: auto; /* hides broken img when src is missing */
+  }
+
+  :global(.t) { /* bookmark title */
+    max-width: 15ch;
+    padding-left: 9px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  /* FIXME: Shorten selector name */
+  :global(.title-overflowing) {
+    max-width: 15ch;
+    overflow: hidden;
+  }
+</style>
