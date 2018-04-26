@@ -25,7 +25,12 @@
               <svelte:self __node="{__bookmark}" lvl="{lvl + 1}"/>
             {:else}
               <!-- bookmark -->
-              <a href="{__bookmark.url}" class="b" on:click="__link(event)">
+              <a
+                href="{__bookmark.url}"
+                title="{__bookmark.title}"
+                class="b"
+                on:click="__link(event)"
+              >
                 <img src="chrome://favicon/{__bookmark.url}" class="i">
                 <span class="t">{__bookmark.title}</span>
               </a>
@@ -37,7 +42,12 @@
   </div>
 {:else}
   <!-- bookmark link -->
-  <a href="{__node.url}" on:click="__link(event)" class="b">
+  <a
+    href="{__node.url}"
+    title="{__node.title}"
+    class="b"
+    on:click="__link(event)"
+  >
     <img src="chrome://favicon/{__node.url}" class="i">
     <span class="t">{__node.title}</span>
   </a>
