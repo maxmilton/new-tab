@@ -3,7 +3,7 @@
 const pkg = require('./package.json');
 
 const isProduction = process.env.NODE_ENV === 'production';
-const hash = "'sha256-vYMJ2ORxi1FGLgYPh62KiRPKPCuCWJVB8goB6ku0AmI='"; // file loader
+const hash = "'sha256-APkC3ZgyFTbE0E0tK0zWZ/P2vtrQhgdmG7VPzUFt4o4='"; // minified loader.js
 
 export default {
   manifest_version: 2,
