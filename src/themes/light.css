@@ -1,10 +1,10 @@
 :root {
-  --b: hsl(0, 0%, 98%); /* background colour */
-  --t: hsl(229, 8%, 24%); /* text colour */
-  --c: hsl(240, 2%, 90%); /* bookmark item hover background, hr */
-  --c1: hsl(0, 0%, 100%); /* bookmarks bar, load more button */
-  --c2: hsl(0, 0%, 100%); /* menu dropdown */
-  --c3: hsl(0, 0%, 100%); /* search input */
-  --c4: hsl(240, 1%, 86%); /* menu hamburger icon, h2, muted text */
-  --c5: hsl(240, 1%, 86%); /* search input placeholder */
+  --b: #fafafa; /* background colour */
+  --t: #383a42; /* text colour */
+  --c: #e5e5e6; /* bookmark item hover background, hr */
+  --c1: #fff; /* bookmarks bar, load more button */
+  --c2: #fff; /* menu dropdown */
+  --c3: #fff; /* search input */
+  --c4: #dbdbdc; /* menu hamburger icon, h2, muted text */
+  --c5: #dbdbdc; /* search input placeholder */
 }

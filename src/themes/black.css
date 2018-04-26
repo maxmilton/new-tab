@@ -1,10 +1,10 @@
 :root {
-  --b: hsl(0, 0%, 7%); /* background colour */
-  --t: hsl(219, 9%, 50%); /* text colour */
-  --c: hsl(216, 13%, 15%); /* bookmark item hover background, hr */
-  --c1: hsl(240, 6%, 10%); /* bookmarks bar, load more button */
-  --c2: hsl(240, 6%, 10%); /* menu dropdown */
-  --c3: hsl(240, 6%, 10%); /* search input */
-  --c4: hsl(240, 5%, 13%); /* menu hamburger icon, h2, muted text */
-  --c5: hsl(240, 11%, 16%); /* search input placeholder */
+  --b: #111; /* background colour */
+  --t: #737b8a; /* text colour */
+  --c: #21252b; /* bookmark item hover background, hr */
+  --c1: #18181b; /* bookmarks bar, load more button */
+  --c2: #18181b; /* menu dropdown */
+  --c3: #18181b; /* search input */
+  --c4: #202023; /* menu hamburger icon, h2, muted text */
+  --c5: #24242d; /* search input placeholder */
 }
