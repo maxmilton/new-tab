@@ -16,14 +16,14 @@
 
     {#if __show}
       <!-- subfolder -->
-      <div class="s {__node.left && 'l'}">
+      <div class="s {__left && 'l'}">
         {#if __node.children.length === 0}
           <span class="b">(empty)</span>
         {:else}
           {#each __node.children as __bookmark}
             {#if __bookmark.children !== undefined}
               <!-- folder -->
-              <svelte:self __node="{__bookmark}" lvl="{lvl + 1}"/>
+              <svelte:self __node="{__bookmark}" __lvl="{__lvl + 1}"/>
             {:else}
               <!-- bookmark -->
               <a
@@ -32,7 +32,7 @@
                 class="b"
                 on:click="__link(event)"
               >
-                <img src="chrome://favicon/{__bookmark.url||''}" class="i">
+                <img src="chrome://favicon/{__bookmark.url || ''}" class="i">
                 <span class="t">{__bookmark.title}</span>
               </a>
             {/if}
@@ -63,6 +63,7 @@
   export default {
     data: () => ({
       __show: false,
+      __left: false,
     }),
     oncreate() {
       this.__openTimer = null;
@@ -73,9 +74,9 @@
 
       // set up event listener to close subfolder when another opens
       __onOpen() {
-        this.root.on('open', (lvl) => {
+        this.root.on('open', (__lvl) => {
           if (this.get().__show) {
-            if (lvl === this.get().lvl) {
+            if (__lvl === this.get().__lvl) {
               this.set({ __show: false });
               this.__resetCloseTimer();
             }
@@ -90,7 +91,7 @@
         } else {
           // delay to prevent accidental folder open
           this.__openTimer = setTimeout(() => {
-            this.root.fire('open', this.get().lvl);
+            this.root.fire('open', this.get().__lvl);
             this.set({ __show: true });
             this.__onOpen();
           }, 200); // open delay
@@ -146,6 +147,8 @@
   :global(.f) {
     position: relative;
     cursor: pointer;
+    /* TODO: @TESTING: Is this worth it? */
+    backface-visibility: hidden; /* performance hack; force GPU */
   }
 
   /* triangle; caret */
@@ -154,6 +157,7 @@
   }
 
   /* left side folder */
+  /* FIXME: Not aligning correctly */
   :global(.l) {
     right: 0;
     left: initial;

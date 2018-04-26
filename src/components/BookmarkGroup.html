@@ -1,11 +1,11 @@
 <div id="a">
   <div id="b">
     {#each __bookmarksBar as __bookmark}
-      <BookmarkItem __node="{__bookmark}" lvl="{0}"/>
+      <BookmarkItem __node="{__bookmark}" __lvl="{0}"/>
     {/each}
   </div>
 
-  <BookmarkItem __node="{__bookmarksOther}" lvl="{0}" left/>
+  <BookmarkItem __node="{__bookmarksOther}" __lvl="{0}" __left/>
 </div>
 
 <script>
@@ -33,7 +33,7 @@
 <style>
   :global(#b) { /* bookmarks bar */
     display: flex;
-    align-items: center;
+    /* align-items: center; */
     margin-right: auto; /* push "other bookmarks" folder to the right */
   }
 

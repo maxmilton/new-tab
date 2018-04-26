@@ -32,7 +32,7 @@
 
     {#each __bookmarks as __item}
       <a href="__item.url" class="r" on:click="__link(event)">
-        <img src="chrome://favicon/{__item.url||''}" class="i">
+        <img src="chrome://favicon/{__item.url || ''}" class="i">
         {__item.title || __item.url}
       </a>
     {/each}
@@ -41,7 +41,7 @@
       <!-- TODO: @TESTING: Some fonts look better with ▼ vs ▾ -->
       <a class="b" on:click="__loadMoreBookmarks(__bookmarks.length)">Show more ▾</a>
     {/if}
-  {:elseif isSearching}
+  {:elseif __isSearching}
     <p class="g">No matching Bookmarks</p>
   {/if}
 
@@ -51,7 +51,7 @@
 
     {#each __history as __item}
       <a href="__item.url" class="r" on:click="__link(event)">
-        <img src="chrome://favicon/{__item.url||''}" class="i">
+        <img src="chrome://favicon/{__item.url || ''}" class="i">
         {__item.title || __item.url}
       </a>
     {/each}
@@ -59,7 +59,7 @@
     {#if __history.length < __historyRaw.length}
       <a class="b" on:click="__loadMoreHistory(__history.length)">Show more ▾</a>
     {/if}
-  {:elseif isSearching}
+  {:elseif __isSearching}
     <p class="g">No matching History</p>
   {/if}
 </div>
@@ -104,7 +104,7 @@
       __history: [],
     }),
     computed: {
-      isSearching: ({ __search }) => __search !== '',
+      __isSearching: ({ __search }) => __search !== '',
     },
 
     oncreate() {
