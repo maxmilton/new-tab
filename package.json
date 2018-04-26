@@ -14,15 +14,16 @@
     "maxmilton"
   ],
   "scripts": {
-    "dev": "serve dist & rollup -c -w",
+    "dev": "rollup -c -w",
     "build": "APP_RELEASE=$(git describe --always --dirty=\"-dev\") NODE_ENV=production rollup -c",
+    "prebuild": "rm -rf dist && mkdir dist",
     "lint:css": "stylelint --cache --cache-location=/tmp/ \"**/*.{html,css}\"",
     "lint:js": "eslint --ignore-path .gitignore --ext .js,.html src test",
     "lint": "yarn lint:css && yarn lint:js",
     "test": "jest",
     "test-ci": "yarn test --coverage --runInBand --ci",
-    "pretest:watch": "yarn lint",
-    "test:watch": "yarn test --coverage --notify --watch"
+    "pretest:dev": "yarn lint",
+    "test:dev": "yarn test --coverage --notify --watch"
   },
   "dependencies": {
     "raven-js": "3.24.2"
@@ -41,7 +42,6 @@
     "rollup-plugin-node-resolve": "3.3.0",
     "rollup-plugin-svelte": "4.1.0",
     "rollup-plugin-uglify": "3.0.0",
-    "serve": "6.5.6",
     "stylelint": "9.2.0",
     "svelte": "2.1.1"
   },
