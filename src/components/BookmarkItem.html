@@ -31,7 +31,7 @@
                 class="b"
                 on:click="__link(event)"
               >
-                <img src="chrome://favicon/{__bookmark.url}" class="i">
+                <img src="chrome://favicon/{__bookmark.url||''}" class="i">
                 <span class="t">{__bookmark.title}</span>
               </a>
             {/if}
@@ -48,7 +48,10 @@
     class="b"
     on:click="__link(event)"
   >
-    <img src="chrome://favicon/{__node.url}" class="i">
+    <!-- only render img if there's a URL; huge initial load performance win! -->
+    {#if __node.url !== undefined}
+      <img src="chrome://favicon/{__node.url}" class="i">
+    {/if}
     <span class="t">{__node.title}</span>
   </a>
 {/if}

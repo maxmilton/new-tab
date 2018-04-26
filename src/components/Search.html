@@ -32,7 +32,7 @@
 
     {#each __bookmarks as __item}
       <a href="__item.url" class="r" on:click="__link(event)">
-        <img src="chrome://favicon/{__item.url}" class="i">
+        <img src="chrome://favicon/{__item.url||''}" class="i">
         {__item.title || __item.url}
       </a>
     {/each}
@@ -52,7 +52,7 @@
 
     {#each __history as __item}
       <a href="__item.url" class="r" on:click="__link(event)">
-        <img src="chrome://favicon/{__item.url}" class="i">
+        <img src="chrome://favicon/{__item.url||''}" class="i">
         {__item.title || __item.url}
       </a>
     {/each}
