@@ -84,6 +84,21 @@ function compileHtml(html) {
   return new Function('d', 'return `' + html + '`'); // eslint-disable-line
 }
 
+/**
+ * Compile a New Tab theme.
+ * @param {string} nameLong The input filename.
+ * @param {string} nameShort The output filename.
+ */
+function makeTheme(nameLong, nameShort) {
+  fs.readFile(`${__dirname}/src/themes/${nameLong}.css`, 'utf8', async (err, res) => {
+    if (err) throw err;
+
+    const css = new CleanCSS(cleanCssOpts).minify(res).styles;
+    fs.writeFile(`${__dirname}/dist/${nameShort}.css`, css, catchErr);
+  });
+}
+
+// Optimise loader code
 // eslint-disable-next-line import/no-extraneous-dependencies
 const loader = require('uglify-es').minify(
   fs.readFileSync(`${__dirname}/src/loader.js`, 'utf8'),
@@ -108,14 +123,23 @@ export default [
           style: sveltePostcss,
         },
         css: (css) => {
-          const minCss = new CleanCSS(cleanCssOpts).minify(css.code);
+          const cssCode = production
+            ? new CleanCSS(cleanCssOpts).minify(css.code).styles
+            : css.code;
+
+          // TODO: Once source maps are supported in svelte preprocessors, enable this
+          // const cssMap = production
+          //   ? ''
+          //   : `\n/*# sourceMappingURL=data:application/json;base64,${Buffer.from(JSON.stringify(css.map)).toString('base64')}*/`;
+          const cssMap = '';
 
           // compile HTML from template
           fs.writeFile(`${__dirname}/dist/ntp.html`, compileHtml(template)({
             banner: `<!-- ${banner} -->\n`,
             title: 'New Tab',
-            head: `<script src=ntp.js defer></script>\n<style>${minCss.styles}</style>\n<script>${loader.code}</script>`,
-            body: '<div id=a><div class="b f">Other bookmarks</div></div><div id=m><div id=i>☰</div></div><div class=c><input type=text id=s></div>',
+            head: `<script src=ntp.js defer></script>\n<style>${cssCode}${cssMap}</style>\n<script>${loader.code}</script>`,
+            // body: '<div id=a><div class="b f">Other bookmarks</div></div><div id=m><div id=i>☰</div></div><div class=c><input type=text id=s></div>',
+            body: '',
           }), catchErr);
         },
       }),
@@ -132,7 +156,7 @@ export default [
   {
     input: 'src/settings.js',
     output: {
-      sourcemap: false,
+      sourcemap: true,
       banner: `/* ${banner} */`,
       format: 'iife',
       name: 's',
@@ -146,13 +170,15 @@ export default [
           style: sveltePostcss,
         },
         css: (css) => {
-          const minCss = new CleanCSS(cleanCssOpts).minify(css.code);
+          const cssCode = production
+            ? new CleanCSS(cleanCssOpts).minify(css.code).styles
+            : css.code;
 
           // compile HTML from template
           fs.writeFile(`${__dirname}/dist/s.html`, compileHtml(template)({
             banner: `<!-- ${banner} -->\n`,
             title: 'Settings | New Tab',
-            head: `<script src=s.js defer></script>\n<style>${minCss.styles}</style>`,
+            head: `<script src=s.js defer></script>\n<style>${cssCode}</style>`,
             body: '',
           }), catchErr);
         },
@@ -194,23 +220,10 @@ export default [
   },
 ];
 
-// extension manifest
+// Extension manifest
 fs.writeFile(`${__dirname}/dist/manifest.json`, JSON.stringify(manifest), catchErr);
 
-/**
- * Compile a New Tab theme.
- * @param {string} nameLong The input filename.
- * @param {string} nameShort The output filename.
- */
-function makeTheme(nameLong, nameShort) {
-  fs.readFile(`${__dirname}/src/themes/${nameLong}.css`, 'utf8', async (err, res) => {
-    if (err) throw err;
-
-    const css = new CleanCSS(cleanCssOpts).minify(res).styles;
-    fs.writeFile(`${__dirname}/dist/${nameShort}.css`, css, catchErr);
-  });
-}
-
-// themes
+// Themes
+// NOTE: Dark theme is omitted because it's embedded into the page with the other CSS
 makeTheme('light', 'l');
 makeTheme('black', 'b');
