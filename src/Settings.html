@@ -1,4 +1,4 @@
-<div>
+<div class="pb">
   <label for="theme">Theme</label>
   <select id="theme" bind:value="__theme">
     <option value="l">Light</option>
@@ -9,7 +9,7 @@
 
 <hr>
 
-<div>
+<div class="pb">
   <label for="opt-out">
     <input id="opt-out" type="checkbox" bind:checked="__errTrack">
     Allow error tracking
@@ -57,29 +57,29 @@
   :global(body) {
     font-size: 18px;
     text-rendering: optimizeLegibility;
-    background: #fafafa;
+    background: hsl(0, 0%, 98%);
+  }
+
+  :global(hr) {
+    border: 0;
+    border-bottom: 1px solid hsl(0, 0%, 87%);
+  }
+
+  :global(footer) {
+    margin-top: 18px;
   }
 
   :global(select) {
     margin-left: 9px;
   }
 
-  :global(input[type="checkbox"]) {
-    margin-right: 9px;
-    vertical-align: 0;
-  }
-
   :global(hr),
-  :global(.form-row) {
+  :global(.pb) {
     margin-bottom: 18px;
   }
 
-  :global(hr) {
-    border: 0;
-    border-bottom: 1px solid #ddd;
-  }
-
-  :global(footer) {
-    margin-top: 18px;
+  :global(input[type="checkbox"]) {
+    margin-right: 9px;
+    vertical-align: 0;
   }
 </style>

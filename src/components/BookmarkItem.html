@@ -1,41 +1,45 @@
-{#if __input.children !== undefined}
+{#if __node.children !== undefined}
   <!-- folder -->
   <div
     class="b f"
-    title="{__input.title}"
+    title="{__node.title}"
     on:mouseenter="__onEnter()"
     on:mouseleave="__onLeave()"
   >
-    {__input.title}
+    {__node.title}
 
-    {#if __input.parentId > 1}
+    {#if __node.parentId > 1}
       <!-- subfolder indicator -->
       <span class="e">▶</span>
     {/if}
 
     {#if __show}
       <!-- subfolder -->
-      <div class="s {__input.left && 'l'}">
-        {#each __input.children as __bookmark}
-          {#if __bookmark.children !== undefined}
-            <!-- folder -->
-            <svelte:self __input="{__bookmark}" lvl="{lvl + 1}"/>
-          {:else}
-            <!-- bookmark -->
-            <a href="{__bookmark.url}" class="b" on:click="__link(event)">
-              <img src="chrome://favicon/{__bookmark.url}" class="i">
-              <span class="t">{__bookmark.title}</span>
-            </a>
-          {/if}
-        {/each}
+      <div class="s {__node.left && 'l'}">
+        {#if __node.children.length === 0}
+          <span class="b">(empty)</span>
+        {:else}
+          {#each __node.children as __bookmark}
+            {#if __bookmark.children !== undefined}
+              <!-- folder -->
+              <svelte:self __node="{__bookmark}" lvl="{lvl + 1}"/>
+            {:else}
+              <!-- bookmark -->
+              <a href="{__bookmark.url}" class="b" on:click="__link(event)">
+                <img src="chrome://favicon/{__bookmark.url}" class="i">
+                <span class="t">{__bookmark.title}</span>
+              </a>
+            {/if}
+          {/each}
+        {/if}
       </div>
     {/if}
   </div>
 {:else}
   <!-- bookmark link -->
-  <a href="{__input.url}" on:click="__link(event)" class="b">
-    <img src="chrome://favicon/{__input.url}" class="i">
-    <span class="t">{__input.title}</span>
+  <a href="{__node.url}" on:click="__link(event)" class="b">
+    <img src="chrome://favicon/{__node.url}" class="i">
+    <span class="t">{__node.title}</span>
   </a>
 {/if}
 
@@ -49,19 +53,21 @@
     oncreate() {
       this.__openTimer = null;
       this.__closeTimer = null;
-
-      // set up listener to close subfolder when another opens
-      this.root.on('open', (lvl) => {
-        if (this.get().__show) {
-          if (lvl === this.get().lvl) {
-            this.set({ __show: false });
-            this.__resetCloseTimer();
-          }
-        }
-      });
     },
     methods: {
       __link: chromeLink,
+
+      // set up event listener to close subfolder when another opens
+      __onOpen() {
+        this.root.on('open', (lvl) => {
+          if (this.get().__show) {
+            if (lvl === this.get().lvl) {
+              this.set({ __show: false });
+              this.__resetCloseTimer();
+            }
+          }
+        });
+      },
 
       // subfolder mouse enter
       __onEnter() {
@@ -72,6 +78,7 @@
           this.__openTimer = setTimeout(() => {
             this.root.fire('open', this.get().lvl);
             this.set({ __show: true });
+            this.__onOpen();
           }, 200); // open delay
         }
       },
@@ -103,26 +110,49 @@
 </script>
 
 <style>
-  :global(.f) { /* folder */
+  :global(.i),
+  :global(.t) {
+    pointer-events: none; /* prevent being the MouseEvent target */
+  }
+
+  /* favicon */
+  :global(.i) {
+    width: 16px;
+  }
+
+  /* bookmark title */
+  :global(.t) {
+    max-width: 15ch;
+    padding-left: 9px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  /* folder */
+  :global(.f) {
     position: relative;
     cursor: pointer;
   }
 
-  :global(.e) { /* triangle; caret */
+  /* triangle; caret */
+  :global(.e) {
     margin-left: auto;
   }
 
-  :global(.l) { /* left side folder */
+  /* left side folder */
+  :global(.l) {
     right: 0;
     left: initial;
 
-    .s { /* subfolder */
+    /* subfolder */
+    .s {
       right: 100%;
       left: initial;
     }
   }
 
-  :global(.s) { /* subfolder */
+  /* subfolder */
+  :global(.s) {
     position: absolute;
     top: 40px;
     left: 0;
@@ -131,17 +161,33 @@
     background: var(--c1);
     filter: var(--s1);
 
-    .b { /* bookmark */
+    /* bookmark */
+    .b {
       padding: 9px;
     }
 
-    .t { /* bookmark title */
+    /* bookmark title */
+    .t {
       max-width: 40ch;
     }
 
     & & {
       top: 0;
       left: 100%;
+    }
+  }
+
+  /* bookmark item */
+  :global(.b) { /* stylelint-disable no-descending-specificity */
+    display: inline-flex;
+    align-items: center;
+    padding: 9px 7px;
+    color: var(--t);
+    text-decoration: none;
+    white-space: nowrap;
+
+    &:hover {
+      background-color: var(--c);
     }
   }
 </style>
