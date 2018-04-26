@@ -7,12 +7,14 @@ module.exports = {
   extends: [
     '@wearegenki/eslint-config',
   ],
+  // parser: 'babel-eslint',
   parserOptions: {
     ecmaVersion: 9,
     sourceType: 'module',
   },
   env: {
-    webextensions: true,
+    browser: true,
     es6: true,
+    webextensions: true,
   },
 };
