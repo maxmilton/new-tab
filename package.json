@@ -31,6 +31,7 @@
   "devDependencies": {
     "@types/chrome": "0.0.64",
     "@wearegenki/dev": "0.12.0",
+    "@wearegenki/test": "0.10.0",
     "codecov": "3.0.0",
     "eslint": "4.19.1",
     "jest": "22.4.3",
@@ -43,7 +44,8 @@
     "rollup-plugin-svelte": "4.1.0",
     "rollup-plugin-uglify": "3.0.0",
     "stylelint": "9.2.0",
-    "svelte": "2.1.1"
+    "svelte": "2.1.1",
+    "svelte-jest": "^0.1.0"
   },
   "engines": {
     "node": ">= 9.10.0"
