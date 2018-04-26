@@ -6,15 +6,14 @@ import commonjs from 'rollup-plugin-commonjs';
 import uglify from 'rollup-plugin-uglify';
 import postcssLoadConfig from 'postcss-load-config';
 import postcss from 'postcss';
+import CleanCSS from 'clean-css';
 import manifest from './manifest';
 
 const production = !process.env.ROLLUP_WATCH;
-const nameCache = {};
 
 const banner = `New Tab ${process.env.APP_RELEASE} | github.com/MaxMilton/new-tab`;
 const template = fs.readFileSync(`${__dirname}/src/template.html`, 'utf8');
 
-// configuration for UglifyJS
 const uglifyOpts = {
   compress: {
     drop_console: production,
@@ -36,10 +35,16 @@ const uglifyOpts = {
     comments: !!process.env.DEBUG,
     wrap_iife: true,
   },
-  nameCache,
   ecma: 8,
   toplevel: true,
   warnings: !!process.env.DEBUG,
+};
+
+const cleanCssOpts = {
+  level: {
+    1: { all: true },
+    2: { all: true },
+  },
 };
 
 /**
@@ -56,12 +61,12 @@ function catchErr(err) { if (err) throw err; }
  * @returns {object} An object containing CSS code and source map.
  */
 function sveltePostcss({ content, filename }) {
-  return postcssLoadConfig({}).then(({ plugins }) =>
+  return postcssLoadConfig({}).then(({ plugins, options }) =>
     postcss(plugins)
-      .process(content, {
+      .process(content, Object.assign(options, {
         from: filename,
         to: filename,
-      })
+      }))
       .then(result => ({
         code: result.css,
         map: result.map,
@@ -78,6 +83,12 @@ function sveltePostcss({ content, filename }) {
 function compileHtml(html) {
   return new Function('d', 'return `' + html + '`'); // eslint-disable-line
 }
+
+// eslint-disable-next-line import/no-extraneous-dependencies
+const loader = require('uglify-es').minify(
+  fs.readFileSync(`${__dirname}/src/loader.js`, 'utf8'),
+  Object.assign({}, uglifyOpts)
+);
 
 export default [
   // App: NTP
@@ -97,12 +108,13 @@ export default [
           style: sveltePostcss,
         },
         css: (css) => {
+          const minCss = new CleanCSS(cleanCssOpts).minify(css.code);
+
           // compile HTML from template
           fs.writeFile(`${__dirname}/dist/ntp.html`, compileHtml(template)({
             banner: `<!-- ${banner} -->\n`,
             title: 'New Tab',
-            // head: `<script src=${jsFileName} defer></script>\n<style>${await cssCode}</style>\n${scripts}<script>${await loaderCode}</script>`,
-            head: `<script src=ntp.js defer></script>\n<style>${css.code}</style>`,
+            head: `<script src=ntp.js defer></script>\n<style>${minCss.styles}</style>\n<script>${loader.code}</script>`,
             body: '<div id=a><div class="b f">Other bookmarks</div></div><div id=m><div id=i>☰</div></div><div class=c><input type=text id=s></div>',
           }), catchErr);
         },
@@ -129,15 +141,18 @@ export default [
     plugins: [
       svelte({
         dev: !production,
+        // shared: false, // not possible to override at the moment
         preprocess: {
           style: sveltePostcss,
         },
         css: (css) => {
+          const minCss = new CleanCSS(cleanCssOpts).minify(css.code);
+
           // compile HTML from template
           fs.writeFile(`${__dirname}/dist/s.html`, compileHtml(template)({
             banner: `<!-- ${banner} -->\n`,
             title: 'Settings | New Tab',
-            head: `<script src=s.js defer></script>\n<style>${css.code}</style>`,
+            head: `<script src=s.js defer></script>\n<style>${minCss.styles}</style>`,
             body: '',
           }), catchErr);
         },
@@ -181,3 +196,21 @@ export default [
 
 // extension manifest
 fs.writeFile(`${__dirname}/dist/manifest.json`, JSON.stringify(manifest), catchErr);
+
+/**
+ * Compile a New Tab theme.
+ * @param {string} nameLong The input filename.
+ * @param {string} nameShort The output filename.
+ */
+function makeTheme(nameLong, nameShort) {
+  fs.readFile(`${__dirname}/src/themes/${nameLong}.css`, 'utf8', async (err, res) => {
+    if (err) throw err;
+
+    const css = new CleanCSS(cleanCssOpts).minify(res).styles;
+    fs.writeFile(`${__dirname}/dist/${nameShort}.css`, css, catchErr);
+  });
+}
+
+// themes
+makeTheme('light', 'l');
+makeTheme('black', 'b');
