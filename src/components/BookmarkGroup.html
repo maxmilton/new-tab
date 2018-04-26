@@ -34,8 +34,7 @@
   :global(#b) { /* bookmarks bar */
     display: flex;
     align-items: center;
-    max-width: 100%;
-    margin-right: auto;
+    margin-right: auto; /* push "other bookmarks" folder to the right */
   }
 
   :global(#a) { /* all bookmarks */
@@ -45,14 +44,11 @@
     left: 0;
     z-index: 2;
     display: flex;
-    min-height: 41px;
+    /* min-height: 41px; */
+    height: 41px;
     padding: 0 7px;
     background: var(--c1);
     filter: drop-shadow(0 9px 9px var(--s));
     backface-visibility: hidden; /* performance hack; force GPU */
-
-    &:last-child { /* "other bookmarks" folder */
-      margin-left: auto;
-    }
   }
 </style>

@@ -38,9 +38,8 @@
     {/each}
 
     {#if __bookmarks.length < __bookmarksRaw.length}
-      <button class="r" on:click="__loadMoreBookmarks(__bookmarks.length)">
-        Show more...
-      </button>
+      <!-- TODO: @TESTING: Some fonts look better with ▼ vs ▾ -->
+      <a class="b" on:click="__loadMoreBookmarks(__bookmarks.length)">Show more ▾</a>
     {/if}
   {:elseif isSearching}
     <p class="g">No matching Bookmarks</p>
@@ -58,9 +57,7 @@
     {/each}
 
     {#if __history.length < __historyRaw.length}
-      <button class="r" on:click="__loadMoreHistory(__history.length)">
-        Show more...
-      </button>
+      <a class="b" on:click="__loadMoreHistory(__history.length)">Show more ▾</a>
     {/if}
   {:elseif isSearching}
     <p class="g">No matching History</p>
@@ -223,17 +220,8 @@
 </script>
 
 <style>
-  /* TODO: Improve the "load more" button appearance */
-  :global(button) {
-    padding: 9px 18px;
-    font-size: 20px;
-    color: var(--t);
-    background: var(--c1);
-    border: 0;
-  }
-
   :global(.c) { /* container */
-    max-width: 60rem;
+    max-width: 800px;
     padding: 0 18px;
     margin: 0 auto;
   }
@@ -252,6 +240,7 @@
   }
 
   :global(#s) { /* search */
+    box-sizing: border-box;
     width: 100%;
     padding: 11px 20px;
     margin: 0 0 18px;

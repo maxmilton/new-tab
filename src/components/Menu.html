@@ -50,33 +50,32 @@
     border-bottom: 1px solid var(--c);
   }
 
-  :global(.m) { /* menu item */
+  /* menu item */
+  :global(.m) {
     display: block;
     padding: 9px 0;
     color: var(--t);
   }
 
-  :global(#m) { /* menu */
-    position: absolute;
+  /* menu */
+  :global(#m) {
+    position: relative;
     display: inline-block;
-    padding: 18px 84px 84px 42px;
-    margin: -28px -84px -84px 0;
+    padding: 10px 84px 84px 42px;
+    margin: -28px -84px -64px 0;
     font-size: 20px;
-
-    @media (max-width: 67em) {
-      position: relative;
-    }
   }
 
-  :global(#i) { /* menu hamburger icon */
+  /* menu hamburger icon */
+  :global(#i) {
     font-size: 30px;
     color: var(--c4);
   }
 
-  :global(#d) { /* menu dropdown */
+  /* menu dropdown */
+  :global(#d) {
     position: absolute;
-    top: 18px;
-    left: 42px;
+    top: 10px;
     z-index: 1;
     padding: 18px;
     white-space: nowrap;
@@ -84,14 +83,18 @@
     filter: var(--s1);
     opacity: 0;
     transition: all 150ms ease-out;
+    /* TODO: Once `scale` is supported in Chrome stable, change this */
     transform: scale(0.5);
-    transform-origin: 0 18px;
+    /* scale: 0.5; */
+    transform-origin: 0 10px;
     will-change: opacity, transform;
+    /* will-change: opacity, scale; */
 
     :global(#m):hover > &,
     :global(#m):focus > & {
       opacity: 1;
       transform: scale(1);
+      /* scale: 1; */
     }
   }
 </style>
