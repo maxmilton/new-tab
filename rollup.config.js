@@ -4,6 +4,7 @@ import resolve from 'rollup-plugin-node-resolve';
 import commonjs from 'rollup-plugin-commonjs';
 // import buble from 'rollup-plugin-buble';
 import uglify from 'rollup-plugin-uglify';
+import htmlMinifier from 'html-minifier';
 import postcssLoadConfig from 'postcss-load-config';
 import postcss from 'postcss';
 import CleanCSS from 'clean-css';
@@ -27,7 +28,7 @@ const uglifyOpts = {
   mangle: {
     properties: {
       // NOTE: Fragile; needs close attention especially between Svelte releases!
-      regex: /^(_.*|each_value.*|.*_index.*|component|changed|previous|destroy)$/,
+      regex: /^(_.*|each_value.*|.*_index.*|component|changed|previous|destroy|root|fire)$/,
       // debug: 'XX',
     },
   },
@@ -54,11 +55,22 @@ const cleanCssOpts = {
 function catchErr(err) { if (err) throw err; }
 
 /**
- * Preprocess PostCSS code into CSS for Svelte.
- * @param {object} obj
- * @param {string} obj.content Contents of the style elements or CSS.
- * @param {string} obj.filename Full path to the file containing the CSS.
- * @returns {object} An object containing CSS code and source map.
+ * Svelte markup preprocessor which trims excessive whitespace.
+ */
+function svelteMinifyHtml({ content }) {
+  const code = htmlMinifier.minify(content, {
+    caseSensitive: true,
+    collapseWhitespace: true,
+    // conservativeCollapse: true,
+    ignoreCustomFragments: [/{[^]*?}/],
+    keepClosingSlash: true,
+  });
+
+  return { code };
+}
+
+/**
+ * Svelte preprocessor to turn PostCSS code into CSS.
  */
 function sveltePostcss({ content, filename }) {
   return postcssLoadConfig({}).then(({ plugins, options }) =>
@@ -100,10 +112,10 @@ function makeTheme(nameLong, nameShort) {
 
 // Optimise loader code
 // eslint-disable-next-line import/no-extraneous-dependencies
-const loader = require('uglify-es').minify(
+const loaderCode = require('uglify-es').minify(
   fs.readFileSync(`${__dirname}/src/loader.js`, 'utf8'),
   Object.assign({}, uglifyOpts)
-);
+).code;
 
 export default [
   // App: NTP
@@ -120,6 +132,7 @@ export default [
       svelte({
         dev: !production,
         preprocess: {
+          markup: svelteMinifyHtml,
           style: sveltePostcss,
         },
         css: (css) => {
@@ -135,11 +148,9 @@ export default [
 
           // compile HTML from template
           fs.writeFile(`${__dirname}/dist/ntp.html`, compileHtml(template)({
-            banner: `<!-- ${banner} -->\n`,
+            banner,
             title: 'New Tab',
-            head: `<script src=ntp.js defer></script>\n<style>${cssCode}${cssMap}</style>\n<script>${loader.code}</script>`,
-            // body: '<div id=a><div class="b f">Other bookmarks</div></div><div id=m><div id=i>☰</div></div><div class=c><input type=text id=s></div>',
-            body: '',
+            content: `<script src=ntp.js defer></script>\n<style>${cssCode}${cssMap}</style>\n<script>${loaderCode}</script>`,
           }), catchErr);
         },
       }),
@@ -176,10 +187,9 @@ export default [
 
           // compile HTML from template
           fs.writeFile(`${__dirname}/dist/s.html`, compileHtml(template)({
-            banner: `<!-- ${banner} -->\n`,
-            title: 'Settings | New Tab',
-            head: `<script src=s.js defer></script>\n<style>${cssCode}</style>`,
-            body: '',
+            banner,
+            title: 'New Tab Settings',
+            content: `<script src=s.js defer></script>\n<style>${cssCode}</style>\n<script>${loaderCode}</script>`,
           }), catchErr);
         },
       }),
