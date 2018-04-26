@@ -79,21 +79,6 @@ function compileHtml(html) {
   return new Function('d', 'return `' + html + '`'); // eslint-disable-line
 }
 
-/**
- * Compile HTML from template
- */
-function renderHtml({ filename, title, head, body }) {
-  return {
-    name: 'renderHtml',
-    onwrite: () => fs.writeFile(`${__dirname}/dist/${filename}`, compileHtml(template)({
-      banner: `<!-- ${banner} -->\n`,
-      title,
-      head,
-      body,
-    }), catchErr),
-  };
-}
-
 export default [
   // App: NTP
   {
@@ -106,16 +91,21 @@ export default [
       file: 'dist/ntp.js',
     },
     plugins: [
-      // TODO: Review and add anything interesting from: https://github.com/sveltejs/svelte#api
       svelte({
         dev: !production,
         preprocess: {
           style: sveltePostcss,
         },
         css: (css) => {
-          css.write('dist/ntp.css');
+          // compile HTML from template
+          fs.writeFile(`${__dirname}/dist/ntp.html`, compileHtml(template)({
+            banner: `<!-- ${banner} -->\n`,
+            title: 'New Tab',
+            // head: `<script src=${jsFileName} defer></script>\n<style>${await cssCode}</style>\n${scripts}<script>${await loaderCode}</script>`,
+            head: `<script src=ntp.js defer></script>\n<style>${css.code}</style>`,
+            body: '<div id=a><div class="b f">Other bookmarks</div></div><div id=m><div id=i>☰</div></div><div class=c><input type=text id=s></div>',
+          }), catchErr);
         },
-        // css: false,
       }),
 
       resolve(),
@@ -123,15 +113,6 @@ export default [
 
       // production && buble({ exclude: 'node_modules/**' }),
       production && uglify(uglifyOpts),
-
-      renderHtml({
-        filename: 'ntp.html',
-        title: 'New Tab',
-        // head: `<script src=${jsFileName} defer></script>\n<style>${await cssCode}</style>\n${scripts}<script>${await loaderCode}</script>`,
-        head: '<script src=ntp.js defer></script><link rel=stylesheet href=ntp.css>',
-        // head: `<script src=ntp.js defer></script>\n<style>${ntpCss}</style>`,
-        body: '<div id=a><div id=b></div><div class="b f">Other bookmarks</div></div><div id=m><div id=i>☰</div></div><div class=c><input type=text placeholder="Search tabs, bookmarks, and history..." id=s><h2>Open Tabs (</h2></div>',
-      }),
     ],
   },
 
@@ -152,19 +133,18 @@ export default [
           style: sveltePostcss,
         },
         css: (css) => {
-          css.write('dist/s.css');
+          // compile HTML from template
+          fs.writeFile(`${__dirname}/dist/s.html`, compileHtml(template)({
+            banner: `<!-- ${banner} -->\n`,
+            title: 'Settings | New Tab',
+            head: `<script src=s.js defer></script>\n<style>${css.code}</style>`,
+            body: '',
+          }), catchErr);
         },
       }),
 
       // production && buble({ exclude: 'node_modules/**' }),
       production && uglify(uglifyOpts),
-
-      renderHtml({
-        filename: 's.html',
-        title: 'Settings | New Tab',
-        head: '<script src=s.js defer></script><link rel=stylesheet href=s.css>',
-        body: '',
-      }),
     ],
   },
 
