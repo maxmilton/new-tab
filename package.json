@@ -45,7 +45,7 @@
     "rollup-plugin-uglify": "3.0.0",
     "stylelint": "9.2.0",
     "svelte": "2.1.1",
-    "svelte-jest": "^0.1.0"
+    "svelte-jest": "0.1.0"
   },
   "engines": {
     "node": ">= 9.10.0"
