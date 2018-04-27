@@ -39,7 +39,7 @@
     "@wearegenki/dev": "0.12.0",
     "browser-sync": "2.23.7",
     "clean-css": "4.1.11",
-    "codecov": "3.0.0",
+    "codecov": "3.0.1",
     "eslint": "4.19.1",
     "jest": "22.4.3",
     "lasso": "3.1.4",
