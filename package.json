@@ -46,7 +46,7 @@
     "lasso-marko": "2.4.0",
     "lasso-postcss": "0.4.0",
     "optimize-js": "1.0.3",
-    "postcss": "6.0.21",
+    "postcss": "6.0.22",
     "stylelint": "9.2.0",
     "uglify-es": "3.3.10",
     "worker-nodes": "1.6.0"
