@@ -55,7 +55,7 @@ const cleanCssOpts = {
 function catchErr(err) { if (err) throw err; }
 
 /**
- * Svelte markup preprocessor which trims excessive whitespace.
+ * Svelte markup preprocessor to trim excessive whitespace.
  */
 function svelteMinifyHtml({ content }) {
   const code = htmlMinifier.minify(content, {
@@ -98,8 +98,8 @@ function compileHtml(html) {
 
 /**
  * Compile a New Tab theme.
- * @param {string} nameLong The input filename.
- * @param {string} nameShort The output filename.
+ * @param {string} nameLong The input file name.
+ * @param {string} nameShort The output file name.
  */
 function makeTheme(nameLong, nameShort) {
   fs.readFile(`${__dirname}/src/themes/${nameLong}.css`, 'utf8', async (err, res) => {
@@ -178,6 +178,7 @@ export default [
         dev: !production,
         // shared: false, // not possible to override at the moment
         preprocess: {
+          markup: svelteMinifyHtml,
           style: sveltePostcss,
         },
         css: (css) => {
