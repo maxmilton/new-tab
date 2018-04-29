@@ -22,7 +22,7 @@ export default {
     'tabs',
   ],
   chrome_url_overrides: {
-    newtab: 'ntp.html',
+    newtab: 'n.html',
   },
   options_ui: {
     chrome_style: true,

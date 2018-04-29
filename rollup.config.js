@@ -19,7 +19,7 @@ const uglifyOpts = {
   compress: {
     drop_console: production,
     drop_debugger: production,
-    negate_iife: false, // better performance when false
+    negate_iife: false, // better chrome performance when false
     passes: 2,
     pure_getters: true,
     unsafe: true,
@@ -27,7 +27,7 @@ const uglifyOpts = {
   },
   mangle: {
     properties: {
-      // NOTE: Fragile; needs close attention especially between Svelte releases!
+      // NOTE: Fragile; needs attention, especially between Svelte releases.
       regex: /^(_.*|each_value.*|.*_index.*|component|changed|previous|destroy|root|fire)$/,
       // debug: 'XX',
     },
@@ -125,8 +125,8 @@ export default [
       sourcemap: true,
       banner: `/* ${banner} */`,
       format: 'iife',
-      name: 'ntp',
-      file: 'dist/ntp.js',
+      name: 'n',
+      file: 'dist/n.js',
     },
     plugins: [
       svelte({
@@ -140,17 +140,17 @@ export default [
             ? new CleanCSS(cleanCssOpts).minify(css.code).styles
             : css.code;
 
-          // TODO: Once source maps are supported in svelte preprocessors, enable this
+          // TODO: Once source maps are supported in svelte preprocessors, enable this:
           // const cssMap = production
           //   ? ''
           //   : `\n/*# sourceMappingURL=data:application/json;base64,${Buffer.from(JSON.stringify(css.map)).toString('base64')}*/`;
           const cssMap = '';
 
           // compile HTML from template
-          fs.writeFile(`${__dirname}/dist/ntp.html`, compileHtml(template)({
+          fs.writeFile(`${__dirname}/dist/n.html`, compileHtml(template)({
             banner,
             title: 'New Tab',
-            content: `<script src=ntp.js defer></script>\n<style>${cssCode}${cssMap}</style>\n<script>${loaderCode}</script>`,
+            content: `<script src=n.js defer></script>\n<style>${cssCode}${cssMap}</style>\n<script>${loaderCode}</script>`,
           }), catchErr);
         },
       }),
