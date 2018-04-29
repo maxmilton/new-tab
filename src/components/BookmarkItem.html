@@ -58,7 +58,7 @@
 {/if}
 
 <script>
-  import { chromeLink } from '../helpers';
+  import { onLinkClick } from '../helpers';
 
   export default {
     data: () => ({
@@ -70,7 +70,7 @@
       this.__closeTimer = null;
     },
     methods: {
-      __link: chromeLink,
+      __link: onLinkClick,
 
       // set up event listener to close subfolder when another opens
       __onOpen() {

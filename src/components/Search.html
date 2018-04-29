@@ -65,7 +65,7 @@
 </div>
 
 <script>
-  import { chromeLink } from '../helpers';
+  import { onLinkClick } from '../helpers';
 
   /**
    * Delay running a function until X ms have passed since its last call.
@@ -129,7 +129,7 @@
     },
 
     methods: {
-      __link: chromeLink,
+      __link: onLinkClick,
 
       __doSearch() {
         const { __search, __tabsRaw } = this.get();

@@ -30,11 +30,11 @@
 </div>
 
 <script>
-  import { chromeLink } from '../helpers';
+  import { onLinkClick } from '../helpers';
 
   export default {
     methods: {
-      __link: chromeLink,
+      __link: onLinkClick,
 
       __settings(event) {
         event.preventDefault();

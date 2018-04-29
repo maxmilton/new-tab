@@ -21,7 +21,7 @@ function updateTabLocation(url) {
  * Special case for internal Chrome links in an extention.
  * @param {MouseEvent} event the click event
  */
-export function chromeLink(event) {
+export function onLinkClick(event) {
   const { target, ctrlKey } = event;
   const url = target.href;
 
