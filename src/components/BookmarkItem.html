@@ -49,11 +49,13 @@
     class="b"
     on:click="__link(event)"
   >
-    <!-- only render img if there's a URL; huge initial load performance win! -->
+    <!-- only render img if there's a URL (better initial load performance) -->
     {#if __node.url !== undefined}
       <img src="chrome://favicon/{__node.url}" class="i">
     {/if}
-    <span class="t">{__node.title}</span>
+    {#if __node.title !== ''}
+      <span class="t">{__node.title}</span>
+    {/if}
   </a>
 {/if}
 
