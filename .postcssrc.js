@@ -1,6 +1,6 @@
 /**
  * PostCSS configuration.
- * Handle custom syntax in CSS and Marko component styles.
+ * Handle custom syntax in CSS and component styles.
  */
 
 'use strict';

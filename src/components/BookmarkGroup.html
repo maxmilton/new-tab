@@ -1,0 +1,52 @@
+<div id="a">
+  <div id="b">
+    {#each __bookmarksBar as __bookmark}
+      <BookmarkItem __node="{__bookmark}" __lvl="{0}"/>
+    {/each}
+  </div>
+
+  <BookmarkItem __node="{__bookmarksOther}" __lvl="{0}" __left/>
+</div>
+
+<script>
+  import BookmarkItem from './BookmarkItem.html';
+
+  export default {
+    components: {
+      BookmarkItem,
+    },
+    data: () => ({
+      __bookmarksBar: [],
+      __bookmarksOther: { title: 'Other bookmarks' },
+    }),
+    oncreate() {
+      chrome.bookmarks.getTree((tree) => {
+        this.set({
+          __bookmarksBar: tree[0].children[0].children,
+          __bookmarksOther: tree[0].children[1],
+        });
+      });
+    },
+  };
+</script>
+
+<style>
+  :global(#b) { /* bookmarks bar */
+    display: flex;
+    margin-right: auto; /* push "other bookmarks" folder to the right */
+  }
+
+  :global(#a) { /* all bookmarks */
+    position: fixed;
+    top: 0;
+    right: 0;
+    left: 0;
+    z-index: 2;
+    display: flex;
+    height: 41px;
+    padding: 0 7px;
+    background: var(--c1);
+    filter: drop-shadow(0 9px 9px var(--s));
+    backface-visibility: hidden; /* performance hack; force GPU */
+  }
+</style>

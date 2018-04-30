@@ -1,14 +1,11 @@
 /* tslint:disable:quotemark max-line-length */
 
-'use strict'; // eslint-disable-line
-
-const pkg = require('../package.json');
+const pkg = require('./package.json');
 
 const isProduction = process.env.NODE_ENV === 'production';
-let hashes = "'sha256-vYMJ2ORxi1FGLgYPh62KiRPKPCuCWJVB8goB6ku0AmI='"; // file loader, settings page
-hashes += " 'sha256-sRcSAAj4ZwPU9swceTK3zzN//6FK9lOpIjnliU+GTCY='"; // file loader, new tab page
+const hash = "'sha256-APkC3ZgyFTbE0E0tK0zWZ/P2vtrQhgdmG7VPzUFt4o4='"; // minified loader.js
 
-module.exports = {
+export default {
   manifest_version: 2,
 
   name: 'New Tab',
@@ -23,9 +20,10 @@ module.exports = {
     'history',
     'storage',
     'tabs',
+    'topSites',
   ],
   chrome_url_overrides: {
-    newtab: 'ntp.html',
+    newtab: 'n.html',
   },
   options_ui: {
     chrome_style: true,
@@ -40,8 +38,8 @@ module.exports = {
 
   ...(isProduction
     // tighter security than default
-    ? { content_security_policy: `script-src 'self' ${hashes}; object-src 'self'` }
+    ? { content_security_policy: `script-src 'self' ${hash}; object-src 'self'` }
     // allow connections from http://localhost during local development
-    : { content_security_policy: `script-src 'self' blob: filesystem: chrome-extension-resource: http://localhost:* ${hashes}; object-src 'self'` }
+    : { content_security_policy: `script-src 'self' blob: filesystem: chrome-extension-resource: http://localhost:* ${hash}; object-src 'self'` }
   ),
 };

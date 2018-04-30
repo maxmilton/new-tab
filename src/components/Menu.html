@@ -1,0 +1,100 @@
+<div id="m">
+  <div id="i">☰</div>
+
+  <div id="d">
+    <a href="chrome-search://local-ntp/local-ntp.html" class="m" on:click="__link(event)">
+      Open Default Tab
+    </a>
+    <a href="chrome://bookmarks/" class="m" on:click="__link(event)">
+      Bookmarks Manager
+    </a>
+    <a href="chrome://downloads/" class="m" on:click="__link(event)">
+      Downloads
+    </a>
+    <a href="chrome://history/" class="m" on:click="__link(event)">
+      History
+    </a>
+    <a href="chrome://settings/passwords" class="m" on:click="__link(event)">
+      Passwords
+    </a>
+
+    <hr>
+
+    <a href="" class="m" on:click="__settings(event)">
+      New Tab Settings
+    </a>
+    <a href="https://github.com/MaxMilton/new-tab/issues" class="m">
+      Submit Bug
+    </a>
+  </div>
+</div>
+
+<script>
+  import { onLinkClick } from '../helpers';
+
+  export default {
+    methods: {
+      __link: onLinkClick,
+
+      __settings(event) {
+        event.preventDefault();
+        chrome.runtime.openOptionsPage();
+      },
+    },
+  };
+</script>
+
+<style>
+  :global(hr) {
+    border: 0;
+    border-bottom: 1px solid var(--c);
+  }
+
+  /* menu item */
+  :global(.m) {
+    display: block;
+    padding: 9px 0;
+    color: var(--t);
+  }
+
+  /* menu */
+  :global(#m) {
+    position: relative;
+    display: inline-block;
+    padding: 10px 84px 84px 42px;
+    margin: -28px -84px -64px 0;
+    font-size: 20px;
+  }
+
+  /* menu hamburger icon */
+  :global(#i) {
+    font-size: 30px;
+    color: var(--c4);
+  }
+
+  /* menu dropdown */
+  :global(#d) {
+    position: absolute;
+    top: 10px;
+    z-index: 1;
+    padding: 18px;
+    white-space: nowrap;
+    background: var(--c2);
+    filter: var(--s1);
+    opacity: 0;
+    transition: all 150ms ease-out;
+    /* TODO: Once `scale` is supported in Chrome stable, change this */
+    transform: scale(0.5);
+    /* scale: 0.5; */
+    transform-origin: 0 10px;
+    will-change: opacity, transform;
+    /* will-change: opacity, scale; */
+
+    :global(#m):hover > &,
+    :global(#m):focus > & {
+      opacity: 1;
+      transform: scale(1);
+      /* scale: 1; */
+    }
+  }
+</style>

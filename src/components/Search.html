@@ -1,0 +1,297 @@
+<!-- bring focus to search input when clicking anywhere -->
+<svelte:window on:click="refs.s.focus()"/>
+
+<div class="c">
+  <input
+    id="s"
+    bind:value="__search"
+    type="text"
+    ref:s
+    placeholder="Search tabs, bookmarks, history, and top sites..."
+    autocomplete="off"
+    on:keyup="__cancelSearch(event.key)"
+  >
+
+  <!-- Open Tabs -->
+  {#if __tabs.length}
+    <h2>Open Tabs ({__tabs.length}/{__tabsRaw.length})</h2>
+
+    {#each __tabs as __item}
+      <a href="{__item.url}" class="r" on:click="__onTabClick(__item, event)">
+        <img src="{__item.favIconUrl||'chrome://favicon/'}" class="i">
+        {__item.title}
+      </a>
+    {/each}
+  {:else}
+    <p class="g">No matching Open Tabs</p>
+  {/if}
+
+  <!-- Bookmarks -->
+  {#if __bookmarks.length}
+    <h2>Bookmarks ({__bookmarks.length}/{__bookmarksRaw.length})</h2>
+
+    {#each __bookmarks as __item}
+      <a href="{__item.url}" class="r" on:click="__link(event)">
+        <img src="chrome://favicon/{__item.url || ''}" class="i">
+        {__item.title || __item.url}
+      </a>
+    {/each}
+
+    {#if __bookmarks.length < __bookmarksRaw.length}
+      <!-- TODO: @TESTING: Some fonts look better with ▼ vs ▾ -->
+      <a class="b" on:click="__loadMoreBookmarks(__bookmarks.length)">Show more ▾</a>
+    {/if}
+  {:elseif __isSearching}
+    <p class="g">No matching Bookmarks</p>
+  {/if}
+
+  <!-- History -->
+  {#if __history.length}
+    <h2>History ({__history.length}/{__historyRaw.length})</h2>
+
+    {#each __history as __item}
+      <a href="{__item.url}" class="r" on:click="__link(event)">
+        <img src="chrome://favicon/{__item.url || ''}" class="i">
+        {__item.title || __item.url}
+      </a>
+    {/each}
+
+    {#if __history.length < __historyRaw.length}
+      <a class="b" on:click="__loadMoreHistory(__history.length)">Show more ▾</a>
+    {/if}
+  {:elseif __isSearching}
+    <p class="g">No matching History</p>
+  {/if}
+
+  <!-- Top Sites -->
+  {#if __topSites.length}
+    <h2>Top Sites ({__topSites.length}/{__topSitesRaw.length})</h2>
+
+    {#each __topSites as __item}
+      <a href="{__item.url}" class="r" on:click="__onTabClick(__item, event)">
+        <img src="chrome://favicon/{__item.url}" class="i">
+        {__item.title}
+      </a>
+    {/each}
+  {:elseif __isSearching}
+    <p class="g">No matching Top Sites</p>
+  {/if}
+</div>
+
+<script>
+  import { onLinkClick } from '../helpers';
+
+  /**
+   * Delay running a function until X ms have passed since its last call.
+   * @see https://github.com/developit/decko/blob/master/src/decko.js
+   * @param {Function} fn The function to debounce.
+   * @param {Number} delay How long to wait for more function calls before executing
+   * the function in milliseconds.
+   * @returns {Function}
+   */
+  function debounce(fn, delay) {
+    let args;
+    let context;
+    let timer;
+
+    return function (...a) { // eslint-disable-line func-names
+      args = a;
+      context = this;
+
+      if (!timer) {
+        timer = setTimeout(() => {
+          fn.apply(context, args);
+          args = context = timer = null; // eslint-disable-line no-multi-assign
+        }, delay);
+      }
+    };
+  }
+
+  /**
+   * Search for matching title or URL.
+   * NOTE: Search query is passed as `this` value.
+   * @param {object} item
+   * @returns {Boolean}
+   */
+  function searchFilter(item) {
+    return item.title.toLowerCase().indexOf(this) > -1
+      || item.url
+        // remove URL protocol since it's unlikely to be searched for
+        .replace(/^.*?:\/\//, '')
+        .toLowerCase().indexOf(this) > -1;
+  }
+
+  export default {
+    data: () => ({
+      __search: '',
+      __bookmarksRaw: [],
+      __bookmarks: [],
+      __historyRaw: [],
+      __history: [],
+      __tabsRaw: [],
+      __tabs: [],
+      __topSites: [],
+      __topSitesRaw: [],
+    }),
+    computed: {
+      __isSearching: ({ __search }) => __search !== '',
+    },
+
+    oncreate() {
+      this.__onSearch = debounce(this.__doSearch, 260); // ms delay
+
+      this.__getTabs();
+
+      chrome.topSites.get((sites) => {
+        this.set({
+          __topSites: sites,
+          __topSitesRaw: sites,
+        });
+      });
+
+      // update tab list on tab events
+      chrome.tabs.onUpdated.addListener((tabId, changeInfo) => {
+        if (changeInfo.title !== undefined) {
+          this.__getTabs();
+        }
+      });
+      chrome.tabs.onMoved.addListener(() => this.__getTabs());
+      chrome.tabs.onRemoved.addListener(() => this.__getTabs());
+    },
+
+    onstate({ changed, previous }) {
+      if (previous !== undefined && changed.__search !== undefined) {
+        this.__onSearch();
+      }
+    },
+
+    methods: {
+      __link: onLinkClick,
+
+      __doSearch() { // eslint-disable-line consistent-return
+        const { __search, __tabsRaw, __topSitesRaw } = this.get();
+
+        // reset search when input is empty
+        if (__search === '') {
+          return this.set({
+            __bookmarks: [],
+            __history: [],
+            __tabs: __tabsRaw,
+            __topSites: __topSitesRaw,
+          });
+        }
+
+        // search history (run first since it takes the longest)
+        chrome.history.search({ text: __search }, (results) => {
+          this.set({
+            __historyRaw: results,
+            __history: results.slice(0, 10),
+          });
+        });
+
+        // search bookmarks
+        chrome.bookmarks.search(__search, (results) => {
+          this.set({
+            __bookmarksRaw: results,
+            __bookmarks: results.slice(0, 10),
+          });
+        });
+
+        // search open tabs
+        this.set({
+          __tabs: __tabsRaw.filter(searchFilter, __search),
+        });
+
+        // search top sites
+        this.set({
+          __topSites: __topSitesRaw.filter(searchFilter, __search),
+        });
+      },
+
+      __getTabs() {
+        chrome.tabs.query({}, (tabs) => {
+          if (this.get().__search === '') {
+            this.set({ __tabs: tabs });
+          }
+
+          this.set({ __tabsRaw: tabs });
+        });
+      },
+
+      __onTabClick(tab, event) {
+        event.preventDefault();
+
+        // update current tab
+        chrome.tabs.update(tab.id, { active: true });
+
+        // switch active window if the tab isn't in the current window
+        chrome.windows.getCurrent({}, (currentWindow) => {
+          if (currentWindow.id !== tab.windowId) {
+            chrome.windows.update(tab.windowId, { focused: true });
+          }
+        });
+
+        // close this NTP
+        chrome.tabs.getCurrent((currentTab) => {
+          chrome.tabs.remove(currentTab.id);
+        });
+      },
+
+      __cancelSearch(key) {
+        if (key === 'Escape') {
+          this.set({
+            __search: '',
+            __tabs: this.get().__tabsRaw,
+            __bookmarks: [],
+            __history: [],
+          });
+        }
+      },
+
+      __loadMoreBookmarks(length) {
+        this.set({ __bookmarks: this.get().__bookmarksRaw.slice(0, length + 100) });
+      },
+
+      __loadMoreHistory(length) {
+        this.set({ __history: this.get().__historyRaw.slice(0, length + 100) });
+      },
+    },
+  };
+</script>
+
+<style>
+  :global(.c) { /* container */
+    max-width: 800px;
+    padding: 0 18px;
+    margin: 0 auto;
+  }
+
+  :global(.r) { /* search result */
+    display: flex;
+    align-items: center;
+    padding: 9px 0;
+    overflow: hidden;
+    color: var(--t);
+    white-space: nowrap;
+
+    & > .i {
+      padding-right: 9px;
+    }
+  }
+
+  :global(#s) { /* search */
+    box-sizing: border-box;
+    width: 100%;
+    padding: 11px 20px;
+    margin: 0 0 18px;
+    font-size: 22px;
+    color: var(--t);
+    background: var(--c3);
+    filter: drop-shadow(0 5px 6px var(--s));
+    border: 0;
+
+    &::placeholder {
+      color: var(--c5);
+    }
+  }
+</style>

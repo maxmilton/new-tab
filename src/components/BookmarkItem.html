@@ -1,0 +1,213 @@
+{#if __node.children !== undefined}
+  <!-- folder -->
+  <div
+    class="b f"
+    title="{__node.title}"
+    on:mouseenter="__onEnter()"
+    on:mouseleave="__onLeave()"
+  >
+    {__node.title}
+
+    {#if __node.parentId > 1}
+      <!-- subfolder indicator -->
+      <!-- TODO: @TESTING: Some fonts look better with ▶ vs ▸ -->
+      <span class="e">▸</span>
+    {/if}
+
+    {#if __show}
+      <!-- subfolder -->
+      <div class="s {__left && 'l'}">
+        {#if __node.children.length === 0}
+          <span class="b">(empty)</span>
+        {:else}
+          {#each __node.children as __bookmark}
+            {#if __bookmark.children !== undefined}
+              <!-- folder -->
+              <svelte:self __node="{__bookmark}" __lvl="{__lvl + 1}"/>
+            {:else}
+              <!-- bookmark -->
+              <a
+                href="{__bookmark.url}"
+                title="{__bookmark.title}"
+                class="b"
+                on:click="__link(event)"
+              >
+                <img src="chrome://favicon/{__bookmark.url || ''}" class="i">
+                <span class="t">{__bookmark.title}</span>
+              </a>
+            {/if}
+          {/each}
+        {/if}
+      </div>
+    {/if}
+  </div>
+{:else}
+  <!-- bookmark link -->
+  <a
+    href="{__node.url}"
+    title="{__node.title}"
+    class="b"
+    on:click="__link(event)"
+  >
+    <!-- only render img if there's a URL (better initial load performance) -->
+    {#if __node.url !== undefined}
+      <img src="chrome://favicon/{__node.url}" class="i">
+    {/if}
+    {#if __node.title !== ''}
+      <span class="t">{__node.title}</span>
+    {/if}
+  </a>
+{/if}
+
+<script>
+  import { onLinkClick } from '../helpers';
+
+  export default {
+    data: () => ({
+      __show: false,
+      __left: false,
+    }),
+    oncreate() {
+      this.__openTimer = null;
+      this.__closeTimer = null;
+    },
+    methods: {
+      __link: onLinkClick,
+
+      // set up event listener to close subfolder when another opens
+      __onOpen() {
+        this.root.on('open', (__lvl) => {
+          if (this.get().__show) {
+            if (__lvl === this.get().__lvl) {
+              this.set({ __show: false });
+              this.__resetCloseTimer();
+            }
+          }
+        });
+      },
+
+      // subfolder mouse enter
+      __onEnter() {
+        if (this.get().__show) {
+          this.__resetCloseTimer();
+        } else {
+          // delay to prevent accidental folder open
+          this.__openTimer = setTimeout(() => {
+            this.root.fire('open', this.get().__lvl);
+            this.set({ __show: true });
+            this.__onOpen();
+          }, 200); // open delay
+        }
+      },
+
+      // subfolder mouse leave
+      __onLeave() {
+        // reset open timer
+        if (this.__openTimer !== null) {
+          clearTimeout(this.__openTimer);
+          this.__openTimer = null;
+        }
+
+        // set up subfolder close timer
+        if (this.get().__show) {
+          this.__closeTimer = setTimeout(() => {
+            this.set({ __show: false });
+          }, 400); // close delay
+        }
+      },
+
+      __resetCloseTimer() {
+        if (this.__closeTimer !== null) {
+          clearTimeout(this.__closeTimer);
+          this.__closeTimer = null;
+        }
+      },
+    },
+  };
+</script>
+
+<style>
+  :global(.i),
+  :global(.t) {
+    pointer-events: none; /* prevent being the MouseEvent target */
+  }
+
+  /* favicon */
+  :global(.i) {
+    width: 16px;
+  }
+
+  /* bookmark title */
+  :global(.t) {
+    max-width: 15ch;
+    padding-left: 9px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  /* folder */
+  :global(.f) {
+    position: relative;
+    cursor: pointer;
+    /* TODO: @TESTING: Is this worth it? */
+    backface-visibility: hidden; /* performance hack; force GPU */
+  }
+
+  /* triangle; caret */
+  :global(.e) {
+    margin-left: auto;
+  }
+
+  /* left side folder */
+  /* FIXME: Not aligning correctly */
+  :global(.l) {
+    right: 0;
+    left: initial;
+
+    /* subfolder */
+    .s {
+      right: 100%;
+      left: initial;
+    }
+  }
+
+  /* subfolder */
+  :global(.s) {
+    position: absolute;
+    top: 40px;
+    left: 0;
+    display: flex;
+    flex-direction: column;
+    background: var(--c1);
+    filter: var(--s1);
+
+    /* bookmark */
+    .b {
+      padding: 9px;
+    }
+
+    /* bookmark title */
+    .t {
+      max-width: 40ch;
+    }
+
+    & & {
+      top: 0;
+      left: 100%;
+    }
+  }
+
+  /* bookmark item */
+  :global(.b) { /* stylelint-disable no-descending-specificity */
+    display: inline-flex;
+    align-items: center;
+    padding: 9px 7px;
+    color: var(--t);
+    text-decoration: none;
+    white-space: nowrap;
+
+    &:hover {
+      background-color: var(--c);
+    }
+  }
+</style>
