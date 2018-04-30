@@ -9,6 +9,28 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ## [Unreleased]
 
+## [0.6.0] - 2018-04-30
+
+### Added
+
+- Top sites are now also listed in search.
+
+### Changed
+
+- Complete rewrite from `Marko.js` to [`Svelte`](https://svelte.technology/guide#refs). After constant issues with marko I decided it was time for a change. Svelte works great for this use case and now not only is the extension faster and bundle files smaller, it's overcome all the extension's bugs.
+
+### Fixed
+
+- Search input not triggering search.
+- Pressing `ESC` doesn't clear search.
+- Bookmark item title incorrect when hovering subfolder items.
+- Build process fails in new nodejs versions.
+
+Known issues:
+
+- Having too many bookmarks in the bookmark bar is still a problem.
+- When sites don't have correct caching headers set up on their favicons it can delay fetching the other favicon images on page load. This causes a tiny but noticeable flash of favicon images.
+
 ## [0.5.1] - 2018-04-30
 
 ### Added
