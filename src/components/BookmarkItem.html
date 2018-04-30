@@ -16,7 +16,7 @@
 
     {#if __show}
       <!-- subfolder -->
-      <div class="s {__left && 'l'}">
+      <div class="s {__left ? 'l' : ''}">
         {#if __node.children.length === 0}
           <span class="b">(empty)</span>
         {:else}
@@ -155,20 +155,8 @@
 
   /* triangle; caret */
   :global(.e) {
+    padding-left: 10px;
     margin-left: auto;
-  }
-
-  /* left side folder */
-  /* FIXME: Not aligning correctly */
-  :global(.l) {
-    right: 0;
-    left: initial;
-
-    /* subfolder */
-    .s {
-      right: 100%;
-      left: initial;
-    }
   }
 
   /* subfolder */
@@ -197,8 +185,22 @@
     }
   }
 
+  /* stylelint-disable no-descending-specificity */
+
+  /* left side folder */
+  :global(.l) {
+    right: 0;
+    left: initial;
+
+    /* subfolder */
+    .s {
+      right: 100%;
+      left: initial;
+    }
+  }
+
   /* bookmark item */
-  :global(.b) { /* stylelint-disable no-descending-specificity */
+  :global(.b) {
     display: inline-flex;
     align-items: center;
     padding: 9px 7px;
