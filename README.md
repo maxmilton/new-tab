@@ -1,7 +1,9 @@
 <!-- markdownlint-disable first-line-h1 no-inline-html -->
 
-[![Build Status](https://travis-ci.org/MaxMilton/new-tab.svg?branch=master)](https://travis-ci.org/MaxMilton/new-tab)
-[![Known Vulnerabilities](https://snyk.io/test/github/MaxMilton/new-tab/badge.svg)](https://snyk.io/test/github/MaxMilton/new-tab)
+[![Build status](https://img.shields.io/travis/MaxMilton/new-tab.svg)](https://travis-ci.org/MaxMilton/new-tab)
+[![Coverage status](https://img.shields.io/codecov/c/github/MaxMilton/new-tab.svg)](https://codecov.io/gh/MaxMilton/new-tab)
+[![Chrome web store version](https://img.shields.io/chrome-web-store/v/cpcibnbdmpmcmnkhoiilpnlaepkepknb.svg)](https://chrome.google.com/webstore/detail/new-tab/cpcibnbdmpmcmnkhoiilpnlaepkepknb)
+[![Licence](https://img.shields.io/github/license/MaxMilton/new-tab.svg)](https://github.com/MaxMilton/new-tab/blob/master/LICENCE)
 
 # New Tab
 
@@ -34,9 +36,8 @@ Unobtrusive | No annoying things like entries in your right click menu.
 
 ### Technology
 
-* [Marko](https://markojs.com) JavaScript framework
-* [PostCSS](http://postcss.org/)
-* [Lasso](https://github.com/lasso-js/lasso) resource bundler
+* [Svelte](https://svelte.technology) JavaScript framework
+* [PostCSS](http://postcss.org)
 * [Chrome browser APIs](https://developer.chrome.com/apps/api_index)
 
 ## Known issues
