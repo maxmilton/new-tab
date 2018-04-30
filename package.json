@@ -41,12 +41,12 @@
     "postcss-load-config": "1.2.0",
     "rollup": "0.58.2",
     "rollup-plugin-buble": "0.19.2",
-    "rollup-plugin-commonjs": "9.1.0",
+    "rollup-plugin-commonjs": "9.1.1",
     "rollup-plugin-node-resolve": "3.3.0",
     "rollup-plugin-svelte": "4.1.0",
     "rollup-plugin-uglify": "3.0.0",
     "stylelint": "9.2.0",
-    "svelte": "2.1.1",
+    "svelte": "2.3.0",
     "svelte-jest": "0.1.0"
   },
   "engines": {
