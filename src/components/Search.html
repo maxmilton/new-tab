@@ -7,7 +7,7 @@
     bind:value="__search"
     type="text"
     ref:s
-    placeholder="Search tabs, bookmarks, and history..."
+    placeholder="Search tabs, bookmarks, history, and top sites..."
     autocomplete="off"
     on:keyup="__cancelSearch(event.key)"
   >
@@ -16,10 +16,10 @@
   {#if __tabs.length}
     <h2>Open Tabs ({__tabs.length}/{__tabsRaw.length})</h2>
 
-    {#each __tabs as __tab}
-      <a href="{__tab.url}" class="r" on:click="__onTabClick(__tab, event)">
-        <img src="{__tab.favIconUrl||'chrome://favicon/'}" class="i">
-        {__tab.title}
+    {#each __tabs as __item}
+      <a href="{__item.url}" class="r" on:click="__onTabClick(__item, event)">
+        <img src="{__item.favIconUrl||'chrome://favicon/'}" class="i">
+        {__item.title}
       </a>
     {/each}
   {:else}
@@ -62,6 +62,20 @@
   {:elseif __isSearching}
     <p class="g">No matching History</p>
   {/if}
+
+  <!-- Top Sites -->
+  {#if __topSites.length}
+    <h2>Top Sites ({__topSites.length}/{__topSitesRaw.length})</h2>
+
+    {#each __topSites as __item}
+      <a href="{__item.url}" class="r" on:click="__onTabClick(__item, event)">
+        <img src="chrome://favicon/{__item.url}" class="i">
+        {__item.title}
+      </a>
+    {/each}
+  {:elseif __isSearching}
+    <p class="g">No matching Top Sites</p>
+  {/if}
 </div>
 
 <script>
@@ -93,15 +107,31 @@
     };
   }
 
+  /**
+   * Search for matching title or URL.
+   * NOTE: Search query is passed as `this` value.
+   * @param {object} item
+   * @returns {Boolean}
+   */
+  function searchFilter(item) {
+    return item.title.toLowerCase().indexOf(this) > -1
+      || item.url
+        // remove URL protocol since it's unlikely to be searched for
+        .replace(/^.*?:\/\//, '')
+        .toLowerCase().indexOf(this) > -1;
+  }
+
   export default {
     data: () => ({
       __search: '',
-      __tabsRaw: [],
-      __tabs: [],
       __bookmarksRaw: [],
       __bookmarks: [],
       __historyRaw: [],
       __history: [],
+      __tabsRaw: [],
+      __tabs: [],
+      __topSites: [],
+      __topSitesRaw: [],
     }),
     computed: {
       __isSearching: ({ __search }) => __search !== '',
@@ -111,6 +141,13 @@
       this.__onSearch = debounce(this.__doSearch, 260); // ms delay
 
       this.__getTabs();
+
+      chrome.topSites.get((sites) => {
+        this.set({
+          __topSites: sites,
+          __topSitesRaw: sites,
+        });
+      });
 
       // update tab list on tab events
       chrome.tabs.onUpdated.addListener((tabId, changeInfo) => {
@@ -131,17 +168,17 @@
     methods: {
       __link: onLinkClick,
 
-      __doSearch() {
-        const { __search, __tabsRaw } = this.get();
+      __doSearch() { // eslint-disable-line consistent-return
+        const { __search, __tabsRaw, __topSitesRaw } = this.get();
 
         // reset search when input is empty
         if (__search === '') {
-          this.set({
-            __tabs: __tabsRaw,
+          return this.set({
             __bookmarks: [],
             __history: [],
+            __tabs: __tabsRaw,
+            __topSites: __topSitesRaw,
           });
-          return;
         }
 
         // search history (run first since it takes the longest)
@@ -162,9 +199,12 @@
 
         // search open tabs
         this.set({
-          __tabs: __tabsRaw.filter(item =>
-            item.title.toLowerCase().indexOf(__search) > -1 ||
-            item.url.toLowerCase().indexOf(__search) > -1),
+          __tabs: __tabsRaw.filter(searchFilter, __search),
+        });
+
+        // search top sites
+        this.set({
+          __topSites: __topSitesRaw.filter(searchFilter, __search),
         });
       },
 

@@ -20,6 +20,7 @@ export default {
     'history',
     'storage',
     'tabs',
+    'topSites',
   ],
   chrome_url_overrides: {
     newtab: 'n.html',
