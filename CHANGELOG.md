@@ -9,6 +9,8 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ## [Unreleased]
 
+## [0.5.1] - 2018-04-30
+
 ### Added
 
 - Initial test suite and testing automation setup.
@@ -145,7 +147,8 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 - Initial public version including all the basics; working proof of concept code, readme, etc. Not ready for release yet though, it's still far from being actually useful!
 
-[Unreleased]: https://github.com/MaxMilton/new-tab/compare/v0.5.0...HEAD
+[Unreleased]: https://github.com/MaxMilton/new-tab/compare/v0.5.1...HEAD
+[0.5.1]: https://github.com/MaxMilton/new-tab/compare/v0.5.0...v0.5.1
 [0.5.0]: https://github.com/MaxMilton/new-tab/compare/v0.4.1...v0.5.0
 [0.4.1]: https://github.com/MaxMilton/new-tab/compare/v0.4.0...v0.4.1
 [0.4.0]: https://github.com/MaxMilton/new-tab/compare/v0.3.2...v0.4.0
