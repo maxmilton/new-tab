@@ -72,18 +72,35 @@ function svelteMinifyHtml({ content }) {
 /**
  * Svelte preprocessor to turn PostCSS code into CSS.
  */
-function sveltePostcss({ content, filename }) {
-  return postcssLoadConfig({}).then(({ plugins, options }) =>
-    postcss(plugins)
-      .process(content, Object.assign(options, {
+function sveltePostcss(context = {}) {
+  return async ({ attributes, content, filename }) => {
+    if (attributes.type !== 'text/postcss') return;
+
+    try {
+      const { plugins, options } = await postcssLoadConfig(Object.assign(context, {
         from: filename,
         to: filename,
-      }))
-      .then(result => ({
+        map: { inline: false },
+      }));
+
+      const result = await postcss(plugins).process(content, options);
+
+      result.warnings().forEach((warn) => {
+        process.stderr.write(warn.toString());
+      });
+
+      return { // eslint-disable-line consistent-return
         code: result.css,
         map: result.map,
-      }))
-  ); // eslint-disable-line function-paren-newline
+      };
+    } catch (error) {
+      if (error.name === 'CssSyntaxError') {
+        process.stderr.write(error.message + error.showSourceCode());
+      } else {
+        throw error;
+      }
+    }
+  };
 }
 
 /**
@@ -133,7 +150,7 @@ export default [
         dev: !production,
         preprocess: {
           markup: svelteMinifyHtml,
-          style: sveltePostcss,
+          style: sveltePostcss(),
         },
         css: (css) => {
           const cssCode = production
@@ -179,7 +196,7 @@ export default [
         // shared: false, // not possible to override at the moment
         preprocess: {
           markup: svelteMinifyHtml,
-          style: sveltePostcss,
+          style: sveltePostcss(),
         },
         css: (css) => {
           const cssCode = production
