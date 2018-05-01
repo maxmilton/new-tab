@@ -57,16 +57,18 @@ function catchErr(err) { if (err) throw err; }
 /**
  * Svelte markup preprocessor to trim excessive whitespace.
  */
-function svelteMinifyHtml({ content }) {
-  const code = htmlMinifier.minify(content, {
-    caseSensitive: true,
-    collapseWhitespace: true,
-    // conservativeCollapse: true,
-    ignoreCustomFragments: [/{[^]*?}/],
-    keepClosingSlash: true,
-  });
+function svelteMinifyHtml({ safe = true }) {
+  return ({ content }) => {
+    const code = htmlMinifier.minify(content, {
+      caseSensitive: true,
+      collapseWhitespace: true,
+      conservativeCollapse: safe,
+      ignoreCustomFragments: [/{[^]*?}/],
+      keepClosingSlash: true,
+    });
 
-  return { code };
+    return { code };
+  };
 }
 
 /**
@@ -149,7 +151,7 @@ export default [
       svelte({
         dev: !production,
         preprocess: {
-          markup: svelteMinifyHtml,
+          markup: svelteMinifyHtml({ safe: false }),
           style: sveltePostcss(),
         },
         css: (css) => {
@@ -195,7 +197,7 @@ export default [
         dev: !production,
         // shared: false, // not possible to override at the moment
         preprocess: {
-          markup: svelteMinifyHtml,
+          markup: svelteMinifyHtml({ safe: false }),
           style: sveltePostcss(),
         },
         css: (css) => {
