@@ -30,7 +30,6 @@
                 href="{__bookmark.url}"
                 title="{__bookmark.title}"
                 class="b"
-                on:click="__link(event)"
               >
                 <img src="chrome://favicon/{__bookmark.url || ''}" class="i">
                 <span class="t">{__bookmark.title}</span>
@@ -47,7 +46,6 @@
     href="{__node.url}"
     title="{__node.title}"
     class="b"
-    on:click="__link(event)"
   >
     <!-- only render img if there's a URL (better initial load performance) -->
     {#if __node.url !== undefined}
@@ -60,8 +58,6 @@
 {/if}
 
 <script>
-  import { onLinkClick } from '../helpers';
-
   export default {
     data: () => ({
       __show: false,
@@ -72,8 +68,6 @@
       this.__closeTimer = null;
     },
     methods: {
-      __link: onLinkClick,
-
       // set up event listener to close subfolder when another opens
       __onOpen() {
         this.root.on('open', (__lvl) => {

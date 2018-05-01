@@ -2,19 +2,19 @@
   <div id="i">☰</div>
 
   <div id="d">
-    <a href="chrome-search://local-ntp/local-ntp.html" class="m" on:click="__link(event)">
+    <a href="chrome-search://local-ntp/local-ntp.html" class="m">
       Open Default Tab
     </a>
-    <a href="chrome://bookmarks/" class="m" on:click="__link(event)">
+    <a href="chrome://bookmarks/" class="m">
       Bookmarks Manager
     </a>
-    <a href="chrome://downloads/" class="m" on:click="__link(event)">
+    <a href="chrome://downloads/" class="m">
       Downloads
     </a>
-    <a href="chrome://history/" class="m" on:click="__link(event)">
+    <a href="chrome://history/" class="m">
       History
     </a>
-    <a href="chrome://settings/passwords" class="m" on:click="__link(event)">
+    <a href="chrome://settings/passwords" class="m">
       Passwords
     </a>
 
@@ -30,13 +30,10 @@
 </div>
 
 <script>
-  import { onLinkClick } from '../helpers';
-
   export default {
     methods: {
-      __link: onLinkClick,
-
       __settings(event) {
+        event.stopPropagation();
         event.preventDefault();
         chrome.runtime.openOptionsPage();
       },
