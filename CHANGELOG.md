@@ -9,6 +9,16 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ## [Unreleased]
 
+## [0.6.1] - 2018-05-01
+
+### Changed
+
+- Simplify link handling; now a single listener on `window` rather than a listener for each link. Results in smaller bundle file size and less overall memory usage.
+
+### Fixed
+
+- Clicking on a top site link doesn't go to the site and just closes the tab.
+
 ## [0.6.0] - 2018-04-30
 
 ### Added
@@ -169,7 +179,9 @@ Known issues:
 
 - Initial public version including all the basics; working proof of concept code, readme, etc. Not ready for release yet though, it's still far from being actually useful!
 
-[Unreleased]: https://github.com/MaxMilton/new-tab/compare/v0.5.1...HEAD
+[Unreleased]: https://github.com/MaxMilton/new-tab/compare/v0.6.1...HEAD
+[0.6.1]: https://github.com/MaxMilton/new-tab/compare/v0.6.0...v0.6.1
+[0.6.0]: https://github.com/MaxMilton/new-tab/compare/v0.5.1...v0.6.0
 [0.5.1]: https://github.com/MaxMilton/new-tab/compare/v0.5.0...v0.5.1
 [0.5.0]: https://github.com/MaxMilton/new-tab/compare/v0.4.1...v0.5.0
 [0.4.1]: https://github.com/MaxMilton/new-tab/compare/v0.4.0...v0.4.1
