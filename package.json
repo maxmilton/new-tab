@@ -35,7 +35,7 @@
     "clean-css": "4.1.11",
     "codecov": "3.0.1",
     "eslint": "4.19.1",
-    "html-minifier": "^3.5.15",
+    "html-minifier": "3.5.15",
     "jest": "22.4.3",
     "postcss": "6.0.22",
     "postcss-load-config": "1.2.0",
