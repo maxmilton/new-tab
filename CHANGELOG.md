@@ -9,6 +9,16 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ## [Unreleased]
 
+### Changed
+
+- Build improvements.
+- Updated dependencies.
+
+### Fixed
+
+- Not obvious when search result item text is overflowing.
+- Svelte dev feedback source incorrect (due to HTML whitespace minification).
+
 ## [0.6.1] - 2018-05-01
 
 ### Changed
