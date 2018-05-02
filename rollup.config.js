@@ -1,4 +1,5 @@
 import fs from 'fs';
+import path from 'path';
 import svelte from 'rollup-plugin-svelte';
 import resolve from 'rollup-plugin-node-resolve';
 import commonjs from 'rollup-plugin-commonjs';
@@ -80,16 +81,51 @@ function sveltePostcss(context = {}) {
 
     try {
       const { plugins, options } = await postcssLoadConfig(Object.assign(context, {
-        from: filename,
-        to: filename,
-        map: { inline: false },
+        from: path.relative(process.cwd(), filename),
+        to: path.relative(process.cwd(), filename),
+        map: { inline: false, annotation: false },
       }));
 
-      const result = await postcss(plugins).process(content, options);
+      // const result = await postcss(plugins).process(content, options);
+      let result = await postcss(plugins).process(content, options);
 
       result.warnings().forEach((warn) => {
         process.stderr.write(warn.toString());
       });
+
+      // ======================================================
+
+      /**
+       * Force global CSS
+       */
+
+      if (attributes.global) {
+        result = await postcss([(root) => {
+          root.walkRules((rule) => {
+            const newSelectors = selectorParser((selectors) => {
+              selectors.each((node) => {
+                const selector = node.toString();
+
+                // only override selectors which are not already global
+                if (selector.indexOf(':global') !== 0 && selector.indexOf('-global-') !== 0) {
+                  // wrap the selector in a global pseudo element
+                  node.prepend(selectorParser.pseudo({ value: ':global(' }));
+                  node.append(selectorParser.pseudo({ value: ')' }));
+                }
+              });
+            }).processSync(rule);
+            rule.selectors = newSelectors.split(',');
+          });
+        }]).process(result.css, options);
+
+        // console.log('\n\n@@ RESULT:\n', result.css);
+
+        result.warnings().forEach((warn) => {
+          process.stderr.write(warn.toString());
+        });
+      }
+
+      // ======================================================
 
       return { // eslint-disable-line consistent-return
         code: result.css,
@@ -151,7 +187,8 @@ export default [
       svelte({
         dev: !production,
         preprocess: {
-          markup: svelteMinifyHtml({ safe: false }),
+          // only remove whitespace in production; better feedback during development
+          ...(production ? { markup: svelteMinifyHtml({ safe: false })} : {}),
           style: sveltePostcss(),
         },
         css: (css) => {
@@ -197,7 +234,8 @@ export default [
         dev: !production,
         // shared: false, // not possible to override at the moment
         preprocess: {
-          markup: svelteMinifyHtml({ safe: false }),
+          // only remove whitespace in production; better feedback during development
+          ...(production ? { markup: svelteMinifyHtml({ safe: false }) } : {}),
           style: sveltePostcss(),
         },
         css: (css) => {
