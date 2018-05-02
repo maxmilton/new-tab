@@ -264,11 +264,12 @@
   }
 
   :global(.r) { /* search result */
-    display: flex;
+    display: block;
     align-items: center;
     padding: 9px 0;
     overflow: hidden;
     color: var(--t);
+    text-overflow: ellipsis;
     white-space: nowrap;
 
     & > .i {
