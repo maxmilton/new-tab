@@ -9,10 +9,12 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ## [Unreleased]
 
+## [0.6.2] - 2018-05-03
+
 ### Changed
 
 - Build improvements.
-- Updated dependencies.
+- Updated dependencies (including new version of Svelte which resulted in more optimised and smaller JavaScript bundles).
 
 ### Fixed
 
@@ -189,7 +191,8 @@ Known issues:
 
 - Initial public version including all the basics; working proof of concept code, readme, etc. Not ready for release yet though, it's still far from being actually useful!
 
-[Unreleased]: https://github.com/MaxMilton/new-tab/compare/v0.6.1...HEAD
+[Unreleased]: https://github.com/MaxMilton/new-tab/compare/v0.6.2...HEAD
+[0.6.2]: https://github.com/MaxMilton/new-tab/compare/v0.6.1...v0.6.2
 [0.6.1]: https://github.com/MaxMilton/new-tab/compare/v0.6.0...v0.6.1
 [0.6.0]: https://github.com/MaxMilton/new-tab/compare/v0.5.1...v0.6.0
 [0.5.1]: https://github.com/MaxMilton/new-tab/compare/v0.5.0...v0.5.1
