@@ -719,9 +719,9 @@
     call-me-maybe "^1.0.1"
     glob-to-regexp "^0.3.0"
 
-"@types/chrome@0.0.64":
-  version "0.0.64"
-  resolved "https://registry.yarnpkg.com/@types/chrome/-/chrome-0.0.64.tgz#c5098de7a5a522ca6271809279973e42d2102c20"
+"@types/chrome@0.0.65":
+  version "0.0.65"
+  resolved "https://registry.yarnpkg.com/@types/chrome/-/chrome-0.0.65.tgz#bd19a4cff5a7f91ce5e487cfb0c7cca59271a053"
   dependencies:
     "@types/filesystem" "*"
 
