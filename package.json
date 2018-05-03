@@ -29,7 +29,7 @@
     "raven-js": "3.24.2"
   },
   "devDependencies": {
-    "@types/chrome": "0.0.64",
+    "@types/chrome": "0.0.65",
     "@wearegenki/dev": "0.12.0",
     "@wearegenki/test": "0.10.0",
     "clean-css": "4.1.11",
@@ -46,7 +46,7 @@
     "rollup-plugin-svelte": "4.1.0",
     "rollup-plugin-uglify": "3.0.0",
     "stylelint": "9.2.0",
-    "svelte": "2.4.1",
+    "svelte": "2.4.3",
     "svelte-jest": "0.1.0"
   },
   "engines": {
