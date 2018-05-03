@@ -5793,9 +5793,9 @@ svelte-jest@0.1.0:
   dependencies:
     svelte "^1.58.0"
 
-svelte@2.4.1:
-  version "2.4.1"
-  resolved "https://registry.yarnpkg.com/svelte/-/svelte-2.4.1.tgz#63b579103ab26a2df4956c83ee9a9718221fa326"
+svelte@2.4.2:
+  version "2.4.2"
+  resolved "https://registry.yarnpkg.com/svelte/-/svelte-2.4.2.tgz#763b3737d0e17754c0af3b4a32dbdf28b7bd37b6"
 
 svelte@^1.58.0:
   version "1.64.1"
