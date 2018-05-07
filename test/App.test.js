@@ -8,6 +8,6 @@ describe('App root component', () => {
   it('should render correctly', () => {
     const target = document.createElement('div');
     new App({ target });
-    expect(target.textContent).toMatchSnapshot();
+    expect(target.innerHTML).toMatchSnapshot();
   });
 });

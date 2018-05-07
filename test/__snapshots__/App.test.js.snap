@@ -1,33 +1,33 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`App root component should render correctly 1`] = `
-"
+"<div id=\\"a\\"><div id=\\"b\\"></div>
+
+  <a href=\\"undefined\\" title=\\"Other bookmarks\\" class=\\"b\\">
+    <span class=\\"t\\">Other bookmarks</span></a><!----></div>
+<div id=\\"m\\"><div id=\\"i\\">☰</div>
+
+  <div id=\\"d\\"><a href=\\"chrome-search://local-ntp/local-ntp.html\\" class=\\"m\\">Open Default Tab</a>
+    <a href=\\"chrome://bookmarks/\\" class=\\"m\\">Bookmarks Manager</a>
+    <a href=\\"chrome://downloads/\\" class=\\"m\\">Downloads</a>
+    <a href=\\"chrome://history/\\" class=\\"m\\">History</a>
+    <a href=\\"chrome://settings/passwords\\" class=\\"m\\">Passwords</a>
+
+    <hr>
+
+    <a href=\\"\\" class=\\"m\\">New Tab Settings</a>
+    <a href=\\"https://github.com/MaxMilton/new-tab/issues\\" class=\\"m\\">Submit Bug</a></div></div>
+<div class=\\"c\\"><input id=\\"s\\" type=\\"text\\" placeholder=\\"Search tabs, bookmarks, history, and top sites...\\" autocomplete=\\"off\\">
 
   
-    Other bookmarks
-☰
-
-  Open Default Tab
-    Bookmarks Manager
-    Downloads
-    History
-    Passwords
-
-    
-
-    New Tab Settings
-    Submit Bug
-
-
-  
-  No matching Open Tabs
-
-  
-  
+  <p class=\\"g\\">No matching Open Tabs</p>
 
   
   
 
   
-  "
+  
+
+  
+  </div>"
 `;
