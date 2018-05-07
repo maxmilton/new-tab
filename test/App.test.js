@@ -8,8 +8,6 @@ describe('App root component', () => {
   it('should render correctly', () => {
     const target = document.createElement('div');
     new App({ target });
-    // expect(target.textContent).toBe('Hello App!');
-    // expect(target.textContent).toEqual(expect.stringContaining('New Tab Settings'));
     expect(target.textContent).toMatchSnapshot();
   });
 });
