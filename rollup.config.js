@@ -3,7 +3,6 @@ import path from 'path';
 import svelte from 'rollup-plugin-svelte';
 import resolve from 'rollup-plugin-node-resolve';
 import commonjs from 'rollup-plugin-commonjs';
-// import buble from 'rollup-plugin-buble';
 import uglify from 'rollup-plugin-uglify';
 import htmlMinifier from 'html-minifier';
 import postcssLoadConfig from 'postcss-load-config';
@@ -86,46 +85,11 @@ function sveltePostcss(context = {}) {
         map: { inline: false, annotation: false },
       }));
 
-      // const result = await postcss(plugins).process(content, options);
-      let result = await postcss(plugins).process(content, options);
+      const result = await postcss(plugins).process(content, options);
 
       result.warnings().forEach((warn) => {
         process.stderr.write(warn.toString());
       });
-
-      // ======================================================
-
-      /**
-       * Force global CSS
-       */
-
-      if (attributes.global) {
-        result = await postcss([(root) => {
-          root.walkRules((rule) => {
-            const newSelectors = selectorParser((selectors) => {
-              selectors.each((node) => {
-                const selector = node.toString();
-
-                // only override selectors which are not already global
-                if (selector.indexOf(':global') !== 0 && selector.indexOf('-global-') !== 0) {
-                  // wrap the selector in a global pseudo element
-                  node.prepend(selectorParser.pseudo({ value: ':global(' }));
-                  node.append(selectorParser.pseudo({ value: ')' }));
-                }
-              });
-            }).processSync(rule);
-            rule.selectors = newSelectors.split(',');
-          });
-        }]).process(result.css, options);
-
-        // console.log('\n\n@@ RESULT:\n', result.css);
-
-        result.warnings().forEach((warn) => {
-          process.stderr.write(warn.toString());
-        });
-      }
-
-      // ======================================================
 
       return { // eslint-disable-line consistent-return
         code: result.css,
@@ -210,11 +174,8 @@ export default [
           }), catchErr);
         },
       }),
-
       resolve(),
       commonjs(),
-
-      // production && buble({ exclude: 'node_modules/**' }),
       production && uglify(uglifyOpts),
     ],
   },
@@ -251,8 +212,6 @@ export default [
           }), catchErr);
         },
       }),
-
-      // production && buble({ exclude: 'node_modules/**' }),
       production && uglify(uglifyOpts),
     ],
   },

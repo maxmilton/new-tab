@@ -9,6 +9,10 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ## [Unreleased]
 
+### Changed
+
+- Updated Svele to v2.5.0 for better code generation.
+
 ## [0.6.2] - 2018-05-03
 
 ### Changed

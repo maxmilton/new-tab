@@ -18,7 +18,7 @@
       <!-- subfolder -->
       <div class="s {__left ? 'l' : ''}">
         {#if __node.children.length === 0}
-          <span class="b">(empty)</span>
+          <span class="b" title="">(empty)</span>
         {:else}
           {#each __node.children as __bookmark}
             {#if __bookmark.children !== undefined}

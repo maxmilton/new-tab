@@ -1,28 +1,12 @@
 const svelte = require('svelte');
-// const postcssLoadConfig = require('postcss-load-config');
-// const postcss = require('postcss');
 
 function process(src, filename) {
-  // const normalized = svelte.preprocess(src, {
-  //   style: ({ content, filepath }) =>
-  //     postcssLoadConfig({}).then(({ plugins }) =>
-  //       postcss(plugins)
-  //         .process(content, {
-  //           from: filepath,
-  //           to: filepath,
-  //         })
-  //         .then(result => ({
-  //           code: result.css,
-  //           map: result.map,
-  //         }))
-  //     ), // eslint-disable-line function-paren-newline
-  // });
+  // strip out <style> tags to prevent failure when unable to parse PostCSS/SASS etc.
+  const re = /<style[^>]*>([\S\s]*?)<\/style>/g;
+  const normalised = src.replace(re, '');
 
-  // console.log('@!@!', normalized.toString());
-
-  // const result = svelte.compile(normalized.toString(), {
-  const result = svelte.compile(src, {
-    // css: false,
+  const result = svelte.compile(normalised, {
+    css: false,
     format: 'cjs',
     filename,
     onwarn(warning, onwarn) {
@@ -33,8 +17,8 @@ function process(src, filename) {
   });
 
   return {
-    code: result.code,
-    map: result.map,
+    code: result.js.code,
+    map: result.js.map,
   };
 }
 
