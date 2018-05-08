@@ -9,9 +9,16 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ## [Unreleased]
 
+## [0.6.3] - 2018-05-09
+
 ### Changed
 
-- Updated Svele to v2.5.0 for better code generation.
+- Shortened search input placeholder text.
+- Updated Svelte resulting in better code generation.
+
+### Fixed
+
+- Long bookmark folder titles are not truncated.
 
 ## [0.6.2] - 2018-05-03
 
@@ -195,7 +202,8 @@ Known issues:
 
 - Initial public version including all the basics; working proof of concept code, readme, etc. Not ready for release yet though, it's still far from being actually useful!
 
-[Unreleased]: https://github.com/MaxMilton/new-tab/compare/v0.6.2...HEAD
+[Unreleased]: https://github.com/MaxMilton/new-tab/compare/v0.6.3...HEAD
+[0.6.3]: https://github.com/MaxMilton/new-tab/compare/v0.6.2...v0.6.3
 [0.6.2]: https://github.com/MaxMilton/new-tab/compare/v0.6.1...v0.6.2
 [0.6.1]: https://github.com/MaxMilton/new-tab/compare/v0.6.0...v0.6.1
 [0.6.0]: https://github.com/MaxMilton/new-tab/compare/v0.5.1...v0.6.0
