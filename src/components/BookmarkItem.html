@@ -6,7 +6,7 @@
     on:mouseenter="__onEnter()"
     on:mouseleave="__onLeave()"
   >
-    {__node.title}
+    <span class="t">{__node.title}</span>
 
     {#if __node.parentId > 1}
       <!-- subfolder indicator -->
@@ -131,20 +131,10 @@
     width: 16px;
   }
 
-  /* bookmark title */
-  :global(.t) {
-    max-width: 15ch;
-    padding-left: 9px;
-    overflow: hidden;
-    text-overflow: ellipsis;
-  }
-
   /* folder */
   :global(.f) {
     position: relative;
     cursor: pointer;
-    /* TODO: @TESTING: Is this worth it? */
-    backface-visibility: hidden; /* performance hack; force GPU */
   }
 
   /* triangle; caret */
@@ -152,6 +142,19 @@
     padding-left: 10px;
     margin-left: auto;
   }
+
+  /* bookmark title */
+  :global(.t) {
+    max-width: 15ch;
+    overflow: hidden;
+    text-overflow: ellipsis;
+
+    :global(.i) + & {
+      padding-left: 9px;
+    }
+  }
+
+  /* stylelint-disable no-descending-specificity */
 
   /* subfolder */
   :global(.s) {
@@ -178,8 +181,6 @@
       left: 100%;
     }
   }
-
-  /* stylelint-disable no-descending-specificity */
 
   /* left side folder */
   :global(.l) {
