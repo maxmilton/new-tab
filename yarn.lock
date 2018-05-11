@@ -1031,9 +1031,9 @@ code-point-at@^1.0.0:
   version "1.1.0"
   resolved "https://registry.yarnpkg.com/code-point-at/-/code-point-at-1.1.0.tgz#0d070b4d043a5bea33a2f1a40e2edb3d9a4ccf77"
 
-codecov@3.0.1:
-  version "3.0.1"
-  resolved "https://registry.yarnpkg.com/codecov/-/codecov-3.0.1.tgz#cc4c5cd1955c6be47f6dda2f8c55bcc43c732dca"
+codecov@3.0.2:
+  version "3.0.2"
+  resolved "https://registry.yarnpkg.com/codecov/-/codecov-3.0.2.tgz#aea43843a5cd2fb6b7e488b2eff25d367ab70b12"
   dependencies:
     argv "0.0.2"
     request "^2.81.0"
@@ -4243,9 +4243,9 @@ randomatic@^1.1.3:
     is-number "^3.0.0"
     kind-of "^4.0.0"
 
-raven-js@3.24.2:
-  version "3.24.2"
-  resolved "https://registry.yarnpkg.com/raven-js/-/raven-js-3.24.2.tgz#c5cacb363b198812e80cd4c6714e5e478549ebcf"
+raven-js@3.25.0:
+  version "3.25.0"
+  resolved "https://registry.yarnpkg.com/raven-js/-/raven-js-3.25.0.tgz#4ee92410b61665d730f34a54a0893fbb3769f5cb"
 
 rc@^1.1.7:
   version "1.2.7"
@@ -5083,9 +5083,9 @@ supports-color@^5.1.0, supports-color@^5.3.0, supports-color@^5.4.0:
   dependencies:
     has-flag "^3.0.0"
 
-svelte@2.5.0:
-  version "2.5.0"
-  resolved "https://registry.yarnpkg.com/svelte/-/svelte-2.5.0.tgz#f8926805f655631cd0f38ed3eddbdfff498de42e"
+svelte@2.5.1:
+  version "2.5.1"
+  resolved "https://registry.yarnpkg.com/svelte/-/svelte-2.5.1.tgz#e9693ec905a333a33499a66102275a2c894a44d6"
 
 svg-tags@^1.0.0:
   version "1.0.0"

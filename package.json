@@ -26,7 +26,7 @@
     "test:dev": "yarn test --coverage --notify --watch"
   },
   "dependencies": {
-    "raven-js": "3.24.2"
+    "raven-js": "3.25.0"
   },
   "devDependencies": {
     "@babel/core": "7.0.0-beta.46",
@@ -37,7 +37,7 @@
     "babel-core": "7.0.0-bridge.0",
     "babel-jest": "22.4.3",
     "clean-css": "4.1.11",
-    "codecov": "3.0.1",
+    "codecov": "3.0.2",
     "eslint": "4.19.1",
     "html-minifier": "3.5.15",
     "jest": "22.4.3",
@@ -50,7 +50,7 @@
     "rollup-plugin-uglify": "3.0.0",
     "sinon-chrome": "2.3.1",
     "stylelint": "9.2.0",
-    "svelte": "2.5.0"
+    "svelte": "2.5.1"
   },
   "engines": {
     "node": ">= 9.10.0"
