@@ -4741,9 +4741,9 @@ signal-exit@^3.0.0, signal-exit@^3.0.2:
   version "3.0.2"
   resolved "https://registry.yarnpkg.com/signal-exit/-/signal-exit-3.0.2.tgz#b5fdc08f1287ea1178628e415e25132b73646c6d"
 
-sinon-chrome@2.3.1:
-  version "2.3.1"
-  resolved "https://registry.yarnpkg.com/sinon-chrome/-/sinon-chrome-2.3.1.tgz#40138f4b6d5a10f211f5faf086cd9e8879338426"
+sinon-chrome@2.3.2:
+  version "2.3.2"
+  resolved "https://registry.yarnpkg.com/sinon-chrome/-/sinon-chrome-2.3.2.tgz#0e4253bd1eceaffa57e2164bc817c2c7b4ef3912"
   dependencies:
     lodash "^4.16.3"
     sinon "^4.4.2"
