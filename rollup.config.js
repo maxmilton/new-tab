@@ -120,7 +120,7 @@ export default [
           writeFile(`${__dirname}/dist/n.html`, compileHtml(template)({
             banner,
             title: 'New Tab',
-            content: `<script src=n.js defer></script>\n<style>${cssCode}${cssMap}</style>\n<script>${loaderCode}</script>`,
+            content: `<script src=n.js type=module></script>\n<style>${cssCode}${cssMap}</style>\n<script>${loaderCode}</script>`,
           }), catchErr);
         },
       }),
@@ -158,7 +158,7 @@ export default [
           writeFile(`${__dirname}/dist/s.html`, compileHtml(template)({
             banner,
             title: 'New Tab Settings',
-            content: `<script src=s.js defer></script>\n<style>${cssCode}</style>\n<script>${loaderCode}</script>`,
+            content: `<script src=s.js type=module></script>\n<style>${cssCode}</style>\n<script>${loaderCode}</script>`,
           }), catchErr);
         },
       }),
