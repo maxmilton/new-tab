@@ -1,17 +1,18 @@
-import fs from 'fs';
+import { readFile, readFileSync, writeFile } from 'fs';
 import preprocessMarkup from '@minna-ui/svelte-preprocess-markup';
 import preprocessStyle from '@minna-ui/svelte-preprocess-style';
 import svelte from 'rollup-plugin-svelte';
 import resolve from 'rollup-plugin-node-resolve';
 import commonjs from 'rollup-plugin-commonjs';
 import uglify from 'rollup-plugin-uglify';
+import uglifyES from 'uglify-es'; // eslint-disable-line import/no-extraneous-dependencies
 import CleanCSS from 'clean-css';
 import manifest from './manifest';
 
 const production = !process.env.ROLLUP_WATCH;
 
 const banner = `New Tab ${process.env.APP_RELEASE} | github.com/MaxMilton/new-tab`;
-const template = fs.readFileSync(`${__dirname}/src/template.html`, 'utf8');
+const template = readFileSync(`${__dirname}/src/template.html`, 'utf8');
 
 const uglifyOpts = {
   compress: {
@@ -68,18 +69,18 @@ function compileHtml(html) {
  * @param {string} nameShort The output file name.
  */
 function makeTheme(nameLong, nameShort) {
-  fs.readFile(`${__dirname}/src/themes/${nameLong}.css`, 'utf8', async (err, res) => {
+  readFile(`${__dirname}/src/themes/${nameLong}.css`, 'utf8', async (err, res) => {
     if (err) throw err;
 
     const css = new CleanCSS(cleanCssOpts).minify(res).styles;
-    fs.writeFile(`${__dirname}/dist/${nameShort}.css`, css, catchErr);
+    writeFile(`${__dirname}/dist/${nameShort}.css`, css, catchErr);
   });
 }
 
 // Optimise loader code
-// eslint-disable-next-line import/no-extraneous-dependencies
-const loaderCode = require('uglify-es').minify(
-  fs.readFileSync(`${__dirname}/src/loader.js`, 'utf8'),
+
+const loaderCode = uglifyES.minify(
+  readFileSync(`${__dirname}/src/loader.js`, 'utf8'),
   Object.assign({}, uglifyOpts)
 ).code;
 
@@ -107,14 +108,16 @@ export default [
             ? new CleanCSS(cleanCssOpts).minify(css.code).styles
             : css.code;
 
-          // TODO: Once source maps are supported in svelte preprocessors, enable this:
+          // TODO: Enable once source maps are supported in svelte preprocess()
           // const cssMap = production
           //   ? ''
-          //   : `\n/*# sourceMappingURL=data:application/json;base64,${Buffer.from(JSON.stringify(css.map)).toString('base64')}*/`;
+          //   : `\n/*# sourceMappingURL=data:application/json;base64,${
+          //     Buffer.from(JSON.stringify(css.map)).toString('base64')
+          //   }*/`;
           const cssMap = '';
 
           // compile HTML from template
-          fs.writeFile(`${__dirname}/dist/n.html`, compileHtml(template)({
+          writeFile(`${__dirname}/dist/n.html`, compileHtml(template)({
             banner,
             title: 'New Tab',
             content: `<script src=n.js defer></script>\n<style>${cssCode}${cssMap}</style>\n<script>${loaderCode}</script>`,
@@ -152,7 +155,7 @@ export default [
             : css.code;
 
           // compile HTML from template
-          fs.writeFile(`${__dirname}/dist/s.html`, compileHtml(template)({
+          writeFile(`${__dirname}/dist/s.html`, compileHtml(template)({
             banner,
             title: 'New Tab Settings',
             content: `<script src=s.js defer></script>\n<style>${cssCode}</style>\n<script>${loaderCode}</script>`,
@@ -195,7 +198,7 @@ export default [
 ];
 
 // Extension manifest
-fs.writeFile(`${__dirname}/dist/manifest.json`, JSON.stringify(manifest), catchErr);
+writeFile(`${__dirname}/dist/manifest.json`, JSON.stringify(manifest), catchErr);
 
 // Themes
 // NOTE: Dark theme is omitted because it's embedded into the page with the other CSS
