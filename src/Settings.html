@@ -11,8 +11,8 @@
 
 <div class="pb">
   <label for="opt-out">
-    <input id="opt-out" bind:checked="__errTrack" type="checkbox">
-    Allow error tracking
+    <input id="opt-out" bind:checked="__errDetect" type="checkbox">
+    Allow error detection
   </label>
 </div>
 
@@ -26,14 +26,14 @@
   export default {
     data: () => ({
       __theme: 'd', // frontend theme
-      __errTrack: true, // error tracking opt-out
+      __errDetect: true, // error detection opt-out
     }),
     oncreate() {
       // check existing settings
       chrome.storage.sync.get(null, (settings) => {
         this.set({
           __theme: settings.t || 'd',
-          __errTrack: !settings.e,
+          __errDetect: !settings.e,
         });
       });
     },
@@ -44,9 +44,9 @@
           chrome.storage.sync.set({ t: current.__theme, td: Date.now() });
         }
 
-        if (changed.__errTrack) {
-          console.log('__changeOptOut', current.__errTrack);
-          chrome.storage.sync.set({ e: !current.__errTrack, ed: Date.now() });
+        if (changed.__errDetect) {
+          console.log('__changeOptOut', current.__errDetect);
+          chrome.storage.sync.set({ e: !current.__errDetect, ed: Date.now() });
         }
       }
     },

@@ -166,7 +166,7 @@ export default [
     ],
   },
 
-  // Error tracking
+  // Error detection
   {
     input: 'src/errors.js',
     output: {
