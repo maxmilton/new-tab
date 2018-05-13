@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`App root component should render correctly 1`] = `
+exports[`App root component renders correctly 1`] = `
 "<div id=\\"a\\"><div id=\\"b\\"></div>
 
   <a href=\\"undefined\\" title=\\"Other bookmarks\\" class=\\"b\\">

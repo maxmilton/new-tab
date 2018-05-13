@@ -1,11 +1,11 @@
 'use strict';
 
-const App = require('../src/App.html');
+const Search = require('../src/components/Search.html');
 
-describe('App root component', () => {
+describe('Search component', () => {
   it('renders correctly', () => {
     const target = document.createElement('div');
-    new App({ target });
+    new Search({ target });
     expect(target.innerHTML).toMatchSnapshot();
   });
 });

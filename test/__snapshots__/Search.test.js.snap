@@ -1,0 +1,17 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Search component renders correctly 1`] = `
+"<div class=\\"c\\"><input id=\\"s\\" type=\\"text\\" placeholder=\\"Search in browser...\\" autocomplete=\\"off\\">
+
+  
+  <p class=\\"g\\">No matching Open Tabs</p>
+
+  
+  
+
+  
+  
+
+  
+  </div>"
+`;

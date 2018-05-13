@@ -1,0 +1,16 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Menu root component renders correctly 1`] = `
+"<div id=\\"m\\"><div id=\\"i\\">☰</div>
+
+  <div id=\\"d\\"><a href=\\"chrome-search://local-ntp/local-ntp.html\\" class=\\"m\\">Open Default Tab</a>
+    <a href=\\"chrome://bookmarks/\\" class=\\"m\\">Bookmarks Manager</a>
+    <a href=\\"chrome://downloads/\\" class=\\"m\\">Downloads</a>
+    <a href=\\"chrome://history/\\" class=\\"m\\">History</a>
+    <a href=\\"chrome://settings/passwords\\" class=\\"m\\">Passwords</a>
+
+    <hr>
+
+    <a class=\\"m\\">New Tab Settings</a>
+    <a href=\\"https://github.com/MaxMilton/new-tab/issues\\" class=\\"m\\">Submit Bug</a></div></div>"
+`;

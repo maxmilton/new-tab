@@ -1,11 +1,11 @@
 'use strict';
 
-const App = require('../src/App.html');
+const Settings = require('../src/Settings.html');
 
-describe('App root component', () => {
+describe('Settings root component', () => {
   it('renders correctly', () => {
     const target = document.createElement('div');
-    new App({ target });
+    new Settings({ target });
     expect(target.innerHTML).toMatchSnapshot();
   });
 });
