@@ -1,7 +1,9 @@
-import chrome from 'sinon-chrome';
-import App from '../src/App.html';
+'use strict';
 
-// set up chrome api mocks
+const chrome = require('sinon-chrome');
+const App = require('../src/App.html');
+
+// set up Chrome API mocks
 global.chrome = chrome;
 
 describe('App root component', () => {

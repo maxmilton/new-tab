@@ -1,8 +1,5 @@
 {
   "extends": [
-    "@wearegenki/eslint-config/jest"
-  ],
-  "rules": {
-    "no-new": "off"
-  }
+    "@minna-ui/eslint-config/jest"
+  ]
 }

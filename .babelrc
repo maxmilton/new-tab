@@ -1,9 +1,7 @@
 {
   "env": {
     "test": {
-      "plugins": [
-        "@babel/transform-modules-commonjs"
-      ]
+      "presets": ["@minna-ui/jest-config/babel-preset.js"]
     }
   }
 }

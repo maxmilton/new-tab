@@ -29,20 +29,18 @@
     "raven-js": "3.25.1"
   },
   "devDependencies": {
-    "@babel/core": "7.0.0-beta.46",
-    "@babel/plugin-transform-modules-commonjs": "7.0.0-beta.46",
+    "@minna-ui/eslint-config": "0.0.0",
+    "@minna-ui/jest-config": "0.0.0",
+    "@minna-ui/postcss-config": "0.0.0",
+    "@minna-ui/stylelint-config": "0.0.0",
+    "@minna-ui/svelte-preprocess-markup": "0.0.0",
+    "@minna-ui/svelte-preprocess-style": "0.0.0",
     "@types/chrome": "0.0.65",
-    "@types/jest": "22.2.3",
-    "@wearegenki/dev": "0.12.0",
-    "babel-core": "7.0.0-bridge.0",
-    "babel-jest": "22.4.3",
     "clean-css": "4.1.11",
     "codecov": "3.0.2",
     "eslint": "4.19.1",
-    "html-minifier": "3.5.15",
     "jest": "22.4.3",
     "postcss": "6.0.22",
-    "postcss-load-config": "1.2.0",
     "rollup": "0.58.2",
     "rollup-plugin-commonjs": "9.1.3",
     "rollup-plugin-node-resolve": "3.3.0",
@@ -51,9 +49,6 @@
     "sinon-chrome": "2.3.2",
     "stylelint": "9.2.0",
     "svelte": "2.5.1"
-  },
-  "engines": {
-    "node": ">= 9.10.0"
   },
   "browserslist": [
     "last 2 Chrome versions"

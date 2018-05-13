@@ -1,20 +1,7 @@
 'use strict'; // eslint-disable-line
 
 module.exports = {
-  transform: {
-    '^.+\\.js$': 'babel-jest',
-    '^.+\\.html$': './test/svelte-jest.js',
-  },
-  moduleFileExtensions: [
-    'js',
-    'json',
-    'html',
-  ],
-  testPathIgnorePatterns: [
-    '/coverage/',
-    '/dist/',
-    '/node_modules/',
-  ],
+  preset: '@minna-ui/jest-config',
   collectCoverageFrom: [
     'src/**/*.{js,html}',
   ],

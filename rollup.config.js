@@ -1,12 +1,10 @@
 import fs from 'fs';
-import path from 'path';
+import preprocessMarkup from '@minna-ui/svelte-preprocess-markup';
+import preprocessStyle from '@minna-ui/svelte-preprocess-style';
 import svelte from 'rollup-plugin-svelte';
 import resolve from 'rollup-plugin-node-resolve';
 import commonjs from 'rollup-plugin-commonjs';
 import uglify from 'rollup-plugin-uglify';
-import htmlMinifier from 'html-minifier';
-import postcssLoadConfig from 'postcss-load-config';
-import postcss from 'postcss';
 import CleanCSS from 'clean-css';
 import manifest from './manifest';
 
@@ -55,57 +53,6 @@ const cleanCssOpts = {
 function catchErr(err) { if (err) throw err; }
 
 /**
- * Svelte markup preprocessor to trim excessive whitespace.
- */
-function svelteMinifyHtml({ unsafe }) {
-  return ({ content }) => {
-    const code = htmlMinifier.minify(content, {
-      caseSensitive: true,
-      collapseWhitespace: true,
-      conservativeCollapse: !unsafe,
-      ignoreCustomFragments: [/{[^]*?}/],
-      keepClosingSlash: true,
-    });
-
-    return { code };
-  };
-}
-
-/**
- * Svelte preprocessor to turn PostCSS code into CSS.
- */
-function sveltePostcss(context = {}) {
-  return async ({ attributes, content, filename }) => {
-    if (attributes.type !== 'text/postcss') return;
-
-    try {
-      const { plugins, options } = await postcssLoadConfig(Object.assign(context, {
-        from: path.relative(process.cwd(), filename),
-        to: path.relative(process.cwd(), filename),
-        map: { inline: false, annotation: false },
-      }));
-
-      const result = await postcss(plugins).process(content, options);
-
-      result.warnings().forEach((warn) => {
-        process.stderr.write(warn.toString());
-      });
-
-      return { // eslint-disable-line consistent-return
-        code: result.css,
-        map: result.map,
-      };
-    } catch (error) {
-      if (error.name === 'CssSyntaxError') {
-        process.stderr.write(error.message + error.showSourceCode());
-      } else {
-        throw error;
-      }
-    }
-  };
-}
-
-/**
  * Ultra-minimal template engine.
  * @see https://github.com/Drulac/template-literal
  * @param {string} html A HTML template to compile.
@@ -152,8 +99,8 @@ export default [
         dev: !production,
         preprocess: {
           // only remove whitespace in production; better feedback during development
-          ...(production ? { markup: svelteMinifyHtml({ unsafe: true }) } : {}),
-          style: sveltePostcss(),
+          ...(production ? { markup: preprocessMarkup({ unsafe: true }) } : {}),
+          style: preprocessStyle(),
         },
         css: (css) => {
           const cssCode = production
@@ -196,8 +143,8 @@ export default [
         // shared: false, // not possible to override at the moment
         preprocess: {
           // only remove whitespace in production; better feedback during development
-          ...(production ? { markup: svelteMinifyHtml({ unsafe: true }) } : {}),
-          style: sveltePostcss(),
+          ...(production ? { markup: preprocessMarkup({ unsafe: true }) } : {}),
+          style: preprocessStyle(),
         },
         css: (css) => {
           const cssCode = production

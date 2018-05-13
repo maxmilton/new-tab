@@ -1,13 +1,10 @@
-/**
- * PostCSS configuration.
- * Handle custom syntax in CSS and component styles.
- */
+// https://github.com/michael-ciniawsky/postcss-load-config
 
 'use strict';
 
 module.exports = {
   plugins: {
-    '@wearegenki/postcss-config': {
+    '@minna-ui/postcss-config': {
       minimal: true,
     },
   },
