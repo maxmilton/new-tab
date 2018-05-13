@@ -120,7 +120,7 @@ export default [
           writeFile(`${__dirname}/dist/n.html`, compileHtml(template)({
             banner,
             title: 'New Tab',
-            content: `<script src=n.js type=module></script>\n<style>${cssCode}${cssMap}</style>\n<script>${loaderCode}</script>`,
+            content: `<script src=n.js type=module></script>\n<style>${cssCode}${cssMap}</style>\n<link rel="preload" href="l.css" as="style">\n<script>${loaderCode}</script>`,
           }), catchErr);
         },
       }),
