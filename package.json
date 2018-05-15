@@ -29,8 +29,8 @@
     "raven-js": "3.25.1"
   },
   "devDependencies": {
-    "@babel/core": "7.0.0-beta.46",
-    "@babel/plugin-transform-modules-commonjs": "7.0.0-beta.46",
+    "@babel/core": "7.0.0-beta.47",
+    "@babel/plugin-transform-modules-commonjs": "7.0.0-beta.47",
     "@types/chrome": "0.0.65",
     "@types/jest": "22.2.3",
     "@wearegenki/dev": "0.12.0",
