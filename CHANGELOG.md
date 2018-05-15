@@ -11,7 +11,6 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ### Changed
 
-- Load main JS file with `type=module` instead of `defer` for better script load priority.
 - Refactor dev configs and tests to use [minna-ui](https://github.com/WeAreGenki/minna-ui) packages.
 
 ## [0.6.3] - 2018-05-09
