@@ -1,6 +1,6 @@
 // https://facebook.github.io/jest/docs/en/configuration.html
 
-'use strict'; // eslint-disable-line
+'use strict';
 
 module.exports = {
   preset: '@minna-ui/jest-config',
