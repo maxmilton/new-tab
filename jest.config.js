@@ -1,22 +1,15 @@
-'use strict'; // eslint-disable-line
+// https://facebook.github.io/jest/docs/en/configuration.html
+
+'use strict';
 
 module.exports = {
-  transform: {
-    '^.+\\.js$': 'babel-jest',
-    '^.+\\.html$': './test/svelte-jest.js',
-  },
-  moduleFileExtensions: [
-    'js',
-    'json',
-    'html',
-  ],
-  testPathIgnorePatterns: [
-    '/coverage/',
-    '/dist/',
-    '/node_modules/',
-  ],
+  preset: '@minna-ui/jest-config',
+  setupFiles: ['<rootDir>/test/__setup__.js'],
   collectCoverageFrom: [
     'src/**/*.{js,html}',
+    '!src/app.js',
+    '!src/settings.js',
+    '!src/template.html',
   ],
   coverageDirectory: '<rootDir>/test/coverage',
 };

@@ -1,0 +1,8 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`BookmarkGroup root component renders correctly 1`] = `
+"<div id=\\"a\\"><div id=\\"b\\"></div>
+
+  <a href=\\"undefined\\" title=\\"Other bookmarks\\" class=\\"b\\">
+    <span class=\\"t\\">Other bookmarks</span></a><!----></div>"
+`;

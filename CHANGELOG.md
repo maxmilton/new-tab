@@ -9,6 +9,17 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ## [Unreleased]
 
+## [0.6.4] - 2018-05-18
+
+### Added
+
+- More unit tests (which finally work now too!).
+
+### Changed
+
+- Refactor dev configs and tests to use [minna-ui](https://github.com/WeAreGenki/minna-ui) packages.
+- Updated dependencies.
+
 ## [0.6.3] - 2018-05-09
 
 ### Changed
@@ -144,7 +155,7 @@ Known issues:
 ### Added
 
 - Better handle when to open and close bookmark folders for a smoother experience.
-- Error tracking. Async and non-invasive. Since the performance impact is low it's also on by default but is easy to opt-out of.
+- Error detection. Async and non-invasive. Since the performance impact is low it's also on by default but is easy to opt-out of.
 
 ### Fixed
 
@@ -202,7 +213,8 @@ Known issues:
 
 - Initial public version including all the basics; working proof of concept code, readme, etc. Not ready for release yet though, it's still far from being actually useful!
 
-[Unreleased]: https://github.com/MaxMilton/new-tab/compare/v0.6.3...HEAD
+[Unreleased]: https://github.com/MaxMilton/new-tab/compare/v0.6.4...HEAD
+[0.6.4]: https://github.com/MaxMilton/new-tab/compare/v0.6.3...v0.6.4
 [0.6.3]: https://github.com/MaxMilton/new-tab/compare/v0.6.2...v0.6.3
 [0.6.2]: https://github.com/MaxMilton/new-tab/compare/v0.6.1...v0.6.2
 [0.6.1]: https://github.com/MaxMilton/new-tab/compare/v0.6.0...v0.6.1

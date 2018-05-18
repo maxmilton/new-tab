@@ -1,4 +1,4 @@
-// config for rich intelliSence in VS Code
+// config for rich intelliSense in VSCode
 {
   "compilerOptions": {
     "target": "es2017",
@@ -18,9 +18,8 @@
     "baseUrl": "."
   },
   "exclude": [
-    "node_modules",
     "dist",
-    ".vscode"
+    "node_modules"
   ],
   "typeAcquisition": {
     "enable": true

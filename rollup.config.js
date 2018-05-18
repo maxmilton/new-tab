@@ -1,19 +1,18 @@
-import fs from 'fs';
-import path from 'path';
+import { readFile, readFileSync, writeFile } from 'fs';
+import preprocessMarkup from '@minna-ui/svelte-preprocess-markup';
+import preprocessStyle from '@minna-ui/svelte-preprocess-style';
 import svelte from 'rollup-plugin-svelte';
 import resolve from 'rollup-plugin-node-resolve';
 import commonjs from 'rollup-plugin-commonjs';
 import uglify from 'rollup-plugin-uglify';
-import htmlMinifier from 'html-minifier';
-import postcssLoadConfig from 'postcss-load-config';
-import postcss from 'postcss';
+import uglifyES from 'uglify-es'; // eslint-disable-line import/no-extraneous-dependencies
 import CleanCSS from 'clean-css';
 import manifest from './manifest';
 
 const production = !process.env.ROLLUP_WATCH;
 
 const banner = `New Tab ${process.env.APP_RELEASE} | github.com/MaxMilton/new-tab`;
-const template = fs.readFileSync(`${__dirname}/src/template.html`, 'utf8');
+const template = readFileSync(`${__dirname}/src/template.html`, 'utf8');
 
 const uglifyOpts = {
   compress: {
@@ -55,57 +54,6 @@ const cleanCssOpts = {
 function catchErr(err) { if (err) throw err; }
 
 /**
- * Svelte markup preprocessor to trim excessive whitespace.
- */
-function svelteMinifyHtml({ unsafe }) {
-  return ({ content }) => {
-    const code = htmlMinifier.minify(content, {
-      caseSensitive: true,
-      collapseWhitespace: true,
-      conservativeCollapse: !unsafe,
-      ignoreCustomFragments: [/{[^]*?}/],
-      keepClosingSlash: true,
-    });
-
-    return { code };
-  };
-}
-
-/**
- * Svelte preprocessor to turn PostCSS code into CSS.
- */
-function sveltePostcss(context = {}) {
-  return async ({ attributes, content, filename }) => {
-    if (attributes.type !== 'text/postcss') return;
-
-    try {
-      const { plugins, options } = await postcssLoadConfig(Object.assign(context, {
-        from: path.relative(process.cwd(), filename),
-        to: path.relative(process.cwd(), filename),
-        map: { inline: false, annotation: false },
-      }));
-
-      const result = await postcss(plugins).process(content, options);
-
-      result.warnings().forEach((warn) => {
-        process.stderr.write(warn.toString());
-      });
-
-      return { // eslint-disable-line consistent-return
-        code: result.css,
-        map: result.map,
-      };
-    } catch (error) {
-      if (error.name === 'CssSyntaxError') {
-        process.stderr.write(error.message + error.showSourceCode());
-      } else {
-        throw error;
-      }
-    }
-  };
-}
-
-/**
  * Ultra-minimal template engine.
  * @see https://github.com/Drulac/template-literal
  * @param {string} html A HTML template to compile.
@@ -121,18 +69,18 @@ function compileHtml(html) {
  * @param {string} nameShort The output file name.
  */
 function makeTheme(nameLong, nameShort) {
-  fs.readFile(`${__dirname}/src/themes/${nameLong}.css`, 'utf8', async (err, res) => {
+  readFile(`${__dirname}/src/themes/${nameLong}.css`, 'utf8', async (err, res) => {
     if (err) throw err;
 
     const css = new CleanCSS(cleanCssOpts).minify(res).styles;
-    fs.writeFile(`${__dirname}/dist/${nameShort}.css`, css, catchErr);
+    writeFile(`${__dirname}/dist/${nameShort}.css`, css, catchErr);
   });
 }
 
 // Optimise loader code
-// eslint-disable-next-line import/no-extraneous-dependencies
-const loaderCode = require('uglify-es').minify(
-  fs.readFileSync(`${__dirname}/src/loader.js`, 'utf8'),
+
+const loaderCode = uglifyES.minify(
+  readFileSync(`${__dirname}/src/loader.js`, 'utf8'),
   Object.assign({}, uglifyOpts)
 ).code;
 
@@ -152,22 +100,24 @@ export default [
         dev: !production,
         preprocess: {
           // only remove whitespace in production; better feedback during development
-          ...(production ? { markup: svelteMinifyHtml({ unsafe: true }) } : {}),
-          style: sveltePostcss(),
+          ...(production ? { markup: preprocessMarkup({ unsafe: true }) } : {}),
+          style: preprocessStyle(),
         },
         css: (css) => {
           const cssCode = production
             ? new CleanCSS(cleanCssOpts).minify(css.code).styles
             : css.code;
 
-          // TODO: Once source maps are supported in svelte preprocessors, enable this:
+          // TODO: Enable once source maps are supported in svelte preprocess()
           // const cssMap = production
           //   ? ''
-          //   : `\n/*# sourceMappingURL=data:application/json;base64,${Buffer.from(JSON.stringify(css.map)).toString('base64')}*/`;
+          //   : `\n/*# sourceMappingURL=data:application/json;base64,${
+          //     Buffer.from(JSON.stringify(css.map)).toString('base64')
+          //   }*/`;
           const cssMap = '';
 
           // compile HTML from template
-          fs.writeFile(`${__dirname}/dist/n.html`, compileHtml(template)({
+          writeFile(`${__dirname}/dist/n.html`, compileHtml(template)({
             banner,
             title: 'New Tab',
             content: `<script src=n.js defer></script>\n<style>${cssCode}${cssMap}</style>\n<script>${loaderCode}</script>`,
@@ -196,8 +146,8 @@ export default [
         // shared: false, // not possible to override at the moment
         preprocess: {
           // only remove whitespace in production; better feedback during development
-          ...(production ? { markup: svelteMinifyHtml({ unsafe: true }) } : {}),
-          style: sveltePostcss(),
+          ...(production ? { markup: preprocessMarkup({ unsafe: true }) } : {}),
+          style: preprocessStyle(),
         },
         css: (css) => {
           const cssCode = production
@@ -205,7 +155,7 @@ export default [
             : css.code;
 
           // compile HTML from template
-          fs.writeFile(`${__dirname}/dist/s.html`, compileHtml(template)({
+          writeFile(`${__dirname}/dist/s.html`, compileHtml(template)({
             banner,
             title: 'New Tab Settings',
             content: `<script src=s.js defer></script>\n<style>${cssCode}</style>\n<script>${loaderCode}</script>`,
@@ -216,7 +166,7 @@ export default [
     ],
   },
 
-  // Error tracking
+  // Error detection
   {
     input: 'src/errors.js',
     output: {
@@ -248,7 +198,7 @@ export default [
 ];
 
 // Extension manifest
-fs.writeFile(`${__dirname}/dist/manifest.json`, JSON.stringify(manifest), catchErr);
+writeFile(`${__dirname}/dist/manifest.json`, JSON.stringify(manifest), catchErr);
 
 // Themes
 // NOTE: Dark theme is omitted because it's embedded into the page with the other CSS

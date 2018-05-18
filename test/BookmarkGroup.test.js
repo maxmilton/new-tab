@@ -1,11 +1,11 @@
 'use strict';
 
-const App = require('../src/App.html');
+const BookmarkGroup = require('../src/components/BookmarkGroup.html');
 
-describe('App root component', () => {
+describe('BookmarkGroup root component', () => {
   it('renders correctly', () => {
     const target = document.createElement('div');
-    new App({ target });
+    new BookmarkGroup({ target });
     expect(target.innerHTML).toMatchSnapshot();
   });
 });

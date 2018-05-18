@@ -1,11 +1,11 @@
 'use strict';
 
-const App = require('../src/App.html');
+const Menu = require('../src/components/Menu.html');
 
-describe('App root component', () => {
+describe('Menu root component', () => {
   it('renders correctly', () => {
     const target = document.createElement('div');
-    new App({ target });
+    new Menu({ target });
     expect(target.innerHTML).toMatchSnapshot();
   });
 });
