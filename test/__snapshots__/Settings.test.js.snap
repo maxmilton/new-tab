@@ -7,7 +7,7 @@ exports[`Settings root component renders correctly 1`] = `
 <hr>
 
 <div class=\\"pb\\"><label for=\\"opt-out\\"><input id=\\"opt-out\\" type=\\"checkbox\\">
-    Allow error detection</label></div>
+    Allow error tracking</label></div>
 
 <footer><small><em>Tip: Settings sync to your account.</em></small></footer>"
 `;

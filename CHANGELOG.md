@@ -155,7 +155,7 @@ Known issues:
 ### Added
 
 - Better handle when to open and close bookmark folders for a smoother experience.
-- Error detection. Async and non-invasive. Since the performance impact is low it's also on by default but is easy to opt-out of.
+- Error tracking. Async and non-invasive. Since the performance impact is low it's also on by default but is easy to opt-out of.
 
 ### Fixed
 

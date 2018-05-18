@@ -3,7 +3,7 @@
 // const loaderScript = require('../src/loader.js');
 // const errScript = require('../src/errors.js');
 
-describe('Error detection script', () => {
+describe('Error tracking script', () => {
   it.skip('should do something', () => {
     // TODO
   });

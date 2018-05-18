@@ -2,7 +2,7 @@
 
 // XXX: Update manifest CSP hash after any changes to this file!
 
-// capture errors (before error detection script is ready)
+// capture errors (before error tracking script is ready)
 window.q = [];
 const cb = (event) => { window.q.push(event); };
 window.l = window.addEventListener('error', cb);
@@ -17,7 +17,7 @@ chrome.storage.sync.get(['e', 't'], (settings) => {
     document.head.appendChild(link);
   }
 
-  // load error detection unless opt-out
+  // load error tracking unless opt-out
   if (!settings.e) {
     const script = document.createElement('script');
     script.src = 'e.js';

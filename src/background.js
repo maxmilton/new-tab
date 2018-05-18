@@ -11,7 +11,7 @@ chrome.runtime.onInstalled.addListener((details) => {
         newSettings.t = 'd'; // dark theme
       }
 
-      // error detection default
+      // error tracking default
       if (!settings.e === undefined) {
         newSettings.e = false; // not opt-out
       }
