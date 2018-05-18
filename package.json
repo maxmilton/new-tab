@@ -26,7 +26,7 @@
     "test:dev": "yarn test --coverage --notify --watch"
   },
   "dependencies": {
-    "raven-js": "3.25.1"
+    "raven-js": "3.25.2"
   },
   "devDependencies": {
     "@minna-ui/eslint-config": "0.0.0",
@@ -47,8 +47,8 @@
     "rollup-plugin-svelte": "4.1.0",
     "rollup-plugin-uglify": "3.0.0",
     "sinon-chrome": "2.3.2",
-    "stylelint": "9.2.1",
-    "svelte": "2.6.2"
+    "stylelint": "9.2.0",
+    "svelte": "2.6.3"
   },
   "browserslist": [
     "last 2 Chrome versions"
