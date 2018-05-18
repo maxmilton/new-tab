@@ -2,12 +2,14 @@
 
 'use strict';
 
-const minnaUiPostcssConfig = require('@minna-ui/postcss-config');
-
-const isDev = process.env.NODE_ENV === 'development';
+const atImport = require('postcss-import');
+const nested = require('postcss-nested');
+const autoprefixer = require('autoprefixer');
 
 module.exports = {
   plugins: [
-    minnaUiPostcssConfig({ verbose: isDev }),
+    atImport,
+    nested,
+    autoprefixer,
   ],
 };
