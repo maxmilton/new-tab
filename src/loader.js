@@ -1,3 +1,5 @@
+/* eslint-disable import/unambiguous */
+
 // XXX: Update manifest CSP hash after any changes to this file!
 
 // capture errors (before error detection script is ready)
