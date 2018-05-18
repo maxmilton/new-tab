@@ -31,7 +31,7 @@ Issue | Why / How
 --|--
 Access | Still have access to common things like the bookmarks bar<sup>[*1](#known-issues)</sup> etc.
 Speed | Near instant access to functionality. Page load performance, runtime performance, and file size should all be scrupulously optimised.
-Privacy | No user tracking scripts (unlike most other extensions). Errors are tracked by default but you can easily opt-out.
+Privacy | No invasive user tracking scripts (unlike most other extensions). Errors are anonymously tracked by default but you can easily opt-out.
 Unobtrusive | No annoying things like entries in your right click menu.
 
 ### Technology
