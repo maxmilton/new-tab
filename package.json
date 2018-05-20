@@ -23,7 +23,7 @@
     "test": "jest",
     "test-ci": "yarn test --coverage --runInBand --ci",
     "pretest:dev": "yarn lint",
-    "test:dev": "yarn test --coverage --notify --watch"
+    "test:dev": "yarn test --notify --watch"
   },
   "dependencies": {
     "raven-js": "3.25.2"
