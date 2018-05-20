@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Menu root component renders correctly 1`] = `
+exports[`Menu component renders correctly 1`] = `
 "<div id=\\"m\\"><div id=\\"i\\">☰</div>
 
   <div id=\\"d\\"><a href=\\"chrome-search://local-ntp/local-ntp.html\\" class=\\"m\\">Open Default Tab</a>
