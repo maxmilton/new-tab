@@ -2,7 +2,7 @@
 
 const BookmarkGroup = require('../src/components/BookmarkGroup.html');
 
-describe('BookmarkGroup root component', () => {
+describe('BookmarkGroup component', () => {
   it('renders correctly', () => {
     const target = document.createElement('div');
     new BookmarkGroup({ target });
