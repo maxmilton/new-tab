@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Settings root component renders correctly 1`] = `
+exports[`Settings component renders correctly 1`] = `
 "<div class=\\"pb\\"><label for=\\"theme\\">Theme</label>
   <select id=\\"theme\\"><option value=\\"l\\">Light</option><option value=\\"d\\">Dark</option><option value=\\"b\\">Black</option></select></div>
 

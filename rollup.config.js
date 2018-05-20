@@ -4,8 +4,8 @@ import preprocessStyle from '@minna-ui/svelte-preprocess-style';
 import svelte from 'rollup-plugin-svelte';
 import resolve from 'rollup-plugin-node-resolve';
 import commonjs from 'rollup-plugin-commonjs';
-import uglify from 'rollup-plugin-uglify';
-import uglifyES from 'uglify-es'; // eslint-disable-line import/no-extraneous-dependencies
+import { terser } from 'rollup-plugin-terser';
+import { minify } from 'terser'; // eslint-disable-line import/no-extraneous-dependencies
 import CleanCSS from 'clean-css';
 import manifest from './manifest';
 
@@ -14,7 +14,7 @@ const production = !process.env.ROLLUP_WATCH;
 const banner = `New Tab ${process.env.APP_RELEASE} | github.com/MaxMilton/new-tab`;
 const template = readFileSync(`${__dirname}/src/template.html`, 'utf8');
 
-const uglifyOpts = {
+const terserOpts = {
   compress: {
     drop_console: production,
     drop_debugger: production,
@@ -79,9 +79,9 @@ function makeTheme(nameLong, nameShort) {
 
 // Optimise loader code
 
-const loaderCode = uglifyES.minify(
+const loaderCode = minify(
   readFileSync(`${__dirname}/src/loader.js`, 'utf8'),
-  Object.assign({}, uglifyOpts)
+  Object.assign({}, terserOpts)
 ).code;
 
 export default [
@@ -126,7 +126,7 @@ export default [
       }),
       resolve(),
       commonjs(),
-      production && uglify(uglifyOpts),
+      production && terser(terserOpts),
     ],
   },
 
@@ -162,7 +162,7 @@ export default [
           }), catchErr);
         },
       }),
-      production && uglify(uglifyOpts),
+      production && terser(terserOpts),
     ],
   },
 
@@ -178,7 +178,7 @@ export default [
     plugins: [
       resolve(),
       commonjs(),
-      production && uglify(uglifyOpts),
+      production && terser(terserOpts),
     ],
   },
 
@@ -192,7 +192,7 @@ export default [
       file: 'dist/b.js',
     },
     plugins: [
-      production && uglify(uglifyOpts),
+      production && terser(terserOpts),
     ],
   },
 ];

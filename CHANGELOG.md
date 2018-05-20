@@ -9,6 +9,10 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ## [Unreleased]
 
+### Changed
+
+- Because `uglifyjs` is no longer supported, it's been swapped out for `terser` its active fork.
+
 ## [0.6.4] - 2018-05-18
 
 ### Added
