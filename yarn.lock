@@ -144,42 +144,42 @@
     lodash "^4.17.5"
     to-fast-properties "^2.0.0"
 
-"@minna-ui/eslint-config@0.0.0":
-  version "0.0.0"
-  resolved "https://registry.yarnpkg.com/@minna-ui/eslint-config/-/eslint-config-0.0.0.tgz#77f25f8f1e7121a8cf542489fe3fbc39f0c42fb4"
+"@minna-ui/eslint-config@0.1.0":
+  version "0.1.0"
+  resolved "https://registry.yarnpkg.com/@minna-ui/eslint-config/-/eslint-config-0.1.0.tgz#775c7f23709556b66717f2933c6d318813a2f8a3"
   dependencies:
     eslint-config-airbnb-base "^12.1.0"
     eslint-plugin-html "^4.0.3"
-    eslint-plugin-import "^2.11.0"
+    eslint-plugin-import "^2.12.0"
     eslint-plugin-jest "^21.15.1"
 
-"@minna-ui/jest-config@0.0.0":
-  version "0.0.0"
-  resolved "https://registry.yarnpkg.com/@minna-ui/jest-config/-/jest-config-0.0.0.tgz#6ed949a378c597ea7dab2b4300f24f7727e7bb7f"
+"@minna-ui/jest-config@0.1.0":
+  version "0.1.0"
+  resolved "https://registry.yarnpkg.com/@minna-ui/jest-config/-/jest-config-0.1.0.tgz#59b775ae375e2e87f73ddc50832a03782f25a3ac"
   dependencies:
     "@babel/core" "^7.0.0-beta.47"
     "@babel/plugin-transform-modules-commonjs" "^7.0.0-beta.47"
     "@types/jest" "^22.2.3"
-    "@types/node" "^10.1.0"
+    "@types/node" "^10.1.2"
     babel-core "^7.0.0-bridge.0"
-    babel-jest "^22.4.3"
+    babel-jest "^22.4.4"
 
-"@minna-ui/stylelint-config@0.0.0":
-  version "0.0.0"
-  resolved "https://registry.yarnpkg.com/@minna-ui/stylelint-config/-/stylelint-config-0.0.0.tgz#1a67a35b06ff38331c114c51451f1039e511fe49"
+"@minna-ui/stylelint-config@0.1.0":
+  version "0.1.0"
+  resolved "https://registry.yarnpkg.com/@minna-ui/stylelint-config/-/stylelint-config-0.1.0.tgz#21ebf1e6ded971ea1232ad48a8046de15dd1e8dc"
   dependencies:
     stylelint-config-standard "^18.2.0"
     stylelint-order "^0.8.1"
 
-"@minna-ui/svelte-preprocess-markup@0.0.0":
-  version "0.0.0"
-  resolved "https://registry.yarnpkg.com/@minna-ui/svelte-preprocess-markup/-/svelte-preprocess-markup-0.0.0.tgz#a4e0295fd817b67740e7451007e1b89f282b5901"
+"@minna-ui/svelte-preprocess-markup@0.1.0":
+  version "0.1.0"
+  resolved "https://registry.yarnpkg.com/@minna-ui/svelte-preprocess-markup/-/svelte-preprocess-markup-0.1.0.tgz#5b22d4ef15793031316da2173d82bef0aebc7f91"
   dependencies:
-    html-minifier "3.5.15"
+    html-minifier "3.5.16"
 
-"@minna-ui/svelte-preprocess-style@0.0.0":
-  version "0.0.0"
-  resolved "https://registry.yarnpkg.com/@minna-ui/svelte-preprocess-style/-/svelte-preprocess-style-0.0.0.tgz#8a2c77383310de9590ea14325107f4015fc18ffe"
+"@minna-ui/svelte-preprocess-style@0.1.0":
+  version "0.1.0"
+  resolved "https://registry.yarnpkg.com/@minna-ui/svelte-preprocess-style/-/svelte-preprocess-style-0.1.0.tgz#e0acd83b605864c89f47adcb72a595d2fca6cea8"
   dependencies:
     postcss-load-config "^1.2.0"
     postcss-selector-parser "^4.0.0"
@@ -225,7 +225,7 @@
   version "22.2.3"
   resolved "https://registry.yarnpkg.com/@types/jest/-/jest-22.2.3.tgz#0157c0316dc3722c43a7b71de3fdf3acbccef10d"
 
-"@types/node@*", "@types/node@^10.1.0":
+"@types/node@*", "@types/node@^10.1.2":
   version "10.1.2"
   resolved "https://registry.yarnpkg.com/@types/node/-/node-10.1.2.tgz#1b928a0baa408fc8ae3ac012cc81375addc147c6"
 
@@ -516,7 +516,7 @@ babel-helpers@^6.24.1:
     babel-runtime "^6.22.0"
     babel-template "^6.24.1"
 
-babel-jest@^22.4.3, babel-jest@^22.4.4:
+babel-jest@^22.4.4:
   version "22.4.4"
   resolved "https://registry.yarnpkg.com/babel-jest/-/babel-jest-22.4.4.tgz#977259240420e227444ebe49e226a61e49ea659d"
   dependencies:
@@ -1303,7 +1303,7 @@ eslint-plugin-html@^4.0.3:
   dependencies:
     htmlparser2 "^3.8.2"
 
-eslint-plugin-import@^2.11.0:
+eslint-plugin-import@^2.12.0:
   version "2.12.0"
   resolved "https://registry.yarnpkg.com/eslint-plugin-import/-/eslint-plugin-import-2.12.0.tgz#dad31781292d6664b25317fd049d2e2b2f02205d"
   dependencies:
@@ -1914,9 +1914,9 @@ html-encoding-sniffer@^1.0.2:
   dependencies:
     whatwg-encoding "^1.0.1"
 
-html-minifier@3.5.15:
-  version "3.5.15"
-  resolved "https://registry.yarnpkg.com/html-minifier/-/html-minifier-3.5.15.tgz#f869848d4543cbfd84f26d5514a2a87cbf9a05e0"
+html-minifier@3.5.16:
+  version "3.5.16"
+  resolved "https://registry.yarnpkg.com/html-minifier/-/html-minifier-3.5.16.tgz#39f5aabaf78bdfc057fe67334226efd7f3851175"
   dependencies:
     camel-case "3.0.x"
     clean-css "4.1.x"
@@ -4061,9 +4061,9 @@ rollup-pluginutils@^2.0.1:
     estree-walker "^0.5.2"
     micromatch "^2.3.11"
 
-rollup@0.59.1:
-  version "0.59.1"
-  resolved "https://registry.yarnpkg.com/rollup/-/rollup-0.59.1.tgz#86cbceaecd861df1317a0aa29207173de23e6a5d"
+rollup@0.59.2:
+  version "0.59.2"
+  resolved "https://registry.yarnpkg.com/rollup/-/rollup-0.59.2.tgz#37011ed83947e4e1071b66f9e7d0574b144affc9"
   dependencies:
     "@types/estree" "0.0.39"
     "@types/node" "*"
