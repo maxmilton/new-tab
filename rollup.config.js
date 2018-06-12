@@ -27,7 +27,7 @@ const terserOpts = {
   mangle: {
     properties: {
       // NOTE: Fragile; needs attention, especially between Svelte releases.
-      regex: /^(_.*|each_value.*|.*_index.*|component|changed|previous|destroy|root|fire)$/,
+      regex: /^(_.*|each_value.*|component|changed|previous|destroy|root|fire)$/,
       // debug: 'XX',
     },
   },
