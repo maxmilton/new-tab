@@ -40,12 +40,10 @@
     onstate({ changed, current, previous }) {
       if (previous) {
         if (changed.__theme) {
-          console.log('__changeTheme', current.__theme);
           chrome.storage.sync.set({ t: current.__theme, td: Date.now() });
         }
 
         if (changed.__errTrack) {
-          console.log('__changeOptOut', current.__errTrack);
           chrome.storage.sync.set({ e: !current.__errTrack, ed: Date.now() });
         }
       }

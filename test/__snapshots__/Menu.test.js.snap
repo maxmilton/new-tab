@@ -11,6 +11,6 @@ exports[`Menu component renders correctly 1`] = `
 
     <hr>
 
-    <a class=\\"m\\">New Tab Settings</a>
+    <a href=\\"#\\" class=\\"m\\">New Tab Settings</a>
     <a href=\\"https://github.com/MaxMilton/new-tab/issues\\" class=\\"m\\">Submit Bug</a></div></div>"
 `;

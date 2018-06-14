@@ -15,9 +15,9 @@ exports[`App root component renders correctly 1`] = `
 
     <hr>
 
-    <a class=\\"m\\">New Tab Settings</a>
+    <a href=\\"#\\" class=\\"m\\">New Tab Settings</a>
     <a href=\\"https://github.com/MaxMilton/new-tab/issues\\" class=\\"m\\">Submit Bug</a></div></div>
-<div class=\\"c\\"><input id=\\"s\\" placeholder=\\"Search in browser...\\" autocomplete=\\"off\\">
+<div class=\\"c\\"><input id=\\"s\\" placeholder=\\"Search browser...\\" autocomplete=\\"off\\">
 
   
   <p class=\\"g\\">No matching Open Tabs</p>
