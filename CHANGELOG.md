@@ -9,6 +9,19 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ## [Unreleased]
 
+### Added
+
+- New meta tag `notranslate`.
+
+### Changed
+
+- Minor clean up of build script.
+- Update dependencies.
+
+### Removed
+
+- Banner comment from HTML.
+
 ## [0.6.5] - 2018-06-12
 
 ### Changed
