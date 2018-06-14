@@ -30,7 +30,7 @@
   },
   "devDependencies": {
     "@minna-ui/eslint-config": "0.2.0",
-    "@minna-ui/jest-config": "0.2.0",
+    "@minna-ui/jest-config": "0.1.0",
     "@minna-ui/stylelint-config": "0.1.0",
     "@minna-ui/svelte-preprocess-markup": "0.2.0",
     "@minna-ui/svelte-preprocess-style": "0.2.0",
