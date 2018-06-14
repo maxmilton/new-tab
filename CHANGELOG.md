@@ -9,6 +9,8 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ## [Unreleased]
 
+## [0.6.6] - 2018-06-14
+
 ### Added
 
 - New meta tag `notranslate`.
@@ -239,7 +241,9 @@ Known issues:
 
 - Initial public version including all the basics; working proof of concept code, readme, etc. Not ready for release yet though, it's still far from being actually useful!
 
-[Unreleased]: https://github.com/MaxMilton/new-tab/compare/v0.6.4...HEAD
+[Unreleased]: https://github.com/MaxMilton/new-tab/compare/v0.6.6...HEAD
+[0.6.6]: https://github.com/MaxMilton/new-tab/compare/v0.6.5...v0.6.6
+[0.6.5]: https://github.com/MaxMilton/new-tab/compare/v0.6.4...v0.6.5
 [0.6.4]: https://github.com/MaxMilton/new-tab/compare/v0.6.3...v0.6.4
 [0.6.3]: https://github.com/MaxMilton/new-tab/compare/v0.6.2...v0.6.3
 [0.6.2]: https://github.com/MaxMilton/new-tab/compare/v0.6.1...v0.6.2
