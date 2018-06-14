@@ -9,9 +9,8 @@ import { minify } from 'terser'; // eslint-disable-line import/no-extraneous-dep
 import CleanCSS from 'clean-css';
 import manifest from './manifest';
 
-const production = !process.env.ROLLUP_WATCH;
-
 const template = readFileSync(`${__dirname}/src/template.html`, 'utf8');
+const production = !process.env.ROLLUP_WATCH;
 
 const terserOpts = {
   compress: {
