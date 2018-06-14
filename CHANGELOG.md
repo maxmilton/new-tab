@@ -9,6 +9,10 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ## [Unreleased]
 
+### Changed
+
+- Increase the click area of bookmark items.
+
 ## [0.6.6] - 2018-06-14
 
 ### Added
