@@ -153,7 +153,7 @@ export default [
           // compile HTML from template
           writeFile(`${__dirname}/dist/s.html`, makeHtml({
             title: 'New Tab Settings',
-            content: `<script src=s.js defer></script>\n<style>${cssCode}</style>\n<script>${loaderCode}</script>`,
+            content: `<script src=s.js defer></script><style>${cssCode}</style><script>${loaderCode}</script>`,
           }), catchErr);
         },
       }),
