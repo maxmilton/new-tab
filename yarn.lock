@@ -148,14 +148,14 @@
     lodash "^4.17.5"
     to-fast-properties "^2.0.0"
 
-"@minna-ui/eslint-config@0.2.0":
-  version "0.2.0"
-  resolved "https://registry.yarnpkg.com/@minna-ui/eslint-config/-/eslint-config-0.2.0.tgz#baa34ef3824e8bf083952d9eba58993cc69b1b30"
+"@minna-ui/eslint-config@0.1.0":
+  version "0.1.0"
+  resolved "https://registry.yarnpkg.com/@minna-ui/eslint-config/-/eslint-config-0.1.0.tgz#775c7f23709556b66717f2933c6d318813a2f8a3"
   dependencies:
     eslint-config-airbnb-base "^12.1.0"
     eslint-plugin-html "^4.0.3"
     eslint-plugin-import "^2.12.0"
-    eslint-plugin-jest "^21.17.0"
+    eslint-plugin-jest "^21.15.1"
 
 "@minna-ui/jest-config@0.2.0":
   version "0.2.0"
@@ -1304,7 +1304,7 @@ eslint-plugin-import@^2.12.0:
     read-pkg-up "^2.0.0"
     resolve "^1.6.0"
 
-eslint-plugin-jest@^21.17.0:
+eslint-plugin-jest@^21.15.1:
   version "21.17.0"
   resolved "https://registry.yarnpkg.com/eslint-plugin-jest/-/eslint-plugin-jest-21.17.0.tgz#fdb00e2f9ff16987d6ebcf2c75c7add105760bbb"
 
