@@ -38,7 +38,7 @@ export default {
 
   ...(isProduction
     // tighter security than default
-    ? { content_security_policy: `default-src 'none'; script-src 'self' ${hash}; style-src 'unsafe-inline'; img-src data: chrome: *` }
+    ? { content_security_policy: `default-src 'none'; script-src 'self' ${hash}; style-src 'unsafe-inline'; img-src data: chrome: *; connect-src https://sentry.io` }
     // allow connections from http://localhost during local development
     : { content_security_policy: `script-src 'self' blob: filesystem: chrome-extension-resource: http://localhost:* ${hash}; object-src 'self'` }
   ),
