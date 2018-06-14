@@ -11,7 +11,6 @@ import manifest from './manifest';
 
 const production = !process.env.ROLLUP_WATCH;
 
-const banner = `New Tab ${process.env.APP_RELEASE} | github.com/MaxMilton/new-tab`;
 const template = readFileSync(`${__dirname}/src/template.html`, 'utf8');
 
 const terserOpts = {
@@ -63,6 +62,8 @@ function compileHtml(html) {
   return new Function('d', 'return `' + html + '`'); // eslint-disable-line
 }
 
+const makeHtml = compileHtml(template);
+
 /**
  * Compile a New Tab theme.
  * @param {string} nameLong The input file name.
@@ -78,7 +79,6 @@ function makeTheme(nameLong, nameShort) {
 }
 
 // Optimise loader code
-
 const loaderCode = minify(
   readFileSync(`${__dirname}/src/loader.js`, 'utf8'),
   Object.assign({}, terserOpts)
@@ -90,7 +90,6 @@ export default [
     input: 'src/app.js',
     output: {
       sourcemap: true,
-      banner: `/* ${banner} */`,
       format: 'iife',
       name: 'n',
       file: 'dist/n.js',
@@ -117,10 +116,9 @@ export default [
           const cssMap = '';
 
           // compile HTML from template
-          writeFile(`${__dirname}/dist/n.html`, compileHtml(template)({
-            banner,
+          writeFile(`${__dirname}/dist/n.html`, makeHtml({
             title: 'New Tab',
-            content: `<script src=n.js defer></script>\n<style>${cssCode}${cssMap}</style>\n<script>${loaderCode}</script>`,
+            content: `<script src=n.js defer></script><style>${cssCode}${cssMap}</style><script>${loaderCode}</script>`,
           }), catchErr);
         },
       }),
@@ -135,7 +133,6 @@ export default [
     input: 'src/settings.js',
     output: {
       sourcemap: true,
-      banner: `/* ${banner} */`,
       format: 'iife',
       name: 's',
       file: 'dist/s.js',
@@ -155,8 +152,7 @@ export default [
             : css.code;
 
           // compile HTML from template
-          writeFile(`${__dirname}/dist/s.html`, compileHtml(template)({
-            banner,
+          writeFile(`${__dirname}/dist/s.html`, makeHtml({
             title: 'New Tab Settings',
             content: `<script src=s.js defer></script>\n<style>${cssCode}</style>\n<script>${loaderCode}</script>`,
           }), catchErr);
