@@ -16,12 +16,17 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 ### Changed
 
 - Much more restrictive CSP for better security.
+- Shorten search placeholder text.
 - Minor clean up of build script.
 - Update dependencies.
 
 ### Removed
 
 - Banner comment from HTML.
+
+### Fixed
+
+- Add href attribute to `<a>` in menu for correct cursor.
 
 ## [0.6.5] - 2018-06-12
 
