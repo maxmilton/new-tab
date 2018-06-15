@@ -118,7 +118,7 @@ export default [
           writeFile(`${__dirname}/dist/n.html`, makeHtml({
             title: 'New Tab',
             content: `<script src=n.js defer></script><style>${cssCode}${cssMap}</style><script>${loaderCode}</script>`,
-          }), catchErr);
+          }).trim(), catchErr);
         },
       }),
       resolve(),
@@ -154,7 +154,7 @@ export default [
           writeFile(`${__dirname}/dist/s.html`, makeHtml({
             title: 'New Tab Settings',
             content: `<script src=s.js defer></script><style>${cssCode}</style><script>${loaderCode}</script>`,
-          }), catchErr);
+          }).trim(), catchErr);
         },
       }),
       production && terser(terserOpts),
