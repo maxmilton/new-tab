@@ -11,6 +11,7 @@ import manifest from './manifest';
 
 const template = readFileSync(`${__dirname}/src/template.html`, 'utf8');
 const production = !process.env.ROLLUP_WATCH;
+const nameCache = {};
 
 const terserOpts = {
   compress: {
@@ -20,20 +21,32 @@ const terserOpts = {
     passes: 2,
     pure_getters: true,
     unsafe: true,
+    unsafe_arrows: true,
+    unsafe_comps: true,
+    unsafe_Function: true,
+    unsafe_math: true,
+    unsafe_methods: true,
     unsafe_proto: true,
+    unsafe_regexp: true,
+    unsafe_undefined: true,
+    hoist_funs: true,
   },
   mangle: {
     properties: {
       // NOTE: Fragile; needs attention, especially between Svelte releases.
       regex: /^(_.*|each_value.*|component|changed|previous|destroy|root|fire)$/,
+      reserved: ['l', 'u', 'q'],
       // debug: 'XX',
     },
+    reserved: ['l', 'u', 'q'],
   },
   output: {
     comments: !!process.env.DEBUG,
     wrap_iife: true,
   },
+  nameCache,
   ecma: 8,
+  module: true,
   toplevel: true,
   warnings: !!process.env.DEBUG,
 };
@@ -77,7 +90,13 @@ function makeTheme(nameLong, nameShort) {
   });
 }
 
-// Optimise loader code
+// errors init script
+const errorsInitCode = minify(
+  readFileSync(`${__dirname}/src/errors-init.js`, 'utf8'),
+  Object.assign({}, terserOpts)
+).code;
+
+// loader script
 const loaderCode = minify(
   readFileSync(`${__dirname}/src/loader.js`, 'utf8'),
   Object.assign({}, terserOpts)
@@ -88,8 +107,8 @@ export default [
   {
     input: 'src/app.js',
     output: {
-      sourcemap: true,
-      format: 'iife',
+      sourcemap: !production,
+      format: 'es',
       name: 'n',
       file: 'dist/n.js',
     },
@@ -106,19 +125,18 @@ export default [
             ? new CleanCSS(cleanCssOpts).minify(css.code).styles
             : css.code;
 
-          // TODO: Enable once source maps are supported in svelte preprocess()
-          // const cssMap = production
-          //   ? ''
-          //   : `\n/*# sourceMappingURL=data:application/json;base64,${
-          //     Buffer.from(JSON.stringify(css.map)).toString('base64')
-          //   }*/`;
-          const cssMap = '';
+          // add CSS source map data
+          const cssMap = production
+            ? ''
+            : `\n/*# sourceMappingURL=data:application/json;base64,${
+              Buffer.from(JSON.stringify(css.map)).toString('base64')
+            }*/`;
 
           // compile HTML from template
           writeFile(`${__dirname}/dist/n.html`, makeHtml({
             title: 'New Tab',
-            content: `<script src=n.js defer></script><style>${cssCode}${cssMap}</style><script>${loaderCode}</script>`,
-          }), catchErr);
+            content: `<style>${cssCode}${cssMap}</style><script>${errorsInitCode}</script><script src=n.js type=module async></script><script type=module async>${loaderCode}</script>`,
+          }).trim(), catchErr);
         },
       }),
       resolve(),
@@ -131,8 +149,8 @@ export default [
   {
     input: 'src/settings.js',
     output: {
-      sourcemap: true,
-      format: 'iife',
+      sourcemap: !production,
+      format: 'es',
       name: 's',
       file: 'dist/s.js',
     },
@@ -153,8 +171,8 @@ export default [
           // compile HTML from template
           writeFile(`${__dirname}/dist/s.html`, makeHtml({
             title: 'New Tab Settings',
-            content: `<script src=s.js defer></script><style>${cssCode}</style><script>${loaderCode}</script>`,
-          }), catchErr);
+            content: `<style>${cssCode}</style><script>${errorsInitCode}</script><script src=s.js type=module async></script><script type=module async>${loaderCode}</script>`,
+          }).trim(), catchErr);
         },
       }),
       production && terser(terserOpts),
@@ -182,7 +200,7 @@ export default [
     input: 'src/background.js',
     output: {
       sourcemap: false,
-      format: 'iife',
+      format: 'es',
       name: 'b',
       file: 'dist/b.js',
     },

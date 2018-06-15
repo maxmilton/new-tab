@@ -29,6 +29,7 @@
     "raven-js": "3.26.2"
   },
   "devDependencies": {
+    "@babel/plugin-syntax-dynamic-import": "7.0.0-beta.51",
     "@minna-ui/eslint-config": "0.2.0",
     "@minna-ui/jest-config": "0.2.0",
     "@minna-ui/stylelint-config": "0.1.0",
@@ -36,6 +37,7 @@
     "@minna-ui/svelte-preprocess-style": "0.2.0",
     "@types/chrome": "0.0.69",
     "autoprefixer": "8.6.2",
+    "babel-eslint": "8.2.3",
     "clean-css": "4.1.11",
     "codecov": "3.0.2",
     "eslint": "4.19.1",

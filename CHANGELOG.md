@@ -9,6 +9,14 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ## [Unreleased]
 
+## [0.7.0] - 2018-06-15
+
+### Changed
+
+- Load JavaScript in a way which is faster and more consistent for page load performance. Uses some new browser APIs which are not available in Chrome =< v63.
+- Increase the click area of bookmark items.
+- Trim whitespace from HTML.
+
 ## [0.6.6] - 2018-06-14
 
 ### Added
@@ -241,7 +249,8 @@ Known issues:
 
 - Initial public version including all the basics; working proof of concept code, readme, etc. Not ready for release yet though, it's still far from being actually useful!
 
-[Unreleased]: https://github.com/MaxMilton/new-tab/compare/v0.6.6...HEAD
+[Unreleased]: https://github.com/MaxMilton/new-tab/compare/v0.7.0...HEAD
+[0.7.0]: https://github.com/MaxMilton/new-tab/compare/v0.6.6...v0.7.0
 [0.6.6]: https://github.com/MaxMilton/new-tab/compare/v0.6.5...v0.6.6
 [0.6.5]: https://github.com/MaxMilton/new-tab/compare/v0.6.4...v0.6.5
 [0.6.4]: https://github.com/MaxMilton/new-tab/compare/v0.6.3...v0.6.4
