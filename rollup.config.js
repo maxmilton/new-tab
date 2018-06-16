@@ -10,13 +10,13 @@ import CleanCSS from 'clean-css';
 import manifest from './manifest';
 
 const template = readFileSync(`${__dirname}/src/template.html`, 'utf8');
-const production = !process.env.ROLLUP_WATCH;
+const isProd = !process.env.ROLLUP_WATCH;
 const nameCache = {};
 
 const terserOpts = {
   compress: {
-    drop_console: production,
-    drop_debugger: production,
+    drop_console: isProd,
+    drop_debugger: isProd,
     negate_iife: false, // better chrome performance when false
     passes: 2,
     pure_getters: true,
@@ -107,26 +107,26 @@ export default [
   {
     input: 'src/app.js',
     output: {
-      sourcemap: !production,
+      sourcemap: !isProd,
       format: 'es',
       name: 'n',
       file: 'dist/n.js',
     },
     plugins: [
       svelte({
-        dev: !production,
+        dev: !isProd,
         preprocess: {
           // only remove whitespace in production; better feedback during development
-          ...(production ? { markup: preprocessMarkup({ unsafe: true }) } : {}),
+          ...(isProd ? { markup: preprocessMarkup({ unsafe: true }) } : {}),
           style: preprocessStyle(),
         },
         css: (css) => {
-          const cssCode = production
+          const cssCode = isProd
             ? new CleanCSS(cleanCssOpts).minify(css.code).styles
             : css.code;
 
           // add CSS source map data
-          const cssMap = production
+          const cssMap = isProd
             ? ''
             : `\n/*# sourceMappingURL=data:application/json;base64,${
               Buffer.from(JSON.stringify(css.map)).toString('base64')
@@ -141,7 +141,7 @@ export default [
       }),
       resolve(),
       commonjs(),
-      production && terser(terserOpts),
+      isProd && terser(terserOpts),
     ],
   },
 
@@ -149,22 +149,22 @@ export default [
   {
     input: 'src/settings.js',
     output: {
-      sourcemap: !production,
+      sourcemap: !isProd,
       format: 'es',
       name: 's',
       file: 'dist/s.js',
     },
     plugins: [
       svelte({
-        dev: !production,
+        dev: !isProd,
         // shared: false, // not possible to override at the moment
         preprocess: {
           // only remove whitespace in production; better feedback during development
-          ...(production ? { markup: preprocessMarkup({ unsafe: true }) } : {}),
+          ...(isProd ? { markup: preprocessMarkup({ unsafe: true }) } : {}),
           style: preprocessStyle(),
         },
         css: (css) => {
-          const cssCode = production
+          const cssCode = isProd
             ? new CleanCSS(cleanCssOpts).minify(css.code).styles
             : css.code;
 
@@ -175,7 +175,7 @@ export default [
           }).trim(), catchErr);
         },
       }),
-      production && terser(terserOpts),
+      isProd && terser(terserOpts),
     ],
   },
 
@@ -191,7 +191,7 @@ export default [
     plugins: [
       resolve(),
       commonjs(),
-      production && terser(terserOpts),
+      isProd && terser(terserOpts),
     ],
   },
 
@@ -205,7 +205,7 @@ export default [
       file: 'dist/b.js',
     },
     plugins: [
-      production && terser(terserOpts),
+      isProd && terser(terserOpts),
     ],
   },
 ];

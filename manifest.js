@@ -2,7 +2,7 @@
 
 const pkg = require('./package.json');
 
-const isProduction = process.env.NODE_ENV === 'production';
+const isProd = process.env.NODE_ENV === 'production';
 const hash = "'sha256-FQRpNOtBY3Ei44Wjesz/iSauIg9ai+XGsmdv4dlvHHk=' 'sha256-G/t3XNYX/hbAY5OgwlU7RHqwX8i/zQ2LaZxKC0ahApE='"; // error-init.js + loader.js
 
 export default {
@@ -36,7 +36,7 @@ export default {
   offline_enabled: true,
   incognito: 'not_allowed',
 
-  ...(isProduction
+  ...(isProd
     // tighter security than default
     ? { content_security_policy: `default-src 'none'; script-src 'self' ${hash}; style-src 'unsafe-inline'; img-src data: chrome: *; connect-src https://sentry.io` }
     // allow connections from http://localhost during local development
