@@ -26,7 +26,7 @@
     "test:dev": "yarn test --notify --watch"
   },
   "dependencies": {
-    "raven-js": "3.26.2"
+    "raven-js": "3.26.3"
   },
   "devDependencies": {
     "@babel/plugin-syntax-dynamic-import": "7.0.0-beta.51",
