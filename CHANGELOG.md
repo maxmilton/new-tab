@@ -16,6 +16,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 - Load JavaScript in a way which is faster and more consistent for page load performance. Uses some new browser APIs which are not available in Chrome =< v63.
 - Increase the click area of bookmark items.
 - Trim whitespace from HTML.
+- Update dependencies.
 
 ## [0.6.6] - 2018-06-14
 

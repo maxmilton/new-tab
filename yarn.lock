@@ -527,7 +527,18 @@ atob@^2.1.1:
   version "2.1.1"
   resolved "https://registry.yarnpkg.com/atob/-/atob-2.1.1.tgz#ae2d5a729477f289d60dd7f96a6314a22dd6c22a"
 
-autoprefixer@8.6.2, autoprefixer@^8.0.0:
+autoprefixer@8.6.3:
+  version "8.6.3"
+  resolved "https://registry.yarnpkg.com/autoprefixer/-/autoprefixer-8.6.3.tgz#1d38a129e6a4582a565b6570d16f2d7d3de9cbf9"
+  dependencies:
+    browserslist "^3.2.8"
+    caniuse-lite "^1.0.30000856"
+    normalize-range "^0.1.2"
+    num2fraction "^1.2.2"
+    postcss "^6.0.22"
+    postcss-value-parser "^3.2.3"
+
+autoprefixer@^8.0.0:
   version "8.6.2"
   resolved "https://registry.yarnpkg.com/autoprefixer/-/autoprefixer-8.6.2.tgz#51d42ff13243820a582a53ecca20dedaeb7f2efd"
   dependencies:
@@ -856,7 +867,7 @@ camelcase@^4.1.0:
   version "4.1.0"
   resolved "https://registry.yarnpkg.com/camelcase/-/camelcase-4.1.0.tgz#d545635be1e33c542649c69173e5de6acfae34dd"
 
-caniuse-lite@^1.0.30000844, caniuse-lite@^1.0.30000851:
+caniuse-lite@^1.0.30000844, caniuse-lite@^1.0.30000851, caniuse-lite@^1.0.30000856:
   version "1.0.30000856"
   resolved "https://registry.yarnpkg.com/caniuse-lite/-/caniuse-lite-1.0.30000856.tgz#ecc16978135a6f219b138991eb62009d25ee8daa"
 
@@ -3799,9 +3810,9 @@ randomatic@^3.0.0:
     kind-of "^6.0.0"
     math-random "^1.0.1"
 
-raven-js@3.26.2:
-  version "3.26.2"
-  resolved "https://registry.yarnpkg.com/raven-js/-/raven-js-3.26.2.tgz#9153af2416e96ccf4e0b9cbc6c90c34dda0d7e88"
+raven-js@3.26.3:
+  version "3.26.3"
+  resolved "https://registry.yarnpkg.com/raven-js/-/raven-js-3.26.3.tgz#0efb49969b5b11ab965f7b0d6da4ca102b763cb0"
 
 rc@^1.1.7:
   version "1.2.8"
@@ -4138,9 +4149,9 @@ rollup-pluginutils@^2.0.1:
     estree-walker "^0.5.2"
     micromatch "^2.3.11"
 
-rollup@0.60.7:
-  version "0.60.7"
-  resolved "https://registry.yarnpkg.com/rollup/-/rollup-0.60.7.tgz#2b62ef9306f719b1ab85a7814b3e6596ac51fae8"
+rollup@0.61.0:
+  version "0.61.0"
+  resolved "https://registry.yarnpkg.com/rollup/-/rollup-0.61.0.tgz#9340ce15f6fc4b0cab4b2512ee9e948cd153e737"
   dependencies:
     "@types/estree" "0.0.39"
     "@types/node" "*"
@@ -4581,9 +4592,9 @@ supports-color@^5.1.0, supports-color@^5.3.0, supports-color@^5.4.0:
   dependencies:
     has-flag "^3.0.0"
 
-svelte@2.7.2:
-  version "2.7.2"
-  resolved "https://registry.yarnpkg.com/svelte/-/svelte-2.7.2.tgz#17019df4997d10206378fb45136b8cbb6edf2611"
+svelte@2.8.0:
+  version "2.8.0"
+  resolved "https://registry.yarnpkg.com/svelte/-/svelte-2.8.0.tgz#9a6cbee1b80f6030f24ef0a1cb41ea5dd5e29a4c"
 
 svg-tags@^1.0.0:
   version "1.0.0"
