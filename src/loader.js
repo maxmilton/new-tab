@@ -1,5 +1,3 @@
-// XXX: Update manifest CSP hash after any changes to this file!
-
 chrome.storage.sync.get(['e', 't'], (settings) => {
   // load alternate theme
   if (settings.t !== 'd') {
