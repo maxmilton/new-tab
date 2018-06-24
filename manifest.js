@@ -9,7 +9,7 @@ export default {
   manifest_version: 2,
 
   name: 'New Tab',
-  description: 'A high performance new tab page that gets you where you need to go faster.',
+  description: '⚡ A high performance new tab page that gets you where you need to go faster.',
   version: pkg.version,
   version_name: process.env.APP_RELEASE,
   homepage_url: 'https://github.com/MaxMilton/new-tab',
