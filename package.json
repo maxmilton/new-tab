@@ -41,7 +41,7 @@
     "clean-css": "4.1.11",
     "codecov": "3.0.2",
     "eslint": "5.0.0",
-    "jest": "23.1.0",
+    "jest": "23.2.0",
     "postcss": "6.0.23",
     "postcss-import": "11.1.0",
     "postcss-nested": "3.0.0",
