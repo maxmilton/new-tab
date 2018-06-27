@@ -239,16 +239,16 @@
     eslint-plugin-import "^2.12.0"
     eslint-plugin-jest "^21.17.0"
 
-"@minna-ui/jest-config@0.2.0":
-  version "0.2.0"
-  resolved "https://registry.yarnpkg.com/@minna-ui/jest-config/-/jest-config-0.2.0.tgz#2521478a320ed94728c1806fced36b5a4c3cbb2f"
+"@minna-ui/jest-config@0.3.0":
+  version "0.3.0"
+  resolved "https://registry.yarnpkg.com/@minna-ui/jest-config/-/jest-config-0.3.0.tgz#f8defa311d3b7b5432008bcd41fee7ea336a9ca3"
   dependencies:
     "@babel/core" "^7.0.0-beta.51"
     "@babel/plugin-transform-modules-commonjs" "^7.0.0-beta.51"
-    "@types/jest" "^23.1.0"
-    "@types/node" "^10.3.3"
+    "@types/jest" "^23.1.2"
+    "@types/node" "^10.3.6"
     babel-core "^7.0.0-bridge.0"
-    babel-jest "^23.0.1"
+    babel-jest "^23.2.0"
 
 "@minna-ui/stylelint-config@0.1.0":
   version "0.1.0"
@@ -307,13 +307,17 @@
   version "0.0.28"
   resolved "https://registry.yarnpkg.com/@types/filewriter/-/filewriter-0.0.28.tgz#c054e8af4d9dd75db4e63abc76f885168714d4b3"
 
-"@types/jest@^23.1.0":
-  version "23.1.1"
-  resolved "https://registry.yarnpkg.com/@types/jest/-/jest-23.1.1.tgz#c54ab1a5f41aa693c0957222dd10414416d0c87b"
+"@types/jest@^23.1.2":
+  version "23.1.2"
+  resolved "https://registry.yarnpkg.com/@types/jest/-/jest-23.1.2.tgz#a6cd37deb9110a8c63dc1435d6ee2518b3bd8e54"
 
-"@types/node@*", "@types/node@^10.3.3":
+"@types/node@*":
   version "10.3.4"
   resolved "https://registry.yarnpkg.com/@types/node/-/node-10.3.4.tgz#c74e8aec19e555df44609b8057311052a2c84d9e"
+
+"@types/node@^10.3.6":
+  version "10.3.6"
+  resolved "https://registry.yarnpkg.com/@types/node/-/node-10.3.6.tgz#ea8aab9439b59f40d19ec5f13b44642344872b11"
 
 abab@^1.0.4:
   version "1.0.4"
@@ -612,6 +616,13 @@ babel-jest@^23.0.1:
     babel-plugin-istanbul "^4.1.6"
     babel-preset-jest "^23.0.1"
 
+babel-jest@^23.2.0:
+  version "23.2.0"
+  resolved "https://registry.yarnpkg.com/babel-jest/-/babel-jest-23.2.0.tgz#14a9d6a3f4122dfea6069d37085adf26a53a4dba"
+  dependencies:
+    babel-plugin-istanbul "^4.1.6"
+    babel-preset-jest "^23.2.0"
+
 babel-messages@^6.23.0:
   version "6.23.0"
   resolved "https://registry.yarnpkg.com/babel-messages/-/babel-messages-6.23.0.tgz#f3cdf4703858035b2a2951c6ec5edf6c62f2630e"
@@ -631,6 +642,10 @@ babel-plugin-jest-hoist@^23.0.1:
   version "23.0.1"
   resolved "https://registry.yarnpkg.com/babel-plugin-jest-hoist/-/babel-plugin-jest-hoist-23.0.1.tgz#eaa11c964563aea9c21becef2bdf7853f7f3c148"
 
+babel-plugin-jest-hoist@^23.2.0:
+  version "23.2.0"
+  resolved "https://registry.yarnpkg.com/babel-plugin-jest-hoist/-/babel-plugin-jest-hoist-23.2.0.tgz#e61fae05a1ca8801aadee57a6d66b8cefaf44167"
+
 babel-plugin-syntax-object-rest-spread@^6.13.0:
   version "6.13.0"
   resolved "https://registry.yarnpkg.com/babel-plugin-syntax-object-rest-spread/-/babel-plugin-syntax-object-rest-spread-6.13.0.tgz#fd6536f2bce13836ffa3a5458c4903a597bb3bf5"
@@ -640,6 +655,13 @@ babel-preset-jest@^23.0.1:
   resolved "https://registry.yarnpkg.com/babel-preset-jest/-/babel-preset-jest-23.0.1.tgz#631cc545c6cf021943013bcaf22f45d87fe62198"
   dependencies:
     babel-plugin-jest-hoist "^23.0.1"
+    babel-plugin-syntax-object-rest-spread "^6.13.0"
+
+babel-preset-jest@^23.2.0:
+  version "23.2.0"
+  resolved "https://registry.yarnpkg.com/babel-preset-jest/-/babel-preset-jest-23.2.0.tgz#8ec7a03a138f001a1a8fb1e8113652bf1a55da46"
+  dependencies:
+    babel-plugin-jest-hoist "^23.2.0"
     babel-plugin-syntax-object-rest-spread "^6.13.0"
 
 babel-register@^6.26.0:
