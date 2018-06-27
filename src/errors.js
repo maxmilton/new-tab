@@ -1,4 +1,4 @@
-import Raven from 'raven-js';
+const Raven = require('raven-js'); // XXX: Has test coverage issues when using import
 
 // clean up listeners for error capture before Sentry is loaded
 window.removeEventListener('error', window.l);

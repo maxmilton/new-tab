@@ -3,10 +3,10 @@
 'use strict';
 
 module.exports = {
-  plugins: ['@babel/plugin-syntax-dynamic-import'],
   env: {
     test: {
       presets: ['@minna-ui/jest-config/babel-preset.js'],
+      plugins: ['@babel/plugin-syntax-dynamic-import'],
     },
   },
 };
