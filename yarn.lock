@@ -257,9 +257,9 @@
     stylelint-config-standard "^18.2.0"
     stylelint-order "^0.8.1"
 
-"@minna-ui/svelte-preprocess-markup@0.3.0":
-  version "0.3.0"
-  resolved "https://registry.yarnpkg.com/@minna-ui/svelte-preprocess-markup/-/svelte-preprocess-markup-0.3.0.tgz#8bf524d58f25ee50179e3b9368d186fdbb51b15e"
+"@minna-ui/svelte-preprocess-markup@0.4.0":
+  version "0.4.0"
+  resolved "https://registry.yarnpkg.com/@minna-ui/svelte-preprocess-markup/-/svelte-preprocess-markup-0.4.0.tgz#262e872c26a7c4846577ef9f891d2703e2cf05c0"
   dependencies:
     html-minifier "3.5.17"
 
