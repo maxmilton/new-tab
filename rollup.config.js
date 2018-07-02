@@ -34,7 +34,7 @@ const terserOpts = {
   mangle: {
     properties: {
       // NOTE: Fragile; needs attention, especially between Svelte releases.
-      regex: /^(_.*|each_value.*|component|changed|previous|destroy|root|fire)$/,
+      regex: /^(_.*|each_value.*|component|changed|previous|destroy|root|fire|current|intro)$/,
       reserved: ['l', 'u', 'q'],
       // debug: 'XX',
     },
@@ -138,6 +138,9 @@ export default [
             content: `<style>${cssCode}${cssMap}</style><script>${errorsInitCode}</script><script src=n.js type=module async></script><script type=module async>${loaderCode}</script>`,
           }).trim(), catchErr);
         },
+        // XXX: Svelte v3 defaults
+        // skipIntroByDefault: true,
+        // nestedTransitions: false,
       }),
       resolve(),
       commonjs(),
