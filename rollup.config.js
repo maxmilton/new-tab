@@ -122,7 +122,11 @@ export default [
         },
         css: (css) => {
           const cssCode = isProd
-            ? new CleanCSS(cleanCssOpts).minify(css.code).styles
+            ? (() => {
+              // run CSS minification twice for better compression
+              const code = new CleanCSS(cleanCssOpts).minify(css.code).styles;
+              return new CleanCSS(cleanCssOpts).minify(code).styles;
+            })()
             : css.code;
 
           // add CSS source map data
