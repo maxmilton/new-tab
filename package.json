@@ -29,7 +29,7 @@
     "raven-js": "3.26.3"
   },
   "devDependencies": {
-    "@babel/plugin-syntax-dynamic-import": "7.0.0-beta.51",
+    "@babel/plugin-syntax-dynamic-import": "7.0.0-beta.52",
     "@minna-ui/eslint-config": "0.3.0",
     "@minna-ui/jest-config": "0.4.0",
     "@minna-ui/stylelint-config": "0.4.0",
@@ -39,9 +39,9 @@
     "autoprefixer": "8.6.4",
     "babel-eslint": "8.2.5",
     "clean-css": "4.1.11",
-    "codecov": "3.0.2",
+    "codecov": "3.0.3",
     "eslint": "5.0.1",
-    "jest": "23.2.0",
+    "jest": "23.3.0",
     "postcss": "6.0.23",
     "postcss-import": "11.1.0",
     "postcss-nested": "3.0.0",
