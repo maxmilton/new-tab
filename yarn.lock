@@ -239,9 +239,9 @@
     eslint-plugin-import "^2.13.0"
     eslint-plugin-jest "^21.17.0"
 
-"@minna-ui/jest-config@0.5.0":
-  version "0.5.0"
-  resolved "https://registry.yarnpkg.com/@minna-ui/jest-config/-/jest-config-0.5.0.tgz#0cba365a0e4f8a7bc2ab153aab49daa91832c168"
+"@minna-ui/jest-config@0.6.0":
+  version "0.6.0"
+  resolved "https://registry.yarnpkg.com/@minna-ui/jest-config/-/jest-config-0.6.0.tgz#82113b0feb217970190c86a6789da46c0d795155"
   dependencies:
     "@babel/core" "^7.0.0-beta.52"
     "@babel/plugin-transform-modules-commonjs" "^7.0.0-beta.52"
