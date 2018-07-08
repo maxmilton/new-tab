@@ -14,7 +14,7 @@
   dependencies:
     "@babel/highlight" "7.0.0-beta.52"
 
-"@babel/core@^7.0.0-beta.51":
+"@babel/core@^7.0.0-beta.52":
   version "7.0.0-beta.52"
   resolved "https://registry.yarnpkg.com/@babel/core/-/core-7.0.0-beta.52.tgz#f27a9a468f8cf9c860aabca5f6084fa52fbc6e55"
   dependencies:
@@ -158,7 +158,7 @@
   dependencies:
     "@babel/helper-plugin-utils" "7.0.0-beta.52"
 
-"@babel/plugin-transform-modules-commonjs@^7.0.0-beta.51":
+"@babel/plugin-transform-modules-commonjs@^7.0.0-beta.52":
   version "7.0.0-beta.52"
   resolved "https://registry.yarnpkg.com/@babel/plugin-transform-modules-commonjs/-/plugin-transform-modules-commonjs-7.0.0-beta.52.tgz#0104ef183cdc2fd43d0860211cccce79ef18017e"
   dependencies:
@@ -239,14 +239,14 @@
     eslint-plugin-import "^2.13.0"
     eslint-plugin-jest "^21.17.0"
 
-"@minna-ui/jest-config@0.4.0":
-  version "0.4.0"
-  resolved "https://registry.yarnpkg.com/@minna-ui/jest-config/-/jest-config-0.4.0.tgz#53a6dd589c160d199aaf83d9ad4828d526b5085e"
+"@minna-ui/jest-config@0.5.0":
+  version "0.5.0"
+  resolved "https://registry.yarnpkg.com/@minna-ui/jest-config/-/jest-config-0.5.0.tgz#0cba365a0e4f8a7bc2ab153aab49daa91832c168"
   dependencies:
-    "@babel/core" "^7.0.0-beta.51"
-    "@babel/plugin-transform-modules-commonjs" "^7.0.0-beta.51"
-    "@types/jest" "^23.1.3"
-    "@types/node" "^10.5.1"
+    "@babel/core" "^7.0.0-beta.52"
+    "@babel/plugin-transform-modules-commonjs" "^7.0.0-beta.52"
+    "@types/jest" "^23.1.4"
+    "@types/node" "^10.5.2"
     babel-core "^7.0.0-bridge.0"
     babel-jest "^23.2.0"
 
@@ -257,11 +257,11 @@
     stylelint-config-standard "^18.2.0"
     stylelint-order "^0.8.1"
 
-"@minna-ui/svelte-preprocess-markup@0.4.0":
-  version "0.4.0"
-  resolved "https://registry.yarnpkg.com/@minna-ui/svelte-preprocess-markup/-/svelte-preprocess-markup-0.4.0.tgz#262e872c26a7c4846577ef9f891d2703e2cf05c0"
+"@minna-ui/svelte-preprocess-markup@0.5.0":
+  version "0.5.0"
+  resolved "https://registry.yarnpkg.com/@minna-ui/svelte-preprocess-markup/-/svelte-preprocess-markup-0.5.0.tgz#00e1ab33bc3f5532ea465adbf4d8cd0c30209cb7"
   dependencies:
-    html-minifier "3.5.17"
+    html-minifier "3.5.18"
 
 "@minna-ui/svelte-preprocess-style@0.3.0":
   version "0.3.0"
@@ -307,11 +307,11 @@
   version "0.0.28"
   resolved "https://registry.yarnpkg.com/@types/filewriter/-/filewriter-0.0.28.tgz#c054e8af4d9dd75db4e63abc76f885168714d4b3"
 
-"@types/jest@^23.1.3":
+"@types/jest@^23.1.4":
   version "23.1.4"
   resolved "https://registry.yarnpkg.com/@types/jest/-/jest-23.1.4.tgz#71e1e2d08b1db742f479ee2795536ebc999a2419"
 
-"@types/node@*", "@types/node@^10.5.1":
+"@types/node@*", "@types/node@^10.5.2":
   version "10.5.2"
   resolved "https://registry.yarnpkg.com/@types/node/-/node-10.5.2.tgz#f19f05314d5421fe37e74153254201a7bf00a707"
 
@@ -1051,17 +1051,13 @@ combined-stream@1.0.6, combined-stream@^1.0.5, combined-stream@~1.0.5:
   dependencies:
     delayed-stream "~1.0.0"
 
-commander@2.15.x:
-  version "2.15.1"
-  resolved "https://registry.yarnpkg.com/commander/-/commander-2.15.1.tgz#df46e867d0fc2aec66a34662b406a9ccafff5b0f"
+commander@2.16.x, commander@~2.16.0:
+  version "2.16.0"
+  resolved "https://registry.yarnpkg.com/commander/-/commander-2.16.0.tgz#f16390593996ceb4f3eeb020b31d78528f7f8a50"
 
 commander@~2.14.1:
   version "2.14.1"
   resolved "https://registry.yarnpkg.com/commander/-/commander-2.14.1.tgz#2235123e37af8ca3c65df45b026dbd357b01b9aa"
-
-commander@~2.16.0:
-  version "2.16.0"
-  resolved "https://registry.yarnpkg.com/commander/-/commander-2.16.0.tgz#f16390593996ceb4f3eeb020b31d78528f7f8a50"
 
 compare-versions@^3.1.0:
   version "3.3.0"
@@ -2064,13 +2060,13 @@ html-encoding-sniffer@^1.0.2:
   dependencies:
     whatwg-encoding "^1.0.1"
 
-html-minifier@3.5.17:
-  version "3.5.17"
-  resolved "https://registry.yarnpkg.com/html-minifier/-/html-minifier-3.5.17.tgz#fe9834c4288e4d5b4dfe18fbc7f3f811c108e5ea"
+html-minifier@3.5.18:
+  version "3.5.18"
+  resolved "https://registry.yarnpkg.com/html-minifier/-/html-minifier-3.5.18.tgz#fc8b02826cbbafc6de19a103c41c830a91cffe5a"
   dependencies:
     camel-case "3.0.x"
     clean-css "4.1.x"
-    commander "2.15.x"
+    commander "2.16.x"
     he "1.1.x"
     param-case "2.1.x"
     relateurl "0.2.x"
