@@ -250,9 +250,9 @@
     babel-core "^7.0.0-bridge.0"
     babel-jest "^23.2.0"
 
-"@minna-ui/stylelint-config@0.4.0":
-  version "0.4.0"
-  resolved "https://registry.yarnpkg.com/@minna-ui/stylelint-config/-/stylelint-config-0.4.0.tgz#cd03acaba7118f94623bd1344d8ddef0360935a9"
+"@minna-ui/stylelint-config@0.6.0":
+  version "0.6.0"
+  resolved "https://registry.yarnpkg.com/@minna-ui/stylelint-config/-/stylelint-config-0.6.0.tgz#47a17759efda37ade45d729ffd4bf5af5a65004c"
   dependencies:
     stylelint-config-standard "^18.2.0"
     stylelint-order "^0.8.1"
