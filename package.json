@@ -39,7 +39,7 @@
     "autoprefixer": "8.6.5",
     "babel-eslint": "8.2.5",
     "clean-css": "4.1.11",
-    "codecov": "3.0.3",
+    "codecov": "3.0.4",
     "eslint": "5.1.0",
     "jest": "23.3.0",
     "postcss": "6.0.23",
