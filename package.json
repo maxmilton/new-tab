@@ -34,7 +34,7 @@
     "@minna-ui/jest-config": "0.7.0",
     "@minna-ui/stylelint-config": "0.7.1",
     "@minna-ui/svelte-preprocess-markup": "0.7.0",
-    "@minna-ui/svelte-preprocess-style": "0.7.0",
+    "@minna-ui/svelte-preprocess-style": "0.3.0",
     "@types/chrome": "0.0.69",
     "autoprefixer": "8.6.5",
     "babel-eslint": "8.2.5",
