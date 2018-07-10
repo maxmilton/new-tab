@@ -239,20 +239,20 @@
     eslint-plugin-import "^2.13.0"
     eslint-plugin-jest "^21.17.0"
 
-"@minna-ui/jest-config@0.6.0":
-  version "0.6.0"
-  resolved "https://registry.yarnpkg.com/@minna-ui/jest-config/-/jest-config-0.6.0.tgz#82113b0feb217970190c86a6789da46c0d795155"
+"@minna-ui/jest-config@0.7.0":
+  version "0.7.0"
+  resolved "https://registry.yarnpkg.com/@minna-ui/jest-config/-/jest-config-0.7.0.tgz#8d3ff8520e8661a3383cdc635a0c77ffbf9d2d22"
   dependencies:
     "@babel/core" "^7.0.0-beta.52"
     "@babel/plugin-transform-modules-commonjs" "^7.0.0-beta.52"
-    "@types/jest" "^23.1.4"
+    "@types/jest" "^23.1.5"
     "@types/node" "^10.5.2"
     babel-core "^7.0.0-bridge.0"
     babel-jest "^23.2.0"
 
-"@minna-ui/stylelint-config@0.6.0":
-  version "0.6.0"
-  resolved "https://registry.yarnpkg.com/@minna-ui/stylelint-config/-/stylelint-config-0.6.0.tgz#47a17759efda37ade45d729ffd4bf5af5a65004c"
+"@minna-ui/stylelint-config@0.7.1":
+  version "0.7.1"
+  resolved "https://registry.yarnpkg.com/@minna-ui/stylelint-config/-/stylelint-config-0.7.1.tgz#c4e8de10275635a773cbb543b58151347d4e1e6f"
   dependencies:
     stylelint-config-standard "^18.2.0"
     stylelint-order "^0.8.1"
@@ -307,9 +307,9 @@
   version "0.0.28"
   resolved "https://registry.yarnpkg.com/@types/filewriter/-/filewriter-0.0.28.tgz#c054e8af4d9dd75db4e63abc76f885168714d4b3"
 
-"@types/jest@^23.1.4":
-  version "23.1.4"
-  resolved "https://registry.yarnpkg.com/@types/jest/-/jest-23.1.4.tgz#71e1e2d08b1db742f479ee2795536ebc999a2419"
+"@types/jest@^23.1.5":
+  version "23.1.5"
+  resolved "https://registry.yarnpkg.com/@types/jest/-/jest-23.1.5.tgz#e31be003956e1fa8c860124d99bea9ae327ae37b"
 
 "@types/node@*", "@types/node@^10.5.2":
   version "10.5.2"
