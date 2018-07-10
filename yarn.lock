@@ -230,9 +230,9 @@
     lodash "^4.17.5"
     to-fast-properties "^2.0.0"
 
-"@minna-ui/eslint-config@0.3.0":
-  version "0.3.0"
-  resolved "https://registry.yarnpkg.com/@minna-ui/eslint-config/-/eslint-config-0.3.0.tgz#4aa0d57f1484d1a84dae7a5d153e8b71d324d19b"
+"@minna-ui/eslint-config@0.7.0":
+  version "0.7.0"
+  resolved "https://registry.yarnpkg.com/@minna-ui/eslint-config/-/eslint-config-0.7.0.tgz#0fdb154664b3199d1c25f0c265c7608b29bd36ab"
   dependencies:
     eslint-config-airbnb-base "^13.0.0"
     eslint-plugin-html "^4.0.5"
@@ -257,15 +257,15 @@
     stylelint-config-standard "^18.2.0"
     stylelint-order "^0.8.1"
 
-"@minna-ui/svelte-preprocess-markup@0.5.0":
-  version "0.5.0"
-  resolved "https://registry.yarnpkg.com/@minna-ui/svelte-preprocess-markup/-/svelte-preprocess-markup-0.5.0.tgz#00e1ab33bc3f5532ea465adbf4d8cd0c30209cb7"
+"@minna-ui/svelte-preprocess-markup@0.7.0":
+  version "0.7.0"
+  resolved "https://registry.yarnpkg.com/@minna-ui/svelte-preprocess-markup/-/svelte-preprocess-markup-0.7.0.tgz#88ce1b536a9f4c83efb699a7e33f05c6cfa4c22f"
   dependencies:
     html-minifier "3.5.18"
 
-"@minna-ui/svelte-preprocess-style@0.3.0":
-  version "0.3.0"
-  resolved "https://registry.yarnpkg.com/@minna-ui/svelte-preprocess-style/-/svelte-preprocess-style-0.3.0.tgz#00a03d3d081c05dd6bf2161672366cb5f85dfc74"
+"@minna-ui/svelte-preprocess-style@0.7.0":
+  version "0.7.0"
+  resolved "https://registry.yarnpkg.com/@minna-ui/svelte-preprocess-style/-/svelte-preprocess-style-0.7.0.tgz#20563bd326ad35a9fe26dd91fd8ff8e032fb4d88"
   dependencies:
     postcss-load-config "^1.2.0"
     postcss-selector-parser "^5.0.0-rc.3"
