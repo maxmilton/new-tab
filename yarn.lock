@@ -244,9 +244,9 @@
     lodash "^4.17.5"
     to-fast-properties "^2.0.0"
 
-"@minna-ui/eslint-config@0.8.0":
-  version "0.8.0"
-  resolved "https://registry.yarnpkg.com/@minna-ui/eslint-config/-/eslint-config-0.8.0.tgz#7badcd15f881019b8176bc75ca5c18cd3f02424c"
+"@minna-ui/eslint-config@0.9.0":
+  version "0.9.0"
+  resolved "https://registry.yarnpkg.com/@minna-ui/eslint-config/-/eslint-config-0.9.0.tgz#0ddf5e1503be214141d535d59a0bc88dac9ebf48"
   dependencies:
     eslint-config-airbnb-base "^13.0.0"
     eslint-plugin-html "^4.0.5"
