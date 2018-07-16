@@ -244,42 +244,42 @@
     lodash "^4.17.5"
     to-fast-properties "^2.0.0"
 
-"@minna-ui/eslint-config@0.8.0":
-  version "0.8.0"
-  resolved "https://registry.yarnpkg.com/@minna-ui/eslint-config/-/eslint-config-0.8.0.tgz#7badcd15f881019b8176bc75ca5c18cd3f02424c"
+"@minna-ui/eslint-config@0.9.0":
+  version "0.9.0"
+  resolved "https://registry.yarnpkg.com/@minna-ui/eslint-config/-/eslint-config-0.9.0.tgz#0ddf5e1503be214141d535d59a0bc88dac9ebf48"
   dependencies:
     eslint-config-airbnb-base "^13.0.0"
     eslint-plugin-html "^4.0.5"
     eslint-plugin-import "^2.13.0"
     eslint-plugin-jest "^21.17.0"
 
-"@minna-ui/jest-config@0.8.0":
-  version "0.8.0"
-  resolved "https://registry.yarnpkg.com/@minna-ui/jest-config/-/jest-config-0.8.0.tgz#b50851521ccded40666e513eca62ae9311a0fd99"
+"@minna-ui/jest-config@0.9.0":
+  version "0.9.0"
+  resolved "https://registry.yarnpkg.com/@minna-ui/jest-config/-/jest-config-0.9.0.tgz#7aead6bb6d6f813e5480ccc3a7f161fa31e05183"
   dependencies:
     "@babel/core" "^7.0.0-beta.53"
     "@babel/plugin-transform-modules-commonjs" "^7.0.0-beta.53"
-    "@types/jest" "^23.1.5"
+    "@types/jest" "^23.1.6"
     "@types/node" "^10.5.2"
     babel-core "^7.0.0-bridge.0"
     babel-jest "^23.4.0"
 
-"@minna-ui/stylelint-config@0.8.0":
-  version "0.8.0"
-  resolved "https://registry.yarnpkg.com/@minna-ui/stylelint-config/-/stylelint-config-0.8.0.tgz#869bc2f5961e6f21f7469d626f3bf4c78e258326"
+"@minna-ui/stylelint-config@0.9.0":
+  version "0.9.0"
+  resolved "https://registry.yarnpkg.com/@minna-ui/stylelint-config/-/stylelint-config-0.9.0.tgz#d25afc093e4a77713ac4cd7f0c63ce75bf4f2c9a"
   dependencies:
     stylelint-config-standard "^18.2.0"
     stylelint-order "^0.8.1"
 
-"@minna-ui/svelte-preprocess-markup@0.8.0":
-  version "0.8.0"
-  resolved "https://registry.yarnpkg.com/@minna-ui/svelte-preprocess-markup/-/svelte-preprocess-markup-0.8.0.tgz#e044ac3120d5760bdbbce7946221a966eba9f51c"
+"@minna-ui/svelte-preprocess-markup@0.9.0":
+  version "0.9.0"
+  resolved "https://registry.yarnpkg.com/@minna-ui/svelte-preprocess-markup/-/svelte-preprocess-markup-0.9.0.tgz#901f2f0c4ed24d6212835e70e863dedbf430dd0d"
   dependencies:
     html-minifier "3.5.19"
 
-"@minna-ui/svelte-preprocess-style@0.8.0":
-  version "0.8.0"
-  resolved "https://registry.yarnpkg.com/@minna-ui/svelte-preprocess-style/-/svelte-preprocess-style-0.8.0.tgz#55c1be83fcc9bda01d0c589e3b251268f1af66ac"
+"@minna-ui/svelte-preprocess-style@0.9.0":
+  version "0.9.0"
+  resolved "https://registry.yarnpkg.com/@minna-ui/svelte-preprocess-style/-/svelte-preprocess-style-0.9.0.tgz#3c9e59fbfcbda53d14460ad96bc89f2fee5c44e1"
   dependencies:
     postcss-load-config "^2.0.0"
     postcss-selector-parser "^5.0.0-rc.3"
@@ -321,9 +321,9 @@
   version "0.0.28"
   resolved "https://registry.yarnpkg.com/@types/filewriter/-/filewriter-0.0.28.tgz#c054e8af4d9dd75db4e63abc76f885168714d4b3"
 
-"@types/jest@^23.1.5":
-  version "23.1.5"
-  resolved "https://registry.yarnpkg.com/@types/jest/-/jest-23.1.5.tgz#e31be003956e1fa8c860124d99bea9ae327ae37b"
+"@types/jest@^23.1.6":
+  version "23.1.6"
+  resolved "https://registry.yarnpkg.com/@types/jest/-/jest-23.1.6.tgz#11c88f738f5b57d1a9dd4970c576a6639b8f0f37"
 
 "@types/node@*", "@types/node@^10.5.2":
   version "10.5.2"
@@ -4667,9 +4667,9 @@ supports-color@^5.1.0, supports-color@^5.3.0, supports-color@^5.4.0:
   dependencies:
     has-flag "^3.0.0"
 
-svelte@2.9.3:
-  version "2.9.3"
-  resolved "https://registry.yarnpkg.com/svelte/-/svelte-2.9.3.tgz#09ac1740c26b4d3394ec623bd9d17cac5713ab6f"
+svelte@2.9.4:
+  version "2.9.4"
+  resolved "https://registry.yarnpkg.com/svelte/-/svelte-2.9.4.tgz#35d43c2b24b7a3f5ebd883e6c9458fb58205b2db"
 
 svg-tags@^1.0.0:
   version "1.0.0"

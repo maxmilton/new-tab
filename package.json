@@ -30,11 +30,11 @@
   },
   "devDependencies": {
     "@babel/plugin-syntax-dynamic-import": "7.0.0-beta.53",
-    "@minna-ui/eslint-config": "0.8.0",
-    "@minna-ui/jest-config": "0.8.0",
-    "@minna-ui/stylelint-config": "0.8.0",
-    "@minna-ui/svelte-preprocess-markup": "0.8.0",
-    "@minna-ui/svelte-preprocess-style": "0.8.0",
+    "@minna-ui/eslint-config": "0.9.0",
+    "@minna-ui/jest-config": "0.9.0",
+    "@minna-ui/stylelint-config": "0.9.0",
+    "@minna-ui/svelte-preprocess-markup": "0.9.0",
+    "@minna-ui/svelte-preprocess-style": "0.9.0",
     "@types/chrome": "0.0.69",
     "autoprefixer": "8.6.5",
     "babel-eslint": "8.2.6",
@@ -52,7 +52,7 @@
     "rollup-plugin-terser": "1.0.1",
     "sinon-chrome": "2.3.2",
     "stylelint": "9.3.0",
-    "svelte": "2.9.3"
+    "svelte": "2.9.4"
   },
   "browserslist": [
     "last 2 Chrome versions"
