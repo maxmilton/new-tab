@@ -29,7 +29,7 @@
     "raven-js": "3.26.3"
   },
   "devDependencies": {
-    "@babel/plugin-syntax-dynamic-import": "7.0.0-beta.53",
+    "@babel/plugin-syntax-dynamic-import": "7.0.0-beta.54",
     "@minna-ui/eslint-config": "0.8.0",
     "@minna-ui/jest-config": "0.8.0",
     "@minna-ui/stylelint-config": "0.8.0",
