@@ -235,11 +235,13 @@
 
       __cancelSearch(key) {
         if (key === 'Escape') {
+          const { __tabsRaw, __topSitesRaw } = this.get();
           this.set({
             __search: '',
-            __tabs: this.get().__tabsRaw,
             __bookmarks: [],
             __history: [],
+            __tabs: __tabsRaw,
+            __topSites: __topSitesRaw,
           });
         }
       },
