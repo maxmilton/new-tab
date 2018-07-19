@@ -15,7 +15,7 @@
   {#if __tabs.length}
     <h2>Open Tabs ({__tabs.length}/{__tabsRaw.length})</h2>
 
-    {#each __tabs as __item}
+    {#each __tabs as __item (__item.id)}
       <a href="{__item.url}" class="r" on:click="__onTabClick(__item, event)">
         <img src="{__item.favIconUrl||'chrome://favicon/'}" class="i">
         {__item.title}
@@ -29,7 +29,7 @@
   {#if __bookmarks.length}
     <h2>Bookmarks ({__bookmarks.length}/{__bookmarksRaw.length})</h2>
 
-    {#each __bookmarks as __item}
+    {#each __bookmarks as __item (__item.id)}
       <a href="{__item.url}" class="r">
         <img src="chrome://favicon/{__item.url || ''}" class="i">
         {__item.title || __item.url}
@@ -48,7 +48,7 @@
   {#if __history.length}
     <h2>History ({__history.length}/{__historyRaw.length})</h2>
 
-    {#each __history as __item}
+    {#each __history as __item (__item.id)}
       <a href="{__item.url}" class="r">
         <img src="chrome://favicon/{__item.url || ''}" class="i">
         {__item.title || __item.url}
@@ -66,7 +66,7 @@
   {#if __topSites.length}
     <h2>Top Sites ({__topSites.length}/{__topSitesRaw.length})</h2>
 
-    {#each __topSites as __item}
+    {#each __topSites as __item (__item.url)}
       <a href="{__item.url}" class="r">
         <img src="chrome://favicon/{__item.url}" class="i">
         {__item.title}
@@ -147,15 +147,13 @@
       });
 
       // update tab list on tab events
-      chrome.tabs.onUpdated.addListener((tabId, changeInfo) => {
-        if (changeInfo.title !== undefined) {
-          this.__getTabs();
-        }
-      });
-      chrome.tabs.onMoved.addListener(() => this.__getTabs());
+      chrome.tabs.onUpdated.addListener(() => this.__getTabs());
       chrome.tabs.onRemoved.addListener(() => this.__getTabs());
+      chrome.tabs.onMoved.addListener(() => this.__getTabs());
+      chrome.tabs.onAttached.addListener(() => this.__getTabs());
     },
 
+    // FIXME: When search is active, rerun when tab events trigger and __getTabs() is run
     onstate({ changed, previous }) {
       if (previous !== undefined && changed.__search !== undefined) {
         this.__onSearch();
@@ -192,13 +190,10 @@
           });
         });
 
-        // search open tabs
         this.set({
+          // search open tabs
           __tabs: __tabsRaw.filter(searchFilter, __search),
-        });
-
-        // search top sites
-        this.set({
+          // search top sites
           __topSites: __topSitesRaw.filter(searchFilter, __search),
         });
       },
@@ -206,10 +201,13 @@
       __getTabs() {
         chrome.tabs.query({}, (tabs) => {
           if (this.get().__search === '') {
-            this.set({ __tabs: tabs });
+            this.set({
+              __tabs: tabs,
+              __tabsRaw: tabs,
+            });
+          } else {
+            this.set({ __tabsRaw: tabs });
           }
-
-          this.set({ __tabsRaw: tabs });
         });
       },
 
@@ -235,11 +233,13 @@
 
       __cancelSearch(key) {
         if (key === 'Escape') {
+          const { __tabsRaw, __topSitesRaw } = this.get();
           this.set({
             __search: '',
-            __tabs: this.get().__tabsRaw,
             __bookmarks: [],
             __history: [],
+            __tabs: __tabsRaw,
+            __topSites: __topSitesRaw,
           });
         }
       },

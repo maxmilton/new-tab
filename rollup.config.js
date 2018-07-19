@@ -115,10 +115,13 @@ export default [
     plugins: [
       svelte({
         dev: !isProd,
-        immutable: true,
+        immutable: true, // better performance but be aware during development
         preprocess: {
           // only remove whitespace in production; better feedback during development
-          ...(isProd ? { markup: preprocessMarkup({ unsafe: true }) } : {}),
+          ...(isProd ? { markup: preprocessMarkup({
+            unsafeWhitespace: true,
+            unsafe: true,
+          }) } : {}),
           style: preprocessStyle(),
         },
         css: (css) => {
@@ -165,8 +168,6 @@ export default [
     plugins: [
       svelte({
         dev: !isProd,
-        // immutable: true, // TODO: See how we should could this for better performance but without breaking the app
-        // shared: false, // not possible to override at the moment
         preprocess: {
           // only remove whitespace in production; better feedback during development
           ...(isProd ? { markup: preprocessMarkup({ unsafe: true }) } : {}),
