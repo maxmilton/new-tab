@@ -153,6 +153,7 @@
       chrome.tabs.onAttached.addListener(() => this.__getTabs());
     },
 
+    // FIXME: When search is active, rerun when tab events trigger and __getTabs() is run
     onstate({ changed, previous }) {
       if (previous !== undefined && changed.__search !== undefined) {
         this.__onSearch();
@@ -189,13 +190,10 @@
           });
         });
 
-        // search open tabs
         this.set({
+          // search open tabs
           __tabs: __tabsRaw.filter(searchFilter, __search),
-        });
-
-        // search top sites
-        this.set({
+          // search top sites
           __topSites: __topSitesRaw.filter(searchFilter, __search),
         });
       },
@@ -203,10 +201,13 @@
       __getTabs() {
         chrome.tabs.query({}, (tabs) => {
           if (this.get().__search === '') {
-            this.set({ __tabs: tabs });
+            this.set({
+              __tabs: tabs,
+              __tabsRaw: tabs,
+            });
+          } else {
+            this.set({ __tabsRaw: tabs });
           }
-
-          this.set({ __tabsRaw: tabs });
         });
       },
 
