@@ -118,7 +118,10 @@ export default [
         immutable: true, // better performance but be aware during development
         preprocess: {
           // only remove whitespace in production; better feedback during development
-          ...(isProd ? { markup: preprocessMarkup({ unsafe: true }) } : {}),
+          ...(isProd ? { markup: preprocessMarkup({
+            unsafeWhitespace: true,
+            unsafe: true,
+          }) } : {}),
           style: preprocessStyle(),
         },
         css: (css) => {
