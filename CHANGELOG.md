@@ -9,9 +9,19 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ## [Unreleased]
 
+## [0.7.4] - 2018-07-19
+
 ### Changed
 
+- Use keyed each loops for search results items. This leads to better performance when performing searches due to less DOM changes.
+- Optimise updating state for tabs and search results; don't set state multiple times if it can be avoided.
+- Set `immutable` to `true` in Svelte built options for better runtime performance.
 - Update dependencies.
+
+### Fixed
+
+- Tabs list is not always refreshed after `update` event.
+- Top sites are not cleared/reset on ESC key press while a search is active.
 
 ## [0.7.3] - 2018-07-06
 
@@ -278,7 +288,8 @@ Known issues:
 
 - Initial public version including all the basics; working proof of concept code, readme, etc. Not ready for release yet though, it's still far from being actually useful!
 
-[Unreleased]: https://github.com/MaxMilton/new-tab/compare/v0.7.3...HEAD
+[Unreleased]: https://github.com/MaxMilton/new-tab/compare/v0.7.4...HEAD
+[0.7.4]: https://github.com/MaxMilton/new-tab/compare/v0.7.3...v0.7.4
 [0.7.3]: https://github.com/MaxMilton/new-tab/compare/v0.7.2...v0.7.3
 [0.7.2]: https://github.com/MaxMilton/new-tab/compare/v0.7.1...v0.7.2
 [0.7.1]: https://github.com/MaxMilton/new-tab/compare/v0.7.0...v0.7.1
