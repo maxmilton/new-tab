@@ -147,13 +147,10 @@
       });
 
       // update tab list on tab events
-      chrome.tabs.onUpdated.addListener((tabId, changeInfo) => {
-        if (changeInfo.title !== undefined) {
-          this.__getTabs();
-        }
-      });
-      chrome.tabs.onMoved.addListener(() => this.__getTabs());
+      chrome.tabs.onUpdated.addListener(() => this.__getTabs());
       chrome.tabs.onRemoved.addListener(() => this.__getTabs());
+      chrome.tabs.onMoved.addListener(() => this.__getTabs());
+      chrome.tabs.onAttached.addListener(() => this.__getTabs());
     },
 
     onstate({ changed, previous }) {
