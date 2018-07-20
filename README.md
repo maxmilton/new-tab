@@ -19,9 +19,9 @@ Originally an experimental project to give me a chance for me to play with the C
 
 ### Features
 
-* Minimal design aesthetic with multiple theme.
+* Minimal design aesthetic with multiple themes.
 * See a list of your open tabs.
-* Quickly search open tabs, bookmarks, and history in one place.
+* Quickly search open tabs, bookmarks, history, and top sites in one place.
 * Simple bookmarks bar.
 * Links to common places in your browser.
 
