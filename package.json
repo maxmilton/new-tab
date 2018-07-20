@@ -42,7 +42,7 @@
     "codecov": "3.0.4",
     "eslint": "5.1.0",
     "jest": "23.4.1",
-    "postcss": "7.0.0",
+    "postcss": "7.0.1",
     "postcss-import": "11.1.0",
     "postcss-nested": "3.0.0",
     "rollup": "0.63.2",
