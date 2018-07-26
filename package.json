@@ -51,7 +51,7 @@
     "rollup-plugin-svelte": "4.2.1",
     "rollup-plugin-terser": "1.0.1",
     "sinon-chrome": "2.3.2",
-    "stylelint": "9.3.0",
+    "stylelint": "9.4.0",
     "svelte": "2.9.7"
   },
   "browserslist": [
