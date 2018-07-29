@@ -305,9 +305,9 @@
   dependencies:
     samsam "1.3.0"
 
-"@types/chrome@0.0.70":
-  version "0.0.70"
-  resolved "https://registry.yarnpkg.com/@types/chrome/-/chrome-0.0.70.tgz#634bfa4aff89d00e8c88f6c37b26663e8d7a220e"
+"@types/chrome@0.0.71":
+  version "0.0.71"
+  resolved "https://registry.yarnpkg.com/@types/chrome/-/chrome-0.0.71.tgz#db895511053befa58decf31d11054b41de15fbee"
   dependencies:
     "@types/filesystem" "*"
 
