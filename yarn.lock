@@ -281,9 +281,9 @@
   dependencies:
     html-minifier "3.5.19"
 
-"@minna-ui/svelte-preprocess-style@0.9.0":
-  version "0.9.0"
-  resolved "https://registry.yarnpkg.com/@minna-ui/svelte-preprocess-style/-/svelte-preprocess-style-0.9.0.tgz#3c9e59fbfcbda53d14460ad96bc89f2fee5c44e1"
+"@minna-ui/svelte-preprocess-style@0.10.0":
+  version "0.10.0"
+  resolved "https://registry.yarnpkg.com/@minna-ui/svelte-preprocess-style/-/svelte-preprocess-style-0.10.0.tgz#2ef74514f24c4b36a5ff7fd8a7f8666139c4e13f"
   dependencies:
     postcss-load-config "^2.0.0"
     postcss-selector-parser "^5.0.0-rc.3"
