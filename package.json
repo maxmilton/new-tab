@@ -30,7 +30,7 @@
   },
   "devDependencies": {
     "@babel/plugin-syntax-dynamic-import": "7.0.0-beta.55",
-    "@minna-ui/eslint-config": "0.9.0",
+    "@minna-ui/eslint-config": "0.10.0",
     "@minna-ui/jest-config": "0.9.1",
     "@minna-ui/stylelint-config": "0.9.0",
     "@minna-ui/svelte-preprocess-markup": "0.9.0",
