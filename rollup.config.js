@@ -6,6 +6,7 @@ import resolve from 'rollup-plugin-node-resolve';
 import commonjs from 'rollup-plugin-commonjs';
 import { terser } from 'rollup-plugin-terser';
 import { minify } from 'terser'; // eslint-disable-line import/no-extraneous-dependencies
+// import compiler from '@ampproject/rollup-plugin-closure-compiler';
 import CleanCSS from 'clean-css';
 import manifest from './manifest';
 
@@ -109,13 +110,14 @@ export default [
     output: {
       sourcemap: !isProd,
       format: 'es',
+      // format: 'iife',
       name: 'n',
       file: 'dist/n.js',
     },
     plugins: [
       svelte({
         dev: !isProd,
-        immutable: true, // better performance but be aware during development
+        // immutable: true, // better performance but be aware during development
         preprocess: {
           // only remove whitespace in production; better feedback during development
           ...(isProd ? { markup: preprocessMarkup({
@@ -146,13 +148,21 @@ export default [
             content: `<style>${cssCode}${cssMap}</style><script>${errorsInitCode}</script><script src=n.js type=module async></script><script type=module async>${loaderCode}</script>`,
           }).trim(), catchErr);
         },
-        // XXX: Svelte v3 defaults
-        // skipIntroByDefault: true,
-        // nestedTransitions: false,
       }),
       resolve(),
       commonjs(),
       isProd && terser(terserOpts),
+      // isProd && compiler({
+      //   languageIn: 'ECMASCRIPT_2017',
+      //   languageOut: 'ECMASCRIPT_2017',
+      //   // compilationLevel: 'ADVANCED_OPTIMIZATIONS',
+      //   compilationLevel: 'ADVANCED',
+      //   warningLevel: 'VERBOSE',
+      //   externs: [
+      //     './node_modules/google-closure-compiler/contrib/externs/chrome.js',
+      //     './node_modules/google-closure-compiler/contrib/externs/chrome_extensions.js',
+      //   ],
+      // }),
     ],
   },
 
