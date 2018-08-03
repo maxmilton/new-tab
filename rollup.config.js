@@ -117,7 +117,7 @@ export default [
     plugins: [
       svelte({
         dev: !isProd,
-        // immutable: true, // better performance but be aware during development
+        immutable: true, // be mindful during development
         preprocess: {
           // only remove whitespace in production; better feedback during development
           ...(isProd ? { markup: preprocessMarkup({
