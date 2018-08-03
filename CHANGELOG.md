@@ -9,10 +9,17 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ## [Unreleased]
 
+## [0.7.6] - 2018-08-03
+
+### Changed
+
+- Re-enable immutable build option.
+
 ## [0.7.5] - 2018-08-03
 
 ### Changed
 
+- Disable immutable build option.
 - Update dependencies.
 
 ## [0.7.4] - 2018-07-19
@@ -294,7 +301,9 @@ Known issues:
 
 - Initial public version including all the basics; working proof of concept code, readme, etc. Not ready for release yet though, it's still far from being actually useful!
 
-[Unreleased]: https://github.com/MaxMilton/new-tab/compare/v0.7.4...HEAD
+[Unreleased]: https://github.com/MaxMilton/new-tab/compare/v0.7.6...HEAD
+[0.7.6]: https://github.com/MaxMilton/new-tab/compare/v0.7.5...v0.7.6
+[0.7.5]: https://github.com/MaxMilton/new-tab/compare/v0.7.4...v0.7.5
 [0.7.4]: https://github.com/MaxMilton/new-tab/compare/v0.7.3...v0.7.4
 [0.7.3]: https://github.com/MaxMilton/new-tab/compare/v0.7.2...v0.7.3
 [0.7.2]: https://github.com/MaxMilton/new-tab/compare/v0.7.1...v0.7.2
