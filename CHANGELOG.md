@@ -9,6 +9,10 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ## [Unreleased]
 
+### Fixed
+
+- Clean up bookmark event listener to prevent memory leaks
+
 ## [0.7.6] - 2018-08-03
 
 ### Changed
