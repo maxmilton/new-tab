@@ -57,6 +57,8 @@
 {/if}
 
 <script>
+  let listener;
+
   export default {
     data: () => ({
       __show: false,
@@ -66,10 +68,14 @@
       this.__openTimer = null;
       this.__closeTimer = null;
     },
+    ondestroy() {
+      // clean up listener to prevent memory leaks
+      if (listener) listener.cancel();
+    },
     methods: {
       // set up event listener to close subfolder when another opens
       __onOpen() {
-        this.root.on('open', (__lvl) => {
+        listener = this.root.on('open', (__lvl) => {
           if (this.get().__show) {
             if (__lvl === this.get().__lvl) {
               this.set({ __show: false });
