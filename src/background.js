@@ -1,5 +1,3 @@
-'use strict'; // eslint-disable-line
-
 // initialise or update default settings and save to user account
 chrome.runtime.onInstalled.addListener((details) => {
   if (details.reason === 'install' || details.reason === 'update') {
@@ -12,7 +10,7 @@ chrome.runtime.onInstalled.addListener((details) => {
       }
 
       // error tracking default
-      if (!settings.e === undefined) {
+      if (settings.e === undefined) {
         newSettings.e = false; // not opt-out
       }
 

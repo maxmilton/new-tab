@@ -3,7 +3,8 @@
 const pkg = require('./package.json');
 
 const isProd = process.env.NODE_ENV === 'production';
-const hash = "'sha256-3K/A5xAmF7Nqq9caeEhFKiR/YxrLyH5birP5ya/U/GY=' 'sha256-G/t3XNYX/hbAY5OgwlU7RHqwX8i/zQ2LaZxKC0ahApE='"; // error-init.js + loader.js
+let hashes = "'sha256-iXouVrInq4s6p7GUvrhd6dTKJjMATqle2TDRTGYFT5I='"; // error-init.js
+hashes += " 'sha256-LGCapXjQV6r23i6/Pdw8LIeykCAJDMVBMO2PFn/Xn7w='"; // loader.js
 
 export default {
   manifest_version: 2,
@@ -12,7 +13,7 @@ export default {
   description: '⚡ A high performance new tab page that gets you where you need to go faster.',
   version: pkg.version,
   version_name: process.env.APP_RELEASE,
-  homepage_url: 'https://github.com/MaxMilton/new-tab',
+  homepage_url: pkg.homepage,
 
   permissions: [
     'bookmarks',
@@ -38,8 +39,8 @@ export default {
 
   ...(isProd
     // tighter security than default
-    ? { content_security_policy: `default-src 'none'; script-src 'self' ${hash}; style-src 'unsafe-inline'; img-src data: chrome: *; connect-src https://sentry.io` }
+    ? { content_security_policy: `default-src 'none'; script-src 'self' ${hashes}; style-src 'unsafe-inline'; img-src data: chrome: *; connect-src https://sentry.io` }
     // allow connections from http://localhost during local development
-    : { content_security_policy: `script-src 'self' blob: filesystem: chrome-extension-resource: http://localhost:* ${hash}; object-src 'self'` }
+    : { content_security_policy: `script-src 'self' blob: filesystem: chrome-extension-resource: http://localhost:* ${hashes}; object-src 'self'` }
   ),
 };

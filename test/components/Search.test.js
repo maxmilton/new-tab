@@ -1,6 +1,6 @@
 'use strict';
 
-const Search = require('../src/components/Search.html');
+const Search = require('../../src/components/Search.html');
 
 describe('Search component', () => {
   it('renders correctly', () => {

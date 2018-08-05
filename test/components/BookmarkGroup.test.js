@@ -1,6 +1,6 @@
 'use strict';
 
-const BookmarkGroup = require('../src/components/BookmarkGroup.html');
+const BookmarkGroup = require('../../src/components/BookmarkGroup.html');
 
 describe('BookmarkGroup component', () => {
   it('renders correctly', () => {

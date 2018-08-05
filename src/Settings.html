@@ -3,7 +3,6 @@
   <select id="theme" bind:value="__theme">
     <option value="l">Light</option>
     <option value="d">Dark</option>
-    <option value="b">Black</option>
   </select>
 </div>
 
@@ -51,32 +50,32 @@
   };
 </script>
 
-<style type="text/postcss">
-  :global(body) {
+<style type="text/postcss" global>
+  body {
     font-size: 18px;
     text-rendering: optimizeLegibility;
     background: rgb(249, 249, 249);
   }
 
-  :global(hr) {
+  hr {
     border: 0;
     border-bottom: 1px solid rgb(221, 221, 221);
   }
 
-  :global(footer) {
+  footer {
     margin-top: 18px;
   }
 
-  :global(select) {
+  select {
     margin-left: 9px;
   }
 
-  :global(hr),
-  :global(.pb) {
+  hr,
+  .pb {
     margin-bottom: 18px;
   }
 
-  :global(input[type="checkbox"]) {
+  input[type="checkbox"] {
     margin-right: 9px;
     vertical-align: 0;
   }

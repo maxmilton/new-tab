@@ -78,6 +78,10 @@
 </div>
 
 <script>
+  const SEARCH_DEBOUNCE_DELAY = 260; // ms
+  const DEFAULT_RESULTS_AMOUNT = 10;
+  const MORE_RESULTS_AMOUNT = 100;
+
   /**
    * Delay running a function until X ms have passed since its last call.
    * @see https://github.com/developit/decko/blob/master/src/decko.js
@@ -135,7 +139,7 @@
     },
 
     oncreate() {
-      this.__onSearch = debounce(this.__doSearch, 260); // ms delay
+      this.__onSearch = debounce(this.__doSearch, SEARCH_DEBOUNCE_DELAY);
 
       this.__getTabs();
 
@@ -178,7 +182,7 @@
         chrome.history.search({ text: __search }, (results) => {
           this.set({
             __historyRaw: results,
-            __history: results.slice(0, 10),
+            __history: results.slice(0, DEFAULT_RESULTS_AMOUNT),
           });
         });
 
@@ -186,7 +190,7 @@
         chrome.bookmarks.search(__search, (results) => {
           this.set({
             __bookmarksRaw: results,
-            __bookmarks: results.slice(0, 10),
+            __bookmarks: results.slice(0, DEFAULT_RESULTS_AMOUNT),
           });
         });
 
@@ -245,24 +249,24 @@
       },
 
       __loadMoreBookmarks(length) {
-        this.set({ __bookmarks: this.get().__bookmarksRaw.slice(0, length + 100) });
+        this.set({ __bookmarks: this.get().__bookmarksRaw.slice(0, length + MORE_RESULTS_AMOUNT) });
       },
 
       __loadMoreHistory(length) {
-        this.set({ __history: this.get().__historyRaw.slice(0, length + 100) });
+        this.set({ __history: this.get().__historyRaw.slice(0, length + MORE_RESULTS_AMOUNT) });
       },
     },
   };
 </script>
 
-<style type="text/postcss">
-  :global(.c) { /* container */
+<style type="text/postcss" global>
+  .c { /* container */
     max-width: 800px;
     padding: 0 18px;
     margin: 0 auto;
   }
 
-  :global(.r) { /* search result */
+  .r { /* search result */
     display: block;
     align-items: center;
     padding: 9px 0;
@@ -276,7 +280,7 @@
     }
   }
 
-  :global(#s) { /* search */
+  #s { /* search */
     box-sizing: border-box;
     width: 100%;
     padding: 11px 20px;

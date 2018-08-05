@@ -57,6 +57,9 @@
 {/if}
 
 <script>
+  const EVENT_NAME = 'open';
+  const OPEN_DELAY = 200;
+  const CLOSE_DELAY = 400;
   let listener;
 
   export default {
@@ -75,7 +78,7 @@
     methods: {
       // set up event listener to close subfolder when another opens
       __onOpen() {
-        listener = this.root.on('open', (__lvl) => {
+        listener = this.root.on(EVENT_NAME, (__lvl) => {
           if (this.get().__show) {
             if (__lvl === this.get().__lvl) {
               this.set({ __show: false });
@@ -92,10 +95,10 @@
         } else {
           // delay to prevent accidental folder open
           this.__openTimer = setTimeout(() => {
-            this.root.fire('open', this.get().__lvl);
+            this.root.fire(EVENT_NAME, this.get().__lvl);
             this.set({ __show: true });
             this.__onOpen();
-          }, 200); // open delay
+          }, OPEN_DELAY);
         }
       },
 
@@ -111,7 +114,7 @@
         if (this.get().__show) {
           this.__closeTimer = setTimeout(() => {
             this.set({ __show: false });
-          }, 400); // close delay
+          }, CLOSE_DELAY);
         }
       },
 
@@ -125,25 +128,27 @@
   };
 </script>
 
-<style type="text/postcss">
-  :global(.i),
-  :global(.t) {
+<style type="text/postcss" global>
+  /* FIXME: "global" on style tag is not working correctly after Svelte 2.9.10 */
+
+  .i,
+  .t {
     pointer-events: none; /* prevent being the MouseEvent target */
   }
 
   /* favicon */
-  :global(.i) {
+  .i {
     width: 16px;
   }
 
   /* folder */
-  :global(.f) {
+  .f {
     position: relative;
     cursor: pointer;
   }
 
   /* triangle; caret */
-  :global(.e) {
+  .e {
     padding-left: 10px;
     margin-left: auto;
   }
@@ -154,7 +159,7 @@
     overflow: hidden;
     text-overflow: ellipsis;
 
-    :global(.i) + & {
+    .i + & {
       padding-left: 9px;
     }
   }
@@ -172,12 +177,12 @@
     filter: var(--s1);
 
     /* bookmark */
-    .b {
+    :global(.b) {
       padding: 9px;
     }
 
     /* bookmark title */
-    .t {
+    :global(.t) {
       max-width: 40ch;
     }
 
@@ -188,19 +193,19 @@
   }
 
   /* left side folder */
-  :global(.l) {
+  .l {
     right: 0;
     left: initial;
 
     /* subfolder */
-    .s {
+    :global(.s) {
       right: 100%;
       left: initial;
     }
   }
 
   /* bookmark item */
-  :global(.b) {
+  .b {
     display: inline-flex;
     align-items: center;
     padding: 9px;

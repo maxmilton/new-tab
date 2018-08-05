@@ -1,6 +1,6 @@
 'use strict';
 
-const Menu = require('../src/components/Menu.html');
+const Menu = require('../../src/components/Menu.html');
 
 describe('Menu component', () => {
   it('renders correctly', () => {
