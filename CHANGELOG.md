@@ -9,6 +9,10 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ## [Unreleased]
 
+### Added
+
+- Add rollup JS bundle analyser.
+
 ## [0.8.0] - 2018-08-06
 
 ### Added
