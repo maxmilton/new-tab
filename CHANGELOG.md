@@ -9,11 +9,33 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ## [Unreleased]
 
+## [0.8.0] - 2018-08-05
+
+### Added
+
+- Add static consts for common JS variables for better visibility and easy tweaking.
+
+### Removed
+
+- Black theme. The dark theme is dark enough 😜.
+
+### Changed
+
+- Big build and tooling refactor. Biggest change is JS minification is now done using Closure Compiler rather than Terser (based on UglifyJS). Although the output file size is slightly larger, the initial load and runtime performance are better. CSS minification has also been changed along with a bunch of small optimisations for a cleaner Rollup config.
+- All themes are now inlined in the page and activated by a class instead of loading a separate file. Avoiding the network request means loading the theme is near instant and you'll notice a flash of unstyled content much less often.
+- Refactor error tracking to use new Sentry JS SDK.
+- Simplify Svelte hack for `:global()` CSS overrides.
+
+### Fixed
+
+- Error tracking event listeners not cleaned up correctly.
+- Incorrect logic in install/upgrade events.
+
 ## [0.7.7] - 2018-08-04
 
 ### Fixed
 
-- Clean up bookmark event listener to prevent memory leaks
+- Clean up bookmark event listener to prevent memory leaks.
 
 ## [0.7.6] - 2018-08-03
 
