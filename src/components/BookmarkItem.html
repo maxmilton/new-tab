@@ -128,25 +128,27 @@
   };
 </script>
 
-<style type="text/postcss">
-  :global(.i),
-  :global(.t) {
+<style type="text/postcss" global>
+  /* FIXME: "global" on style tag is not working correctly after Svelte 2.9.10 */
+
+  .i,
+  .t {
     pointer-events: none; /* prevent being the MouseEvent target */
   }
 
   /* favicon */
-  :global(.i) {
+  .i {
     width: 16px;
   }
 
   /* folder */
-  :global(.f) {
+  .f {
     position: relative;
     cursor: pointer;
   }
 
   /* triangle; caret */
-  :global(.e) {
+  .e {
     padding-left: 10px;
     margin-left: auto;
   }
@@ -157,7 +159,7 @@
     overflow: hidden;
     text-overflow: ellipsis;
 
-    :global(.i) + & {
+    .i + & {
       padding-left: 9px;
     }
   }
@@ -175,12 +177,12 @@
     filter: var(--s1);
 
     /* bookmark */
-    .b {
+    :global(.b) {
       padding: 9px;
     }
 
     /* bookmark title */
-    .t {
+    :global(.t) {
       max-width: 40ch;
     }
 
@@ -191,19 +193,19 @@
   }
 
   /* left side folder */
-  :global(.l) {
+  .l {
     right: 0;
     left: initial;
 
     /* subfolder */
-    .s {
+    :global(.s) {
       right: 100%;
       left: initial;
     }
   }
 
   /* bookmark item */
-  :global(.b) {
+  .b {
     display: inline-flex;
     align-items: center;
     padding: 9px;

@@ -41,21 +41,21 @@
   };
 </script>
 
-<style type="text/postcss">
-  :global(hr) {
+<style type="text/postcss" global>
+  hr {
     border: 0;
     border-bottom: 1px solid var(--c);
   }
 
   /* menu item */
-  :global(.m) {
+  .m {
     display: block;
     padding: 9px 0;
     color: var(--t);
   }
 
   /* menu */
-  :global(#m) {
+  #m {
     position: relative;
     display: inline-block;
     padding: 10px 84px 84px 42px;
@@ -64,13 +64,13 @@
   }
 
   /* menu hamburger icon */
-  :global(#i) {
+  #i {
     font-size: 30px;
     color: var(--c4);
   }
 
   /* menu dropdown */
-  :global(#d) {
+  #d {
     position: absolute;
     top: 10px;
     z-index: 1;
@@ -87,8 +87,8 @@
     will-change: opacity, transform;
     /* will-change: opacity, scale; */
 
-    :global(#m):hover > &,
-    :global(#m):focus > & {
+    #m:hover > &,
+    #m:focus > & {
       opacity: 1;
       transform: scale(1);
       /* scale: 1; */
