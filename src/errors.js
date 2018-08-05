@@ -1,24 +1,21 @@
-const Raven = require('raven-js'); // XXX: Has test coverage issues when using import
+import * as Sentry from '@sentry/browser';
 
-// clean up listeners for error capture before Sentry is loaded
-window.removeEventListener('error', window.l);
-window.removeEventListener('unhandledrejection', window.u);
+// clean up listeners for error capture before Sentry was loaded
+window.removeEventListener('error', window.p);
+window.removeEventListener('unhandledrejection', window.p);
 
-Raven
-  .config('https://fa953eecae7143afb7db0e926a6453de@sentry.io/282621', {
-    release: chrome.runtime.getManifest().version_name,
-  })
-  .install();
-
-window.addEventListener('unhandledrejection', (event) => {
-  Raven.captureException(event.reason);
+Sentry.init({
+  dsn: 'https://fa953eecae7143afb7db0e926a6453de@sentry.io/282621',
+  release: chrome.runtime.getManifest().version_name,
 });
 
-// report any error queued before Sentry tracker was loaded
+window.addEventListener('unhandledrejection', (event) => {
+  Sentry.captureException(event.reason);
+});
+
+// report any errors queued before Sentry tracker was loaded
 window.q.forEach((event) => {
-  Raven.captureException(event.reason || event, {
-    extra: {
-      event,
-    },
+  Sentry.captureException(event.reason || event, {
+    extra: { event },
   });
 });
