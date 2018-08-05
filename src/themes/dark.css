@@ -1,5 +1,5 @@
-/* dark theme */
-:global(:root) { /* :global hack for svelte */
+/* dark theme (default) */
+:root {
   --s: #06001124; /* shadow colour */
   --s1: drop-shadow(0 18px 18px #0600114d); /* shadow dark */
   --b: #23252d; /* background colour */
