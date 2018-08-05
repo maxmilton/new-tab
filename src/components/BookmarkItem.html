@@ -57,6 +57,9 @@
 {/if}
 
 <script>
+  const EVENT_NAME = 'open';
+  const OPEN_DELAY = 200;
+  const CLOSE_DELAY = 400;
   let listener;
 
   export default {
@@ -75,7 +78,7 @@
     methods: {
       // set up event listener to close subfolder when another opens
       __onOpen() {
-        listener = this.root.on('open', (__lvl) => {
+        listener = this.root.on(EVENT_NAME, (__lvl) => {
           if (this.get().__show) {
             if (__lvl === this.get().__lvl) {
               this.set({ __show: false });
@@ -92,10 +95,10 @@
         } else {
           // delay to prevent accidental folder open
           this.__openTimer = setTimeout(() => {
-            this.root.fire('open', this.get().__lvl);
+            this.root.fire(EVENT_NAME, this.get().__lvl);
             this.set({ __show: true });
             this.__onOpen();
-          }, 200); // open delay
+          }, OPEN_DELAY);
         }
       },
 
@@ -111,7 +114,7 @@
         if (this.get().__show) {
           this.__closeTimer = setTimeout(() => {
             this.set({ __show: false });
-          }, 400); // close delay
+          }, CLOSE_DELAY);
         }
       },
 
