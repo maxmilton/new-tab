@@ -2,6 +2,7 @@
   "name": "new-tab",
   "version": "0.7.7",
   "description": "⚡ A high performance new tab page that gets you where you need to go faster.",
+  "homepage": "https://github.com/MaxMilton/new-tab",
   "author": "Max Milton <max@wearegenki.com>",
   "license": "MIT",
   "private": true,

@@ -3,7 +3,7 @@
 const pkg = require('./package.json');
 
 const isProd = process.env.NODE_ENV === 'production';
-let hashes = "'sha256-XkQF3RJRU6kyQkz4Oy+RHW8Nak9lhEGg7p+LIi6ULww='"; // error-init.js
+let hashes = "'sha256-iXouVrInq4s6p7GUvrhd6dTKJjMATqle2TDRTGYFT5I='"; // error-init.js
 hashes += " 'sha256-LGCapXjQV6r23i6/Pdw8LIeykCAJDMVBMO2PFn/Xn7w='"; // loader.js
 
 export default {
@@ -13,7 +13,7 @@ export default {
   description: '⚡ A high performance new tab page that gets you where you need to go faster.',
   version: pkg.version,
   version_name: process.env.APP_RELEASE,
-  homepage_url: 'https://github.com/MaxMilton/new-tab',
+  homepage_url: pkg.homepage,
 
   permissions: [
     'bookmarks',
