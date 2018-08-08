@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`BookmarkItem component renders correctly 1`] = `
-"<a href=\\"undefined\\" title=\\"undefined\\" class=\\"b\\">
-    <span class=\\"t\\">undefined</span></a><!---->"
+"<a href=\\"undefined\\" title=\\"undefined\\" class=\\"bookmark\\">
+    <span class=\\"title\\">undefined</span></a><!---->"
 `;

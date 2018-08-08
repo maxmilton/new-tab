@@ -1,16 +1,16 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`Menu component renders correctly 1`] = `
-"<div id=\\"m\\"><div id=\\"i\\">☰</div>
+"<div id=\\"menu\\"><div id=\\"icon\\">☰</div>
 
-  <div id=\\"d\\"><a href=\\"chrome-search://local-ntp/local-ntp.html\\" class=\\"m\\">Open Default Tab</a>
-    <a href=\\"chrome://bookmarks/\\" class=\\"m\\">Bookmarks Manager</a>
-    <a href=\\"chrome://downloads/\\" class=\\"m\\">Downloads</a>
-    <a href=\\"chrome://history/\\" class=\\"m\\">History</a>
-    <a href=\\"chrome://settings/passwords\\" class=\\"m\\">Passwords</a>
+  <div id=\\"dropdown\\"><a href=\\"chrome-search://local-ntp/local-ntp.html\\" class=\\"menu-item\\">Open Default Tab</a>
+    <a href=\\"chrome://bookmarks/\\" class=\\"menu-item\\">Bookmarks Manager</a>
+    <a href=\\"chrome://downloads/\\" class=\\"menu-item\\">Downloads</a>
+    <a href=\\"chrome://history/\\" class=\\"menu-item\\">History</a>
+    <a href=\\"chrome://settings/passwords\\" class=\\"menu-item\\">Passwords</a>
 
     <hr>
 
-    <a href=\\"#\\" class=\\"m\\">New Tab Settings</a>
-    <a href=\\"https://github.com/MaxMilton/new-tab/issues\\" class=\\"m\\">Submit Bug</a></div></div>"
+    <a href=\\"\\" class=\\"menu-item\\">New Tab Settings</a>
+    <a href=\\"https://github.com/MaxMilton/new-tab/issues\\" class=\\"menu-item\\">Submit Bug</a></div></div>"
 `;

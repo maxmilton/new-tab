@@ -1,8 +1,8 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`BookmarkGroup component renders correctly 1`] = `
-"<div id=\\"a\\"><div id=\\"b\\"></div>
+"<div id=\\"bookmarks\\"><div id=\\"bookmarks-bar\\"></div>
 
-  <a href=\\"undefined\\" title=\\"Other bookmarks\\" class=\\"b\\">
-    <span class=\\"t\\">Other bookmarks</span></a><!----></div>"
+  <a href=\\"undefined\\" title=\\"Other bookmarks\\" class=\\"bookmark\\">
+    <span class=\\"title\\">Other bookmarks</span></a><!----></div>"
 `;
