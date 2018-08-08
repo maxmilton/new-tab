@@ -47,14 +47,15 @@
     "postcss": "7.0.2",
     "postcss-import": "12.0.0",
     "postcss-nested": "3.0.0",
-    "rollup": "0.63.5",
+    "rollup": "0.64.1",
+    "rollup-plugin-analyzer": "^2.1.0",
     "rollup-plugin-commonjs": "9.1.4",
     "rollup-plugin-node-resolve": "3.3.0",
     "rollup-plugin-svelte": "4.2.1",
     "rollup-plugin-terser": "1.0.1",
     "sinon-chrome": "2.3.2",
     "stylelint": "9.4.0",
-    "svelte": "2.9.10"
+    "svelte": "2.9.11"
   },
   "browserslist": [
     "last 2 Chrome versions"

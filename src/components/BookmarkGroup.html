@@ -6,8 +6,8 @@
     - https://github.com/palantir/blueprint/blob/develop/packages/core/src/components/overflow-list/overflowList.tsx
 -->
 
-<div id="a">
-  <div id="b">
+<div id="bookmarks">
+  <div id="bookmarks-bar">
     {#each __bookmarksBar as __bookmark}
       <BookmarkItem __node="{__bookmark}" __lvl="{0}"/>
     {/each}
@@ -39,12 +39,12 @@
 </script>
 
 <style type="text/postcss" global>
-  #b { /* bookmarks bar */
+  #bookmarks-bar {
     display: flex;
     margin-right: auto; /* push "other bookmarks" folder to the right */
   }
 
-  #a { /* all bookmarks */
+  #bookmarks {
     position: fixed;
     top: 0;
     right: 0;

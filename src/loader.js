@@ -1,6 +1,6 @@
 chrome.storage.sync.get(['e', 't'], (settings) => {
   // load alternate theme
-  if (settings.t !== 'd') {
+  if (settings.t) {
     document.body.classList.add(settings.t);
   }
 

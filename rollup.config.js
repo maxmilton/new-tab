@@ -10,6 +10,7 @@ import { compiler as ClosureCompiler } from 'google-closure-compiler'; // eslint
 import compiler from '@ampproject/rollup-plugin-closure-compiler';
 import { createFilter } from 'rollup-pluginutils'; // eslint-disable-line import/no-extraneous-dependencies
 import crass from 'crass';
+import { plugin as analyze } from 'rollup-plugin-analyzer';
 import manifest from './manifest';
 
 const docTemplate = readFileSync(`${__dirname}/src/template.html`, 'utf8');
@@ -200,6 +201,7 @@ export default [
         title: 'New Tab',
         content: async () => `%CSS%<script>${await initCode}</script><script src=n.js type=module async></script><script type=module async>${loaderCode}</script>`,
       }),
+      isProd && analyze(),
     ],
   },
 
@@ -224,6 +226,7 @@ export default [
         title: 'New Tab Settings',
         content: async () => `%CSS%<script>${await initCode}</script><script src=s.js type=module async></script><script type=module async>${loaderCode}</script>`,
       }),
+      isProd && analyze(),
     ],
   },
 
@@ -239,6 +242,7 @@ export default [
       nodeResolve(),
       commonjs(),
       isProd && compiler(compilerOptsSimple),
+      isProd && analyze(),
     ],
   },
 
@@ -252,6 +256,7 @@ export default [
     },
     plugins: [
       isProd && compiler(compilerOpts),
+      isProd && analyze(),
     ],
   },
 ];
