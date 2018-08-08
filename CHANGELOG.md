@@ -9,9 +9,20 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ## [Unreleased]
 
+## [0.9.0] - 2018-08-09
+
 ### Added
 
-- Add rollup JS bundle analyser.
+- Rollup JS bundle analyser.
+
+### Changed
+
+- Simplified default settings handling.
+- Use verbose CSS class names. Components are more understandable at the cost of slightly larger file sizes. I intent to write a Svelte plugin to automatically rewrite the class names into a short form to get the best of both worlds.
+
+### Fixed
+
+- Bookmark folders open in the wrong place; off to the side.
 
 ## [0.8.0] - 2018-08-06
 
@@ -333,7 +344,8 @@ Known issues:
 
 - Initial public version including all the basics; working proof of concept code, readme, etc. Not ready for release yet though, it's still far from being actually useful!
 
-[Unreleased]: https://github.com/MaxMilton/new-tab/compare/v0.8.0...HEAD
+[Unreleased]: https://github.com/MaxMilton/new-tab/compare/v0.9.0...HEAD
+[0.9.0]: https://github.com/MaxMilton/new-tab/compare/v0.8.0...v0.9.0
 [0.8.0]: https://github.com/MaxMilton/new-tab/compare/v0.7.7...v0.8.0
 [0.7.7]: https://github.com/MaxMilton/new-tab/compare/v0.7.6...v0.7.7
 [0.7.6]: https://github.com/MaxMilton/new-tab/compare/v0.7.5...v0.7.6
