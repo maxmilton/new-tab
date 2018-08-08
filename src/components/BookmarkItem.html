@@ -1,23 +1,23 @@
 {#if __node.children !== undefined}
   <!-- folder -->
   <div
-    class="b f"
+    class="bookmark folder"
     title="{__node.title}"
     on:mouseenter="__onEnter()"
     on:mouseleave="__onLeave()"
   >
-    <span class="t">{__node.title}</span>
+    <span class="title">{__node.title}</span>
 
     {#if __node.parentId > 1}
       <!-- subfolder indicator -->
-      <span class="e">▸</span>
+      <span class="caret">▸</span>
     {/if}
 
     {#if __show}
       <!-- subfolder -->
-      <div class="s {__left ? 'l' : ''}">
+      <div class="subfolder {__left ? 'left' : ''}">
         {#if __node.children.length === 0}
-          <span class="b" title="">(empty)</span>
+          <span class="bookmark" title="">(empty)</span>
         {:else}
           {#each __node.children as __bookmark}
             {#if __bookmark.children !== undefined}
@@ -28,10 +28,10 @@
               <a
                 href="{__bookmark.url}"
                 title="{__bookmark.title}"
-                class="b"
+                class="bookmark"
               >
-                <img src="chrome://favicon/{__bookmark.url || ''}" class="i">
-                <span class="t">{__bookmark.title}</span>
+                <img src="chrome://favicon/{__bookmark.url || ''}" class="favicon">
+                <span class="title">{__bookmark.title}</span>
               </a>
             {/if}
           {/each}
@@ -44,14 +44,14 @@
   <a
     href="{__node.url}"
     title="{__node.title}"
-    class="b"
+    class="bookmark"
   >
     <!-- only render img if there's a URL (better initial load performance) -->
     {#if __node.url !== undefined}
-      <img src="chrome://favicon/{__node.url}" class="i">
+      <img src="chrome://favicon/{__node.url}" class="favicon">
     {/if}
     {#if __node.title !== ''}
-      <span class="t">{__node.title}</span>
+      <span class="title">{__node.title}</span>
     {/if}
   </a>
 {/if}
@@ -131,43 +131,38 @@
 <style type="text/postcss" global>
   /* FIXME: "global" on style tag is not working correctly after Svelte 2.9.10 */
 
-  .i,
-  .t {
+  .favicon,
+  .title {
     pointer-events: none; /* prevent being the MouseEvent target */
   }
 
-  /* favicon */
-  .i {
+  .favicon {
     width: 16px;
   }
 
-  /* folder */
-  .f {
+  .folder {
     position: relative;
     cursor: pointer;
   }
 
-  /* triangle; caret */
-  .e {
+  .caret {
     padding-left: 10px;
     margin-left: auto;
   }
 
-  /* bookmark title */
-  :global(.t) {
+  :global(.title) {
     max-width: 15ch;
     overflow: hidden;
     text-overflow: ellipsis;
 
-    .i + & {
+    .favicon + & {
       padding-left: 9px;
     }
   }
 
   /* stylelint-disable no-descending-specificity */
 
-  /* subfolder */
-  :global(.s) {
+  :global(.subfolder) {
     position: absolute;
     top: 40px;
     left: 0;
@@ -176,13 +171,11 @@
     background: var(--c1);
     filter: var(--s1);
 
-    /* bookmark */
-    :global(.b) {
+    :global(.bookmark) {
       padding: 9px;
     }
 
-    /* bookmark title */
-    :global(.t) {
+    :global(.title) {
       max-width: 40ch;
     }
 
@@ -193,19 +186,17 @@
   }
 
   /* left side folder */
-  .l {
+  .left {
     right: 0;
     left: initial;
 
-    /* subfolder */
-    :global(.s) {
+    :global(.subfolder) {
       right: 100%;
       left: initial;
     }
   }
 
-  /* bookmark item */
-  .b {
+  .bookmark {
     display: inline-flex;
     align-items: center;
     padding: 9px;

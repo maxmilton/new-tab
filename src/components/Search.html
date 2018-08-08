@@ -1,9 +1,9 @@
 <!-- bring focus to search input when clicking anywhere -->
 <svelte:window on:click="refs.s.focus()"/>
 
-<div class="c">
+<div class="container">
   <input
-    id="s"
+    id="search"
     bind:value="__search"
     ref:s
     placeholder="Search browser..."
@@ -16,13 +16,13 @@
     <h2>Open Tabs ({__tabs.length}/{__tabsRaw.length})</h2>
 
     {#each __tabs as __item (__item.id)}
-      <a href="{__item.url}" class="r" on:click="__onTabClick(__item, event)">
-        <img src="{__item.favIconUrl||'chrome://favicon/'}" class="i">
+      <a href="{__item.url}" class="result" on:click="__onTabClick(__item, event)">
+        <img src="{__item.favIconUrl||'chrome://favicon/'}" class="favicon">
         {__item.title}
       </a>
     {/each}
   {:else}
-    <p class="g">No matching Open Tabs</p>
+    <p class="muted">No matching Open Tabs</p>
   {/if}
 
   <!-- Bookmarks -->
@@ -30,8 +30,8 @@
     <h2>Bookmarks ({__bookmarks.length}/{__bookmarksRaw.length})</h2>
 
     {#each __bookmarks as __item (__item.id)}
-      <a href="{__item.url}" class="r">
-        <img src="chrome://favicon/{__item.url || ''}" class="i">
+      <a href="{__item.url}" class="result">
+        <img src="chrome://favicon/{__item.url || ''}" class="favicon">
         {__item.title || __item.url}
       </a>
     {/each}
@@ -41,7 +41,7 @@
       <a class="b" on:click="__loadMoreBookmarks(__bookmarks.length)">Show more ▾</a>
     {/if}
   {:elseif __isSearching}
-    <p class="g">No matching Bookmarks</p>
+    <p class="muted">No matching Bookmarks</p>
   {/if}
 
   <!-- History -->
@@ -49,8 +49,8 @@
     <h2>History ({__history.length}/{__historyRaw.length})</h2>
 
     {#each __history as __item (__item.id)}
-      <a href="{__item.url}" class="r">
-        <img src="chrome://favicon/{__item.url || ''}" class="i">
+      <a href="{__item.url}" class="result">
+        <img src="chrome://favicon/{__item.url || ''}" class="favicon">
         {__item.title || __item.url}
       </a>
     {/each}
@@ -59,7 +59,7 @@
       <a class="b" on:click="__loadMoreHistory(__history.length)">Show more ▾</a>
     {/if}
   {:elseif __isSearching}
-    <p class="g">No matching History</p>
+    <p class="muted">No matching History</p>
   {/if}
 
   <!-- Top Sites -->
@@ -67,13 +67,13 @@
     <h2>Top Sites ({__topSites.length}/{__topSitesRaw.length})</h2>
 
     {#each __topSites as __item (__item.url)}
-      <a href="{__item.url}" class="r">
-        <img src="chrome://favicon/{__item.url}" class="i">
+      <a href="{__item.url}" class="result">
+        <img src="chrome://favicon/{__item.url}" class="favicon">
         {__item.title}
       </a>
     {/each}
   {:elseif __isSearching}
-    <p class="g">No matching Top Sites</p>
+    <p class="muted">No matching Top Sites</p>
   {/if}
 </div>
 
@@ -260,13 +260,13 @@
 </script>
 
 <style type="text/postcss" global>
-  .c { /* container */
+  .container {
     max-width: 800px;
     padding: 0 18px;
     margin: 0 auto;
   }
 
-  .r { /* search result */
+  .result {
     display: block;
     align-items: center;
     padding: 9px 0;
@@ -275,12 +275,12 @@
     text-overflow: ellipsis;
     white-space: nowrap;
 
-    & > .i {
+    & > .favicon {
       padding-right: 9px;
     }
   }
 
-  #s { /* search */
+  #search {
     box-sizing: border-box;
     width: 100%;
     padding: 11px 20px;
@@ -290,9 +290,10 @@
     background: var(--c3);
     filter: drop-shadow(0 5px 6px var(--s));
     border: 0;
+  }
 
-    &::placeholder {
-      color: var(--c5);
-    }
+  /* search input placeholder */
+  ::placeholder {
+    color: var(--c5);
   }
 </style>

@@ -1,29 +1,29 @@
-<div id="m">
-  <div id="i">☰</div>
+<div id="menu">
+  <div id="icon">☰</div>
 
-  <div id="d">
-    <a href="chrome-search://local-ntp/local-ntp.html" class="m">
+  <div id="dropdown">
+    <a href="chrome-search://local-ntp/local-ntp.html" class="menu-item">
       Open Default Tab
     </a>
-    <a href="chrome://bookmarks/" class="m">
+    <a href="chrome://bookmarks/" class="menu-item">
       Bookmarks Manager
     </a>
-    <a href="chrome://downloads/" class="m">
+    <a href="chrome://downloads/" class="menu-item">
       Downloads
     </a>
-    <a href="chrome://history/" class="m">
+    <a href="chrome://history/" class="menu-item">
       History
     </a>
-    <a href="chrome://settings/passwords" class="m">
+    <a href="chrome://settings/passwords" class="menu-item">
       Passwords
     </a>
 
     <hr>
 
-    <a href="#" class="m" on:click="__settings(event)">
+    <a href="" class="menu-item" on:click="__settings(event)">
       New Tab Settings
     </a>
-    <a href="https://github.com/MaxMilton/new-tab/issues" class="m">
+    <a href="https://github.com/MaxMilton/new-tab/issues" class="menu-item">
       Submit Bug
     </a>
   </div>
@@ -47,15 +47,13 @@
     border-bottom: 1px solid var(--c);
   }
 
-  /* menu item */
-  .m {
+  .menu-item {
     display: block;
     padding: 9px 0;
     color: var(--t);
   }
 
-  /* menu */
-  #m {
+  #menu {
     position: relative;
     display: inline-block;
     padding: 10px 84px 84px 42px;
@@ -63,14 +61,12 @@
     font-size: 20px;
   }
 
-  /* menu hamburger icon */
-  #i {
+  #icon {
     font-size: 30px;
     color: var(--c4);
   }
 
-  /* menu dropdown */
-  #d {
+  #dropdown {
     position: absolute;
     top: 10px;
     z-index: 1;
@@ -87,8 +83,8 @@
     will-change: opacity, transform;
     /* will-change: opacity, scale; */
 
-    #m:hover > &,
-    #m:focus > & {
+    #menu:hover > &,
+    #menu:focus > & {
       opacity: 1;
       transform: scale(1);
       /* scale: 1; */
