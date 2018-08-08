@@ -1,6 +1,7 @@
 <div class="pb">
   <label for="theme">Theme</label>
   <select id="theme" bind:value="__theme">
+    <option value="light">Light</option>
     <option value="{null}">Dark</option>
   </select>
 </div>
@@ -9,7 +10,7 @@
 
 <div class="pb">
   <label for="opt-out">
-    <input id="opt-out" bind:checked="__errTrack" type="checkbox">
+    <input id="opt-out" bind:checked="__errTrack" type="checkbox" class="checkbox">
     Allow error tracking
   </label>
 </div>
@@ -23,7 +24,9 @@
 <script>
   export default {
     data: () => ({
-      __theme: 'd', // frontend theme
+      /** @type {string} */
+      __theme: null, // frontend theme
+      /** @type {Boolean} */
       __errTrack: true, // error tracking opt-out
     }),
     oncreate() {
@@ -74,7 +77,7 @@
     margin-bottom: 18px;
   }
 
-  input[type="checkbox"] {
+  .checkbox {
     margin-right: 9px;
     vertical-align: 0;
   }
