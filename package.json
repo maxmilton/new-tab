@@ -38,7 +38,7 @@
     "@minna-ui/svelte-preprocess-markup": "0.10.0",
     "@minna-ui/svelte-preprocess-style": "0.10.0",
     "@types/chrome": "0.0.72",
-    "autoprefixer": "9.1.1",
+    "autoprefixer": "9.1.2",
     "babel-eslint": "8.2.6",
     "codecov": "3.0.4",
     "crass": "0.12.3",
