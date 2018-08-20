@@ -5,56 +5,15 @@ import preprocessStyle from '@minna-ui/svelte-preprocess-style';
 import svelte from 'rollup-plugin-svelte';
 import nodeResolve from 'rollup-plugin-node-resolve';
 import commonjs from 'rollup-plugin-commonjs';
-import { minify } from 'terser'; // eslint-disable-line import/no-extraneous-dependencies
 import { compiler as ClosureCompiler } from 'google-closure-compiler'; // eslint-disable-line import/no-extraneous-dependencies
 import compiler from '@ampproject/rollup-plugin-closure-compiler';
 import { createFilter } from 'rollup-pluginutils'; // eslint-disable-line import/no-extraneous-dependencies
 import crass from 'crass';
 import { plugin as analyze } from 'rollup-plugin-analyzer';
-import manifest from './manifest';
+import manifest from './manifest.js';
 
 const docTemplate = readFileSync(`${__dirname}/src/template.html`, 'utf8');
 const isProd = !process.env.ROLLUP_WATCH;
-
-// TODO: Replace terser with Closure Compiler once it can parse dynamic import https://github.com/google/closure-compiler/issues/2770
-const nameCache = {};
-const terserOpts = {
-  compress: {
-    drop_console: isProd,
-    drop_debugger: isProd,
-    negate_iife: false, // better chrome performance when false
-    passes: 2,
-    pure_getters: true,
-    unsafe: true,
-    unsafe_arrows: true,
-    unsafe_comps: true,
-    unsafe_Function: true,
-    unsafe_math: true,
-    unsafe_methods: true,
-    unsafe_proto: true,
-    unsafe_regexp: true,
-    unsafe_undefined: true,
-    hoist_funs: true,
-  },
-  mangle: {
-    properties: {
-      // NOTE: Fragile; needs attention, especially between Svelte releases.
-      regex: /^(_.+|each_value.*|component|changed|previous|destroy|root|fire|current|intro)$/,
-      reserved: ['p', 'q'],
-      // debug: 'XX',
-    },
-    reserved: ['p', 'q'],
-  },
-  output: {
-    comments: !!process.env.DEBUG,
-    wrap_iife: true,
-  },
-  nameCache,
-  ecma: 8,
-  module: true,
-  toplevel: true,
-  warnings: !!process.env.DEBUG,
-};
 
 const externs = [
   './node_modules/google-closure-compiler/contrib/externs/chrome.js',
@@ -66,10 +25,6 @@ const externs = [
 const compilerOpts = {
   externs,
   compilationLevel: 'ADVANCED',
-};
-
-const compilerOptsSimple = {
-  externs,
 };
 
 /**
@@ -91,11 +46,11 @@ function compileTemplate(templateStr) {
 // extension manifest
 writeFile(`${__dirname}/dist/manifest.json`, JSON.stringify(manifest), catchErr);
 
-// error tracking initialisation code
-const initCode = new Promise((resolve, reject) => {
+// loader script code
+const loaderCode = new Promise((resolve, reject) => {
   const closureCompiler = new ClosureCompiler({
     externs,
-    js: `${__dirname}/src/errors-init.js`,
+    js: `${__dirname}/src/loader.js`,
     language_in: 'ECMASCRIPT_NEXT',
     compilation_level: 'ADVANCED',
   });
@@ -108,14 +63,6 @@ const initCode = new Promise((resolve, reject) => {
     }
   });
 });
-
-// loader script code
-// TODO: Make it work the same as initCode()
-// XXX: Waiting on parser support for dynamic import in Closure Compiler
-const loaderCode = minify(
-  readFileSync(`${__dirname}/src/loader.js`, 'utf8'),
-  Object.assign({}, terserOpts)
-).code;
 
 /** Generate HTML from a template and write it to disk */
 function makeHtml({
@@ -199,7 +146,7 @@ export default [
         template: docTemplate,
         file: 'dist/n.html',
         title: 'New Tab',
-        content: async () => `%CSS%<script>${await initCode}</script><script src=n.js type=module async></script><script type=module async>${loaderCode}</script>`,
+        content: async () => `%CSS%<script src=n.js type=module async></script><script type=module async>${await loaderCode}</script>`,
       }),
       isProd && analyze(),
     ],
@@ -224,24 +171,8 @@ export default [
         template: docTemplate,
         file: 'dist/s.html',
         title: 'New Tab Settings',
-        content: async () => `%CSS%<script>${await initCode}</script><script src=s.js type=module async></script><script type=module async>${loaderCode}</script>`,
+        content: '%CSS%<script src=s.js type=module async></script>',
       }),
-      isProd && analyze(),
-    ],
-  },
-
-  // error tracking
-  {
-    input: 'src/errors.js',
-    output: {
-      sourcemap: false,
-      format: 'iife',
-      file: 'dist/e.js',
-    },
-    plugins: [
-      nodeResolve(),
-      commonjs(),
-      isProd && compiler(compilerOptsSimple),
       isProd && analyze(),
     ],
   },

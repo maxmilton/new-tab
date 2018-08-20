@@ -9,6 +9,12 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ## [Unreleased]
 
+## [0.10.0] - 2018-08-21
+
+### Removed
+
+- Error tracking. Instead I'll focus on well tested code rather than invading user privacy.
+
 ## [0.9.1] - 2018-08-21
 
 ### Changed

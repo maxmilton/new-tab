@@ -17,7 +17,7 @@
   dependencies:
     "@babel/highlight" "7.0.0-beta.44"
 
-"@babel/code-frame@7.0.0-rc.1", "@babel/code-frame@^7.0.0-beta.35", "@babel/code-frame@^7.0.0-beta.47":
+"@babel/code-frame@7.0.0-rc.1", "@babel/code-frame@^7.0.0-beta.35":
   version "7.0.0-rc.1"
   resolved "https://registry.yarnpkg.com/@babel/code-frame/-/code-frame-7.0.0-rc.1.tgz#5c2154415d6c09959a71845ef519d11157e95d10"
   dependencies:
@@ -160,12 +160,6 @@
   version "7.0.0-rc.1"
   resolved "https://registry.yarnpkg.com/@babel/parser/-/parser-7.0.0-rc.1.tgz#d009a9bba8175d7b971e30cd03535b278c44082d"
 
-"@babel/plugin-syntax-dynamic-import@7.0.0-rc.1":
-  version "7.0.0-rc.1"
-  resolved "https://registry.yarnpkg.com/@babel/plugin-syntax-dynamic-import/-/plugin-syntax-dynamic-import-7.0.0-rc.1.tgz#9bf26d934b968c327e262ecf3a39729bcdec7419"
-  dependencies:
-    "@babel/helper-plugin-utils" "7.0.0-rc.1"
-
 "@babel/plugin-transform-modules-commonjs@^7.0.0-beta.55":
   version "7.0.0-rc.1"
   resolved "https://registry.yarnpkg.com/@babel/plugin-transform-modules-commonjs/-/plugin-transform-modules-commonjs-7.0.0-rc.1.tgz#475bd3e6c3b86bb38307f715e0cbdb6cb2f431c2"
@@ -287,49 +281,6 @@
 "@nodelib/fs.stat@^1.0.1":
   version "1.1.1"
   resolved "https://registry.yarnpkg.com/@nodelib/fs.stat/-/fs.stat-1.1.1.tgz#53f349bb986ab273d601175aa1b25a655ab90ee3"
-
-"@sentry/browser@4.0.0-beta.12":
-  version "4.0.0-beta.12"
-  resolved "https://registry.yarnpkg.com/@sentry/browser/-/browser-4.0.0-beta.12.tgz#dff44c7a3732577057844b1643e0ba38c644138b"
-  dependencies:
-    "@sentry/core" "4.0.0-beta.12"
-    "@sentry/hub" "4.0.0-beta.12"
-    "@sentry/minimal" "4.0.0-beta.12"
-    "@sentry/types" "4.0.0-beta.12"
-    "@sentry/utils" "4.0.0-beta.12"
-
-"@sentry/core@4.0.0-beta.12":
-  version "4.0.0-beta.12"
-  resolved "https://registry.yarnpkg.com/@sentry/core/-/core-4.0.0-beta.12.tgz#c821e41b02c1d66e48fbef16da744f0173575558"
-  dependencies:
-    "@sentry/hub" "4.0.0-beta.12"
-    "@sentry/minimal" "4.0.0-beta.12"
-    "@sentry/types" "4.0.0-beta.12"
-    "@sentry/utils" "4.0.0-beta.12"
-
-"@sentry/hub@4.0.0-beta.12":
-  version "4.0.0-beta.12"
-  resolved "https://registry.yarnpkg.com/@sentry/hub/-/hub-4.0.0-beta.12.tgz#85267cec47c0bbf1094a537f7d14d19495c77234"
-  dependencies:
-    "@sentry/types" "4.0.0-beta.12"
-    "@sentry/utils" "4.0.0-beta.12"
-
-"@sentry/minimal@4.0.0-beta.12":
-  version "4.0.0-beta.12"
-  resolved "https://registry.yarnpkg.com/@sentry/minimal/-/minimal-4.0.0-beta.12.tgz#534e8edd065646e0e5f8d71443a63f6ce7187573"
-  dependencies:
-    "@sentry/hub" "4.0.0-beta.12"
-    "@sentry/types" "4.0.0-beta.12"
-
-"@sentry/types@4.0.0-beta.12":
-  version "4.0.0-beta.12"
-  resolved "https://registry.yarnpkg.com/@sentry/types/-/types-4.0.0-beta.12.tgz#0abd303692e48c0fc11afbfea8cbad87e625357a"
-
-"@sentry/utils@4.0.0-beta.12":
-  version "4.0.0-beta.12"
-  resolved "https://registry.yarnpkg.com/@sentry/utils/-/utils-4.0.0-beta.12.tgz#9d51e88634843232b6c6f0edb6df3d3fba83071e"
-  dependencies:
-    "@sentry/types" "4.0.0-beta.12"
 
 "@sinonjs/formatio@^2.0.0":
   version "2.0.0"
@@ -622,7 +573,7 @@ babel-core@^7.0.0-bridge.0:
   version "7.0.0-bridge.0"
   resolved "https://registry.yarnpkg.com/babel-core/-/babel-core-7.0.0-bridge.0.tgz#95a492ddd90f9b4e9a4a1da14eb335b87b634ece"
 
-babel-eslint@8.2.6, babel-eslint@^8.2.3:
+babel-eslint@^8.2.3:
   version "8.2.6"
   resolved "https://registry.yarnpkg.com/babel-eslint/-/babel-eslint-8.2.6.tgz#6270d0c73205628067c0f7ae1693a9e797acefd9"
   dependencies:
@@ -4341,13 +4292,6 @@ rollup-plugin-svelte@4.2.1:
     rollup-pluginutils "^2.3.0"
     sourcemap-codec "^1.4.1"
 
-rollup-plugin-terser@1.0.1:
-  version "1.0.1"
-  resolved "https://registry.yarnpkg.com/rollup-plugin-terser/-/rollup-plugin-terser-1.0.1.tgz#ba5f497cbc9aa38ba19d3ee2167c04ea3ed279af"
-  dependencies:
-    "@babel/code-frame" "^7.0.0-beta.47"
-    terser "^3.7.5"
-
 rollup-pluginutils@^2.0.1, rollup-pluginutils@^2.3.0:
   version "2.3.1"
   resolved "https://registry.yarnpkg.com/rollup-pluginutils/-/rollup-pluginutils-2.3.1.tgz#760d185ccc237dedc12d7ae48c6bcd127b4892d0"
@@ -4536,7 +4480,7 @@ source-map-support@^0.4.15:
   dependencies:
     source-map "^0.5.6"
 
-source-map-support@^0.5.6, source-map-support@~0.5.6:
+source-map-support@^0.5.6:
   version "0.5.9"
   resolved "https://registry.yarnpkg.com/source-map-support/-/source-map-support-0.5.9.tgz#41bc953b2534267ea2d605bccfa7bfa3111ced5f"
   dependencies:
@@ -4871,14 +4815,6 @@ temp-write@3.4.0:
     pify "^3.0.0"
     temp-dir "^1.0.0"
     uuid "^3.0.1"
-
-terser@^3.7.5:
-  version "3.8.1"
-  resolved "https://registry.yarnpkg.com/terser/-/terser-3.8.1.tgz#cb70070ac9e0a71add169dfb63c0a64fca2738ac"
-  dependencies:
-    commander "~2.16.0"
-    source-map "~0.6.1"
-    source-map-support "~0.5.6"
 
 test-exclude@^4.2.1:
   version "4.2.1"

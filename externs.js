@@ -14,9 +14,3 @@ var m = {};
 // var intro = {};
 // var outro = {};
 // var start = {};
-
-// error tracking
-const q = [];
-window.q = q;
-const p = function (event) {};
-window.p = p;

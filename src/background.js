@@ -15,11 +15,6 @@
 //         newSettings.t = 'dark'; // dark theme
 //       }
 
-//       // error tracking default
-//       if (settings.e === undefined) {
-//         newSettings.e = false; // not opt-out
-//       }
-
 //       chrome.storage.sync.set(newSettings);
 //     });
 //   }

@@ -1,4 +1,4 @@
-<div class="pb">
+<div class="row">
   <label for="theme">Theme</label>
   <select id="theme" bind:value="__theme">
     <option value="light">Light</option>
@@ -7,13 +7,6 @@
 </div>
 
 <hr>
-
-<div class="pb">
-  <label for="opt-out">
-    <input id="opt-out" bind:checked="__errTrack" type="checkbox" class="checkbox">
-    Allow error tracking
-  </label>
-</div>
 
 <footer>
   <small>
@@ -26,15 +19,12 @@
     data: () => ({
       /** @type {string} */
       __theme: null, // frontend theme
-      /** @type {Boolean} */
-      __errTrack: true, // error tracking opt-out
     }),
     oncreate() {
       // check existing settings
       chrome.storage.sync.get(null, (settings) => {
         this.set({
           __theme: settings.t || null,
-          __errTrack: !settings.e,
         });
       });
     },
@@ -42,10 +32,6 @@
       if (previous) {
         if (changed.__theme) {
           chrome.storage.sync.set({ t: current.__theme, td: Date.now() });
-        }
-
-        if (changed.__errTrack) {
-          chrome.storage.sync.set({ e: !current.__errTrack, ed: Date.now() });
         }
       }
     },
@@ -73,7 +59,7 @@
   }
 
   hr,
-  .pb {
+  .row {
     margin-bottom: 18px;
   }
 
