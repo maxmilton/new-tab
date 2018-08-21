@@ -3,7 +3,7 @@ import path from 'path';
 import preprocessMarkup from '@minna-ui/svelte-preprocess-markup';
 import preprocessStyle from '@minna-ui/svelte-preprocess-style';
 import svelte from 'rollup-plugin-svelte';
-import nodeResolve from 'rollup-plugin-node-resolve';
+import resolve from 'rollup-plugin-node-resolve';
 import commonjs from 'rollup-plugin-commonjs';
 import compiler from '@ampproject/rollup-plugin-closure-compiler';
 import { createFilter } from 'rollup-pluginutils'; // eslint-disable-line import/no-extraneous-dependencies
@@ -14,15 +14,13 @@ import manifest from './manifest.js';
 const docTemplate = readFileSync(`${__dirname}/src/template.html`, 'utf8');
 const isProd = !process.env.ROLLUP_WATCH;
 
-const externs = [
-  './node_modules/google-closure-compiler/contrib/externs/chrome.js',
-  './node_modules/google-closure-compiler/contrib/externs/chrome_extensions.js',
-  './node_modules/google-closure-compiler/contrib/externs/svg.js',
-  './externs.js',
-];
-
 const compilerOpts = {
-  externs,
+  externs: [
+    './node_modules/google-closure-compiler/contrib/externs/chrome.js',
+    './node_modules/google-closure-compiler/contrib/externs/chrome_extensions.js',
+    './node_modules/google-closure-compiler/contrib/externs/svg.js',
+    './externs.js',
+  ],
   compilationLevel: 'ADVANCED',
 };
 
@@ -105,7 +103,7 @@ const preprocess = {
 };
 
 export default [
-  // new tab page app
+  /** New Tab Page app */
   {
     input: 'src/app.js',
     output: {
@@ -118,9 +116,9 @@ export default [
         preprocess,
         dev: !isProd,
         emitCss: true,
-        immutable: true, // be mindful during development
+        immutable: true, // be mindful during development!
       }),
-      nodeResolve(),
+      resolve(),
       commonjs(),
       isProd && compiler(compilerOpts),
       makeHtml({
@@ -133,7 +131,7 @@ export default [
     ],
   },
 
-  // settings app
+  /** Settings app */
   {
     input: 'src/settings.js',
     output: {
@@ -158,7 +156,7 @@ export default [
     ],
   },
 
-  // background process
+  /** Background process */
   {
     input: 'src/background.js',
     output: {
