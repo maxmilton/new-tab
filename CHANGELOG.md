@@ -365,7 +365,9 @@ Known issues:
 
 - Initial public version including all the basics; working proof of concept code, readme, etc. Not ready for release yet though, it's still far from being actually useful!
 
-[Unreleased]: https://github.com/MaxMilton/new-tab/compare/v0.9.1...HEAD
+[Unreleased]: https://github.com/MaxMilton/new-tab/compare/v0.11.0...HEAD
+[0.11.0]: https://github.com/MaxMilton/new-tab/compare/v0.10.0...v0.11.0
+[0.10.0]: https://github.com/MaxMilton/new-tab/compare/v0.9.1...v0.10.0
 [0.9.1]: https://github.com/MaxMilton/new-tab/compare/v0.9.0...v0.9.1
 [0.9.0]: https://github.com/MaxMilton/new-tab/compare/v0.8.0...v0.9.0
 [0.8.0]: https://github.com/MaxMilton/new-tab/compare/v0.7.7...v0.8.0
