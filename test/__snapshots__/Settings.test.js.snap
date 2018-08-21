@@ -6,5 +6,5 @@ exports[`Settings component renders correctly 1`] = `
 
 <hr>
 
-<footer><small><em>Tip: Settings sync to your account.</em></small></footer>"
+<footer><small><em>※ Settings sync to your account.</em></small></footer>"
 `;
