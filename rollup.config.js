@@ -149,7 +149,6 @@ export default [
       makeHtml({
         template: docTemplate,
         file: 'dist/s.html',
-        title: 'New Tab Settings',
         content: '%CSS%<script src=s.js async></script>',
       }),
       isProd && analyze(),

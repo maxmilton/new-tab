@@ -1,5 +1,4 @@
 <!doctype html>
 <meta charset=utf-8>
-<meta name=google value=notranslate>
-<title>${d.title}</title>
+<meta name=google value=notranslate>${d.title ? `\n<title>${d.title}</title>` : ''}
 ${d.content}

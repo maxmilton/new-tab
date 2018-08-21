@@ -9,6 +9,10 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ## [Unreleased]
 
+### Removed
+
+- Don't generate title for settings page HTML.
+
 ### Changed
 
 - Clean up settings page.
