@@ -9,6 +9,15 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ## [Unreleased]
 
+## [0.11.0] - 2018-08-22
+
+### Changed
+
+- Place loader script into the main JS bundle rather than inlining in the HTML.
+- Tweak how scripts are loaded for more consistent and faster initial load performance.
+- Simplify build process.
+- Simplify manifest generation and content security policy configuration.
+
 ## [0.10.0] - 2018-08-21
 
 ### Removed
