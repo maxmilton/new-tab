@@ -3,9 +3,8 @@ import path from 'path';
 import preprocessMarkup from '@minna-ui/svelte-preprocess-markup';
 import preprocessStyle from '@minna-ui/svelte-preprocess-style';
 import svelte from 'rollup-plugin-svelte';
-import nodeResolve from 'rollup-plugin-node-resolve';
+import resolve from 'rollup-plugin-node-resolve';
 import commonjs from 'rollup-plugin-commonjs';
-import { compiler as ClosureCompiler } from 'google-closure-compiler'; // eslint-disable-line import/no-extraneous-dependencies
 import compiler from '@ampproject/rollup-plugin-closure-compiler';
 import { createFilter } from 'rollup-pluginutils'; // eslint-disable-line import/no-extraneous-dependencies
 import crass from 'crass';
@@ -15,15 +14,13 @@ import manifest from './manifest.js';
 const docTemplate = readFileSync(`${__dirname}/src/template.html`, 'utf8');
 const isProd = !process.env.ROLLUP_WATCH;
 
-const externs = [
-  './node_modules/google-closure-compiler/contrib/externs/chrome.js',
-  './node_modules/google-closure-compiler/contrib/externs/chrome_extensions.js',
-  './node_modules/google-closure-compiler/contrib/externs/svg.js',
-  './externs.js',
-];
-
 const compilerOpts = {
-  externs,
+  externs: [
+    './node_modules/google-closure-compiler/contrib/externs/chrome.js',
+    './node_modules/google-closure-compiler/contrib/externs/chrome_extensions.js',
+    './node_modules/google-closure-compiler/contrib/externs/svg.js',
+    './externs.js',
+  ],
   compilationLevel: 'ADVANCED',
 };
 
@@ -45,24 +42,6 @@ function compileTemplate(templateStr) {
 
 // extension manifest
 writeFile(`${__dirname}/dist/manifest.json`, JSON.stringify(manifest), catchErr);
-
-// loader script code
-const loaderCode = new Promise((resolve, reject) => {
-  const closureCompiler = new ClosureCompiler({
-    externs,
-    js: `${__dirname}/src/loader.js`,
-    language_in: 'ECMASCRIPT_NEXT',
-    compilation_level: 'ADVANCED',
-  });
-
-  closureCompiler.run((exitCode, stdOut, stdErr) => {
-    if (exitCode !== 0 || stdErr) {
-      reject(new Error(stdErr));
-    } else {
-      resolve(stdOut.trim());
-    }
-  });
-});
 
 /** Generate HTML from a template and write it to disk */
 function makeHtml({
@@ -124,7 +103,7 @@ const preprocess = {
 };
 
 export default [
-  // new tab page app
+  /** New Tab Page app */
   {
     input: 'src/app.js',
     output: {
@@ -137,22 +116,22 @@ export default [
         preprocess,
         dev: !isProd,
         emitCss: true,
-        immutable: true, // be mindful during development
+        immutable: true, // be mindful during development!
       }),
-      nodeResolve(),
+      resolve(),
       commonjs(),
       isProd && compiler(compilerOpts),
       makeHtml({
         template: docTemplate,
         file: 'dist/n.html',
         title: 'New Tab',
-        content: async () => `%CSS%<script src=n.js type=module async></script><script type=module async>${await loaderCode}</script>`,
+        content: '%CSS%<script src=n.js async></script>',
       }),
       isProd && analyze(),
     ],
   },
 
-  // settings app
+  /** Settings app */
   {
     input: 'src/settings.js',
     output: {
@@ -171,13 +150,13 @@ export default [
         template: docTemplate,
         file: 'dist/s.html',
         title: 'New Tab Settings',
-        content: '%CSS%<script src=s.js type=module async></script>',
+        content: '%CSS%<script src=s.js async></script>',
       }),
       isProd && analyze(),
     ],
   },
 
-  // background process
+  /** Background process */
   {
     input: 'src/background.js',
     output: {

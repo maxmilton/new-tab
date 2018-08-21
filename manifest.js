@@ -1,9 +1,4 @@
-/* tslint:disable:quotemark max-line-length */
-
 const pkg = require('./package.json');
-
-const isProd = process.env.NODE_ENV === 'production';
-const cspHash = "'sha256-YEDeigdATq/qONj0g3Dz+aRAzq9XT8EZX3ZwEdIFqAQ='"; // loader.js
 
 export default {
   manifest_version: 2,
@@ -36,10 +31,10 @@ export default {
   offline_enabled: true,
   incognito: 'not_allowed',
 
-  ...(isProd
-    // tighter security than default
-    ? { content_security_policy: `default-src 'none'; script-src 'self' ${cspHash}; style-src 'unsafe-inline'; img-src data: chrome: *; connect-src https://sentry.io` }
-    // allow connections from http://localhost during local development
-    : { content_security_policy: `script-src 'self' blob: filesystem: chrome-extension-resource: http://localhost:* ${cspHash}; object-src 'self'` }
-  ),
+  content_security_policy:
+    "default-src 'none';"
+    + " script-src 'self';"
+    + " style-src 'unsafe-inline';"
+    + ' img-src data: chrome: *;'
+    + ' connect-src https://sentry.io',
 };
