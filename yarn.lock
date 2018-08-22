@@ -515,7 +515,18 @@ atob@^2.1.1:
   version "2.1.2"
   resolved "https://registry.yarnpkg.com/atob/-/atob-2.1.2.tgz#6d9517eb9e030d2436666651e86bd9f6f13533c9"
 
-autoprefixer@9.1.2, autoprefixer@^9.0.0:
+autoprefixer@9.1.3:
+  version "9.1.3"
+  resolved "https://registry.yarnpkg.com/autoprefixer/-/autoprefixer-9.1.3.tgz#bd5940ccb9d1bfa3508308659915f0a14394c8d5"
+  dependencies:
+    browserslist "^4.0.2"
+    caniuse-lite "^1.0.30000878"
+    normalize-range "^0.1.2"
+    num2fraction "^1.2.2"
+    postcss "^7.0.2"
+    postcss-value-parser "^3.2.3"
+
+autoprefixer@^9.0.0:
   version "9.1.2"
   resolved "https://registry.yarnpkg.com/autoprefixer/-/autoprefixer-9.1.2.tgz#73672614e3ee43a433b84c1c2a4b1ca392d2f6a1"
   dependencies:
@@ -845,7 +856,7 @@ camelcase@^4.1.0:
   version "4.1.0"
   resolved "https://registry.yarnpkg.com/camelcase/-/camelcase-4.1.0.tgz#d545635be1e33c542649c69173e5de6acfae34dd"
 
-caniuse-lite@^1.0.30000876, caniuse-lite@^1.0.30000877:
+caniuse-lite@^1.0.30000876, caniuse-lite@^1.0.30000877, caniuse-lite@^1.0.30000878:
   version "1.0.30000878"
   resolved "https://registry.yarnpkg.com/caniuse-lite/-/caniuse-lite-1.0.30000878.tgz#c644c39588dd42d3498e952234c372e5a40a4123"
 
