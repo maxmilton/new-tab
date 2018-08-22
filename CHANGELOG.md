@@ -9,6 +9,10 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ## [Unreleased]
 
+### Removed
+
+- Unnecessary line in content security policy configuration.
+
 ## [0.11.1] - 2018-08-22
 
 ### Removed
