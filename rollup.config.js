@@ -15,13 +15,19 @@ const docTemplate = readFileSync(`${__dirname}/src/template.html`, 'utf8');
 const isProd = !process.env.ROLLUP_WATCH;
 
 const compilerOpts = {
+  charset: 'UTF-8',
   externs: [
     './node_modules/google-closure-compiler/contrib/externs/chrome.js',
     './node_modules/google-closure-compiler/contrib/externs/chrome_extensions.js',
-    './node_modules/google-closure-compiler/contrib/externs/svg.js',
+    // './node_modules/google-closure-compiler/contrib/externs/svg.js',
     './externs.js',
   ],
   compilationLevel: 'ADVANCED',
+  // warningLevel: 'VERBOSE',
+
+  // uncomment the following for debugging
+  // formatting: 'PRETTY_PRINT',
+  // debug: true,
 };
 
 /**
@@ -163,9 +169,6 @@ export default [
       format: 'es',
       file: 'dist/b.js',
     },
-    plugins: [
-      isProd && compiler(compilerOpts),
-      isProd && analyze(),
-    ],
+    plugins: [isProd && compiler(compilerOpts), isProd && analyze()],
   },
 ];
