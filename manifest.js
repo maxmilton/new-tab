@@ -35,6 +35,5 @@ export default {
     "default-src 'none';"
     + " script-src 'self';"
     + " style-src 'unsafe-inline';"
-    + ' img-src data: chrome: *;'
-    + ' connect-src https://sentry.io',
+    + ' img-src data: chrome: *;',
 };
