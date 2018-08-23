@@ -29,7 +29,7 @@
   "dependencies": {},
   "devDependencies": {
     "@ampproject/rollup-plugin-closure-compiler": "0.6.1",
-    "@minna-ui/eslint-config": "0.10.0",
+    "@minna-ui/eslint-config": "0.11.0",
     "@minna-ui/jest-config": "0.10.0",
     "@minna-ui/stylelint-config": "0.10.0",
     "@minna-ui/svelte-preprocess-markup": "0.10.0",
