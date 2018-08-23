@@ -23,7 +23,7 @@
   dependencies:
     "@babel/highlight" "7.0.0-rc.2"
 
-"@babel/core@^7.0.0-beta.55", "@babel/core@^7.0.0-rc.1":
+"@babel/core@^7.0.0-rc.1", "@babel/core@^7.0.0-rc.2":
   version "7.0.0-rc.2"
   resolved "https://registry.yarnpkg.com/@babel/core/-/core-7.0.0-rc.2.tgz#dcb46b3adb63e35b1e82c35d9130d9c27be58427"
   dependencies:
@@ -158,7 +158,7 @@
   version "7.0.0-rc.2"
   resolved "https://registry.yarnpkg.com/@babel/parser/-/parser-7.0.0-rc.2.tgz#a98c01af5834e71d48a5108e3aeeee333cdf26c4"
 
-"@babel/plugin-transform-modules-commonjs@^7.0.0-beta.55":
+"@babel/plugin-transform-modules-commonjs@^7.0.0-rc.2":
   version "7.0.0-rc.2"
   resolved "https://registry.yarnpkg.com/@babel/plugin-transform-modules-commonjs/-/plugin-transform-modules-commonjs-7.0.0-rc.2.tgz#f6475129473b635bd68cbbab69448c76eb52718c"
   dependencies:
@@ -237,14 +237,14 @@
     eslint-plugin-import "^2.13.0"
     eslint-plugin-jest "^21.18.0"
 
-"@minna-ui/jest-config@0.10.0":
-  version "0.10.0"
-  resolved "https://registry.yarnpkg.com/@minna-ui/jest-config/-/jest-config-0.10.0.tgz#10e8b0697060a6c83cb07553b423e10fc3af10b2"
+"@minna-ui/jest-config@0.11.0":
+  version "0.11.0"
+  resolved "https://registry.yarnpkg.com/@minna-ui/jest-config/-/jest-config-0.11.0.tgz#88ce1072908b3364edba518382c6f1f3782a77f5"
   dependencies:
-    "@babel/core" "^7.0.0-beta.55"
-    "@babel/plugin-transform-modules-commonjs" "^7.0.0-beta.55"
+    "@babel/core" "^7.0.0-rc.2"
+    "@babel/plugin-transform-modules-commonjs" "^7.0.0-rc.2"
     "@types/jest" "^23.3.1"
-    "@types/node" "^10.5.5"
+    "@types/node" "^10.7.1"
     babel-core "^7.0.0-bridge.0"
     babel-jest "^23.4.2"
 
@@ -309,7 +309,7 @@
   version "23.3.1"
   resolved "https://registry.yarnpkg.com/@types/jest/-/jest-23.3.1.tgz#a4319aedb071d478e6f407d1c4578ec8156829cf"
 
-"@types/node@*", "@types/node@^10.5.5":
+"@types/node@*", "@types/node@^10.7.1":
   version "10.7.1"
   resolved "https://registry.yarnpkg.com/@types/node/-/node-10.7.1.tgz#b704d7c259aa40ee052eec678758a68d07132a2e"
 
