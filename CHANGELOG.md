@@ -9,6 +9,10 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ## [Unreleased]
 
+### Changed
+
+- Small improvement to tab event handling.
+
 ## [0.11.2] - 2018-08-23
 
 ### Removed

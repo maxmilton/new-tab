@@ -139,9 +139,11 @@
     },
 
     oncreate() {
+      const getTabs = () => this.__getTabs();
+
       this.__onSearch = debounce(this.__doSearch, SEARCH_DEBOUNCE_DELAY);
 
-      this.__getTabs();
+      getTabs();
 
       chrome.topSites.get((sites) => {
         this.set({
@@ -151,10 +153,10 @@
       });
 
       // update tab list on tab events
-      chrome.tabs.onUpdated.addListener(() => this.__getTabs());
-      chrome.tabs.onRemoved.addListener(() => this.__getTabs());
-      chrome.tabs.onMoved.addListener(() => this.__getTabs());
-      chrome.tabs.onAttached.addListener(() => this.__getTabs());
+      chrome.tabs.onUpdated.addListener(getTabs);
+      chrome.tabs.onRemoved.addListener(getTabs);
+      chrome.tabs.onMoved.addListener(getTabs);
+      chrome.tabs.onAttached.addListener(getTabs);
     },
 
     // FIXME: When search is active, rerun when tab events trigger and __getTabs() is run
