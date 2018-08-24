@@ -9,6 +9,8 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ## [Unreleased]
 
+## [0.11.4] - 2018-08-24
+
 ### Removed
 
 - CSS property `will-change` from menu so browser decides how to handle animation rather than forcing GPU.
@@ -403,7 +405,8 @@ Known issues:
 
 - Initial public version including all the basics; working proof of concept code, readme, etc. Not ready for release yet though, it's still far from being actually useful!
 
-[Unreleased]: https://github.com/MaxMilton/new-tab/compare/v0.11.3...HEAD
+[Unreleased]: https://github.com/MaxMilton/new-tab/compare/v0.11.4...HEAD
+[0.11.4]: https://github.com/MaxMilton/new-tab/compare/v0.11.3...v0.11.4
 [0.11.3]: https://github.com/MaxMilton/new-tab/compare/v0.11.2...v0.11.3
 [0.11.2]: https://github.com/MaxMilton/new-tab/compare/v0.11.1...v0.11.2
 [0.11.1]: https://github.com/MaxMilton/new-tab/compare/v0.11.0...v0.11.1
