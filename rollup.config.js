@@ -122,7 +122,6 @@ export default [
         preprocess,
         dev: !isProd,
         emitCss: true,
-        immutable: true, // be mindful during development!
       }),
       resolve(),
       commonjs(),

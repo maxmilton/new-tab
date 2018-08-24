@@ -9,6 +9,10 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ## [Unreleased]
 
+### Changed
+
+- Only set the search component as immutable rather than the whole app.
+
 ## [0.11.4] - 2018-08-24
 
 ### Removed
