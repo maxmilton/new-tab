@@ -5,9 +5,7 @@
   --b: #23252d; /* background colour */
   --t: #9da5b4; /* text colour */
   --c: #21252b; /* bookmark item hover background, hr */
-  --c1: #292d35; /* bookmarks bar, load more button */
-  --c2: #2f333d; /* menu dropdown */
-  --c3: #2c313a; /* search input */
-  --c4: #383e4a; /* menu hamburger icon, h2, muted text */
-  --c5: #5c6370; /* search input placeholder */
+  --c1: #292d35; /* bookmarks bar, search input, menu dropdown, load more button */
+  --c2: #383e4a; /* menu hamburger icon, h2, muted text */
+  --c3: #5c6370; /* search input placeholder */
 }

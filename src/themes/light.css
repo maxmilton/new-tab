@@ -1,10 +1,9 @@
+/* light theme */
 .l {
   --b: #fafafa; /* background colour */
   --t: #383a42; /* text colour */
   --c: #e5e5e6; /* bookmark item hover background, hr */
-  --c1: #fff; /* bookmarks bar, load more button */
-  --c2: #fff; /* menu dropdown */
-  --c3: #fff; /* search input */
-  --c4: #dbdbdc; /* menu hamburger icon, h2, muted text */
-  --c5: #dbdbdc; /* search input placeholder */
+  --c1: #fff; /* bookmarks bar, search input, menu dropdown, load more button */
+  --c2: #dbdbdc; /* menu hamburger icon, h2, muted text */
+  --c3: #dbdbdc; /* search input placeholder */
 }
