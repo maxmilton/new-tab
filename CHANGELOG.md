@@ -9,9 +9,15 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ## [Unreleased]
 
+### Removed
+
+- CSS property `will-change` from menu so browser decides how to handle animation rather than forcing GPU.
+
 ### Changed
 
 - Improve theme loading performance.
+- Simplify theme colours.
+- Switch shadows from `filter: drop-shadow()` to `box-shadow:` for faster paint during initial page load and scrolling.
 - Adjust closure compiler settings.
 
 ## [0.11.3] - 2018-08-24
