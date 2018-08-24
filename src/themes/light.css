@@ -3,7 +3,7 @@
   --b: #fafafa; /* background colour */
   --t: #383a42; /* text colour */
   --c: #e5e5e6; /* bookmark item hover background, hr */
-  --c1: #fff; /* bookmarks bar, search input, menu dropdown, load more button */
-  --c2: #dbdbdc; /* menu hamburger icon, h2, muted text */
-  --c3: #dbdbdc; /* search input placeholder */
+  --c0: #fff; /* bookmarks bar, search input, menu dropdown, load more button */
+  --c1: #dbdbdc; /* menu hamburger icon, h2, muted text */
+  --c2: #dbdbdc; /* search input placeholder */
 }

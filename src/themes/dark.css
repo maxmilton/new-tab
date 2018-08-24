@@ -1,11 +1,11 @@
 /* dark theme (default) */
 :root {
   --s: 0 2px 6px #06001124; /* shadow */
-  --s1: 0 9px 16px #06001133; /* shadow heavy */
+  --s0: 0 9px 16px #06001133; /* shadow heavy */
   --b: #23252d; /* background colour */
   --t: #9da5b4; /* text colour */
   --c: #21252b; /* bookmark item hover background, hr */
-  --c1: #292d35; /* bookmarks bar, search input, menu dropdown, load more button */
-  --c2: #383e4a; /* menu hamburger icon, h2, muted text */
-  --c3: #5c6370; /* search input placeholder */
+  --c0: #292d35; /* bookmarks bar, search input, menu dropdown, load more button */
+  --c1: #383e4a; /* menu hamburger icon, h2, muted text */
+  --c2: #5c6370; /* search input placeholder */
 }
