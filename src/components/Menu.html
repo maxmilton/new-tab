@@ -76,18 +76,13 @@
     filter: var(--s1);
     opacity: 0;
     transition: all 150ms ease-out;
-    /* TODO: Once `scale` is supported in Chrome stable, change this */
     transform: scale(0.5);
-    /* scale: 0.5; */
     transform-origin: 0 10px;
-    will-change: opacity, transform;
-    /* will-change: opacity, scale; */
 
     #menu:hover > &,
     #menu:focus > & {
       opacity: 1;
       transform: scale(1);
-      /* scale: 1; */
     }
   }
 </style>
