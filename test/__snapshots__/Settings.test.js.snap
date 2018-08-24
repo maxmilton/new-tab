@@ -2,7 +2,7 @@
 
 exports[`Settings component renders correctly 1`] = `
 "<div class=\\"row\\"><label for=\\"theme\\">Theme</label>
-  <select id=\\"theme\\"><option value=\\"light\\">Light</option><option value=\\"null\\">Dark</option></select></div>
+  <select id=\\"theme\\"><option value=\\"l\\">Light</option><option value=\\"null\\">Dark</option></select></div>
 
 <hr>
 
