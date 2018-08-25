@@ -99,13 +99,16 @@ function makeHtml({
   };
 }
 
-// svelte preprocess options
-const preprocess = {
-  ...(!isProd ? {} : { markup: preprocessMarkup({
-    unsafeWhitespace: true,
-    unsafe: true,
-  }) }),
-  style: preprocessStyle(),
+const svelteOpts = {
+  preprocess: {
+    ...(!isProd ? {} : { markup: preprocessMarkup({
+      unsafeWhitespace: true,
+      unsafe: true,
+    }) }),
+    style: preprocessStyle(),
+  },
+  dev: !isProd,
+  emitCss: true,
 };
 
 export default [
@@ -118,11 +121,7 @@ export default [
       file: 'dist/n.js',
     },
     plugins: [
-      svelte({
-        preprocess,
-        dev: !isProd,
-        emitCss: true,
-      }),
+      svelte(svelteOpts),
       resolve(),
       commonjs(),
       isProd && compiler(compilerOpts),
@@ -145,11 +144,7 @@ export default [
       file: 'dist/s.js',
     },
     plugins: [
-      svelte({
-        preprocess,
-        dev: !isProd,
-        emitCss: true,
-      }),
+      svelte(svelteOpts),
       isProd && compiler(compilerOpts),
       makeHtml({
         template: docTemplate,

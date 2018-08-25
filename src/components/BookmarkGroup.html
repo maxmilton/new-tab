@@ -1,3 +1,5 @@
+<svelte:window on:resize="__setVisibleEnd()" />
+
 <div id="bookmarks">
   <div id="bookmarks-bar" ref:b>
     {#each __visible as __bookmark}
@@ -9,16 +11,16 @@
     <BookmarkItem __node="{__overflow}" __lvl="{0}" __left/>
   {/if}
 
-  <BookmarkItem __node="{__bookmarksOther}" __lvl="{0}" __left/>
+  {#if __bookmarksOther.children.length}
+    <BookmarkItem __node="{__bookmarksOther}" __lvl="{0}" __left/>
+  {/if}
 </div>
-
-<svelte:window on:resize="__setVisibleEnd()"/>
 
 <script>
   import BookmarkItem from './BookmarkItem.html';
 
-  // Measure title text width using the 2d canvas measureText method as it's
-  // faster than adding an element to the DOM -- but we need to manually
+  // Get title text width using the 2d canvas measureText method as it's
+  // faster than adding an element to the DOM but we need to manually
   // calculate any padding etc.
 
   const FONT = '18px sans-serif';
@@ -39,7 +41,7 @@
     },
     data: () => ({
       __bookmarksBar: [],
-      __bookmarksOther: { title: 'Other bookmarks' },
+      __bookmarksOther: { children: []},
       __end: 0,
     }),
     computed: {
@@ -64,11 +66,14 @@
     methods: {
       __setVisibleEnd() {
         const { __bookmarksBar } = this.get();
+        const { length } = __bookmarksBar;
         const bookmarksBarWidth = this.refs.b.offsetWidth - ITEM_PADDING;
         let __end = 0;
         let width = 0;
 
-        __bookmarksBar.every((item, index) => {
+        /* eslint-disable-next-line no-plusplus */
+        for (let index = 0; index !== length; index++) {
+          const item = __bookmarksBar[index];
           /* eslint-disable-next-line no-nested-ternary */
           const faviconWidth = item.children
             ? 0
@@ -80,13 +85,11 @@
           const itemWidth = ITEM_PADDING + faviconWidth + titleWidth;
           const newWidth = width + itemWidth;
 
-          if (newWidth < bookmarksBarWidth) {
-            width = newWidth;
-            __end = index + 1;
-            return true;
-          }
-          return false;
-        });
+          if (newWidth > bookmarksBarWidth) break;
+
+          width = newWidth;
+          __end = index + 1;
+        }
 
         this.set({ __end });
       },
