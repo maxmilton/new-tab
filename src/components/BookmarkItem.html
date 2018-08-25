@@ -138,6 +138,7 @@
 
   .favicon {
     width: 16px;
+    height: 16px; /* prevents slight realignment jump on initial load */
   }
 
   .folder {
@@ -151,7 +152,7 @@
   }
 
   :global(.title) {
-    max-width: 15ch;
+    max-width: 144px;
     overflow: hidden;
     text-overflow: ellipsis;
 

@@ -3,6 +3,8 @@
 exports[`App root component renders correctly 1`] = `
 "<div id=\\"bookmarks\\"><div id=\\"bookmarks-bar\\"></div>
 
+  
+
   <a href=\\"undefined\\" title=\\"Other bookmarks\\" class=\\"bookmark\\">
     <span class=\\"title\\">Other bookmarks</span></a><!----></div>
 <div id=\\"menu\\"><div id=\\"icon\\">☰</div>

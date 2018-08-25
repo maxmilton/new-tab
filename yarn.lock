@@ -310,8 +310,8 @@
   resolved "https://registry.yarnpkg.com/@types/jest/-/jest-23.3.1.tgz#a4319aedb071d478e6f407d1c4578ec8156829cf"
 
 "@types/node@*", "@types/node@^10.7.1":
-  version "10.9.1"
-  resolved "https://registry.yarnpkg.com/@types/node/-/node-10.9.1.tgz#06f002136fbcf51e730995149050bb3c45ee54e6"
+  version "10.9.2"
+  resolved "https://registry.yarnpkg.com/@types/node/-/node-10.9.2.tgz#f0ab8dced5cd6c56b26765e1c0d9e4fdcc9f2a00"
 
 abab@^2.0.0:
   version "2.0.0"
@@ -2552,6 +2552,10 @@ istanbul-reports@^1.3.0:
   dependencies:
     handlebars "^4.0.3"
 
+jest-canvas-mock@1.1.0:
+  version "1.1.0"
+  resolved "https://registry.yarnpkg.com/jest-canvas-mock/-/jest-canvas-mock-1.1.0.tgz#f6ed0998b6be3ae2b7e095d7173441ae62cc831e"
+
 jest-changed-files@^23.4.2:
   version "23.4.2"
   resolved "https://registry.yarnpkg.com/jest-changed-files/-/jest-changed-files-23.4.2.tgz#1eed688370cd5eebafe4ae93d34bb3b64968fe83"
@@ -4757,9 +4761,9 @@ supports-color@^5.1.0, supports-color@^5.3.0, supports-color@^5.4.0:
   dependencies:
     has-flag "^3.0.0"
 
-svelte@2.12.0:
-  version "2.12.0"
-  resolved "https://registry.yarnpkg.com/svelte/-/svelte-2.12.0.tgz#9ad94f0ee47898d15a52a0d0a6908bfcb1095471"
+svelte@2.13.0:
+  version "2.13.0"
+  resolved "https://registry.yarnpkg.com/svelte/-/svelte-2.13.0.tgz#01d7f1e8e9c69fbea0903079255d54922cd148e7"
 
 svg-tags@^1.0.0:
   version "1.0.0"
