@@ -12,7 +12,7 @@
   <BookmarkItem __node="{__bookmarksOther}" __lvl="{0}" __left/>
 </div>
 
-<svelte:window on:resize="__calculateEnd()"/>
+<svelte:window on:resize="__setVisibleEnd()"/>
 
 <script>
   import BookmarkItem from './BookmarkItem.html';
@@ -58,11 +58,11 @@
       if (previous === undefined) return;
 
       if (changed.__bookmarksBar) {
-        this.__calculateEnd();
+        this.__setVisibleEnd();
       }
     },
     methods: {
-      __calculateEnd() {
+      __setVisibleEnd() {
         const { __bookmarksBar } = this.get();
         const bookmarksBarWidth = this.refs.b.offsetWidth - ITEM_PADDING;
         let __end = 0;
