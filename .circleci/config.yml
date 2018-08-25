@@ -30,7 +30,7 @@ jobs:
       # run tests!
       - run: yarn run lint
       - run: yarn run test-ci
-      - run: codecov
+      - run: yarn codecov
 
       - store_artifacts:
           path: test/coverage
