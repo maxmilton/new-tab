@@ -18,13 +18,11 @@
     "dev": "rollup -c -w",
     "build": "APP_RELEASE=$(git describe --always --dirty=\"-dev\") NODE_ENV=production rollup -c",
     "prebuild": "rm -rf dist && mkdir dist",
-    "lint:css": "stylelint --cache --cache-location=/tmp/ \"**/*.{html,css}\"",
-    "lint:js": "eslint --ignore-path .gitignore --ext .js,.html src test",
     "lint": "yarn lint:css && yarn lint:js",
-    "test": "jest",
-    "test-ci": "yarn test --coverage --runInBand --ci",
-    "pretest:dev": "yarn lint",
-    "test:dev": "yarn test --notify --watch"
+    "lint:css": "stylelint **/*.{html,css} --cache --cache-location=/tmp/",
+    "lint:js": "eslint --ignore-path .gitignore --ext js,html .",
+    "test": "yarn lint && jest --notify --watch",
+    "test-ci": "jest --coverage --runInBand --ci"
   },
   "dependencies": {},
   "devDependencies": {
