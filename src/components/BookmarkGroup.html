@@ -1,23 +1,32 @@
-<!--
-  FIXME: Overflowing bookmark items should collapse into a folder.
-
-  REF:
-    - http://blueprintjs.com/docs/#core/components/overflow-list
-    - https://github.com/palantir/blueprint/blob/develop/packages/core/src/components/overflow-list/overflowList.tsx
--->
-
 <div id="bookmarks">
-  <div id="bookmarks-bar">
-    {#each __bookmarksBar as __bookmark}
-      <BookmarkItem __node="{__bookmark}" __lvl="{0}"/>
+  <div id="bookmarks-bar" ref:b>
+    {#each __visible as __bookmark}
+      <BookmarkItem __node="{__bookmark}" __lvl="{0}" />
     {/each}
   </div>
 
+  {#if __overflow.children.length}
+    <BookmarkItem __node="{__overflow}" __lvl="{0}" __left/>
+  {/if}
   <BookmarkItem __node="{__bookmarksOther}" __lvl="{0}" __left/>
 </div>
 
+<svelte:window on:resize="__calculateEnd()"/>
+
 <script>
   import BookmarkItem from './BookmarkItem.html';
+
+  const FONT = '18px sans-serif';
+  const TITLE_MAX_WIDTH = 144;
+  const FAVICON_WIDTH = 16;
+  const FAVICON_PADDING = 9;
+  const ITEM_PADDING = 9 + 9; // padding left + right
+
+  const canvas = document.createElement('canvas');
+  const ctx = canvas.getContext('2d');
+  ctx.font = FONT;
+  const ellipsisWidth = ctx.measureText('…').width;
+  const itemMaxWidth = TITLE_MAX_WIDTH - ellipsisWidth;
 
   export default {
     components: {
@@ -26,7 +35,12 @@
     data: () => ({
       __bookmarksBar: [],
       __bookmarksOther: { title: 'Other bookmarks' },
+      __end: 0,
     }),
+    computed: {
+      __visible: ({ __bookmarksBar, __end }) => __bookmarksBar.slice(0, __end),
+      __overflow: ({ __bookmarksBar, __end }) => ({ title: '»', children: __bookmarksBar.slice(__end) }),
+    },
     oncreate() {
       chrome.bookmarks.getTree((tree) => {
         this.set({
@@ -35,13 +49,51 @@
         });
       });
     },
+    onstate({ changed, previous }) {
+      if (previous === undefined) return;
+
+      if (changed.__bookmarksBar) {
+        this.__calculateEnd();
+      }
+    },
+    methods: {
+      __calculateEnd() {
+        const { __bookmarksBar } = this.get();
+        const bookmarksBarWidth = this.refs.b.offsetWidth - ITEM_PADDING;
+        let __end = 0;
+        let width = 0;
+
+        __bookmarksBar.every((item, index) => {
+          const context = canvas.getContext('2d');
+          context.font = FONT;
+          /* eslint-disable-next-line no-nested-ternary */
+          const faviconWidth = item.children
+            ? 0
+            : item.title
+              ? FAVICON_WIDTH + FAVICON_PADDING
+              : FAVICON_WIDTH;
+          const realTitleWidth = item.title ? context.measureText(item.title).width : 0;
+          const titleWidth = realTitleWidth > itemMaxWidth ? TITLE_MAX_WIDTH : realTitleWidth;
+          const itemWidth = ITEM_PADDING + faviconWidth + titleWidth;
+          const newWidth = width + itemWidth;
+
+          if (newWidth < bookmarksBarWidth) {
+            width = newWidth;
+            __end = index + 1;
+            return true;
+          }
+          return false;
+        });
+
+        this.set({ __end });
+      },
+    },
   };
 </script>
 
 <style type="text/postcss" global>
   #bookmarks-bar {
-    display: flex;
-    margin-right: auto; /* push "other bookmarks" folder to the right */
+    width: 100%;
   }
 
   #bookmarks {
