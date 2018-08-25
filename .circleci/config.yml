@@ -31,3 +31,7 @@ jobs:
       - run: yarn run lint
       - run: yarn run test-ci
       - run: codecov
+
+      - store_artifacts:
+        path: test/coverage
+        prefix: coverage
