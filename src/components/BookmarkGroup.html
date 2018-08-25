@@ -1,3 +1,5 @@
+<svelte:window on:resize="__setVisibleEnd()" />
+
 <div id="bookmarks">
   <div id="bookmarks-bar" ref:b>
     {#each __visible as __bookmark}
@@ -12,13 +14,11 @@
   <BookmarkItem __node="{__bookmarksOther}" __lvl="{0}" __left/>
 </div>
 
-<svelte:window on:resize="__setVisibleEnd()"/>
-
 <script>
   import BookmarkItem from './BookmarkItem.html';
 
-  // Measure title text width using the 2d canvas measureText method as it's
-  // faster than adding an element to the DOM -- but we need to manually
+  // Get title text width using the 2d canvas measureText method as it's
+  // faster than adding an element to the DOM but we need to manually
   // calculate any padding etc.
 
   const FONT = '18px sans-serif';
