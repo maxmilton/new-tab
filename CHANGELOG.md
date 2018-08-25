@@ -9,9 +9,16 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ## [Unreleased]
 
+## [0.12.0] - 2018-08-25
+
 ### Changed
 
-- Only set the search component as immutable rather than the whole app.
+- Only set the search component as `immutable` rather than the whole app.
+- Update dependencies.
+
+### Fixed
+
+- Handle bookmark bar overflow.
 
 ## [0.11.4] - 2018-08-24
 
@@ -409,7 +416,8 @@ Known issues:
 
 - Initial public version including all the basics; working proof of concept code, readme, etc. Not ready for release yet though, it's still far from being actually useful!
 
-[Unreleased]: https://github.com/MaxMilton/new-tab/compare/v0.11.4...HEAD
+[Unreleased]: https://github.com/MaxMilton/new-tab/compare/v0.12.0...HEAD
+[0.11.4]: https://github.com/MaxMilton/new-tab/compare/v0.11.4...v0.12.0
 [0.11.4]: https://github.com/MaxMilton/new-tab/compare/v0.11.3...v0.11.4
 [0.11.3]: https://github.com/MaxMilton/new-tab/compare/v0.11.2...v0.11.3
 [0.11.2]: https://github.com/MaxMilton/new-tab/compare/v0.11.1...v0.11.2
