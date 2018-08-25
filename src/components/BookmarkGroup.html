@@ -16,17 +16,21 @@
 <script>
   import BookmarkItem from './BookmarkItem.html';
 
+  // Measure title text width using the 2d canvas measureText method as it's
+  // faster than adding an element to the DOM -- but we need to manually
+  // calculate any padding etc.
+
   const FONT = '18px sans-serif';
   const TITLE_MAX_WIDTH = 144;
   const FAVICON_WIDTH = 16;
   const FAVICON_PADDING = 9;
   const ITEM_PADDING = 9 + 9; // padding left + right
 
-  const canvas = document.createElement('canvas');
-  const ctx = canvas.getContext('2d');
-  ctx.font = FONT;
-  const ellipsisWidth = ctx.measureText('…').width;
-  const itemMaxWidth = TITLE_MAX_WIDTH - ellipsisWidth;
+  // reusing the same canvas is much faster
+  const canvas = document.createElement('canvas').getContext('2d');
+  canvas.font = FONT;
+  const ellipsisWidth = canvas.measureText('…').width;
+  const titleMaxInnerWidth = TITLE_MAX_WIDTH - ellipsisWidth;
 
   export default {
     components: {
@@ -64,16 +68,14 @@
         let width = 0;
 
         __bookmarksBar.every((item, index) => {
-          const context = canvas.getContext('2d');
-          context.font = FONT;
           /* eslint-disable-next-line no-nested-ternary */
           const faviconWidth = item.children
             ? 0
             : item.title
               ? FAVICON_WIDTH + FAVICON_PADDING
               : FAVICON_WIDTH;
-          const realTitleWidth = item.title ? context.measureText(item.title).width : 0;
-          const titleWidth = realTitleWidth > itemMaxWidth ? TITLE_MAX_WIDTH : realTitleWidth;
+          const realTitleWidth = item.title ? canvas.measureText(item.title).width : 0;
+          const titleWidth = realTitleWidth > titleMaxInnerWidth ? TITLE_MAX_WIDTH : realTitleWidth;
           const itemWidth = ITEM_PADDING + faviconWidth + titleWidth;
           const newWidth = width + itemWidth;
 
