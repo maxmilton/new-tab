@@ -5,8 +5,7 @@ exports[`App root component renders correctly 1`] = `
 
   
 
-  <a href=\\"undefined\\" title=\\"Other bookmarks\\" class=\\"bookmark\\">
-    <span class=\\"title\\">Other bookmarks</span></a><!----></div>
+  </div>
 <div id=\\"menu\\"><div id=\\"icon\\">☰</div>
 
   <div id=\\"dropdown\\"><a href=\\"chrome-search://local-ntp/local-ntp.html\\" class=\\"menu-item\\">Open Default Tab</a>

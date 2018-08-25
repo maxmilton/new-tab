@@ -5,6 +5,5 @@ exports[`BookmarkGroup component renders correctly 1`] = `
 
   
 
-  <a href=\\"undefined\\" title=\\"Other bookmarks\\" class=\\"bookmark\\">
-    <span class=\\"title\\">Other bookmarks</span></a><!----></div>"
+  </div>"
 `;
