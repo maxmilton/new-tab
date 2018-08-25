@@ -11,5 +11,4 @@ module.exports = {
     '!src/settings.js',
     '!src/template.html',
   ],
-  coverageDirectory: '<rootDir>/test/coverage',
 };
