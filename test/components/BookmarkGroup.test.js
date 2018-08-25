@@ -1,5 +1,6 @@
 'use strict';
 
+require('jest-canvas-mock');
 const BookmarkGroup = require('../../src/components/BookmarkGroup.html');
 
 describe('BookmarkGroup component', () => {
