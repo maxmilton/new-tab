@@ -11,7 +11,9 @@
     <BookmarkItem __node="{__overflow}" __lvl="{0}" __left/>
   {/if}
 
-  <BookmarkItem __node="{__bookmarksOther}" __lvl="{0}" __left/>
+  {#if __bookmarksOther.children.length}
+    <BookmarkItem __node="{__bookmarksOther}" __lvl="{0}" __left/>
+  {/if}
 </div>
 
 <script>
@@ -39,7 +41,7 @@
     },
     data: () => ({
       __bookmarksBar: [],
-      __bookmarksOther: {},
+      __bookmarksOther: { children: []},
       __end: 0,
     }),
     computed: {
