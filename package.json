@@ -50,7 +50,7 @@
     "rollup-plugin-svelte": "4.2.1",
     "sinon-chrome": "2.3.2",
     "stylelint": "9.5.0",
-    "svelte": "2.12.0"
+    "svelte": "2.13.0"
   },
   "browserslist": [
     "last 2 Chrome versions"
