@@ -10,13 +10,14 @@ jobs:
       - checkout
       - restore_cache:
           keys:
-          - v2-dependencies-{{ checksum "yarn.lock" }}
+          - v2-dependencies-{{ .Branch }}-{{ checksum "yarn.lock" }}
+          - v2-dependencies-{{ .Branch }}-
           - v2-dependencies-
       - run: yarn install --frozen-lockfile
       - save_cache:
           paths:
             - node_modules
-          key: v2-dependencies-{{ checksum "yarn.lock" }}
+          key: v2-dependencies-{{ .Branch }}-{{ checksum "yarn.lock" }}
 
       - run: yarn run lint
       - run: yarn run test-ci
