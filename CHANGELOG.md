@@ -19,6 +19,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 ### Fixed
 
 - Handle bookmark bar overflow.
+- Hide "Other Bookmarks" when it's empty.
 
 ## [0.11.4] - 2018-08-24
 
