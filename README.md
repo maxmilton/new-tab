@@ -42,15 +42,13 @@ Unobtrusive | No annoying things like entries in your right click menu.
 
 ## Known issues
 
-1. No overflow menu on the bookmarks bar. I haven't been able to implement this with the level performance I'm after from the extension so this is purposely left out.
-    * _Workaround:_ Limit the number of bookmarks in your bookmarks bar folder or group your bookmarks into folders (it's nice to have it clean and minimal anyway!).
-1. The extension's bookmarks bar is lacking in functionality. Chrome doesn't have an API to control the native bookmarks bar via extensions so I've recreated a simplistic version. The goal here is _high performance_ and not to emulate all the native bookmarks bar features.
+1. The extension's bookmarks bar is limited in functionality. Chrome doesn't have an API to control the native bookmarks bar via extensions so I've recreated a simplistic version. The goal here is _high performance_ and not to emulate all the native bookmarks bar features. Use the bookmark manager.
 1. Page needs to be reload after adding, editing, or removing bookmarks. Because bookmarks don't change often, I prefer not to add bookmark event listeners as most users simply don't need live bookmark changes.
 1. Searching the browsing history is slow when you history is _very_ big. This is just a reality of Chrome. 😢
 
 ## Browser support
 
-Each release will support the 2 latest versions of Google Chrome.
+Each release will support the 2 latest versions of Google Chrome stable.
 
 ## Bugs
 
