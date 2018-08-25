@@ -64,11 +64,14 @@
     methods: {
       __setVisibleEnd() {
         const { __bookmarksBar } = this.get();
+        const { length } = __bookmarksBar;
         const bookmarksBarWidth = this.refs.b.offsetWidth - ITEM_PADDING;
         let __end = 0;
         let width = 0;
 
-        __bookmarksBar.every((item, index) => {
+        /* eslint-disable-next-line no-plusplus */
+        for (let index = 0; index !== length; index++) {
+          const item = __bookmarksBar[index];
           /* eslint-disable-next-line no-nested-ternary */
           const faviconWidth = item.children
             ? 0
@@ -80,13 +83,11 @@
           const itemWidth = ITEM_PADDING + faviconWidth + titleWidth;
           const newWidth = width + itemWidth;
 
-          if (newWidth < bookmarksBarWidth) {
-            width = newWidth;
-            __end = index + 1;
-            return true;
-          }
-          return false;
-        });
+          if (newWidth > bookmarksBarWidth) break;
+
+          width = newWidth;
+          __end = index + 1;
+        }
 
         this.set({ __end });
       },
