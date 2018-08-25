@@ -33,5 +33,5 @@ jobs:
       - run: codecov
 
       - store_artifacts:
-        path: test/coverage
-        prefix: coverage
+          path: test/coverage
+          prefix: coverage
