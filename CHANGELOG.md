@@ -9,6 +9,10 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ## [Unreleased]
 
+### Changed
+
+- Switch from Travis to Circle CI for faster and better continuous integration.
+
 ## [0.12.0] - 2018-08-25
 
 ### Changed
