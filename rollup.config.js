@@ -22,8 +22,8 @@ const compilerOpts = {
     // './node_modules/google-closure-compiler/contrib/externs/svg.js',
     './externs.js',
   ],
-  compilationLevel: 'ADVANCED',
-  // warningLevel: 'VERBOSE',
+  compilation_level: 'ADVANCED',
+  // warning_level: 'VERBOSE',
 
   // uncomment the following for debugging
   // formatting: 'PRETTY_PRINT',
@@ -168,6 +168,9 @@ export default [
       format: 'es',
       file: 'dist/b.js',
     },
-    plugins: [isProd && compiler(compilerOpts), isProd && analyze()],
+    plugins: [
+      isProd && compiler(compilerOpts),
+      isProd && analyze(),
+    ],
   },
 ];
