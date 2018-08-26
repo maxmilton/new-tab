@@ -9,10 +9,17 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ## [Unreleased]
 
+## [0.12.1] - 2018-08-27
+
 ### Changed
 
 - Switch from Travis to Circle CI for faster and better continuous integration.
 - Clean up and improve `package.json`.
+
+### Fixed
+
+- Bookmarks not overflowing correctly due to incorrect calculation of width ("Other Bookmarks" not taken into consideration correctly).
+- Don't show "Other Bookmarks" folder if it's empty.
 
 ## [0.12.0] - 2018-08-25
 
@@ -422,8 +429,9 @@ Known issues:
 
 - Initial public version including all the basics; working proof of concept code, readme, etc. Not ready for release yet though, it's still far from being actually useful!
 
-[Unreleased]: https://github.com/MaxMilton/new-tab/compare/v0.12.0...HEAD
-[0.11.4]: https://github.com/MaxMilton/new-tab/compare/v0.11.4...v0.12.0
+[Unreleased]: https://github.com/MaxMilton/new-tab/compare/v0.12.1...HEAD
+[0.12.1]: https://github.com/MaxMilton/new-tab/compare/v0.12.0...v0.12.1
+[0.12.0]: https://github.com/MaxMilton/new-tab/compare/v0.11.4...v0.12.0
 [0.11.4]: https://github.com/MaxMilton/new-tab/compare/v0.11.3...v0.11.4
 [0.11.3]: https://github.com/MaxMilton/new-tab/compare/v0.11.2...v0.11.3
 [0.11.2]: https://github.com/MaxMilton/new-tab/compare/v0.11.1...v0.11.2
