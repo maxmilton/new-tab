@@ -35,16 +35,16 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ## [0.11.4] - 2018-08-24
 
-### Removed
-
-- CSS property `will-change` from menu so browser decides how to handle animation rather than forcing GPU.
-
 ### Changed
 
 - Improve theme loading performance.
 - Simplify theme colours.
 - Switch shadows from `filter: drop-shadow()` to `box-shadow:` for faster paint during initial page load and scrolling.
 - Adjust closure compiler settings.
+
+### Removed
+
+- CSS property `will-change` from menu so browser decides how to handle animation rather than forcing GPU.
 
 ## [0.11.3] - 2018-08-24
 
@@ -55,23 +55,23 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ## [0.11.2] - 2018-08-23
 
-### Removed
-
-- Unnecessary line in content security policy configuration.
-
 ### Changed
 
 - Update dependencies.
 
-## [0.11.1] - 2018-08-22
-
 ### Removed
 
-- Don't generate title for settings page HTML.
+- Unnecessary line in content security policy configuration.
+
+## [0.11.1] - 2018-08-22
 
 ### Changed
 
 - Clean up settings page.
+
+### Removed
+
+- Don't generate title for settings page HTML.
 
 ## [0.11.0] - 2018-08-22
 
@@ -115,16 +115,16 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 - Add static consts for common JS variables for better visibility and easy tweaking.
 
-### Removed
-
-- Black theme. The dark theme is dark enough 😜.
-
 ### Changed
 
 - Big build and tooling refactor. Biggest change is JS minification is now done using Closure Compiler rather than Terser (based on UglifyJS). Although the output file size is slightly larger, the initial load and runtime performance are better. CSS minification has also been changed along with a bunch of small optimisations for a cleaner Rollup config.
 - All themes are now inlined in the page and activated by a class instead of loading a separate file. Avoiding the network request means loading the theme is near instant and you'll notice a flash of unstyled content much less often.
 - Refactor error tracking to use new Sentry JS SDK.
 - Simplify Svelte hack for `:global()` CSS overrides.
+
+### Removed
+
+- Black theme. The dark theme is dark enough 😜.
 
 ### Fixed
 
@@ -297,10 +297,6 @@ Known issues:
 
 - Initial test suite and testing automation setup.
 
-### Fixed
-
-- Temporarily disable JS advanced property mangling to prevent any related errors.
-
 ### Changed
 
 - Move main JavaScript bundle to higher for a small performance improvement.
@@ -308,6 +304,10 @@ Known issues:
 - Build process improvements.
 - Update dependencies.
 - Developer tooling configuration tweaks.
+
+### Fixed
+
+- Temporarily disable JS advanced property mangling to prevent any related errors.
 
 ## [0.5.0] - 2018-02-13
 
@@ -355,10 +355,6 @@ Known issues:
 
 ## [0.3.1] - 2018-02-07
 
-### Fixed
-
-- "Load more" bug in search results.
-
 ### Changed
 
 - Use Marko event system to trigger bookmark folder close for better efficiency than browser native events.
@@ -366,18 +362,16 @@ Known issues:
 - Custom JavaScript object property mangling for even more file size savings.
 - Small development watch script CLI feedback improvement.
 
+### Fixed
+
+- "Load more" bug in search results.
+
 ## [0.3.0] - 2018-02-05
 
 ### Added
 
 - Better handle when to open and close bookmark folders for a smoother experience.
 - Error tracking. Async and non-invasive. Since the performance impact is low it's also on by default but is easy to opt-out of.
-
-### Fixed
-
-- Menu animation no longer stutters.
-- Menu is a bit more usable on small screens.
-- Bug where the document is loaded multiple times due to an incorrect `<img>` src attribute.
 
 ### Changed
 
@@ -387,6 +381,12 @@ Known issues:
 - Tighter <abbr title="Content Security Policy">CSP</abbr> than Chrome defaults for better security.
 - JavaScript bundle size reductions.
 - General code clean up.
+
+### Fixed
+
+- Menu animation no longer stutters.
+- Menu is a bit more usable on small screens.
+- Bug where the document is loaded multiple times due to an incorrect `<img>` src attribute.
 
 ## [0.2.0] - 2018-02-04
 
@@ -399,12 +399,6 @@ Known issues:
 - Listen to tab events and update tabs list when something changes.
 - Show message when there are no matching search results for a category.
 - Wrote a better readme.
-
-### Fixed
-
-- Bookmark folders open to the right if there's not enough space to show the folder in the window.
-- Debounce search input to help prevent layout thrashing when search results appear.
-- Add `title` attribute to bookmarks to view long bookmark titles on hover.
 
 ### Changed
 
@@ -422,6 +416,12 @@ Known issues:
 ### Removed
 
 - Dependency `fast-memoize` as the benefit was not really there.
+
+### Fixed
+
+- Bookmark folders open to the right if there's not enough space to show the folder in the window.
+- Debounce search input to help prevent layout thrashing when search results appear.
+- Add `title` attribute to bookmarks to view long bookmark titles on hover.
 
 ## 0.1.0 - 2018-01-25
 
