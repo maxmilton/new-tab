@@ -1,11 +1,9 @@
 <svelte:window on:resize="__setVisibleEnd()" />
 
-<div id="bookmarks">
-  <div id="bookmarks-bar" ref:b>
-    {#each __visible as __bookmark}
-      <BookmarkItem __node="{__bookmark}" __lvl="{0}" />
-    {/each}
-  </div>
+<div id="bookmarks" ref:b>
+  {#each __visible as __bookmark}
+    <BookmarkItem __node="{__bookmark}" __lvl="{0}" />
+  {/each}
 
   {#if __overflow.children.length}
     <BookmarkItem __node="{__overflow}" __lvl="{0}" __left/>
@@ -65,9 +63,13 @@
     },
     methods: {
       __setVisibleEnd() {
-        const { __bookmarksBar } = this.get();
+        const { __bookmarksBar, __bookmarksOther } = this.get();
         const { length } = __bookmarksBar;
-        const bookmarksBarWidth = this.refs.b.offsetWidth - ITEM_PADDING;
+        const otherBookmarksWidth = !__bookmarksOther.children.length
+          ? 0
+          : canvas.measureText(__bookmarksOther.title).width + ITEM_PADDING;
+        /* eslint-disable-next-line max-len */
+        const bookmarksBarWidth = this.refs.b.offsetWidth - ITEM_PADDING - FAVICON_PADDING - otherBookmarksWidth;
         let __end = 0;
         let width = 0;
 
@@ -98,10 +100,6 @@
 </script>
 
 <style type="text/postcss" global>
-  #bookmarks-bar {
-    width: 100%;
-  }
-
   #bookmarks {
     position: fixed;
     top: 0;
