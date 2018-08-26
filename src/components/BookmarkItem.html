@@ -1,7 +1,12 @@
+<!--
+  FIXME: Figure out how to prevent empty comments from being added to the DOM, too
+  many are being added and it's slowing down initial layout.
+-->
+
 {#if __node.children !== undefined}
   <!-- folder -->
   <div
-    class="bookmark folder"
+    class="bookmark folder {__lvl === 0 && __left ? 'end' : ''}"
     title="{__node.title}"
     on:mouseenter="__onEnter()"
     on:mouseleave="__onLeave()"
@@ -129,8 +134,6 @@
 </script>
 
 <style type="text/postcss" global>
-  /* FIXME: "global" on style tag is not working correctly after Svelte 2.9.10 */
-
   .favicon,
   .title {
     pointer-events: none; /* prevent being the MouseEvent target */
@@ -146,11 +149,21 @@
     cursor: pointer;
   }
 
+  /* TODO: Refactor this with a more elegant solution */
+  .end {
+    margin-left: auto;
+
+    & + & {
+      margin-left: 0;
+    }
+  }
+
   .caret {
     padding-left: 10px;
     margin-left: auto;
   }
 
+  /* FIXME: "global" on style tag is not working correctly after Svelte 2.9.10 */
   :global(.title) {
     max-width: 144px;
     overflow: hidden;
