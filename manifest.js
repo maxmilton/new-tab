@@ -30,7 +30,6 @@ export default {
   },
   offline_enabled: true,
   incognito: 'not_allowed',
-
   content_security_policy:
     "default-src 'none';"
     + " script-src 'self';"
