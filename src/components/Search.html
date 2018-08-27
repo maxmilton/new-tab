@@ -37,8 +37,7 @@
     {/each}
 
     {#if __bookmarks.length < __bookmarksRaw.length}
-      <!-- TODO: @TESTING: Some fonts look better with ▼ vs ▾ -->
-      <a class="b" on:click="__loadMoreBookmarks(__bookmarks.length)">Show more ▾</a>
+      <button on:click="__loadMoreBookmarks(__bookmarks.length)">Show more ▾</button>
     {/if}
   {:elseif __isSearching}
     <p class="muted">No matching Bookmarks</p>
@@ -56,7 +55,7 @@
     {/each}
 
     {#if __history.length < __historyRaw.length}
-      <a class="b" on:click="__loadMoreHistory(__history.length)">Show more ▾</a>
+      <button on:click="__loadMoreHistory(__history.length)">Show more ▾</button>
     {/if}
   {:elseif __isSearching}
     <p class="muted">No matching History</p>
@@ -284,6 +283,7 @@
     }
   }
 
+  button,
   #search {
     box-sizing: border-box;
     width: 100%;
@@ -299,5 +299,12 @@
   /* search input placeholder */
   ::placeholder {
     color: var(--c2);
+  }
+
+  /* load more buttons */
+  button {
+    width: initial;
+    margin-top: 9px;
+    cursor: pointer;
   }
 </style>
