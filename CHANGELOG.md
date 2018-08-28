@@ -9,6 +9,12 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ## [Unreleased]
 
+## [0.12.3] - 2018-08-29
+
+### Changed
+
+- Update dependencies — including a Svelte update which could bring improved performance due to batched component updates.
+
 ## [0.12.2] - 2018-08-28
 
 ### Changed
@@ -435,7 +441,8 @@ Known issues:
 
 - Initial public version including all the basics; working proof of concept code, readme, etc. Not ready for release yet though, it's still far from being actually useful!
 
-[Unreleased]: https://github.com/MaxMilton/new-tab/compare/v0.12.2...HEAD
+[Unreleased]: https://github.com/MaxMilton/new-tab/compare/v0.12.3...HEAD
+[0.12.3]: https://github.com/MaxMilton/new-tab/compare/v0.12.2...v0.12.3
 [0.12.2]: https://github.com/MaxMilton/new-tab/compare/v0.12.1...v0.12.2
 [0.12.1]: https://github.com/MaxMilton/new-tab/compare/v0.12.0...v0.12.1
 [0.12.0]: https://github.com/MaxMilton/new-tab/compare/v0.11.4...v0.12.0
