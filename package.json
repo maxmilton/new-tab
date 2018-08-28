@@ -1,7 +1,7 @@
 {
   "private": true,
   "name": "new-tab",
-  "version": "0.12.1",
+  "version": "0.12.2",
   "description": "⚡ A high performance new tab page that gets you where you need to go faster.",
   "homepage": "https://github.com/MaxMilton/new-tab",
   "author": "Max Milton <max@wearegenki.com>",
@@ -49,7 +49,7 @@
     "rollup-plugin-svelte": "4.2.1",
     "sinon-chrome": "2.3.2",
     "stylelint": "9.5.0",
-    "svelte": "2.13.1"
+    "svelte": "2.13.2"
   },
   "browserslist": [
     "last 2 Chrome versions"
