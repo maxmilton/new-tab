@@ -12,7 +12,7 @@ import { plugin as analyze } from 'rollup-plugin-analyzer';
 import manifest from './manifest.js';
 
 const docTemplate = readFileSync(`${__dirname}/src/template.html`, 'utf8');
-const isProd = !process.env.ROLLUP_WATCH;
+const dev = !!process.env.ROLLUP_WATCH;
 
 const compilerOpts = {
   charset: 'UTF-8',
@@ -80,7 +80,7 @@ function makeHtml({
       }
 
       // minify CSS
-      if (isProd && css.length) {
+      if (!dev && css.length) {
         css = crass.parse(css).optimize({ o1: true, css4: true }).toString();
       }
 
@@ -100,14 +100,14 @@ function makeHtml({
 }
 
 const svelteOpts = {
+  dev,
   preprocess: {
-    ...(!isProd ? {} : { markup: preprocessMarkup({
+    ...(dev ? {} : { markup: preprocessMarkup({
       unsafeWhitespace: true,
       unsafe: true,
     }) }),
     style: preprocessStyle(),
   },
-  dev: !isProd,
   emitCss: true,
 };
 
@@ -116,7 +116,7 @@ export default [
   {
     input: 'src/app.js',
     output: {
-      sourcemap: !isProd,
+      sourcemap: dev,
       format: 'es',
       file: 'dist/n.js',
     },
@@ -124,14 +124,14 @@ export default [
       svelte(svelteOpts),
       resolve(),
       commonjs(),
-      isProd && compiler(compilerOpts),
+      !dev && compiler(compilerOpts),
       makeHtml({
         template: docTemplate,
         file: 'dist/n.html',
         title: 'New Tab',
         content: '%CSS%<script src=n.js async></script>',
       }),
-      isProd && analyze(),
+      !dev && analyze(),
     ],
   },
 
@@ -139,19 +139,19 @@ export default [
   {
     input: 'src/settings.js',
     output: {
-      sourcemap: !isProd,
+      sourcemap: dev,
       format: 'es',
       file: 'dist/s.js',
     },
     plugins: [
       svelte(svelteOpts),
-      isProd && compiler(compilerOpts),
+      !dev && compiler(compilerOpts),
       makeHtml({
         template: docTemplate,
         file: 'dist/s.html',
         content: '%CSS%<script src=s.js async></script>',
       }),
-      isProd && analyze(),
+      !dev && analyze(),
     ],
   },
 
@@ -164,8 +164,8 @@ export default [
       file: 'dist/b.js',
     },
     plugins: [
-      isProd && compiler(compilerOpts),
-      isProd && analyze(),
+      !dev && compiler(compilerOpts),
+      !dev && analyze(),
     ],
   },
 ];
