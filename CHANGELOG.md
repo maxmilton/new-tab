@@ -9,6 +9,10 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ## [Unreleased]
 
+### Added
+
+- New `chokidar` dev dependency which improves watching the filesystem for changes while in dev mode.
+
 ## [0.12.3] - 2018-08-29
 
 ### Changed

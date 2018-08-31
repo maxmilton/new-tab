@@ -34,6 +34,7 @@
     "@minna-ui/svelte-preprocess-style": "0.11.0",
     "@types/chrome": "0.0.72",
     "autoprefixer": "9.1.3",
+    "chokidar": "2.0.4",
     "codecov": "3.0.4",
     "crass": "0.12.3",
     "eslint": "5.4.0",
