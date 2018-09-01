@@ -1,11 +1,14 @@
 ci
 codecov
+contrib
 CSP
 ctrl
+esm
 ext
 extends
 extension
 extensions
+externs
 iife
 markdownlint
 markup
@@ -15,7 +18,6 @@ mkdir
 NTP
 oncreate
 onstate
-paren
 preprocess
 subfolder
 unhandledrejection
