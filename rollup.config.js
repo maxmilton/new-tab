@@ -112,6 +112,10 @@ const svelteOpts = {
   emitCss: true,
 };
 
+const analyzeOpts = {
+  showExports: true,
+};
+
 // extension manifest
 writeFile(`${__dirname}/dist/manifest.json`, JSON.stringify(manifest), catchErr);
 
@@ -135,7 +139,7 @@ export default [
         title: 'New Tab',
         content: '%CSS%<script src=n.js async></script>',
       }),
-      !dev && analyze(),
+      !dev && analyze(analyzeOpts),
     ],
   },
 
@@ -155,7 +159,7 @@ export default [
         file: 'dist/s.html',
         content: '%CSS%<script src=s.js async></script>',
       }),
-      !dev && analyze(),
+      !dev && analyze(analyzeOpts),
     ],
   },
 
@@ -169,7 +173,7 @@ export default [
     },
     plugins: [
       !dev && compiler(compilerOpts),
-      !dev && analyze(),
+      !dev && analyze(analyzeOpts),
     ],
   },
 ];
