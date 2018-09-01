@@ -24,7 +24,10 @@ const compilerOpts = {
   ],
   compilation_level: 'ADVANCED',
   use_types_for_optimization: true,
-  // warning_level: 'VERBOSE', // FIXME: Run in verbose mode
+  warning_level: 'VERBOSE',
+
+  // FIXME: Shouldn't need this
+  jscomp_off: 'duplicate',
 
   // uncomment for debugging
   // formatting: 'PRETTY_PRINT',
