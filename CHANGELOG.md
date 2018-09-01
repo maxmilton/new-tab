@@ -9,6 +9,10 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ## [Unreleased]
 
+### Added
+
+- Print stats about exports at build time.
+
 ### Changed
 
 - Update dependencies.
@@ -24,7 +28,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ### Changed
 
-- Update dependencies — including a Svelte update which could bring improved performance due to batched component updates.
+- Update dependencies — including a Svelte update which _might_ bring improved performance by doing batched component updates.
 
 ## [0.12.2] - 2018-08-28
 
