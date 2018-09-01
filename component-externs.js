@@ -1,16 +1,16 @@
 /**
- * @fileoverview Externs to support building Svelte and app code.
+ * @fileoverview Closure Compiler externs to support building Svelte components.
  * @externs
  */
 
-/* eslint-disable no-var, no-unused-vars */
+/* eslint-disable strict, no-var, no-unused-vars */
 
-// svelte hard-coded strings
-var i = {};
-var m = {};
+// Svelte quoted method references
+var i = () => {};
+var m = () => {};
 // var state = {};
-// var update = {};
-// var destroy = {};
-// var intro = {};
-// var outro = {};
-// var start = {};
+// var update = () => {};
+// var destroy = () => {};
+// var intro = () => {};
+// var outro = () => {};
+// var start = () => {};

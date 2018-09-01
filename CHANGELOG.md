@@ -11,7 +11,15 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ### Added
 
+- Print stats about exports at build time.
+
+### Changed
+
+- Update dependencies.
+
 ## [0.12.4] - 2018-09-01
+
+### Added
 
 - Extension icons.
 - New `chokidar` dev dependency which improves watching the filesystem for changes while in dev mode.
@@ -20,7 +28,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ### Changed
 
-- Update dependencies — including a Svelte update which could bring improved performance due to batched component updates.
+- Update dependencies — including a Svelte update which _might_ bring improved performance by doing batched component updates.
 
 ## [0.12.2] - 2018-08-28
 

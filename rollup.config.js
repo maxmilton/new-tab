@@ -7,11 +7,11 @@ import resolve from 'rollup-plugin-node-resolve';
 import commonjs from 'rollup-plugin-commonjs';
 import compiler from '@ampproject/rollup-plugin-closure-compiler';
 import { createFilter } from 'rollup-pluginutils'; // eslint-disable-line import/no-extraneous-dependencies
-import crass from 'crass';
 import { plugin as analyze } from 'rollup-plugin-analyzer';
+import crass from 'crass';
 import manifest from './manifest.js';
 
-const docTemplate = readFileSync(`${__dirname}/src/template.html`, 'utf8');
+const htmlTemplate = readFileSync(`${__dirname}/src/template.html`, 'utf8');
 const dev = !!process.env.ROLLUP_WATCH;
 
 const compilerOpts = {
@@ -23,7 +23,11 @@ const compilerOpts = {
     path.join(__dirname, 'component-externs.js'),
   ],
   compilation_level: 'ADVANCED',
-  // warning_level: 'VERBOSE', // FIXME: Run in verbose mode
+  use_types_for_optimization: true,
+  warning_level: 'VERBOSE',
+
+  // FIXME: Shouldn't need this
+  jscomp_off: 'duplicate',
 
   // uncomment for debugging
   // formatting: 'PRETTY_PRINT',
@@ -39,15 +43,12 @@ function catchErr(err) { if (err) throw err; }
 /**
  * Ultra-minimal template engine.
  * @see https://github.com/Drulac/template-literal
- * @param {string} templateStr A HTML template to compile.
+ * @param {string} template A HTML template to compile.
  * @returns {Function}
  */
-function compileTemplate(templateStr) {
-  return new Function('d', 'return `' + templateStr + '`'); // eslint-disable-line
+function compileTemplate(template) {
+  return new Function('d', 'return `' + template + '`'); // eslint-disable-line
 }
-
-// extension manifest
-writeFile(`${__dirname}/dist/manifest.json`, JSON.stringify(manifest), catchErr);
 
 /** Generate HTML from a template and write it to disk */
 function makeHtml({
@@ -111,6 +112,13 @@ const svelteOpts = {
   emitCss: true,
 };
 
+const analyzeOpts = {
+  showExports: true,
+};
+
+// extension manifest
+writeFile(`${__dirname}/dist/manifest.json`, JSON.stringify(manifest), catchErr);
+
 export default [
   /** New Tab Page app */
   {
@@ -126,12 +134,12 @@ export default [
       commonjs(),
       !dev && compiler(compilerOpts),
       makeHtml({
-        template: docTemplate,
+        template: htmlTemplate,
         file: 'dist/n.html',
         title: 'New Tab',
         content: '%CSS%<script src=n.js async></script>',
       }),
-      !dev && analyze(),
+      !dev && analyze(analyzeOpts),
     ],
   },
 
@@ -147,11 +155,11 @@ export default [
       svelte(svelteOpts),
       !dev && compiler(compilerOpts),
       makeHtml({
-        template: docTemplate,
+        template: htmlTemplate,
         file: 'dist/s.html',
         content: '%CSS%<script src=s.js async></script>',
       }),
-      !dev && analyze(),
+      !dev && analyze(analyzeOpts),
     ],
   },
 
@@ -165,7 +173,7 @@ export default [
     },
     plugins: [
       !dev && compiler(compilerOpts),
-      !dev && analyze(),
+      !dev && analyze(analyzeOpts),
     ],
   },
 ];
