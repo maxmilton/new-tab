@@ -17,7 +17,7 @@
   "scripts": {
     "dev": "rollup -c -w",
     "build": "APP_RELEASE=$(git describe --always --dirty=\"-dev\") NODE_ENV=production rollup -c",
-    "prebuild": "rm -rf dist && mkdir dist",
+    "prebuild": "rm -rf dist && mkdir dist && cp icon* dist",
     "lint": "yarn lint:css && yarn lint:js",
     "lint:css": "stylelint **/*.{html,css} --cache --cache-location=/tmp/",
     "lint:js": "eslint --ignore-path .gitignore --ext js,html .",
@@ -34,6 +34,7 @@
     "@minna-ui/svelte-preprocess-style": "0.11.0",
     "@types/chrome": "0.0.72",
     "autoprefixer": "9.1.3",
+    "chokidar": "2.0.4",
     "codecov": "3.0.4",
     "crass": "0.12.3",
     "eslint": "5.5.0",

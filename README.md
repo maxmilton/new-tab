@@ -63,6 +63,8 @@ See [CHANGELOG.md](https://github.com/MaxMilton/new-tab/blob/master/CHANGELOG.md
 
 `New Tab` is an MIT licensed open source project. See [LICENCE](https://github.com/MaxMilton/new-tab/blob/master/LICENCE).
 
+Icon made by [Freepik](http://www.freepik.com) licensed [CC 3.0 BY](http://creativecommons.org/licenses/by/3.0/).
+
 -----
 
 © 2018 [Max Milton](https://maxmilton.com)

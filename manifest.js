@@ -8,7 +8,10 @@ export default {
   version: pkg.version,
   version_name: process.env.APP_RELEASE,
   homepage_url: pkg.homepage,
-
+  icons: {
+    128: 'icon128.png',
+    48: 'icon48.png',
+  },
   permissions: [
     'bookmarks',
     'chrome://favicon/',
