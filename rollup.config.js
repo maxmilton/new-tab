@@ -46,9 +46,6 @@ function compileTemplate(templateStr) {
   return new Function('d', 'return `' + templateStr + '`'); // eslint-disable-line
 }
 
-// extension manifest
-writeFile(`${__dirname}/dist/manifest.json`, JSON.stringify(manifest), catchErr);
-
 /** Generate HTML from a template and write it to disk */
 function makeHtml({
   file,
@@ -110,6 +107,9 @@ const svelteOpts = {
   },
   emitCss: true,
 };
+
+// extension manifest
+writeFile(`${__dirname}/dist/manifest.json`, JSON.stringify(manifest), catchErr);
 
 export default [
   /** New Tab Page app */
