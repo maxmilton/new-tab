@@ -25,7 +25,7 @@ const compilerOpts = {
   compilation_level: 'ADVANCED',
   // warning_level: 'VERBOSE',
 
-  // uncomment the following for debugging
+  // uncomment for debugging
   // formatting: 'PRETTY_PRINT',
   // debug: true,
 };
@@ -117,7 +117,7 @@ export default [
     input: 'src/app.js',
     output: {
       sourcemap: dev,
-      format: 'es',
+      format: 'esm',
       file: 'dist/n.js',
     },
     plugins: [
@@ -140,7 +140,7 @@ export default [
     input: 'src/settings.js',
     output: {
       sourcemap: dev,
-      format: 'es',
+      format: 'esm',
       file: 'dist/s.js',
     },
     plugins: [
@@ -160,7 +160,7 @@ export default [
     input: 'src/background.js',
     output: {
       sourcemap: false,
-      format: 'es',
+      format: 'esm',
       file: 'dist/b.js',
     },
     plugins: [
