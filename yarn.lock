@@ -29,7 +29,7 @@
   dependencies:
     "@babel/highlight" "^7.0.0"
 
-"@babel/core@^7.0.0-rc.1", "@babel/core@^7.0.0-rc.3":
+"@babel/core@^7.0.0", "@babel/core@^7.0.0-rc.1":
   version "7.0.0"
   resolved "https://registry.yarnpkg.com/@babel/core/-/core-7.0.0.tgz#0cb0c0fd2e78a0a2bec97698f549ae9ce0b99515"
   dependencies:
@@ -206,7 +206,7 @@
   version "7.0.0"
   resolved "https://registry.yarnpkg.com/@babel/parser/-/parser-7.0.0.tgz#697655183394facffb063437ddf52c0277698775"
 
-"@babel/plugin-transform-modules-commonjs@^7.0.0-rc.3":
+"@babel/plugin-transform-modules-commonjs@^7.0.0":
   version "7.0.0"
   resolved "https://registry.yarnpkg.com/@babel/plugin-transform-modules-commonjs/-/plugin-transform-modules-commonjs-7.0.0.tgz#20b906e5ab130dd8e456b694a94d9575da0fd41f"
   dependencies:
@@ -308,42 +308,43 @@
     lodash "^4.17.10"
     to-fast-properties "^2.0.0"
 
-"@minna-ui/eslint-config@0.11.1":
-  version "0.11.1"
-  resolved "https://registry.yarnpkg.com/@minna-ui/eslint-config/-/eslint-config-0.11.1.tgz#7ae3d80de384900ed18f6275c7fa835dbc4bda50"
+"@minna-ui/eslint-config@0.12.0":
+  version "0.12.0"
+  resolved "https://registry.yarnpkg.com/@minna-ui/eslint-config/-/eslint-config-0.12.0.tgz#25d3365a932786344adf7b01e444d4688db9522b"
   dependencies:
     eslint-config-airbnb-base "^13.1.0"
     eslint-plugin-html "^4.0.5"
     eslint-plugin-import "^2.14.0"
     eslint-plugin-jest "^21.22.0"
 
-"@minna-ui/jest-config@0.11.1":
-  version "0.11.1"
-  resolved "https://registry.yarnpkg.com/@minna-ui/jest-config/-/jest-config-0.11.1.tgz#83462972a52b9b00da28eeeb28cd194ae2753867"
+"@minna-ui/jest-config@0.12.0":
+  version "0.12.0"
+  resolved "https://registry.yarnpkg.com/@minna-ui/jest-config/-/jest-config-0.12.0.tgz#fbb2a1928a92a681fe45dca6f349fa3f39b422d5"
   dependencies:
-    "@babel/core" "^7.0.0-rc.3"
-    "@babel/plugin-transform-modules-commonjs" "^7.0.0-rc.3"
+    "@babel/core" "^7.0.0"
+    "@babel/plugin-transform-modules-commonjs" "^7.0.0"
     "@types/jest" "^23.3.1"
-    "@types/node" "^10.9.2"
+    "@types/node" "^10.9.4"
     babel-core "^7.0.0-bridge.0"
     babel-jest "^23.4.2"
+    jest-circus "^23.5.0"
 
-"@minna-ui/stylelint-config@0.11.0":
-  version "0.11.0"
-  resolved "https://registry.yarnpkg.com/@minna-ui/stylelint-config/-/stylelint-config-0.11.0.tgz#76435288a539b50aa508ff9f0eea373f31f79191"
+"@minna-ui/stylelint-config@0.12.0":
+  version "0.12.0"
+  resolved "https://registry.yarnpkg.com/@minna-ui/stylelint-config/-/stylelint-config-0.12.0.tgz#8ebbcd7009d51e1ce5abe337be7ebf35e2ebcfa7"
   dependencies:
     stylelint-config-standard "^18.2.0"
     stylelint-order "^1.0.0"
 
-"@minna-ui/svelte-preprocess-markup@0.11.0":
-  version "0.11.0"
-  resolved "https://registry.yarnpkg.com/@minna-ui/svelte-preprocess-markup/-/svelte-preprocess-markup-0.11.0.tgz#baeab84c362609818df845d4df0b73082e96acfa"
+"@minna-ui/svelte-preprocess-markup@0.12.0":
+  version "0.12.0"
+  resolved "https://registry.yarnpkg.com/@minna-ui/svelte-preprocess-markup/-/svelte-preprocess-markup-0.12.0.tgz#120e8c20adf59995c4da8add7bbd90ac74a2b7a0"
   dependencies:
     html-minifier "3.5.20"
 
-"@minna-ui/svelte-preprocess-style@0.11.0":
-  version "0.11.0"
-  resolved "https://registry.yarnpkg.com/@minna-ui/svelte-preprocess-style/-/svelte-preprocess-style-0.11.0.tgz#7503e2b23f8b066e355acb420a74203cd1d13120"
+"@minna-ui/svelte-preprocess-style@0.12.0":
+  version "0.12.0"
+  resolved "https://registry.yarnpkg.com/@minna-ui/svelte-preprocess-style/-/svelte-preprocess-style-0.12.0.tgz#ede47c035a5e00e319be40b05730c7a6e93727be"
   dependencies:
     postcss-load-config "^2.0.0"
     postcss-selector-parser "^5.0.0-rc.3"
@@ -389,7 +390,7 @@
   version "23.3.1"
   resolved "https://registry.yarnpkg.com/@types/jest/-/jest-23.3.1.tgz#a4319aedb071d478e6f407d1c4578ec8156829cf"
 
-"@types/node@*", "@types/node@^10.9.2":
+"@types/node@*", "@types/node@^10.9.4":
   version "10.9.4"
   resolved "https://registry.yarnpkg.com/@types/node/-/node-10.9.4.tgz#0f4cb2dc7c1de6096055357f70179043c33e9897"
 
@@ -2686,6 +2687,24 @@ jest-changed-files@^23.4.2:
   resolved "https://registry.yarnpkg.com/jest-changed-files/-/jest-changed-files-23.4.2.tgz#1eed688370cd5eebafe4ae93d34bb3b64968fe83"
   dependencies:
     throat "^4.0.0"
+
+jest-circus@^23.5.0:
+  version "23.5.0"
+  resolved "https://registry.yarnpkg.com/jest-circus/-/jest-circus-23.5.0.tgz#75ef1149890a8aaa418cf574edbf274c29a65a18"
+  dependencies:
+    babel-traverse "^6.0.0"
+    chalk "^2.0.1"
+    co "^4.6.0"
+    expect "^23.5.0"
+    is-generator-fn "^1.0.0"
+    jest-diff "^23.5.0"
+    jest-each "^23.5.0"
+    jest-matcher-utils "^23.5.0"
+    jest-message-util "^23.4.0"
+    jest-snapshot "^23.5.0"
+    jest-util "^23.4.0"
+    pretty-format "^23.5.0"
+    stack-utils "^1.0.1"
 
 jest-cli@^23.5.0:
   version "23.5.0"
