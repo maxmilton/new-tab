@@ -7,11 +7,11 @@ import resolve from 'rollup-plugin-node-resolve';
 import commonjs from 'rollup-plugin-commonjs';
 import compiler from '@ampproject/rollup-plugin-closure-compiler';
 import { createFilter } from 'rollup-pluginutils'; // eslint-disable-line import/no-extraneous-dependencies
-import crass from 'crass';
 import { plugin as analyze } from 'rollup-plugin-analyzer';
+import crass from 'crass';
 import manifest from './manifest.js';
 
-const docTemplate = readFileSync(`${__dirname}/src/template.html`, 'utf8');
+const htmlTemplate = readFileSync(`${__dirname}/src/template.html`, 'utf8');
 const dev = !!process.env.ROLLUP_WATCH;
 
 const compilerOpts = {
@@ -43,11 +43,11 @@ function catchErr(err) { if (err) throw err; }
 /**
  * Ultra-minimal template engine.
  * @see https://github.com/Drulac/template-literal
- * @param {string} templateStr A HTML template to compile.
+ * @param {string} template A HTML template to compile.
  * @returns {Function}
  */
-function compileTemplate(templateStr) {
-  return new Function('d', 'return `' + templateStr + '`'); // eslint-disable-line
+function compileTemplate(template) {
+  return new Function('d', 'return `' + template + '`'); // eslint-disable-line
 }
 
 /** Generate HTML from a template and write it to disk */
@@ -134,7 +134,7 @@ export default [
       commonjs(),
       !dev && compiler(compilerOpts),
       makeHtml({
-        template: docTemplate,
+        template: htmlTemplate,
         file: 'dist/n.html',
         title: 'New Tab',
         content: '%CSS%<script src=n.js async></script>',
@@ -155,7 +155,7 @@ export default [
       svelte(svelteOpts),
       !dev && compiler(compilerOpts),
       makeHtml({
-        template: docTemplate,
+        template: htmlTemplate,
         file: 'dist/s.html',
         content: '%CSS%<script src=s.js async></script>',
       }),
