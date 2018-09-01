@@ -17,13 +17,13 @@ const dev = !!process.env.ROLLUP_WATCH;
 const compilerOpts = {
   charset: 'UTF-8',
   externs: [
-    './node_modules/google-closure-compiler/contrib/externs/chrome.js',
-    './node_modules/google-closure-compiler/contrib/externs/chrome_extensions.js',
-    // './node_modules/google-closure-compiler/contrib/externs/svg.js',
-    './externs.js',
+    require.resolve('google-closure-compiler/contrib/externs/chrome.js'),
+    require.resolve('google-closure-compiler/contrib/externs/chrome_extensions.js'),
+    // require.resolve('google-closure-compiler/contrib/externs/svg.js'),
+    path.join(__dirname, 'component-externs.js'),
   ],
   compilation_level: 'ADVANCED',
-  // warning_level: 'VERBOSE',
+  // warning_level: 'VERBOSE', // FIXME: Run in verbose mode
 
   // uncomment for debugging
   // formatting: 'PRETTY_PRINT',
