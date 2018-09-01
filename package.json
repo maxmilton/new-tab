@@ -37,7 +37,7 @@
     "chokidar": "2.0.4",
     "codecov": "3.0.4",
     "crass": "0.12.3",
-    "eslint": "5.4.0",
+    "eslint": "5.5.0",
     "jest": "23.5.0",
     "jest-canvas-mock": "1.1.0",
     "postcss": "7.0.2",
