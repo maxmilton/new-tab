@@ -21,8 +21,8 @@
     "lint": "yarn lint:css && yarn lint:js",
     "lint:css": "stylelint **/*.{html,css} --cache --cache-location=/tmp/",
     "lint:js": "eslint --ignore-path .gitignore --ext js,html .",
-    "test": "yarn lint && jest --notify --watch",
-    "test-ci": "jest --coverage --runInBand --ci"
+    "test": "yarn lint && JEST_CIRCUS=1 jest --notify --watch",
+    "test-ci": "JEST_CIRCUS=1 jest --coverage --runInBand --ci"
   },
   "dependencies": {},
   "devDependencies": {
