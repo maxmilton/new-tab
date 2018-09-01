@@ -23,6 +23,7 @@ const compilerOpts = {
     path.join(__dirname, 'component-externs.js'),
   ],
   compilation_level: 'ADVANCED',
+  use_types_for_optimization: true,
   // warning_level: 'VERBOSE', // FIXME: Run in verbose mode
 
   // uncomment for debugging
