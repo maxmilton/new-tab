@@ -8,9 +8,3 @@
 // Svelte quoted method references
 var i = () => {};
 var m = () => {};
-// var state = {};
-// var update = () => {};
-// var destroy = () => {};
-// var intro = () => {};
-// var outro = () => {};
-// var start = () => {};
