@@ -5,40 +5,40 @@
   TODO: Reduce the amount of DOM nodes in general.
 -->
 
-{#if __node.children !== undefined}
+{#if _node.children !== undefined}
   <!-- folder -->
   <div
-    class="bookmark folder {__lvl === 0 && __left ? 'end' : ''}"
-    title="{__node.title}"
-    on:mouseenter="__onEnter()"
-    on:mouseleave="__onLeave()"
+    class="bookmark folder {_lvl === 0 && _left ? 'end' : ''}"
+    title="{_node.title}"
+    on:mouseenter="_onEnter()"
+    on:mouseleave="_onLeave()"
   >
-    <span class="title">{__node.title}</span>
+    <span class="title">{_node.title}</span>
 
-    {#if __node.parentId > 1}
+    {#if _node.parentId > 1}
       <!-- subfolder indicator -->
       <span class="caret">▸</span>
     {/if}
 
-    {#if __show}
+    {#if _show}
       <!-- subfolder -->
-      <div class="subfolder {__left ? 'left' : ''}">
-        {#if __node.children.length === 0}
+      <div class="subfolder {_left ? 'left' : ''}">
+        {#if _node.children.length === 0}
           <span class="bookmark" title="">(empty)</span>
         {:else}
-          {#each __node.children as __bookmark}
-            {#if __bookmark.children !== undefined}
+          {#each _node.children as _bookmark}
+            {#if _bookmark.children !== undefined}
               <!-- folder -->
-              <svelte:self __node="{__bookmark}" __lvl="{__lvl + 1}"/>
+              <svelte:self _node="{_bookmark}" _lvl="{_lvl + 1}"/>
             {:else}
               <!-- bookmark -->
               <a
-                href="{__bookmark.url}"
-                title="{__bookmark.title}"
+                href="{_bookmark.url}"
+                title="{_bookmark.title}"
                 class="bookmark"
               >
-                <img src="chrome://favicon/{__bookmark.url || ''}" class="favicon">
-                <span class="title">{__bookmark.title}</span>
+                <img src="chrome://favicon/{_bookmark.url || ''}" class="favicon">
+                <span class="title">{_bookmark.title}</span>
               </a>
             {/if}
           {/each}
@@ -49,16 +49,16 @@
 {:else}
   <!-- bookmark link -->
   <a
-    href="{__node.url}"
-    title="{__node.title}"
+    href="{_node.url}"
+    title="{_node.title}"
     class="bookmark"
   >
     <!-- only render img if there's a URL (better initial load performance) -->
-    {#if __node.url !== undefined}
-      <img src="chrome://favicon/{__node.url}" class="favicon">
+    {#if _node.url !== undefined}
+      <img src="chrome://favicon/{_node.url}" class="favicon">
     {/if}
-    {#if __node.title !== ''}
-      <span class="title">{__node.title}</span>
+    {#if _node.title !== ''}
+      <span class="title">{_node.title}</span>
     {/if}
   </a>
 {/if}
@@ -71,12 +71,12 @@
 
   export default {
     data: () => ({
-      __show: false,
-      __left: false,
+      _show: false,
+      _left: false,
     }),
     oncreate() {
-      this.__openTimer = null;
-      this.__closeTimer = null;
+      this._openTimer = null;
+      this._closeTimer = null;
     },
     ondestroy() {
       // clean up listener to prevent memory leaks
@@ -84,51 +84,51 @@
     },
     methods: {
       // set up event listener to close subfolder when another opens
-      __onOpen() {
-        listener = this.root.on(EVENT_NAME, (__lvl) => {
-          if (this.get().__show) {
-            if (__lvl === this.get().__lvl) {
-              this.set({ __show: false });
-              this.__resetCloseTimer();
+      _onOpen() {
+        listener = this.root.on(EVENT_NAME, (_lvl) => {
+          if (this.get()._show) {
+            if (_lvl === this.get()._lvl) {
+              this.set({ _show: false });
+              this._resetCloseTimer();
             }
           }
         });
       },
 
       // subfolder mouse enter
-      __onEnter() {
-        if (this.get().__show) {
-          this.__resetCloseTimer();
+      _onEnter() {
+        if (this.get()._show) {
+          this._resetCloseTimer();
         } else {
           // delay to prevent accidental folder open
-          this.__openTimer = setTimeout(() => {
-            this.root.fire(EVENT_NAME, this.get().__lvl);
-            this.set({ __show: true });
-            this.__onOpen();
+          this._openTimer = setTimeout(() => {
+            this.root.fire(EVENT_NAME, this.get()._lvl);
+            this.set({ _show: true });
+            this._onOpen();
           }, OPEN_DELAY);
         }
       },
 
       // subfolder mouse leave
-      __onLeave() {
+      _onLeave() {
         // reset open timer
-        if (this.__openTimer !== null) {
-          clearTimeout(this.__openTimer);
-          this.__openTimer = null;
+        if (this._openTimer !== null) {
+          clearTimeout(this._openTimer);
+          this._openTimer = null;
         }
 
         // set up subfolder close timer
-        if (this.get().__show) {
-          this.__closeTimer = setTimeout(() => {
-            this.set({ __show: false });
+        if (this.get()._show) {
+          this._closeTimer = setTimeout(() => {
+            this.set({ _show: false });
           }, CLOSE_DELAY);
         }
       },
 
-      __resetCloseTimer() {
-        if (this.__closeTimer !== null) {
-          clearTimeout(this.__closeTimer);
-          this.__closeTimer = null;
+      _resetCloseTimer() {
+        if (this._closeTimer !== null) {
+          clearTimeout(this._closeTimer);
+          this._closeTimer = null;
         }
       },
     },

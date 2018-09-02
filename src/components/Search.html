@@ -4,21 +4,21 @@
 <div class="container">
   <input
     id="search"
-    bind:value="__search"
+    bind:value="_search"
     ref:s
     placeholder="Search browser..."
     autocomplete="off"
-    on:keyup="__cancelSearch(event.key)"
+    on:keyup="_cancelSearch(event.key)"
   >
 
   <!-- Open Tabs -->
-  {#if __tabs.length}
-    <h2>Open Tabs ({__tabs.length}/{__tabsRaw.length})</h2>
+  {#if _tabs.length}
+    <h2>Open Tabs ({_tabs.length}/{_tabsRaw.length})</h2>
 
-    {#each __tabs as __item (__item.id)}
-      <a href="{__item.url}" class="result" on:click="__onTabClick(__item, event)">
-        <img src="{__item.favIconUrl||'chrome://favicon/'}" class="favicon">
-        {__item.title}
+    {#each _tabs as _item (_item.id)}
+      <a href="{_item.url}" class="result" on:click="_onTabClick(_item, event)">
+        <img src="{_item.favIconUrl||'chrome://favicon/'}" class="favicon">
+        {_item.title}
       </a>
     {/each}
   {:else}
@@ -26,52 +26,52 @@
   {/if}
 
   <!-- Bookmarks -->
-  {#if __bookmarks.length}
-    <h2>Bookmarks ({__bookmarks.length}/{__bookmarksRaw.length})</h2>
+  {#if _bookmarks.length}
+    <h2>Bookmarks ({_bookmarks.length}/{_bookmarksRaw.length})</h2>
 
-    {#each __bookmarks as __item (__item.id)}
-      <a href="{__item.url}" class="result">
-        <img src="chrome://favicon/{__item.url || ''}" class="favicon">
-        {__item.title || __item.url}
+    {#each _bookmarks as _item (_item.id)}
+      <a href="{_item.url}" class="result">
+        <img src="chrome://favicon/{_item.url || ''}" class="favicon">
+        {_item.title || _item.url}
       </a>
     {/each}
 
-    {#if __bookmarks.length < __bookmarksRaw.length}
-      <button on:click="__loadMoreBookmarks(__bookmarks.length)">Show more ▾</button>
+    {#if _bookmarks.length < _bookmarksRaw.length}
+      <button on:click="_loadMoreBookmarks(_bookmarks.length)">Show more ▾</button>
     {/if}
-  {:elseif __isSearching}
+  {:elseif _isSearching}
     <p class="muted">No matching Bookmarks</p>
   {/if}
 
   <!-- History -->
-  {#if __history.length}
-    <h2>History ({__history.length}/{__historyRaw.length})</h2>
+  {#if _history.length}
+    <h2>History ({_history.length}/{_historyRaw.length})</h2>
 
-    {#each __history as __item (__item.id)}
-      <a href="{__item.url}" class="result">
-        <img src="chrome://favicon/{__item.url || ''}" class="favicon">
-        {__item.title || __item.url}
+    {#each _history as _item (_item.id)}
+      <a href="{_item.url}" class="result">
+        <img src="chrome://favicon/{_item.url || ''}" class="favicon">
+        {_item.title || _item.url}
       </a>
     {/each}
 
-    {#if __history.length < __historyRaw.length}
-      <button on:click="__loadMoreHistory(__history.length)">Show more ▾</button>
+    {#if _history.length < _historyRaw.length}
+      <button on:click="_loadMoreHistory(_history.length)">Show more ▾</button>
     {/if}
-  {:elseif __isSearching}
+  {:elseif _isSearching}
     <p class="muted">No matching History</p>
   {/if}
 
   <!-- Top Sites -->
-  {#if __topSites.length}
-    <h2>Top Sites ({__topSites.length}/{__topSitesRaw.length})</h2>
+  {#if _topSites.length}
+    <h2>Top Sites ({_topSites.length}/{_topSitesRaw.length})</h2>
 
-    {#each __topSites as __item (__item.url)}
-      <a href="{__item.url}" class="result">
-        <img src="chrome://favicon/{__item.url}" class="favicon">
-        {__item.title}
+    {#each _topSites as _item (_item.url)}
+      <a href="{_item.url}" class="result">
+        <img src="chrome://favicon/{_item.url}" class="favicon">
+        {_item.title}
       </a>
     {/each}
-  {:elseif __isSearching}
+  {:elseif _isSearching}
     <p class="muted">No matching Top Sites</p>
   {/if}
 </div>
@@ -125,31 +125,31 @@
     immutable: true, // be mindful during development
 
     data: () => ({
-      __search: '',
-      __bookmarksRaw: [],
-      __bookmarks: [],
-      __historyRaw: [],
-      __history: [],
-      __tabsRaw: [],
-      __tabs: [],
-      __topSites: [],
-      __topSitesRaw: [],
+      _search: '',
+      _bookmarksRaw: [],
+      _bookmarks: [],
+      _historyRaw: [],
+      _history: [],
+      _tabsRaw: [],
+      _tabs: [],
+      _topSites: [],
+      _topSitesRaw: [],
     }),
     computed: {
-      __isSearching: ({ __search }) => __search !== '',
+      _isSearching: ({ _search }) => _search !== '',
     },
 
     oncreate() {
-      const getTabs = () => this.__getTabs();
+      const getTabs = () => this._getTabs();
 
-      this.__onSearch = debounce(this.__doSearch, SEARCH_DEBOUNCE_DELAY);
+      this._onSearch = debounce(this._doSearch, SEARCH_DEBOUNCE_DELAY);
 
       getTabs();
 
       chrome.topSites.get((sites) => {
         this.set({
-          __topSites: sites,
-          __topSitesRaw: sites,
+          _topSites: sites,
+          _topSitesRaw: sites,
         });
       });
 
@@ -160,65 +160,65 @@
       chrome.tabs.onAttached.addListener(getTabs);
     },
 
-    // FIXME: When search is active, rerun when tab events trigger and __getTabs() is run
+    // FIXME: When search is active, rerun when tab events trigger and _getTabs() is run
     onstate({ changed, previous }) {
-      if (previous !== undefined && changed.__search !== undefined) {
-        this.__onSearch();
+      if (previous !== undefined && changed._search !== undefined) {
+        this._onSearch();
       }
     },
 
     methods: {
-      __doSearch() { // eslint-disable-line consistent-return
-        const { __search, __tabsRaw, __topSitesRaw } = this.get();
+      _doSearch() { // eslint-disable-line consistent-return
+        const { _search, _tabsRaw, _topSitesRaw } = this.get();
 
         // reset search when input is empty
-        if (__search === '') {
+        if (_search === '') {
           return this.set({
-            __bookmarks: [],
-            __history: [],
-            __tabs: __tabsRaw,
-            __topSites: __topSitesRaw,
+            _bookmarks: [],
+            _history: [],
+            _tabs: _tabsRaw,
+            _topSites: _topSitesRaw,
           });
         }
 
         // search history (run first since it takes the longest)
-        chrome.history.search({ text: __search }, (results) => {
+        chrome.history.search({ text: _search }, (results) => {
           this.set({
-            __historyRaw: results,
-            __history: results.slice(0, DEFAULT_RESULTS_AMOUNT),
+            _historyRaw: results,
+            _history: results.slice(0, DEFAULT_RESULTS_AMOUNT),
           });
         });
 
         // search bookmarks
-        chrome.bookmarks.search(__search, (results) => {
+        chrome.bookmarks.search(_search, (results) => {
           this.set({
-            __bookmarksRaw: results,
-            __bookmarks: results.slice(0, DEFAULT_RESULTS_AMOUNT),
+            _bookmarksRaw: results,
+            _bookmarks: results.slice(0, DEFAULT_RESULTS_AMOUNT),
           });
         });
 
         this.set({
           // search open tabs
-          __tabs: __tabsRaw.filter(searchFilter, __search),
+          _tabs: _tabsRaw.filter(searchFilter, _search),
           // search top sites
-          __topSites: __topSitesRaw.filter(searchFilter, __search),
+          _topSites: _topSitesRaw.filter(searchFilter, _search),
         });
       },
 
-      __getTabs() {
+      _getTabs() {
         chrome.tabs.query({}, (tabs) => {
-          if (this.get().__search === '') {
+          if (this.get()._search === '') {
             this.set({
-              __tabs: tabs,
-              __tabsRaw: tabs,
+              _tabs: tabs,
+              _tabsRaw: tabs,
             });
           } else {
-            this.set({ __tabsRaw: tabs });
+            this.set({ _tabsRaw: tabs });
           }
         });
       },
 
-      __onTabClick(tab, event) {
+      _onTabClick(tab, event) {
         event.stopPropagation();
         event.preventDefault();
 
@@ -238,25 +238,25 @@
         });
       },
 
-      __cancelSearch(key) {
+      _cancelSearch(key) {
         if (key === 'Escape') {
-          const { __tabsRaw, __topSitesRaw } = this.get();
+          const { _tabsRaw, _topSitesRaw } = this.get();
           this.set({
-            __search: '',
-            __bookmarks: [],
-            __history: [],
-            __tabs: __tabsRaw,
-            __topSites: __topSitesRaw,
+            _search: '',
+            _bookmarks: [],
+            _history: [],
+            _tabs: _tabsRaw,
+            _topSites: _topSitesRaw,
           });
         }
       },
 
-      __loadMoreBookmarks(length) {
-        this.set({ __bookmarks: this.get().__bookmarksRaw.slice(0, length + MORE_RESULTS_AMOUNT) });
+      _loadMoreBookmarks(length) {
+        this.set({ _bookmarks: this.get()._bookmarksRaw.slice(0, length + MORE_RESULTS_AMOUNT) });
       },
 
-      __loadMoreHistory(length) {
-        this.set({ __history: this.get().__historyRaw.slice(0, length + MORE_RESULTS_AMOUNT) });
+      _loadMoreHistory(length) {
+        this.set({ _history: this.get()._historyRaw.slice(0, length + MORE_RESULTS_AMOUNT) });
       },
     },
   };

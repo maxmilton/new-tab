@@ -20,7 +20,7 @@
 
     <hr>
 
-    <a href="" class="menu-item" on:click="__settings(event)">
+    <a href="" class="menu-item" on:click="_settings(event)">
       New Tab Settings
     </a>
     <a href="https://github.com/MaxMilton/new-tab/issues" class="menu-item">
@@ -32,7 +32,7 @@
 <script>
   export default {
     methods: {
-      __settings(event) {
+      _settings(event) {
         event.stopPropagation();
         event.preventDefault();
         chrome.runtime.openOptionsPage();

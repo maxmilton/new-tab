@@ -1,4 +1,4 @@
-<svelte:window on:click="__onLinkClick(event)"/>
+<svelte:window on:click="_onLinkClick(event)"/>
 
 <BookmarkGroup/>
 <Menu/>
@@ -21,7 +21,7 @@
        * in an extension.
        * @param {MouseEvent} event the click event
        */
-      __onLinkClick(event) {
+      _onLinkClick(event) {
         const { target, ctrlKey } = event;
         const url = target.href;
 

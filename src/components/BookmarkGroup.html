@@ -1,16 +1,16 @@
-<svelte:window on:resize="__setVisibleEnd()" />
+<svelte:window on:resize="_setVisibleEnd()" />
 
 <div id="bookmarks" ref:b>
-  {#each __visible as __bookmark}
-    <BookmarkItem __node="{__bookmark}" __lvl="{0}" />
+  {#each _visible as _bookmark}
+    <BookmarkItem _node="{_bookmark}" _lvl="{0}" />
   {/each}
 
-  {#if __overflow.children.length}
-    <BookmarkItem __node="{__overflow}" __lvl="{0}" __left/>
+  {#if _overflow.children.length}
+    <BookmarkItem _node="{_overflow}" _lvl="{0}" _left/>
   {/if}
 
-  {#if __bookmarksOther.children.length}
-    <BookmarkItem __node="{__bookmarksOther}" __lvl="{0}" __left/>
+  {#if _bookmarksOther.children.length}
+    <BookmarkItem _node="{_bookmarksOther}" _lvl="{0}" _left/>
   {/if}
 </div>
 
@@ -38,44 +38,44 @@
       BookmarkItem,
     },
     data: () => ({
-      __bookmarksBar: [],
-      __bookmarksOther: { children: []},
-      __end: 0,
+      _bookmarksBar: [],
+      _bookmarksOther: { children: []},
+      _end: 0,
     }),
     computed: {
-      __visible: ({ __bookmarksBar, __end }) => __bookmarksBar.slice(0, __end),
-      __overflow: ({ __bookmarksBar, __end }) => ({ title: '»', children: __bookmarksBar.slice(__end) }),
+      _visible: ({ _bookmarksBar, _end }) => _bookmarksBar.slice(0, _end),
+      _overflow: ({ _bookmarksBar, _end }) => ({ title: '»', children: _bookmarksBar.slice(_end) }),
     },
     oncreate() {
       chrome.bookmarks.getTree((tree) => {
         this.set({
-          __bookmarksBar: tree[0].children[0].children,
-          __bookmarksOther: tree[0].children[1],
+          _bookmarksBar: tree[0].children[0].children,
+          _bookmarksOther: tree[0].children[1],
         });
       });
     },
     onstate({ changed, previous }) {
       if (previous === undefined) return;
 
-      if (changed.__bookmarksBar) {
-        this.__setVisibleEnd();
+      if (changed._bookmarksBar) {
+        this._setVisibleEnd();
       }
     },
     methods: {
-      __setVisibleEnd() {
-        const { __bookmarksBar, __bookmarksOther } = this.get();
-        const { length } = __bookmarksBar;
-        const otherBookmarksWidth = !__bookmarksOther.children.length
+      _setVisibleEnd() {
+        const { _bookmarksBar, _bookmarksOther } = this.get();
+        const { length } = _bookmarksBar;
+        const otherBookmarksWidth = !_bookmarksOther.children.length
           ? 0
-          : canvas.measureText(__bookmarksOther.title).width + ITEM_PADDING;
+          : canvas.measureText(_bookmarksOther.title).width + ITEM_PADDING;
         /* eslint-disable-next-line max-len */
         const bookmarksBarWidth = this.refs.b.offsetWidth - ITEM_PADDING - FAVICON_PADDING - otherBookmarksWidth;
-        let __end = 0;
+        let _end = 0;
         let width = 0;
 
         /* eslint-disable-next-line no-plusplus */
         for (let index = 0; index !== length; index++) {
-          const item = __bookmarksBar[index];
+          const item = _bookmarksBar[index];
           /* eslint-disable-next-line no-nested-ternary */
           const faviconWidth = item.children
             ? 0
@@ -90,10 +90,10 @@
           if (newWidth > bookmarksBarWidth) break;
 
           width = newWidth;
-          __end = index + 1;
+          _end = index + 1;
         }
 
-        this.set({ __end });
+        this.set({ _end });
       },
     },
   };
