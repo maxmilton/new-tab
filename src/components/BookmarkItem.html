@@ -1,75 +1,58 @@
 <!--
-  FIXME: Figure out how to prevent empty comments from being added to the DOM, too
-  many are being added and it's slowing down initial layout.
-
-  TODO: Reduce the amount of DOM nodes in general.
+  FIXME: Try to prevent empty comment anchors from being added to the
+  DOM since these bookmarks are static.
 -->
 
-{#if _node.children !== undefined}
-  <!-- folder -->
-  <div
-    class="bookmark folder {_lvl === 0 && _left ? 'end' : ''}"
-    title="{_node.title}"
-    on:mouseenter="_onEnter()"
-    on:mouseleave="_onLeave()"
-  >
-    <span class="title">{_node.title}</span>
+{#if _node.children}
 
-    {#if _node.parentId > 1}
-      <!-- subfolder indicator -->
-      <span class="caret">▸</span>
+  <!-- folder -->
+
+  <div
+    class="item folder {_left ? 'right' : ''}"
+    title="{_node.title}"
+    on:mouseenter="_handleMouseEnter()"
+    on:mouseleave="_handleMouseLeave()"
+  >
+    {_node.title}
+
+    {#if _lvl !== 0}
+      <div class="caret">▸</div>
     {/if}
 
     {#if _show}
+
       <!-- subfolder -->
+
       <div class="subfolder {_left ? 'left' : ''}">
         {#if _node.children.length === 0}
-          <span class="bookmark" title="">(empty)</span>
+          <div class="item">(empty)</div>
         {:else}
           {#each _node.children as _bookmark}
-            {#if _bookmark.children !== undefined}
-              <!-- folder -->
-              <svelte:self _node="{_bookmark}" _lvl="{_lvl + 1}"/>
-            {:else}
-              <!-- bookmark -->
-              <a
-                href="{_bookmark.url}"
-                title="{_bookmark.title}"
-                class="bookmark"
-              >
-                <img src="chrome://favicon/{_bookmark.url || ''}" class="favicon">
-                <span class="title">{_bookmark.title}</span>
-              </a>
-            {/if}
+            <svelte:self _node="{_bookmark}" _lvl="{_lvl + 1}" _max="{40}"/>
           {/each}
         {/if}
       </div>
     {/if}
   </div>
 {:else}
+
   <!-- bookmark link -->
-  <a
-    href="{_node.url}"
-    title="{_node.title}"
-    class="bookmark"
-  >
-    <!-- only render img if there's a URL (better initial load performance) -->
-    {#if _node.url !== undefined}
-      <img src="chrome://favicon/{_node.url}" class="favicon">
-    {/if}
-    {#if _node.title !== ''}
-      <span class="title">{_node.title}</span>
-    {/if}
-  </a>
+
+  <LinkItem _url="{_node.url}" _title="{_node.title}" _max="{_max}"/>
 {/if}
 
+
 <script>
+  import LinkItem from './LinkItem.html';
+
   const EVENT_NAME = 'open';
   const OPEN_DELAY = 200;
   const CLOSE_DELAY = 400;
-  let listener;
 
   export default {
+    components: {
+      LinkItem,
+    },
     data: () => ({
       _show: false,
       _left: false,
@@ -80,12 +63,12 @@
     },
     ondestroy() {
       // clean up listener to prevent memory leaks
-      if (listener) listener.cancel();
+      if (this.listener) this.listener.cancel();
     },
     methods: {
       // set up event listener to close subfolder when another opens
       _onOpen() {
-        listener = this.root.on(EVENT_NAME, (_lvl) => {
+        this.listener = this.root.on(EVENT_NAME, (_lvl) => {
           if (this.get()._show) {
             if (_lvl === this.get()._lvl) {
               this.set({ _show: false });
@@ -96,7 +79,7 @@
       },
 
       // subfolder mouse enter
-      _onEnter() {
+      _handleMouseEnter() {
         if (this.get()._show) {
           this._resetCloseTimer();
         } else {
@@ -110,7 +93,7 @@
       },
 
       // subfolder mouse leave
-      _onLeave() {
+      _handleMouseLeave() {
         // reset open timer
         if (this._openTimer !== null) {
           clearTimeout(this._openTimer);
@@ -136,64 +119,21 @@
 </script>
 
 <style type="text/postcss" global>
-  .favicon,
-  .title {
-    pointer-events: none; /* prevent being the MouseEvent target */
-  }
-
-  .favicon {
-    width: 16px;
-    height: 16px; /* prevents slight realignment jump on initial load */
-  }
-
   .folder {
     position: relative;
-    cursor: pointer;
-  }
-
-  /* TODO: Refactor this with a more elegant solution */
-  .end {
-    margin-left: auto;
-
-    & + & {
-      margin-left: 0;
-    }
   }
 
   .caret {
-    padding-left: 10px;
-    margin-left: auto;
+    float: right;
+    padding-left: 12px;
   }
-
-  /* FIXME: "global" on style tag is not working correctly after Svelte 2.9.10 */
-  :global(.title) {
-    max-width: 144px;
-    overflow: hidden;
-    text-overflow: ellipsis;
-
-    .favicon + & {
-      padding-left: 9px;
-    }
-  }
-
-  /* stylelint-disable no-descending-specificity */
 
   :global(.subfolder) {
     position: absolute;
     top: 40px;
     left: 0;
-    display: flex;
-    flex-direction: column;
     background: var(--c0);
     box-shadow: var(--s0);
-
-    :global(.bookmark) {
-      padding: 9px;
-    }
-
-    :global(.title) {
-      max-width: 40ch;
-    }
 
     & & {
       top: 0;
@@ -201,28 +141,21 @@
     }
   }
 
-  /* left side folder */
+  /* bookmark item pushed to the right */
+  .right {
+    width: 100%;
+    text-align: right;
+  }
+
+  /* folder which opens to the left */
   .left {
     right: 0;
     left: initial;
+    text-align: initial;
 
     :global(.subfolder) {
       right: 100%;
       left: initial;
-    }
-  }
-
-  button,
-  .bookmark {
-    display: inline-flex;
-    align-items: center;
-    padding: 9px;
-    color: var(--t);
-    text-decoration: none;
-    white-space: nowrap;
-
-    &:hover {
-      background-color: var(--c);
     }
   }
 </style>
