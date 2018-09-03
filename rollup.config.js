@@ -15,7 +15,6 @@ const htmlTemplate = readFileSync(`${__dirname}/src/template.html`, 'utf8');
 const dev = !!process.env.ROLLUP_WATCH;
 
 const compilerOpts = {
-  charset: 'UTF-8',
   externs: [
     require.resolve('google-closure-compiler/contrib/externs/chrome.js'),
     require.resolve('google-closure-compiler/contrib/externs/chrome_extensions.js'),
@@ -23,11 +22,14 @@ const compilerOpts = {
     path.join(__dirname, 'component-externs.js'),
   ],
   compilation_level: 'ADVANCED',
+  language_in: 'ECMASCRIPT_2017',
+  charset: 'UTF-8',
+  strict_mode_input: true,
   use_types_for_optimization: true,
   warning_level: 'VERBOSE',
-
-  // FIXME: Shouldn't need this
-  jscomp_off: 'duplicate',
+  // jscomp_warning: '*', // FIXME: Broken upstream; https://git.io/fAlzj
+  // jscomp_error: '*',
+  jscomp_off: 'duplicate', // FIXME: Shouldn't need this
 
   // uncomment for debugging
   // formatting: 'PRETTY_PRINT',
