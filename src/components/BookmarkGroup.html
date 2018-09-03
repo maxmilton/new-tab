@@ -1,21 +1,21 @@
 <div id="bookmarks" ref:b>
   {#each _visible as _bookmark}
-    <BookmarkItem _node="{_bookmark}" _lvl="{0}" />
+    <BookmarkItem _node="{_bookmark}" _max="{15}" _lvl="{0}" />
   {/each}
 
   {#if _overflow.children.length}
-    <BookmarkItem _node="{_overflow}" _lvl="{0}" _left/>
+    <BookmarkItem _node="{_overflow}" _lvl="{0}" _max="{40}" _left/>
   {/if}
 
   {#if _bookmarksOther.children.length}
-    <BookmarkItem _node="{_bookmarksOther}" _lvl="{0}" _left/>
+    <BookmarkItem _node="{_bookmarksOther}" _lvl="{0}" _max="{40}" _left/>
   {/if}
 </div>
 
 <script>
   import BookmarkItem from './BookmarkItem.html';
 
-  // Get title text width using the 2d canvas measureText method as it's
+  // Get title text width using the 2d canvas measureText() method as it's
   // faster than adding an element to the DOM but we need to manually
   // calculate any padding etc.
 
