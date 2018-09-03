@@ -1,10 +1,10 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`Settings component renders correctly 1`] = `
-"<div class=\\"row\\"><label for=\\"theme\\">Theme</label>
-  <select id=\\"theme\\"><option value=\\"l\\">Light</option><option value=\\"null\\">Dark</option></select></div>
+"<div><div class=\\"row\\"><label for=\\"theme\\">Theme</label>
+    <select id=\\"theme\\"><option value=\\"l\\">Light</option><option value=\\"\\">Dark</option></select></div>
 
-<hr>
+  <hr>
 
-<footer><small><em>※ Settings sync to your account.</em></small></footer>"
+  <small><em>※ Settings sync to your account.</em></small></div>"
 `;
