@@ -1,37 +1,36 @@
-<div class="row">
-  <label for="theme">Theme</label>
-  <select id="theme" bind:value="__theme">
-    <option value="l">Light</option>
-    <option value="{null}">Dark</option>
-  </select>
-</div>
+<!-- XXX: Wrapper div actually reduces the overall file size -->
+<div>
+  <div class="row">
+    <label for="theme">Theme</label>
+    <select id="theme" bind:value="_theme">
+      <option value="l">Light</option>
+      <option value="">Dark</option>
+    </select>
+  </div>
 
-<hr>
+  <hr>
 
-<footer>
   <small>
     <em>※ Settings sync to your account.</em>
   </small>
-</footer>
+</div>
 
 <script>
   export default {
     data: () => ({
-      /** @type {string|null} */
-      __theme: null, // frontend theme
+      _theme: '', // frontend theme
     }),
     oncreate() {
       // check existing settings
       chrome.storage.sync.get(null, (settings) => {
-        this.set({
-          __theme: settings.t || null,
-        });
+        this.set({ _theme: settings.t });
       });
     },
     onstate({ changed, current, previous }) {
       if (previous) {
-        if (changed.__theme) {
-          chrome.storage.sync.set({ t: current.__theme, td: Date.now() });
+        if (changed._theme) {
+          // chrome.storage.sync.set({ t: current._theme, td: Date.now() });
+          chrome.storage.sync.set({ t: current._theme });
         }
       }
     },
