@@ -1,82 +1,72 @@
-<!-- bring focus to search input when clicking anywhere -->
-<svelte:window on:click="refs.s.focus()"/>
+<!--
+  XXX: The h2 titles are implemented abnormally to get around a current Svelte
+  limitation where it creates multiple text nodes instead of realising there's
+  multiple text nodes that could be combined into one. Once Svelte has this
+  optimisation these titles should be refactored.
+-->
 
 <div class="container">
   <input
     id="search"
-    bind:value="_search"
+    bind:value="_searchText"
     ref:s
-    placeholder="Search browser..."
+    placeholder="Search browser…"
     autocomplete="off"
     on:keyup="_cancelSearch(event.key)"
   >
 
   <!-- Open Tabs -->
-  {#if _tabs.length}
-    <h2>Open Tabs ({_tabs.length}/{_tabsRaw.length})</h2>
 
-    {#each _tabs as _item (_item.id)}
-      <a href="{_item.url}" class="result" on:click="_onTabClick(_item, event)">
-        <img src="{_item.favIconUrl||'chrome://favicon/'}" class="favicon">
-        {_item.title}
-      </a>
-    {/each}
-  {:else}
-    <p class="muted">No matching Open Tabs</p>
-  {/if}
+  <h2>{`Open Tabs (${_tabs.length}/${_tabsRaw.length})`}</h2>
 
-  <!-- Bookmarks -->
-  {#if _bookmarks.length}
-    <h2>Bookmarks ({_bookmarks.length}/{_bookmarksRaw.length})</h2>
+  {#each _tabs as _item}
+    <!--
+      TODO: Figure out a more elegant way of doing this onclick handler; try to
+      keep the LinkItem as simple as possible.
+    -->
+    <LinkItem _url="{_item.url}" _title="{_item.title}" on:click="_onTabClick(_item, event)" />
+  {/each}
 
-    {#each _bookmarks as _item (_item.id)}
-      <a href="{_item.url}" class="result">
-        <img src="chrome://favicon/{_item.url || ''}" class="favicon">
-        {_item.title || _item.url}
-      </a>
+  {#if _isSearching}
+
+    <!-- Bookmarks -->
+
+    <h2>{`Bookmarks (${_bookmarks.length}/${_bookmarksRaw.length})`}</h2>
+
+    {#each _bookmarks as _item}
+      <LinkItem _url="{_item.url}" _title="{_item.title}" />
     {/each}
 
     {#if _bookmarks.length < _bookmarksRaw.length}
       <button on:click="_loadMoreBookmarks(_bookmarks.length)">Show more ▾</button>
     {/if}
-  {:elseif _isSearching}
-    <p class="muted">No matching Bookmarks</p>
-  {/if}
 
-  <!-- History -->
-  {#if _history.length}
-    <h2>History ({_history.length}/{_historyRaw.length})</h2>
+    <!-- History -->
 
-    {#each _history as _item (_item.id)}
-      <a href="{_item.url}" class="result">
-        <img src="chrome://favicon/{_item.url || ''}" class="favicon">
-        {_item.title || _item.url}
-      </a>
+    <h2>{`History (${_history.length}/${_historyRaw.length})`}</h2>
+
+    {#each _history as _item}
+      <LinkItem _url="{_item.url}" _title="{_item.title}" />
     {/each}
 
     {#if _history.length < _historyRaw.length}
       <button on:click="_loadMoreHistory(_history.length)">Show more ▾</button>
     {/if}
-  {:elseif _isSearching}
-    <p class="muted">No matching History</p>
+
   {/if}
 
   <!-- Top Sites -->
-  {#if _topSites.length}
-    <h2>Top Sites ({_topSites.length}/{_topSitesRaw.length})</h2>
 
-    {#each _topSites as _item (_item.url)}
-      <a href="{_item.url}" class="result">
-        <img src="chrome://favicon/{_item.url}" class="favicon">
-        {_item.title}
-      </a>
-    {/each}
-  {:elseif _isSearching}
-    <p class="muted">No matching Top Sites</p>
-  {/if}
+  <h2>{`Top Sites (${_topSites.length}/${_topSitesRaw.length})`}</h2>
+
+  {#each _topSites as _item}
+    <LinkItem _url="{_item.url}" _title="{_item.title}" />
+  {/each}
 </div>
 
 <script>
+  import LinkItem from './LinkItem.html';
+
   const SEARCH_DEBOUNCE_DELAY = 260; // ms
   const DEFAULT_RESULTS_AMOUNT = 10;
   const MORE_RESULTS_AMOUNT = 100;
@@ -85,7 +75,7 @@
    * Delay running a function until X ms have passed since its last call.
    * @see https://github.com/developit/decko/blob/master/src/decko.js
    * @param {Function} fn The function to debounce.
-   * @param {Number} delay How long to wait for more function calls before executing
+   * @param {number} delay How long to wait for more function calls before executing
    * the function in milliseconds.
    * @returns {Function}
    */
@@ -107,25 +97,27 @@
     };
   }
 
+  // regex to match URL protocol, e.g. https://
+  const protocol = /^.*?:\/\//;
+
   /**
-   * Search for matching title or URL.
-   * NOTE: Search query is passed as `this` value.
-   * @param {object} item
-   * @returns {Boolean}
+   * Check for a matching title or URL.
+   * @this {string} Search query
+   * @param {{ title: string, url: string }} item
+   * @returns {boolean}
    */
-  function searchFilter(item) {
-    return item.title.toLowerCase().indexOf(this) > -1
-      || item.url
-        // remove URL protocol since it's unlikely to be searched for
-        .replace(/^.*?:\/\//, '')
-        .toLowerCase().indexOf(this) > -1;
+  function searchFilter({ title, url }) {
+    return title.toLowerCase().indexOf(this) > -1
+      // remove URL protocol since it's unlikely to be searched for
+      || url.replace(protocol, '').toLowerCase().indexOf(this) > -1;
   }
 
   export default {
-    immutable: true, // be mindful during development
-
+    components: {
+      LinkItem,
+    },
     data: () => ({
-      _search: '',
+      _searchText: '',
       _bookmarksRaw: [],
       _bookmarks: [],
       _historyRaw: [],
@@ -136,13 +128,11 @@
       _topSitesRaw: [],
     }),
     computed: {
-      _isSearching: ({ _search }) => _search !== '',
+      _isSearching: ({ _searchText }) => _searchText !== '',
     },
 
     oncreate() {
       const getTabs = () => this._getTabs();
-
-      this._onSearch = debounce(this._doSearch, SEARCH_DEBOUNCE_DELAY);
 
       getTabs();
 
@@ -151,6 +141,13 @@
           _topSites: sites,
           _topSitesRaw: sites,
         });
+      });
+
+      this._onSearch = debounce(this._search, SEARCH_DEBOUNCE_DELAY);
+
+      // bring focus to search input when clicking anywhere on the page
+      window.addEventListener('click', () => {
+        this.refs.s.focus();
       });
 
       // update tab list on tab events
@@ -162,17 +159,19 @@
 
     // FIXME: When search is active, rerun when tab events trigger and _getTabs() is run
     onstate({ changed, previous }) {
-      if (previous !== undefined && changed._search !== undefined) {
+      if (!previous) return;
+
+      if (changed._searchText) {
         this._onSearch();
       }
     },
 
     methods: {
-      _doSearch() { // eslint-disable-line consistent-return
-        const { _search, _tabsRaw, _topSitesRaw } = this.get();
+      _search() { // eslint-disable-line consistent-return
+        const { _searchText, _tabsRaw, _topSitesRaw } = this.get();
 
         // reset search when input is empty
-        if (_search === '') {
+        if (_searchText === '') {
           return this.set({
             _bookmarks: [],
             _history: [],
@@ -182,7 +181,7 @@
         }
 
         // search history (run first since it takes the longest)
-        chrome.history.search({ text: _search }, (results) => {
+        chrome.history.search({ text: _searchText }, (results) => {
           this.set({
             _historyRaw: results,
             _history: results.slice(0, DEFAULT_RESULTS_AMOUNT),
@@ -190,7 +189,7 @@
         });
 
         // search bookmarks
-        chrome.bookmarks.search(_search, (results) => {
+        chrome.bookmarks.search(_searchText, (results) => {
           this.set({
             _bookmarksRaw: results,
             _bookmarks: results.slice(0, DEFAULT_RESULTS_AMOUNT),
@@ -199,15 +198,18 @@
 
         this.set({
           // search open tabs
-          _tabs: _tabsRaw.filter(searchFilter, _search),
+          _tabs: _tabsRaw.filter(searchFilter, _searchText),
           // search top sites
-          _topSites: _topSitesRaw.filter(searchFilter, _search),
+          _topSites: _topSitesRaw.filter(searchFilter, _searchText),
         });
       },
 
+      /**
+       * Query the browser for a list of the currently open tabs.
+       */
       _getTabs() {
         chrome.tabs.query({}, (tabs) => {
-          if (this.get()._search === '') {
+          if (this.get()._searchText === '') {
             this.set({
               _tabs: tabs,
               _tabsRaw: tabs,
@@ -219,7 +221,6 @@
       },
 
       _onTabClick(tab, event) {
-        event.stopPropagation();
         event.preventDefault();
 
         // update current tab
@@ -242,7 +243,7 @@
         if (key === 'Escape') {
           const { _tabsRaw, _topSitesRaw } = this.get();
           this.set({
-            _search: '',
+            _searchText: '',
             _bookmarks: [],
             _history: [],
             _tabs: _tabsRaw,
@@ -267,20 +268,6 @@
     max-width: 800px;
     padding: 0 18px;
     margin: 0 auto;
-  }
-
-  .result {
-    display: block;
-    align-items: center;
-    padding: 9px 0;
-    overflow: hidden;
-    color: var(--t);
-    text-overflow: ellipsis;
-    white-space: nowrap;
-
-    & > .favicon {
-      padding-right: 9px;
-    }
   }
 
   button,
