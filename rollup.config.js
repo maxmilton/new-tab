@@ -137,7 +137,10 @@ export default [
         template: htmlTemplate,
         file: 'dist/n.html',
         title: 'New Tab',
-        content: '%CSS%<script src=n.js async></script>',
+        // content: '%CSS%<script src=n.js async></script>',
+        // XXX: The first script is `loader.js` run through closure compiler
+        // TODO: Should automate this again so it's easy to make changes to loader.js
+        content: '<script>chrome.storage.sync.get(["t"],(a)=>{a.t&&(document.body.className=a.t)});</script>%CSS%<script src=n.js async></script>',
       }),
       !dev && analyze(analyzeOpts),
     ],
