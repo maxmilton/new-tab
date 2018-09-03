@@ -38,11 +38,11 @@
     data: () => ({
       _bookmarksBar: [],
       _bookmarksOther: { children: []},
-      _end: 0,
+      _maxItems: 0,
     }),
     computed: {
-      _visible: ({ _bookmarksBar, _end }) => _bookmarksBar.slice(0, _end),
-      _overflow: ({ _bookmarksBar, _end }) => ({ title: '»', children: _bookmarksBar.slice(_end) }),
+      _visible: ({ _bookmarksBar, _maxItems }) => _bookmarksBar.slice(0, _maxItems),
+      _overflow: ({ _bookmarksBar, _maxItems }) => ({ title: '»', children: _bookmarksBar.slice(_maxItems) }),
     },
     oncreate() {
       chrome.bookmarks.getTree((tree) => {
@@ -72,7 +72,7 @@
           : canvas.measureText(_bookmarksOther.title).width + ITEM_PADDING;
         /* eslint-disable-next-line max-len */
         const bookmarksBarWidth = this.refs.b.offsetWidth - ITEM_PADDING - FAVICON_PADDING - otherBookmarksWidth;
-        let _end = 0;
+        let _maxItems = 0;
         let width = 0;
 
         /* eslint-disable-next-line no-plusplus */
@@ -95,7 +95,7 @@
           _end = index + 1;
         }
 
-        this.set({ _end });
+        this.set({ _maxItems });
       },
     },
   };
