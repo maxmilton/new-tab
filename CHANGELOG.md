@@ -15,7 +15,21 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ### Changed
 
+- Big refactor of the whole app — same features but changed to do the minimum necessary computation:
+  - Rename various variables and methods to be more understandable and mark private objects with `_` instead of `__`.
+  - Move app click handler outside of Svelte component since it doesn't need to interact with the component.
+  - Reorder top level components for better initial load JS parsing.
+  - Place menu static HTML into a `{@html}` block to avoid unnecessary work and for smaller JS bundle size.
+  - Refactor settings app for smaller JS bundle size.
+  - Set up bookmark bar resize handler in the component to avoid Svelte setting up a remove handler (the event never needs to be removed)
+  - Refactor bookmark bar resize handler loop.
+  - Add a new reusable `LinkItem` component which is shared between the bookmarks bar and the search result.
+  - Complete refactor of `BookmarkItem` and `Search` components to do the minimum necessary to achieve the desired functionality.
 - Update dependencies.
+
+### Fixed
+
+- Move theme loader code into a script tag in the HTML page to make sure it's executed as early as possible. This should reduce the chance of a flash of the dark theme when the user has the light theme setting enabled.
 
 ## [0.12.4] - 2018-09-01
 
