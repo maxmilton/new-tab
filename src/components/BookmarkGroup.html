@@ -75,24 +75,22 @@
         let _maxItems = 0;
         let width = 0;
 
-        /* eslint-disable-next-line no-plusplus */
-        for (let index = 0; index !== length; index++) {
-          const item = _bookmarksBar[index];
+        for (; _maxItems < length; _maxItems += 1) {
+          const { children, title } = _bookmarksBar[_maxItems];
           /* eslint-disable-next-line no-nested-ternary */
-          const faviconWidth = item.children
+          const faviconWidth = children
             ? 0
-            : item.title
+            : title
               ? FAVICON_WIDTH + FAVICON_PADDING
               : FAVICON_WIDTH;
-          const realTitleWidth = item.title ? canvas.measureText(item.title).width : 0;
+          const realTitleWidth = title ? canvas.measureText(title).width : 0;
           const titleWidth = realTitleWidth > titleMaxInnerWidth ? TITLE_MAX_WIDTH : realTitleWidth;
           const itemWidth = ITEM_PADDING + faviconWidth + titleWidth;
-          const newWidth = width + itemWidth;
+          const nextWidth = width + itemWidth;
 
-          if (newWidth > bookmarksBarWidth) break;
+          if (nextWidth > bookmarksBarWidth) break;
 
-          width = newWidth;
-          _end = index + 1;
+          width = nextWidth;
         }
 
         this.set({ _maxItems });
