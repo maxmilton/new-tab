@@ -57,7 +57,7 @@
       });
     },
     onstate({ changed, previous }) {
-      if (previous === undefined) return;
+      if (!previous) return;
 
       if (changed._bookmarksBar) {
         this._handleResize();
