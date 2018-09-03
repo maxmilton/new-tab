@@ -1,5 +1,3 @@
-<svelte:window on:resize="_setVisibleEnd()" />
-
 <div id="bookmarks" ref:b>
   {#each _visible as _bookmark}
     <BookmarkItem _node="{_bookmark}" _lvl="{0}" />
@@ -53,16 +51,20 @@
           _bookmarksOther: tree[0].children[1],
         });
       });
+
+      window.addEventListener('resize', () => {
+        this._handleResize();
+      });
     },
     onstate({ changed, previous }) {
       if (previous === undefined) return;
 
       if (changed._bookmarksBar) {
-        this._setVisibleEnd();
+        this._handleResize();
       }
     },
     methods: {
-      _setVisibleEnd() {
+      _handleResize() {
         const { _bookmarksBar, _bookmarksOther } = this.get();
         const { length } = _bookmarksBar;
         const otherBookmarksWidth = !_bookmarksOther.children.length
