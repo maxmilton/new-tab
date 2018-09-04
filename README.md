@@ -42,8 +42,7 @@ Unobtrusive | No annoying things like entries in your right click menu.
 
 ## Known issues
 
-1. Not able to scroll in bookmark folders. This will be fixed soon.
-1. The extension's bookmarks bar is limited in functionality. Chrome doesn't have an API to control the native bookmarks bar via extensions so I've recreated a simplistic version. The goal here is _high performance_ and not to emulate all the native bookmarks bar features. Use the bookmark manager.
+1. The extension's bookmarks bar is limited in functionality. Chrome doesn't have an API to control the native bookmarks bar via extensions so I've recreated a simplistic version. The goal here is _high performance_ and not to emulate all the native bookmarks bar features. Use the bookmark manager for access to all features.
 1. Page needs to be reload after adding, editing, or removing bookmarks. Because bookmarks don't change often, I prefer not to add bookmark event listeners as most users simply don't need live bookmark changes.
 1. Searching the browsing history is slow when you history is _very_ big. This is just a reality of Chrome. 😢
 
