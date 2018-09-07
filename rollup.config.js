@@ -18,7 +18,6 @@ const compilerOpts = {
   externs: [
     require.resolve('google-closure-compiler/contrib/externs/chrome.js'),
     require.resolve('google-closure-compiler/contrib/externs/chrome_extensions.js'),
-    // require.resolve('google-closure-compiler/contrib/externs/svg.js'),
     path.join(__dirname, 'component-externs.js'),
   ],
   compilation_level: 'ADVANCED',
@@ -27,7 +26,7 @@ const compilerOpts = {
   strict_mode_input: true,
   use_types_for_optimization: true,
   warning_level: 'VERBOSE',
-  // jscomp_warning: '*', // FIXME: Broken upstream; https://git.io/fAlzj
+  jscomp_warning: '*', // FIXME: Broken upstream; https://git.io/fAlzj
   // jscomp_error: '*',
   jscomp_off: 'duplicate', // FIXME: Shouldn't need this
 
