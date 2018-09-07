@@ -3930,11 +3930,11 @@ postcss-media-query-parser@^0.2.3:
   version "0.2.3"
   resolved "https://registry.yarnpkg.com/postcss-media-query-parser/-/postcss-media-query-parser-0.2.3.tgz#27b39c6f4d94f81b1a73b8f76351c609e5cef244"
 
-postcss-nested@3.0.0:
-  version "3.0.0"
-  resolved "https://registry.yarnpkg.com/postcss-nested/-/postcss-nested-3.0.0.tgz#cde40bd07a078565f3df72e2dc2665871c724852"
+postcss-nested@4.0.0:
+  version "4.0.0"
+  resolved "https://registry.yarnpkg.com/postcss-nested/-/postcss-nested-4.0.0.tgz#c5d0f8d04b661d5b4cb041e7f8a668accafdfb4a"
   dependencies:
-    postcss "^6.0.14"
+    postcss "^7.0.2"
     postcss-selector-parser "^3.1.1"
 
 postcss-reporter@^5.0.0:
@@ -4030,7 +4030,7 @@ postcss@^5.2.16:
     source-map "^0.5.6"
     supports-color "^3.2.3"
 
-postcss@^6.0.14, postcss@^6.0.8:
+postcss@^6.0.8:
   version "6.0.23"
   resolved "https://registry.yarnpkg.com/postcss/-/postcss-6.0.23.tgz#61c82cc328ac60e677645f979054eb98bc0e3324"
   dependencies:
