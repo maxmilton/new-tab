@@ -42,7 +42,7 @@
     "jest-canvas-mock": "1.1.0",
     "postcss": "7.0.2",
     "postcss-import": "12.0.0",
-    "postcss-nested": "3.0.0",
+    "postcss-nested": "4.0.0",
     "rollup": "0.65.2",
     "rollup-plugin-analyzer": "2.1.0",
     "rollup-plugin-commonjs": "9.1.6",
@@ -50,7 +50,7 @@
     "rollup-plugin-svelte": "4.3.0",
     "sinon-chrome": "2.3.2",
     "stylelint": "9.5.0",
-    "svelte": "2.13.3"
+    "svelte": "2.13.4"
   },
   "browserslist": [
     "last 2 Chrome versions"
