@@ -2,12 +2,12 @@
 # yarn lockfile v1
 
 
-"@ampproject/rollup-plugin-closure-compiler@0.6.1":
-  version "0.6.1"
-  resolved "https://registry.yarnpkg.com/@ampproject/rollup-plugin-closure-compiler/-/rollup-plugin-closure-compiler-0.6.1.tgz#7a20a4cb70dd81579564d4bf9eaa8139de51286a"
+"@ampproject/rollup-plugin-closure-compiler@0.6.2":
+  version "0.6.2"
+  resolved "https://registry.yarnpkg.com/@ampproject/rollup-plugin-closure-compiler/-/rollup-plugin-closure-compiler-0.6.2.tgz#b6edfcc1c1231c250eecee3795fd0cfed856028a"
   dependencies:
-    acorn "5.7.1"
-    google-closure-compiler "20180716.0.1"
+    acorn "5.7.2"
+    google-closure-compiler "20180805.0.0"
     magic-string "0.25.0"
     temp-write "3.4.0"
 
@@ -414,11 +414,7 @@ acorn-jsx@^4.1.1:
   dependencies:
     acorn "^5.0.3"
 
-acorn@5.7.1:
-  version "5.7.1"
-  resolved "https://registry.yarnpkg.com/acorn/-/acorn-5.7.1.tgz#f095829297706a7c9776958c0afc8930a9b9d9d8"
-
-acorn@^5.0.0, acorn@^5.0.3, acorn@^5.5.3, acorn@^5.6.0:
+acorn@5.7.2, acorn@^5.0.0, acorn@^5.0.3, acorn@^5.5.3, acorn@^5.6.0:
   version "5.7.2"
   resolved "https://registry.yarnpkg.com/acorn/-/acorn-5.7.2.tgz#91fa871883485d06708800318404e72bfb26dcc5"
 
@@ -1135,12 +1131,13 @@ code-point-at@^1.0.0:
   version "1.1.0"
   resolved "https://registry.yarnpkg.com/code-point-at/-/code-point-at-1.1.0.tgz#0d070b4d043a5bea33a2f1a40e2edb3d9a4ccf77"
 
-codecov@3.0.4:
-  version "3.0.4"
-  resolved "https://registry.yarnpkg.com/codecov/-/codecov-3.0.4.tgz#37f2bf9ed71086923aac7496d982e32e5899dfd8"
+codecov@3.1.0:
+  version "3.1.0"
+  resolved "https://registry.yarnpkg.com/codecov/-/codecov-3.1.0.tgz#340bd968d361f256976b5af782dd8ba9f82bc849"
   dependencies:
     argv "^0.0.2"
     ignore-walk "^3.0.1"
+    js-yaml "^3.12.0"
     request "^2.87.0"
     urlgrey "^0.4.4"
 
@@ -2053,24 +2050,25 @@ gonzales-pe@^4.2.3:
   dependencies:
     minimist "1.1.x"
 
-google-closure-compiler-linux@^20180716.0.0:
-  version "20180716.0.0"
-  resolved "https://registry.yarnpkg.com/google-closure-compiler-linux/-/google-closure-compiler-linux-20180716.0.0.tgz#b0dc9aa4751085b46002d6a300146df73fa87d35"
+google-closure-compiler-linux@^20180805.0.0:
+  version "20180805.0.0"
+  resolved "https://registry.yarnpkg.com/google-closure-compiler-linux/-/google-closure-compiler-linux-20180805.0.0.tgz#f6e0a7dca90a61181a7dea6f5748305645d9a1b7"
 
-google-closure-compiler-osx@^20180716.0.0:
-  version "20180716.0.0"
-  resolved "https://registry.yarnpkg.com/google-closure-compiler-osx/-/google-closure-compiler-osx-20180716.0.0.tgz#5691c07580578dfea3205e90a6a2968d23b85bd9"
+google-closure-compiler-osx@^20180805.0.0:
+  version "20180805.0.0"
+  resolved "https://registry.yarnpkg.com/google-closure-compiler-osx/-/google-closure-compiler-osx-20180805.0.0.tgz#71bc29b8dcd4882742709af01466ca1958e229c0"
 
-google-closure-compiler@20180716.0.1:
-  version "20180716.0.1"
-  resolved "https://registry.yarnpkg.com/google-closure-compiler/-/google-closure-compiler-20180716.0.1.tgz#48deb2b1dfe4c118adcb70dd104cf4fa2b9508d7"
+google-closure-compiler@20180805.0.0:
+  version "20180805.0.0"
+  resolved "https://registry.yarnpkg.com/google-closure-compiler/-/google-closure-compiler-20180805.0.0.tgz#9e2a9d0794a2033b276ab13c807a3671a7d93dbf"
   dependencies:
     chalk "^1.0.0"
+    minimist "^1.2.0"
     vinyl "^2.0.1"
     vinyl-sourcemaps-apply "^0.2.0"
   optionalDependencies:
-    google-closure-compiler-linux "^20180716.0.0"
-    google-closure-compiler-osx "^20180716.0.0"
+    google-closure-compiler-linux "^20180805.0.0"
+    google-closure-compiler-osx "^20180805.0.0"
 
 graceful-fs@^4.1.11, graceful-fs@^4.1.2:
   version "4.1.11"
@@ -4441,9 +4439,9 @@ rollup-pluginutils@^2.0.1, rollup-pluginutils@^2.3.0:
     estree-walker "^0.5.2"
     micromatch "^2.3.11"
 
-rollup@0.65.0:
-  version "0.65.0"
-  resolved "https://registry.yarnpkg.com/rollup/-/rollup-0.65.0.tgz#280db1252169b68fc3043028346b337dde453fba"
+rollup@0.65.2:
+  version "0.65.2"
+  resolved "https://registry.yarnpkg.com/rollup/-/rollup-0.65.2.tgz#e1532e3c1a2e102c89d99289a184fcbbc7cd4b4a"
   dependencies:
     "@types/estree" "0.0.39"
     "@types/node" "*"
@@ -4890,9 +4888,9 @@ supports-color@^5.1.0, supports-color@^5.3.0, supports-color@^5.4.0:
   dependencies:
     has-flag "^3.0.0"
 
-svelte@2.13.2:
-  version "2.13.2"
-  resolved "https://registry.yarnpkg.com/svelte/-/svelte-2.13.2.tgz#69026ac64cca97134e4d49104e0c894ea590ff7a"
+svelte@2.13.3:
+  version "2.13.3"
+  resolved "https://registry.yarnpkg.com/svelte/-/svelte-2.13.3.tgz#eb89e22e65e7a781e20565374f5da5e00707aedc"
 
 svg-tags@^1.0.0:
   version "1.0.0"

@@ -26,7 +26,7 @@
   },
   "dependencies": {},
   "devDependencies": {
-    "@ampproject/rollup-plugin-closure-compiler": "0.6.1",
+    "@ampproject/rollup-plugin-closure-compiler": "0.6.2",
     "@minna-ui/eslint-config": "0.12.0",
     "@minna-ui/jest-config": "0.12.0",
     "@minna-ui/stylelint-config": "0.12.0",
@@ -35,7 +35,7 @@
     "@types/chrome": "0.0.72",
     "autoprefixer": "9.1.5",
     "chokidar": "2.0.4",
-    "codecov": "3.0.4",
+    "codecov": "3.1.0",
     "crass": "0.12.3",
     "eslint": "5.5.0",
     "jest": "23.5.0",
@@ -43,14 +43,14 @@
     "postcss": "7.0.2",
     "postcss-import": "12.0.0",
     "postcss-nested": "3.0.0",
-    "rollup": "0.65.0",
+    "rollup": "0.65.2",
     "rollup-plugin-analyzer": "2.1.0",
     "rollup-plugin-commonjs": "9.1.6",
     "rollup-plugin-node-resolve": "3.4.0",
     "rollup-plugin-svelte": "4.3.0",
     "sinon-chrome": "2.3.2",
     "stylelint": "9.5.0",
-    "svelte": "2.13.2"
+    "svelte": "2.13.3"
   },
   "browserslist": [
     "last 2 Chrome versions"
