@@ -9,32 +9,10 @@
 <Menu/>
 
 <script>
+  import { handleLinkClick } from './helpers.js';
   import Search from './components/Search.html';
   import BookmarkGroup from './components/BookmarkGroup.html';
   import Menu from './components/Menu.html';
-
-  /**
-   * Handle link click to get around restriction for internal Chrome links
-   * in an extension.
-   * @param {MouseEvent} event the click event
-   */
-  function handleLinkClick(event) {
-    const { target, ctrlKey } = event;
-    const url = target.href;
-
-    // only apply special handling to non-http links
-    if (url && url.charAt(0) !== 'h') {
-      event.preventDefault();
-
-      if (target.target === '_blank' || ctrlKey) {
-        // open the location in a new tab
-        chrome.tabs.create({ url });
-      } else {
-        // update the location in the current tab
-        chrome.tabs.update({ url });
-      }
-    }
-  }
 
   window.addEventListener('click', handleLinkClick);
 
