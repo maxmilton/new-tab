@@ -15,13 +15,17 @@ describe('App click handler', () => {
   it('triggers on mouse click event', () => {
     expect.assertions(1);
     const target = document.createElement('div');
-    const component = new App({ target });
-    const spy = jest.spyOn(component, '_onLinkClick');
+    const spy1 = jest.spyOn(chrome.tabs, 'update');
+    new App({ target });
     const event = new MouseEvent('click');
+    Object.defineProperty(event, 'target', { value: { href: 'chrome://bookmarks/' }, enumerable: true });
+    const spy2 = jest.spyOn(event, 'preventDefault');
     window.dispatchEvent(event);
-    expect(spy).toHaveBeenCalledWith(event);
-    spy.mockReset();
-    spy.mockRestore();
+    expect(spy1).toHaveBeenCalledWith(event);
+    expect(spy1).toHaveBeenCalledTimes(1);
+    expect(spy2).toHaveBeenCalledTimes(1);
+    spy1.mockRestore();
+    spy2.mockRestore();
   });
 
   it('handles regular HTTP links', () => {
@@ -40,8 +44,6 @@ describe('App click handler', () => {
     window.dispatchEvent(event);
     expect(spy1).toHaveBeenCalled();
     expect(spy2).not.toHaveBeenCalled();
-    spy1.mockReset();
-    spy2.mockReset();
     spy1.mockRestore();
     spy2.mockRestore();
   });
@@ -66,10 +68,6 @@ describe('App click handler', () => {
     expect(spy2).toHaveBeenCalled();
     expect(spy3).not.toHaveBeenCalled();
     expect(spy4).toHaveBeenCalled();
-    spy1.mockReset();
-    spy2.mockReset();
-    spy3.mockReset();
-    spy4.mockReset();
     spy1.mockRestore();
     spy2.mockRestore();
     spy3.mockRestore();
@@ -97,10 +95,6 @@ describe('App click handler', () => {
     expect(spy2).toHaveBeenCalled();
     expect(spy3).toHaveBeenCalled();
     expect(spy4).not.toHaveBeenCalled();
-    spy1.mockReset();
-    spy2.mockReset();
-    spy3.mockReset();
-    spy4.mockReset();
     spy1.mockRestore();
     spy2.mockRestore();
     spy3.mockRestore();
@@ -128,10 +122,6 @@ describe('App click handler', () => {
     expect(spy2).toHaveBeenCalled();
     expect(spy3).toHaveBeenCalled();
     expect(spy4).not.toHaveBeenCalled();
-    spy1.mockReset();
-    spy2.mockReset();
-    spy3.mockReset();
-    spy4.mockReset();
     spy1.mockRestore();
     spy2.mockRestore();
     spy3.mockRestore();

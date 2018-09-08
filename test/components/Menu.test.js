@@ -17,7 +17,6 @@ describe('Menu component', () => {
     const spy = jest.spyOn(chrome.runtime, 'openOptionsPage', 'get');
     link.click();
     expect(spy).toHaveBeenCalled();
-    spy.mockReset();
     spy.mockRestore();
   });
 });
