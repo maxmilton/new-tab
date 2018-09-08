@@ -2,7 +2,7 @@
 
 const BookmarkItem = require('../../src/components/BookmarkItem.html');
 
-const __node = {};
+const _node = {};
 
 describe('BookmarkItem component', () => {
   it('renders correctly', () => {
@@ -10,7 +10,7 @@ describe('BookmarkItem component', () => {
     new BookmarkItem({
       target,
       data: {
-        __node,
+        _node,
       },
     });
     expect(target.innerHTML).toMatchSnapshot();

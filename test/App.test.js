@@ -16,7 +16,7 @@ describe('App click handler', () => {
     expect.assertions(1);
     const target = document.createElement('div');
     const component = new App({ target });
-    const spy = jest.spyOn(component, '__onLinkClick');
+    const spy = jest.spyOn(component, '_onLinkClick');
     const event = new MouseEvent('click');
     window.dispatchEvent(event);
     expect(spy).toHaveBeenCalledWith(event);
@@ -35,7 +35,7 @@ describe('App click handler', () => {
       cancelable: true,
     });
     Object.defineProperty(event, 'target', { value: link, enumerable: true });
-    const spy1 = jest.spyOn(component, '__onLinkClick');
+    const spy1 = jest.spyOn(component, '_onLinkClick');
     const spy2 = jest.spyOn(event, 'preventDefault');
     window.dispatchEvent(event);
     expect(spy1).toHaveBeenCalled();
@@ -57,7 +57,7 @@ describe('App click handler', () => {
       cancelable: true,
     });
     Object.defineProperty(event, 'target', { value: link, enumerable: true });
-    const spy1 = jest.spyOn(component, '__onLinkClick');
+    const spy1 = jest.spyOn(component, '_onLinkClick');
     const spy2 = jest.spyOn(event, 'preventDefault');
     const spy3 = jest.spyOn(chrome.tabs, 'create', 'get');
     const spy4 = jest.spyOn(chrome.tabs, 'update', 'get');
@@ -88,7 +88,7 @@ describe('App click handler', () => {
     });
     Object.defineProperty(event, 'target', { value: link, enumerable: true });
     Object.defineProperty(event.target, 'target', { value: '_blank', enumerable: true });
-    const spy1 = jest.spyOn(component, '__onLinkClick');
+    const spy1 = jest.spyOn(component, '_onLinkClick');
     const spy2 = jest.spyOn(event, 'preventDefault');
     const spy3 = jest.spyOn(chrome.tabs, 'create', 'get');
     const spy4 = jest.spyOn(chrome.tabs, 'update', 'get');
@@ -119,7 +119,7 @@ describe('App click handler', () => {
       ctrlKey: true,
     });
     Object.defineProperty(event, 'target', { value: link, enumerable: true });
-    const spy1 = jest.spyOn(component, '__onLinkClick');
+    const spy1 = jest.spyOn(component, '_onLinkClick');
     const spy2 = jest.spyOn(event, 'preventDefault');
     const spy3 = jest.spyOn(chrome.tabs, 'create', 'get');
     const spy4 = jest.spyOn(chrome.tabs, 'update', 'get');
