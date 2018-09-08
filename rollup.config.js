@@ -18,6 +18,7 @@ const compilerOpts = {
   externs: [
     require.resolve('google-closure-compiler/contrib/externs/chrome.js'),
     require.resolve('google-closure-compiler/contrib/externs/chrome_extensions.js'),
+    // require.resolve('google-closure-compiler/contrib/externs/svg.js'),
     path.join(__dirname, 'component-externs.js'),
   ],
   compilation_level: 'ADVANCED',
@@ -26,9 +27,9 @@ const compilerOpts = {
   strict_mode_input: true,
   use_types_for_optimization: true,
   warning_level: 'VERBOSE',
-  jscomp_warning: '*', // FIXME: Broken upstream; https://git.io/fAlzj
+  // jscomp_warning: '*', // FIXME: Broken upstream; https://git.io/fAlzj
   // jscomp_error: '*',
-  jscomp_off: 'duplicate', // FIXME: Shouldn't need this
+  jscomp_off: 'duplicate', // FIXME: Deprecated `method` var
 
   // uncomment for debugging
   // formatting: 'PRETTY_PRINT',
@@ -51,7 +52,16 @@ function compileTemplate(template) {
   return new Function('d', 'return `' + template + '`'); // eslint-disable-line
 }
 
-/** Generate HTML from a template and write it to disk */
+/**
+ * Generate HTML from a template and write it to disk
+ * @param {object} opts
+ * @param {string} opts.file
+ * @param {string} opts.template
+ * @param {string=} opts.title
+ * @param {string|Function} opts.content
+ * @param {Array<string>=} opts.exclude
+ * @param {Array<string>=} opts.include
+ */
 function makeHtml({
   file,
   template,
@@ -60,7 +70,7 @@ function makeHtml({
   exclude,
   include = ['**/*.css', '**/*.postcss', '**/*.pcss'],
   ...options
-} = {}) {
+}) {
   const filter = createFilter(include, exclude);
   const injectHtml = compileTemplate(template);
   const styles = {};
@@ -133,14 +143,14 @@ export default [
       svelte(svelteOpts),
       resolve(),
       commonjs(),
-      !dev && compiler(compilerOpts),
+      !dev && compiler({ ...compilerOpts }),
       makeHtml({
         template: htmlTemplate,
         file: 'dist/n.html',
         title: 'New Tab',
         // content: '%CSS%<script src=n.js async></script>',
         // XXX: The first script is `loader.js` run through closure compiler
-        // TODO: Should automate this again so it's easy to make changes to loader.js
+        // TODO: Automate this again + manifest hash so it's easy to make changes to loader.js
         content: '<script>chrome.storage.sync.get(["t"],(a)=>{a.t&&(document.body.className=a.t)});</script>%CSS%<script src=n.js async></script>',
       }),
       !dev && analyze(analyzeOpts),
@@ -157,7 +167,7 @@ export default [
     },
     plugins: [
       svelte(svelteOpts),
-      !dev && compiler(compilerOpts),
+      !dev && compiler({ ...compilerOpts }),
       makeHtml({
         template: htmlTemplate,
         file: 'dist/s.html',
@@ -176,7 +186,7 @@ export default [
       file: 'dist/b.js',
     },
     plugins: [
-      !dev && compiler(compilerOpts),
+      !dev && compiler({ ...compilerOpts }),
       !dev && analyze(analyzeOpts),
     ],
   },

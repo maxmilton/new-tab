@@ -35,8 +35,9 @@ export default {
   incognito: 'not_allowed',
   content_security_policy:
     "default-src 'none';"
-    // XXX: The sha hash is `loader.js` embedded into the document
+    // hash is `loader.js` embedded into the document
     + " script-src 'self' 'sha256-SrXpau91xJHQ5yfVQ0Ew8+BUUE21zSOda0XiKW+nUxo=';"
     + " style-src 'unsafe-inline';"
-    + ' img-src chrome://favicon;',
+    // `data:` is used in the settings page
+    + ' img-src chrome://favicon data:;',
 };
