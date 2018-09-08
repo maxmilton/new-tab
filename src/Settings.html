@@ -30,7 +30,7 @@
       if (previous) {
         if (changed._theme) {
           // chrome.storage.sync.set({ t: current._theme, td: Date.now() });
-          chrome.storage.sync.set({ t: current._theme });
+          chrome.storage.sync.set({ t: current._theme }); // eslint-disable-line id-length
         }
       }
     },
