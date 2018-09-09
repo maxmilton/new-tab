@@ -127,6 +127,11 @@ const analyzeOpts = {
   showExports: true,
 };
 
+const watch = {
+  chokidar: true,
+  clearScreen: false,
+};
+
 // extension manifest
 writeFile(`${__dirname}/dist/manifest.json`, JSON.stringify(manifest), catchErr);
 
@@ -155,6 +160,7 @@ export default [
       }),
       !dev && analyze(analyzeOpts),
     ],
+    watch,
   },
 
   /** Settings app */
