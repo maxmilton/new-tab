@@ -2,11 +2,11 @@
  * Delay running a function until X ms have passed since its last call.
  * @see https://github.com/developit/decko/blob/master/src/decko.js
  * @param {Function} fn The function to debounce.
- * @param {number} delay How long to wait for more function calls before executing
+ * @param {number=} delay How long to wait for more function calls before executing
  * the function in milliseconds.
  * @returns {Function}
  */
-export function debounce(fn, delay) {
+export function debounce(fn, delay = 260) {
   let args;
   let context;
   let timer;

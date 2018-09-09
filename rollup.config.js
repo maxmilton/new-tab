@@ -18,7 +18,6 @@ const compilerOpts = {
   externs: [
     require.resolve('google-closure-compiler/contrib/externs/chrome.js'),
     require.resolve('google-closure-compiler/contrib/externs/chrome_extensions.js'),
-    // require.resolve('google-closure-compiler/contrib/externs/svg.js'),
     path.join(__dirname, 'component-externs.js'),
   ],
   compilation_level: 'ADVANCED',
@@ -55,12 +54,12 @@ function compileTemplate(template) {
 /**
  * Generate HTML from a template and write it to disk
  * @param {object} opts
- * @param {string} opts.file
- * @param {string} opts.template
- * @param {string=} opts.title
- * @param {string|Function} opts.content
- * @param {Array<string>=} opts.exclude
- * @param {Array<string>=} opts.include
+ * @param {string} opts.file File path where to save generated HTML document.
+ * @param {string} opts.template HTML document template.
+ * @param {string=} opts.title Page title.
+ * @param {string|Function} opts.content Page content.
+ * @param {Array<string>=} opts.exclude Files to exclude from CSS processing.
+ * @param {Array<string>=} opts.include Files to include in CSS processing.
  */
 function makeHtml({
   file,
