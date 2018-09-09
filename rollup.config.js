@@ -123,7 +123,7 @@ const svelteOpts = {
 };
 
 const analyzeOpts = {
-  showExports: true,
+  // showExports: true,
 };
 
 const watch = {
