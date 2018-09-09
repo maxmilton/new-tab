@@ -175,19 +175,6 @@ export default [
       }),
       !dev && analyze(analyzeOpts),
     ],
-  },
-
-  /** Background process */
-  {
-    input: 'src/background.js',
-    output: {
-      sourcemap: false,
-      format: 'esm',
-      file: 'dist/b.js',
-    },
-    plugins: [
-      !dev && compiler({ ...compilerOpts }),
-      !dev && analyze(analyzeOpts),
-    ],
+    watch,
   },
 ];

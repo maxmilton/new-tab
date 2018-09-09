@@ -26,10 +26,6 @@ export default {
     chrome_style: true,
     page: 's.html',
   },
-  background: {
-    scripts: ['b.js'],
-    persistent: true, // keep the extension in memory for fast load
-  },
   offline_enabled: true,
   incognito: 'not_allowed',
   content_security_policy:
