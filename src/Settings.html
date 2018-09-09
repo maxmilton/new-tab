@@ -39,17 +39,19 @@
       // check existing settings
       chrome.storage.local.get(null, (settings) => {
         this.set({
-          _theme: settings.t,
-          _order: settings.o || DEFAULT_ORDER,
+          /* eslint-disable dot-notation */ // prevent closure mangling
+          _theme: settings['t'],
+          _order: settings['o'] || DEFAULT_ORDER,
+          /* eslint-enable */
         });
       });
     },
     onstate({ current, previous }) {
       if (previous) {
-        /* eslint-disable id-length */
+        /* eslint-disable quote-props */ // prevent closure mangling
         chrome.storage.local.set({
-          t: current._theme,
-          o: current._order,
+          't': current._theme,
+          'o': current._order,
         });
         /* eslint-enable */
       }
