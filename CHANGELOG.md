@@ -9,6 +9,8 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ## [Unreleased]
 
+## [0.13.0] - 2018-09-09
+
 ### Added
 
 - New setting to sort the list order.
@@ -478,7 +480,8 @@ Known issues:
 
 - Initial public version including all the basics; working proof of concept code, readme, etc. Not ready for release yet though, it's still far from being actually useful!
 
-[Unreleased]: https://github.com/MaxMilton/new-tab/compare/v0.12.4...HEAD
+[Unreleased]: https://github.com/MaxMilton/new-tab/compare/v0.13.0...HEAD
+[0.13.0]: https://github.com/MaxMilton/new-tab/compare/v0.12.4...v0.13.0
 [0.12.4]: https://github.com/MaxMilton/new-tab/compare/v0.12.3...v0.12.4
 [0.12.3]: https://github.com/MaxMilton/new-tab/compare/v0.12.2...v0.12.3
 [0.12.2]: https://github.com/MaxMilton/new-tab/compare/v0.12.1...v0.12.2
