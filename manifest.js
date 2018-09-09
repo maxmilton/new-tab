@@ -31,7 +31,7 @@ export default {
   content_security_policy:
     "default-src 'none';"
     // hash is `loader.js` embedded into the document
-    + " script-src 'self' 'sha256-SrXpau91xJHQ5yfVQ0Ew8+BUUE21zSOda0XiKW+nUxo=';"
+    + " script-src 'self' 'sha256-FtIFk1UjzWWlhfMrIdJ9n60rbnTmldIAss9HFJTJeUM=';"
     + " style-src 'unsafe-inline';"
     // `data:` is used in the settings page
     + ' img-src chrome://favicon data:;',
