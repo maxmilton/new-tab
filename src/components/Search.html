@@ -21,7 +21,7 @@
 
       <h2>{`Open Tabs (${_tabs.length}/${_tabsRaw.length})`}</h2>
 
-      {#each _tabs as _item}
+      {#each _tabs as _item (_item.id)}
         <!--
           TODO: Figure out a more elegant way of doing this onclick handler; try to
           keep the LinkItem as simple as possible.
@@ -33,7 +33,7 @@
 
       <h2>{`Top Sites (${_topSites.length}/${_topSitesRaw.length})`}</h2>
 
-      {#each _topSites as _item}
+      {#each _topSites as _item (_item.url)}
         <LinkItem _url="{_item.url}" _title="{_item.title}" />
       {/each}
     {:elseif _section === 'Bookmarks' && _isSearching}
@@ -41,7 +41,7 @@
 
       <h2>{`Bookmarks (${_bookmarks.length}/${_bookmarksRaw.length})`}</h2>
 
-      {#each _bookmarks as _item}
+      {#each _bookmarks as _item (_item.id)}
         <LinkItem _url="{_item.url}" _title="{_item.title}" />
       {/each}
 
@@ -53,7 +53,7 @@
 
       <h2>{`History (${_history.length}/${_historyRaw.length})`}</h2>
 
-      {#each _history as _item}
+      {#each _history as _item (_item.id)}
         <LinkItem _url="{_item.url}" _title="{_item.title}" />
       {/each}
 
