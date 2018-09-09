@@ -92,7 +92,7 @@ function makeHtml({
 
       // minify CSS
       if (!dev && css.length) {
-        css = crass.parse(css).optimize({ o1: true, css4: true }).toString();
+        css = crass.parse(css).optimize({ o1: true }).toString();
       }
 
       // compile HTML from template
