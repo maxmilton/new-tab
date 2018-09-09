@@ -11,10 +11,14 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ### Added
 
-- Print stats about exports at build time.
+- Setting to sort the list order.
+- Show stats about exports at build time.
+- Customised settings for rollup watch mode.
 
 ### Changed
 
+- `Light` theme is now the default. 
+- Extension settings are now stored locally and do not sync to your account.
 - Big refactor of the whole app — same features but changed to do the minimum necessary computation:
   - Rename various variables and methods to be more understandable and mark private objects with `_` instead of `__`.
   - Move app click handler outside of Svelte component since it doesn't need to interact with the component.
@@ -26,6 +30,10 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
   - Add a new reusable `LinkItem` component which is shared between the bookmarks bar and the search result.
   - Complete refactor of `BookmarkItem` and `Search` components to do the minimum necessary to achieve the desired functionality.
 - Update dependencies.
+
+### Removed
+
+- Background script was keeping the extension in memory for fast loading... but after some testing it's not necessary. Now the browser can manage the extension memory use better.
 
 ### Fixed
 
