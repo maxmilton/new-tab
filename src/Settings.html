@@ -1,38 +1,105 @@
-<!-- XXX: Wrapper div actually reduces the overall file size -->
-<div>
-  <div class="row">
-    <label for="theme">Theme</label>
-    <select id="theme" bind:value="_theme">
-      <option value="l">Light</option>
-      <option value="">Dark</option>
-    </select>
-  </div>
+<div class="row">
+  <label>Theme:</label>
+  <select bind:value="_theme">
+    <option value="d">Dark</option>
+    <option value="">Light</option> <!-- default -->
+  </select>
+</div>
 
-  <hr>
-
-  <small>
-    <em>※ Settings sync to your account.</em>
-  </small>
+<div class="row">
+  <label>List order:</label>
+  <ul>
+    {#each _order as item, index (item)}
+      <li
+        class="item"
+        draggable="true"
+        on:dragstart="_handleDragStart(event, index)"
+        on:dragend="_handleDragEnd(event)"
+        on:dragover="_handleDragOver(event)"
+        on:dragenter="_handleDragEnter(event)"
+        on:dragleave="_handleDragLeave(event)"
+        on:drop="_handleDrop(event, index)"
+      >
+        <span class="icon">☰</span>
+        {item}
+      </li>
+    {/each}
+  </ul>
 </div>
 
 <script>
+  import { DEFAULT_ORDER } from './common.js';
+
   export default {
     data: () => ({
-      _theme: '', // frontend theme
+      _theme: '',
+      _order: [],
     }),
     oncreate() {
       // check existing settings
-      chrome.storage.sync.get(null, (settings) => {
-        this.set({ _theme: settings.t });
+      chrome.storage.local.get(null, (settings) => {
+        this.set({
+          /* eslint-disable dot-notation */ // prevent closure mangling
+          _theme: settings['t'],
+          _order: settings['o'] || DEFAULT_ORDER,
+          /* eslint-enable */
+        });
       });
     },
-    onstate({ changed, current, previous }) {
+    onstate({ current, previous }) {
       if (previous) {
-        if (changed._theme) {
-          // chrome.storage.sync.set({ t: current._theme, td: Date.now() });
-          chrome.storage.sync.set({ t: current._theme }); // eslint-disable-line id-length
-        }
+        /* eslint-disable quote-props */ // prevent closure mangling
+        chrome.storage.local.set({
+          't': current._theme,
+          'o': current._order,
+        });
+        /* eslint-enable */
       }
+    },
+    methods: {
+      _moveItem(from, to) {
+        const { _order } = this.get();
+        const item = _order[from];
+
+        // remove from previous location
+        _order.splice(from, 1);
+
+        // add to new location
+        _order.splice(to, 0, item);
+
+        this.set({ _order });
+      },
+
+      _handleDragStart(event, index) {
+        event.dataTransfer.setData('from', index);
+        event.target.classList.add('dragging');
+      },
+
+      _handleDragEnd(event) {
+        event.target.classList.remove('dragging');
+      },
+
+      _handleDragOver(event) {
+        event.preventDefault();
+        event.dataTransfer.dropEffect = 'move'; // eslint-disable-line no-param-reassign
+      },
+
+      _handleDragEnter(event) {
+        event.target.classList.add('over');
+      },
+
+      _handleDragLeave(event) {
+        event.target.classList.remove('over');
+      },
+
+      _handleDrop(event, index) {
+        event.preventDefault();
+        const from = event.dataTransfer.getData('from');
+        this._moveItem(from, index);
+
+        // remove class in case the dragleave event didn't fire
+        event.target.classList.remove('over');
+      },
     },
   };
 </script>
@@ -42,17 +109,43 @@
     font-size: 18px;
   }
 
-  hr {
-    border: 0;
-    border-bottom: 1px solid rgb(221, 221, 221);
-  }
-
   select {
     margin-left: 9px;
   }
 
-  hr,
   .row {
     margin-bottom: 18px;
+  }
+
+  ul {
+    padding-left: 0;
+    list-style: none;
+  }
+
+  .item {
+    padding: 6px 10px;
+    margin: 6px 0;
+    cursor: grab;
+    border: 1px solid rgba(0, 0, 0, 0.25);
+    border-radius: 2px;
+  }
+
+  .icon {
+    margin-right: 10px;
+    color: rgb(180, 180, 180);
+
+    .item:hover > & {
+      color: rgb(110, 110, 110);
+    }
+  }
+
+  .dragging {
+    border-style: dashed;
+    opacity: 0.4;
+  }
+
+  .over {
+    /* stylelint-disable-next-line declaration-no-important */
+    border-color: rgb(21, 48, 167) !important;
   }
 </style>

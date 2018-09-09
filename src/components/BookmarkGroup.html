@@ -27,6 +27,8 @@
 
   // reusing the same canvas is much faster
   const canvas = document.createElement('canvas').getContext('2d');
+  // TODO: Enable once OffscreenCanvas has support
+  // const canvas = (new OffscreenCanvas(0, 0)).getContext('2d');
   canvas.font = FONT;
   const ellipsisWidth = canvas.measureText('…').width;
   const titleMaxInnerWidth = TITLE_MAX_WIDTH - ellipsisWidth;

@@ -8,3 +8,7 @@
 // Svelte quoted method references
 var i = () => {};
 var m = () => {};
+
+// TODO: Enable once OffscreenCanvas has support
+// TODO: Remove once supported in Closure Compiler's native externs
+// var OffscreenCanvas = () => {};

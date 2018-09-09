@@ -18,7 +18,6 @@ const compilerOpts = {
   externs: [
     require.resolve('google-closure-compiler/contrib/externs/chrome.js'),
     require.resolve('google-closure-compiler/contrib/externs/chrome_extensions.js'),
-    // require.resolve('google-closure-compiler/contrib/externs/svg.js'),
     path.join(__dirname, 'component-externs.js'),
   ],
   compilation_level: 'ADVANCED',
@@ -55,12 +54,12 @@ function compileTemplate(template) {
 /**
  * Generate HTML from a template and write it to disk
  * @param {object} opts
- * @param {string} opts.file
- * @param {string} opts.template
- * @param {string=} opts.title
- * @param {string|Function} opts.content
- * @param {Array<string>=} opts.exclude
- * @param {Array<string>=} opts.include
+ * @param {string} opts.file File path where to save generated HTML document.
+ * @param {string} opts.template HTML document template.
+ * @param {string=} opts.title Page title.
+ * @param {string|Function} opts.content Page content.
+ * @param {Array<string>=} opts.exclude Files to exclude from CSS processing.
+ * @param {Array<string>=} opts.include Files to include in CSS processing.
  */
 function makeHtml({
   file,
@@ -93,7 +92,7 @@ function makeHtml({
 
       // minify CSS
       if (!dev && css.length) {
-        css = crass.parse(css).optimize({ o1: true, css4: true }).toString();
+        css = crass.parse(css).optimize({ o1: true }).toString();
       }
 
       // compile HTML from template
@@ -124,7 +123,12 @@ const svelteOpts = {
 };
 
 const analyzeOpts = {
-  showExports: true,
+  // showExports: true,
+};
+
+const watch = {
+  chokidar: true,
+  clearScreen: false,
 };
 
 // extension manifest
@@ -151,10 +155,11 @@ export default [
         // content: '%CSS%<script src=n.js async></script>',
         // XXX: The first script is `loader.js` run through closure compiler
         // TODO: Automate this again + manifest hash so it's easy to make changes to loader.js
-        content: '<script>chrome.storage.sync.get(["t"],(a)=>{a.t&&(document.body.className=a.t)});</script>%CSS%<script src=n.js async></script>',
+        content: '<script>chrome.storage.local.get(null,a=>{a.t&&(document.body.className=a.t)});</script>%CSS%<script src=n.js async></script>',
       }),
       !dev && analyze(analyzeOpts),
     ],
+    watch,
   },
 
   /** Settings app */
@@ -175,19 +180,6 @@ export default [
       }),
       !dev && analyze(analyzeOpts),
     ],
-  },
-
-  /** Background process */
-  {
-    input: 'src/background.js',
-    output: {
-      sourcemap: false,
-      format: 'esm',
-      file: 'dist/b.js',
-    },
-    plugins: [
-      !dev && compiler({ ...compilerOpts }),
-      !dev && analyze(analyzeOpts),
-    ],
+    watch,
   },
 ];
