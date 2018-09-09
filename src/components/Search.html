@@ -17,6 +17,7 @@
 
   {#each _order as _section (_section)}
     {#if _section === 'Open Tabs'}
+
       <!-- Open Tabs -->
 
       <h2>{`Open Tabs (${_tabs.length}/${_tabsRaw.length})`}</h2>
@@ -29,6 +30,7 @@
         <LinkItem _url="{_item.url}" _title="{_item.title}" on:click="_onTabClick(_item, event)" />
       {/each}
     {:elseif _section === 'Top Sites'}
+
       <!-- Top Sites -->
 
       <h2>{`Top Sites (${_topSites.length}/${_topSitesRaw.length})`}</h2>
@@ -36,7 +38,8 @@
       {#each _topSites as _item (_item.url)}
         <LinkItem _url="{_item.url}" _title="{_item.title}" />
       {/each}
-    {:elseif _section === 'Bookmarks' && _isSearching}
+    {:elseif _isSearching && _section === 'Bookmarks'}
+
       <!-- Bookmarks -->
 
       <h2>{`Bookmarks (${_bookmarks.length}/${_bookmarksRaw.length})`}</h2>
@@ -48,7 +51,8 @@
       {#if _bookmarks.length < _bookmarksRaw.length}
         <button on:click="_loadMoreBookmarks(_bookmarks.length)">Show more ▾</button>
       {/if}
-    {:elseif _section === 'History' && _isSearching}
+    {:elseif _isSearching && _section === 'History'}
+
       <!-- History -->
 
       <h2>{`History (${_history.length}/${_historyRaw.length})`}</h2>
