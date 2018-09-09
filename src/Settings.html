@@ -41,7 +41,7 @@
         this.set({
           /* eslint-disable dot-notation */ // prevent closure mangling
           _theme: settings['t'],
-          _order: settings['o'] || DEFAULT_ORDER,
+          _order: settings['o'] || [...DEFAULT_ORDER],
           /* eslint-enable */
         });
       });
@@ -51,7 +51,9 @@
         /* eslint-disable quote-props */ // prevent closure mangling
         chrome.storage.local.set({
           't': current._theme,
-          'o': current._order,
+          'o': JSON.stringify(current._order) === JSON.stringify(DEFAULT_ORDER)
+            ? null
+            : current._order,
         });
         /* eslint-enable */
       }

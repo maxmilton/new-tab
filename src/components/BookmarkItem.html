@@ -3,7 +3,7 @@
   DOM since these bookmarks are static.
 -->
 
-{#if _node.children}
+{#if _node.children !== undefined}
 
   <!-- folder -->
 
@@ -24,7 +24,7 @@
       <!-- subfolder -->
 
       <div class="subfolder {_left ? 'left' : ''}">
-        {#if _node.children.length === 0}
+        {#if !_node.children.length}
           <div class="item">(empty)</div>
         {:else}
           {#each _node.children as _bookmark}
