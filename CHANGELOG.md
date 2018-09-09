@@ -11,7 +11,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ### Added
 
-- Setting to sort the list order.
+- New setting to sort the list order.
 - Show stats about exports at build time.
 - Customised settings for rollup watch mode.
 
