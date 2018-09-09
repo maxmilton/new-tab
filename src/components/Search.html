@@ -15,52 +15,52 @@
     on:keyup="_cancelSearch(event.key)"
   >
 
-  <!-- Open Tabs -->
+  {#each _order as _section (_section)}
+    {#if _section === 'Open Tabs'}
+      <!-- Open Tabs -->
 
-  <h2>{`Open Tabs (${_tabs.length}/${_tabsRaw.length})`}</h2>
+      <h2>{`Open Tabs (${_tabs.length}/${_tabsRaw.length})`}</h2>
 
-  {#each _tabs as _item}
-    <!--
-      TODO: Figure out a more elegant way of doing this onclick handler; try to
-      keep the LinkItem as simple as possible.
-    -->
-    <LinkItem _url="{_item.url}" _title="{_item.title}" on:click="_onTabClick(_item, event)" />
-  {/each}
+      {#each _tabs as _item}
+        <!--
+          TODO: Figure out a more elegant way of doing this onclick handler; try to
+          keep the LinkItem as simple as possible.
+        -->
+        <LinkItem _url="{_item.url}" _title="{_item.title}" on:click="_onTabClick(_item, event)" />
+      {/each}
+    {:elseif _section === 'Top Sites'}
+      <!-- Top Sites -->
 
-  {#if _isSearching}
+      <h2>{`Top Sites (${_topSites.length}/${_topSitesRaw.length})`}</h2>
 
-    <!-- Bookmarks -->
+      {#each _topSites as _item}
+        <LinkItem _url="{_item.url}" _title="{_item.title}" />
+      {/each}
+    {:elseif _section === 'Bookmarks' && _isSearching}
+      <!-- Bookmarks -->
 
-    <h2>{`Bookmarks (${_bookmarks.length}/${_bookmarksRaw.length})`}</h2>
+      <h2>{`Bookmarks (${_bookmarks.length}/${_bookmarksRaw.length})`}</h2>
 
-    {#each _bookmarks as _item}
-      <LinkItem _url="{_item.url}" _title="{_item.title}" />
-    {/each}
+      {#each _bookmarks as _item}
+        <LinkItem _url="{_item.url}" _title="{_item.title}" />
+      {/each}
 
-    {#if _bookmarks.length < _bookmarksRaw.length}
-      <button on:click="_loadMoreBookmarks(_bookmarks.length)">Show more ▾</button>
+      {#if _bookmarks.length < _bookmarksRaw.length}
+        <button on:click="_loadMoreBookmarks(_bookmarks.length)">Show more ▾</button>
+      {/if}
+    {:elseif _section === 'History' && _isSearching}
+      <!-- History -->
+
+      <h2>{`History (${_history.length}/${_historyRaw.length})`}</h2>
+
+      {#each _history as _item}
+        <LinkItem _url="{_item.url}" _title="{_item.title}" />
+      {/each}
+
+      {#if _history.length < _historyRaw.length}
+        <button on:click="_loadMoreHistory(_history.length)">Show more ▾</button>
+      {/if}
     {/if}
-
-    <!-- History -->
-
-    <h2>{`History (${_history.length}/${_historyRaw.length})`}</h2>
-
-    {#each _history as _item}
-      <LinkItem _url="{_item.url}" _title="{_item.title}" />
-    {/each}
-
-    {#if _history.length < _historyRaw.length}
-      <button on:click="_loadMoreHistory(_history.length)">Show more ▾</button>
-    {/if}
-
-  {/if}
-
-  <!-- Top Sites -->
-
-  <h2>{`Top Sites (${_topSites.length}/${_topSitesRaw.length})`}</h2>
-
-  {#each _topSites as _item}
-    <LinkItem _url="{_item.url}" _title="{_item.title}" />
   {/each}
 </div>
 
@@ -72,8 +72,7 @@
   const DEFAULT_RESULTS_AMOUNT = 10;
   const MORE_RESULTS_AMOUNT = 100;
 
-
-  // regex to match URL protocol, e.g. https://
+  // URL protocol regex
   const protocol = /^.*?:\/\//;
 
   /**
@@ -93,6 +92,7 @@
       LinkItem,
     },
     data: () => ({
+      _order: DEFAULT_ORDER,
       _searchText: '',
       _bookmarksRaw: [],
       _bookmarks: [],
@@ -108,6 +108,14 @@
     },
 
     oncreate() {
+      chrome.storage.local.get(null, (settings) => {
+        /* eslint-disable dot-notation */ // prevent closure mangling
+        if (settings['o']) {
+          this.set({ _order: settings['o'] });
+        }
+        /* eslint-enable */
+      });
+
       const getTabs = () => this._getTabs();
 
       getTabs();
