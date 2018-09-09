@@ -4,14 +4,24 @@
     TODO: Try to accomplish the same short text with CSS but without adding any
     wrapper elements.
   -->
-  {_max
-    ? (
-      _title.length > _max
-        ? _title.slice(0, _max) + '…'
-        : _title
-    )
-    : _title}
+  {_shorten(_title, _max)}
 </a>
+
+<script>
+  export default {
+    helpers: {
+      _shorten(text, max) {
+        if (max === undefined) {
+          return text;
+        }
+
+        return text.length > max
+          ? `${text.slice(0, max)}…`
+          : text;
+      },
+    },
+  };
+</script>
 
 <style type="text/postcss" global>
   :global(.item) {
