@@ -1,5 +1,7 @@
-/* light theme */
-.l {
+/* light theme (default) */
+:root {
+  --s: 0 2px 6px #06001124; /* shadow */
+  --s0: 0 9px 16px #06001133; /* shadow heavy */
   --b: #fafafa; /* background colour */
   --t: #383a42; /* text colour */
   --c: #e5e5e6; /* bookmark item hover background, hr */
