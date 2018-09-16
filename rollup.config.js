@@ -22,6 +22,7 @@ const compilerOpts = {
   ],
   compilation_level: 'ADVANCED',
   language_in: 'ECMASCRIPT_2017',
+  // language_out: 'ECMASCRIPT5_STRICT', // XXX: Experimental
   charset: 'UTF-8',
   strict_mode_input: true,
   use_types_for_optimization: true,

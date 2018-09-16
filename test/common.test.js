@@ -1,17 +1,17 @@
 'use strict';
 
-const helpers = require('../src/helpers.js');
+const common = require('../src/common.js');
 
 describe('Helper debounce function', () => {
   it('function exists', () => {
     expect.assertions(1);
-    expect(helpers.debounce).toBeDefined();
+    expect(common.debounce).toBeDefined();
   });
 });
 
 describe('Helper handleLinkClick function', () => {
   it('function exists', () => {
     expect.assertions(1);
-    expect(helpers.handleLinkClick).toBeDefined();
+    expect(common.handleLinkClick).toBeDefined();
   });
 });

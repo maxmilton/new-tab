@@ -8,6 +8,7 @@
 
 <div class="row">
   <label>List order:</label>
+  <button on:click="_resetOrder()">Reset</button>
   <ul>
     {#each _order as item, index (item)}
       <li
@@ -59,6 +60,10 @@
       }
     },
     methods: {
+      _resetOrder() {
+        this.set({ _order: [...DEFAULT_ORDER]});
+      },
+
       _moveItem(from, to) {
         const { _order } = this.get();
         const item = _order[from];
@@ -111,8 +116,9 @@
     font-size: 18px;
   }
 
-  select {
-    margin-left: 9px;
+  select,
+  button {
+    margin-left: 9px !important;
   }
 
   .row {

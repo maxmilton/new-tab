@@ -3,12 +3,17 @@
   DOM since these bookmarks are static.
 -->
 
-{#if _node.children !== undefined}
+{#if _node.children === undefined}
+
+  <!-- bookmark link -->
+
+  <LinkItem _url="{_node.url}" _title="{_node.title}" _max="{_max}" />
+{:else}
 
   <!-- folder -->
 
   <div
-    class="item folder {_left ? 'right' : ''}"
+    class="item folder {_endNode ? 'right' : ''}"
     title="{_node.title}"
     on:mouseenter="_handleMouseEnter()"
     on:mouseleave="_handleMouseLeave()"
@@ -23,22 +28,15 @@
 
       <!-- subfolder -->
 
-      <div class="subfolder {_left ? 'left' : ''}">
-        {#if !_node.children.length}
-          <div class="item">(empty)</div>
+      <div class="subfolder {_endNode ? 'left' : ''}">
+        {#each _node.children as _bookmark}
+          <svelte:self _node="{_bookmark}" _lvl="{_lvl + 1}" _max="{40}" />
         {:else}
-          {#each _node.children as _bookmark}
-            <svelte:self _node="{_bookmark}" _lvl="{_lvl + 1}" _max="{40}"/>
-          {/each}
-        {/if}
+          <div class="item">(empty)</div>
+        {/each}
       </div>
     {/if}
   </div>
-{:else}
-
-  <!-- bookmark link -->
-
-  <LinkItem _url="{_node.url}" _title="{_node.title}" _max="{_max}"/>
 {/if}
 
 
@@ -53,10 +51,10 @@
     components: {
       LinkItem,
     },
-    data: () => ({
-      _show: false,
-      _left: false,
-    }),
+    // data: () => ({
+    //   _show: false,
+    //   _endNode: false,
+    // }),
     oncreate() {
       this._openTimer = null;
       this._closeTimer = null;
