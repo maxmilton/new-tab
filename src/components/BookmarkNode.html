@@ -13,7 +13,7 @@
   <!-- folder -->
 
   <div
-    class="item folder {_left ? 'right' : ''}"
+    class="item folder {_endNode ? 'right' : ''}"
     title="{_node.title}"
     on:mouseenter="_handleMouseEnter()"
     on:mouseleave="_handleMouseLeave()"
@@ -28,7 +28,7 @@
 
       <!-- subfolder -->
 
-      <div class="subfolder {_left ? 'left' : ''}">
+      <div class="subfolder {_endNode ? 'left' : ''}">
         {#each _node.children as _bookmark}
           <svelte:self _node="{_bookmark}" _lvl="{_lvl + 1}" _max="{40}"/>
         {:else}
@@ -53,7 +53,7 @@
     },
     // data: () => ({
     //   _show: false,
-    //   _left: false,
+    //   _endNode: false,
     // }),
     oncreate() {
       this._openTimer = null;
