@@ -30,7 +30,7 @@
 
       <div class="subfolder {_endNode ? 'left' : ''}">
         {#each _node.children as _bookmark}
-          <svelte:self _node="{_bookmark}" _lvl="{_lvl + 1}" _max="{40}"/>
+          <svelte:self _node="{_bookmark}" _lvl="{_lvl + 1}" _max="{40}" />
         {:else}
           <div class="item">(empty)</div>
         {/each}
