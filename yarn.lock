@@ -2,13 +2,13 @@
 # yarn lockfile v1
 
 
-"@ampproject/rollup-plugin-closure-compiler@0.6.2":
-  version "0.6.2"
-  resolved "https://registry.yarnpkg.com/@ampproject/rollup-plugin-closure-compiler/-/rollup-plugin-closure-compiler-0.6.2.tgz#b6edfcc1c1231c250eecee3795fd0cfed856028a"
+"@ampproject/rollup-plugin-closure-compiler@0.7.2":
+  version "0.7.2"
+  resolved "https://registry.yarnpkg.com/@ampproject/rollup-plugin-closure-compiler/-/rollup-plugin-closure-compiler-0.7.2.tgz#897bd27d4536a9d57b65ca1b111df6b18c696fe4"
   dependencies:
-    acorn "5.7.2"
-    google-closure-compiler "20180805.0.0"
-    magic-string "0.25.0"
+    acorn "5.7.3"
+    google-closure-compiler "20180910.0.0"
+    magic-string "0.25.1"
     temp-write "3.4.0"
 
 "@babel/code-frame@7.0.0-beta.44":
@@ -351,11 +351,7 @@ acorn-walk@^6.0.1:
   version "6.0.1"
   resolved "https://registry.yarnpkg.com/acorn-walk/-/acorn-walk-6.0.1.tgz#c7827bdbb8e21aa97b609adfa225400d9ae348ba"
 
-acorn@5.7.2:
-  version "5.7.2"
-  resolved "https://registry.yarnpkg.com/acorn/-/acorn-5.7.2.tgz#91fa871883485d06708800318404e72bfb26dcc5"
-
-acorn@^5.0.3, acorn@^5.5.3, acorn@^5.6.0:
+acorn@5.7.3, acorn@^5.0.3, acorn@^5.5.3, acorn@^5.6.0:
   version "5.7.3"
   resolved "https://registry.yarnpkg.com/acorn/-/acorn-5.7.3.tgz#67aa231bf8812974b85235a96771eb6bd07ea279"
 
@@ -1947,25 +1943,25 @@ gonzales-pe@^4.2.3:
   dependencies:
     minimist "1.1.x"
 
-google-closure-compiler-linux@^20180805.0.0:
-  version "20180805.0.0"
-  resolved "https://registry.yarnpkg.com/google-closure-compiler-linux/-/google-closure-compiler-linux-20180805.0.0.tgz#f6e0a7dca90a61181a7dea6f5748305645d9a1b7"
+google-closure-compiler-linux@^20180910.0.1:
+  version "20180910.0.1"
+  resolved "https://registry.yarnpkg.com/google-closure-compiler-linux/-/google-closure-compiler-linux-20180910.0.1.tgz#22567f7f5b605946d23c99c86a3e29a2210386da"
 
-google-closure-compiler-osx@^20180805.0.0:
-  version "20180805.0.0"
-  resolved "https://registry.yarnpkg.com/google-closure-compiler-osx/-/google-closure-compiler-osx-20180805.0.0.tgz#71bc29b8dcd4882742709af01466ca1958e229c0"
+google-closure-compiler-osx@^20180910.0.1:
+  version "20180910.0.1"
+  resolved "https://registry.yarnpkg.com/google-closure-compiler-osx/-/google-closure-compiler-osx-20180910.0.1.tgz#83e88bf892038655efd281fad61e3f6377a60afb"
 
-google-closure-compiler@20180805.0.0:
-  version "20180805.0.0"
-  resolved "https://registry.yarnpkg.com/google-closure-compiler/-/google-closure-compiler-20180805.0.0.tgz#9e2a9d0794a2033b276ab13c807a3671a7d93dbf"
+google-closure-compiler@20180910.0.0:
+  version "20180910.0.0"
+  resolved "https://registry.yarnpkg.com/google-closure-compiler/-/google-closure-compiler-20180910.0.0.tgz#74f7fdb16931cce2ba6af17a447d264f46e10c47"
   dependencies:
     chalk "^1.0.0"
     minimist "^1.2.0"
     vinyl "^2.0.1"
     vinyl-sourcemaps-apply "^0.2.0"
   optionalDependencies:
-    google-closure-compiler-linux "^20180805.0.0"
-    google-closure-compiler-osx "^20180805.0.0"
+    google-closure-compiler-linux "^20180910.0.1"
+    google-closure-compiler-osx "^20180910.0.1"
 
 graceful-fs@^4.1.11, graceful-fs@^4.1.2:
   version "4.1.11"
@@ -3135,9 +3131,9 @@ lru-cache@^4.0.1:
     pseudomap "^1.0.2"
     yallist "^2.1.2"
 
-magic-string@0.25.0:
-  version "0.25.0"
-  resolved "https://registry.yarnpkg.com/magic-string/-/magic-string-0.25.0.tgz#1f3696f9931ff0a1ed4c132250529e19cad6759b"
+magic-string@0.25.1:
+  version "0.25.1"
+  resolved "https://registry.yarnpkg.com/magic-string/-/magic-string-0.25.1.tgz#b1c248b399cd7485da0fe7385c2fc7011843266e"
   dependencies:
     sourcemap-codec "^1.4.1"
 
