@@ -23,11 +23,11 @@
       <h2>{`Open Tabs (${_tabs.length}/${_tabsRaw.length})`}</h2>
 
       {#each _tabs as _item}
-        <!--
-          TODO: Figure out a more elegant way of doing this onclick handler; try to
-          keep the LinkItem as simple as possible.
-        -->
-        <LinkItem _url="{_item.url}" _title="{_item.title}" on:click="_onTabClick(_item, event)" />
+        <!-- XXX: This is the same as <LinkItem> but with a click handler -->
+        <a href="{_item.url}" title="{_item.title}" on:click="_onTabClick(_item, event)">
+          <img src="chrome://favicon/{_item.url}">
+          {_item.title}
+        </a>
       {/each}
     {:elseif _section === 'Top Sites'}
 
