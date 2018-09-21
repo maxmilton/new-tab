@@ -22,15 +22,13 @@
   const FONT = '18px sans-serif';
   const TITLE_MAX_WIDTH = 144;
   const FAVICON_WIDTH = 16;
-  const FAVICON_PADDING = 4; // margin right
+  const FAVICON_MARGIN = 4; // margin right
   const ITEM_PADDING = 13 + 13; // padding left + right
 
-  // reusing the same canvas is much faster
-  const canvas = document.createElement('canvas').getContext('2d');
-  // TODO: Enable once OffscreenCanvas has support
-  // const canvas = (new OffscreenCanvas(0, 0)).getContext('2d');
-  canvas.font = FONT;
-  const ellipsisWidth = canvas.measureText('…').width;
+  // reuse the same canvas
+  const canvas2d = (new OffscreenCanvas(0, 0)).getContext('2d');
+  canvas2d.font = FONT;
+  const ellipsisWidth = canvas2d.measureText('…').width;
   const titleMaxInnerWidth = TITLE_MAX_WIDTH - ellipsisWidth;
 
   export default {
@@ -71,21 +69,22 @@
         const { length } = _bookmarksBar;
         const otherBookmarksWidth = !_bookmarksOther.children.length
           ? 0
-          : canvas.measureText(_bookmarksOther.title).width + ITEM_PADDING;
+          : canvas2d.measureText(_bookmarksOther.title).width + ITEM_PADDING;
         /* eslint-disable-next-line max-len */
-        const bookmarksBarWidth = this.refs.b.offsetWidth - ITEM_PADDING - FAVICON_PADDING - otherBookmarksWidth;
+        const bookmarksBarWidth = this.refs.b.offsetWidth - ITEM_PADDING - FAVICON_MARGIN - otherBookmarksWidth;
         let _maxItems = 0;
         let width = 0;
 
         for (; _maxItems < length; _maxItems += 1) {
           const { children, title } = _bookmarksBar[_maxItems];
+          const hasTitle = title !== undefined;
           /* eslint-disable-next-line no-nested-ternary */
-          const faviconWidth = children
+          const faviconWidth = children !== undefined
             ? 0
-            : title
-              ? FAVICON_WIDTH + FAVICON_PADDING
+            : hasTitle
+              ? FAVICON_WIDTH + FAVICON_MARGIN
               : FAVICON_WIDTH;
-          const realTitleWidth = title ? canvas.measureText(title).width : 0;
+          const realTitleWidth = hasTitle ? canvas2d.measureText(title).width : 0;
           const titleWidth = realTitleWidth > titleMaxInnerWidth ? TITLE_MAX_WIDTH : realTitleWidth;
           const itemWidth = ITEM_PADDING + faviconWidth + titleWidth;
           const nextWidth = width + itemWidth;
