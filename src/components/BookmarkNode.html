@@ -1,6 +1,6 @@
 <!--
-  FIXME: Try to prevent empty comment anchors from being added to the
-  DOM since these bookmarks are static.
+  FIXME: Prevent empty comment anchors from being added to the DOM since these
+  bookmarks are static.
 -->
 
 {#if _node.children === undefined}
@@ -18,7 +18,7 @@
     on:mouseenter="_handleMouseEnter()"
     on:mouseleave="_handleMouseLeave()"
   >
-    {_node.title}
+    {shorten(_node.title, _max)}
 
     {#if _lvl !== 0}
       <div class="caret">▸</div>
@@ -42,12 +42,16 @@
 
 <script>
   import LinkItem from './LinkItem.html';
+  import { shorten } from '../common.js';
 
   const EVENT_NAME = 'open';
   const OPEN_DELAY = 200;
   const CLOSE_DELAY = 400;
 
   export default {
+    helpers: {
+      shorten,
+    },
     components: {
       LinkItem,
     },
