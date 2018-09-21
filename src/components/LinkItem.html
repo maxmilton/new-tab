@@ -21,13 +21,17 @@
   :global(a),
   :global(.item) {
     display: block;
-    padding: 13px;
+    padding: 13px 0;
     color: var(--t);
     white-space: nowrap;
 
-    #bookmarks &:hover {
+    #bookmarks & {
+      padding: 13px;
+
+      &:hover {
       background-color: var(--c);
     }
+  }
   }
 
   /* all <img> are favicons */
