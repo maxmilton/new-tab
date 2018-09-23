@@ -1,0 +1,147 @@
+<div
+  class="item folder{endNode ? ' right' : ''}"
+  title="{_node.title}"
+  on:mouseenter="handleMouseEnter()"
+  on:mouseleave="handleMouseLeave()"
+>
+  {shorten(_node.title, maxLen)}
+
+  {#if lvl !== 0}
+    <div class="caret">▸</div>
+  {/if}
+
+  {#if isOpen}
+
+    <!-- subfolder -->
+
+    <div class="subfolder{endNode ? ' left' : ''}">
+      {#each _node.children as childNode}
+        <BookmarkNode _node="{childNode}" lvl="{lvl + 1}" maxLen="{40}"/>
+      {:else}
+        <div class="item">(empty)</div>
+      {/each}
+    </div>
+  {/if}
+</div>
+
+<script>
+  import BookmarkNode from './BookmarkNode.js';
+  import { shorten } from '../common.js';
+
+  const EVENT_NAME = 'open';
+  const OPEN_DELAY = 200;
+  const CLOSE_DELAY = 400;
+
+  export default {
+    helpers: {
+      shorten,
+    },
+    components: {
+      BookmarkNode,
+    },
+    // data: () => ({
+    //   isOpen: false,
+    //   endNode: false,
+    // }),
+    oncreate() {
+      this.openTimer = null;
+      this.closeTimer = null;
+    },
+    ondestroy() {
+      // clean up listener to prevent memory leaks
+      if (this.openListener) this.openListener.cancel();
+    },
+    methods: {
+      // set up event listener to close subfolder when another opens
+      onOpen() {
+        this.openListener = this.root.on(EVENT_NAME, (lvl) => {
+          if (this.get().isOpen) {
+            if (lvl === this.get().lvl) {
+              this.set({ isOpen: false });
+              this.resetCloseTimer();
+            }
+          }
+        });
+      },
+
+      // subfolder mouse enter
+      handleMouseEnter() {
+        if (this.get().isOpen) {
+          this.resetCloseTimer();
+        } else {
+          // delay to prevent accidental folder open
+          this.openTimer = setTimeout(() => {
+            this.root.fire(EVENT_NAME, this.get().lvl);
+            this.set({ isOpen: true });
+            this.onOpen();
+          }, OPEN_DELAY);
+        }
+      },
+
+      // subfolder mouse leave
+      handleMouseLeave() {
+        // reset open timer
+        if (this.openTimer !== null) {
+          clearTimeout(this.openTimer);
+          this.openTimer = null;
+        }
+
+        // set up subfolder close timer
+        if (this.get().isOpen) {
+          this.closeTimer = setTimeout(() => {
+            this.set({ isOpen: false });
+          }, CLOSE_DELAY);
+        }
+      },
+
+      resetCloseTimer() {
+        if (this.closeTimer !== null) {
+          clearTimeout(this.closeTimer);
+          this.closeTimer = null;
+        }
+      },
+    },
+  };
+</script>
+
+<style type="text/postcss" global>
+  .folder {
+    position: relative;
+  }
+
+  .caret {
+    float: right;
+    padding-left: 12px;
+  }
+
+  :global(.subfolder) {
+    position: absolute;
+    top: 40px;
+    left: 0;
+    background: var(--c0);
+    box-shadow: var(--s0);
+
+    & & {
+      top: 0;
+      left: 100%;
+    }
+  }
+
+  /* bookmark item pushed to the right */
+  .right {
+    width: 100%;
+    text-align: right;
+  }
+
+  /* folder which opens to the left */
+  .left {
+    right: 0;
+    left: initial;
+    text-align: initial;
+
+    :global(.subfolder) {
+      right: 100%;
+      left: initial;
+    }
+  }
+</style>

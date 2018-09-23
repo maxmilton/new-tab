@@ -3,8 +3,6 @@ import path from 'path';
 import preprocessMarkup from '@minna-ui/svelte-preprocess-markup';
 import preprocessStyle from '@minna-ui/svelte-preprocess-style';
 import svelte from 'rollup-plugin-svelte';
-import resolve from 'rollup-plugin-node-resolve';
-import commonjs from 'rollup-plugin-commonjs';
 import compiler from '@ampproject/rollup-plugin-closure-compiler';
 import { createFilter } from 'rollup-pluginutils'; // eslint-disable-line import/no-extraneous-dependencies
 import { plugin as analyze } from 'rollup-plugin-analyzer';
@@ -117,14 +115,14 @@ const svelteOpts = {
     ...(dev ? {} : { markup: preprocessMarkup({
       unsafeWhitespace: true,
       unsafe: true,
+
+      // XXX: Removes even more " " textNodes but can break the app so be mindful
+      trimCustomFragments: true,
+      removeComments: true,
     }) }),
     style: preprocessStyle(),
   },
   emitCss: true,
-};
-
-const analyzeOpts = {
-  showExports: true,
 };
 
 const watch = {
@@ -147,8 +145,6 @@ export default [
     },
     plugins: [
       svelte(svelteOpts),
-      resolve(),
-      commonjs(),
       !dev && compiler(compilerOpts),
       makeHtml({
         template: htmlTemplate,
@@ -159,7 +155,7 @@ export default [
         // loader.js -- could it be part of `makeHtml` to make it generic and reusable?
         content: '<script>chrome.storage.local.get(null,a=>{a.t&&(document.body.className=a.t)});</script>%CSS%<script src=n.js async></script>',
       }),
-      !dev && analyze(analyzeOpts),
+      !dev && analyze(),
     ],
   },
 
@@ -180,7 +176,7 @@ export default [
         file: 'dist/s.html',
         content: '%CSS%<script src=s.js async></script>',
       }),
-      !dev && analyze(analyzeOpts),
+      !dev && analyze(),
     ],
   },
 ];

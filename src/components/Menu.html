@@ -20,9 +20,11 @@
 
     <hr> -->
 
+    <!-- htmlmin:ignore -->
     {@html '<a href=chrome-search://local-ntp/local-ntp.html class=menu-item>Open Default Tab</a><a href=chrome://bookmarks/ class=menu-item>Bookmarks Manager</a><a href=chrome://downloads/ class=menu-item>Downloads</a><a href=chrome://history/ class=menu-item>History</a><a href=chrome://settings/passwords class=menu-item>Passwords</a><hr>'}
+    <!-- htmlmin:ignore -->
 
-    <a href="" class="menu-item" on:click="_settings(event)">
+    <a href="" class="menu-item" on:click="openSettings(event)">
       New Tab Settings
     </a>
     <a href="https://github.com/MaxMilton/new-tab/issues" class="menu-item">
@@ -34,7 +36,7 @@
 <script>
   export default {
     methods: {
-      _settings(event) {
+      openSettings(event) {
         event.stopPropagation();
         event.preventDefault();
         chrome.runtime.openOptionsPage();
@@ -51,7 +53,6 @@
 
   .menu-item {
     display: block;
-    padding: 9px 0;
     color: var(--t);
   }
 

@@ -1,19 +1,21 @@
 <div id="bookmarks" ref:b>
-  {#each _visible as _bookmark}
-    <BookmarkNode _node="{_bookmark}" _max="{15}" _lvl="{0}" />
+  {#each visibleNodes as _node}
+    <!-- htmlmin:ignore -->
+    <BookmarkNode {_node} maxLen="{15}" lvl="{0}"/>
+    <!-- htmlmin:ignore -->
   {/each}
 
-  {#if _overflow.children.length}
-    <BookmarkNode _node="{_overflow}" _lvl="{0}" _max="{40}" _endNode />
+  {#if overflowNodes.children.length}
+    <BookmarkNode _node="{overflowNodes}" lvl="{0}" maxLen="{40}" endNode/>
   {/if}
 
-  {#if _bookmarksOther.children.length}
-    <BookmarkNode _node="{_bookmarksOther}" _lvl="{0}" _max="{40}" _endNode />
+  {#if bookmarksOther.children.length}
+    <BookmarkNode _node="{bookmarksOther}" lvl="{0}" maxLen="{40}" endNode/>
   {/if}
 </div>
 
 <script>
-  import BookmarkNode from './BookmarkNode.html';
+  import BookmarkNode from './BookmarkNode.js';
 
   // Get title text width using the 2d canvas measureText() method as it's
   // faster than adding an element to the DOM but we need to manually
@@ -26,7 +28,7 @@
   const ITEM_PADDING = 13 + 13; // padding left + right
 
   // reuse the same canvas
-  const canvas2d = (new OffscreenCanvas(0, 0)).getContext('2d');
+  const canvas2d = new OffscreenCanvas(0, 0).getContext('2d');
   canvas2d.font = FONT;
   const ellipsisWidth = canvas2d.measureText('…').width;
   const titleMaxInnerWidth = TITLE_MAX_WIDTH - ellipsisWidth;
@@ -36,47 +38,51 @@
       BookmarkNode,
     },
     data: () => ({
-      _bookmarksBar: [],
-      _bookmarksOther: { children: []},
-      _maxItems: 0,
+      bookmarksBar: [],
+      bookmarksOther: { children: []},
+      maxItems: 0,
     }),
     computed: {
-      _visible: ({ _bookmarksBar, _maxItems }) => _bookmarksBar.slice(0, _maxItems),
-      _overflow: ({ _bookmarksBar, _maxItems }) => ({ title: '»', children: _bookmarksBar.slice(_maxItems) }),
+      visibleNodes: ({ bookmarksBar, maxItems }) => bookmarksBar.slice(0, maxItems),
+      overflowNodes: ({ bookmarksBar, maxItems }) => ({ title: '»', children: bookmarksBar.slice(maxItems) }),
     },
+
     oncreate() {
       chrome.bookmarks.getTree((tree) => {
         this.set({
-          _bookmarksBar: tree[0].children[0].children,
-          _bookmarksOther: tree[0].children[1],
+          bookmarksBar: tree[0].children[0].children,
+          bookmarksOther: tree[0].children[1],
         });
       });
 
       window.addEventListener('resize', () => {
-        this._handleResize();
+        this.handleResize();
       });
     },
+
+    /** @return {void=} */
     onstate({ changed, previous }) {
       if (!previous) return;
 
-      if (changed._bookmarksBar) {
-        this._handleResize();
+      if (changed.bookmarksBar) {
+        this.handleResize();
       }
     },
+
     methods: {
-      _handleResize() {
-        const { _bookmarksBar, _bookmarksOther } = this.get();
-        const { length } = _bookmarksBar;
-        const otherBookmarksWidth = !_bookmarksOther.children.length
+      handleResize() {
+        const { bookmarksBar, bookmarksOther } = this.get();
+        const { length } = bookmarksBar;
+        const otherBookmarksWidth = !bookmarksOther.children.length
           ? 0
-          : canvas2d.measureText(_bookmarksOther.title).width + ITEM_PADDING;
+          : canvas2d.measureText(bookmarksOther.title).width + ITEM_PADDING;
         /* eslint-disable-next-line max-len */
         const bookmarksBarWidth = this.refs.b.offsetWidth - ITEM_PADDING - FAVICON_MARGIN - otherBookmarksWidth;
-        let _maxItems = 0;
+        let maxItems = 0;
         let width = 0;
 
-        for (; _maxItems < length; _maxItems += 1) {
-          const { children, title } = _bookmarksBar[_maxItems];
+        for (; maxItems < length; maxItems += 1) {
+          const { children, title } = bookmarksBar[maxItems];
           const hasTitle = title !== undefined;
           /* eslint-disable-next-line no-nested-ternary */
           const faviconWidth = children !== undefined
@@ -94,7 +100,7 @@
           width = nextWidth;
         }
 
-        this.set({ _maxItems });
+        this.set({ maxItems });
       },
     },
   };
