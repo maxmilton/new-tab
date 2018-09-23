@@ -1,6 +1,7 @@
+// FIXME: Mock OffscreenCanvas()
+
 'use strict';
 
-require('jest-canvas-mock');
 const App = require('../src/App.html');
 
 describe('App root component', () => {
