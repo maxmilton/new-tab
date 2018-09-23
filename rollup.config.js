@@ -3,8 +3,6 @@ import path from 'path';
 import preprocessMarkup from '@minna-ui/svelte-preprocess-markup';
 import preprocessStyle from '@minna-ui/svelte-preprocess-style';
 import svelte from 'rollup-plugin-svelte';
-import resolve from 'rollup-plugin-node-resolve';
-import commonjs from 'rollup-plugin-commonjs';
 import compiler from '@ampproject/rollup-plugin-closure-compiler';
 import { createFilter } from 'rollup-pluginutils'; // eslint-disable-line import/no-extraneous-dependencies
 import { plugin as analyze } from 'rollup-plugin-analyzer';
@@ -21,13 +19,13 @@ const compilerOpts = {
     path.join(__dirname, 'component-externs.js'),
   ],
   compilation_level: 'ADVANCED',
-  language_in: 'ECMASCRIPT_2017',
-  // language_out: 'ECMASCRIPT5_STRICT', // XXX: Experimental
+  // language_in: 'ECMASCRIPT_NEXT',
+  // language_out: 'STABLE',
   charset: 'UTF-8',
-  strict_mode_input: true,
-  use_types_for_optimization: true,
-  warning_level: 'VERBOSE',
-  // jscomp_warning: '*', // FIXME: Broken upstream; https://git.io/fAlzj
+  // strict_mode_input: true,
+  // use_types_for_optimization: true,
+  // warning_level: 'VERBOSE',
+  // jscomp_warning: '*',
   // jscomp_error: '*',
   jscomp_off: 'duplicate', // FIXME: Deprecated `method` var
 
@@ -117,14 +115,14 @@ const svelteOpts = {
     ...(dev ? {} : { markup: preprocessMarkup({
       unsafeWhitespace: true,
       unsafe: true,
+
+      // XXX: Removes even more " " textNodes but can break the app so be mindful
+      trimCustomFragments: true,
+      removeComments: true,
     }) }),
     style: preprocessStyle(),
   },
   emitCss: true,
-};
-
-const analyzeOpts = {
-  showExports: true,
 };
 
 const watch = {
@@ -138,6 +136,7 @@ writeFile(`${__dirname}/dist/manifest.json`, JSON.stringify(manifest), catchErr)
 export default [
   /** New Tab Page app */
   {
+    watch,
     input: 'src/app.js',
     output: {
       sourcemap: dev,
@@ -146,25 +145,23 @@ export default [
     },
     plugins: [
       svelte(svelteOpts),
-      resolve(),
-      commonjs(),
-      !dev && compiler({ ...compilerOpts }),
+      !dev && compiler(compilerOpts),
       makeHtml({
         template: htmlTemplate,
         file: 'dist/n.html',
         title: 'New Tab',
-        // content: '%CSS%<script src=n.js async></script>',
-        // XXX: The first script is `loader.js` run through closure compiler
-        // TODO: Automate this again + manifest hash so it's easy to make changes to loader.js
+        // XXX: First script is `loader.js` run through closure compiler + manual tweaks
+        // TODO: Automate this again + manifest hash so it's easy to make changes to
+        // loader.js -- could it be part of `makeHtml` to make it generic and reusable?
         content: '<script>chrome.storage.local.get(null,a=>{a.t&&(document.body.className=a.t)});</script>%CSS%<script src=n.js async></script>',
       }),
-      !dev && analyze(analyzeOpts),
+      !dev && analyze(),
     ],
-    watch,
   },
 
   /** Settings app */
   {
+    watch,
     input: 'src/settings.js',
     output: {
       sourcemap: dev,
@@ -173,14 +170,13 @@ export default [
     },
     plugins: [
       svelte(svelteOpts),
-      !dev && compiler({ ...compilerOpts }),
+      !dev && compiler(compilerOpts),
       makeHtml({
         template: htmlTemplate,
         file: 'dist/s.html',
         content: '%CSS%<script src=s.js async></script>',
       }),
-      !dev && analyze(analyzeOpts),
+      !dev && analyze(),
     ],
-    watch,
   },
 ];

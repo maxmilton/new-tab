@@ -14,7 +14,7 @@
   import BookmarkGroup from './components/BookmarkGroup.html';
   import Menu from './components/Menu.html';
 
-  window.addEventListener('click', handleLinkClick);
+  document.addEventListener('click', handleLinkClick);
 
   export default {
     components: {
@@ -33,7 +33,12 @@
     margin: 80px 0;
     overflow-y: scroll; /* prevents jump on load */
     font-size: 18px;
-    line-height: 1;
+    /**
+     * Normally you would use a unitless value for line-height but this is kind
+     * of a hack for alignment with the minimum possible style properties. Same
+     * as bookmark bar height.
+     */
+    line-height: 41px;
     text-rendering: optimizeSpeed;
     font-variant-ligatures: none;
     color: var(--t);

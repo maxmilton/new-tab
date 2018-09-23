@@ -1,24 +1,22 @@
-<a href="{_url}" title="{_title}" on:click="fire('click', event)">
-  <img src="chrome://favicon/{_url}">
-  <!--
-    TODO: Try to accomplish the same short text with CSS but without adding any
-    wrapper elements.
-  -->
-  {_shorten(_title, _max)}
+<!--
+  TODO: Try to accomplish the same short text like shorten() but with CSS only
+  and without  adding any wrapper elements.
+
+  TODO: Add padding to img if there is a textNode but try to do it without
+  using JS based logic to keep the component logic free.
+-->
+
+<a href="{_node.url}" title="{_node.title}">
+  <img src="chrome://favicon/{_node.url}" class="{_node.title && 'pad'}">
+  {shorten(_node.title, maxLen)}
 </a>
 
 <script>
+  import { shorten } from '../common.js';
+
   export default {
     helpers: {
-      _shorten(text, max) {
-        if (max === undefined) {
-          return text;
-        }
-
-        return text.length > max
-          ? `${text.slice(0, max)}…`
-          : text;
-      },
+      shorten,
     },
   };
 </script>
@@ -27,12 +25,15 @@
   :global(a),
   :global(.item) {
     display: block;
-    padding: 13px 7px;
     color: var(--t);
     white-space: nowrap;
 
-    #bookmarks &:hover {
-      background-color: var(--c);
+    #bookmarks & {
+      padding: 0 13px;
+
+      &:hover {
+        background-color: var(--c);
+      }
     }
   }
 
@@ -40,6 +41,9 @@
   img {
     width: 16px;
     height: 16px; /* prevents slight realignment jump on initial load */
-    margin: 0 4px;
+  }
+
+  .pad {
+    margin: 0 6px 0 0;
   }
 </style>

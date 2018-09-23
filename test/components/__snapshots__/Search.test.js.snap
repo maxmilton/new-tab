@@ -3,17 +3,11 @@
 exports[`Search component renders correctly 1`] = `
 "<div class=\\"container\\"><input id=\\"search\\" placeholder=\\"Search browser…\\" autocomplete=\\"off\\">
 
-  
-
   <h2>Open Tabs (0/0)</h2>
 
-  
+      <!----><!----><!----><!----><h2>Top Sites (0/0)</h2>
 
-  
 
-  
 
-  <h2>Top Sites (0/0)</h2>
-
-  </div>"
+<!----><!----></div>"
 `;

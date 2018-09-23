@@ -1,69 +1,42 @@
-<!--
-  XXX: The h2 titles are implemented abnormally to get around a current Svelte
-  limitation where it creates multiple text nodes instead of realising there's
-  multiple text nodes that could be combined into one. Once Svelte has this
-  optimisation these titles should be refactored.
--->
-
 <div class="container">
   <input
     id="search"
-    bind:value="_searchText"
+    bind:value="searchText"
     ref:s
     placeholder="Search browser…"
     autocomplete="off"
-    on:keyup="_cancelSearch(event.key)"
+    on:keyup="cancelSearch(event.key)"
   >
 
-  {#each _order as _section}
-    {#if _section === 'Open Tabs'}
+  {#each resultsOrder as resultSection}
+    {#if resultSection === 'Open Tabs'}
+      <h2>{`Open Tabs (${tabsList.length}/${tabsRaw.length})`}</h2>
 
-      <!-- Open Tabs -->
-
-      <h2>{`Open Tabs (${_tabs.length}/${_tabsRaw.length})`}</h2>
-
-      {#each _tabs as _item}
-        <!--
-          TODO: Figure out a more elegant way of doing this onclick handler; try to
-          keep the LinkItem as simple as possible.
-        -->
-        <LinkItem _url="{_item.url}" _title="{_item.title}" on:click="_onTabClick(_item, event)" />
+      {#each tabsList as _node}
+        <!-- XXX: This is the same as <LinkItem> but with a click handler -->
+        <a href="{_node.url}" title="{_node.title}" on:click="handleTabClick(_node, event)">
+          <img src="chrome://favicon/{_node.url}" class="{_node.title ? 'pad' : ''}">
+          {_node.title}
+        </a>
       {/each}
-    {:elseif _section === 'Top Sites'}
-
-      <!-- Top Sites -->
-
-      <h2>{`Top Sites (${_topSites.length}/${_topSitesRaw.length})`}</h2>
-
-      {#each _topSites as _item}
-        <LinkItem _url="{_item.url}" _title="{_item.title}" />
-      {/each}
-    {:elseif _isSearching && _section === 'Bookmarks'}
-
-      <!-- Bookmarks -->
-
-      <h2>{`Bookmarks (${_bookmarks.length}/${_bookmarksRaw.length})`}</h2>
-
-      {#each _bookmarks as _item}
-        <LinkItem _url="{_item.url}" _title="{_item.title}" />
-      {/each}
-
-      {#if _bookmarks.length < _bookmarksRaw.length}
-        <button on:click="_loadMoreBookmarks(_bookmarks.length)">Show more ▾</button>
-      {/if}
-    {:elseif _isSearching && _section === 'History'}
-
-      <!-- History -->
-
-      <h2>{`History (${_history.length}/${_historyRaw.length})`}</h2>
-
-      {#each _history as _item}
-        <LinkItem _url="{_item.url}" _title="{_item.title}" />
-      {/each}
-
-      {#if _history.length < _historyRaw.length}
-        <button on:click="_loadMoreHistory(_history.length)">Show more ▾</button>
-      {/if}
+    {:elseif resultSection === 'Top Sites'}
+      <SearchResults
+        resultsName="Top Sites"
+        resultsList="{topSitesList}"
+        resultsRaw="{topSitesRaw}"
+      />
+    {:elseif isSearching && resultSection === 'Bookmarks'}
+      <SearchResults
+        resultsName="Bookmarks"
+        resultsList="{bookmarksList}"
+        resultsRaw="{bookmarksRaw}"
+      />
+    {:elseif isSearching && resultSection === 'History'}
+      <SearchResults
+        resultsName="History"
+        resultsList="{historyList}"
+        resultsRaw="{historyRaw}"
+      />
     {/if}
   {/each}
 </div>
@@ -71,19 +44,19 @@
 <script>
   import { DEFAULT_ORDER, debounce } from '../common.js';
   import LinkItem from './LinkItem.html';
+  import SearchResults from './SearchResults.html';
 
   const SEARCH_DEBOUNCE_DELAY = 260; // ms
   const DEFAULT_RESULTS_AMOUNT = 10;
-  const MORE_RESULTS_AMOUNT = 100;
 
   // URL protocol regex
   const protocol = /^.*?:\/\//;
 
   /**
-   * Check for a matching title or URL.
+   * Check if either title or URL match a query.
    * @this {string} Search query
    * @param {{ title: string, url: string }} item
-   * @returns {boolean}
+   * @return {boolean}
    */
   function searchFilter({ title, url }) {
     return title.toLowerCase().indexOf(this) > -1
@@ -94,47 +67,48 @@
   export default {
     components: {
       LinkItem,
+      SearchResults,
     },
     data: () => ({
-      _order: DEFAULT_ORDER,
-      _searchText: '',
-      _bookmarksRaw: [],
-      _bookmarks: [],
-      _historyRaw: [],
-      _history: [],
-      _tabsRaw: [],
-      _tabs: [],
-      _topSites: [],
-      _topSitesRaw: [],
+      bookmarksList: [],
+      bookmarksRaw: [],
+      historyList: [],
+      historyRaw: [],
+      resultsOrder: DEFAULT_ORDER,
+      searchText: '',
+      tabsList: [],
+      tabsRaw: [],
+      topSitesList: [],
+      topSitesRaw: [],
     }),
     computed: {
-      _isSearching: ({ _searchText }) => !!_searchText,
+      isSearching: ({ searchText }) => !!searchText,
     },
 
     oncreate() {
       chrome.storage.local.get(null, (settings) => {
         /* eslint-disable dot-notation */ // prevent closure mangling
         if (settings['o']) {
-          this.set({ _order: settings['o'] });
+          this.set({ resultsOrder: settings['o'] });
         }
         /* eslint-enable */
       });
 
-      const getTabs = () => this._getTabs();
+      const getTabs = () => this.getTabs();
 
       getTabs();
 
       chrome.topSites.get((sites) => {
         this.set({
-          _topSites: sites,
-          _topSitesRaw: sites,
+          topSitesList: sites,
+          topSitesRaw: sites,
         });
       });
 
-      this._onSearch = debounce(this._search, SEARCH_DEBOUNCE_DELAY);
+      this.onSearch = debounce(this.doSearch, SEARCH_DEBOUNCE_DELAY);
 
       // bring focus to search input when clicking anywhere on the page
-      window.addEventListener('click', () => {
+      document.addEventListener('click', () => {
         this.refs.s.focus();
       });
 
@@ -145,70 +119,75 @@
       chrome.tabs.onAttached.addListener(getTabs);
     },
 
-    // FIXME: When search is active, rerun when tab events trigger and _getTabs() is run
+    // FIXME: When search is active, rerun when tab events trigger and getTabs() is run
+    /** @return {void=} */
     onstate({ changed, previous }) {
       if (!previous) return;
 
-      if (changed._searchText) {
-        this._onSearch();
+      if (changed.searchText) {
+        this.onSearch();
       }
     },
 
+    /** @return {void=} */
     methods: {
-      _search() { // eslint-disable-line consistent-return
-        const { _searchText, _tabsRaw, _topSitesRaw } = this.get();
+      doSearch() { // xxeslint-disable-line consistent-return
+        const { searchText, tabsRaw, topSitesRaw } = this.get();
 
         // reset search when input is empty
-        if (_searchText === '') {
-          return this.set({
-            _bookmarks: [],
-            _history: [],
-            _tabs: _tabsRaw,
-            _topSites: _topSitesRaw,
+        if (searchText === '') {
+          this.set({
+            bookmarksList: [],
+            historyList: [],
+            tabsList: tabsRaw,
+            topSitesList: topSitesRaw,
           });
+          return;
         }
 
         // search history (run first since it takes the longest)
-        chrome.history.search({ text: _searchText }, (results) => {
+        chrome.history.search({ text: searchText }, (results) => {
           this.set({
-            _historyRaw: results,
-            _history: results.slice(0, DEFAULT_RESULTS_AMOUNT),
+            historyRaw: results,
+            historyList: results.slice(0, DEFAULT_RESULTS_AMOUNT),
           });
         });
 
         // search bookmarks
-        chrome.bookmarks.search(_searchText, (results) => {
+        chrome.bookmarks.search(searchText, (results) => {
           this.set({
-            _bookmarksRaw: results,
-            _bookmarks: results.slice(0, DEFAULT_RESULTS_AMOUNT),
+            bookmarksRaw: results,
+            bookmarksList: results.slice(0, DEFAULT_RESULTS_AMOUNT),
           });
         });
 
         this.set({
           // search open tabs
-          _tabs: _tabsRaw.filter(searchFilter, _searchText),
+          tabsList: tabsRaw.filter(searchFilter, searchText),
           // search top sites
-          _topSites: _topSitesRaw.filter(searchFilter, _searchText),
+          topSitesList: topSitesRaw.filter(searchFilter, searchText),
         });
       },
 
-      /**
-       * Query the browser for a list of the currently open tabs.
-       */
-      _getTabs() {
+      /** Query the browser for a list of the currently open tabs. */
+      getTabs() {
         chrome.tabs.query({}, (tabs) => {
-          if (this.get()._searchText === '') {
+          if (this.get().searchText === '') {
             this.set({
-              _tabs: tabs,
-              _tabsRaw: tabs,
+              tabsList: tabs,
+              tabsRaw: tabs,
             });
           } else {
-            this.set({ _tabsRaw: tabs });
+            this.set({ tabsRaw: tabs });
           }
         });
       },
 
-      _onTabClick(tab, event) {
+      /**
+       * @param {Tab} tab
+       * @param {MouseEvent}
+       */
+      handleTabClick(tab, event) {
         event.preventDefault();
 
         // update current tab
@@ -227,25 +206,17 @@
         });
       },
 
-      _cancelSearch(key) {
+      cancelSearch(key) {
         if (key === 'Escape') {
-          const { _tabsRaw, _topSitesRaw } = this.get();
+          const { tabsRaw, topSitesRaw } = this.get();
           this.set({
-            _searchText: '',
-            _bookmarks: [],
-            _history: [],
-            _tabs: _tabsRaw,
-            _topSites: _topSitesRaw,
+            searchText: '',
+            bookmarksList: [],
+            historyList: [],
+            tabsList: tabsRaw,
+            topSitesList: topSitesRaw,
           });
         }
-      },
-
-      _loadMoreBookmarks(length) {
-        this.set({ _bookmarks: this.get()._bookmarksRaw.slice(0, length + MORE_RESULTS_AMOUNT) });
-      },
-
-      _loadMoreHistory(length) {
-        this.set({ _history: this.get()._historyRaw.slice(0, length + MORE_RESULTS_AMOUNT) });
       },
     },
   };

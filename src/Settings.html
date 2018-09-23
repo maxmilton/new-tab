@@ -1,6 +1,6 @@
 <div class="row">
   <label>Theme:</label>
-  <select bind:value="_theme">
+  <select bind:value="pageTheme">
     <option value="d">Dark</option>
     <option value="">Light</option> <!-- default -->
   </select>
@@ -8,21 +8,21 @@
 
 <div class="row">
   <label>List order:</label>
-  <button on:click="_resetOrder()">Reset</button>
+  <button on:click="resetOrder()">Reset</button>
   <ul>
-    {#each _order as item, index (item)}
+    {#each resultsOrder as _item, index (_item)}
       <li
         class="item"
         draggable="true"
-        on:dragstart="_handleDragStart(event, index)"
-        on:dragend="_handleDragEnd(event)"
-        on:dragover="_handleDragOver(event)"
-        on:dragenter="_handleDragEnter(event)"
-        on:dragleave="_handleDragLeave(event)"
-        on:drop="_handleDrop(event, index)"
+        on:dragstart="handleDragStart(event, index)"
+        on:dragend="handleDragEnd(event)"
+        on:dragover="handleDragOver(event)"
+        on:dragenter="handleDragEnter(event)"
+        on:dragleave="handleDragLeave(event)"
+        on:drop="handleDrop(event, index)"
       >
         <span class="icon">☰</span>
-        {item}
+        {_item}
       </li>
     {/each}
   </ul>
@@ -33,16 +33,16 @@
 
   export default {
     data: () => ({
-      _theme: '',
-      _order: [],
+      resultsOrder: [],
+      pageTheme: '',
     }),
     oncreate() {
       // check existing settings
       chrome.storage.local.get(null, (settings) => {
         this.set({
           /* eslint-disable dot-notation */ // prevent closure mangling
-          _theme: settings['t'],
-          _order: settings['o'] || [...DEFAULT_ORDER],
+          pageTheme: settings['t'],
+          resultsOrder: settings['o'] || [...DEFAULT_ORDER],
           /* eslint-enable */
         });
       });
@@ -51,58 +51,58 @@
       if (previous) {
         /* eslint-disable quote-props */ // prevent closure mangling
         chrome.storage.local.set({
-          't': current._theme,
-          'o': JSON.stringify(current._order) === JSON.stringify(DEFAULT_ORDER)
+          't': current.pageTheme,
+          'o': JSON.stringify(current.resultsOrder) === JSON.stringify(DEFAULT_ORDER)
             ? null
-            : current._order,
+            : current.resultsOrder,
         });
         /* eslint-enable */
       }
     },
     methods: {
-      _resetOrder() {
-        this.set({ _order: [...DEFAULT_ORDER]});
+      resetOrder() {
+        this.set({ resultsOrder: [...DEFAULT_ORDER]});
       },
 
-      _moveItem(from, to) {
-        const { _order } = this.get();
-        const item = _order[from];
+      moveItem(from, to) {
+        const { resultsOrder } = this.get();
+        const item = resultsOrder[from];
 
         // remove from previous location
-        _order.splice(from, 1);
+        resultsOrder.splice(from, 1);
 
         // add to new location
-        _order.splice(to, 0, item);
+        resultsOrder.splice(to, 0, item);
 
-        this.set({ _order });
+        this.set({ resultsOrder });
       },
 
-      _handleDragStart(event, index) {
+      handleDragStart(event, index) {
         event.dataTransfer.setData('from', index);
         event.target.classList.add('dragging');
       },
 
-      _handleDragEnd(event) {
+      handleDragEnd(event) {
         event.target.classList.remove('dragging');
       },
 
-      _handleDragOver(event) {
+      handleDragOver(event) {
         event.preventDefault();
         event.dataTransfer.dropEffect = 'move'; // eslint-disable-line no-param-reassign
       },
 
-      _handleDragEnter(event) {
+      handleDragEnter(event) {
         event.target.classList.add('over');
       },
 
-      _handleDragLeave(event) {
+      handleDragLeave(event) {
         event.target.classList.remove('over');
       },
 
-      _handleDrop(event, index) {
+      handleDrop(event, index) {
         event.preventDefault();
         const from = event.dataTransfer.getData('from');
-        this._moveItem(from, index);
+        this.moveItem(from, index);
 
         // remove class in case the dragleave event didn't fire
         event.target.classList.remove('over');
@@ -118,7 +118,7 @@
 
   select,
   button {
-    margin-left: 9px !important;
+    margin-left: 9px !important; /* stylelint-disable-line declaration-no-important */
   }
 
   .row {

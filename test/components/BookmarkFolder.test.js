@@ -1,17 +1,15 @@
 'use strict';
 
-const BookmarkItem = require('../../src/components/BookmarkItem.html');
+const BookmarkFolder = require('../../src/components/BookmarkFolder.html');
 
 const _node = {};
 
-describe('BookmarkItem component', () => {
+describe('BookmarkFolder component', () => {
   it('renders correctly', () => {
     const target = document.createElement('div');
-    new BookmarkItem({
+    new BookmarkFolder({
       target,
-      data: {
-        _node,
-      },
+      data: { _node },
     });
     expect(target.innerHTML).toMatchSnapshot();
   });

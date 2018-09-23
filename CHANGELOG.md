@@ -9,6 +9,31 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ## [Unreleased]
 
+### Added
+
+- Extract search results list into new reusable component.
+- Extract bookmarks folder into separate component and make a new bookmark node functional/routing component which conditionally renders a folder or link item. This avoids Svelte's logic to insert comment DOM nodes to anchor an `if` block in case the condition changes.
+- Some extra JSDoc comments for better development feedback in VS Code.
+
+### Changed
+
+- Rename most internal names (variables, props, functions, etc.) to remove the leading underscore and to be more descriptive and to be unique so closure compiler mangles it.
+- Use a kind of `line-height` hack to align things with minimal CSS.
+- Use `OffscreenCanvas` instead of `document.createElement('canvas')` — Chrome v69+.
+- Update dependencies.
+
+### Removed
+
+- Unnecessary dependencies.
+- Excessive (and broken) exports info during production build.
+
+### Fixed
+
+- Can't open `chrome://` bookmarks sometimes due to click event race condition.
+- All favicons have a right margin even if there is no adjacent text.
+- Excessive use of event listeners; click listener on every link item instead of just on open tab links.
+- Unnecessary white space textNodes present in DOM. Uses `trimCustomFragments` option of `html-minifier` which means now we need to add special ignore comments in some places to avoid breaking the app due to collapsed white space in attributes and props.
+
 ## [0.13.0] - 2018-09-09
 
 ### Added

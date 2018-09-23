@@ -54,3 +54,19 @@ export function handleLinkClick(event) {
     }
   }
 }
+
+/**
+ * Shorten a string to a specified length.
+ * @param {string} text Text to shorten.
+ * @param {number} max Maximum length of text.
+ * @returns {string} The shortened text.
+ */
+export function shorten(text, max) {
+  if (max === undefined) {
+    return text;
+  }
+
+  return text.length > max
+    ? `${text.slice(0, max)}…`
+    : text;
+}

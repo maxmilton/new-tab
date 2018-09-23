@@ -1,0 +1,9 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`BookmarkFolder component renders correctly 1`] = `
+"<div class=\\"item folder\\" title=\\"undefined\\">undefined
+
+  <div class=\\"caret\\">▸</div>
+
+  </div>"
+`;
