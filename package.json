@@ -19,8 +19,8 @@
     "build": "APP_RELEASE=$(git describe --always --dirty=\"-dev\") NODE_ENV=production rollup -c",
     "prebuild": "rm -rf dist && mkdir dist && cp icon* dist",
     "lint": "yarn lint:css && yarn lint:js",
-    "lint:css": "stylelint **/*.{html,css} --cache --cache-location=/tmp/",
-    "lint:js": "eslint --ignore-path .gitignore --ext js,html .",
+    "lint:css": "stylelint **/*.{css,html} --cache --cache-location=/tmp/",
+    "lint:js": "eslint --ignore-path .gitignore --ext html,js .",
     "test": "yarn lint && JEST_CIRCUS=1 jest --notify --watch",
     "test-ci": "JEST_CIRCUS=1 jest --coverage --runInBand --ci"
   },

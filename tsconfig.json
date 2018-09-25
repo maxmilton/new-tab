@@ -1,4 +1,4 @@
-// config for rich intelliSense in VSCode
+// config for rich intelliSense in VS Code
 {
   "compilerOptions": {
     "target": "esnext",
