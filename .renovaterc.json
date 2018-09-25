@@ -1,7 +1,5 @@
 {
   "extends": [
-    "config:base"
-  ],
-  "rangeStrategy": "auto",
-  "prHourlyLimit": 99
+    "@wearegenki"
+  ]
 }
