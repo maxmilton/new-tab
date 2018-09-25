@@ -116,7 +116,8 @@ const svelteOpts = {
       unsafeWhitespace: true,
       unsafe: true,
 
-      // XXX: Removes even more " " textNodes but can break the app so be mindful
+      // XXX: Removes even more " " textNodes but can break the app if it removes
+      // spaces around attributes so be mindful; use <!-- htmlmin:ignore -->
       trimCustomFragments: true,
       removeComments: true,
     }) }),
