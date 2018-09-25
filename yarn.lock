@@ -326,6 +326,10 @@
   version "10.10.3"
   resolved "https://registry.yarnpkg.com/@types/node/-/node-10.10.3.tgz#09c75a4ad84d6a3d286790bdd9489a4f8ee9906c"
 
+"@wearegenki/renovate-config@^1.0.0":
+  version "1.0.0"
+  resolved "https://registry.yarnpkg.com/@wearegenki/renovate-config/-/renovate-config-1.0.0.tgz#3b2665c76d978a0a56a76093b2657f0c4579bf7b"
+
 abab@^2.0.0:
   version "2.0.0"
   resolved "https://registry.yarnpkg.com/abab/-/abab-2.0.0.tgz#aba0ab4c5eee2d4c79d3487d85450fb2376ebb0f"
