@@ -40,14 +40,14 @@
     "crass": "0.12.3",
     "eslint": "5.6.0",
     "jest": "23.6.0",
-    "postcss": "7.0.3",
+    "postcss": "7.0.4",
     "postcss-import": "12.0.0",
     "postcss-nested": "4.1.0",
     "rollup": "0.66.2",
     "rollup-plugin-analyzer": "2.1.0",
     "rollup-plugin-svelte": "4.3.2",
     "sinon-chrome": "2.3.2",
-    "stylelint": "9.5.0",
+    "stylelint": "9.6.0",
     "svelte": "2.13.5"
   },
   "browserslist": [
