@@ -15,8 +15,8 @@
     "maxmilton"
   ],
   "scripts": {
-    "dev": "rollup -c -w",
-    "build": "APP_RELEASE=$(git describe --always --dirty=\"-dev\") NODE_ENV=production rollup -c",
+    "dev": "rollup --config --watch",
+    "build": "APP_RELEASE=$(git describe --always --dirty=\"-dev\") NODE_ENV=production rollup --config",
     "prebuild": "rm -rf dist && mkdir dist && cp icon* dist",
     "lint": "yarn lint:css && yarn lint:js",
     "lint:css": "stylelint **/*.{css,html} --cache --cache-location=/tmp/",
@@ -26,7 +26,7 @@
   },
   "dependencies": {},
   "devDependencies": {
-    "@ampproject/rollup-plugin-closure-compiler": "0.7.2",
+    "@ampproject/rollup-plugin-closure-compiler": "0.7.3",
     "@minna-ui/eslint-config": "0.13.0",
     "@minna-ui/jest-config": "0.13.0",
     "@minna-ui/stylelint-config": "0.13.0",
