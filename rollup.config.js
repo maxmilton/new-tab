@@ -26,7 +26,7 @@ const compilerOpts = {
   // warning_level: 'VERBOSE',
   // jscomp_warning: '*',
   // jscomp_error: '*',
-  jscomp_off: 'duplicate', // FIXME: Deprecated `method` var
+  jscomp_off: 'duplicate', // FIXME: Deprecated `methods` var
 
   // uncomment for debugging
   // formatting: 'PRETTY_PRINT',
