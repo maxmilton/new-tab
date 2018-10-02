@@ -5,7 +5,7 @@ import preprocessStyle from '@minna-ui/svelte-preprocess-style';
 import svelte from 'rollup-plugin-svelte';
 import compiler from '@ampproject/rollup-plugin-closure-compiler';
 import { plugin as analyze } from 'rollup-plugin-analyzer';
-import makeHtml from './rollup-plugin-make-html.js';
+import { makeHtml } from './rollup-plugins.js';
 import manifest from './manifest.js';
 
 const htmlTemplate = readFileSync(`${__dirname}/src/template.html`, 'utf8');
