@@ -40,15 +40,9 @@ function catchErr(err) { if (err) throw err; }
 const svelteOpts = {
   dev,
   preprocess: {
-    ...(dev ? {} : { markup: preprocessMarkup({
-      unsafeWhitespace: true,
-      unsafe: true,
-
-      // XXX: Removes even more " " textNodes but can break the app if it removes
-      // spaces around attributes so be mindful; use <!-- htmlmin:ignore -->
-      trimCustomFragments: true,
-      removeComments: true,
-    }) }),
+    // XXX: Level 4 removes all " " textNodes but can break the app if it removes
+    // spaces around attributes so in these cases use <!-- htmlmin:ignore -->
+    markup: preprocessMarkup({ level: dev ? 0 : 4 }),
     style: preprocessStyle(),
   },
   emitCss: true,
