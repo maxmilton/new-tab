@@ -73,7 +73,7 @@ export default [
         template,
         file: 'dist/n.html',
         title: 'New Tab',
-        // XXX: First script is `loader.js` run through closure compiler + manual tweaks
+        // first script is loader.js run through closure compiler + manual tweaks
         content: '<script>chrome.storage.local.get(null,a=>{a.t&&(document.body.className=a.t)});</script>%CSS%<script src=n.js async></script>',
       }),
       !dev && analyze(),
