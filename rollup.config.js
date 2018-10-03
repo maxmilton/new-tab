@@ -15,7 +15,7 @@ const compilerOpts = {
   externs: [
     require.resolve('google-closure-compiler/contrib/externs/chrome.js'),
     require.resolve('google-closure-compiler/contrib/externs/chrome_extensions.js'),
-    path.join(__dirname, 'component-externs.js'),
+    path.join(__dirname, 'externs.js'),
   ],
   compilation_level: 'ADVANCED',
   // language_in: 'ECMASCRIPT_NEXT',
