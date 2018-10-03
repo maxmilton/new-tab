@@ -8,7 +8,7 @@ import { plugin as analyze } from 'rollup-plugin-analyzer';
 import { makeHtml } from './rollup-plugins.js';
 import manifest from './manifest.js';
 
-const htmlTemplate = readFileSync(`${__dirname}/src/template.html`, 'utf8');
+const template = readFileSync(`${__dirname}/src/template.html`, 'utf8');
 const dev = !!process.env.ROLLUP_WATCH;
 
 const compilerOpts = {
@@ -17,20 +17,18 @@ const compilerOpts = {
     require.resolve('google-closure-compiler/contrib/externs/chrome_extensions.js'),
     path.join(__dirname, 'externs.js'),
   ],
+  charset: 'UTF-8',
   compilation_level: 'ADVANCED',
   // language_in: 'ECMASCRIPT_NEXT',
   // language_out: 'STABLE',
-  charset: 'UTF-8',
   // strict_mode_input: true,
   // use_types_for_optimization: true,
   // warning_level: 'VERBOSE',
   // jscomp_warning: '*',
   // jscomp_error: '*',
   jscomp_off: 'duplicate', // FIXME: Deprecated `methods` var
-
-  // uncomment for debugging
-  // formatting: 'PRETTY_PRINT',
   // debug: true,
+  // formatting: 'PRETTY_PRINT',
 };
 
 /**
@@ -78,12 +76,10 @@ export default [
       svelte(svelteOpts),
       !dev && compiler(compilerOpts),
       makeHtml({
-        template: htmlTemplate,
+        template,
         file: 'dist/n.html',
         title: 'New Tab',
         // XXX: First script is `loader.js` run through closure compiler + manual tweaks
-        // TODO: Automate this again + manifest hash so it's easy to make changes to
-        // loader.js -- could it be part of `makeHtml` to make it generic and reusable?
         content: '<script>chrome.storage.local.get(null,a=>{a.t&&(document.body.className=a.t)});</script>%CSS%<script src=n.js async></script>',
       }),
       !dev && analyze(),
@@ -103,7 +99,7 @@ export default [
       svelte(svelteOpts),
       !dev && compiler(compilerOpts),
       makeHtml({
-        template: htmlTemplate,
+        template,
         file: 'dist/s.html',
         content: '%CSS%<script src=s.js async></script>',
       }),
