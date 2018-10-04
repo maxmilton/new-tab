@@ -1,18 +1,12 @@
-<!--
-  TODO: Try to reduce the amount of CSS overall; reuse existing styles more
-
-  TODO: Try to reduce the number of DOM nodes
--->
-
 <BookmarkGroup/>
-<Search/><!-- htmlmin:ignore -->{@html '<div id=menu><div id=icon>☰</div><div id=dropdown><a href=chrome-search://local-ntp/local-ntp.html class=menu-item>Open Default Tab</a><a href=chrome://bookmarks/ class=menu-item>Bookmarks Manager</a><a href=chrome://downloads/ class=menu-item>Downloads</a><a href=chrome://history/ class=menu-item>History</a><a href=chrome://settings/passwords class=menu-item>Passwords</a><hr><a href="" id=o class=menu-item>New Tab Settings</a><a href=https://github.com/MaxMilton/new-tab/issues class=menu-item>Submit Bug</a></div></div>'}<!-- htmlmin:ignore -->
-<!-- <Menu/> -->
+<Search/>
+<Menu/>
 
 <script>
   import { handleLinkClick } from './common.js';
   import Search from './components/Search.html';
   import BookmarkGroup from './components/BookmarkGroup.html';
-  // import Menu from './components/Menu.html';
+  import Menu from './components/Menu.html';
 
   document.addEventListener('click', handleLinkClick);
 
@@ -20,15 +14,7 @@
     components: {
       Search,
       BookmarkGroup,
-      // Menu,
-    },
-    oncreate() {
-      /* eslint-disable-next-line no-undef, id-length */ // referencing id=o
-      o.addEventListener('click', (e) => {
-        e.stopPropagation();
-        e.preventDefault();
-        chrome.runtime.openOptionsPage();
-      });
+      Menu,
     },
   };
 </script>
@@ -64,50 +50,6 @@
     &:hover,
     &:focus {
       text-decoration: underline;
-    }
-  }
-
-  /* Menu */
-  hr {
-    border: 0;
-    border-bottom: 1px solid var(--c);
-  }
-
-  .menu-item {
-    display: block;
-    color: var(--t);
-  }
-
-  #menu {
-    position: fixed;
-    top: 90px;
-    padding: 10px 84px 84px 42px;
-    margin: -28px -84px -64px 0;
-    font-size: 20px;
-  }
-
-  #icon {
-    font-size: 30px;
-    color: var(--c1);
-  }
-
-  #dropdown {
-    position: absolute;
-    top: 10px;
-    z-index: 1;
-    padding: 18px;
-    white-space: nowrap;
-    background: var(--c0);
-    box-shadow: var(--s0);
-    opacity: 0;
-    transition: all 150ms ease-out;
-    transform: scale(0.5);
-    transform-origin: 0 10px;
-
-    #menu:hover > &,
-    #menu:focus > & {
-      opacity: 1;
-      transform: scale(1);
     }
   }
 </style>
