@@ -43,7 +43,7 @@
     "postcss": "7.0.5",
     "postcss-import": "12.0.0",
     "postcss-nested": "4.1.0",
-    "rollup": "0.66.3",
+    "rollup": "0.66.4",
     "rollup-plugin-analyzer": "2.1.0",
     "rollup-plugin-svelte": "4.3.2",
     "sinon-chrome": "2.3.2",
