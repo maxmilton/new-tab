@@ -24,7 +24,6 @@
     "test": "yarn lint && JEST_CIRCUS=1 jest --notify --watch",
     "test-ci": "JEST_CIRCUS=1 jest --coverage --runInBand --ci"
   },
-  "dependencies": {},
   "devDependencies": {
     "@ampproject/rollup-plugin-closure-compiler": "0.7.3",
     "@minna-ui/eslint-config": "0.15.0",
