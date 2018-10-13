@@ -293,10 +293,10 @@
   dependencies:
     html-minifier "3.5.20"
 
-"@minna-ui/svelte-preprocess-style@0.13.0":
-  version "0.13.0"
-  resolved "https://registry.yarnpkg.com/@minna-ui/svelte-preprocess-style/-/svelte-preprocess-style-0.13.0.tgz#3cdc543b26f7ecc09daf66f21327d7f2a61afcf6"
-  integrity sha512-BH12pmOE0P69Z6QT4SuNaQR5KbM8Q+inlzszqt7HHKUr2Qfo6MA/QQYtDUL9c3rXpXnK23wtG3VQchjXoVBxcA==
+"@minna-ui/svelte-preprocess-style@0.15.0":
+  version "0.15.0"
+  resolved "https://registry.yarnpkg.com/@minna-ui/svelte-preprocess-style/-/svelte-preprocess-style-0.15.0.tgz#133539277e6240dc36f094f7684b0ab1c11a3c21"
+  integrity sha512-MpiW40bWS8bvjMbQsgjusn6H4s32nQwnpf/UivJx+dkPKj6PDvpqp+A9PJ+SMYQ0AWq9SBjI7d0YG4NwRyuZAQ==
   dependencies:
     postcss-load-config "^2.0.0"
     postcss-selector-parser "^5.0.0-rc.3"
