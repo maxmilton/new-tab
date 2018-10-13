@@ -26,7 +26,7 @@
   dependencies:
     "@babel/highlight" "^7.0.0"
 
-"@babel/core@^7.0.0":
+"@babel/core@^7.0.0", "@babel/core@^7.1.0":
   version "7.1.2"
   resolved "https://registry.yarnpkg.com/@babel/core/-/core-7.1.2.tgz#f8d2a9ceb6832887329a7b60f9d035791400ba4e"
   integrity sha512-IFeSSnjXdhDaoysIlev//UzHZbdEmm7D0EIH2qtse9xK7mXEZQpYjs2P00XlP1qYsYvid79p+Zgg6tz1mp6iVw==
@@ -178,7 +178,7 @@
   resolved "https://registry.yarnpkg.com/@babel/parser/-/parser-7.1.2.tgz#85c5c47af6d244fab77bce6b9bd830e38c978409"
   integrity sha512-x5HFsW+E/nQalGMw7hu+fvPqnBeBaIr0lWJ2SG0PPL2j+Pm9lYvCrsZJGIgauPIENx0v10INIyFjmSNUD/gSqQ==
 
-"@babel/plugin-transform-modules-commonjs@^7.0.0":
+"@babel/plugin-transform-modules-commonjs@^7.1.0":
   version "7.1.0"
   resolved "https://registry.yarnpkg.com/@babel/plugin-transform-modules-commonjs/-/plugin-transform-modules-commonjs-7.1.0.tgz#0a9d86451cbbfb29bd15186306897c67f6f9a05c"
   integrity sha512-wtNwtMjn1XGwM0AXPspQgvmE6msSJP15CX2RVfpTSTNPLhKhaOjaIfBaVfj4iUZ/VrFSodcFedwtPg/NxwQlPA==
@@ -255,48 +255,48 @@
     lodash "^4.17.10"
     to-fast-properties "^2.0.0"
 
-"@minna-ui/eslint-config@0.13.0":
-  version "0.13.0"
-  resolved "https://registry.yarnpkg.com/@minna-ui/eslint-config/-/eslint-config-0.13.0.tgz#21b2fbe581d58f1f06c6d58c7d1edb5e58cd4a87"
-  integrity sha512-JfPVqVv0hrr6jBwcvQ+VMlpX7BMjjGqUqk4Bqc3/WNQlZHwu2jGlaFgjrX5E8T7XTbq1dyYCWdRjCPfTsp+PXQ==
+"@minna-ui/eslint-config@0.15.0":
+  version "0.15.0"
+  resolved "https://registry.yarnpkg.com/@minna-ui/eslint-config/-/eslint-config-0.15.0.tgz#7067a68cea3208b7afe3260bc0efa43c892ff7a9"
+  integrity sha512-XbJZrWUdlb6NvMyXF95BDFj8PUNllog7YrnxUKIbAc/TFwPJaPz0kkc82gocgEX0c+SyYycpNkZONH7ARhAHgQ==
   dependencies:
     eslint-config-airbnb-base "^13.1.0"
-    eslint-plugin-html "^4.0.5"
+    eslint-plugin-html "^4.0.6"
     eslint-plugin-import "^2.14.0"
-    eslint-plugin-jest "^21.22.0"
+    eslint-plugin-jest "^21.24.1"
 
-"@minna-ui/jest-config@0.13.0":
-  version "0.13.0"
-  resolved "https://registry.yarnpkg.com/@minna-ui/jest-config/-/jest-config-0.13.0.tgz#fb449255701b9937d60bcad1cb14ad2a8e38a0ce"
-  integrity sha512-EROGguDXPqM7xqSKcG3LC0lCB7r2OqiDC0A1Q59P0A7y5yAhE104KhhK+9GpwZw0iXU65DjfoODI1loMsf2Itw==
+"@minna-ui/jest-config@0.15.0":
+  version "0.15.0"
+  resolved "https://registry.yarnpkg.com/@minna-ui/jest-config/-/jest-config-0.15.0.tgz#d655f0bb87ed852abfe34d8ab49c8477c8664b3a"
+  integrity sha512-bsLl7aC492ZaSm3SSGCfz7iM40m/hI8tWNr2vyLuwDBeieujHf/fI5mRvz65/oQa/DSanLBZCCDgRQ71sk0Xqg==
   dependencies:
-    "@babel/core" "^7.0.0"
-    "@babel/plugin-transform-modules-commonjs" "^7.0.0"
-    "@types/jest" "^23.3.1"
-    "@types/node" "^10.9.4"
+    "@babel/core" "^7.1.0"
+    "@babel/plugin-transform-modules-commonjs" "^7.1.0"
+    "@types/jest" "^23.3.5"
+    "@types/node" "^10.11.7"
     babel-core "^7.0.0-bridge.0"
-    babel-jest "^23.4.2"
-    jest-circus "^23.5.0"
+    babel-jest "^23.6.0"
+    jest-circus "^23.6.0"
 
-"@minna-ui/stylelint-config@0.13.0":
-  version "0.13.0"
-  resolved "https://registry.yarnpkg.com/@minna-ui/stylelint-config/-/stylelint-config-0.13.0.tgz#a9612b399dd2b3121abe63aff84a34058cacfb58"
-  integrity sha512-AB8yq8dwT3acVsn8v/w8HDkyZP1sgqL5ClzAjBZTMndBMyGMbQLcp3VxWBPQTa1j8mwlbzl4BSP+d64vcWqqdg==
+"@minna-ui/stylelint-config@0.15.0":
+  version "0.15.0"
+  resolved "https://registry.yarnpkg.com/@minna-ui/stylelint-config/-/stylelint-config-0.15.0.tgz#ac9efa62dafe1310251824dab0319c288e65e464"
+  integrity sha512-BFtW05iLB8LS6oV/trkus+SaMcHVlbl6I/oE4oeEIdHz/WekBWHSgQh50NbkVu6+JalHzFryJlq5mGxZRvf13A==
   dependencies:
     stylelint-config-standard "^18.2.0"
     stylelint-order "^1.0.0"
 
-"@minna-ui/svelte-preprocess-markup@0.13.0":
-  version "0.13.0"
-  resolved "https://registry.yarnpkg.com/@minna-ui/svelte-preprocess-markup/-/svelte-preprocess-markup-0.13.0.tgz#18ae013bca237cf4807133d46781468b324515ee"
-  integrity sha512-fEOpdn/mBuCiN6AJ8Dj6TstuIYnTb0X85Eh9EVLopkUI1prJoiSM0s81ZvUotNQ8H0V0CdJGcaJUj8dDqYwG0A==
+"@minna-ui/svelte-preprocess-markup@0.15.0":
+  version "0.15.0"
+  resolved "https://registry.yarnpkg.com/@minna-ui/svelte-preprocess-markup/-/svelte-preprocess-markup-0.15.0.tgz#ceba56940fc7cb9c2ffab125cfea6be4a58a92d8"
+  integrity sha512-GPMtuka5cdbQxUyJLFD3TIqWyh65tFNCfXy3gvn5eFXBP1Kth9QxCnqHfAcT6oUNE79HYujM9WHGMTA3Y2GfMA==
   dependencies:
     html-minifier "3.5.20"
 
-"@minna-ui/svelte-preprocess-style@0.13.0":
-  version "0.13.0"
-  resolved "https://registry.yarnpkg.com/@minna-ui/svelte-preprocess-style/-/svelte-preprocess-style-0.13.0.tgz#3cdc543b26f7ecc09daf66f21327d7f2a61afcf6"
-  integrity sha512-BH12pmOE0P69Z6QT4SuNaQR5KbM8Q+inlzszqt7HHKUr2Qfo6MA/QQYtDUL9c3rXpXnK23wtG3VQchjXoVBxcA==
+"@minna-ui/svelte-preprocess-style@0.15.0":
+  version "0.15.0"
+  resolved "https://registry.yarnpkg.com/@minna-ui/svelte-preprocess-style/-/svelte-preprocess-style-0.15.0.tgz#133539277e6240dc36f094f7684b0ab1c11a3c21"
+  integrity sha512-MpiW40bWS8bvjMbQsgjusn6H4s32nQwnpf/UivJx+dkPKj6PDvpqp+A9PJ+SMYQ0AWq9SBjI7d0YG4NwRyuZAQ==
   dependencies:
     postcss-load-config "^2.0.0"
     postcss-selector-parser "^5.0.0-rc.3"
@@ -359,15 +359,20 @@
   resolved "https://registry.yarnpkg.com/@types/filewriter/-/filewriter-0.0.28.tgz#c054e8af4d9dd75db4e63abc76f885168714d4b3"
   integrity sha1-wFTor02d11205jq8dviFFocU1LM=
 
-"@types/jest@^23.3.1":
-  version "23.3.3"
-  resolved "https://registry.yarnpkg.com/@types/jest/-/jest-23.3.3.tgz#246ebcc52771d2327bb8e37aa971b412d9dc4237"
-  integrity sha512-G6EBrbjWDfmIpYu8UcRBOhwtDiYaLj5N5jUR5rx0YvbKxRBhXPZVLUmtfShewSUNKiQwpHavpML69a2WMbIlEQ==
+"@types/jest@^23.3.5":
+  version "23.3.5"
+  resolved "https://registry.yarnpkg.com/@types/jest/-/jest-23.3.5.tgz#870a1434208b60603745bfd214fc3fc675142364"
+  integrity sha512-3LI+vUC3Wju28vbjIjsTKakhMB8HC4l+tMz+Z8WRzVK+kmvezE5jcOvKtBpznWSI5KDLFo+FouUhpTKoekadCA==
 
-"@types/node@*", "@types/node@^10.9.4":
+"@types/node@*":
   version "10.11.4"
   resolved "https://registry.yarnpkg.com/@types/node/-/node-10.11.4.tgz#e8bd933c3f78795d580ae41d86590bfc1f4f389d"
   integrity sha512-ojnbBiKkZFYRfQpmtnnWTMw+rzGp/JiystjluW9jgN3VzRwilXddJ6aGQ9V/7iuDG06SBgn7ozW9k3zcAnYjYQ==
+
+"@types/node@^10.11.7":
+  version "10.11.7"
+  resolved "https://registry.yarnpkg.com/@types/node/-/node-10.11.7.tgz#0e75ca9357d646ca754016ca1d68a127ad7e7300"
+  integrity sha512-yOxFfkN9xUFLyvWaeYj90mlqTJ41CsQzWKS3gXdOMOyPVacUsymejKxJ4/pMW7exouubuEeZLJawGgcNGYlTeg==
 
 "@wearegenki/renovate-config@1.0.0":
   version "1.0.0"
@@ -709,7 +714,7 @@ babel-helpers@^6.24.1:
     babel-runtime "^6.22.0"
     babel-template "^6.24.1"
 
-babel-jest@^23.4.2, babel-jest@^23.6.0:
+babel-jest@^23.6.0:
   version "23.6.0"
   resolved "https://registry.yarnpkg.com/babel-jest/-/babel-jest-23.6.0.tgz#a644232366557a2240a0c083da6b25786185a2f1"
   integrity sha512-lqKGG6LYXYu+DQh/slrQ8nxXQkEkhugdXsU6St7GmhVS7Ilc/22ArwqXNJrf0QaOBjZB0360qZMwXqDYQHXaew==
@@ -1665,7 +1670,7 @@ eslint-module-utils@^2.2.0:
     debug "^2.6.8"
     pkg-dir "^1.0.0"
 
-eslint-plugin-html@^4.0.5:
+eslint-plugin-html@^4.0.6:
   version "4.0.6"
   resolved "https://registry.yarnpkg.com/eslint-plugin-html/-/eslint-plugin-html-4.0.6.tgz#724bb9272efb4df007dfee8dfb269ed83577e5b4"
   integrity sha512-nj6A9oK+7BKnMm0E7dMRH3r75BfpkXtcVIb3pFC4AcDdBTNyg2NGxHXyFNT1emW4VsR7P2SZvRXXQtUR+kY08w==
@@ -1688,7 +1693,7 @@ eslint-plugin-import@^2.14.0:
     read-pkg-up "^2.0.0"
     resolve "^1.6.0"
 
-eslint-plugin-jest@^21.22.0:
+eslint-plugin-jest@^21.24.1:
   version "21.24.1"
   resolved "https://registry.yarnpkg.com/eslint-plugin-jest/-/eslint-plugin-jest-21.24.1.tgz#aaf3c34e816f07add83d1e9c20696fdc31fac8dc"
   integrity sha512-+lJ6nvwJtDRQtTumCs/9gMuteiopArpHJbRbWqPaScCzlhTu1pEilWTUlTgDEtY7GOx7FdOMD3BO/mdxFb4yDg==
@@ -2993,7 +2998,7 @@ jest-changed-files@^23.4.2:
   dependencies:
     throat "^4.0.0"
 
-jest-circus@^23.5.0:
+jest-circus@^23.6.0:
   version "23.6.0"
   resolved "https://registry.yarnpkg.com/jest-circus/-/jest-circus-23.6.0.tgz#8f3edf425c2bd89fff46438d491f6e1e192e2bf7"
   integrity sha512-fzfLQpWeEmUtKrAJZb9T2tim+YCOHRR6WuYaRdz5cMOFtmkm2iJQ0afWxFyBfNj3DcIQ6SF8C9Ulbzk4hYMFOA==
