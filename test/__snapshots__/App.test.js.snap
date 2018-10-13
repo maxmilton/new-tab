@@ -17,9 +17,14 @@ exports[`App root component renders correctly 1`] = `
 <!----><!----></div>
 <div id=\\"menu\\"><div id=\\"icon\\">☰</div>
 
-  <div id=\\"dropdown\\"><a href=\\"chrome-search://local-ntp/local-ntp.html\\" class=\\"menu-item\\">Open Default Tab</a><a href=\\"chrome://bookmarks/\\" class=\\"menu-item\\">Bookmarks Manager</a><a href=\\"chrome://downloads/\\" class=\\"menu-item\\">Downloads</a><a href=\\"chrome://history/\\" class=\\"menu-item\\">History</a><a href=\\"chrome://settings/passwords\\" class=\\"menu-item\\">Passwords</a><hr><noscript></noscript>
-    
+  <div id=\\"dropdown\\"><a href=\\"chrome-search://local-ntp/local-ntp.html\\" class=\\"menu-item\\">Open Default Tab</a>
+    <a href=\\"chrome://bookmarks/\\" class=\\"menu-item\\">Bookmarks Manager</a>
+    <a href=\\"chrome://downloads/\\" class=\\"menu-item\\">Downloads</a>
+    <a href=\\"chrome://history/\\" class=\\"menu-item\\">History</a>
+    <a href=\\"chrome://settings/passwords\\" class=\\"menu-item\\">Passwords</a>
 
-    <a href=\\"\\" class=\\"menu-item\\">New Tab Settings</a>
+    <hr>
+
+    <a id=\\"o\\" class=\\"menu-item\\">New Tab Settings</a>
     <a href=\\"https://github.com/MaxMilton/new-tab/issues\\" class=\\"menu-item\\">Submit Bug</a></div></div>"
 `;

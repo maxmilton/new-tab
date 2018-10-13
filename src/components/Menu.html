@@ -1,4 +1,4 @@
-<div id="menu">
+<div ref:m id="menu">
   <div id="icon">☰</div>
 
   <div id="dropdown">
@@ -34,8 +34,7 @@
     // rather than using on:click + a method like normal, manually set up an event
     // listener so the entire template is static and recives special optimisation
     oncreate() {
-      /* eslint-disable-next-line no-undef, id-length */ // reference id=o
-      o.addEventListener('click', () => chrome.runtime.openOptionsPage());
+      this.refs.m.addEventListener('click', () => chrome.runtime.openOptionsPage());
     },
   };
 </script>
