@@ -16,7 +16,7 @@
 
     <div class="subfolder{endNode ? ' left' : ''}">
       {#each _node.children as childNode}
-        <BookmarkNode _node="{childNode}" lvl="{lvl + 1}" maxLen="{40}"/>
+        <BookmarkNode _node="{childNode}" lvl="{lvl + 1}" maxLen="{40}" />
       {:else}
         <div class="item">(empty)</div>
       {/each}

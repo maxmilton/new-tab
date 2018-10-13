@@ -11,3 +11,6 @@ var m = () => {};
 
 // TODO: Remove once supported in Closure Compiler's native externs
 var OffscreenCanvas = () => {};
+
+// id=o shorthand instead of document.getElementById('o') in Menu.html
+var o = () => {};

@@ -1,16 +1,15 @@
 <div id="bookmarks" ref:b>
   {#each visibleNodes as _node}
     <!-- htmlmin:ignore -->
-    <BookmarkNode {_node} maxLen="{15}" lvl="{0}"/>
-    <!-- htmlmin:ignore -->
+    <BookmarkNode {_node} maxLen="{15}" lvl="{0}" /><!-- htmlmin:ignore -->
   {/each}
 
   {#if overflowNodes.children.length}
-    <BookmarkNode _node="{overflowNodes}" lvl="{0}" maxLen="{40}" endNode/>
+    <BookmarkNode _node="{overflowNodes}" lvl="{0}" maxLen="{40}" endNode />
   {/if}
 
   {#if bookmarksOther.children.length}
-    <BookmarkNode _node="{bookmarksOther}" lvl="{0}" maxLen="{40}" endNode/>
+    <BookmarkNode _node="{bookmarksOther}" lvl="{0}" maxLen="{40}" endNode />
   {/if}
 </div>
 

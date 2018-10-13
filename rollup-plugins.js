@@ -21,7 +21,7 @@ function catchErr(err) { if (err) throw err; }
  * @param {string} template A HTML template to compile.
  * @returns {Function}
  */
-function compileTemplate(template) {
+export function compileTemplate(template) {
   return new Function('d', 'return `' + template + '`'); // eslint-disable-line
 }
 
@@ -35,7 +35,7 @@ function compileTemplate(template) {
  * @param {Array<string>=} opts.exclude Files to exclude from CSS processing.
  * @param {Array<string>=} opts.include Files to include in CSS processing.
  */
-export default function makeHtml({
+export function makeHtml({
   file,
   template,
   title,
