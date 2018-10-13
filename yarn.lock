@@ -255,15 +255,15 @@
     lodash "^4.17.10"
     to-fast-properties "^2.0.0"
 
-"@minna-ui/eslint-config@0.13.0":
-  version "0.13.0"
-  resolved "https://registry.yarnpkg.com/@minna-ui/eslint-config/-/eslint-config-0.13.0.tgz#21b2fbe581d58f1f06c6d58c7d1edb5e58cd4a87"
-  integrity sha512-JfPVqVv0hrr6jBwcvQ+VMlpX7BMjjGqUqk4Bqc3/WNQlZHwu2jGlaFgjrX5E8T7XTbq1dyYCWdRjCPfTsp+PXQ==
+"@minna-ui/eslint-config@0.15.0":
+  version "0.15.0"
+  resolved "https://registry.yarnpkg.com/@minna-ui/eslint-config/-/eslint-config-0.15.0.tgz#7067a68cea3208b7afe3260bc0efa43c892ff7a9"
+  integrity sha512-XbJZrWUdlb6NvMyXF95BDFj8PUNllog7YrnxUKIbAc/TFwPJaPz0kkc82gocgEX0c+SyYycpNkZONH7ARhAHgQ==
   dependencies:
     eslint-config-airbnb-base "^13.1.0"
-    eslint-plugin-html "^4.0.5"
+    eslint-plugin-html "^4.0.6"
     eslint-plugin-import "^2.14.0"
-    eslint-plugin-jest "^21.22.0"
+    eslint-plugin-jest "^21.24.1"
 
 "@minna-ui/jest-config@0.13.0":
   version "0.13.0"
@@ -1670,7 +1670,7 @@ eslint-module-utils@^2.2.0:
     debug "^2.6.8"
     pkg-dir "^1.0.0"
 
-eslint-plugin-html@^4.0.5:
+eslint-plugin-html@^4.0.6:
   version "4.0.6"
   resolved "https://registry.yarnpkg.com/eslint-plugin-html/-/eslint-plugin-html-4.0.6.tgz#724bb9272efb4df007dfee8dfb269ed83577e5b4"
   integrity sha512-nj6A9oK+7BKnMm0E7dMRH3r75BfpkXtcVIb3pFC4AcDdBTNyg2NGxHXyFNT1emW4VsR7P2SZvRXXQtUR+kY08w==
@@ -1693,10 +1693,10 @@ eslint-plugin-import@^2.14.0:
     read-pkg-up "^2.0.0"
     resolve "^1.6.0"
 
-eslint-plugin-jest@^21.22.0:
-  version "21.22.1"
-  resolved "https://registry.yarnpkg.com/eslint-plugin-jest/-/eslint-plugin-jest-21.22.1.tgz#bc805e9b1c75c3bc92e47c44dd41370c1af7ebcc"
-  integrity sha512-OcVizyXljSps3nVfuPomfK8RKt7jvDsIsDrO7l1ZA4bDbiO9bEGWpsdU/x5F0pymVDG7ME88VlTboxbYJumLGQ==
+eslint-plugin-jest@^21.24.1:
+  version "21.24.1"
+  resolved "https://registry.yarnpkg.com/eslint-plugin-jest/-/eslint-plugin-jest-21.24.1.tgz#aaf3c34e816f07add83d1e9c20696fdc31fac8dc"
+  integrity sha512-+lJ6nvwJtDRQtTumCs/9gMuteiopArpHJbRbWqPaScCzlhTu1pEilWTUlTgDEtY7GOx7FdOMD3BO/mdxFb4yDg==
 
 eslint-restricted-globals@^0.1.1:
   version "0.1.1"
