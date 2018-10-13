@@ -278,10 +278,10 @@
     babel-jest "^23.4.2"
     jest-circus "^23.5.0"
 
-"@minna-ui/stylelint-config@0.13.0":
-  version "0.13.0"
-  resolved "https://registry.yarnpkg.com/@minna-ui/stylelint-config/-/stylelint-config-0.13.0.tgz#a9612b399dd2b3121abe63aff84a34058cacfb58"
-  integrity sha512-AB8yq8dwT3acVsn8v/w8HDkyZP1sgqL5ClzAjBZTMndBMyGMbQLcp3VxWBPQTa1j8mwlbzl4BSP+d64vcWqqdg==
+"@minna-ui/stylelint-config@0.15.0":
+  version "0.15.0"
+  resolved "https://registry.yarnpkg.com/@minna-ui/stylelint-config/-/stylelint-config-0.15.0.tgz#ac9efa62dafe1310251824dab0319c288e65e464"
+  integrity sha512-BFtW05iLB8LS6oV/trkus+SaMcHVlbl6I/oE4oeEIdHz/WekBWHSgQh50NbkVu6+JalHzFryJlq5mGxZRvf13A==
   dependencies:
     stylelint-config-standard "^18.2.0"
     stylelint-order "^1.0.0"
