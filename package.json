@@ -25,7 +25,7 @@
     "test-ci": "JEST_CIRCUS=1 jest --coverage --runInBand --ci"
   },
   "devDependencies": {
-    "@ampproject/rollup-plugin-closure-compiler": "0.7.3",
+    "@ampproject/rollup-plugin-closure-compiler": "0.8.2",
     "@minna-ui/eslint-config": "0.15.0",
     "@minna-ui/jest-config": "0.15.0",
     "@minna-ui/stylelint-config": "0.15.0",
