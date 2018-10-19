@@ -2,13 +2,15 @@
 # yarn lockfile v1
 
 
-"@ampproject/rollup-plugin-closure-compiler@0.7.3":
-  version "0.7.3"
-  resolved "https://registry.yarnpkg.com/@ampproject/rollup-plugin-closure-compiler/-/rollup-plugin-closure-compiler-0.7.3.tgz#34e4f0e363100bec30d68b7ac30851f5a3d32c78"
-  integrity sha512-D+bWoVZ4E9CA8NvUX4OIXzhQ0GMTIhrI+3BzkromB9/qajWoYl/wPG2ZDb3T9bQGW11SJ/wJ2NVL7YjOURW+Lw==
+"@ampproject/rollup-plugin-closure-compiler@0.8.2":
+  version "0.8.2"
+  resolved "https://registry.yarnpkg.com/@ampproject/rollup-plugin-closure-compiler/-/rollup-plugin-closure-compiler-0.8.2.tgz#1e188edc846444ff4c91704f5bdb62b9213950b2"
+  integrity sha512-+CKPR2/8UL7hxAW88KEXRJ2pl2PI2zXnj9IsaP4GvdDClsML2x1YM88Bw6+TDTBAoug3S4MYD+4Ztma4MhTkow==
   dependencies:
-    acorn "5.7.3"
-    google-closure-compiler "20180910.1.0"
+    acorn "6.0.2"
+    acorn-dynamic-import "4.0.0"
+    acorn-walk "6.1.0"
+    google-closure-compiler "20181008.0.0"
     magic-string "0.25.1"
     temp-write "3.4.0"
 
@@ -384,6 +386,11 @@ abbrev@1:
   resolved "https://registry.yarnpkg.com/abbrev/-/abbrev-1.1.1.tgz#f8f2c887ad10bf67f634f005b6987fed3179aac8"
   integrity sha512-nne9/IiQ/hzIhY6pdDnbBtz7DjPTKrY00P/zvPSm5pOFkl6xuGrGnXn/VtTNNfNtAfZ9/1RtehkszU9qcTii0Q==
 
+acorn-dynamic-import@4.0.0:
+  version "4.0.0"
+  resolved "https://registry.yarnpkg.com/acorn-dynamic-import/-/acorn-dynamic-import-4.0.0.tgz#482210140582a36b83c3e342e1cfebcaa9240948"
+  integrity sha512-d3OEjQV4ROpoflsnUA8HozoIR504TFxNivYEUi6uwz0IYhBkTDXGuWlNdMtybRt3nqVx/L6XqMt0FxkXuWKZhw==
+
 acorn-globals@^4.1.0:
   version "4.3.0"
   resolved "https://registry.yarnpkg.com/acorn-globals/-/acorn-globals-4.3.0.tgz#e3b6f8da3c1552a95ae627571f7dd6923bb54103"
@@ -399,20 +406,20 @@ acorn-jsx@^4.1.1:
   dependencies:
     acorn "^5.0.3"
 
-acorn-walk@^6.0.1:
+acorn-walk@6.1.0, acorn-walk@^6.0.1:
   version "6.1.0"
   resolved "https://registry.yarnpkg.com/acorn-walk/-/acorn-walk-6.1.0.tgz#c957f4a1460da46af4a0388ce28b4c99355b0cbc"
   integrity sha512-ugTb7Lq7u4GfWSqqpwE0bGyoBZNMTok/zDBXxfEG0QM50jNlGhIWjRC1pPN7bvV1anhF+bs+/gNcRw+o55Evbg==
 
-acorn@5.7.3, acorn@^5.0.3, acorn@^5.5.3, acorn@^5.6.0:
-  version "5.7.3"
-  resolved "https://registry.yarnpkg.com/acorn/-/acorn-5.7.3.tgz#67aa231bf8812974b85235a96771eb6bd07ea279"
-  integrity sha512-T/zvzYRfbVojPWahDsE5evJdHb3oJoQfFbsrKM7w5Zcs++Tr257tia3BmMP8XYVjp1S9RZXQMh7gao96BlqZOw==
-
-acorn@^6.0.1:
+acorn@6.0.2, acorn@^6.0.1:
   version "6.0.2"
   resolved "https://registry.yarnpkg.com/acorn/-/acorn-6.0.2.tgz#6a459041c320ab17592c6317abbfdf4bbaa98ca4"
   integrity sha512-GXmKIvbrN3TV7aVqAzVFaMW8F8wzVX7voEBRO3bDA64+EX37YSayggRJP5Xig6HYHBkWKpFg9W5gg6orklubhg==
+
+acorn@^5.0.3, acorn@^5.5.3, acorn@^5.6.0:
+  version "5.7.3"
+  resolved "https://registry.yarnpkg.com/acorn/-/acorn-5.7.3.tgz#67aa231bf8812974b85235a96771eb6bd07ea279"
+  integrity sha512-T/zvzYRfbVojPWahDsE5evJdHb3oJoQfFbsrKM7w5Zcs++Tr257tia3BmMP8XYVjp1S9RZXQMh7gao96BlqZOw==
 
 ajv@^5.3.0:
   version "5.5.2"
@@ -2248,28 +2255,28 @@ gonzales-pe@^4.2.3:
   dependencies:
     minimist "1.1.x"
 
-google-closure-compiler-linux@^20180910.0.1:
-  version "20180910.0.1"
-  resolved "https://registry.yarnpkg.com/google-closure-compiler-linux/-/google-closure-compiler-linux-20180910.0.1.tgz#22567f7f5b605946d23c99c86a3e29a2210386da"
-  integrity sha512-hSTqyLLHDLnntR442BVea0sp49q+Uwi05HMOVBPMmbwDoHLtCpDmwZ/FUKs5GLFZ/cQafk3RgHLktPdReEPMIw==
+google-closure-compiler-linux@^20181008.0.0:
+  version "20181008.0.0"
+  resolved "https://registry.yarnpkg.com/google-closure-compiler-linux/-/google-closure-compiler-linux-20181008.0.0.tgz#d351110b5eaa0d05ec0aadcd29a3b64e812e8e15"
+  integrity sha512-k8njGfH2uzWJiRPPvUxM7MJB28gPrf4kI2bbuiF0gJk/1arXcWCPGjLD6pzCU0UylMy52MUXLgsIpRorqf2brw==
 
-google-closure-compiler-osx@^20180910.0.1:
-  version "20180910.0.1"
-  resolved "https://registry.yarnpkg.com/google-closure-compiler-osx/-/google-closure-compiler-osx-20180910.0.1.tgz#83e88bf892038655efd281fad61e3f6377a60afb"
-  integrity sha512-HU2waANIOHBFtAJ205rzF8BGXiJaLT0s6qu4memI7D4ThBhAJLA/SwTlEjrby6OvS+ZRL4e0FYMPJW1/fhQKzg==
+google-closure-compiler-osx@^20181008.0.0:
+  version "20181008.0.0"
+  resolved "https://registry.yarnpkg.com/google-closure-compiler-osx/-/google-closure-compiler-osx-20181008.0.0.tgz#7f7a0a19afdad4fb1f40b1a44d9f08b50762e67f"
+  integrity sha512-xzf/yH/4MXdb6GbP84iHnpcVCOPBbH0gMVOs0JhR/KbrQh+DlJU+Y8Z/DQzTkw9HgD650R2/WZmBknURyg9OTw==
 
-google-closure-compiler@20180910.1.0:
-  version "20180910.1.0"
-  resolved "https://registry.yarnpkg.com/google-closure-compiler/-/google-closure-compiler-20180910.1.0.tgz#e143178bf4fa73d4041338b02ecbba1effd855ec"
-  integrity sha512-4VdtHL5LoNmMxDgOixiRJmJejvcFCzpC/uX5R4oGquuQG08knb7bgzPQuIBieYjbHETyc03DyksPFR+kjW4LgA==
+google-closure-compiler@20181008.0.0:
+  version "20181008.0.0"
+  resolved "https://registry.yarnpkg.com/google-closure-compiler/-/google-closure-compiler-20181008.0.0.tgz#dcf02ab3a679822a0d1ded519ec8bec99d6887ba"
+  integrity sha512-XmJIasXHyy4kirthlsuDev2LZcXjYXWfOHwHdCLUQnfJH8T2sxWDNjFLQycaCIXwQLOyw2Kem38VgxrYfG0hzg==
   dependencies:
     chalk "^1.0.0"
     minimist "^1.2.0"
     vinyl "^2.0.1"
     vinyl-sourcemaps-apply "^0.2.0"
   optionalDependencies:
-    google-closure-compiler-linux "^20180910.0.1"
-    google-closure-compiler-osx "^20180910.0.1"
+    google-closure-compiler-linux "^20181008.0.0"
+    google-closure-compiler-osx "^20181008.0.0"
 
 graceful-fs@^4.1.11, graceful-fs@^4.1.2:
   version "4.1.11"
