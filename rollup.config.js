@@ -21,12 +21,13 @@ const compilerOpts = {
   compilation_level: 'ADVANCED',
   // language_in: 'ECMASCRIPT_NEXT',
   // language_out: 'STABLE',
+  // language_out: 'ECMASCRIPT_NEXT',
   // strict_mode_input: true,
   // use_types_for_optimization: true,
   // warning_level: 'VERBOSE',
   // jscomp_warning: '*',
   // jscomp_error: '*',
-  jscomp_off: 'duplicate', // FIXME: Deprecated `methods` var
+  // jscomp_off: 'duplicate', // FIXME: Deprecated `methods` var
   // debug: true,
   // formatting: 'PRETTY_PRINT',
 };
@@ -46,6 +47,8 @@ const svelteOpts = {
     style: preprocessStyle(),
   },
   emitCss: true,
+  nestedTransitions: false,
+  skipIntroByDefault: false,
 };
 
 const watch = {
