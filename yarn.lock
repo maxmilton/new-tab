@@ -267,15 +267,15 @@
     eslint-plugin-import "^2.14.0"
     eslint-plugin-jest "^21.24.1"
 
-"@minna-ui/jest-config@0.15.0":
-  version "0.15.0"
-  resolved "https://registry.yarnpkg.com/@minna-ui/jest-config/-/jest-config-0.15.0.tgz#d655f0bb87ed852abfe34d8ab49c8477c8664b3a"
-  integrity sha512-bsLl7aC492ZaSm3SSGCfz7iM40m/hI8tWNr2vyLuwDBeieujHf/fI5mRvz65/oQa/DSanLBZCCDgRQ71sk0Xqg==
+"@minna-ui/jest-config@0.16.0":
+  version "0.16.0"
+  resolved "https://registry.yarnpkg.com/@minna-ui/jest-config/-/jest-config-0.16.0.tgz#81e0159ca3d1adca82f88ba5174b5211d064568e"
+  integrity sha512-q5U++UM2Kuw+GdVm6HFQU4mKD5vIi3l676tSIyAlUZoH6Q0zUTlRHoH1FyYPgizKE4NXEXKu2mj3H5l4YuUG7g==
   dependencies:
     "@babel/core" "^7.1.0"
     "@babel/plugin-transform-modules-commonjs" "^7.1.0"
     "@types/jest" "^23.3.5"
-    "@types/node" "^10.11.7"
+    "@types/node" "^10.12.0"
     babel-core "^7.0.0-bridge.0"
     babel-jest "^23.6.0"
     jest-circus "^23.6.0"
@@ -366,10 +366,15 @@
   resolved "https://registry.yarnpkg.com/@types/jest/-/jest-23.3.5.tgz#870a1434208b60603745bfd214fc3fc675142364"
   integrity sha512-3LI+vUC3Wju28vbjIjsTKakhMB8HC4l+tMz+Z8WRzVK+kmvezE5jcOvKtBpznWSI5KDLFo+FouUhpTKoekadCA==
 
-"@types/node@*", "@types/node@^10.11.7":
+"@types/node@*":
   version "10.11.7"
   resolved "https://registry.yarnpkg.com/@types/node/-/node-10.11.7.tgz#0e75ca9357d646ca754016ca1d68a127ad7e7300"
   integrity sha512-yOxFfkN9xUFLyvWaeYj90mlqTJ41CsQzWKS3gXdOMOyPVacUsymejKxJ4/pMW7exouubuEeZLJawGgcNGYlTeg==
+
+"@types/node@^10.12.0":
+  version "10.12.0"
+  resolved "https://registry.yarnpkg.com/@types/node/-/node-10.12.0.tgz#ea6dcbddbc5b584c83f06c60e82736d8fbb0c235"
+  integrity sha512-3TUHC3jsBAB7qVRGxT6lWyYo2v96BMmD2PTcl47H25Lu7UXtFH/2qqmKiVrnel6Ne//0TFYf6uvNX+HW2FRkLQ==
 
 "@wearegenki/renovate-config@1.0.0":
   version "1.0.0"
