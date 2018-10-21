@@ -28,7 +28,7 @@
     "@ampproject/rollup-plugin-closure-compiler": "0.8.2",
     "@minna-ui/eslint-config": "0.15.0",
     "@minna-ui/jest-config": "0.15.0",
-    "@minna-ui/stylelint-config": "0.15.0",
+    "@minna-ui/stylelint-config": "0.16.0",
     "@minna-ui/svelte-preprocess-markup": "0.15.0",
     "@minna-ui/svelte-preprocess-style": "0.15.0",
     "@types/chrome": "0.0.74",
