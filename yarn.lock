@@ -5449,10 +5449,10 @@ supports-color@^5.1.0, supports-color@^5.3.0, supports-color@^5.5.0:
   dependencies:
     has-flag "^3.0.0"
 
-svelte@2.15.0:
-  version "2.15.0"
-  resolved "https://registry.yarnpkg.com/svelte/-/svelte-2.15.0.tgz#27b27b033abcba97f4392ff04faa707b1345b6da"
-  integrity sha512-rSrDbOftOHfPN8Epy8FHFUfr7L1WaZZBUC1UloNNH7+S7QHPyvbQw1KdrhtVYSuOslpjHe20xgTDR/tZn/sDMg==
+svelte@2.15.1:
+  version "2.15.1"
+  resolved "https://registry.yarnpkg.com/svelte/-/svelte-2.15.1.tgz#827da0505184af9529e325b8356c0ed4cba041cd"
+  integrity sha512-Mq9SJ9MXoNpjWLr+rK/xmDr9DT1unZxmVl4hq47qyU/Ksobp6CLEj0FDwLqa4b8/T8nViT7L1hBaDPfD6YNHbg==
 
 svg-tags@^1.0.0:
   version "1.0.0"
