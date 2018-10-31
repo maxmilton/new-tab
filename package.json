@@ -34,6 +34,7 @@
     "@types/chrome": "0.0.75",
     "@wearegenki/renovate-config": "1.0.0",
     "autoprefixer": "9.3.1",
+    "babel-eslint": "10.0.1",
     "chokidar": "2.0.4",
     "codecov": "3.1.0",
     "crass": "0.12.3",
