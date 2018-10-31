@@ -39,18 +39,18 @@
   };
 </script>
 
-<style type="text/postcss" global>
-  hr {
+<style type="text/postcss">
+  :global(hr) {
     border: 0;
     border-bottom: 1px solid var(--c);
   }
 
-  .menu-item {
+  :global(.menu-item) {
     display: block;
     color: var(--t);
   }
 
-  #menu {
+  :global(#menu) {
     position: fixed;
     top: 90px;
     padding: 10px 84px 84px 42px;
@@ -58,12 +58,12 @@
     font-size: 20px;
   }
 
-  #icon {
+  :global(#icon) {
     font-size: 30px;
     color: var(--c1);
   }
 
-  #dropdown {
+  :global(#dropdown) {
     position: absolute;
     top: 10px;
     z-index: 1;
@@ -72,12 +72,14 @@
     background: var(--c0);
     box-shadow: var(--s0);
     opacity: 0;
-    transition: all 150ms ease-out;
+    transition:
+      opacity 150ms ease-out,
+      transform 150ms ease-out;
     transform: scale(0.5);
     transform-origin: 0 10px;
 
-    #menu:hover > &,
-    #menu:focus > & {
+    :global(#menu):hover > &,
+    :global(#menu):focus > & {
       opacity: 1;
       transform: scale(1);
     }

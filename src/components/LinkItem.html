@@ -21,7 +21,18 @@
   };
 </script>
 
-<style type="text/postcss" global>
+<style type="text/postcss">
+  /* all <img> are favicons */
+  :global(img) {
+    width: 16px;
+    height: 16px; /* prevents slight realignment jump on initial load */
+  }
+
+  :global(.pad) {
+    margin: 0 6px 0 0;
+  }
+
+  /* stylelint-disable-next-line no-descending-specificity */
   :global(a),
   :global(.item) {
     display: flex;
@@ -30,7 +41,7 @@
     white-space: nowrap;
     cursor: pointer;
 
-    #bookmarks & {
+    :global(#bookmarks) & {
       padding: 0 13px;
 
       &:hover,
@@ -38,15 +49,5 @@
         background-color: var(--c);
       }
     }
-  }
-
-  /* all <img> are favicons */
-  img {
-    width: 16px;
-    height: 16px; /* prevents slight realignment jump on initial load */
-  }
-
-  .pad {
-    margin: 0 6px 0 0;
   }
 </style>

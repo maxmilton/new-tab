@@ -222,15 +222,28 @@
   };
 </script>
 
-<style type="text/postcss" global>
-  .container {
+<style type="text/postcss">
+  /* search input placeholder */
+  :global(::placeholder) {
+    color: var(--c2);
+  }
+
+  /* load more buttons */
+  :global(button) {
+    width: initial;
+    margin-top: 9px;
+    cursor: pointer;
+  }
+
+  :global(.container) {
     max-width: 800px;
     padding: 0 18px;
     margin: 0 auto;
   }
 
-  button,
-  #search {
+  /* stylelint-disable-next-line no-descending-specificity */
+  :global(button),
+  :global(#search) {
     box-sizing: border-box;
     width: 100%;
     padding: 11px 20px;
@@ -240,17 +253,5 @@
     background: var(--c0);
     border: 0;
     box-shadow: var(--s);
-  }
-
-  /* search input placeholder */
-  ::placeholder {
-    color: var(--c2);
-  }
-
-  /* load more buttons */
-  button {
-    width: initial;
-    margin-top: 9px;
-    cursor: pointer;
   }
 </style>
