@@ -5,5 +5,5 @@
   --c: #21252b; /* bookmark item hover background, hr */
   --c0: #292d35; /* bookmarks bar, search input, menu dropdown, load more button */
   --c1: #383e4a; /* menu hamburger icon, h2, muted text */
-  --c2: #5c6370; /* search input placeholder */
+  --c2: #292d35; /* search input */
 }
