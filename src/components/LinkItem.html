@@ -24,7 +24,8 @@
 <style type="text/postcss" global>
   :global(a),
   :global(.item) {
-    display: block;
+    display: flex;
+    align-items: center;
     color: var(--t);
     white-space: nowrap;
     cursor: pointer;
@@ -32,7 +33,8 @@
     #bookmarks & {
       padding: 0 13px;
 
-      &:hover {
+      &:hover,
+      &:focus { /* stylelint-disable-line no-descending-specificity */
         background-color: var(--c);
       }
     }
