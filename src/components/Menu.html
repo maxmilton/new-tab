@@ -70,17 +70,18 @@
     padding: 18px;
     white-space: nowrap;
     background: var(--c0);
-    box-shadow: var(--s0);
+    box-shadow: var(--s);
     opacity: 0;
     transition:
-      opacity 192ms ease-out,
-      transform 192ms ease-out;
-    transform: scale(0.5);
+      opacity 160ms ease-out,
+      transform 160ms ease-out;
+    transform: scale(0.8);
     transform-origin: 0 10px;
 
     :global(#menu):hover > &,
     :global(#menu):focus > & {
       opacity: 1;
+      transition-duration: 192ms;
       transform: scale(1);
     }
   }
