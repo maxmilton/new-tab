@@ -11,9 +11,6 @@
   {/if}
 
   {#if isOpen}
-
-    <!-- subfolder -->
-
     <div class="subfolder{endNode ? ' left' : ''}">
       {#each _node.children as childNode}
         <BookmarkNode _node="{childNode}" lvl="{lvl + 1}" maxLen="{40}" />
@@ -110,8 +107,8 @@
   }
 
   .caret {
-    float: right;
-    padding-left: 12px;
+    padding: 0 6px;
+    margin-left: auto;
   }
 
   :global(.subfolder) {
@@ -130,14 +127,14 @@
   /* bookmark item pushed to the right */
   .right {
     width: 100%;
-    text-align: right;
+    justify-content: flex-end;
   }
 
   /* folder which opens to the left */
   .left {
     right: 0;
     left: initial;
-    text-align: initial;
+    justify-content: initial;
 
     :global(.subfolder) {
       right: 100%;
