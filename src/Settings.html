@@ -61,7 +61,7 @@
     },
     methods: {
       resetOrder() {
-        this.set({ resultsOrder: [...DEFAULT_ORDER]});
+        this.set({ resultsOrder: [...DEFAULT_ORDER] });
       },
 
       moveItem(from, to) {
@@ -142,7 +142,8 @@
     margin-right: 10px;
     color: rgb(180, 180, 180);
 
-    .item:hover > & {
+    .item:hover > &,
+    .item:focus > & {
       color: rgb(110, 110, 110);
     }
   }
