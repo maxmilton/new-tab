@@ -1,6 +1,6 @@
 /* light theme (default) */
 :global(:root) {
-  --s: 0 2px 6px #06001124; /* shadow */
+  --s: 0 2px 4px rgba(0, 0, 17, 0.15); /* shadow */
   --b: #fafafa; /* background colour */
   --t: #383a42; /* text colour */
   --c: #e5e5e6; /* bookmark item hover background, hr */
