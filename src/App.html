@@ -8,7 +8,7 @@
   import BookmarkGroup from './components/BookmarkGroup.html';
   import Menu from './components/Menu.html';
 
-  document.addEventListener('click', handleLinkClick);
+  window.addEventListener('click', handleLinkClick, true);
 
   export default {
     components: {
