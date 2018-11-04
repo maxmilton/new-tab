@@ -87,7 +87,7 @@
 
     oncreate() {
       chrome.storage.local.get(null, (settings) => {
-        /* eslint-disable dot-notation */ // prevent closure mangling
+        /* eslint-disable dot-notation */ // prevent closure from mangling
         if (settings['o']) {
           this.set({ resultsOrder: settings['o'] });
         }
@@ -126,7 +126,7 @@
 
     /** @return {void=} */
     methods: {
-      doSearch() { // xxeslint-disable-line consistent-return
+      doSearch() {
         const { searchText, tabsRaw, topSitesRaw } = this.get();
 
         // reset search when input is empty
