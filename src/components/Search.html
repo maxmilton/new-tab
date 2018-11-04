@@ -107,12 +107,6 @@
 
       this.onSearch = debounce(this.doSearch, SEARCH_DEBOUNCE_DELAY);
 
-      // FIXME: Should this be removed? Does it add any value or is it confusing?
-      // bring focus to search input when clicking anywhere on the page
-      // document.addEventListener('click', () => {
-      //   this.refs.s.focus();
-      // });
-
       // update tab list on tab events
       chrome.tabs.onUpdated.addListener(getTabs);
       chrome.tabs.onRemoved.addListener(getTabs);
