@@ -41,6 +41,11 @@ export function handleLinkClick(event) {
   const { target, ctrlKey } = event;
   const url = target.href;
 
+  // handle open settings from Menu.html component
+  if (target.id === 'o') {
+    chrome.runtime.openOptionsPage();
+  }
+
   // only apply special handling to non-http links
   if (url && url.charAt(0) !== 'h') {
     event.preventDefault();

@@ -1,4 +1,4 @@
-<div ref:m id="menu">
+<div id="menu">
   <div id="icon">☰</div>
 
   <div id="dropdown">
@@ -20,6 +20,11 @@
 
     <hr>
 
+    <!--
+      Rather than using on:click + a method like normal, use an `id` and capture
+      clicks in the global click event handler (in `common.js`). This way the
+      entire component template is static and receives special optimisation.
+    -->
     <a id="o" class="menu-item">
       New Tab Settings
     </a>
@@ -28,16 +33,6 @@
     </a>
   </div>
 </div>
-
-<script>
-  export default {
-    // rather than using on:click + a method like normal, manually set up an event
-    // listener so the entire template is static and recives special optimisation
-    oncreate() {
-      this.refs.m.addEventListener('click', () => chrome.runtime.openOptionsPage());
-    },
-  };
-</script>
 
 <style type="text/postcss">
   :global(hr) {
