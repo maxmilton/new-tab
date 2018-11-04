@@ -19,8 +19,8 @@ export function debounce(fn, delay = 260) {
   let context;
   let timer;
 
-  return function (...a) { // eslint-disable-line func-names, id-length
-    args = a;
+  return function (...params) { // eslint-disable-line func-names
+    args = params;
     context = this;
 
     if (!timer) {
