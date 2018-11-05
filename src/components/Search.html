@@ -87,7 +87,7 @@
 
     oncreate() {
       chrome.storage.local.get(null, (settings) => {
-        /* eslint-disable dot-notation */ // prevent closure mangling
+        /* eslint-disable dot-notation */ // prevent closure from mangling
         if (settings['o']) {
           this.set({ resultsOrder: settings['o'] });
         }
@@ -107,11 +107,6 @@
 
       this.onSearch = debounce(this.doSearch, SEARCH_DEBOUNCE_DELAY);
 
-      // bring focus to search input when clicking anywhere on the page
-      document.addEventListener('click', () => {
-        this.refs.s.focus();
-      });
-
       // update tab list on tab events
       chrome.tabs.onUpdated.addListener(getTabs);
       chrome.tabs.onRemoved.addListener(getTabs);
@@ -119,7 +114,7 @@
       chrome.tabs.onAttached.addListener(getTabs);
     },
 
-    // FIXME: When search is active, rerun when tab events trigger and getTabs() is run
+    // TODO: When search is active, rerun when tab events trigger and getTabs() is run
     /** @return {void=} */
     onstate({ changed, previous }) {
       if (!previous) return;
@@ -131,7 +126,7 @@
 
     /** @return {void=} */
     methods: {
-      doSearch() { // xxeslint-disable-line consistent-return
+      doSearch() {
         const { searchText, tabsRaw, topSitesRaw } = this.get();
 
         // reset search when input is empty
@@ -222,35 +217,38 @@
   };
 </script>
 
-<style type="text/postcss" global>
-  .container {
+<style type="text/postcss">
+  /* load more buttons */
+  :global(button) {
+    width: initial;
+    margin-top: 9px;
+    cursor: pointer;
+  }
+
+  :global(.container) {
     max-width: 800px;
     padding: 0 18px;
     margin: 0 auto;
   }
 
-  button,
-  #search {
+  /* stylelint-disable no-descending-specificity */
+  :global(button),
+  :global(#search) {
     box-sizing: border-box;
     width: 100%;
     padding: 11px 20px;
     margin: 0 0 18px;
     font-size: 22px;
     color: var(--t);
-    background: var(--c0);
+    background: var(--c2);
     border: 0;
-    box-shadow: var(--s);
-  }
+    border-radius: 24px;
+    outline: none;
 
-  /* search input placeholder */
-  ::placeholder {
-    color: var(--c2);
+    &:hover,
+    &:focus {
+      background: var(--c1);
+    }
   }
-
-  /* load more buttons */
-  button {
-    width: initial;
-    margin-top: 9px;
-    cursor: pointer;
-  }
+  /* stylelint-enable */
 </style>

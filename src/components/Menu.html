@@ -1,4 +1,4 @@
-<div ref:m id="menu">
+<div id="menu">
   <div id="icon">☰</div>
 
   <div id="dropdown">
@@ -20,6 +20,11 @@
 
     <hr>
 
+    <!--
+      Rather than using on:click + a method like normal, use an `id` and capture
+      clicks in the global click event handler (in `common.js`). This way the
+      entire component template is static and receives special optimisation.
+    -->
     <a id="o" class="menu-item">
       New Tab Settings
     </a>
@@ -29,28 +34,18 @@
   </div>
 </div>
 
-<script>
-  export default {
-    // rather than using on:click + a method like normal, manually set up an event
-    // listener so the entire template is static and recives special optimisation
-    oncreate() {
-      this.refs.m.addEventListener('click', () => chrome.runtime.openOptionsPage());
-    },
-  };
-</script>
-
-<style type="text/postcss" global>
-  hr {
+<style type="text/postcss">
+  :global(hr) {
     border: 0;
     border-bottom: 1px solid var(--c);
   }
 
-  .menu-item {
+  :global(.menu-item) {
     display: block;
     color: var(--t);
   }
 
-  #menu {
+  :global(#menu) {
     position: fixed;
     top: 90px;
     padding: 10px 84px 84px 42px;
@@ -58,27 +53,30 @@
     font-size: 20px;
   }
 
-  #icon {
+  :global(#icon) {
     font-size: 30px;
     color: var(--c1);
   }
 
-  #dropdown {
+  :global(#dropdown) {
     position: absolute;
     top: 10px;
     z-index: 1;
     padding: 18px;
     white-space: nowrap;
     background: var(--c0);
-    box-shadow: var(--s0);
+    box-shadow: var(--s);
     opacity: 0;
-    transition: all 150ms ease-out;
-    transform: scale(0.5);
+    transition:
+      opacity 160ms ease-out,
+      transform 160ms ease-out;
+    transform: scale(0.8);
     transform-origin: 0 10px;
 
-    #menu:hover > &,
-    #menu:focus > & {
+    :global(#menu):hover > &,
+    :global(#menu):focus > & {
       opacity: 1;
+      transition-duration: 192ms;
       transform: scale(1);
     }
   }

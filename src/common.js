@@ -19,8 +19,8 @@ export function debounce(fn, delay = 260) {
   let context;
   let timer;
 
-  return function (...a) { // eslint-disable-line func-names, id-length
-    args = a;
+  return function (...params) { // eslint-disable-line func-names
+    args = params;
     context = this;
 
     if (!timer) {
@@ -40,6 +40,11 @@ export function debounce(fn, delay = 260) {
 export function handleLinkClick(event) {
   const { target, ctrlKey } = event;
   const url = target.href;
+
+  // handle open settings from Menu.html component
+  if (target.id === 'o') {
+    chrome.runtime.openOptionsPage();
+  }
 
   // only apply special handling to non-http links
   if (url && url.charAt(0) !== 'h') {

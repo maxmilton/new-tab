@@ -101,12 +101,12 @@
   };
 </script>
 
-<style type="text/postcss" global>
-  .folder {
+<style type="text/postcss">
+  :global(.folder) {
     position: relative;
   }
 
-  .caret {
+  :global(.caret) {
     padding: 0 6px;
     margin-left: auto;
   }
@@ -116,7 +116,7 @@
     top: 40px;
     left: 0;
     background: var(--c0);
-    box-shadow: var(--s0);
+    box-shadow: var(--s);
 
     & & {
       top: 0;
@@ -125,13 +125,13 @@
   }
 
   /* bookmark item pushed to the right */
-  .right {
-    width: 100%;
+  :global(.right) { /* stylelint-disable-line no-descending-specificity */
     justify-content: flex-end;
+    width: 100%;
   }
 
   /* folder which opens to the left */
-  .left {
+  :global(.left) { /* stylelint-disable-line no-descending-specificity */
     right: 0;
     left: initial;
     justify-content: initial;

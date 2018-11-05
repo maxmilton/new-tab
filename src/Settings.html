@@ -61,7 +61,7 @@
     },
     methods: {
       resetOrder() {
-        this.set({ resultsOrder: [...DEFAULT_ORDER]});
+        this.set({ resultsOrder: [...DEFAULT_ORDER] });
       },
 
       moveItem(from, to) {
@@ -111,26 +111,26 @@
   };
 </script>
 
-<style type="text/postcss" global>
-  body {
+<style type="text/postcss">
+  :global(body) {
     font-size: 18px;
   }
 
-  select,
-  button {
+  :global(select),
+  :global(button) {
     margin-left: 9px !important; /* stylelint-disable-line declaration-no-important */
   }
 
-  .row {
-    margin-bottom: 18px;
-  }
-
-  ul {
+  :global(ul) {
     padding-left: 0;
     list-style: none;
   }
 
-  .item {
+  :global(.row) {
+    margin-bottom: 18px;
+  }
+
+  :global(.item) {
     padding: 6px 10px;
     margin: 6px 0;
     cursor: grab;
@@ -138,21 +138,22 @@
     border-radius: 2px;
   }
 
-  .icon {
+  :global(.icon) {
     margin-right: 10px;
     color: rgb(180, 180, 180);
 
-    .item:hover > & {
+    .item:hover > &,
+    .item:focus > & {
       color: rgb(110, 110, 110);
     }
   }
 
-  .dragging {
+  :global(.dragging) { /* stylelint-disable-line no-descending-specificity */
     border-style: dashed;
     opacity: 0.4;
   }
 
-  .over {
+  :global(.over) { /* stylelint-disable-line no-descending-specificity */
     /* stylelint-disable-next-line declaration-no-important */
     border-color: rgb(21, 48, 167) !important;
   }

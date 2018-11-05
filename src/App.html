@@ -8,7 +8,7 @@
   import BookmarkGroup from './components/BookmarkGroup.html';
   import Menu from './components/Menu.html';
 
-  document.addEventListener('click', handleLinkClick);
+  window.addEventListener('click', handleLinkClick, true);
 
   export default {
     components: {
@@ -19,11 +19,11 @@
   };
 </script>
 
-<style type="text/postcss" global>
+<style type="text/postcss">
   @import "./themes/light.css";
   @import "./themes/dark.css";
 
-  body {
+  :global(body) {
     margin: 80px 0;
     /* overflow-y: scroll; */ /* prevents jump on load */
     font-size: 18px;
@@ -39,12 +39,12 @@
     background-color: var(--b);
   }
 
-  h2,
-  .muted {
+  :global(h2),
+  :global(.muted) {
     color: var(--c1);
   }
 
-  a {
+  :global(a) { /* stylelint-disable-line no-descending-specificity */
     text-decoration: none;
 
     &:hover,
