@@ -1,15 +1,41 @@
+import compiler from '@ampproject/rollup-plugin-closure-compiler';
+import preMarkup from '@minna-ui/pre-markup';
+import preStyle from '@minna-ui/pre-style';
+import { catchErr, makeHtml } from '@minna-ui/rollup-plugins';
+import crass from 'crass';
 import { readFileSync, writeFile } from 'fs';
 import path from 'path';
-import preprocessMarkup from '@minna-ui/svelte-preprocess-markup';
-import preprocessStyle from '@minna-ui/svelte-preprocess-style';
-import svelte from 'rollup-plugin-svelte';
-import compiler from '@ampproject/rollup-plugin-closure-compiler';
 import { plugin as analyze } from 'rollup-plugin-analyzer';
-import { catchErr, makeHtml } from './rollup-plugins.js';
+import svelte from 'rollup-plugin-svelte';
 import manifest from './manifest.js';
 
-const template = readFileSync(`${__dirname}/src/template.html`, 'utf8');
 const dev = !!process.env.ROLLUP_WATCH;
+
+const watch = {
+  chokidar: true,
+  clearScreen: false,
+};
+
+const svelteOpts = {
+  dev,
+  preprocess: {
+    // level 4 removes all " " textNodes but can break the app if it removes
+    // spaces around attributes so in these cases use <!-- htmlmin:ignore -->
+    markup: preMarkup({ level: dev ? 0 : 4 }),
+    style: preStyle(),
+  },
+  emitCss: true,
+  nestedTransitions: false,
+  skipIntroByDefault: false,
+};
+
+const makeHtmlOpts = {
+  template: readFileSync(path.join(__dirname, 'src/template.html'), 'utf8'),
+  basePath: '',
+  inlineCss: true,
+  onCss: css => crass.parse(css).optimize({ o1: true }).toString(),
+  scriptAttr: 'async',
+};
 
 const compilerOpts = {
   externs: [
@@ -23,29 +49,15 @@ const compilerOpts = {
   // formatting: 'PRETTY_PRINT',
 };
 
-const svelteOpts = {
-  dev,
-  preprocess: {
-    // level 4 removes all " " textNodes but can break the app if it removes
-    // spaces around attributes so in these cases use <!-- htmlmin:ignore -->
-    markup: preprocessMarkup({ level: dev ? 0 : 4 }),
-    style: preprocessStyle(),
-  },
-  emitCss: true,
-  nestedTransitions: false,
-  skipIntroByDefault: false,
-};
-
-const watch = {
-  chokidar: true,
-  clearScreen: false,
-};
-
 // loader.js run through closure compiler + manual tweaks
 const loader = '<script>chrome.storage.local.get(null,a=>{a.t&&(document.body.className=a.t)});</script>';
 
 // extension manifest
-writeFile(`${__dirname}/dist/manifest.json`, JSON.stringify(manifest), catchErr);
+writeFile(
+  path.join(__dirname, 'dist/manifest.json'),
+  JSON.stringify(manifest),
+  catchErr
+);
 
 export default [
   {
@@ -60,10 +72,10 @@ export default [
       svelte(svelteOpts),
       !dev && compiler(compilerOpts),
       makeHtml({
-        template,
+        ...makeHtmlOpts,
         file: 'dist/n.html',
         title: 'New Tab',
-        content: `${loader}%CSS%<script src=n.js async></script>`,
+        content: `${loader}%CSS%%JS%`,
       }),
       !dev && analyze(),
     ],
@@ -80,9 +92,8 @@ export default [
       svelte(svelteOpts),
       !dev && compiler(compilerOpts),
       makeHtml({
-        template,
+        ...makeHtmlOpts,
         file: 'dist/s.html',
-        content: '%CSS%<script src=s.js async></script>',
       }),
       !dev && analyze(),
     ],
