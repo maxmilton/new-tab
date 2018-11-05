@@ -7,10 +7,6 @@ module.exports = {
   extends: [
     '@minna-ui/eslint-config',
   ],
-  parser: 'babel-eslint',
-  parserOptions: {
-    allowImportExportEverywhere: true,
-  },
   env: {
     webextensions: true,
   },
