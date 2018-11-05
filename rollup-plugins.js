@@ -13,7 +13,7 @@ const dev = !!process.env.ROLLUP_WATCH;
  * Generic error handler for nodejs callbacks.
  * @param {Error} err
  */
-function catchErr(err) { if (err) throw err; }
+export function catchErr(err) { if (err) throw err; }
 
 /**
  * Ultra-minimal template engine.
