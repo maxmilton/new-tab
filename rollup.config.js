@@ -30,11 +30,11 @@ const svelteOpts = {
 };
 
 const makeHtmlOpts = {
-  template: readFileSync(path.join(__dirname, 'src/template.html'), 'utf8'),
   basePath: '',
   inlineCss: true,
   onCss: css => crass.parse(css).optimize({ o1: true }).toString(),
   scriptAttr: 'async',
+  template: readFileSync(path.join(__dirname, 'src/template.html'), 'utf8'),
 };
 
 const compilerOpts = {
@@ -64,9 +64,9 @@ export default [
     watch,
     input: 'src/app.js',
     output: {
-      sourcemap: dev,
-      format: 'esm',
       file: 'dist/n.js',
+      format: 'esm',
+      sourcemap: dev,
     },
     plugins: [
       svelte(svelteOpts),
@@ -84,9 +84,9 @@ export default [
     watch,
     input: 'src/settings.js',
     output: {
-      sourcemap: dev,
-      format: 'esm',
       file: 'dist/s.js',
+      format: 'esm',
+      sourcemap: dev,
     },
     plugins: [
       svelte(svelteOpts),
