@@ -19,7 +19,7 @@
     "build": "APP_RELEASE=$(git describe --always --dirty=\"-dev\") NODE_ENV=production rollup --config",
     "prebuild": "rm -rf dist && mkdir dist && cp icon* dist",
     "lint": "yarn lint:css && yarn lint:js",
-    "lint:css": "stylelint **/*.{css,html} --cache --cache-location=/tmp/",
+    "lint:css": "stylelint --ignore-path .gitignore **/*.{css,html} --cache",
     "lint:js": "eslint --ignore-path .gitignore --ext html,js .",
     "test": "yarn lint && JEST_CIRCUS=1 jest --notify --watch",
     "test-ci": "JEST_CIRCUS=1 jest --coverage --runInBand --ci"
@@ -54,5 +54,50 @@
   },
   "browserslist": [
     "last 2 Chrome versions"
-  ]
+  ],
+  "babel": {
+    "env": {
+      "test": {
+        "presets": ["@minna-ui/jest-config/babel-preset.js"]
+      }
+    }
+  },
+  "jest": {
+    "preset": "@minna-ui/jest-config",
+    "setupFiles": ["<rootDir>/test/__setup__.js"],
+    "collectCoverageFrom": [
+      "src/**/*.{js,html}",
+      "!src/app.js",
+      "!src/settings.js",
+      "!src/template.html"
+    ]
+  },
+  "postcss": {
+    "plugins": {
+      "postcss-import": {},
+      "postcss-nested": {},
+      "autoprefixer": {}
+    }
+  },
+  "eslintConfig": {
+    "root": true,
+    "extends": [
+      "@minna-ui/eslint-config"
+    ],
+    "env": {
+      "webextensions": true
+    }
+  },
+  "stylelint": {
+    "extends": "@minna-ui/stylelint-config",
+    "rules": {
+      "selector-max-id": null,
+      "color-no-hex": null
+    }
+  },
+  "renovate": {
+    "extends": [
+      "@wearegenki"
+    ]
+  }
 }

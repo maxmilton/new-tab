@@ -7,7 +7,7 @@ import { readFileSync, writeFile } from 'fs';
 import path from 'path';
 import { plugin as analyze } from 'rollup-plugin-analyzer';
 import svelte from 'rollup-plugin-svelte';
-import manifest from './manifest.js';
+import manifest from './src/manifest.js';
 
 const dev = !!process.env.ROLLUP_WATCH;
 
