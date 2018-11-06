@@ -1,3 +1,4 @@
+.stylelintcache
 *.log
 dist/
 node_modules/
