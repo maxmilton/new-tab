@@ -35,7 +35,7 @@ export function debounce(fn, delay = 260) {
 /**
  * Handle link click to get around restriction for internal Chrome links
  * in an extension.
- * @param {MouseEvent} event the click event
+ * @param {MouseEvent} event The click event.
  */
 export function handleLinkClick(event) {
   const { target, ctrlKey } = event;

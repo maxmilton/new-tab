@@ -19,22 +19,22 @@
     "build": "APP_RELEASE=$(git describe --always --dirty=\"-dev\") NODE_ENV=production rollup --config",
     "prebuild": "rm -rf dist && mkdir dist && cp icon* dist",
     "lint": "yarn lint:css && yarn lint:js",
-    "lint:css": "stylelint **/*.{css,html} --cache --cache-location=/tmp/",
+    "lint:css": "stylelint --ignore-path .gitignore **/*.{css,html} --cache",
     "lint:js": "eslint --ignore-path .gitignore --ext html,js .",
     "test": "yarn lint && JEST_CIRCUS=1 jest --notify --watch",
     "test-ci": "JEST_CIRCUS=1 jest --coverage --runInBand --ci"
   },
   "devDependencies": {
     "@ampproject/rollup-plugin-closure-compiler": "0.8.3",
-    "@minna-ui/eslint-config": "0.16.0",
-    "@minna-ui/jest-config": "0.16.0",
-    "@minna-ui/stylelint-config": "0.16.0",
-    "@minna-ui/svelte-preprocess-markup": "0.16.0",
-    "@minna-ui/svelte-preprocess-style": "0.16.0",
+    "@minna-ui/eslint-config": "link:../../minna-ui/utils/eslint-config",
+    "@minna-ui/jest-config": "link:../../minna-ui/utils/jest-config",
+    "@minna-ui/pre-markup": "link:../../minna-ui/utils/pre-markup",
+    "@minna-ui/pre-style": "link:../../minna-ui/utils/pre-style",
+    "@minna-ui/rollup-plugins": "link:../../minna-ui/utils/rollup-plugins",
+    "@minna-ui/stylelint-config": "link:../../minna-ui/utils/stylelint-config",
     "@types/chrome": "0.0.75",
     "@wearegenki/renovate-config": "1.0.0",
     "autoprefixer": "9.3.1",
-    "babel-eslint": "10.0.1",
     "chokidar": "2.0.4",
     "codecov": "3.1.0",
     "crass": "0.12.3",
@@ -44,15 +44,60 @@
     "postcss": "7.0.5",
     "postcss-import": "12.0.1",
     "postcss-nested": "4.1.0",
-    "puppeteer": "1.10.0",
+    "puppeteer-core": "1.10.0",
     "rollup": "0.67.0",
     "rollup-plugin-analyzer": "2.1.0",
     "rollup-plugin-svelte": "4.3.2",
     "sinon-chrome": "2.3.2",
     "stylelint": "9.7.1",
-    "svelte": "2.15.2"
+    "svelte": "2.15.3"
   },
   "browserslist": [
     "last 2 Chrome versions"
-  ]
+  ],
+  "babel": {
+    "env": {
+      "test": {
+        "presets": ["@minna-ui/jest-config/babel-preset.js"]
+      }
+    }
+  },
+  "jest": {
+    "preset": "@minna-ui/jest-config",
+    "setupFiles": ["<rootDir>/test/__setup__.js"],
+    "collectCoverageFrom": [
+      "src/**/*.{js,html}",
+      "!src/app.js",
+      "!src/settings.js",
+      "!src/template.html"
+    ]
+  },
+  "postcss": {
+    "plugins": {
+      "postcss-import": {},
+      "postcss-nested": {},
+      "autoprefixer": {}
+    }
+  },
+  "eslintConfig": {
+    "root": true,
+    "extends": [
+      "@minna-ui/eslint-config"
+    ],
+    "env": {
+      "webextensions": true
+    }
+  },
+  "stylelint": {
+    "extends": "@minna-ui/stylelint-config",
+    "rules": {
+      "selector-max-id": null,
+      "color-no-hex": null
+    }
+  },
+  "renovate": {
+    "extends": [
+      "@wearegenki"
+    ]
+  }
 }
