@@ -26,19 +26,19 @@
   },
   "devDependencies": {
     "@ampproject/rollup-plugin-closure-compiler": "0.8.3",
-    "@minna-ui/eslint-config": "link:../../minna-ui/utils/eslint-config",
-    "@minna-ui/jest-config": "link:../../minna-ui/utils/jest-config",
-    "@minna-ui/pre-markup": "link:../../minna-ui/utils/pre-markup",
-    "@minna-ui/pre-style": "link:../../minna-ui/utils/pre-style",
-    "@minna-ui/rollup-plugins": "link:../../minna-ui/utils/rollup-plugins",
-    "@minna-ui/stylelint-config": "link:../../minna-ui/utils/stylelint-config",
+    "@minna-ui/eslint-config": "0.17.0",
+    "@minna-ui/jest-config": "0.17.0",
+    "@minna-ui/pre-markup": "0.17.0",
+    "@minna-ui/pre-style": "0.17.0",
+    "@minna-ui/rollup-plugins": "0.17.0",
+    "@minna-ui/stylelint-config": "0.17.0",
     "@types/chrome": "0.0.75",
     "@wearegenki/renovate-config": "1.0.0",
     "autoprefixer": "9.3.1",
     "chokidar": "2.0.4",
     "codecov": "3.1.0",
     "crass": "0.12.3",
-    "eslint": "5.8.0",
+    "eslint": "5.9.0",
     "jest": "23.6.0",
     "jest-puppeteer": "3.5.0",
     "postcss": "7.0.5",
@@ -49,7 +49,7 @@
     "rollup-plugin-analyzer": "2.1.0",
     "rollup-plugin-svelte": "4.3.2",
     "sinon-chrome": "2.3.2",
-    "stylelint": "9.7.1",
+    "stylelint": "9.8.0",
     "svelte": "2.15.3"
   },
   "browserslist": [
@@ -58,13 +58,17 @@
   "babel": {
     "env": {
       "test": {
-        "presets": ["@minna-ui/jest-config/babel-preset.js"]
+        "presets": [
+          "@minna-ui/jest-config/babel-preset.js"
+        ]
       }
     }
   },
   "jest": {
     "preset": "@minna-ui/jest-config",
-    "setupFiles": ["<rootDir>/test/__setup__.js"],
+    "setupFiles": [
+      "<rootDir>/test/__setup__.js"
+    ],
     "collectCoverageFrom": [
       "src/**/*.{js,html}",
       "!src/app.js",
