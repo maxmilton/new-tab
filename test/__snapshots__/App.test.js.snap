@@ -34,7 +34,6 @@ exports[`App root component renders correctly 1`] = `
 			    </a>
 
 			    <hr>
-
 			    <a id=\\"o\\" class=\\"menu-item\\">
 			      New Tab Settings
 			    </a>
