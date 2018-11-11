@@ -26,7 +26,7 @@
   },
   "devDependencies": {
     "@ampproject/rollup-plugin-closure-compiler": "0.8.3",
-    "@minna-ui/eslint-config": "0.17.0",
+    "@minna-ui/eslint-config": "0.17.1",
     "@minna-ui/jest-config": "0.17.0",
     "@minna-ui/pre-markup": "0.17.0",
     "@minna-ui/pre-style": "0.17.0",
