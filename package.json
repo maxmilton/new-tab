@@ -19,8 +19,8 @@
     "build": "APP_RELEASE=$(git describe --always --dirty=\"-dev\") NODE_ENV=production rollup --config",
     "prebuild": "rm -rf dist && mkdir dist && cp icon* dist",
     "lint": "yarn lint:css && yarn lint:js",
-    "lint:css": "stylelint --ignore-path .gitignore **/*.{css,html}",
-    "lint:js": "eslint --ignore-path .gitignore --ext html,js .",
+    "lint:css": "stylelint --ignore-path .gitignore **/*.{css,html,md}",
+    "lint:js": "eslint --ignore-path .gitignore --ext html,js,md .",
     "test": "yarn lint && JEST_CIRCUS=1 jest --notify --watch",
     "test-ci": "JEST_CIRCUS=1 jest --coverage --runInBand --ci"
   },
@@ -41,9 +41,10 @@
     "eslint": "5.9.0",
     "jest": "23.6.0",
     "jest-puppeteer": "3.5.1",
-    "postcss": "7.0.5",
+    "postcss": "7.0.6",
     "postcss-import": "12.0.1",
     "postcss-nested": "4.1.0",
+    "prettier": "1.15.2",
     "puppeteer-core": "1.10.0",
     "rollup": "0.67.3",
     "rollup-plugin-analyzer": "2.1.0",
@@ -99,9 +100,34 @@
       "color-no-hex": null
     }
   },
+  "prettier": {
+    "endOfLine": "lf",
+    "singleQuote": true,
+    "trailingComma": "all",
+    "overrides": [
+      {
+        "files": "*.html",
+        "options": {
+          "htmlWhitespaceSensitivity": "ignore",
+          "requirePragma": true
+        }
+      }
+    ]
+  },
   "renovate": {
     "extends": [
       "@wearegenki"
     ]
-  }
+  },
+  "engines": {
+    "node": ">11.0.0",
+    "yarn": ">1.12.0"
+  },
+  "os": [
+    "!win32",
+    "darwin",
+    "freebsd",
+    "linux",
+    "openbsd"
+  ]
 }
