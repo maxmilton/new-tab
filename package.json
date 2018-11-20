@@ -41,7 +41,7 @@
     "eslint": "5.9.0",
     "jest": "23.6.0",
     "jest-puppeteer": "3.5.1",
-    "postcss": "7.0.5",
+    "postcss": "7.0.6",
     "postcss-import": "12.0.1",
     "postcss-nested": "4.1.0",
     "puppeteer-core": "1.10.0",
