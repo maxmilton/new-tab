@@ -20,14 +20,15 @@ Originally an experimental project to give me a chance for me to play with the C
 
 ### Features
 
-* Minimal design aesthetic with multiple themes.
-* See a list of your open tabs.
-* Quickly search open tabs, bookmarks, history, and top sites in one place.
-* Simple bookmarks bar.
-* Links to common places in your browser.
+- Minimal design aesthetic with multiple themes.
+- See a list of your open tabs.
+- Quickly search open tabs, bookmarks, history, and top sites in one place.
+- Simple bookmarks bar.
+- Links to common places in your browser.
 
 ### Motives
 
+<!-- prettier-ignore -->
 Issue | Why / How
 --|--
 Access | Still have access to common things like the bookmarks bar etc.
@@ -37,15 +38,16 @@ Unobtrusive | No annoying things like entries in your right click menu.
 
 ### Technology
 
-* [Svelte](https://svelte.technology) JavaScript framework
-* [PostCSS](http://postcss.org)
-* [Chrome browser APIs](https://developer.chrome.com/apps/api_index)
+- [Svelte](https://svelte.technology) JavaScript framework
+- [PostCSS](http://postcss.org)
+- [Chrome browser APIs](https://developer.chrome.com/apps/api_index)
 
 ## Known issues
 
 1. The extension's bookmarks bar is limited in functionality. Chrome doesn't have an API to control the native bookmarks bar via extensions so I've recreated a simplistic version. The goal here is _high performance_ and not to emulate all the native bookmarks bar features. Use the bookmark manager for access to all features.
 1. Page needs to be reloaded after adding, editing, or removing bookmarks. Because bookmarks don't change often, I prefer not to add bookmark event listeners as most users simply don't need live bookmark changes.
 1. Searching the browsing history is slow when you history is _very_ big. This is just a reality of Chrome. 😢
+1. The project is set up for on Linux/macOS and may not build on Windows.
 
 ## Browser support
 
@@ -65,6 +67,6 @@ See [CHANGELOG.md](https://github.com/MaxMilton/new-tab/blob/master/CHANGELOG.md
 
 Icon made by [Freepik](http://www.freepik.com) licensed [CC 3.0 BY](http://creativecommons.org/licenses/by/3.0/).
 
------
+---
 
 © 2018 [Max Milton](https://maxmilton.com)
