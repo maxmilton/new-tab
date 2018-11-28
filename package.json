@@ -40,7 +40,7 @@
     "crass": "0.12.3",
     "eslint": "5.9.0",
     "jest": "23.6.0",
-    "jest-puppeteer": "3.5.1",
+    "jest-puppeteer": "3.5.2",
     "postcss": "7.0.6",
     "postcss-import": "12.0.1",
     "postcss-nested": "4.1.0",
@@ -48,9 +48,9 @@
     "puppeteer-core": "1.10.0",
     "rollup": "0.67.3",
     "rollup-plugin-analyzer": "2.1.0",
-    "rollup-plugin-svelte": "4.3.2",
+    "rollup-plugin-svelte": "4.4.0",
     "sinon-chrome": "2.3.2",
-    "stylelint": "9.8.0",
+    "stylelint": "9.9.0",
     "svelte": "2.15.3"
   },
   "browserslist": [
