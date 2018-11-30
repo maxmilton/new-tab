@@ -44,7 +44,7 @@
     "postcss": "7.0.6",
     "postcss-import": "12.0.1",
     "postcss-nested": "4.1.0",
-    "puppeteer-core": "1.10.0",
+    "puppeteer-core": "1.11.0",
     "rollup": "0.67.3",
     "rollup-plugin-analyzer": "2.1.0",
     "rollup-plugin-svelte": "4.3.2",
