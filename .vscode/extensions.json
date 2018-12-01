@@ -1,0 +1,9 @@
+{
+  "recommendations": [
+    "ban.spellright",
+    "davidanson.vscode-markdownlint",
+    "dbaeumer.vscode-eslint",
+    "esbenp.prettier-vscode",
+    "shinnn.stylelint"
+  ]
+}
