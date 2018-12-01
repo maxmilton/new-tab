@@ -4,7 +4,8 @@ export default {
   manifest_version: 2,
 
   name: 'New Tab',
-  description: '⚡ A high performance new tab page that gets you where you need to go faster.',
+  description:
+    '⚡ A high performance new tab page that gets you where you need to go faster.',
   version: pkg.version,
   version_name: process.env.APP_RELEASE,
   homepage_url: pkg.homepage,
@@ -30,10 +31,10 @@ export default {
   offline_enabled: true,
   incognito: 'not_allowed',
   content_security_policy:
-    "default-src 'none';"
+    "default-src 'none';" +
     // hash is `loader.js` embedded into the document
-    + " script-src 'self' 'sha256-FtIFk1UjzWWlhfMrIdJ9n60rbnTmldIAss9HFJTJeUM=';"
-    + " style-src 'unsafe-inline';"
+    " script-src 'self' 'sha256-FtIFk1UjzWWlhfMrIdJ9n60rbnTmldIAss9HFJTJeUM=';" +
+    " style-src 'unsafe-inline';" +
     // `data:` is used in the settings page
-    + ' img-src chrome://favicon data:;',
+    ' img-src chrome://favicon data:;',
 };

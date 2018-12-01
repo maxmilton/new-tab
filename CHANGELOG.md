@@ -44,7 +44,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ### Changed
 
-- `Light` theme is now the default. 
+- `Light` theme is now the default.
 - Extension settings are now stored locally and do not sync to your account.
 - Big refactor of the whole app — same features but changed to do the minimum necessary computation:
   - Rename various variables and methods to be more understandable and mark private objects with `_` instead of `__`.
@@ -505,7 +505,7 @@ Known issues:
 
 - Initial public version including all the basics; working proof of concept code, readme, etc. Not ready for release yet though, it's still far from being actually useful!
 
-[Unreleased]: https://github.com/MaxMilton/new-tab/compare/v0.13.0...HEAD
+[unreleased]: https://github.com/MaxMilton/new-tab/compare/v0.13.0...HEAD
 [0.13.0]: https://github.com/MaxMilton/new-tab/compare/v0.12.4...v0.13.0
 [0.12.4]: https://github.com/MaxMilton/new-tab/compare/v0.12.3...v0.12.4
 [0.12.3]: https://github.com/MaxMilton/new-tab/compare/v0.12.2...v0.12.3

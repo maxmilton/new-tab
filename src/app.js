@@ -1,5 +1,6 @@
 import App from './App.html';
 
-new App({ // eslint-disable-line no-new
+/* eslint-disable-next-line no-new */
+new App({
   target: document.body,
 });

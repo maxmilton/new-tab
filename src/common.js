@@ -1,10 +1,5 @@
 /** @type {Array<string>} */
-export const DEFAULT_ORDER = [
-  'Open Tabs',
-  'Bookmarks',
-  'History',
-  'Top Sites',
-];
+export const DEFAULT_ORDER = ['Open Tabs', 'Bookmarks', 'History', 'Top Sites'];
 
 /**
  * Delay running a function until X ms have passed since its last call.
@@ -19,7 +14,8 @@ export function debounce(fn, delay = 260) {
   let context;
   let timer;
 
-  return function (...params) { // eslint-disable-line func-names
+  // eslint-disable-next-line func-names
+  return function(...params) {
     args = params;
     context = this;
 
@@ -71,7 +67,5 @@ export function shorten(text, max) {
     return text;
   }
 
-  return text.length > max
-    ? `${text.slice(0, max)}…`
-    : text;
+  return text.length > max ? `${text.slice(0, max)}…` : text;
 }

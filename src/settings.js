@@ -1,5 +1,6 @@
 import Settings from './Settings.html';
 
-new Settings({ // eslint-disable-line no-new
+/* eslint-disable-next-line no-new */
+new Settings({
   target: document.body,
 });

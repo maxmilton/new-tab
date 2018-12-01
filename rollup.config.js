@@ -32,31 +32,39 @@ const svelteOpts = {
 const makeHtmlOpts = {
   basePath: '',
   inlineCss: true,
-  onCss: css => crass.parse(css).optimize({ o1: true }).toString(),
+  onCss: css =>
+    crass
+      .parse(css)
+      .optimize({ o1: true })
+      .toString(),
   scriptAttr: 'async',
   template: readFileSync(path.join(__dirname, 'src/template.html'), 'utf8'),
 };
 
 const compilerOpts = {
-  externs: [
-    require.resolve('google-closure-compiler/contrib/externs/chrome.js'),
-    require.resolve('google-closure-compiler/contrib/externs/chrome_extensions.js'),
-    path.join(__dirname, 'externs.js'),
-  ],
   charset: 'UTF-8',
   compilation_level: 'ADVANCED',
+  externs: [
+    require.resolve('google-closure-compiler/contrib/externs/chrome.js'),
+    require.resolve(
+      'google-closure-compiler/contrib/externs/chrome_extensions.js',
+    ),
+    path.join(__dirname, 'externs.js'),
+  ],
+
   // debug: true,
   // formatting: 'PRETTY_PRINT',
 };
 
 // loader.js run through closure compiler + manual tweaks
-const loader = '<script>chrome.storage.local.get(null,a=>{a.t&&(document.body.className=a.t)});</script>';
+const loader =
+  '<script>chrome.storage.local.get(null,a=>{a.t&&(document.body.className=a.t)});</script>';
 
 // extension manifest
 writeFile(
   path.join(__dirname, 'dist/manifest.json'),
   JSON.stringify(manifest),
-  catchErr
+  catchErr,
 );
 
 export default [
