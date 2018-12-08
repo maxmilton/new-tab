@@ -38,7 +38,7 @@
     "chokidar": "2.0.4",
     "codecov": "3.1.0",
     "crass": "0.12.3",
-    "eslint": "5.9.0",
+    "eslint": "5.10.0",
     "jest": "23.6.0",
     "jest-puppeteer": "3.5.2",
     "postcss": "7.0.6",
