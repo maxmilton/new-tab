@@ -48,7 +48,7 @@
     "puppeteer-core": "1.11.0",
     "rollup": "0.67.4",
     "rollup-plugin-analyzer": "2.1.0",
-    "rollup-plugin-svelte": "4.4.0",
+    "rollup-plugin-svelte": "4.5.0",
     "sinon-chrome": "2.3.2",
     "stylelint": "9.9.0",
     "svelte": "2.15.3"
