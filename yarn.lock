@@ -5326,16 +5326,16 @@ rollup-plugin-analyzer@2.1.0:
   resolved "https://registry.yarnpkg.com/rollup-plugin-analyzer/-/rollup-plugin-analyzer-2.1.0.tgz#81d82cafb5a992fb99617112bc73d2313dd18259"
   integrity sha512-lryo+3+O6/QF2uoDfszbg+YHuKD1OBuUfcd6kjsbZPKho0ksKCTDStFKrbBH6bF1Rpx/F2jdH6gvDsNbYaEK6g==
 
-rollup-plugin-svelte@4.5.0:
-  version "4.5.0"
-  resolved "https://registry.yarnpkg.com/rollup-plugin-svelte/-/rollup-plugin-svelte-4.5.0.tgz#b075ee252a2d2d06844e78b479091314dccd33a7"
-  integrity sha512-mueHEp59mmyYIJQDF9LWfUetFJN18qDwcqcnik7NrPJwHHepptIEzuWoqaWjl954t9Oj0QRkyU9nmxyAX5ZPLA==
+rollup-plugin-svelte@5.0.0:
+  version "5.0.0"
+  resolved "https://registry.yarnpkg.com/rollup-plugin-svelte/-/rollup-plugin-svelte-5.0.0.tgz#42d93d8a20565e37b959adea0166e8d7817d6de4"
+  integrity sha512-wt8RvegLSZ0fgwYit6LOmJVMgM66aWyNo7/MZkwCxJQD56GeSMtrpxpRyTv9W/GDUYQsbl2RkCoFRw0kazWi0w==
   dependencies:
     require-relative "^0.8.7"
-    rollup-pluginutils "^2.3.0"
-    sourcemap-codec "^1.4.1"
+    rollup-pluginutils "^2.3.3"
+    sourcemap-codec "^1.4.4"
 
-rollup-pluginutils@^2.3.0, rollup-pluginutils@^2.3.3:
+rollup-pluginutils@^2.3.3:
   version "2.3.3"
   resolved "https://registry.yarnpkg.com/rollup-pluginutils/-/rollup-pluginutils-2.3.3.tgz#3aad9b1eb3e7fe8262820818840bf091e5ae6794"
   integrity sha512-2XZwja7b6P5q4RZ5FhyX1+f46xi1Z3qBKigLRZ6VTZjwbN0K1IFGMlwm06Uu0Emcre2Z63l77nq/pzn+KxIEoA==
@@ -5592,7 +5592,7 @@ source-map@^0.6.0, source-map@^0.6.1, source-map@~0.6.0, source-map@~0.6.1:
   resolved "https://registry.yarnpkg.com/source-map/-/source-map-0.6.1.tgz#74722af32e9614e9c287a8d0bbde48b5e2f1a263"
   integrity sha512-UjgapumWlbMhkBgzT7Ykc5YXUT46F0iKu8SGXq0bcwP5dz/h0Plj6enJqjz1Zbq2l5WaqYnrVbwWOWMyF3F47g==
 
-sourcemap-codec@^1.4.1:
+sourcemap-codec@^1.4.1, sourcemap-codec@^1.4.4:
   version "1.4.4"
   resolved "https://registry.yarnpkg.com/sourcemap-codec/-/sourcemap-codec-1.4.4.tgz#c63ea927c029dd6bd9a2b7fa03b3fec02ad56e9f"
   integrity sha512-CYAPYdBu34781kLHkaW3m6b/uUSyMOC2R61gcYMWooeuaGtjof86ZA/8T+qVPPt7np1085CR9hmMGrySwEc8Xg==
