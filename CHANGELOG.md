@@ -9,30 +9,43 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ## [Unreleased]
 
+## [0.14.0] - 2018-12-17
+
 ### Added
 
 - Extract search results list into new reusable component.
 - Extract bookmarks folder into separate component and make a new bookmark node functional/routing component which conditionally renders a folder or link item. This avoids Svelte's logic to insert comment DOM nodes to anchor an `if` block in case the condition changes.
 - Some extra JSDoc comments for better development feedback in VS Code.
+- Replace many packages with the new `@minna-ui/*` packages.
 
 ### Changed
 
 - Rename most internal names (variables, props, functions, etc.) to remove the leading underscore and to be more descriptive and to be unique so closure compiler mangles it.
 - Use a kind of `line-height` hack to align things with minimal CSS.
 - Use `OffscreenCanvas` instead of `document.createElement('canvas')` — Chrome v69+.
+- Move global click handler logic from menu component to `src/common.js`.
+- Better click event capture.
+- Tweak shadow colours and animation timing.
+- Move `manifest.js` into `src` directory.
+- Move most devtooling configs into `package.json` for a cleaner and less intimidating root directory.
 - Update dependencies.
 
 ### Removed
 
+- Automatic search input focus on document click as this feature was mostly unknown and we now match the UX of the default new tab page.
+- Custom HTML build code, now replaced with `makeHtml` from `@minna-ui/rollup-plugins`.
+- Automatic `:global()` around styles, now these need to be added manually.
 - Unnecessary dependencies.
-- Excessive (and broken) exports info during production build.
+- Excessive (and broken) exports information during production build.
 
 ### Fixed
 
-- Can't open `chrome://` bookmarks sometimes due to click event race condition.
-- All favicons have a right margin even if there is no adjacent text.
+- Can't open `chrome://` bookmarks sometimes due to click event race condition (still an issue but is now triggered less).
+- Favicon alignment and all favicons have a right margin even if there is no adjacent text.
 - Excessive use of event listeners; click listener on every link item instead of just on open tab links.
 - Unnecessary white space textNodes present in DOM. Uses `trimCustomFragments` option of `html-minifier` which means now we need to add special ignore comments in some places to avoid breaking the app due to collapsed white space in attributes and props.
+- New linting errors.
+- Clean up externs and build config.
 
 ## [0.13.0] - 2018-09-09
 
@@ -505,7 +518,8 @@ Known issues:
 
 - Initial public version including all the basics; working proof of concept code, readme, etc. Not ready for release yet though, it's still far from being actually useful!
 
-[unreleased]: https://github.com/MaxMilton/new-tab/compare/v0.13.0...HEAD
+[unreleased]: https://github.com/MaxMilton/new-tab/compare/v0.14.0...HEAD
+[0.13.0]: https://github.com/MaxMilton/new-tab/compare/v0.13.0...v0.14.0
 [0.13.0]: https://github.com/MaxMilton/new-tab/compare/v0.12.4...v0.13.0
 [0.12.4]: https://github.com/MaxMilton/new-tab/compare/v0.12.3...v0.12.4
 [0.12.3]: https://github.com/MaxMilton/new-tab/compare/v0.12.2...v0.12.3
