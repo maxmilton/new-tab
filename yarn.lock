@@ -172,16 +172,16 @@
     lodash "^4.17.10"
     to-fast-properties "^2.0.0"
 
-"@minna-ui/eslint-config@0.18.0":
-  version "0.18.0"
-  resolved "https://registry.yarnpkg.com/@minna-ui/eslint-config/-/eslint-config-0.18.0.tgz#0532b73432fe07252926b0308873ab076605b03b"
-  integrity sha512-780+52EEVl2EIR2rXlfobdAju/UmIXBTQ8kHGI8++fBQCaFsu6m855L/YLWwGzHSOC9XKQjOde8GWhp0s2sGFg==
+"@minna-ui/eslint-config@0.18.1":
+  version "0.18.1"
+  resolved "https://registry.yarnpkg.com/@minna-ui/eslint-config/-/eslint-config-0.18.1.tgz#2d7da8069ac9627adbccbe3102ece16589c7ab78"
+  integrity sha512-7+YQvhSk0gqeN+qicGV/GVvAG/orEgllP+E56Hm6SrhutlndIEPSEQRB7ZhgGgYBhsU8My4SGqYmo130kfC0yw==
   dependencies:
     eslint-config-airbnb-base "^13.1.0"
     eslint-config-prettier "^3.3.0"
     eslint-plugin-html "^5.0.0"
     eslint-plugin-import "^2.14.0"
-    eslint-plugin-jest "^22.1.0"
+    eslint-plugin-jest "^22.1.2"
     eslint-plugin-markdown "^1.0.0-rc.1"
     eslint-plugin-prettier "^3.0.0"
 
@@ -1700,7 +1700,7 @@ eslint-plugin-import@^2.14.0:
     read-pkg-up "^2.0.0"
     resolve "^1.6.0"
 
-eslint-plugin-jest@^22.1.0:
+eslint-plugin-jest@^22.1.2:
   version "22.1.2"
   resolved "https://registry.yarnpkg.com/eslint-plugin-jest/-/eslint-plugin-jest-22.1.2.tgz#1ea36cc3faedbdb788e702ca633d635ca14e91e8"
   integrity sha512-jSPT4rVmNetkeCIyrvvOM0wJtgoUSbKHIUDoOGzIISsg51eWN/nISPNKVM+jXMMDI9oowbyapOnpKSXlsLiDpQ==
