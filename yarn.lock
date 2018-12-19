@@ -198,12 +198,12 @@
     babel-jest "^23.6.0"
     jest-circus "^23.6.0"
 
-"@minna-ui/pre-markup@0.18.0":
-  version "0.18.0"
-  resolved "https://registry.yarnpkg.com/@minna-ui/pre-markup/-/pre-markup-0.18.0.tgz#b0cbddcc09c0d71d99641815a96f92c6488a7ba9"
-  integrity sha512-rkOY0pMiJwM1A18K7vfXxHxmPRGbbd28Nso/ANIwRl9t5SdW+gkbKLbivJa7EyrHnTqoG7sEwsn4LdGg6Jl0DA==
+"@minna-ui/pre-markup@0.18.1":
+  version "0.18.1"
+  resolved "https://registry.yarnpkg.com/@minna-ui/pre-markup/-/pre-markup-0.18.1.tgz#0e370db15a6f72b8078089ba5ff13241cf763b79"
+  integrity sha512-17an2045bsL686ie6bot1tXGX9q3oQ7KejZr870v86JRwqJ87I5g8UheX+XCrD5H7T7JKl+/5SwMrNqU7A3w1A==
   dependencies:
-    deepmerge "^2.2.1"
+    deepmerge "^3.0.0"
     html-minifier "3.5.21"
 
 "@minna-ui/pre-style@0.18.0":
@@ -1432,6 +1432,11 @@ deepmerge@^2.2.1:
   version "2.2.1"
   resolved "https://registry.yarnpkg.com/deepmerge/-/deepmerge-2.2.1.tgz#5d3ff22a01c00f645405a2fbc17d0778a1801170"
   integrity sha512-R9hc1Xa/NOBi9WRVUWg19rl1UB7Tt4kuPd+thNJgFZoxXsTz7ncaPaeIm+40oSGuP33DfMb4sZt1QIGiJzC4EA==
+
+deepmerge@^3.0.0:
+  version "3.0.0"
+  resolved "https://registry.yarnpkg.com/deepmerge/-/deepmerge-3.0.0.tgz#ca7903b34bfa1f8c2eab6779280775a411bfc6ba"
+  integrity sha512-a8z8bkgHsAML+uHLqmMS83HHlpy3PvZOOuiTQqaa3wu8ZVg3h0hqHk6aCsGdOnZV2XMM/FRimNGjUh0KCcmHBw==
 
 default-require-extensions@^1.0.0:
   version "1.0.0"
