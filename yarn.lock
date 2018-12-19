@@ -21,7 +21,7 @@
   dependencies:
     "@babel/highlight" "^7.0.0"
 
-"@babel/core@^7.1.2", "@babel/core@^7.1.6":
+"@babel/core@^7.1.2", "@babel/core@^7.2.2":
   version "7.2.2"
   resolved "https://registry.yarnpkg.com/@babel/core/-/core-7.2.2.tgz#07adba6dde27bb5ad8d8672f15fde3e08184a687"
   integrity sha512-59vB0RWt09cAct5EIe58+NzGP4TFSD3Bz//2/ELy3ZeTeKF6VTD1AXlH8BGGbCX0PuobZBsIzO7IAI9PH67eKw==
@@ -130,7 +130,7 @@
   resolved "https://registry.yarnpkg.com/@babel/parser/-/parser-7.2.2.tgz#37ebdbc88a2e1ebc6c8dd3d35ea9436e3e39e477"
   integrity sha512-UNTmQ5cSLDeBGBl+s7JeowkqIHgmFAGBnLDdIzFmUNSuS5JF0XBcN59jsh/vJO/YjfsBqMxhMjoFGmNExmf0FA==
 
-"@babel/plugin-transform-modules-commonjs@^7.1.0":
+"@babel/plugin-transform-modules-commonjs@^7.2.0":
   version "7.2.0"
   resolved "https://registry.yarnpkg.com/@babel/plugin-transform-modules-commonjs/-/plugin-transform-modules-commonjs-7.2.0.tgz#c4f1933f5991d5145e9cfad1dfd848ea1727f404"
   integrity sha512-V6y0uaUQrQPXUrmj+hgnks8va2L0zcZymeU7TtWEgdRLNkceafKXEduv7QzgQAE4lT+suwooG9dC7LFhdRAbVQ==
@@ -185,15 +185,15 @@
     eslint-plugin-markdown "^1.0.0-rc.1"
     eslint-plugin-prettier "^3.0.0"
 
-"@minna-ui/jest-config@0.18.0":
-  version "0.18.0"
-  resolved "https://registry.yarnpkg.com/@minna-ui/jest-config/-/jest-config-0.18.0.tgz#29386dc710cb627bbcc2d3aae96bba07add740aa"
-  integrity sha512-AK60YPzjT47KtPjWyWX4GnqYnGVvooAEjMPsW/MEbgAmsB8slxsHZZYrFVO5bFT9CV8o7DTg+zmap/wvl//mRg==
+"@minna-ui/jest-config@0.18.1":
+  version "0.18.1"
+  resolved "https://registry.yarnpkg.com/@minna-ui/jest-config/-/jest-config-0.18.1.tgz#3d24e01ad40540143e7b41e133e15f402daccda8"
+  integrity sha512-XWgy6yRmRv4wDjj2UdNZXS6TDJfO3zemfUGjFo0wBOa7eTU/AcaW3pL+bA7xPAv3ASvTWHBfqgH9PCh25w9YRQ==
   dependencies:
-    "@babel/core" "^7.1.6"
-    "@babel/plugin-transform-modules-commonjs" "^7.1.0"
+    "@babel/core" "^7.2.2"
+    "@babel/plugin-transform-modules-commonjs" "^7.2.0"
     "@types/jest" "^23.3.10"
-    "@types/node" "^10.12.11"
+    "@types/node" "^10.12.15"
     babel-core "^7.0.0-bridge.0"
     babel-jest "^23.6.0"
     jest-circus "^23.6.0"
@@ -308,10 +308,15 @@
   resolved "https://registry.yarnpkg.com/@types/jest/-/jest-23.3.10.tgz#4897974cc317bf99d4fe6af1efa15957fa9c94de"
   integrity sha512-DC8xTuW/6TYgvEg3HEXS7cu9OijFqprVDXXiOcdOKZCU/5PJNLZU37VVvmZHdtMiGOa8wAA/We+JzbdxFzQTRQ==
 
-"@types/node@*", "@types/node@^10.12.11":
+"@types/node@*":
   version "10.12.15"
   resolved "https://registry.yarnpkg.com/@types/node/-/node-10.12.15.tgz#20e85651b62fd86656e57c9c9bc771ab1570bc59"
   integrity sha512-9kROxduaN98QghwwHmxXO2Xz3MaWf+I1sLVAA6KJDF5xix+IyXVhds0MAfdNwtcpSrzhaTsNB0/jnL86fgUhqA==
+
+"@types/node@^10.12.15":
+  version "10.12.17"
+  resolved "https://registry.yarnpkg.com/@types/node/-/node-10.12.17.tgz#7040565b2c93d59325a68fa69073e754a7eda93a"
+  integrity sha512-umSCRkjWH70uNzFiOof5yxCqrMXIBJ9UJJUzbEsmtWt8apURQh06pylGMqnhdjHGJSeoBrhzk+mibu6NgL1oBA==
 
 "@types/unist@^2.0.2":
   version "2.0.2"
