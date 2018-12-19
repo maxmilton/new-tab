@@ -214,12 +214,12 @@
     deepmerge "^2.2.1"
     postcss-load-config "^2.0.0"
 
-"@minna-ui/rollup-plugins@0.18.0":
-  version "0.18.0"
-  resolved "https://registry.yarnpkg.com/@minna-ui/rollup-plugins/-/rollup-plugins-0.18.0.tgz#c227faabc4f6bf838970ed9b729e3be67a31f506"
-  integrity sha512-ovgj6Pyh0ZO7YSqgzGGFsdnr9trixTmOvJPxwnYpEKOE42S4SAYIno9kUiBmzyYaLPdkvz1NNYxkb6baLRxyPw==
+"@minna-ui/rollup-plugins@0.18.1":
+  version "0.18.1"
+  resolved "https://registry.yarnpkg.com/@minna-ui/rollup-plugins/-/rollup-plugins-0.18.1.tgz#fd1f6c3f9a234dd6a8e1967c62606dd5f3501bf9"
+  integrity sha512-/7T7dDMjQzuwkdS5qSFfbjxUn9s+IDw/wHoPIYv1trx6XWvyM6Dl5qtwTGC9gttDDfAo1yoirmeC+m4qpZxOqw==
   dependencies:
-    deepmerge "^2.2.1"
+    deepmerge "^3.0.0"
     postcss-load-config "^2.0.0"
     purgecss "^1.1.0"
     rollup-pluginutils "^2.3.3"
@@ -1432,6 +1432,11 @@ deepmerge@^2.2.1:
   version "2.2.1"
   resolved "https://registry.yarnpkg.com/deepmerge/-/deepmerge-2.2.1.tgz#5d3ff22a01c00f645405a2fbc17d0778a1801170"
   integrity sha512-R9hc1Xa/NOBi9WRVUWg19rl1UB7Tt4kuPd+thNJgFZoxXsTz7ncaPaeIm+40oSGuP33DfMb4sZt1QIGiJzC4EA==
+
+deepmerge@^3.0.0:
+  version "3.0.0"
+  resolved "https://registry.yarnpkg.com/deepmerge/-/deepmerge-3.0.0.tgz#ca7903b34bfa1f8c2eab6779280775a411bfc6ba"
+  integrity sha512-a8z8bkgHsAML+uHLqmMS83HHlpy3PvZOOuiTQqaa3wu8ZVg3h0hqHk6aCsGdOnZV2XMM/FRimNGjUh0KCcmHBw==
 
 default-require-extensions@^1.0.0:
   version "1.0.0"
