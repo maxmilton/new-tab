@@ -206,12 +206,12 @@
     deepmerge "^2.2.1"
     html-minifier "3.5.21"
 
-"@minna-ui/pre-style@0.18.0":
-  version "0.18.0"
-  resolved "https://registry.yarnpkg.com/@minna-ui/pre-style/-/pre-style-0.18.0.tgz#ff66e9533363f641e4e5549ff9479c4fdb336739"
-  integrity sha512-g7+itwOCP46E5SSEgQtmrsWyozm9vDEz5CRo9R97mbI9WOBLnw6XdNIGPp83G6uNCmON75kBiZtMIggf7W0VGg==
+"@minna-ui/pre-style@0.18.1":
+  version "0.18.1"
+  resolved "https://registry.yarnpkg.com/@minna-ui/pre-style/-/pre-style-0.18.1.tgz#7a34aa9596bc3ad7d353363301b6498981c188fc"
+  integrity sha512-2vqFw+13I9wU8KuKcsvBtLTUi4iMnQ48EMj6bc33aQw1fuP0UNYs9ko4kJ4b2qA0mjqLBbAaJS+neMVsC0Hfvw==
   dependencies:
-    deepmerge "^2.2.1"
+    deepmerge "^3.0.0"
     postcss-load-config "^2.0.0"
 
 "@minna-ui/rollup-plugins@0.18.0":
@@ -1432,6 +1432,11 @@ deepmerge@^2.2.1:
   version "2.2.1"
   resolved "https://registry.yarnpkg.com/deepmerge/-/deepmerge-2.2.1.tgz#5d3ff22a01c00f645405a2fbc17d0778a1801170"
   integrity sha512-R9hc1Xa/NOBi9WRVUWg19rl1UB7Tt4kuPd+thNJgFZoxXsTz7ncaPaeIm+40oSGuP33DfMb4sZt1QIGiJzC4EA==
+
+deepmerge@^3.0.0:
+  version "3.0.0"
+  resolved "https://registry.yarnpkg.com/deepmerge/-/deepmerge-3.0.0.tgz#ca7903b34bfa1f8c2eab6779280775a411bfc6ba"
+  integrity sha512-a8z8bkgHsAML+uHLqmMS83HHlpy3PvZOOuiTQqaa3wu8ZVg3h0hqHk6aCsGdOnZV2XMM/FRimNGjUh0KCcmHBw==
 
 default-require-extensions@^1.0.0:
   version "1.0.0"
