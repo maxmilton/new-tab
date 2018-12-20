@@ -185,15 +185,15 @@
     eslint-plugin-markdown "^1.0.0-rc.1"
     eslint-plugin-prettier "^3.0.0"
 
-"@minna-ui/jest-config@0.18.1":
-  version "0.18.1"
-  resolved "https://registry.yarnpkg.com/@minna-ui/jest-config/-/jest-config-0.18.1.tgz#3d24e01ad40540143e7b41e133e15f402daccda8"
-  integrity sha512-XWgy6yRmRv4wDjj2UdNZXS6TDJfO3zemfUGjFo0wBOa7eTU/AcaW3pL+bA7xPAv3ASvTWHBfqgH9PCh25w9YRQ==
+"@minna-ui/jest-config@0.18.2":
+  version "0.18.2"
+  resolved "https://registry.yarnpkg.com/@minna-ui/jest-config/-/jest-config-0.18.2.tgz#4972b239e90cdf2777fe4ad472b683dd1189bd93"
+  integrity sha512-pK2qh8c2IYpXJCNI4Zv88kNi0YEds4VeEeZRHc9gI2rXpZCg+fBLPDzP3NWyoZqKhQmMDCUCSMq6EUyKM8/V1Q==
   dependencies:
     "@babel/core" "^7.2.2"
     "@babel/plugin-transform-modules-commonjs" "^7.2.0"
     "@types/jest" "^23.3.10"
-    "@types/node" "^10.12.15"
+    "@types/node" "^10.12.18"
     babel-core "^7.0.0-bridge.0"
     babel-jest "^23.6.0"
     jest-circus "^23.6.0"
@@ -214,10 +214,10 @@
     deepmerge "^3.0.0"
     postcss-load-config "^2.0.0"
 
-"@minna-ui/rollup-plugins@0.18.1":
-  version "0.18.1"
-  resolved "https://registry.yarnpkg.com/@minna-ui/rollup-plugins/-/rollup-plugins-0.18.1.tgz#fd1f6c3f9a234dd6a8e1967c62606dd5f3501bf9"
-  integrity sha512-/7T7dDMjQzuwkdS5qSFfbjxUn9s+IDw/wHoPIYv1trx6XWvyM6Dl5qtwTGC9gttDDfAo1yoirmeC+m4qpZxOqw==
+"@minna-ui/rollup-plugins@0.18.2":
+  version "0.18.2"
+  resolved "https://registry.yarnpkg.com/@minna-ui/rollup-plugins/-/rollup-plugins-0.18.2.tgz#7756fc71856053aad57f23135b57a77d90791f93"
+  integrity sha512-WNeyO1qS+6apLYJYTTs1UfKtNccwUZl4gnLSeuRg7Mf0x1UZwjzO2LK170ZV/VeC5/q7xKfxrVjD9QkkNJ4qSw==
   dependencies:
     deepmerge "^3.0.0"
     postcss-load-config "^2.0.0"
@@ -308,10 +308,15 @@
   resolved "https://registry.yarnpkg.com/@types/jest/-/jest-23.3.10.tgz#4897974cc317bf99d4fe6af1efa15957fa9c94de"
   integrity sha512-DC8xTuW/6TYgvEg3HEXS7cu9OijFqprVDXXiOcdOKZCU/5PJNLZU37VVvmZHdtMiGOa8wAA/We+JzbdxFzQTRQ==
 
-"@types/node@*", "@types/node@^10.12.15":
+"@types/node@*":
   version "10.12.17"
   resolved "https://registry.yarnpkg.com/@types/node/-/node-10.12.17.tgz#7040565b2c93d59325a68fa69073e754a7eda93a"
   integrity sha512-umSCRkjWH70uNzFiOof5yxCqrMXIBJ9UJJUzbEsmtWt8apURQh06pylGMqnhdjHGJSeoBrhzk+mibu6NgL1oBA==
+
+"@types/node@^10.12.18":
+  version "10.12.18"
+  resolved "https://registry.yarnpkg.com/@types/node/-/node-10.12.18.tgz#1d3ca764718915584fcd9f6344621b7672665c67"
+  integrity sha512-fh+pAqt4xRzPfqA6eh3Z2y6fyZavRIumvjhaCL753+TVkGKGhpPeyrJG2JftD0T9q4GF00KjefsQ+PQNDdWQaQ==
 
 "@wearegenki/renovate-config@1.0.0":
   version "1.0.0"

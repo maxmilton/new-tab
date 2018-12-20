@@ -16,7 +16,7 @@
   ],
   "scripts": {
     "dev": "rollup --config --watch",
-    "build": "APP_RELEASE=$(git describe --always --dirty=\"-dev\") NODE_ENV=production rollup --config",
+    "build": "NODE_ENV=production rollup --config",
     "prebuild": "rm -rf dist && mkdir dist && cp icon* dist",
     "lint": "yarn lint:css && yarn lint:js",
     "lint:css": "stylelint --ignore-path .gitignore **/*.{css,html,md}",
@@ -27,10 +27,10 @@
   "devDependencies": {
     "@ampproject/rollup-plugin-closure-compiler": "0.9.0-beta.7",
     "@minna-ui/eslint-config": "0.18.1",
-    "@minna-ui/jest-config": "0.18.1",
+    "@minna-ui/jest-config": "0.18.2",
     "@minna-ui/pre-markup": "0.18.1",
     "@minna-ui/pre-style": "0.18.1",
-    "@minna-ui/rollup-plugins": "0.18.1",
+    "@minna-ui/rollup-plugins": "0.18.2",
     "@minna-ui/stylelint-config": "0.18.0",
     "@types/chrome": "0.0.76",
     "@wearegenki/renovate-config": "1.0.0",

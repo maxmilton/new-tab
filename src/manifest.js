@@ -1,3 +1,4 @@
+import { gitDescribe } from '@minna-ui/rollup-plugins'; // eslint-disable-line import/no-extraneous-dependencies
 import pkg from '../package.json';
 
 export default {
@@ -7,7 +8,7 @@ export default {
   description:
     '⚡ A high performance new tab page that gets you where you need to go faster.',
   version: pkg.version,
-  version_name: process.env.APP_RELEASE,
+  version_name: gitDescribe(),
   homepage_url: pkg.homepage,
   icons: {
     128: 'icon128.png',
