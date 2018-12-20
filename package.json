@@ -30,7 +30,7 @@
     "@minna-ui/jest-config": "0.18.1",
     "@minna-ui/pre-markup": "0.18.1",
     "@minna-ui/pre-style": "0.18.1",
-    "@minna-ui/rollup-plugins": "0.18.1",
+    "@minna-ui/rollup-plugins": "0.18.2",
     "@minna-ui/stylelint-config": "0.18.0",
     "@types/chrome": "0.0.76",
     "@wearegenki/renovate-config": "1.0.0",

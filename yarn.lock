@@ -214,10 +214,10 @@
     deepmerge "^3.0.0"
     postcss-load-config "^2.0.0"
 
-"@minna-ui/rollup-plugins@0.18.1":
-  version "0.18.1"
-  resolved "https://registry.yarnpkg.com/@minna-ui/rollup-plugins/-/rollup-plugins-0.18.1.tgz#fd1f6c3f9a234dd6a8e1967c62606dd5f3501bf9"
-  integrity sha512-/7T7dDMjQzuwkdS5qSFfbjxUn9s+IDw/wHoPIYv1trx6XWvyM6Dl5qtwTGC9gttDDfAo1yoirmeC+m4qpZxOqw==
+"@minna-ui/rollup-plugins@0.18.2":
+  version "0.18.2"
+  resolved "https://registry.yarnpkg.com/@minna-ui/rollup-plugins/-/rollup-plugins-0.18.2.tgz#7756fc71856053aad57f23135b57a77d90791f93"
+  integrity sha512-WNeyO1qS+6apLYJYTTs1UfKtNccwUZl4gnLSeuRg7Mf0x1UZwjzO2LK170ZV/VeC5/q7xKfxrVjD9QkkNJ4qSw==
   dependencies:
     deepmerge "^3.0.0"
     postcss-load-config "^2.0.0"
