@@ -78,6 +78,7 @@
     ]
   },
   "postcss": {
+    "map": true,
     "plugins": {
       "postcss-import": {},
       "postcss-nested": {},
