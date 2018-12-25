@@ -172,10 +172,10 @@
     lodash "^4.17.10"
     to-fast-properties "^2.0.0"
 
-"@minna-ui/eslint-config@0.18.1":
-  version "0.18.1"
-  resolved "https://registry.yarnpkg.com/@minna-ui/eslint-config/-/eslint-config-0.18.1.tgz#2d7da8069ac9627adbccbe3102ece16589c7ab78"
-  integrity sha512-7+YQvhSk0gqeN+qicGV/GVvAG/orEgllP+E56Hm6SrhutlndIEPSEQRB7ZhgGgYBhsU8My4SGqYmo130kfC0yw==
+"@minna-ui/eslint-config@0.19.0":
+  version "0.19.0"
+  resolved "https://registry.yarnpkg.com/@minna-ui/eslint-config/-/eslint-config-0.19.0.tgz#1a4ddab329675abba126996a967b535d4f8ef26e"
+  integrity sha512-vhoh3f97xBD4AdW0L/JhdaDdcuNUlHnhYUkvVbflpdSJ4mvBdQbs8lo2ZOhVbThgyz5CBki88+5GQXFn7Rkiqw==
   dependencies:
     eslint-config-airbnb-base "^13.1.0"
     eslint-config-prettier "^3.3.0"
