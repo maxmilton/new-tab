@@ -198,10 +198,10 @@
     babel-jest "^23.6.0"
     jest-circus "^23.6.0"
 
-"@minna-ui/pre-markup@0.18.1":
-  version "0.18.1"
-  resolved "https://registry.yarnpkg.com/@minna-ui/pre-markup/-/pre-markup-0.18.1.tgz#0e370db15a6f72b8078089ba5ff13241cf763b79"
-  integrity sha512-17an2045bsL686ie6bot1tXGX9q3oQ7KejZr870v86JRwqJ87I5g8UheX+XCrD5H7T7JKl+/5SwMrNqU7A3w1A==
+"@minna-ui/pre-markup@0.19.0":
+  version "0.19.0"
+  resolved "https://registry.yarnpkg.com/@minna-ui/pre-markup/-/pre-markup-0.19.0.tgz#2f2cf314cdd03bf722bc377079fa1ef33e4d9e2c"
+  integrity sha512-6zlVCCzszTNV71rs4eiCmejkYOKmd19W2abP5V6zPR70CA1nqDtsi8zXxwFHUBF7e2bU2hxYFJ1kqUZWmZEq8Q==
   dependencies:
     deepmerge "^3.0.0"
     html-minifier "3.5.21"
