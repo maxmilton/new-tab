@@ -224,10 +224,10 @@
     purgecss "^1.1.0"
     rollup-pluginutils "^2.3.3"
 
-"@minna-ui/stylelint-config@0.18.0":
-  version "0.18.0"
-  resolved "https://registry.yarnpkg.com/@minna-ui/stylelint-config/-/stylelint-config-0.18.0.tgz#fcae59b769ecee5e691a13018ff5953b01e2d382"
-  integrity sha512-mUxSgZEUS3b/jGIh5mtkZZpDOMDNI2+jqZGpKGtUk22LgOwEYlD81zm9JzrWqRMMiDMxki03lJOCKJKoIwXD6g==
+"@minna-ui/stylelint-config@0.19.0":
+  version "0.19.0"
+  resolved "https://registry.yarnpkg.com/@minna-ui/stylelint-config/-/stylelint-config-0.19.0.tgz#a7850a350e68acfa05d04fdbc00aa693a53d2376"
+  integrity sha512-nf+o424rCkw3yO16pZglW+NuSlU23rP1J9i3UfFnKYXCznmA+AgRQ/xrgaREWTTr4NoyepmNgs/IxYfopxz8Ig==
   dependencies:
     stylelint-a11y "^1.1.9"
     stylelint-config-prettier "^4.0.0"
