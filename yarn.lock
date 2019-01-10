@@ -185,16 +185,16 @@
     eslint-plugin-markdown "^1.0.0-rc.1"
     eslint-plugin-prettier "^3.0.0"
 
-"@minna-ui/jest-config@0.19.0":
-  version "0.19.0"
-  resolved "https://registry.yarnpkg.com/@minna-ui/jest-config/-/jest-config-0.19.0.tgz#014c59baacb82b6cc1171d64d6d7d7301ba08c4c"
-  integrity sha512-jzOilzGrXlFqCk+SznLFMoJKT5jKETEPJxbM6qB4YXMGkzMyMGjWXHj6tUvUayay4wbQ/ImGwo/Pa9R2nwNiLQ==
+"@minna-ui/jest-config@0.20.0":
+  version "0.20.0"
+  resolved "https://registry.yarnpkg.com/@minna-ui/jest-config/-/jest-config-0.20.0.tgz#b7d2a05150e4fac11606d80b2bf32123e20b2d44"
+  integrity sha512-U1W7t0iStLsLJSfhSRLutB30Lt/Tdfebp4GzThZ3YA3lE7ESh0h2wOuOp/MRwE1I5XhiaH9M8BMZFaDy4KNIXA==
   dependencies:
     "@babel/core" "^7.2.2"
     "@babel/plugin-transform-modules-commonjs" "^7.2.0"
     "@types/jest" "^23.3.10"
     "@types/node" "^10.12.18"
-    babel-core "^7.0.0-bridge.0"
+    babel-core "7.0.0-bridge.0"
     babel-jest "^23.6.0"
     jest-circus "^23.6.0"
 
@@ -635,6 +635,11 @@ babel-code-frame@^6.26.0:
     esutils "^2.0.2"
     js-tokens "^3.0.2"
 
+babel-core@7.0.0-bridge.0:
+  version "7.0.0-bridge.0"
+  resolved "https://registry.yarnpkg.com/babel-core/-/babel-core-7.0.0-bridge.0.tgz#95a492ddd90f9b4e9a4a1da14eb335b87b634ece"
+  integrity sha512-poPX9mZH/5CSanm50Q+1toVci6pv5KSRv/5TWCwtzQS5XEwn40BcCrgIeMFWP9CKKIniKXNxoIOnOq4VVlGXhg==
+
 babel-core@^6.0.0, babel-core@^6.26.0:
   version "6.26.3"
   resolved "https://registry.yarnpkg.com/babel-core/-/babel-core-6.26.3.tgz#b2e2f09e342d0f0c88e2f02e067794125e75c207"
@@ -659,11 +664,6 @@ babel-core@^6.0.0, babel-core@^6.26.0:
     private "^0.1.8"
     slash "^1.0.0"
     source-map "^0.5.7"
-
-babel-core@^7.0.0-bridge.0:
-  version "7.0.0-bridge.0"
-  resolved "https://registry.yarnpkg.com/babel-core/-/babel-core-7.0.0-bridge.0.tgz#95a492ddd90f9b4e9a4a1da14eb335b87b634ece"
-  integrity sha512-poPX9mZH/5CSanm50Q+1toVci6pv5KSRv/5TWCwtzQS5XEwn40BcCrgIeMFWP9CKKIniKXNxoIOnOq4VVlGXhg==
 
 babel-generator@^6.18.0, babel-generator@^6.26.0:
   version "6.26.1"
