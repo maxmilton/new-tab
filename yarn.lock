@@ -228,17 +228,17 @@
     rollup-pluginutils "^2.3.3"
     sirv "^0.2.2"
 
-"@minna-ui/stylelint-config@0.19.0":
-  version "0.19.0"
-  resolved "https://registry.yarnpkg.com/@minna-ui/stylelint-config/-/stylelint-config-0.19.0.tgz#a7850a350e68acfa05d04fdbc00aa693a53d2376"
-  integrity sha512-nf+o424rCkw3yO16pZglW+NuSlU23rP1J9i3UfFnKYXCznmA+AgRQ/xrgaREWTTr4NoyepmNgs/IxYfopxz8Ig==
+"@minna-ui/stylelint-config@0.20.0":
+  version "0.20.0"
+  resolved "https://registry.yarnpkg.com/@minna-ui/stylelint-config/-/stylelint-config-0.20.0.tgz#6b7ec5af294463910d67034e948e63962353b875"
+  integrity sha512-oF4T1NEjoY7zdu8zWpdtDA3nq019Ct2uocca875XFSv7O6zcA+OQpk2psnbyf9iiBsMJMtXqfAhtb8HecMacwA==
   dependencies:
     stylelint-a11y "^1.1.9"
     stylelint-config-prettier "^4.0.0"
     stylelint-config-standard "^18.2.0"
     stylelint-high-performance-animation "^1.1.1"
     stylelint-order "^2.0.0"
-    stylelint-prettier "^1.0.5"
+    stylelint-prettier "^1.0.6"
 
 "@mrmlnc/readdir-enhanced@^2.2.1":
   version "2.2.1"
@@ -6532,10 +6532,10 @@ stylelint-order@^2.0.0:
     postcss "^7.0.2"
     postcss-sorting "^4.0.1"
 
-stylelint-prettier@^1.0.5:
-  version "1.0.5"
-  resolved "https://registry.yarnpkg.com/stylelint-prettier/-/stylelint-prettier-1.0.5.tgz#762807a1b4565c88f186c57bd6e0d9e89b8fbb50"
-  integrity sha512-nrrw+z4muE/3KC3OOUXOiq2qfQnVbTr2Vt6vLyW3ULkTPM2rHwmHSYIL+xcxAIRTMPGHGoCkNNQkqTEyE8OIhg==
+stylelint-prettier@^1.0.6:
+  version "1.0.6"
+  resolved "https://registry.yarnpkg.com/stylelint-prettier/-/stylelint-prettier-1.0.6.tgz#479b76336751cb617c5beb7545d05a791f945e1e"
+  integrity sha512-XKlTyJHJYiyXs9JXRMt2FQxMJoBSjz4I6+4+/R3o8/ePof19v9naC4d0zsMKUJ88by81+qHfqXBLfmAalu46cg==
   dependencies:
     prettier-linter-helpers "^1.0.0"
 
