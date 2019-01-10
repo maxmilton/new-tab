@@ -214,10 +214,10 @@
     deepmerge "^3.0.0"
     postcss-load-config "^2.0.0"
 
-"@minna-ui/rollup-plugins@0.19.1":
-  version "0.19.1"
-  resolved "https://registry.yarnpkg.com/@minna-ui/rollup-plugins/-/rollup-plugins-0.19.1.tgz#4e6711490c3a9968491e70729e308295b4cc4fa8"
-  integrity sha512-IDrfxUsHggrDh5pZ9bPCPqg5ijzrwpl7eEPGuNOvuVKuJ57KG1UCuaoZvYEcCXkjomDUf39gr7m19QFVOlYoMg==
+"@minna-ui/rollup-plugins@0.20.0":
+  version "0.20.0"
+  resolved "https://registry.yarnpkg.com/@minna-ui/rollup-plugins/-/rollup-plugins-0.20.0.tgz#852e1a329fe1306432e3dceb4cdd5d22de92afb4"
+  integrity sha512-7NlYIFGeCmV/wiOVv5RhCm2G59+qjw1uM2MPN4pPiB/qtORLWFfmpMkIGbM2sWvEwhUaeJdmBYMxRhJ7r7OQLw==
   dependencies:
     colorette "^1.0.7"
     cssnano "^4.1.8"
