@@ -29,7 +29,7 @@
     "@minna-ui/eslint-config": "0.19.0",
     "@minna-ui/jest-config": "0.19.0",
     "@minna-ui/pre-markup": "0.19.0",
-    "@minna-ui/pre-style": "0.19.0",
+    "@minna-ui/pre-style": "0.20.0",
     "@minna-ui/rollup-plugins": "0.20.0",
     "@minna-ui/stylelint-config": "0.20.0",
     "@types/chrome": "0.0.77",
