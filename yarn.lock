@@ -172,10 +172,10 @@
     lodash "^4.17.10"
     to-fast-properties "^2.0.0"
 
-"@minna-ui/eslint-config@0.19.0":
-  version "0.19.0"
-  resolved "https://registry.yarnpkg.com/@minna-ui/eslint-config/-/eslint-config-0.19.0.tgz#1a4ddab329675abba126996a967b535d4f8ef26e"
-  integrity sha512-vhoh3f97xBD4AdW0L/JhdaDdcuNUlHnhYUkvVbflpdSJ4mvBdQbs8lo2ZOhVbThgyz5CBki88+5GQXFn7Rkiqw==
+"@minna-ui/eslint-config@0.20.0":
+  version "0.20.0"
+  resolved "https://registry.yarnpkg.com/@minna-ui/eslint-config/-/eslint-config-0.20.0.tgz#5f074b3e14957daa43aef7dedd4f3d706e59765d"
+  integrity sha512-c6BBZQm672QzRb4pwt/8DU1jgXr4pNIBQywGNRrarJ9XrLPdNMrgAN2aqT3mfvvsaqD26r+DE/OWeN/hf4m1dg==
   dependencies:
     eslint-config-airbnb-base "^13.1.0"
     eslint-config-prettier "^3.3.0"
@@ -183,7 +183,7 @@
     eslint-plugin-import "^2.14.0"
     eslint-plugin-jest "^22.1.2"
     eslint-plugin-markdown "^1.0.0-rc.1"
-    eslint-plugin-prettier "^3.0.0"
+    eslint-plugin-prettier "^3.0.1"
 
 "@minna-ui/jest-config@0.20.0":
   version "0.20.0"
@@ -1957,7 +1957,7 @@ eslint-plugin-markdown@^1.0.0-rc.1:
     remark-parse "^5.0.0"
     unified "^6.1.2"
 
-eslint-plugin-prettier@^3.0.0:
+eslint-plugin-prettier@^3.0.1:
   version "3.0.1"
   resolved "https://registry.yarnpkg.com/eslint-plugin-prettier/-/eslint-plugin-prettier-3.0.1.tgz#19d521e3981f69dd6d14f64aec8c6a6ac6eb0b0d"
   integrity sha512-/PMttrarPAY78PLvV3xfWibMOdMDl57hmlQ2XqFeA37wd+CJ7WSxV7txqjVPHi/AAFKd2lX0ZqfsOc/i5yFCSQ==
