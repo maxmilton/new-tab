@@ -57,13 +57,9 @@
     "last 2 Chrome versions"
   ],
   "babel": {
-    "env": {
-      "test": {
-        "presets": [
-          "@minna-ui/jest-config/babel-preset.js"
-        ]
-      }
-    }
+    "presets": [
+      "@minna-ui/jest-config/babel-preset.js"
+    ]
   },
   "postcss": {
     "map": true,
@@ -90,6 +86,7 @@
     }
   },
   "prettier": {
+    "arrowParens": "always",
     "endOfLine": "lf",
     "singleQuote": true,
     "trailingComma": "all",
@@ -97,8 +94,13 @@
       {
         "files": "*.html",
         "options": {
-          "htmlWhitespaceSensitivity": "ignore",
           "requirePragma": true
+        }
+      },
+      {
+        "files": "*.test.js",
+        "options": {
+          "printWidth": 100
         }
       }
     ]
