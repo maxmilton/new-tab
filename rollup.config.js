@@ -4,12 +4,13 @@ import preStyle from '@minna-ui/pre-style';
 import { catchErr, makeHtml } from '@minna-ui/rollup-plugins';
 import crass from 'crass';
 import { readFileSync, writeFile } from 'fs';
-import path from 'path';
+import { join } from 'path';
 import { plugin as analyze } from 'rollup-plugin-analyzer';
 import svelte from 'rollup-plugin-svelte';
 import manifest from './src/manifest.js';
 
-const dev = !!process.env.ROLLUP_WATCH;
+const { resolve } = require;
+const isDev = !!process.env.ROLLUP_WATCH;
 
 const watch = {
   chokidar: true,
@@ -17,11 +18,11 @@ const watch = {
 };
 
 const svelteOpts = {
-  dev,
+  dev: isDev,
   preprocess: {
     // level 4 removes all " " textNodes but can break the app if it removes
     // spaces around attributes so in these cases use <!-- htmlmin:ignore -->
-    markup: preMarkup({ level: dev ? 0 : 4 }),
+    markup: preMarkup({ level: isDev ? 0 : 4 }),
     style: preStyle(),
   },
   emitCss: true,
@@ -32,25 +33,27 @@ const svelteOpts = {
 const makeHtmlOpts = {
   basePath: '',
   inlineCss: true,
-  onCss: css =>
+  onCss: (css) =>
     crass
       .parse(css)
       .optimize({ o1: true })
       .toString(),
   scriptAttr: 'async',
-  template: readFileSync(path.join(__dirname, 'src/template.html'), 'utf8'),
+  template: readFileSync(join(__dirname, 'src/template.html'), 'utf8'),
 };
 
 const compilerOpts = {
   charset: 'UTF-8',
   compilation_level: 'ADVANCED',
   externs: [
-    require.resolve('google-closure-compiler/contrib/externs/chrome.js'),
-    require.resolve(
-      'google-closure-compiler/contrib/externs/chrome_extensions.js',
-    ),
-    path.join(__dirname, 'externs.js'),
+    resolve('google-closure-compiler/contrib/externs/chrome.js'),
+    resolve('google-closure-compiler/contrib/externs/chrome_extensions.js'),
+    join(__dirname, 'externs.js'),
   ],
+  // language_in: 'ECMASCRIPT_NEXT',
+  // language_out: 'STABLE',
+  // warning_level: 'VERBOSE',
+  // jscomp_off: ['duplicate', 'globalThis'],
 
   // debug: true,
   // formatting: 'PRETTY_PRINT',
@@ -62,7 +65,7 @@ const loader =
 
 // extension manifest
 writeFile(
-  path.join(__dirname, 'dist/manifest.json'),
+  join(__dirname, 'dist/manifest.json'),
   JSON.stringify(manifest),
   catchErr,
 );
@@ -74,18 +77,18 @@ export default [
     output: {
       file: 'dist/n.js',
       format: 'esm',
-      sourcemap: dev,
+      sourcemap: isDev,
     },
     plugins: [
       svelte(svelteOpts),
-      !dev && compiler(compilerOpts),
+      !isDev && compiler(compilerOpts),
       makeHtml({
         ...makeHtmlOpts,
         file: 'dist/n.html',
         title: 'New Tab',
         content: `${loader}%CSS%%JS%`,
       }),
-      !dev && analyze(),
+      !isDev && analyze(),
     ],
   },
   {
@@ -94,16 +97,16 @@ export default [
     output: {
       file: 'dist/s.js',
       format: 'esm',
-      sourcemap: dev,
+      sourcemap: isDev,
     },
     plugins: [
       svelte(svelteOpts),
-      !dev && compiler(compilerOpts),
+      !isDev && compiler(compilerOpts),
       makeHtml({
         ...makeHtmlOpts,
         file: 'dist/s.html',
       }),
-      !dev && analyze(),
+      !isDev && analyze(),
     ],
   },
 ];
