@@ -36,9 +36,7 @@ describe('App click handler', () => {
     expect.assertions(2);
     const target = document.createElement('div');
     const component = new App({ target });
-    const link = target.querySelector(
-      '[href="https://github.com/MaxMilton/new-tab/issues"]',
-    );
+    const link = target.querySelector('[href="https://github.com/MaxMilton/new-tab/issues"]');
     const event = new MouseEvent('click', {
       view: window,
       bubbles: true,
