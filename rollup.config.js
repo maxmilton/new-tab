@@ -7,6 +7,7 @@ import { readFileSync, writeFile } from 'fs';
 import { join } from 'path';
 import { plugin as analyze } from 'rollup-plugin-analyzer';
 import svelte from 'rollup-plugin-svelte';
+import nodeResolve from 'rollup-plugin-node-resolve';
 import manifest from './src/manifest.js';
 
 const { resolve } = require;
@@ -26,8 +27,7 @@ const svelteOpts = {
     style: preStyle(),
   },
   emitCss: true,
-  nestedTransitions: false,
-  skipIntroByDefault: false,
+  // immutable: true, // TODO: Hmmm...
 };
 
 const makeHtmlOpts = {
@@ -81,6 +81,7 @@ export default [
     },
     plugins: [
       svelte(svelteOpts),
+      nodeResolve(),
       !isDev && compiler(compilerOpts),
       makeHtml({
         ...makeHtmlOpts,
@@ -101,6 +102,7 @@ export default [
     },
     plugins: [
       svelte(svelteOpts),
+      nodeResolve(),
       !isDev && compiler(compilerOpts),
       makeHtml({
         ...makeHtmlOpts,

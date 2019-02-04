@@ -1,0 +1,16 @@
+<svelte:options bind:props />
+
+<script>
+  import LinkItem from './LinkItem.html';
+  import BookmarkFolder from './BookmarkFolder.html';
+
+  let props;
+</script>
+
+{#if props._node.children !== undefined}
+  <!-- htmlmin:ignore -->
+  <BookmarkFolder {...props} /><!-- htmlmin:ignore -->
+{:else}
+  <!-- htmlmin:ignore -->
+  <LinkItem {...props} /><!-- htmlmin:ignore -->
+{/if}

@@ -6,20 +6,17 @@
   using JS based logic to keep the component logic free.
 -->
 
+<script>
+  import { shorten } from '../common.js';
+
+  export let _node;
+  export let maxLen;
+</script>
+
 <a href="{_node.url}" title="{_node.title}">
   <img src="chrome://favicon/{_node.url}" class="{_node.title && 'pad'}">
   {shorten(_node.title, maxLen)}
 </a>
-
-<script>
-  import { shorten } from '../common.js';
-
-  export default {
-    helpers: {
-      shorten,
-    },
-  };
-</script>
 
 <style type="text/postcss">
   /* all <img> are favicons */

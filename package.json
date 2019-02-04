@@ -32,6 +32,7 @@
     "@minna-ui/pre-style": "0.20.0",
     "@minna-ui/rollup-plugins": "0.20.0",
     "@minna-ui/stylelint-config": "0.20.0",
+    "@minna-ui/ts-config": "0.20.0",
     "@types/chrome": "0.0.78",
     "@wearegenki/renovate-config": "1.0.0",
     "autoprefixer": "9.4.7",
@@ -39,6 +40,7 @@
     "codecov": "3.1.0",
     "crass": "0.12.3",
     "eslint": "5.12.1",
+    "eslint-plugin-svelte3": "github:sveltejs/eslint-plugin-svelte3",
     "jest": "24.0.0",
     "jest-puppeteer": "3.9.0",
     "postcss": "7.0.14",
@@ -48,10 +50,11 @@
     "puppeteer-core": "1.12.1",
     "rollup": "1.1.2",
     "rollup-plugin-analyzer": "3.0.0",
+    "rollup-plugin-node-resolve": "4.0.0",
     "rollup-plugin-svelte": "5.0.1",
     "sinon-chrome": "2.3.2",
     "stylelint": "9.10.1",
-    "svelte": "2.16.0"
+    "svelte": "3.0.0-alpha27"
   },
   "browserslist": [
     "last 2 Chrome versions"
@@ -74,8 +77,16 @@
     "extends": [
       "@minna-ui/eslint-config"
     ],
+    "plugins": [
+      "eslint-plugin-svelte3"
+    ],
     "env": {
       "webextensions": true
+    },
+    "settings": {
+      "svelte3/extensions": [
+        ".html"
+      ]
     }
   },
   "stylelint": {

@@ -1,23 +1,15 @@
+<script>
+  import { handleLinkClick } from './common.js';
+  import BookmarkGroup from './components/BookmarkGroup.html';
+  import Menu from './components/Menu.html';
+  import Search from './components/Search.html';
+
+  window.addEventListener('click', handleLinkClick, true);
+</script>
+
 <BookmarkGroup />
 <Search />
 <Menu />
-
-<script>
-  import { handleLinkClick } from './common.js';
-  import Search from './components/Search.html';
-  import BookmarkGroup from './components/BookmarkGroup.html';
-  import Menu from './components/Menu.html';
-
-  window.addEventListener('click', handleLinkClick, true);
-
-  export default {
-    components: {
-      Search,
-      BookmarkGroup,
-      Menu,
-    },
-  };
-</script>
 
 <style type="text/postcss">
   @import './themes/light.css';

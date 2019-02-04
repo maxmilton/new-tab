@@ -5,6 +5,21 @@
   optimisation these titles should be refactored.
 -->
 
+<script>
+  import LinkItem from './LinkItem.html';
+
+  // props
+  export let resultsName;
+  export let resultsList;
+  export let resultsRaw;
+
+  const MORE_RESULTS_AMOUNT = 100;
+
+  function loadMore(length) {
+    resultsList = resultsRaw.slice(0, length + MORE_RESULTS_AMOUNT);
+  }
+</script>
+
 <!-- htmlmin:ignore -->
 <h2>{`${resultsName} (${resultsList.length}/${resultsRaw.length})`}</h2><!-- htmlmin:ignore -->
 
@@ -14,22 +29,5 @@
 {/each}
 
 {#if resultsName !== 'Top Sites' && resultsList.length < resultsRaw.length}
-  <button on:click="loadMore(resultsList.length)">Show more ▾</button>
+  <button on:click="{() => loadMore(resultsList.length)}">Show more ▾</button>
 {/if}
-
-<script>
-  import LinkItem from './LinkItem.html';
-
-  const MORE_RESULTS_AMOUNT = 100;
-
-  export default {
-    components: {
-      LinkItem,
-    },
-    methods: {
-      loadMore(length) {
-        this.set({ resultsList: this.get().resultsRaw.slice(0, length + MORE_RESULTS_AMOUNT) });
-      },
-    },
-  };
-</script>
