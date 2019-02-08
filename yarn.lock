@@ -238,12 +238,12 @@
     deepmerge "^3.0.0"
     html-minifier "3.5.21"
 
-"@minna-ui/pre-style@0.20.0":
-  version "0.20.0"
-  resolved "https://registry.yarnpkg.com/@minna-ui/pre-style/-/pre-style-0.20.0.tgz#0a67f95750936afd70c82f7c4abbca843d80027e"
-  integrity sha512-qhm5Y+8HK5sG2z+zrkQ1kwRLpesSCM8veCUeosl0W3k15w4OYOUt0TUBTUTYMrrbul/JNlEATVTu5AhYQV39+Q==
+"@minna-ui/pre-style@0.21.0":
+  version "0.21.0"
+  resolved "https://registry.yarnpkg.com/@minna-ui/pre-style/-/pre-style-0.21.0.tgz#5e2a4db3369e211df85c728b9dea13db576a57b5"
+  integrity sha512-EWSPzx1dRALx0ga4kHdGbHmCDq2RImK6jOJtLpiLHsXQeXE4QRu/G8gpXDQuJECFQDWnnUyJRwuljELx/DF4/w==
   dependencies:
-    deepmerge "^3.0.0"
+    deepmerge "^3.1.0"
     postcss-load-config "^2.0.0"
 
 "@minna-ui/rollup-plugins@0.21.0":
