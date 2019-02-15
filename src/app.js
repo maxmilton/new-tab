@@ -1,4 +1,4 @@
-import App from './App.html';
+import App from './App.svelte';
 
 /* eslint-disable-next-line no-new */
 new App({

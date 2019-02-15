@@ -1,4 +1,4 @@
-import Settings from './Settings.html';
+import Settings from './Settings.svelte';
 
 /* eslint-disable-next-line no-new */
 new Settings({

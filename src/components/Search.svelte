@@ -1,8 +1,8 @@
 <script>
   import { beforeUpdate } from 'svelte';
   import { DEFAULT_ORDER, debounce } from '../common.js';
-  import LinkItem from './LinkItem.html';
-  import SearchResults from './SearchResults.html';
+  import LinkItem from './LinkItem.svelte';
+  import SearchResults from './SearchResults.svelte';
 
   const SEARCH_DEBOUNCE_DELAY = 260; // ms
   const DEFAULT_RESULTS_AMOUNT = 10;

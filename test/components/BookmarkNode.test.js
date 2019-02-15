@@ -1,6 +1,6 @@
 'use strict';
 
-const BookmarkNode = require('../../src/components/BookmarkNode.html');
+const BookmarkNode = require('../../src/components/BookmarkNode.svelte');
 
 const _node = {};
 

@@ -1,6 +1,6 @@
 <script>
   import { createEventDispatcher, onDestroy } from 'svelte';
-  import BookmarkNode from './BookmarkNode.html'; // eslint-disable-line import/no-cycle
+  import BookmarkNode from './BookmarkNode.svelte'; // eslint-disable-line import/no-cycle
   import { shorten } from '../common.js';
 
   // props

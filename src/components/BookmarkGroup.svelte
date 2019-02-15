@@ -1,5 +1,5 @@
 <script>
-  import BookmarkNode from './BookmarkNode.html';
+  import BookmarkNode from './BookmarkNode.svelte';
 
   // Get title text width using the 2d canvas measureText() method as it's
   // faster than adding an element to the DOM but we need to manually

@@ -1,8 +1,8 @@
 <svelte:options bind:props />
 
 <script>
-  import LinkItem from './LinkItem.html';
-  import BookmarkFolder from './BookmarkFolder.html';
+  import LinkItem from './LinkItem.svelte';
+  import BookmarkFolder from './BookmarkFolder.svelte';
 
   let props;
 </script>

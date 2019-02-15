@@ -2,7 +2,7 @@
 
 'use strict';
 
-const App = require('../src/App.html');
+const App = require('../src/App.svelte');
 
 describe('App root component', () => {
   it('renders correctly', () => {

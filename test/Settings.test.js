@@ -1,6 +1,6 @@
 'use strict';
 
-const Settings = require('../src/Settings.html');
+const Settings = require('../src/Settings.svelte');
 
 describe('Settings component', () => {
   it('renders correctly', () => {

@@ -6,7 +6,7 @@
 -->
 
 <script>
-  import LinkItem from './LinkItem.html';
+  import LinkItem from './LinkItem.svelte';
 
   // props
   export let resultsName;

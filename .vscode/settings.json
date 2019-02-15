@@ -2,15 +2,22 @@
   "css.validate": false,
   "editor.formatOnSave": true,
   "eslint.enable": true,
-  "eslint.validate": ["html", "javascript", "javascriptreact", "markdown"],
+  "eslint.validate": [
+    { "language": "html", "autoFix": true },
+    { "language": "javascript", "autoFix": true },
+    { "language": "javascriptreact", "autoFix": true },
+    { "language": "markdown", "autoFix": true },
+    { "language": "typescript", "autoFix": true },
+    { "language": "typescriptreact", "autoFix": true }
+  ],
   "files.associations": {
     "*.css": "scss",
-    "*.pcss": "scss"
+    "*.pcss": "scss",
+    "*.svelte": "html"
   },
   "files.eol": "\n",
   "javascript.implicitProjectConfig.checkJs": true,
   "prettier.eslintIntegration": true,
-  "prettier.tslintIntegration": true,
   "prettier.stylelintIntegration": true,
   "scss.validate": false,
   // recommended dictionary: https://github.com/WeAreGenki/dictionary
