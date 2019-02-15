@@ -1872,8 +1872,8 @@ eslint-plugin-security@^1.4.0:
     safe-regex "^1.1.0"
 
 "eslint-plugin-svelte3@github:sveltejs/eslint-plugin-svelte3":
-  version "0.2.1"
-  resolved "https://codeload.github.com/sveltejs/eslint-plugin-svelte3/tar.gz/8cd9c438bf7c02d9135a3a99a58c362263beb23c"
+  version "0.2.2"
+  resolved "https://codeload.github.com/sveltejs/eslint-plugin-svelte3/tar.gz/651d7e3695b1731251ab3a501d1067b561ede09f"
 
 eslint-restricted-globals@^0.1.1:
   version "0.1.1"
@@ -5376,10 +5376,10 @@ punycode@^2.1.0, punycode@^2.1.1:
   resolved "https://registry.yarnpkg.com/punycode/-/punycode-2.1.1.tgz#b58b010ac40c22c5657616c8d2c2c02c7bf479ec"
   integrity sha512-XRsRjdf+j5ml+y/6GKHPZbrF/8p2Yga0JPtdqTIY2Xe5ohJPD9saDJJLPvp9+NSBprVvevdXZybnj2cv8OEd0A==
 
-puppeteer-core@1.12.2:
+puppeteer@1.12.2:
   version "1.12.2"
-  resolved "https://registry.yarnpkg.com/puppeteer-core/-/puppeteer-core-1.12.2.tgz#f4797979aa9fde1045e52b343840f60500d5988e"
-  integrity sha512-M+atMV5e+MwJdR+OwQVZ1xqAIwh3Ou4nUxNuf334GwpcLG+LDj5BwIph4J9y8YAViByRtWGL+uF8qX2Ggzb+Fg==
+  resolved "https://registry.yarnpkg.com/puppeteer/-/puppeteer-1.12.2.tgz#dbc36afc3ba2d7182b1a37523c0081a0e8507c9a"
+  integrity sha512-xWSyCeD6EazGlfnQweMpM+Hs6X6PhUYhNTHKFj/axNZDq4OmrVERf70isBf7HsnFgB3zOC1+23/8+wCAZYg+Pg==
   dependencies:
     debug "^4.1.0"
     extract-zip "^1.6.6"
@@ -6406,10 +6406,10 @@ supports-color@^6.0.0, supports-color@^6.1.0:
   dependencies:
     has-flag "^3.0.0"
 
-svelte@3.0.0-alpha27:
-  version "3.0.0-alpha27"
-  resolved "https://registry.yarnpkg.com/svelte/-/svelte-3.0.0-alpha27.tgz#f321a5bb6d4c1a0b035bdad4212c8445a8ce0a70"
-  integrity sha512-ykVDgZWpFcCZo3QkciGkQuwLhPM0XmgcJzzz5/srOEf8hfgk+XSaZS9UB9JrQiT7horAU/kA06aYSLaScCxxKw==
+svelte@3.0.0-beta.3:
+  version "3.0.0-beta.3"
+  resolved "https://registry.yarnpkg.com/svelte/-/svelte-3.0.0-beta.3.tgz#7989243e028f0eeed48d27d3af45d5d6a4e82082"
+  integrity sha512-kEPbvpmzZqVsUMgMQ1DFx1W+05hWiHVSQaQYPv55AzcCAeXHRZD9N55Pv4LKH6sOHvvNhkb4GVLSK2yBQZn5CQ==
 
 svg-tags@^1.0.0:
   version "1.0.0"
