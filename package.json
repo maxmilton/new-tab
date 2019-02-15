@@ -32,7 +32,7 @@
     "@minna-ui/pre-style": "0.21.0",
     "@minna-ui/rollup-plugins": "0.21.0",
     "@minna-ui/stylelint-config": "0.20.0",
-    "@types/chrome": "0.0.79",
+    "@types/chrome": "0.0.80",
     "@wearegenki/renovate-config": "1.0.0",
     "autoprefixer": "9.4.7",
     "chokidar": "2.1.1",
