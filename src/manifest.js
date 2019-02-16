@@ -1,3 +1,5 @@
+/* eslint-disable sort-keys, @typescript-eslint/camelcase */
+
 import { gitDescribe } from '@minna-ui/rollup-plugins'; // eslint-disable-line import/no-extraneous-dependencies
 import pkg from '../package.json';
 

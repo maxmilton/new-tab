@@ -35,7 +35,7 @@
     const otherBookmarksWidth = !bookmarksOther.children.length
       ? 0
       : canvas2d.measureText(bookmarksOther.title).width + ITEM_PADDING;
-    /* eslint-disable-next-line max-len */
+    // eslint-disable-next-line max-len
     const bookmarksBarWidth = barEl.offsetWidth - ITEM_PADDING - FAVICON_MARGIN - otherBookmarksWidth;
     let maxItems = 0;
     let width = 0;
@@ -43,14 +43,16 @@
     for (; maxItems < length; maxItems += 1) {
       const { children, title } = bookmarksBar[maxItems];
       const hasTitle = title !== undefined;
-      /* eslint-disable-next-line no-nested-ternary */
+      // eslint-disable-next-line no-nested-ternary
       const faviconWidth = children !== undefined
         ? 0
         : hasTitle
           ? FAVICON_WIDTH + FAVICON_MARGIN
           : FAVICON_WIDTH;
       const realTitleWidth = hasTitle ? canvas2d.measureText(title).width : 0;
-      const titleWidth = realTitleWidth > titleMaxInnerWidth ? TITLE_MAX_WIDTH : realTitleWidth;
+      const titleWidth = realTitleWidth > titleMaxInnerWidth
+        ? TITLE_MAX_WIDTH
+        : realTitleWidth;
       const itemWidth = ITEM_PADDING + faviconWidth + titleWidth;
       const nextWidth = width + itemWidth;
 
