@@ -4,7 +4,6 @@
     "dbaeumer.vscode-eslint",
     "drewbourne.vscode-remark-lint",
     "esbenp.prettier-vscode",
-    "ms-vscode.vscode-typescript-tslint-plugin",
     "shinnn.stylelint",
     "timonwong.shellcheck"
   ]

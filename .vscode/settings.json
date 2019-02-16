@@ -5,14 +5,11 @@
   "eslint.validate": [
     { "language": "html", "autoFix": true },
     { "language": "javascript", "autoFix": true },
-    { "language": "javascriptreact", "autoFix": true },
     { "language": "markdown", "autoFix": true },
-    { "language": "typescript", "autoFix": true },
-    { "language": "typescriptreact", "autoFix": true }
+    { "language": "typescript", "autoFix": true }
   ],
   "files.associations": {
     "*.css": "scss",
-    "*.pcss": "scss",
     "*.svelte": "html"
   },
   "files.eol": "\n",
@@ -35,23 +32,5 @@
     "typescript"
   ],
   "spellright.spellContext": "body code comments strings",
-  "stylelint.enable": true,
-  "tslint.jsEnable": true
-
-  // "[scss]": {
-  //   /**
-  //    * FIXME: VS Code stylelint extension doesn't allow overriding language for
-  //    * file extensions. We need `*.pcss` to be parsed as scss otherwise automatic
-  //    * formatting breaks on things like inline comments. Perhaps we can open an
-  //    * issue in https://github.com/shinnn/stylelint-vscode to convince them to
-  //    * use https://github.com/gucong3000/postcss-syntax in a way that the parser
-  //    * is customisable or is selected based on the VS Code language.
-  //    */
-  //   /**
-  //    * FIXME: Stylelint autofix doesn't take `stylelint-disable` comments into
-  //    * consideration. See upstream issue:
-  //    * https://github.com/stylelint/stylelint/issues/2643
-  //    */
-  //   "editor.formatOnSave": false
-  // }
+  "stylelint.enable": true
 }
