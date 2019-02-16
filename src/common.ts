@@ -4,36 +4,34 @@ export const DEFAULT_ORDER = ['Open Tabs', 'Bookmarks', 'History', 'Top Sites'];
 /**
  * Delay running a function until X ms have passed since its last call.
  * @see https://github.com/developit/decko/blob/master/src/decko.js
- * @param {Function} fn The function to debounce.
- * @param {number=} delay How long to wait for more function calls before executing
- * the function in milliseconds.
- * @returns {Function}
  */
-export function debounce(fn, delay = 260) {
-  let args;
-  let context;
-  let timer;
+export function debounce(fn: Function, delay = 260): Function {
+  /* eslint-disable @typescript-eslint/no-explicit-any, func-names */
+  let args: any;
+  let context: any;
+  let timer: NodeJS.Timeout | null;
 
-  // eslint-disable-next-line func-names
-  return function(...params) {
+  return function (...params: any[]) {
     args = params;
+    // @ts-ignore
     context = this;
 
     if (!timer) {
       timer = setTimeout(() => {
         fn.apply(context, args);
-        args = context = timer = null; // eslint-disable-line no-multi-assign
+        // eslint-disable-next-line no-multi-assign
+        args = context = timer = null;
       }, delay);
     }
   };
+  /* eslint-enable */
 }
 
 /**
  * Handle link click to get around restriction for internal Chrome links
  * in an extension.
- * @param {MouseEvent} event The click event.
  */
-export function handleLinkClick(event) {
+export function handleLinkClick(event: MouseEvent): void {
   const { target, ctrlKey } = event;
   const url = target.href;
 
@@ -58,11 +56,8 @@ export function handleLinkClick(event) {
 
 /**
  * Shorten a string to a specified length.
- * @param {string} text Text to shorten.
- * @param {number} max Maximum length of text.
- * @returns {string} The shortened text.
  */
-export function shorten(text, max) {
+export function shorten(text: string, max: number): string {
   if (max === undefined) {
     return text;
   }

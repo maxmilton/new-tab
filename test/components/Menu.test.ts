@@ -1,6 +1,4 @@
-'use strict';
-
-const Menu = require('../../src/components/Menu.svelte');
+import Menu from '../../src/components/Menu.svelte';
 
 describe('Menu component', () => {
   it('renders correctly', () => {

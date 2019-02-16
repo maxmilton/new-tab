@@ -1,6 +1,6 @@
 <script>
   import { beforeUpdate } from 'svelte';
-  import { DEFAULT_ORDER, debounce } from '../common.js';
+  import { DEFAULT_ORDER, debounce } from '../common';
   import LinkItem from './LinkItem.svelte';
   import SearchResults from './SearchResults.svelte';
 

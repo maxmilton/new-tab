@@ -1,6 +1,4 @@
-'use strict';
-
-const Settings = require('../src/Settings.svelte');
+import Settings from '../src/Settings.svelte';
 
 describe('Settings component', () => {
   it('renders correctly', () => {

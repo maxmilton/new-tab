@@ -4,10 +4,16 @@
   "extends": "@minna-ui/ts-config",
   "compilerOptions": {
     "baseUrl": ".",
-    // "noEmit": true
-    // "importHelpers": true,
+    "importHelpers": true,
     "outDir": "dist"
   },
+  "exclude": [
+    "**/.*rc.js",
+    "**/*.config.js",
+    "dist",
+    "node_modules",
+    "test/coverage"
+  ],
   "typeAcquisition": {
     "enable": true
   }

@@ -1,6 +1,4 @@
-'use strict';
-
-const common = require('../src/common.js');
+import * as common from '../src/common';
 
 describe('Helper debounce function', () => {
   it('function exists', () => {

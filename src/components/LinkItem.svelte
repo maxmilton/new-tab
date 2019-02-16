@@ -7,7 +7,7 @@
 -->
 
 <script>
-  import { shorten } from '../common.js';
+  import { shorten } from '../common';
 
   export let _node;
   export let maxLen;

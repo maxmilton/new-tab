@@ -1,6 +1,4 @@
-'use strict';
-
-const BookmarkGroup = require('../../src/components/BookmarkGroup.svelte');
+import BookmarkGroup from '../../src/components/BookmarkGroup.svelte';
 
 describe('BookmarkGroup component', () => {
   it('renders correctly', () => {

@@ -1,8 +1,6 @@
 // FIXME: Move things to `common.test.js` + fix click handler tests
 
-'use strict';
-
-const App = require('../src/App.svelte');
+import App from '../src/App.svelte';
 
 describe('App root component', () => {
   it('renders correctly', () => {
@@ -20,8 +18,8 @@ describe('App click handler', () => {
     new App({ target });
     const event = new MouseEvent('click');
     Object.defineProperty(event, 'target', {
-      value: { href: 'chrome://bookmarks/' },
       enumerable: true,
+      value: { href: 'chrome://bookmarks/' },
     });
     const spy2 = jest.spyOn(event, 'preventDefault');
     window.dispatchEvent(event);
@@ -38,11 +36,11 @@ describe('App click handler', () => {
     const component = new App({ target });
     const link = target.querySelector('[href="https://github.com/MaxMilton/new-tab/issues"]');
     const event = new MouseEvent('click', {
-      view: window,
       bubbles: true,
       cancelable: true,
+      view: window,
     });
-    Object.defineProperty(event, 'target', { value: link, enumerable: true });
+    Object.defineProperty(event, 'target', { enumerable: true, value: link });
     const spy1 = jest.spyOn(component, '_onLinkClick');
     const spy2 = jest.spyOn(event, 'preventDefault');
     window.dispatchEvent(event);
@@ -58,11 +56,11 @@ describe('App click handler', () => {
     const component = new App({ target });
     const link = target.querySelector('[href="chrome://bookmarks/"]');
     const event = new MouseEvent('click', {
-      view: window,
       bubbles: true,
       cancelable: true,
+      view: window,
     });
-    Object.defineProperty(event, 'target', { value: link, enumerable: true });
+    Object.defineProperty(event, 'target', { enumerable: true, value: link });
     const spy1 = jest.spyOn(component, '_onLinkClick');
     const spy2 = jest.spyOn(event, 'preventDefault');
     const spy3 = jest.spyOn(chrome.tabs, 'create', 'get');
@@ -84,14 +82,14 @@ describe('App click handler', () => {
     const component = new App({ target });
     const link = target.querySelector('[href="chrome://bookmarks/"]');
     const event = new MouseEvent('click', {
-      view: window,
       bubbles: true,
       cancelable: true,
+      view: window,
     });
-    Object.defineProperty(event, 'target', { value: link, enumerable: true });
+    Object.defineProperty(event, 'target', { enumerable: true, value: link });
     Object.defineProperty(event.target, 'target', {
-      value: '_blank',
       enumerable: true,
+      value: '_blank',
     });
     const spy1 = jest.spyOn(component, '_onLinkClick');
     const spy2 = jest.spyOn(event, 'preventDefault');
@@ -114,12 +112,12 @@ describe('App click handler', () => {
     const component = new App({ target });
     const link = target.querySelector('[href="chrome://bookmarks/"]');
     const event = new MouseEvent('click', {
-      view: window,
       bubbles: true,
       cancelable: true,
       ctrlKey: true,
+      view: window,
     });
-    Object.defineProperty(event, 'target', { value: link, enumerable: true });
+    Object.defineProperty(event, 'target', { enumerable: true, value: link });
     const spy1 = jest.spyOn(component, '_onLinkClick');
     const spy2 = jest.spyOn(event, 'preventDefault');
     const spy3 = jest.spyOn(chrome.tabs, 'create', 'get');

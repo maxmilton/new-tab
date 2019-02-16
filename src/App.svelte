@@ -1,5 +1,5 @@
 <script>
-  import { handleLinkClick } from './common.js';
+  import { handleLinkClick } from './common';
   import BookmarkGroup from './components/BookmarkGroup.svelte';
   import Menu from './components/Menu.svelte';
   import Search from './components/Search.svelte';

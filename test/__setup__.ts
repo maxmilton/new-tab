@@ -1,9 +1,7 @@
-'use strict';
-
-const chrome = require('sinon-chrome');
+import chromeMocks from 'sinon-chrome';
 
 // set up Chrome API mocks
-global.chrome = chrome;
+global.chrome = chromeMocks;
 
 // simple OffscreenCanvas mock
 global.OffscreenCanvas = jest.fn(() => ({

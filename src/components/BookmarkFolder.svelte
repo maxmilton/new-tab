@@ -1,7 +1,7 @@
 <script>
   import { createEventDispatcher, onDestroy } from 'svelte';
   import BookmarkNode from './BookmarkNode.svelte'; // eslint-disable-line import/no-cycle
-  import { shorten } from '../common.js';
+  import { shorten } from '../common';
 
   // props
   export let lvl = 0;
@@ -138,5 +138,9 @@
       right: 100%;
       left: initial;
     }
+  }
+
+  .testyoyo {
+    display: inline;
   }
 </style>

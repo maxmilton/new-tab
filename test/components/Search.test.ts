@@ -1,6 +1,4 @@
-'use strict';
-
-const Search = require('../../src/components/Search.svelte');
+import Search from '../../src/components/Search.svelte';
 
 describe('Search component', () => {
   it('renders correctly', () => {

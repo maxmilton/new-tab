@@ -1,6 +1,4 @@
-'use strict';
-
-const BookmarkFolder = require('../../src/components/BookmarkFolder.svelte');
+import BookmarkFolder from '../../src/components/BookmarkFolder.svelte';
 
 const _node = {};
 

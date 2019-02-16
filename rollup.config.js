@@ -1,3 +1,5 @@
+/* eslint-disable global-require */
+
 import compiler from '@ampproject/rollup-plugin-closure-compiler';
 import preMarkup from '@minna-ui/pre-markup';
 import preStyle from '@minna-ui/pre-style';
@@ -5,8 +7,9 @@ import { catchErr, makeHtml } from '@minna-ui/rollup-plugins';
 import crass from 'crass';
 import { readFileSync, writeFile } from 'fs';
 import { join } from 'path';
-import { plugin as analyze } from 'rollup-plugin-analyzer';
+// import { plugin as analyze } from 'rollup-plugin-analyzer';
 import svelte from 'rollup-plugin-svelte';
+import typescript from 'rollup-plugin-typescript';
 import nodeResolve from 'rollup-plugin-node-resolve';
 import manifest from './src/manifest.js';
 
@@ -20,14 +23,14 @@ const watch = {
 
 const svelteOpts = {
   dev: isDev,
+  emitCss: true,
+  // immutable: true, // TODO: Hmmm...
   preprocess: {
     // level 4 removes all " " textNodes but can break the app if it removes
     // spaces around attributes so in these cases use <!-- htmlmin:ignore -->
     markup: preMarkup({ level: isDev ? 0 : 4 }),
     style: preStyle(),
   },
-  emitCss: true,
-  // immutable: true, // TODO: Hmmm...
 };
 
 const makeHtmlOpts = {
@@ -42,6 +45,7 @@ const makeHtmlOpts = {
   template: readFileSync(join(__dirname, 'src/template.html'), 'utf8'),
 };
 
+/* eslint-disable @typescript-eslint/camelcase */
 const compilerOpts = {
   charset: 'UTF-8',
   compilation_level: 'ADVANCED',
@@ -58,6 +62,7 @@ const compilerOpts = {
   // debug: true,
   // formatting: 'PRETTY_PRINT',
 };
+/* eslint-enable @typescript-eslint/camelcase */
 
 // loader.js run through closure compiler + manual tweaks
 const loader =
@@ -72,8 +77,7 @@ writeFile(
 
 export default [
   {
-    watch,
-    input: 'src/app.js',
+    input: 'src/app.ts',
     output: {
       file: 'dist/n.js',
       format: 'esm',
@@ -82,6 +86,9 @@ export default [
     plugins: [
       svelte(svelteOpts),
       nodeResolve(),
+      typescript({
+        typescript: require('typescript'),
+      }),
       !isDev && compiler(compilerOpts),
       makeHtml({
         ...makeHtmlOpts,
@@ -89,12 +96,12 @@ export default [
         title: 'New Tab',
         content: `${loader}%CSS%%JS%`,
       }),
-      !isDev && analyze(),
+      // !isDev && analyze(),
     ],
+    watch,
   },
   {
-    watch,
-    input: 'src/settings.js',
+    input: 'src/settings.ts',
     output: {
       file: 'dist/s.js',
       format: 'esm',
@@ -103,12 +110,16 @@ export default [
     plugins: [
       svelte(svelteOpts),
       nodeResolve(),
+      typescript({
+        typescript: require('typescript'),
+      }),
       !isDev && compiler(compilerOpts),
       makeHtml({
         ...makeHtmlOpts,
         file: 'dist/s.html',
       }),
-      !isDev && analyze(),
+      // !isDev && analyze(),
     ],
+    watch,
   },
 ];
