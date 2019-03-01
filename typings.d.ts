@@ -7,7 +7,7 @@ declare module '*.svelte' {
     target?: Element;
   }
   class Component {
-    constructor(options?: IComponentOptions);
+    public constructor(options?: IComponentOptions);
   }
   export = Component;
 }

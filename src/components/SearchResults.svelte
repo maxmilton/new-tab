@@ -15,6 +15,7 @@
 
   const MORE_RESULTS_AMOUNT = 100;
 
+  /** @param {number} length Current length of list. */
   function loadMore(length) {
     resultsList = resultsRaw.slice(0, length + MORE_RESULTS_AMOUNT);
   }

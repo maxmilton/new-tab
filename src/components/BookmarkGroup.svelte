@@ -28,7 +28,7 @@
 
   // computed properties
   $: visibleNodes = bookmarksBar.slice(0, itemCount);
-  $: overflowNodes = ({ title: '»', children: bookmarksBar.slice(itemCount) });
+  $: overflowNodes = ({ children: bookmarksBar.slice(itemCount), title: '»' });
 
   function handleResize() {
     const { length } = bookmarksBar;
@@ -41,6 +41,7 @@
     let width = 0;
 
     for (; maxItems < length; maxItems += 1) {
+      // eslint-disable-next-line security/detect-object-injection
       const { children, title } = bookmarksBar[maxItems];
       const hasTitle = title !== undefined;
       // eslint-disable-next-line no-nested-ternary
@@ -66,7 +67,7 @@
 
   chrome.bookmarks.getTree((tree) => {
     bookmarksBar = tree[0].children[0].children;
-    bookmarksOther = tree[0].children[1];
+    bookmarksOther = tree[0].children[1]; // eslint-disable-line prefer-destructuring
 
     handleResize();
   });

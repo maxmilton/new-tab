@@ -7,7 +7,7 @@ import { catchErr, makeHtml } from '@minna-ui/rollup-plugins';
 import crass from 'crass';
 import { readFileSync, writeFile } from 'fs';
 import { join } from 'path';
-// import { plugin as analyze } from 'rollup-plugin-analyzer';
+import { plugin as analyze } from 'rollup-plugin-analyzer';
 import svelte from 'rollup-plugin-svelte';
 import typescript from 'rollup-plugin-typescript';
 import nodeResolve from 'rollup-plugin-node-resolve';
@@ -15,6 +15,7 @@ import manifest from './src/manifest.js';
 
 const { resolve } = require;
 const isDev = !!process.env.ROLLUP_WATCH;
+const isDebug = !!process.env.DEBUG;
 
 const watch = {
   chokidar: true,
@@ -26,9 +27,7 @@ const svelteOpts = {
   emitCss: true,
   // immutable: true, // TODO: Hmmm...
   preprocess: {
-    // level 4 removes all " " textNodes but can break the app if it removes
-    // spaces around attributes so in these cases use <!-- htmlmin:ignore -->
-    markup: preMarkup({ level: isDev ? 0 : 4 }),
+    markup: preMarkup({ enabled: !isDev }),
     style: preStyle(),
   },
 };
@@ -92,11 +91,11 @@ export default [
       !isDev && compiler(compilerOpts),
       makeHtml({
         ...makeHtmlOpts,
+        content: `${loader}%CSS%%JS%`,
         file: 'dist/n.html',
         title: 'New Tab',
-        content: `${loader}%CSS%%JS%`,
       }),
-      // !isDev && analyze(),
+      isDebug && analyze(),
     ],
     watch,
   },
@@ -118,7 +117,7 @@ export default [
         ...makeHtmlOpts,
         file: 'dist/s.html',
       }),
-      // !isDev && analyze(),
+      isDebug && analyze(),
     ],
     watch,
   },

@@ -1,4 +1,4 @@
-<!-- markdownlint-disable no-duplicate-header no-inline-html -->
+<!-- lint disable no-duplicate-headings list-item-spacing -->
 
 # Changelog
 

@@ -6,8 +6,8 @@ describe('BookmarkNode component', () => {
   it.skip('renders correctly', () => {
     const target = document.createElement('div');
     new BookmarkNode({
-      target,
       data: { _node },
+      target,
     });
     expect(target.innerHTML).toMatchSnapshot();
   });

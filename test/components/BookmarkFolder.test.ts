@@ -6,8 +6,8 @@ describe('BookmarkFolder component', () => {
   it('renders correctly', () => {
     const target = document.createElement('div');
     new BookmarkFolder({
-      target,
       data: { _node },
+      target,
     });
     expect(target.innerHTML).toMatchSnapshot();
   });
