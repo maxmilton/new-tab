@@ -165,19 +165,19 @@
           {_node.title}
         </a>
       {/each}
-    {:elseif resultSection === 'Top Sites'}
+    {:else if resultSection === 'Top Sites'}
       <SearchResults
         resultsName="Top Sites"
         resultsList="{topSitesList}"
         resultsRaw="{topSitesRaw}"
       />
-    {:elseif isSearching && resultSection === 'Bookmarks'}
+    {:else if isSearching && resultSection === 'Bookmarks'}
       <SearchResults
         resultsName="Bookmarks"
         resultsList="{bookmarksList}"
         resultsRaw="{bookmarksRaw}"
       />
-    {:elseif isSearching && resultSection === 'History'}
+    {:else if isSearching && resultSection === 'History'}
       <SearchResults
         resultsName="History"
         resultsList="{historyList}"
