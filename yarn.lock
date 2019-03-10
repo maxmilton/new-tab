@@ -2,15 +2,15 @@
 # yarn lockfile v1
 
 
-"@ampproject/rollup-plugin-closure-compiler@0.9.0-beta.7":
-  version "0.9.0-beta.7"
-  resolved "https://registry.yarnpkg.com/@ampproject/rollup-plugin-closure-compiler/-/rollup-plugin-closure-compiler-0.9.0-beta.7.tgz#bb5d7879523384c08709da2068d4b6bddec894d9"
-  integrity sha512-sPVJ3Iu45Irwd31HXD4JrBp+oz+5oYr/HruVXRb1zVUS7FhSG9B6+Oh6edD5UO71+HL44ly2A+bsR+HD8nROHg==
+"@ampproject/rollup-plugin-closure-compiler@0.8.5":
+  version "0.8.5"
+  resolved "https://registry.yarnpkg.com/@ampproject/rollup-plugin-closure-compiler/-/rollup-plugin-closure-compiler-0.8.5.tgz#e0bc9ae954a87bb4126eecfaa6f31b4bcd5d91ed"
+  integrity sha512-/cYzOL/c2gsMqKh9ISdXiSvYY3n8TUukBSl4secUh6URIH4unMPjHROxhyDgNUky4MntEKspfk/jCM8V0b0JDw==
   dependencies:
     acorn "6.0.4"
     acorn-dynamic-import "4.0.0"
-    acorn-walk "6.1.0"
-    google-closure-compiler "20181028.0.1"
+    acorn-walk "6.1.1"
+    google-closure-compiler "20181125.0.1"
     magic-string "0.25.1"
     temp-write "3.4.0"
 
@@ -347,69 +347,97 @@
     "@types/istanbul-lib-coverage" "^1.1.0"
     "@types/yargs" "^12.0.9"
 
-"@minna-ui/eslint-config@0.21.0":
-  version "0.0.0"
-  uid ""
+"@minna-ui/eslint-config@0.22.0-next.190":
+  version "0.22.0-next.190"
+  resolved "https://registry.yarnpkg.com/@minna-ui/eslint-config/-/eslint-config-0.22.0-next.190.tgz#5d3bee5aac6f0d03728e483515335259941f7f58"
+  integrity sha512-YtC9KhE+9V4+5KWab8XTYAnzQ2qfMcUzLIE/IiGjbQtqNK9wwHRueNAU80up04VmvCwo3YdYT4mtWoAIB1MNWw==
+  dependencies:
+    "@typescript-eslint/eslint-plugin" "^1.4.2"
+    "@typescript-eslint/parser" "^1.4.2"
+    eslint-config-airbnb-base "^13.1.0"
+    eslint-plugin-html "^5.0.3"
+    eslint-plugin-import "^2.16.0"
+    eslint-plugin-jest "^22.2.2"
+    eslint-plugin-jsdoc "^4.1.1"
+    eslint-plugin-markdown "^1.0.0"
+    eslint-plugin-security "^1.4.0"
+    eslint-plugin-svelte3 "github:sveltejs/eslint-plugin-svelte3#v0.4.3"
 
-"@minna-ui/eslint-config@link:../minna-ui/utils/eslint-config":
-  version "0.0.0"
-  uid ""
+"@minna-ui/jest-config@0.22.0-next.190":
+  version "0.22.0-next.190"
+  resolved "https://registry.yarnpkg.com/@minna-ui/jest-config/-/jest-config-0.22.0-next.190.tgz#7aa7e319473f8776cc38e7319e3ad50176935dca"
+  integrity sha512-oYyR2iYnoRqxoPJIBx5GrYc5Y3Ax/4ctVNC7dKp6hGODgK4u04YtHlCOPefkA1WEcHCquxSRLJRVSwGEH+ydfw==
+  dependencies:
+    "@babel/core" "^7.3.4"
+    "@babel/plugin-transform-modules-commonjs" "^7.2.0"
+    "@babel/preset-typescript" "^7.1.0"
+    "@types/jest" "^24.0.11"
+    "@types/node" "^11.11.0"
+    babel-core "7.0.0-bridge.0"
+    babel-jest "^24.3.1"
+    identity-obj-proxy "^3.0.0"
+    jest-circus "^24.3.1"
 
-"@minna-ui/jest-config@0.21.0":
-  version "0.0.0"
-  uid ""
+"@minna-ui/pre-markup@0.22.0-next.190":
+  version "0.22.0-next.190"
+  resolved "https://registry.yarnpkg.com/@minna-ui/pre-markup/-/pre-markup-0.22.0-next.190.tgz#cd9651d67c41febfaace54447afb5dd415cb3fa5"
+  integrity sha512-YnD7IP25OG2xsuoXU6pJeMqDrTubM16boAHjdXubDKBhj6wiYCExIBTgq856iYG34Jj0Sk9ZMAKr/+8s4o9lrQ==
 
-"@minna-ui/jest-config@link:../minna-ui/utils/jest-config":
-  version "0.0.0"
-  uid ""
+"@minna-ui/pre-style@0.22.0-next.190":
+  version "0.22.0-next.190"
+  resolved "https://registry.yarnpkg.com/@minna-ui/pre-style/-/pre-style-0.22.0-next.190.tgz#1c37c18c7d360a441ccbdb6aef1ec41cce0ed1b5"
+  integrity sha512-x7Y8g5VCCZ5w5RqhgkdkmOU3RLeFpshh754KrQTOzmy+nc2Ugj1JTT50PMK0Ar/C0P6AndC9d8mPq+JGE0LE7g==
+  dependencies:
+    deepmerge "^3.1.0"
+    postcss-load-config "^2.0.0"
 
-"@minna-ui/pre-markup@0.21.0":
-  version "0.0.0"
-  uid ""
+"@minna-ui/prettier-config@0.22.0-next.190":
+  version "0.22.0-next.190"
+  resolved "https://registry.yarnpkg.com/@minna-ui/prettier-config/-/prettier-config-0.22.0-next.190.tgz#c6d63d7f5bccaaec48db2e17021817385c0c6bba"
+  integrity sha512-KJIMKt0fDd+ANzEvv5Id9lwZIRmaT5L3lWCkuU14WV8op5wDPBRlSq5aV9IQ1dDy/zbZLdevbuiEz5WhuowznQ==
+  dependencies:
+    "@types/prettier" "^1.16.0"
+    deepmerge "^3.1.0"
 
-"@minna-ui/pre-markup@link:../minna-ui/utils/pre-markup":
-  version "0.0.0"
-  uid ""
+"@minna-ui/remark-config@0.22.0-next.190":
+  version "0.22.0-next.190"
+  resolved "https://registry.yarnpkg.com/@minna-ui/remark-config/-/remark-config-0.22.0-next.190.tgz#230f1fc4bcc0536a843abc1bd1214c3b51c192f2"
+  integrity sha512-jyd5zGo+rkaLKUYvz1hSQkRSUsf8XXRmWlGeKzWOLNO+YykTkLAQqTbFOxiizpf8aoE2KMu6zKWHJs6rXErAJg==
+  dependencies:
+    remark-lint "^6.0.4"
+    remark-preset-lint-consistent "^2.0.2"
+    remark-preset-lint-markdown-style-guide "^2.1.2"
+    remark-preset-lint-recommended "^3.0.2"
 
-"@minna-ui/pre-style@0.21.0":
-  version "0.0.0"
-  uid ""
+"@minna-ui/rollup-plugins@0.22.0-next.190":
+  version "0.22.0-next.190"
+  resolved "https://registry.yarnpkg.com/@minna-ui/rollup-plugins/-/rollup-plugins-0.22.0-next.190.tgz#ad699c279205e36763575f44e32d00601cad7589"
+  integrity sha512-8W8ihOY/0+hmE1ZqPzqoRFd7WliFRfktG0hiUeMtCF3vmn5EnaywTIjhzBmQwYe8TssRHJhvKuY/ituS70AgYg==
+  dependencies:
+    "@wearegenki/node-utils" "0.1.1"
+    cssnano "^4.1.8"
+    cssnano-preset-advanced "^4.0.6"
+    deepmerge "^3.1.0"
+    postcss-load-config "^2.0.0"
+    purgecss "^1.1.0"
+    rollup-pluginutils "^2.4.1"
+    sirv "^0.2.2"
 
-"@minna-ui/pre-style@link:../minna-ui/utils/pre-style":
-  version "0.0.0"
-  uid ""
+"@minna-ui/stylelint-config@0.22.0-next.190":
+  version "0.22.0-next.190"
+  resolved "https://registry.yarnpkg.com/@minna-ui/stylelint-config/-/stylelint-config-0.22.0-next.190.tgz#2857e49b58c7fbb717930ec0a447534472544c52"
+  integrity sha512-4J8yL+lfQhL/xWgn7plgtq72cfRuCXeDdCV1FEuV59rJ7wiW5aF4WikKwMymB1SaAg73pP3F3e3fiTzzIEdVhg==
+  dependencies:
+    stylelint-a11y "^1.1.10"
+    stylelint-config-css-modules "^1.3.0"
+    stylelint-config-standard "^18.2.0"
+    stylelint-high-performance-animation "^1.1.1"
+    stylelint-order "^2.1.0"
 
-"@minna-ui/remarklint-config@0.21.0":
-  version "0.0.0"
-  uid ""
-
-"@minna-ui/remarklint-config@link:../minna-ui/utils/remarklint-config":
-  version "0.0.0"
-  uid ""
-
-"@minna-ui/rollup-plugins@0.21.0":
-  version "0.0.0"
-  uid ""
-
-"@minna-ui/rollup-plugins@link:../minna-ui/utils/rollup-plugins":
-  version "0.0.0"
-  uid ""
-
-"@minna-ui/stylelint-config@0.21.0":
-  version "0.0.0"
-  uid ""
-
-"@minna-ui/stylelint-config@link:../minna-ui/utils/stylelint-config":
-  version "0.0.0"
-  uid ""
-
-"@minna-ui/ts-config@0.21.0":
-  version "0.0.0"
-  uid ""
-
-"@minna-ui/ts-config@link:../minna-ui/utils/ts-config":
-  version "0.0.0"
-  uid ""
+"@minna-ui/ts-config@0.22.0-next.190":
+  version "0.22.0-next.190"
+  resolved "https://registry.yarnpkg.com/@minna-ui/ts-config/-/ts-config-0.22.0-next.190.tgz#53cd1d09607a446010fe4c6f0e1e13905e9b7ed3"
+  integrity sha512-hkc35sBZKOrGC3icGD8KItrJQrUzuVs5tJ+8yNh+1ZWoG7K+z8vxMkE5Rl44jd1ybChs9RW2MIOGRvCUwHp6HQ==
 
 "@mrmlnc/readdir-enhanced@^2.2.1":
   version "2.2.1"
@@ -546,10 +574,10 @@
   resolved "https://registry.yarnpkg.com/@types/jest-diff/-/jest-diff-20.0.1.tgz#35cc15b9c4f30a18ef21852e255fdb02f6d59b89"
   integrity sha512-yALhelO3i0hqZwhjtcr6dYyaLoCHbAMshwtj6cGxTvHZAKXHsYGdff6E8EPw3xLKY0ELUTQ69Q1rQiJENnccMA==
 
-"@types/jest@^24.0.9":
-  version "24.0.9"
-  resolved "https://registry.yarnpkg.com/@types/jest/-/jest-24.0.9.tgz#74ce9cf337f25e189aa18f76ab3d65e8669b55f2"
-  integrity sha512-k3OOeevcBYLR5pdsOv5g3OP94h3mrJmLPHFEPWgbbVy2tGv0TZ/TlygiC848ogXhK8NL0I5up7YYtwpCp8xCJA==
+"@types/jest@^24.0.11":
+  version "24.0.11"
+  resolved "https://registry.yarnpkg.com/@types/jest/-/jest-24.0.11.tgz#1f099bea332c228ea6505a88159bfa86a5858340"
+  integrity sha512-2kLuPC5FDnWIDvaJBzsGTBQaBbnDweznicvK7UGYzlIJP4RJR2a4A/ByLUXEyEgag6jz8eHdlWExGDtH3EYUXQ==
   dependencies:
     "@types/jest-diff" "*"
 
@@ -558,10 +586,20 @@
   resolved "https://registry.yarnpkg.com/@types/minimatch/-/minimatch-3.0.3.tgz#3dca0e3f33b200fc7d1139c0cd96c1268cadfd9d"
   integrity sha512-tHq6qdbT9U1IRSGf14CL0pUlULksvY9OZ+5eEgl1N7t+OA3tGvNpxJCzuKQlsNgCVwbAs670L1vcVQi8j9HjnA==
 
-"@types/node@*", "@types/node@^11.10.5", "@types/node@^11.9.5":
+"@types/node@*", "@types/node@^11.9.5":
   version "11.10.5"
   resolved "https://registry.yarnpkg.com/@types/node/-/node-11.10.5.tgz#fbaca34086bdc118011e1f05c47688d432f2d571"
   integrity sha512-DuIRlQbX4K+d5I+GMnv+UfnGh+ist0RdlvOp+JZ7ePJ6KQONCFQv/gKYSU1ZzbVdFSUCKZOltjmpFAGGv5MdYA==
+
+"@types/node@^11.11.0":
+  version "11.11.0"
+  resolved "https://registry.yarnpkg.com/@types/node/-/node-11.11.0.tgz#070e9ce7c90e727aca0e0c14e470f9a93ffe9390"
+  integrity sha512-D5Rt+HXgEywr3RQJcGlZUCTCx1qVbCZpVk3/tOOA6spLNZdGm8BU+zRgdRYDoF1pO3RuXLxADzMrF903JlQXqg==
+
+"@types/prettier@^1.16.0":
+  version "1.16.1"
+  resolved "https://registry.yarnpkg.com/@types/prettier/-/prettier-1.16.1.tgz#328d1c9b54402e44119398bcb6a31b7bbd606d59"
+  integrity sha512-db6pZL5QY3JrlCHBhYQzYDci0xnoDuxfseUuguLRr3JNk+bnCfpkK6p8quiUDyO8A0vbpBKkk59Fw125etrNeA==
 
 "@types/q@^1.5.1":
   version "1.5.1"
@@ -667,12 +705,7 @@ acorn-jsx@^5.0.0:
   resolved "https://registry.yarnpkg.com/acorn-jsx/-/acorn-jsx-5.0.1.tgz#32a064fd925429216a09b141102bfdd185fae40e"
   integrity sha512-HJ7CfNHrfJLlNTzIEUTj43LNWGkqpRLxm3YjAlcD0ACydk9XynzYsCBHxut+iqt+1aBXkx9UP/w/ZqMr13XIzg==
 
-acorn-walk@6.1.0:
-  version "6.1.0"
-  resolved "https://registry.yarnpkg.com/acorn-walk/-/acorn-walk-6.1.0.tgz#c957f4a1460da46af4a0388ce28b4c99355b0cbc"
-  integrity sha512-ugTb7Lq7u4GfWSqqpwE0bGyoBZNMTok/zDBXxfEG0QM50jNlGhIWjRC1pPN7bvV1anhF+bs+/gNcRw+o55Evbg==
-
-acorn-walk@^6.0.1:
+acorn-walk@6.1.1, acorn-walk@^6.0.1:
   version "6.1.1"
   resolved "https://registry.yarnpkg.com/acorn-walk/-/acorn-walk-6.1.1.tgz#d363b66f5fac5f018ff9c3a1e7b6f8e310cc3913"
   integrity sha512-OtUw6JUTgxA2QoqqmrmQ7F2NYqiBPi/L2jqHyFtllhOUvXYQXf0Z1CYUinIfyT4bTCGmrA7gX9FvHA81uzCoVw==
@@ -2685,40 +2718,40 @@ gonzales-pe@^4.2.3:
   dependencies:
     minimist "1.1.x"
 
-google-closure-compiler-java@^20181028.0.0:
-  version "20181028.0.0"
-  resolved "https://registry.yarnpkg.com/google-closure-compiler-java/-/google-closure-compiler-java-20181028.0.0.tgz#84629942e8e563a08a83c7e9e9b28e4385272e24"
-  integrity sha512-msRSt+BqBsFQlE3kwbQN+RDlW8bzbFrA+YWxXAN7jalm1RAYyFdU7KH30nYSmwmuKgYQYsBTnc7PFwdZNk003Q==
+google-closure-compiler-java@^20181125.0.1:
+  version "20181125.0.1"
+  resolved "https://registry.yarnpkg.com/google-closure-compiler-java/-/google-closure-compiler-java-20181125.0.1.tgz#4def6bc712f01acb0df22a0ec1c39271ba8b6f07"
+  integrity sha512-UURFLSpdizI40C7cJ8wAzedZww8hjoWnwW4YKLVsTkenvdI1qe1WsWohGUNxPUJoHODVExJHfTtBlfcigesGKg==
 
-google-closure-compiler-js@^20181028.0.0:
-  version "20181028.0.0"
-  resolved "https://registry.yarnpkg.com/google-closure-compiler-js/-/google-closure-compiler-js-20181028.0.0.tgz#4a75b5ab656b1e0ff4ce1b0a285ea1b598effa91"
-  integrity sha512-yTF8uBR8TMf5SW76+1LU1ywvgeVyeNCQ+Jj3KJfMiIShoYhxPtVfLn99nx9r3uwIVNNyMxdQVc9zUFD2DEkTaA==
+google-closure-compiler-js@^20181125.0.1:
+  version "20181125.0.1"
+  resolved "https://registry.yarnpkg.com/google-closure-compiler-js/-/google-closure-compiler-js-20181125.0.1.tgz#ed06f6bab66acfe0d187e0262114c92c5569e2f0"
+  integrity sha512-3+K8b18kWP6CR+qyYwa6DxN9QuijYZvBYpK8L1Va8urXvbDY07x1hA6tKeiEfHmd19pAp7MUW2Ivv2aquDAozw==
 
-google-closure-compiler-linux@^20181028.0.1:
-  version "20181028.0.1"
-  resolved "https://registry.yarnpkg.com/google-closure-compiler-linux/-/google-closure-compiler-linux-20181028.0.1.tgz#80a3a6fde1046647720d190314106fe203a22b2d"
-  integrity sha512-yMfqIBkc9mg9D8wWTBJ/It+IY2NIMmwZDThYK6bfkcq3ZpeJI3GBfb3cA8GxOrHQgtopKysDwQQRrMq9UNscqw==
+google-closure-compiler-linux@^20181125.0.1:
+  version "20181125.0.1"
+  resolved "https://registry.yarnpkg.com/google-closure-compiler-linux/-/google-closure-compiler-linux-20181125.0.1.tgz#231ad4d1988068488a4d2f60e7b1647323199822"
+  integrity sha512-yPejZG9x5fIsygo6qG8NbusY4uQ9865I4664KbQ9jJbJitySORzu1/V4QoUM23efrNI4loDGt6gqDGQ1kR7dTw==
 
-google-closure-compiler-osx@^20181028.0.1:
-  version "20181028.0.1"
-  resolved "https://registry.yarnpkg.com/google-closure-compiler-osx/-/google-closure-compiler-osx-20181028.0.1.tgz#24a5a975d317403dcb82b0b2bb8898226e22804a"
-  integrity sha512-A3g1Ri5dNU1P6dGtY88/3xIAkMt5cQpIG4YqAwwBMTbG5fG7jRfExTetLaUsAaJwQQXG3TYWUELV3kSAMr/bAg==
+google-closure-compiler-osx@^20181125.0.1:
+  version "20181125.0.1"
+  resolved "https://registry.yarnpkg.com/google-closure-compiler-osx/-/google-closure-compiler-osx-20181125.0.1.tgz#d188dd31a866ba2c4ae041050c3da86d882c3894"
+  integrity sha512-jORcziwwlcl/VVeEJLPoPyOB0GyMSeFhzq+B9jaG3ge1q1K2Pcj0fu5rD1QMKuKx70Y3cHWbOXAQVan/jnmLKQ==
 
-google-closure-compiler@20181028.0.1:
-  version "20181028.0.1"
-  resolved "https://registry.yarnpkg.com/google-closure-compiler/-/google-closure-compiler-20181028.0.1.tgz#2c419f8e1e8ba7b677841860933de2b722276485"
-  integrity sha512-Gj+hNFJzxpNbnkZWRe+Gag2IeUfYSfl93qZ5TkRzXZAFznRhL1JpA/0v6nckly8QQDsEjVNMQOloOgfQP6Itkg==
+google-closure-compiler@20181125.0.1:
+  version "20181125.0.1"
+  resolved "https://registry.yarnpkg.com/google-closure-compiler/-/google-closure-compiler-20181125.0.1.tgz#ef2d7be2b6bc1025e770964264e904130f881d49"
+  integrity sha512-OMA8eu33V9ObuaBVrt4kKPNZnylKwDXVeb/QixCCCpOerWFM4UlZG/FSJcA4WF8x6WR4pa7N3ivCZbx2+ey8oA==
   dependencies:
     chalk "^1.0.0"
-    google-closure-compiler-java "^20181028.0.0"
-    google-closure-compiler-js "^20181028.0.0"
+    google-closure-compiler-java "^20181125.0.1"
+    google-closure-compiler-js "^20181125.0.1"
     minimist "^1.2.0"
     vinyl "^2.0.1"
     vinyl-sourcemaps-apply "^0.2.0"
   optionalDependencies:
-    google-closure-compiler-linux "^20181028.0.1"
-    google-closure-compiler-osx "^20181028.0.1"
+    google-closure-compiler-linux "^20181125.0.1"
+    google-closure-compiler-osx "^20181125.0.1"
 
 graceful-fs@^4.1.11, graceful-fs@^4.1.15, graceful-fs@^4.1.2:
   version "4.1.15"
@@ -7139,10 +7172,10 @@ supports-color@^6.0.0, supports-color@^6.1.0:
   dependencies:
     has-flag "^3.0.0"
 
-svelte@3.0.0-beta.11:
-  version "3.0.0-beta.11"
-  resolved "https://registry.yarnpkg.com/svelte/-/svelte-3.0.0-beta.11.tgz#2bdeb73ba6b39175eebe8a4b909d89a4fbbd8488"
-  integrity sha512-NTk89Q1azXoG08qRDd9R9aM8+fylCSon1bPThsS2IWSqw7YEPPu2wv9p3VaZ5Eo4NubUDfnX/HXtwdGozSnjCg==
+svelte@3.0.0-beta.13:
+  version "3.0.0-beta.13"
+  resolved "https://registry.yarnpkg.com/svelte/-/svelte-3.0.0-beta.13.tgz#b5ddea8463db7acd4ca229b1dce8f47a1c42fcad"
+  integrity sha512-Ne7WVb7lrTB+p3K7i3oNUxA9fZUuGK2BkyuVkA10cbZhESacjW7zQfJwrytgODCzASPTNQhcyzCdfOKmyx8jsA==
 
 svg-tags@^1.0.0:
   version "1.0.0"
