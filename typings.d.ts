@@ -2,7 +2,7 @@
 
 declare module '*.svelte' {
   interface IComponentOptions {
-    data?: {
+    props?: {
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
       [key: string]: any;
     };
