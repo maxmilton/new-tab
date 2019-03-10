@@ -7,6 +7,8 @@
 -->
 
 <script>
+  /* eslint-disable no-underscore-dangle */
+
   import { shorten } from '../common';
 
   export let _node;

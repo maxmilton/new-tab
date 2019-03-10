@@ -1,7 +1,6 @@
 <script>
   import { beforeUpdate } from 'svelte';
   import { DEFAULT_ORDER, debounce } from '../common';
-  import LinkItem from './LinkItem.svelte';
   import SearchResults from './SearchResults.svelte';
 
   const SEARCH_DEBOUNCE_DELAY = 260; // ms
@@ -29,8 +28,8 @@
   /**
    * Check if either title or URL match a query.
    * @this {string} Search query
-   * @param {{ title: string, url: string }} item
-   * @return {boolean}
+   * @param {{ title: string, url: string }} item - Item to match against.
+   * @returns {boolean} True is a match is found.
    */
   function searchFilter({ title, url }) {
     return title.toLowerCase().indexOf(this) > -1
@@ -79,8 +78,8 @@
   }
 
   /**
-    * @param {Tab} tab
-    * @param {MouseEvent} event
+    * @param {Tab} tab - A browser tab object.
+    * @param {MouseEvent} event - A mouse event.
     */
   function handleTabClick(tab, event) {
     event.preventDefault();
@@ -136,8 +135,11 @@
 
   // this callback runs whenever props change
   beforeUpdate(() => {
-    // TODO: When search is active, rerun when tab events trigger and getTabs() is run
-    // FIXME: Do we need to track the previous value of `searchText` and only run this if it's changed?
+    // TODO: When search is active, rerun when tab events trigger and
+    // getTabs() is run
+
+    // FIXME: Do we need to track the previous value of `searchText` and only
+    // run this if it's changed?
     if (searchText) {
       onSearch();
     }
@@ -160,8 +162,15 @@
       {#each tabsList as _node}
         <!-- XXX: This is the same as <LinkItem> but with a click handler -->
         <!-- TODO: Once the "better composition" RFC lands see if this can be improved: https://github.com/sveltejs/rfcs/pull/12 -->
-        <a href="{_node.url}" title="{_node.title}" on:click="{event => handleTabClick(_node, event)}">
-          <img src="chrome://favicon/{_node.url}" class="{_node.title ? 'pad' : ''}">
+        <a
+          href="{_node.url}"
+          title="{_node.title}"
+          on:click="{event => handleTabClick(_node, event)}"
+        >
+          <img
+            src="chrome://favicon/{_node.url}"
+            class="{_node.title ? 'pad' : ''}"
+          >
           {_node.title}
         </a>
       {/each}

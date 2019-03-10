@@ -1,4 +1,6 @@
 <script>
+  /* eslint-disable no-underscore-dangle */
+
   import { createEventDispatcher, onDestroy } from 'svelte';
   import BookmarkNode from './BookmarkNode.svelte'; // eslint-disable-line import/no-cycle
   import { shorten } from '../common';

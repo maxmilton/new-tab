@@ -1,6 +1,6 @@
 <script>
   import { afterUpdate } from 'svelte';
-  import { DEFAULT_ORDER } from './common.js';
+  import { DEFAULT_ORDER } from './common';
 
   let resultsOrder = [];
   let pageTheme = '';
@@ -8,8 +8,8 @@
   // check existing settings
   chrome.storage.local.get(null, (settings) => {
     /* eslint-disable dot-notation */ // prevent closure mangling
-    pageTheme = settings['t'];
     resultsOrder = settings['o'] || [...DEFAULT_ORDER];
+    pageTheme = settings['t'];
     /* eslint-enable */
   });
 
@@ -17,10 +17,10 @@
   afterUpdate(() => {
     /* eslint-disable quote-props */ // prevent closure mangling
     chrome.storage.local.set({
-      't': pageTheme,
       'o': JSON.stringify(resultsOrder) === JSON.stringify(DEFAULT_ORDER)
         ? null
         : resultsOrder,
+      't': pageTheme,
     });
     /* eslint-enable */
   });
@@ -31,6 +31,7 @@
 
   function moveItem(from, to) {
     const ordered = Object.assign(resultsOrder);
+    // eslint-disable-next-line security/detect-object-injection
     const item = resultsOrder[from];
 
     // remove from previous location
