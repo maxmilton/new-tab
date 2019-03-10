@@ -1,4 +1,4 @@
-import Menu from '../../src/components/Menu.svelte';
+import Menu from '../Menu.svelte';
 
 describe('Menu component', () => {
   it('renders correctly', () => {

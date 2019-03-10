@@ -1,4 +1,4 @@
-import * as common from '../src/common';
+import * as common from '../common';
 
 describe('Helper debounce function', () => {
   it('function exists', () => {

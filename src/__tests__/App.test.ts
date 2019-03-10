@@ -1,6 +1,6 @@
 // FIXME: Move things to `common.test.js` + fix click handler tests
 
-import App from '../src/App.svelte';
+import App from '../App.svelte';
 
 describe('App root component', () => {
   it('renders correctly', () => {

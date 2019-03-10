@@ -1,4 +1,4 @@
-import BookmarkFolder from '../../src/components/BookmarkFolder.svelte';
+import BookmarkFolder from '../BookmarkFolder.svelte';
 
 const _node = {};
 

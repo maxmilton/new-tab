@@ -1,9 +1,9 @@
-import Settings from '../src/Settings.svelte';
+import BookmarkGroup from '../BookmarkGroup.svelte';
 
-describe('Settings component', () => {
+describe('BookmarkGroup component', () => {
   it('renders correctly', () => {
     const target = document.createElement('div');
-    new Settings({ target });
+    new BookmarkGroup({ target });
     expect(target.innerHTML).toMatchSnapshot();
   });
 });
