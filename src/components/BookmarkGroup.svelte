@@ -77,8 +77,7 @@
 
 <div id="bookmarks" bind:this="{barEl}">
   {#each visibleNodes as _node}
-    <!-- htmlmin:ignore -->
-    <BookmarkNode {_node} maxLen="{15}" lvl="{0}" /><!-- htmlmin:ignore -->
+    <BookmarkNode {_node} maxLen="{15}" lvl="{0}" />
   {/each}
 
   {#if overflowNodes.children.length}

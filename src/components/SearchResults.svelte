@@ -21,12 +21,10 @@
   }
 </script>
 
-<!-- htmlmin:ignore -->
-<h2>{`${resultsName} (${resultsList.length}/${resultsRaw.length})`}</h2><!-- htmlmin:ignore -->
+<h2>{`${resultsName} (${resultsList.length}/${resultsRaw.length})`}</h2>
 
 {#each resultsList as _node}
-  <!-- htmlmin:ignore -->
-  <LinkItem {_node} /><!-- htmlmin:ignore -->
+  <LinkItem {_node} />
 {/each}
 
 {#if resultsName !== 'Top Sites' && resultsList.length < resultsRaw.length}
