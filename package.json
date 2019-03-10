@@ -77,7 +77,7 @@
   ],
   "babel": {
     "presets": [
-      "@minna-ui/jest-config/babel-preset.js"
+      "@minna-ui/jest-config/lib/babel-preset"
     ]
   },
   "postcss": {
@@ -91,7 +91,8 @@
   "eslintConfig": {
     "root": true,
     "extends": [
-      "@minna-ui/eslint-config"
+      "@minna-ui/eslint-config",
+      "@minna-ui/eslint-config/lib/svelte"
     ],
     "env": {
       "webextensions": true
@@ -106,30 +107,7 @@
   },
   "remarkConfig": {
     "plugins": [
-      "@minna-ui/remarklint-config"
-    ]
-  },
-  "prettier": {
-    "arrowParens": "always",
-    "endOfLine": "lf",
-    "singleQuote": true,
-    "trailingComma": "all",
-    "overrides": [
-      {
-        "files": [
-          "*.html",
-          "*.svelte"
-        ],
-        "options": {
-          "requirePragma": true
-        }
-      },
-      {
-        "files": "*.test.ts",
-        "options": {
-          "printWidth": 100
-        }
-      }
+      "@minna-ui/remark-config"
     ]
   },
   "jest": {
