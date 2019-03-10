@@ -1,4 +1,7 @@
 <script>
+  // FIXME:
+  /* eslint-disable import/first */
+
   import LinkItem from './LinkItem.svelte';
   import BookmarkFolder from './BookmarkFolder.svelte';
 </script>
