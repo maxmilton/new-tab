@@ -1,4 +1,4 @@
-/* eslint-disable global-require */
+/* eslint-disable @typescript-eslint/camelcase, global-require */
 
 import compiler from '@ampproject/rollup-plugin-closure-compiler';
 import preMarkup from '@minna-ui/pre-markup';
@@ -42,7 +42,6 @@ const makeHtmlOpts = {
   template: readFileSync(join(__dirname, 'src/template.html'), 'utf8'),
 };
 
-/* eslint-disable @typescript-eslint/camelcase */
 const compilerOpts = {
   charset: 'UTF-8',
   compilation_level: 'ADVANCED',
@@ -53,7 +52,6 @@ const compilerOpts = {
   ],
   strict_mode_input: false, // FIXME: Duplicate `$$props` error
 };
-/* eslint-enable @typescript-eslint/camelcase */
 
 // loader.js run through closure compiler + manual tweaks
 const loader =
