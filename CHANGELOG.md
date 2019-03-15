@@ -16,6 +16,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 ### Changed
 
 - Converted internals to use Svelte v3 beta.
+- New way of generating the extension manifest.
 
 ## [0.14.0] - 2018-12-17
 
