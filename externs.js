@@ -20,7 +20,6 @@ var isOpen;
 var itemCount;
 var lvl;
 var maxLen;
-var openListener;
 var openTimer;
 var overflowNodes;
 var resultsList;

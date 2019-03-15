@@ -1,7 +1,7 @@
 <script>
   /* eslint-disable no-underscore-dangle */
 
-  import { createEventDispatcher, onDestroy } from 'svelte';
+  import { onDestroy } from 'svelte';
   import BookmarkNode from './BookmarkNode'; // eslint-disable-line import/no-cycle
   import { shorten } from '../common';
 
@@ -14,20 +14,13 @@
   // reactive data
   let isOpen = false;
 
-  const dispatch = createEventDispatcher();
-
   const EVENT_NAME = 'open';
   const OPEN_DELAY = 200;
   const CLOSE_DELAY = 400;
 
+  const openEvent = new CustomEvent(EVENT_NAME, { detail: lvl });
   let openTimer = null;
   let closeTimer = null;
-  let openListener;
-
-  onDestroy(() => {
-    // clean up listener to prevent memory leaks
-    if (openListener) openListener.cancel();
-  });
 
   function resetCloseTimer() {
     if (closeTimer !== null) {
@@ -36,18 +29,21 @@
     }
   }
 
-  // set up event listener to close subfolder when another opens
+  /**
+   * Close subfolder when another opens.
+   * @param {CustomEvent} event Event dispatched when another subfolder opens.
+   */
+  function handleOpen(event) {
+    if (isOpen && event.detail === lvl) {
+      isOpen = false;
+      resetCloseTimer();
+    }
+  }
+
   function onOpen() {
-    dispatch(EVENT_NAME, lvl);
-
+    window.dispatchEvent(openEvent);
+    window.addEventListener(EVENT_NAME, handleOpen);
     isOpen = true;
-
-    openListener = _root.on(EVENT_NAME, (openLvl) => {
-      if (isOpen && openLvl === lvl) {
-        isOpen = false;
-        resetCloseTimer();
-      }
-    });
   }
 
   // subfolder mouse enter
@@ -72,9 +68,14 @@
     if (isOpen) {
       closeTimer = setTimeout(() => {
         isOpen = false;
+        window.removeEventListener(EVENT_NAME, handleOpen);
       }, CLOSE_DELAY);
     }
   }
+
+  onDestroy(() => {
+    window.removeEventListener(EVENT_NAME, handleOpen);
+  });
 </script>
 
 <style type="text/postcss">
