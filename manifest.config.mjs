@@ -1,9 +1,9 @@
-/* eslint-disable sort-keys, @typescript-eslint/camelcase */
+/* eslint-disable @typescript-eslint/camelcase, import/no-extraneous-dependencies, sort-keys */
 
-import { gitDescribe } from '@minna-ui/rollup-plugins'; // eslint-disable-line import/no-extraneous-dependencies
+import { gitDescribe } from '@minna-ui/rollup-plugins';
 import pkg from './package.json';
 
-export default {
+export default JSON.stringify({
   manifest_version: 2,
 
   name: 'New Tab',
@@ -40,4 +40,4 @@ export default {
     " style-src 'unsafe-inline';" +
     // `data:` is used in the settings page
     ' img-src chrome://favicon data:;',
-};
+});

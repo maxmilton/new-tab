@@ -10,8 +10,8 @@ import { join } from 'path';
 import { plugin as analyze } from 'rollup-plugin-analyzer';
 import svelte from 'rollup-plugin-svelte';
 import typescript from 'rollup-plugin-typescript';
+import manifest from './manifest.config.mjs';
 import nodeResolve from 'rollup-plugin-node-resolve';
-import manifest from './src/manifest.mjs';
 
 const { resolve } = require;
 const isDev = !!process.env.ROLLUP_WATCH;
@@ -70,7 +70,7 @@ const loader =
 // extension manifest
 writeFile(
   join(__dirname, 'dist/manifest.json'),
-  JSON.stringify(manifest),
+  manifest,
   catchErr,
 );
 
