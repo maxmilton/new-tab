@@ -7,7 +7,6 @@ import { catchErr, makeHtml } from '@minna-ui/rollup-plugins';
 import crass from 'crass';
 import { readFileSync, writeFile } from 'fs';
 import { join } from 'path';
-import { plugin as analyze } from 'rollup-plugin-analyzer';
 import nodeResolve from 'rollup-plugin-node-resolve';
 import svelte from 'rollup-plugin-svelte';
 import typescript from 'rollup-plugin-typescript';
@@ -15,7 +14,6 @@ import manifest from './manifest.config.mjs';
 
 const { resolve } = require;
 const isDev = !!process.env.ROLLUP_WATCH;
-const isDebug = !!process.env.DEBUG;
 
 const watch = {
   chokidar: true,
@@ -89,7 +87,6 @@ export default [
         file: 'dist/n.html',
         title: 'New Tab',
       }),
-      isDebug && analyze(),
     ],
     watch,
   },
@@ -111,7 +108,6 @@ export default [
         ...makeHtmlOpts,
         file: 'dist/s.html',
       }),
-      isDebug && analyze(),
     ],
     watch,
   },
