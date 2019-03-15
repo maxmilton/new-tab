@@ -8,8 +8,6 @@
 /* FIXME: Workaround?? :'( */
 // new tab app props
 var _node;
-var _root; // FIXME: This <<
-var barEl;
 var bookmarksBar;
 var bookmarksList;
 var bookmarksOther;
