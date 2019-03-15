@@ -81,43 +81,6 @@
   }
 </script>
 
-<div class="row">
-  <label>Theme:</label>
-  <select bind:value="{pageTheme}">
-    <option value="d">Dark</option>
-    <option value="">Light</option> <!-- default -->
-  </select>
-</div>
-
-<div class="row">
-  <label>List order:</label>
-  <button on:click="{resetOrder}">Reset</button>
-  <ul>
-    {#each resultsOrder as _item, index (_item)}
-      <li
-        class="item"
-        draggable="true"
-        on:dragstart="{event => handleDragStart(event, index)}"
-        on:dragend="{event => handleDragEnd(event)}"
-        on:dragover="{event => handleDragOver(event)}"
-        on:dragenter="{event => handleDragEnter(event)}"
-        on:dragleave="{event => handleDragLeave(event)}"
-        on:drop="{event => handleDrop(event, index)}"
-      >
-        <span class="icon">☰</span>
-        {_item}
-        <button
-          class="rm"
-          title="Remove section"
-          on:click="{() => removeItem(index)}"
-        >
-          🗑
-        ️</button>
-      </li>
-    {/each}
-  </ul>
-</div>
-
 <style type="text/postcss">
   :global(body) {
     font-size: 18px;
@@ -169,3 +132,40 @@
     border-color: rgb(21, 48, 167) !important;
   }
 </style>
+
+<div class="row">
+  <label>Theme:</label>
+  <select bind:value="{pageTheme}">
+    <option value="d">Dark</option>
+    <option value="">Light</option>
+  </select>
+</div>
+
+<div class="row">
+  <label>List order:</label>
+  <button on:click="{resetOrder}">Reset</button>
+  <ul>
+    {#each resultsOrder as _item, index (_item)}
+      <li
+        class="item"
+        draggable="true"
+        on:dragstart="{event => handleDragStart(event, index)}"
+        on:dragend="{event => handleDragEnd(event)}"
+        on:dragover="{event => handleDragOver(event)}"
+        on:dragenter="{event => handleDragEnter(event)}"
+        on:dragleave="{event => handleDragLeave(event)}"
+        on:drop="{event => handleDrop(event, index)}"
+      >
+        <span class="icon">☰</span>
+        {_item}
+        <button
+          class="rm"
+          title="Remove section"
+          on:click="{() => removeItem(index)}"
+        >
+          🗑
+        ️</button>
+      </li>
+    {/each}
+  </ul>
+</div>

@@ -1,39 +1,3 @@
-<div id="menu">
-  <div id="icon">☰</div>
-
-  <div id="dropdown">
-    <a href="chrome-search://local-ntp/local-ntp.html" class="menu-item">
-      Open Default Tab
-    </a>
-    <a href="chrome://bookmarks/" class="menu-item">
-      Bookmarks Manager
-    </a>
-    <a href="chrome://downloads/" class="menu-item">
-      Downloads
-    </a>
-    <a href="chrome://history/" class="menu-item">
-      History
-    </a>
-    <a href="chrome://settings/passwords" class="menu-item">
-      Passwords
-    </a>
-
-    <hr>
-
-    <!--
-      Rather than using on:click + a method like normal, use an `id` and capture
-      clicks in the global click event handler (in `common.js`). This way the
-      entire component template is static and receives special optimisation.
-    -->
-    <a id="o" class="menu-item">
-      New Tab Settings
-    </a>
-    <a href="https://github.com/MaxMilton/new-tab/issues" class="menu-item">
-      Submit Bug
-    </a>
-  </div>
-</div>
-
 <style type="text/postcss">
   :global(hr) {
     border: 0;
@@ -81,3 +45,39 @@
     }
   }
 </style>
+
+<div id="menu">
+  <div id="icon">☰</div>
+
+  <div id="dropdown">
+    <a href="chrome-search://local-ntp/local-ntp.html" class="menu-item">
+      Open Default Tab
+    </a>
+    <a href="chrome://bookmarks/" class="menu-item">
+      Bookmarks Manager
+    </a>
+    <a href="chrome://downloads/" class="menu-item">
+      Downloads
+    </a>
+    <a href="chrome://history/" class="menu-item">
+      History
+    </a>
+    <a href="chrome://settings/passwords" class="menu-item">
+      Passwords
+    </a>
+
+    <hr>
+
+    <!--
+      Rather than using on:click + a method like normal, use an `id` and capture
+      clicks in the global click event handler (in `common.js`). This way the
+      entire component template is static and receives special optimisation.
+    -->
+    <a id="o" class="menu-item">
+      New Tab Settings
+    </a>
+    <a href="https://github.com/MaxMilton/new-tab/issues" class="menu-item">
+      Submit Bug
+    </a>
+  </div>
+</div>

@@ -21,10 +21,6 @@
   let bookmarksBar = [];
   let bookmarksOther = { children: [] };
   let itemCount;
-  let barEl;
-
-  let visibleNodes;
-  let overflowNodes;
 
   // computed properties
   $: visibleNodes = bookmarksBar.slice(0, itemCount);
@@ -75,20 +71,6 @@
   window.addEventListener('resize', handleResize);
 </script>
 
-<div id="bookmarks" bind:this="{barEl}">
-  {#each visibleNodes as _node}
-    <BookmarkNode {_node} maxLen="{15}" lvl="{0}" />
-  {/each}
-
-  {#if overflowNodes.children.length}
-    <BookmarkNode _node="{overflowNodes}" lvl="{0}" maxLen="{40}" endNode />
-  {/if}
-
-  {#if bookmarksOther.children.length}
-    <BookmarkNode _node="{bookmarksOther}" lvl="{0}" maxLen="{40}" endNode />
-  {/if}
-</div>
-
 <style type="text/postcss">
   :global(#bookmarks) {
     position: fixed;
@@ -103,3 +85,17 @@
     backface-visibility: hidden; /* performance hack; force GPU */
   }
 </style>
+
+<div id="bookmarks">
+  {#each visibleNodes as _node}
+    <BookmarkNode {_node} maxLen="{15}" lvl="{0}" />
+  {/each}
+
+  {#if overflowNodes.children.length}
+    <BookmarkNode _node="{overflowNodes}" lvl="{0}" maxLen="{40}" endNode />
+  {/if}
+
+  {#if bookmarksOther.children.length}
+    <BookmarkNode _node="{bookmarksOther}" lvl="{0}" maxLen="{40}" endNode />
+  {/if}
+</div>

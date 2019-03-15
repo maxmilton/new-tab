@@ -9,7 +9,6 @@
   export let lvl = 0;
   export let maxLen = 0;
   export let endNode = false;
-  export let _root; // FIXME: Pass in a component reference (?)
   export let _node;
 
   // reactive data
@@ -78,29 +77,6 @@
   }
 </script>
 
-<div
-  class="item folder{endNode ? ' right' : ''}"
-  title="{_node.title}"
-  on:mouseenter="{handleMouseEnter}"
-  on:mouseleave="{handleMouseLeave}"
->
-  {shorten(_node.title, maxLen)}
-
-  {#if lvl !== 0}
-    <div class="caret">▸</div>
-  {/if}
-
-  {#if isOpen}
-    <div class="subfolder{endNode ? ' left' : ''}">
-      {#each _node.children as childNode}
-        <BookmarkNode _node="{childNode}" lvl="{lvl + 1}" maxLen="{40}" />
-      {:else}
-        <div class="item">(empty)</div>
-      {/each}
-    </div>
-  {/if}
-</div>
-
 <style type="text/postcss">
   :global(.folder) {
     position: relative;
@@ -146,3 +122,26 @@
     display: inline;
   }
 </style>
+
+<div
+  class="item folder{endNode ? ' right' : ''}"
+  title="{_node.title}"
+  on:mouseenter="{handleMouseEnter}"
+  on:mouseleave="{handleMouseLeave}"
+>
+  {shorten(_node.title, maxLen)}
+
+  {#if lvl !== 0}
+    <div class="caret">▸</div>
+  {/if}
+
+  {#if isOpen}
+    <div class="subfolder{endNode ? ' left' : ''}">
+      {#each _node.children as childNode}
+        <BookmarkNode _node="{childNode}" lvl="{lvl + 1}" maxLen="{40}" />
+      {:else}
+        <div class="item">(empty)</div>
+      {/each}
+    </div>
+  {/if}
+</div>

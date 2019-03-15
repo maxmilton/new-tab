@@ -22,7 +22,6 @@
   let topSitesRaw = [];
 
   // computed properties
-  let isSearching;
   $: isSearching = !!searchText;
 
   /**
@@ -146,6 +145,42 @@
   });
 </script>
 
+<style type="text/postcss">
+  /* load more buttons */
+  :global(button) {
+    width: initial;
+    margin-top: 9px;
+    cursor: pointer;
+  }
+
+  :global(.container) {
+    max-width: 800px;
+    padding: 0 18px;
+    margin: 0 auto;
+  }
+
+  /* stylelint-disable no-descending-specificity */
+  :global(button),
+  :global(#search) {
+    box-sizing: border-box;
+    width: 100%;
+    padding: 11px 20px;
+    margin: 0 0 18px;
+    font-size: 22px;
+    color: var(--t);
+    background: var(--c2);
+    border: 0;
+    border-radius: 24px;
+    outline: none;
+
+    &:hover,
+    &:focus {
+      background: var(--c1);
+    }
+  }
+  /* stylelint-enable */
+</style>
+
 <div class="container">
   <input
     id="search"
@@ -195,39 +230,3 @@
     {/if}
   {/each}
 </div>
-
-<style type="text/postcss">
-  /* load more buttons */
-  :global(button) {
-    width: initial;
-    margin-top: 9px;
-    cursor: pointer;
-  }
-
-  :global(.container) {
-    max-width: 800px;
-    padding: 0 18px;
-    margin: 0 auto;
-  }
-
-  /* stylelint-disable no-descending-specificity */
-  :global(button),
-  :global(#search) {
-    box-sizing: border-box;
-    width: 100%;
-    padding: 11px 20px;
-    margin: 0 0 18px;
-    font-size: 22px;
-    color: var(--t);
-    background: var(--c2);
-    border: 0;
-    border-radius: 24px;
-    outline: none;
-
-    &:hover,
-    &:focus {
-      background: var(--c1);
-    }
-  }
-  /* stylelint-enable */
-</style>

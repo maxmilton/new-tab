@@ -7,10 +7,6 @@
   window.addEventListener('click', handleLinkClick, true);
 </script>
 
-<BookmarkGroup />
-<Search />
-<Menu />
-
 <style type="text/postcss">
   @import './themes/light.css';
   @import './themes/dark.css';
@@ -45,3 +41,7 @@
     }
   }
 </style>
+
+<BookmarkGroup/>
+<Search/>
+<Menu/>

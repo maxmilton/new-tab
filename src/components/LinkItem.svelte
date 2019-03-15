@@ -15,11 +15,6 @@
   export let maxLen;
 </script>
 
-<a href="{_node.url}" title="{_node.title}">
-  <img src="chrome://favicon/{_node.url}" class="{_node.title && 'pad'}">
-  {shorten(_node.title, maxLen)}
-</a>
-
 <style type="text/postcss">
   /* all <img> are favicons */
   :global(img) {
@@ -51,3 +46,8 @@
     }
   }
 </style>
+
+<a href="{_node.url}" title="{_node.title}">
+  <img src="chrome://favicon/{_node.url}" class="{_node.title && 'pad'}">
+  {shorten(_node.title, maxLen)}
+</a>
