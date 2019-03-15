@@ -25,7 +25,7 @@ const watch = {
 const svelteOpts = {
   dev: isDev,
   emitCss: true,
-  // immutable: true, // TODO: Hmmm...
+  immutable: true,
   preprocess: {
     markup: preMarkup({ enabled: !isDev }),
     style: preStyle(),
