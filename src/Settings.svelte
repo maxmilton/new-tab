@@ -43,6 +43,12 @@
     resultsOrder = ordered;
   }
 
+  function removeItem(index) {
+    const ordered = [...resultsOrder];
+    ordered.splice(index, 1);
+    resultsOrder = ordered;
+  }
+
   function handleDragStart(event, index) {
     event.dataTransfer.setData('from', index);
     event.target.classList.add('dragging');
@@ -100,6 +106,13 @@
       >
         <span class="icon">☰</span>
         {_item}
+        <button
+          class="rm"
+          title="Remove section"
+          on:click="{() => removeItem(index)}"
+        >
+          🗑
+        ️</button>
       </li>
     {/each}
   </ul>
@@ -108,11 +121,6 @@
 <style type="text/postcss">
   :global(body) {
     font-size: 18px;
-  }
-
-  :global(select),
-  :global(button) {
-    margin-left: 9px !important; /* stylelint-disable-line declaration-no-important */
   }
 
   :global(ul) {
@@ -130,6 +138,15 @@
     cursor: grab;
     border: 1px solid rgba(0, 0, 0, 0.25);
     border-radius: 2px;
+  }
+
+  /* TODO: Improve the styling technique */
+  :global(.rm) {
+    position: relative;
+    top: -7px;
+    right: -12px;
+    float: right;
+    cursor: pointer;
   }
 
   :global(.icon) {
