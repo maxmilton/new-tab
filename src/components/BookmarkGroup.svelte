@@ -22,6 +22,9 @@
   let bookmarksOther = { children: [] };
   let itemCount;
 
+  // refs
+  let barEl;
+
   // computed properties
   $: visibleNodes = bookmarksBar.slice(0, itemCount);
   $: overflowNodes = ({ children: bookmarksBar.slice(itemCount), title: '»' });
@@ -86,7 +89,7 @@
   }
 </style>
 
-<div id="bookmarks">
+<div id="bookmarks" bind:this="{barEl}">
   {#each visibleNodes as _node}
     <BookmarkNode {_node} maxLen="{15}" lvl="{0}" />
   {/each}
