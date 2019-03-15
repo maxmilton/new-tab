@@ -8,10 +8,10 @@ import crass from 'crass';
 import { readFileSync, writeFile } from 'fs';
 import { join } from 'path';
 import { plugin as analyze } from 'rollup-plugin-analyzer';
+import nodeResolve from 'rollup-plugin-node-resolve';
 import svelte from 'rollup-plugin-svelte';
 import typescript from 'rollup-plugin-typescript';
 import manifest from './manifest.config.mjs';
-import nodeResolve from 'rollup-plugin-node-resolve';
 
 const { resolve } = require;
 const isDev = !!process.env.ROLLUP_WATCH;
@@ -53,13 +53,7 @@ const compilerOpts = {
     resolve('google-closure-compiler/contrib/externs/chrome_extensions.js'),
     join(__dirname, 'externs.js'),
   ],
-  // language_in: 'ECMASCRIPT_NEXT',
-  // language_out: 'STABLE',
-  // warning_level: 'VERBOSE',
-  // jscomp_off: ['duplicate', 'globalThis'],
-
-  // debug: true,
-  // formatting: 'PRETTY_PRINT',
+  strict_mode_input: false, // FIXME: Duplicate `$$props` error
 };
 /* eslint-enable @typescript-eslint/camelcase */
 

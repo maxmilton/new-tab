@@ -5,10 +5,6 @@
 
 /* eslint-disable strict, no-var, @typescript-eslint/no-unused-vars, no-underscore-dangle */
 
-// Svelte quoted method references
-// var i;
-// var m;
-
 /* FIXME: Workaround?? :'( */
 // new tab app props
 var _node;
