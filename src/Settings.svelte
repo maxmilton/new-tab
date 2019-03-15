@@ -8,7 +8,7 @@
   // check existing settings
   chrome.storage.local.get(null, (settings) => {
     /* eslint-disable dot-notation */ // prevent closure mangling
-    resultsOrder = settings['o'] || [...DEFAULT_ORDER];
+    resultsOrder = settings['o'] || DEFAULT_ORDER;
     pageTheme = settings['t'];
     /* eslint-enable */
   });
@@ -30,7 +30,7 @@
   }
 
   function moveItem(from, to) {
-    const ordered = Object.assign(resultsOrder);
+    const ordered = [...resultsOrder];
     // eslint-disable-next-line security/detect-object-injection
     const item = resultsOrder[from];
 
