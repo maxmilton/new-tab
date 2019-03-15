@@ -81,7 +81,7 @@ export default [
       !isDev && compiler(compilerOpts),
       makeHtml({
         ...makeHtmlOpts,
-        content: `${loader}%CSS%%JS%`,
+        content: `%CSS%${loader}%JS%`,
         file: 'dist/n.html',
         title: 'New Tab',
       }),
