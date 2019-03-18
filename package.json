@@ -43,7 +43,7 @@
     "chokidar": "2.1.2",
     "codecov": "3.2.0",
     "crass": "0.12.3",
-    "eslint": "5.15.1",
+    "eslint": "5.15.3",
     "jest": "24.5.0",
     "jest-puppeteer": "4.1.0",
     "postcss": "7.0.14",
@@ -58,7 +58,7 @@
     "rollup-plugin-typescript": "1.0.0",
     "sinon-chrome": "2.3.2",
     "stylelint": "9.10.1",
-    "svelte": "3.0.0-beta.15",
+    "svelte": "3.0.0-beta.20",
     "tslib": "1.9.3",
     "typescript": "3.3.3333"
   },
