@@ -118,10 +118,6 @@
       left: initial;
     }
   }
-
-  .testyoyo {
-    display: inline;
-  }
 </style>
 
 <div
