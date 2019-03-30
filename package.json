@@ -88,13 +88,20 @@
     ],
     "env": {
       "webextensions": true
+    },
+    "globals": {
+      "page": true,
+      "browser": true,
+      "context": true,
+      "jestPuppeteer": true
     }
   },
   "stylelint": {
     "extends": "@minna-ui/stylelint-config",
     "rules": {
-      "selector-max-id": null,
-      "color-no-hex": null
+      "color-no-hex": null,
+      "scale-unlimited/declaration-strict-value": null,
+      "selector-max-id": null
     }
   },
   "remarkConfig": {
@@ -104,8 +111,11 @@
   },
   "jest": {
     "preset": "@minna-ui/jest-config",
-    "setupFiles": [
-      "<rootDir>/test/__setup__.ts"
+    "globalSetup": "jest-environment-puppeteer/setup",
+    "globalTeardown": "jest-environment-puppeteer/teardown",
+    "testEnvironment": "jest-environment-puppeteer",
+    "setupFilesAfterEnv": [
+      "expect-puppeteer"
     ],
     "collectCoverageFrom": [
       "src/**/*.{html,js,svelte,ts}",
