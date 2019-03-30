@@ -1,6 +1,6 @@
 /* eslint-disable no-underscore-dangle */
 
-import BookmarkNode from '../BookmarkNode.svelte';
+import BookmarkNode from '../BookmarkNode';
 
 const _node = {};
 

@@ -1,3 +1,5 @@
+/** @jest-environment node */
+
 // import loaderScript from '../loader';
 
 describe('Loader script', () => {

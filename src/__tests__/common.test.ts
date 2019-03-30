@@ -1,3 +1,7 @@
+/** @jest-environment node */
+
+// TODO: Actually implement unit tests
+
 import * as common from '../common';
 
 describe('Helper debounce function', () => {

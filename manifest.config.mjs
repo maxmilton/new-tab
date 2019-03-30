@@ -35,9 +35,9 @@ export default JSON.stringify({
   incognito: 'not_allowed',
   content_security_policy:
     "default-src 'none';" +
-    // hash is `loader.js` embedded into the document
+    // allow `loader.ts` to be embedded in the document
     " script-src 'self' 'sha256-FtIFk1UjzWWlhfMrIdJ9n60rbnTmldIAss9HFJTJeUM=';" +
     " style-src 'unsafe-inline';" +
-    // `data:` is used in the settings page
+    // `data:` used in settings page
     ' img-src chrome://favicon data:;',
 });
