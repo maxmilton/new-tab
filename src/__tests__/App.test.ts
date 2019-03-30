@@ -1,8 +1,14 @@
 // FIXME: Move things to `common.test.js` + fix click handler tests
 
+// FIXME: Should tests be split up into virtual (jsdom) + UI (puppeteer)?
+
 import App from '../App.svelte';
 
-describe('App root component', () => {
+beforeAll(async () => {
+  await page.goto('chrome://newtab');
+});
+
+describe('App component', () => {
   it('renders correctly', () => {
     const target = document.createElement('div');
     new App({ target });
