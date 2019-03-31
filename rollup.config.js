@@ -2,7 +2,7 @@
 
 import compiler from '@ampproject/rollup-plugin-closure-compiler';
 import crass from 'crass';
-import { readFileSync, writeFile } from 'fs';
+import { writeFile } from 'fs';
 import { handleErr, emitHtml } from 'minna-tools';
 import { preprocess } from 'minna-ui';
 import { join } from 'path';
@@ -35,7 +35,7 @@ const emitHtmlOpts = {
       .optimize({ o1: true })
       .toString(),
   scriptAttr: 'async',
-  template: readFileSync(join(__dirname, 'src/template.html'), 'utf8'),
+  template: join(__dirname, 'src/template.html'),
 };
 
 const compilerOpts = {
