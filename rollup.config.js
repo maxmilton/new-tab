@@ -1,11 +1,10 @@
 /* eslint-disable @typescript-eslint/camelcase, global-require */
 
 import compiler from '@ampproject/rollup-plugin-closure-compiler';
-import preMarkup from '@minna-ui/pre-markup';
-import preStyle from '@minna-ui/pre-style';
-import { catchErr, makeHtml } from '@minna-ui/rollup-plugins';
 import crass from 'crass';
 import { readFileSync, writeFile } from 'fs';
+import { handleErr, emitHtml } from 'minna-tools';
+import { preprocess } from 'minna-ui';
 import { join } from 'path';
 import nodeResolve from 'rollup-plugin-node-resolve';
 import svelte from 'rollup-plugin-svelte';
@@ -24,13 +23,10 @@ const svelteOpts = {
   dev: isDev,
   emitCss: true,
   immutable: true,
-  preprocess: {
-    markup: preMarkup({ enabled: !isDev }),
-    style: preStyle(),
-  },
+  preprocess,
 };
 
-const makeHtmlOpts = {
+const emitHtmlOpts = {
   basePath: '',
   inlineCss: true,
   onCss: (css) =>
@@ -61,7 +57,7 @@ const loader =
 writeFile(
   join(__dirname, 'dist/manifest.json'),
   manifest,
-  catchErr,
+  handleErr,
 );
 
 export default [
@@ -79,8 +75,8 @@ export default [
         typescript: require('typescript'),
       }),
       !isDev && compiler(compilerOpts),
-      makeHtml({
-        ...makeHtmlOpts,
+      emitHtml({
+        ...emitHtmlOpts,
         content: `%CSS%${loader}%JS%`,
         file: 'dist/n.html',
         title: 'New Tab',
@@ -102,8 +98,8 @@ export default [
         typescript: require('typescript'),
       }),
       !isDev && compiler(compilerOpts),
-      makeHtml({
-        ...makeHtmlOpts,
+      emitHtml({
+        ...emitHtmlOpts,
         file: 'dist/s.html',
       }),
     ],
