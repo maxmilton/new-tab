@@ -67,13 +67,7 @@
   "browserslist": [
     "last 2 Chrome versions"
   ],
-  "FIXME__babel": {
-    "presets": [
-      "@minna-ui/jest-config/lib/babel-preset"
-    ]
-  },
   "postcss": {
-    "map": true,
     "plugins": {
       "postcss-import": {},
       "postcss-nested": {},
