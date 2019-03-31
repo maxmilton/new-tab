@@ -10,7 +10,7 @@ import { join } from 'path';
 import nodeResolve from 'rollup-plugin-node-resolve';
 import svelte from 'rollup-plugin-svelte';
 import typescript from 'rollup-plugin-typescript';
-import manifest from './manifest.config.mjs';
+import manifest from './manifest.config.js';
 
 const { resolve } = require;
 const isDev = !!process.env.ROLLUP_WATCH;

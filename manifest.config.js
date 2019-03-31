@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/camelcase, import/no-extraneous-dependencies, sort-keys */
 
-import { gitDescribe } from '@minna-ui/rollup-plugins';
+import { gitDescribe } from 'minna-tools';
 import pkg from './package.json';
 
 export default JSON.stringify({
