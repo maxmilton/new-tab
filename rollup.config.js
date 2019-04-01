@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/camelcase, global-require */
 
 import compiler from '@ampproject/rollup-plugin-closure-compiler';
-import crass from 'crass';
+import CleanCSS from 'clean-css';
 import { writeFile } from 'fs';
 import { handleErr, emitHtml } from 'minna-tools';
 import { preprocess } from 'minna-ui';
@@ -26,14 +26,35 @@ const svelteOpts = {
   preprocess,
 };
 
+/**
+ * Build CSS output postprocessing handler; CSS minifier.
+ * @param {string} css CSS code to minify.
+ * @returns {Promise<string>}
+ */
+async function onCss(css) {
+  if (isDev) return css;
+
+  const cleancss = new CleanCSS({
+    level: {
+      2: {
+        restructureRules: true,
+      },
+    },
+    returnPromise: true,
+  });
+
+  const result = await cleancss.minify(css);
+
+  result.errors.forEach((err) => console.error(err)); // eslint-disable-line no-console
+  result.warnings.forEach((err) => console.warn(err)); // eslint-disable-line no-console
+
+  return result.styles;
+}
+
 const emitHtmlOpts = {
   basePath: '',
   inlineCss: true,
-  onCss: (css) =>
-    crass
-      .parse(css)
-      .optimize({ o1: true })
-      .toString(),
+  onCss,
   scriptAttr: 'async',
   template: join(__dirname, 'src/template.html'),
 };

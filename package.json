@@ -36,7 +36,7 @@
     "autoprefixer": "9.5.0",
     "chokidar": "2.1.5",
     "codecov": "3.2.0",
-    "crass": "0.12.3",
+    "clean-css": "4.2.1",
     "eslint": "5.16.0",
     "jest": "24.5.0",
     "jest-puppeteer": "4.1.0",
