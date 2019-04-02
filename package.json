@@ -33,18 +33,14 @@
     "@types/jest-environment-puppeteer": "4.0.0",
     "@types/puppeteer": "1.12.3",
     "@wearegenki/renovate-config": "1.0.0",
-    "autoprefixer": "9.5.0",
     "chokidar": "2.1.5",
     "codecov": "3.2.0",
-    "clean-css": "4.2.1",
     "eslint": "5.16.0",
-    "jest": "24.5.0",
+    "jest": "24.6.0",
     "jest-puppeteer": "4.1.0",
-    "minna-tools": "0.22.0-next.266",
-    "minna-ui": "0.22.0-next.266",
+    "minna-tools": "0.22.0-next.274",
+    "minna-ui": "0.22.0-next.274",
     "postcss": "7.0.14",
-    "postcss-import": "12.0.1",
-    "postcss-nested": "4.1.2",
     "postcss-scss": "2.0.0",
     "prettier": "1.16.4",
     "puppeteer": "1.14.0",
@@ -62,18 +58,18 @@
     "last 2 Chrome versions"
   ],
   "postcss": {
+    "map": false,
     "syntax": "postcss-scss",
     "plugins": {
-      "postcss-import": {},
-      "postcss-nested": {},
-      "autoprefixer": {}
+      "minna-ui/postcss": {
+        "unsafe": true
+      }
     }
   },
   "eslintConfig": {
     "root": true,
     "extends": [
-      "@minna-ui/eslint-config",
-      "@minna-ui/eslint-config/lib/svelte"
+      "./node_modules/minna-tools/eslint.js"
     ],
     "env": {
       "webextensions": true
@@ -86,7 +82,7 @@
     }
   },
   "stylelint": {
-    "extends": "@minna-ui/stylelint-config",
+    "extends": "minna-tools/stylelint",
     "rules": {
       "color-no-hex": null,
       "scale-unlimited/declaration-strict-value": null,
@@ -95,11 +91,11 @@
   },
   "remarkConfig": {
     "plugins": [
-      "@minna-ui/remark-config"
+      "minna-tools/remark"
     ]
   },
   "jest": {
-    "preset": "@minna-ui/jest-config",
+    "preset": "minna-tools",
     "globalSetup": "jest-environment-puppeteer/setup",
     "globalTeardown": "jest-environment-puppeteer/teardown",
     "testEnvironment": "jest-environment-puppeteer",

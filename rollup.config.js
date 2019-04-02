@@ -1,9 +1,8 @@
 /* eslint-disable @typescript-eslint/camelcase, global-require */
 
 import compiler from '@ampproject/rollup-plugin-closure-compiler';
-import CleanCSS from 'clean-css';
 import { writeFile } from 'fs';
-import { handleErr, emitHtml } from 'minna-tools';
+import { emitHtml, handleErr } from 'minna-tools';
 import { preprocess } from 'minna-ui';
 import { join } from 'path';
 import nodeResolve from 'rollup-plugin-node-resolve';
@@ -26,37 +25,17 @@ const svelteOpts = {
   preprocess,
 };
 
-/**
- * Build CSS output postprocessing handler; CSS minifier.
- * @param {string} css CSS code to minify.
- * @returns {Promise<string>}
- */
-async function onCss(css) {
-  if (isDev) return css;
-
-  const cleancss = new CleanCSS({
+const emitHtmlOpts = {
+  inlineCss: true,
+  optimize: !isDev && {
     level: {
       2: {
         restructureRules: true,
       },
     },
-    returnPromise: true,
-  });
-
-  const result = await cleancss.minify(css);
-
-  result.errors.forEach((err) => console.error(err)); // eslint-disable-line no-console
-  result.warnings.forEach((err) => console.warn(err)); // eslint-disable-line no-console
-
-  return result.styles;
-}
-
-const emitHtmlOpts = {
-  basePath: '',
-  inlineCss: true,
-  onCss,
+  },
   scriptAttr: 'async',
-  template: join(__dirname, 'src/template.html'),
+  template: 'src/template.html',
 };
 
 const compilerOpts = {
@@ -67,7 +46,6 @@ const compilerOpts = {
     resolve('google-closure-compiler/contrib/externs/chrome_extensions.js'),
     join(__dirname, 'externs.js'),
   ],
-  strict_mode_input: false, // FIXME: Duplicate `$$props` error
 };
 
 // loader.js run through closure compiler + manual tweaks
@@ -85,6 +63,7 @@ export default [
   {
     input: 'src/app.ts',
     output: {
+      assetFileNames: '[name][extname]',
       file: 'dist/n.js',
       format: 'esm',
       sourcemap: isDev,
@@ -99,7 +78,6 @@ export default [
       emitHtml({
         ...emitHtmlOpts,
         content: `%CSS%${loader}%JS%`,
-        file: 'dist/n.html',
         title: 'New Tab',
       }),
     ],
@@ -108,6 +86,7 @@ export default [
   {
     input: 'src/settings.ts',
     output: {
+      assetFileNames: '[name][extname]',
       file: 'dist/s.js',
       format: 'esm',
       sourcemap: isDev,
@@ -119,10 +98,7 @@ export default [
         typescript: require('typescript'),
       }),
       !isDev && compiler(compilerOpts),
-      emitHtml({
-        ...emitHtmlOpts,
-        file: 'dist/s.html',
-      }),
+      emitHtml(emitHtmlOpts),
     ],
     watch,
   },
