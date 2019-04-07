@@ -26,6 +26,7 @@
 
   /**
    * Check if either title or URL match a query.
+   *
    * @this {string} Search query
    * @param {{ title: string, url: string }} item - Item to match against.
    * @returns {boolean} True is a match is found.
@@ -77,9 +78,9 @@
   }
 
   /**
-    * @param {Tab} tab - A browser tab object.
-    * @param {MouseEvent} event - A mouse event.
-    */
+   * @param {Tab} tab - A browser tab object.
+   * @param {MouseEvent} event - A mouse event.
+   */
   function handleTabClick(tab, event) {
     event.preventDefault();
 

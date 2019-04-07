@@ -31,7 +31,8 @@
 
   /**
    * Close subfolder when another opens.
-   * @param {CustomEvent} event Event dispatched when another subfolder opens.
+   *
+   * @param {CustomEvent} event - Event dispatched when another subfolder opens.
    */
   function handleOpen(event) {
     if (isOpen && event.detail === lvl) {

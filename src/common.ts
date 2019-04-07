@@ -3,6 +3,7 @@ export const DEFAULT_ORDER = ['Open Tabs', 'Bookmarks', 'History', 'Top Sites'];
 
 /**
  * Delay running a function until X ms have passed since its last call.
+ *
  * @see https://github.com/developit/decko/blob/master/src/decko.js
  */
 export function debounce(fn: Function, delay = 260): Function {
