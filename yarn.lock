@@ -5182,7 +5182,7 @@ posix-character-classes@^0.1.0:
   resolved "https://registry.yarnpkg.com/posix-character-classes/-/posix-character-classes-0.1.1.tgz#01eac0fe3b5af71a2a6c02feabb8c1fef7e00eab"
   integrity sha1-AerA/jta9xoqbAL+q7jB/vfgDqs=
 
-"postcss-advanced-variables@github:MaxMilton/postcss-advanced-variables#precompiled":
+postcss-advanced-variables@MaxMilton/postcss-advanced-variables#precompiled:
   version "3.0.0"
   resolved "https://codeload.github.com/MaxMilton/postcss-advanced-variables/tar.gz/13ca503266410fbbb4ddec5aa133fe8dd0baff8d"
   dependencies:
@@ -7317,10 +7317,10 @@ supports-color@^6.0.0, supports-color@^6.1.0:
   dependencies:
     has-flag "^3.0.0"
 
-svelte@3.0.0-beta.23:
-  version "3.0.0-beta.23"
-  resolved "https://registry.yarnpkg.com/svelte/-/svelte-3.0.0-beta.23.tgz#fa96b91638e34bbaed01aad50df4d4192e252d70"
-  integrity sha512-jn9AI6idldjcIOuFZkA/HvULv97jjrtS1FVh7bjnFx7i7IuDpMFRbn+WYmnPoW+JXvLMFnNa+BbraDfjrMARSg==
+svelte@3.0.0-beta.25:
+  version "3.0.0-beta.25"
+  resolved "https://registry.yarnpkg.com/svelte/-/svelte-3.0.0-beta.25.tgz#e2895cb28338a90a805eb5c12414955030e329c8"
+  integrity sha512-54PKgHDRlrRbcsRuX2K5IaIVPLXVfx8f/a5tcM8etOJLLLnWHT/8a1KXicA48xVmup12s6K4bwwSAswxcjKYAQ==
 
 svg-tags@^1.0.0:
   version "1.0.0"
