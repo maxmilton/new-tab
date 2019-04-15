@@ -260,17 +260,16 @@
     rollup-pluginutils "^2.3.3"
     sirv "^0.2.2"
 
-"@minna-ui/stylelint-config@0.20.0":
-  version "0.20.0"
-  resolved "https://registry.yarnpkg.com/@minna-ui/stylelint-config/-/stylelint-config-0.20.0.tgz#6b7ec5af294463910d67034e948e63962353b875"
-  integrity sha512-oF4T1NEjoY7zdu8zWpdtDA3nq019Ct2uocca875XFSv7O6zcA+OQpk2psnbyf9iiBsMJMtXqfAhtb8HecMacwA==
+"@minna-ui/stylelint-config@0.21.0":
+  version "0.21.0"
+  resolved "https://registry.yarnpkg.com/@minna-ui/stylelint-config/-/stylelint-config-0.21.0.tgz#7817e91fd0e444d5799a9c6b82b3428f0bf82b1b"
+  integrity sha512-mRgF5i1QJejG/DAW89eEOrbUdXuThvSCcjXdgwOQvc3CcJK0fxwOwnKWYYODlkOlNZEJF70FrNfhAJXhTVv/Fg==
   dependencies:
-    stylelint-a11y "^1.1.9"
-    stylelint-config-prettier "^4.0.0"
+    stylelint-a11y "^1.1.10"
+    stylelint-config-css-modules "^1.3.0"
     stylelint-config-standard "^18.2.0"
     stylelint-high-performance-animation "^1.1.1"
     stylelint-order "^2.0.0"
-    stylelint-prettier "^1.0.6"
 
 "@mrmlnc/readdir-enhanced@^2.2.1":
   version "2.2.1"
@@ -6733,15 +6732,15 @@ stylehacks@^4.0.0:
     postcss "^7.0.0"
     postcss-selector-parser "^3.0.0"
 
-stylelint-a11y@^1.1.9:
-  version "1.1.9"
-  resolved "https://registry.yarnpkg.com/stylelint-a11y/-/stylelint-a11y-1.1.9.tgz#f2897742c78bacb2fcf3ebfa920bbce9669d7bf5"
-  integrity sha512-HmdBQApoj40gqaGG/q2BAmbOXAGT8SbNYnPl94JLWm31N9XCNKwJREmtDY8q/kGNyCNmgEfm/EWivoky9xAaVA==
+stylelint-a11y@^1.1.10:
+  version "1.1.11"
+  resolved "https://registry.yarnpkg.com/stylelint-a11y/-/stylelint-a11y-1.1.11.tgz#970d708903d32633f811e16240c960f82298a0d3"
+  integrity sha512-L+qZm0GPqDfxMv/p5G8LkCSRMnQsInNE9qxaDj8LnJZ1XOtoY/0/pC0tiuHrmVqzQCk2WKVhThU3lcvSBAs1hQ==
 
-stylelint-config-prettier@^4.0.0:
-  version "4.0.0"
-  resolved "https://registry.yarnpkg.com/stylelint-config-prettier/-/stylelint-config-prettier-4.0.0.tgz#8c712977be13bd25191ab8b986b5c07a3342a5dc"
-  integrity sha512-cwh3QbBC2+3zBeMvuxFjT8XsbSdyoyELOY9BZqMuvphUKEQ+srkPWoN60FlvRwLB014TOke4Y12KvTtfKnaHhg==
+stylelint-config-css-modules@^1.3.0:
+  version "1.4.0"
+  resolved "https://registry.yarnpkg.com/stylelint-config-css-modules/-/stylelint-config-css-modules-1.4.0.tgz#15f52900104960cb40a91101886950d73f159c42"
+  integrity sha512-MIEtUL+cnaycbHhjq8V3FT7kNdp0LdYpkjLziIb8NA/Z9MblPITuBtU1Y2nJbGrjfdm1qT/AeckDX7OyuG1TSA==
 
 stylelint-config-recommended@^2.1.0:
   version "2.1.0"
@@ -6768,13 +6767,6 @@ stylelint-order@^2.0.0:
     lodash "^4.17.10"
     postcss "^7.0.2"
     postcss-sorting "^4.0.1"
-
-stylelint-prettier@^1.0.6:
-  version "1.0.6"
-  resolved "https://registry.yarnpkg.com/stylelint-prettier/-/stylelint-prettier-1.0.6.tgz#479b76336751cb617c5beb7545d05a791f945e1e"
-  integrity sha512-XKlTyJHJYiyXs9JXRMt2FQxMJoBSjz4I6+4+/R3o8/ePof19v9naC4d0zsMKUJ88by81+qHfqXBLfmAalu46cg==
-  dependencies:
-    prettier-linter-helpers "^1.0.0"
 
 stylelint@9.10.1:
   version "9.10.1"
