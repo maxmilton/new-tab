@@ -23,11 +23,11 @@
     "lint:css": "stylelint --ignore-path .gitignore '**/*.{css,html,js,md,svelte,ts}'",
     "lint:js": "eslint --ignore-path .gitignore --ext html,js,md,svelte,ts .",
     "lint:types": "tsc --noEmit || true",
-    "test": "yarn lint && JEST_CIRCUS=1 jest --notify --watch",
-    "test-ci": "JEST_CIRCUS=1 jest --coverage --runInBand --ci"
+    "test": "yarn lint && jest --notify --watch",
+    "test-ci": "jest --coverage --runInBand --ci"
   },
   "devDependencies": {
-    "@ampproject/rollup-plugin-closure-compiler": "0.8.5",
+    "@ampproject/rollup-plugin-closure-compiler": "0.9.0",
     "@types/chrome": "0.0.82",
     "@types/expect-puppeteer": "3.3.1",
     "@types/jest-environment-puppeteer": "4.0.0",
@@ -38,8 +38,8 @@
     "eslint": "5.16.0",
     "jest": "24.7.1",
     "jest-puppeteer": "4.1.1",
-    "minna-tools": "0.22.0-next.12",
-    "minna-ui": "0.22.0-next.12",
+    "minna-tools": "0.22.0-next.23",
+    "minna-ui": "0.22.0-next.23",
     "postcss": "7.0.14",
     "postcss-scss": "2.0.0",
     "prettier": "1.17.0",
@@ -50,7 +50,7 @@
     "rollup-plugin-svelte": "5.0.3",
     "rollup-plugin-typescript": "1.0.1",
     "stylelint": "10.0.0",
-    "svelte": "3.0.0-beta.25",
+    "svelte": "3.0.0-beta.26",
     "tslib": "1.9.3",
     "typescript": "3.4.3"
   },
