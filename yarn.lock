@@ -6221,10 +6221,10 @@ rollup-plugin-analyzer@3.0.0:
   resolved "https://registry.yarnpkg.com/rollup-plugin-analyzer/-/rollup-plugin-analyzer-3.0.0.tgz#284f67f213529a34cd1dd306a6f438b96c60321d"
   integrity sha512-xokEBlQEdpN3mAXtJT8plDjdQKBKyfNxT1tyGJCq+xi0da3FNJ8RyLcve0fV1IVZAfBGsv8sXwWO8yNSGR2e7w==
 
-rollup-plugin-svelte@5.0.1:
-  version "5.0.1"
-  resolved "https://registry.yarnpkg.com/rollup-plugin-svelte/-/rollup-plugin-svelte-5.0.1.tgz#d6f9345f3bb652f512407395dd178197ca28ac67"
-  integrity sha512-iwm4ANbdoEQqoCL8m70R3F2Oe/auSr0zIOBVVJWx7IMSkzFZjhd0PeqzKe3BWCllLAnBXIbqTSOHmU2mnvy0SA==
+rollup-plugin-svelte@5.0.3:
+  version "5.0.3"
+  resolved "https://registry.yarnpkg.com/rollup-plugin-svelte/-/rollup-plugin-svelte-5.0.3.tgz#1e4cce33a94b0b4b4831abc7d76eabdf333ab63d"
+  integrity sha512-3W/jbtBcsxohKQMI1Po2ZsUHRGUy3vEtgXLHvBin1+ms3wl2eomSyYBV7pwrkh6tWok9BVzdxGQgd7IqibG+Ew==
   dependencies:
     require-relative "^0.8.7"
     rollup-pluginutils "^2.3.3"
