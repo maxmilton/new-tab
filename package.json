@@ -49,7 +49,7 @@
     "rollup": "1.1.2",
     "rollup-plugin-analyzer": "3.0.0",
     "rollup-plugin-svelte": "5.0.1",
-    "sinon-chrome": "2.3.2",
+    "sinon-chrome": "3.0.1",
     "stylelint": "9.10.1",
     "svelte": "2.16.1"
   },
