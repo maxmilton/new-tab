@@ -320,10 +320,10 @@
     array-from "^2.1.1"
     lodash.get "^4.4.2"
 
-"@types/chrome@0.0.80":
-  version "0.0.80"
-  resolved "https://registry.yarnpkg.com/@types/chrome/-/chrome-0.0.80.tgz#615b4d861e80f8065a2bf7b6293da9d9a27502ed"
-  integrity sha512-I8YtD80sp/3oJnz/dEmACTsXj3fXqv0gHCq4gM7RS4q58qCqTirb0iDJwb8Zv5njJo7+EJjkjoloFefjhoNR1w==
+"@types/chrome@0.0.82":
+  version "0.0.82"
+  resolved "https://registry.yarnpkg.com/@types/chrome/-/chrome-0.0.82.tgz#baa7b8a162f715b83294375f745acb60af818e74"
+  integrity sha512-Gpbjs+bnOZ41p2ZV2l/x9XaJUGpwZJMwAv76QPb1kO7IbHuCuczyg/BdJQkkWEWLCR1T4SnA2K1yJ3vScZITiw==
   dependencies:
     "@types/filesystem" "*"
 
