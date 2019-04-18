@@ -68,4 +68,4 @@ Icon made by [Freepik](http://www.freepik.com) licensed [CC 3.0 BY](http://creat
 
 ---
 
-© 2018 [Max Milton](https://maxmilton.com)
+© 2019 [Max Milton](https://maxmilton.com)
