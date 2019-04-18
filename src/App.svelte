@@ -1,22 +1,10 @@
-<BookmarkGroup />
-<Search />
-<Menu />
-
 <script>
-  import { handleLinkClick } from './common.js';
-  import Search from './components/Search.html';
-  import BookmarkGroup from './components/BookmarkGroup.html';
-  import Menu from './components/Menu.html';
+  import { handleLinkClick } from './common';
+  import BookmarkGroup from './components/BookmarkGroup.svelte';
+  import Menu from './components/Menu.svelte';
+  import Search from './components/Search.svelte';
 
   window.addEventListener('click', handleLinkClick, true);
-
-  export default {
-    components: {
-      Search,
-      BookmarkGroup,
-      Menu,
-    },
-  };
 </script>
 
 <style type="text/postcss">
@@ -53,3 +41,7 @@
     }
   }
 </style>
+
+<BookmarkGroup/>
+<Search/>
+<Menu/>

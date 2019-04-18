@@ -1,7 +1,9 @@
-import { gitDescribe } from '@minna-ui/rollup-plugins'; // eslint-disable-line import/no-extraneous-dependencies
-import pkg from '../package.json';
+/* eslint-disable @typescript-eslint/camelcase, import/no-extraneous-dependencies, sort-keys */
 
-export default {
+import { gitDescribe } from 'minna-tools';
+import pkg from './package.json';
+
+export default JSON.stringify({
   manifest_version: 2,
 
   name: 'New Tab',
@@ -33,9 +35,9 @@ export default {
   incognito: 'not_allowed',
   content_security_policy:
     "default-src 'none';" +
-    // hash is `loader.js` embedded into the document
+    // allow `loader.ts` to be embedded in the document
     " script-src 'self' 'sha256-FtIFk1UjzWWlhfMrIdJ9n60rbnTmldIAss9HFJTJeUM=';" +
     " style-src 'unsafe-inline';" +
-    // `data:` is used in the settings page
+    // `data:` used in settings page
     ' img-src chrome://favicon data:;',
-};
+});

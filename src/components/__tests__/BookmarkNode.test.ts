@@ -1,6 +1,6 @@
-'use strict';
+/* eslint-disable no-underscore-dangle */
 
-const BookmarkNode = require('../../src/components/BookmarkNode.js');
+import BookmarkNode from '../BookmarkNode';
 
 const _node = {};
 
@@ -8,8 +8,8 @@ describe('BookmarkNode component', () => {
   it.skip('renders correctly', () => {
     const target = document.createElement('div');
     new BookmarkNode({
+      props: { _node },
       target,
-      data: { _node },
     });
     expect(target.innerHTML).toMatchSnapshot();
   });

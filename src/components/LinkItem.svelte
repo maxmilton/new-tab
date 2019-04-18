@@ -6,19 +6,13 @@
   using JS based logic to keep the component logic free.
 -->
 
-<a href="{_node.url}" title="{_node.title}">
-  <img src="chrome://favicon/{_node.url}" class="{_node.title && 'pad'}">
-  {shorten(_node.title, maxLen)}
-</a>
-
 <script>
-  import { shorten } from '../common.js';
+  /* eslint-disable no-underscore-dangle */
 
-  export default {
-    helpers: {
-      shorten,
-    },
-  };
+  import { shorten } from '../common';
+
+  export let _node;
+  export let maxLen;
 </script>
 
 <style type="text/postcss">
@@ -52,3 +46,8 @@
     }
   }
 </style>
+
+<a href="{_node.url}" title="{_node.title}">
+  <img src="chrome://favicon/{_node.url}" class="{_node.title && 'pad'}">
+  {shorten(_node.title, maxLen)}
+</a>

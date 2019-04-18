@@ -1,15 +1,17 @@
-'use strict';
+/* eslint-disable no-underscore-dangle */
 
-const BookmarkFolder = require('../../src/components/BookmarkFolder.html');
+import BookmarkFolder from '../BookmarkFolder.svelte';
 
-const _node = {};
+const _node = {
+  title: 'Test Bookmark',
+};
 
 describe('BookmarkFolder component', () => {
   it('renders correctly', () => {
     const target = document.createElement('div');
     new BookmarkFolder({
+      props: { _node },
       target,
-      data: { _node },
     });
     expect(target.innerHTML).toMatchSnapshot();
   });

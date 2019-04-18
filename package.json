@@ -18,102 +18,94 @@
     "dev": "rollup --config --watch",
     "build": "NODE_ENV=production rollup --config",
     "prebuild": "rm -rf dist && mkdir dist && cp icon* dist",
-    "lint": "yarn lint:css && yarn lint:js",
-    "lint:css": "stylelint --ignore-path .gitignore **/*.{css,html,md}",
-    "lint:js": "eslint --ignore-path .gitignore --ext html,js,md .",
-    "test": "yarn lint && JEST_CIRCUS=1 jest --notify --watch",
-    "test-ci": "JEST_CIRCUS=1 jest --coverage --runInBand --ci"
+    "lint": "yarn lint:md && yarn lint:css && yarn lint:js && yarn lint:types",
+    "lint:md": "remark --frail --quiet .",
+    "lint:css": "stylelint --ignore-path .gitignore '**/*.{css,html,js,md,svelte,ts}'",
+    "lint:js": "eslint --ignore-path .gitignore --ext html,js,md,svelte,ts .",
+    "lint:types": "tsc --noEmit || true",
+    "test": "yarn lint && jest --notify --watch",
+    "test-ci": "jest --coverage --runInBand --ci"
   },
   "devDependencies": {
-    "@ampproject/rollup-plugin-closure-compiler": "0.9.0-beta.7",
-    "@minna-ui/eslint-config": "0.20.0",
-    "@minna-ui/jest-config": "0.20.0",
-    "@minna-ui/pre-markup": "0.21.0",
-    "@minna-ui/pre-style": "0.21.0",
-    "@minna-ui/rollup-plugins": "0.21.0",
-    "@minna-ui/stylelint-config": "0.20.0",
-    "@types/chrome": "0.0.80",
+    "@ampproject/rollup-plugin-closure-compiler": "0.9.0",
+    "@types/chrome": "0.0.82",
+    "@types/expect-puppeteer": "3.3.1",
+    "@types/jest-environment-puppeteer": "4.0.0",
+    "@types/puppeteer": "1.12.3",
     "@wearegenki/renovate-config": "1.0.0",
-    "autoprefixer": "9.4.7",
-    "chokidar": "2.1.1",
-    "codecov": "3.2.0",
-    "crass": "0.12.3",
-    "eslint": "5.12.1",
-    "jest": "24.0.0",
-    "jest-puppeteer": "4.0.0",
+    "chokidar": "2.1.5",
+    "codecov": "3.3.0",
+    "eslint": "5.16.0",
+    "jest": "24.7.1",
+    "jest-puppeteer": "4.1.1",
+    "minna-tools": "0.22.1-beta.0",
+    "minna-ui": "0.22.1-beta.0",
     "postcss": "7.0.14",
-    "postcss-import": "12.0.1",
-    "postcss-nested": "4.1.1",
-    "prettier": "1.16.4",
-    "puppeteer-core": "1.12.2",
-    "rollup": "1.1.2",
-    "rollup-plugin-analyzer": "3.0.0",
-    "rollup-plugin-svelte": "5.0.1",
-    "sinon-chrome": "2.3.2",
-    "stylelint": "9.10.1",
-    "svelte": "2.16.1"
+    "postcss-scss": "2.0.0",
+    "prettier": "1.17.0",
+    "puppeteer": "1.14.0",
+    "remark-cli": "6.0.1",
+    "rollup": "1.10.0",
+    "rollup-plugin-node-resolve": "4.2.3",
+    "rollup-plugin-svelte": "5.0.3",
+    "rollup-plugin-typescript": "1.0.1",
+    "stylelint": "10.0.1",
+    "svelte": "3.0.0-beta.28",
+    "tslib": "1.9.3",
+    "typescript": "3.4.3"
   },
   "browserslist": [
     "last 2 Chrome versions"
   ],
-  "babel": {
-    "presets": [
-      "@minna-ui/jest-config/babel-preset.js"
-    ]
-  },
   "postcss": {
-    "map": true,
+    "map": false,
+    "syntax": "postcss-scss",
     "plugins": {
-      "postcss-import": {},
-      "postcss-nested": {},
-      "autoprefixer": {}
+      "minna-ui/postcss": {
+        "unsafe": true
+      }
     }
   },
   "eslintConfig": {
     "root": true,
     "extends": [
-      "@minna-ui/eslint-config"
+      "./node_modules/minna-tools/eslint.js"
     ],
     "env": {
       "webextensions": true
+    },
+    "globals": {
+      "page": true,
+      "browser": true,
+      "context": true,
+      "jestPuppeteer": true
     }
   },
   "stylelint": {
-    "extends": "@minna-ui/stylelint-config",
+    "extends": "minna-tools/stylelint",
     "rules": {
-      "selector-max-id": null,
-      "color-no-hex": null
+      "color-no-hex": null,
+      "scale-unlimited/declaration-strict-value": null,
+      "selector-max-id": null
     }
   },
-  "prettier": {
-    "arrowParens": "always",
-    "endOfLine": "lf",
-    "singleQuote": true,
-    "trailingComma": "all",
-    "overrides": [
-      {
-        "files": "*.html",
-        "options": {
-          "requirePragma": true
-        }
-      },
-      {
-        "files": "*.test.js",
-        "options": {
-          "printWidth": 100
-        }
-      }
+  "remarkConfig": {
+    "plugins": [
+      "minna-tools/remark"
     ]
   },
   "jest": {
-    "preset": "@minna-ui/jest-config",
-    "setupFiles": [
-      "<rootDir>/test/__setup__.js"
+    "preset": "minna-tools",
+    "globalSetup": "jest-environment-puppeteer/setup",
+    "globalTeardown": "jest-environment-puppeteer/teardown",
+    "testEnvironment": "jest-environment-puppeteer",
+    "setupFilesAfterEnv": [
+      "expect-puppeteer"
     ],
     "collectCoverageFrom": [
-      "src/**/*.{js,html}",
-      "!src/app.js",
-      "!src/settings.js",
+      "src/**/*.{html,js,svelte,ts}",
+      "!src/app.ts",
+      "!src/settings.ts",
       "!src/template.html"
     ]
   },
@@ -124,7 +116,7 @@
   },
   "engines": {
     "node": ">11.0.0",
-    "yarn": ">1.12.0"
+    "yarn": ">1.15.0"
   },
   "os": [
     "!win32",

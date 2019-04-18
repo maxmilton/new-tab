@@ -1,4 +1,9 @@
-/* dark theme */
+/**
+ * Dark Theme
+ */
+
+/* stylelint-disable max-line-length */
+
 :global(.d) {
   --b: #23252d; /* background colour */
   --t: #9da5b4; /* text colour */
