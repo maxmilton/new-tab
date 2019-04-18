@@ -59,12 +59,12 @@
   ],
   "postcss": {
     "map": false,
-    "syntax": "postcss-scss",
     "plugins": {
       "minna-ui/postcss": {
         "unsafe": true
       }
-    }
+    },
+    "syntax": "postcss-scss"
   },
   "eslintConfig": {
     "root": true,
@@ -103,10 +103,9 @@
       "expect-puppeteer"
     ],
     "collectCoverageFrom": [
-      "src/**/*.{html,js,svelte,ts}",
+      "src/**/*.{svelte,ts}",
       "!src/app.ts",
-      "!src/settings.ts",
-      "!src/template.html"
+      "!src/settings.ts"
     ]
   },
   "renovate": {
