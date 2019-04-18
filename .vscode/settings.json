@@ -1,15 +1,21 @@
 {
   "css.validate": false,
   "editor.formatOnSave": true,
-  "eslint.autoFixOnSave": true,
   "eslint.enable": true,
-  "eslint.validate": ["html", "javascript", "markdown"],
-  /**
-   * Better syntax highlighting for PostCSS. Only covers `*.css` files;
-   * component styles still use the CSS language (limitation in VS Code).
-   */
-  "files.associations": { "*.css": "scss" },
+  "eslint.validate": [
+    { "language": "html", "autoFix": true },
+    { "language": "javascript", "autoFix": true },
+    { "language": "markdown", "autoFix": true },
+    { "language": "typescript", "autoFix": true }
+  ],
+  "files.associations": {
+    "*.css": "scss",
+    "*.svelte": "html"
+  },
+  "files.eol": "\n",
   "javascript.implicitProjectConfig.checkJs": true,
+  "prettier.eslintIntegration": true,
+  "prettier.stylelintIntegration": true,
   "scss.validate": false,
   // recommended dictionary: https://github.com/WeAreGenki/dictionary
   "spellright.language": ["en_GB"],
@@ -22,7 +28,9 @@
     "markdown",
     "plaintext",
     "properties",
-    "scss"
+    "scss",
+    "typescript"
   ],
-  "spellright.spellContext": "body code comments strings"
+  "spellright.spellContext": "body code comments strings",
+  "stylelint.enable": true
 }

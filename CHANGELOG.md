@@ -1,4 +1,4 @@
-<!-- markdownlint-disable no-duplicate-header no-inline-html -->
+<!-- lint disable no-duplicate-headings list-item-spacing -->
 
 # Changelog
 
@@ -8,6 +8,15 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
 ## [Unreleased]
+
+### Added
+
+- Ability to remove unwanted sections.
+
+### Changed
+
+- Converted internals to use Svelte v3 beta.
+- New way of generating the extension manifest.
 
 ## [0.14.0] - 2018-12-17
 

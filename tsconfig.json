@@ -1,29 +1,18 @@
-// config for rich intelliSense in VS Code
+// https://www.typescriptlang.org/docs/handbook/tsconfig-json.html
+
 {
+  "extends": "@minna-ui/ts-config",
   "compilerOptions": {
-    "target": "esnext",
-    "module": "esnext",
-    "moduleResolution": "node",
-    "allowSyntheticDefaultImports": true,
-    "esModuleInterop": true,
-    "resolveJsonModule": true,
-    "allowJs": true,
-    "checkJs": true,
-    "pretty": true,
-
-    "strict": true,
-    "noUnusedLocals": true,
-    "noUnusedParameters": true,
-    "noImplicitReturns": true,
-    "noFallthroughCasesInSwitch": true,
-    "strictNullChecks": true,
-    "strictPropertyInitialization": true,
-
-    "baseUrl": "."
+    "baseUrl": ".",
+    "importHelpers": true,
+    "outDir": "dist"
   },
   "exclude": [
+    "**/.*rc.js",
+    "**/*.config.js",
     "dist",
-    "node_modules"
+    "node_modules",
+    "test/coverage"
   ],
   "typeAcquisition": {
     "enable": true

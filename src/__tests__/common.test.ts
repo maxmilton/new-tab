@@ -1,6 +1,8 @@
-'use strict';
+/** @jest-environment node */
 
-const common = require('../src/common.js');
+// TODO: Actually implement unit tests
+
+import * as common from '../common';
 
 describe('Helper debounce function', () => {
   it('function exists', () => {

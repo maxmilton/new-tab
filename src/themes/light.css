@@ -1,4 +1,9 @@
-/* light theme (default) */
+/**
+ * Light Theme (default)
+ */
+
+/* stylelint-disable max-line-length */
+
 :global(:root) {
   --s: 0 2px 4px rgba(0, 0, 17, 0.15); /* shadow */
   --b: #fafafa; /* background colour */
