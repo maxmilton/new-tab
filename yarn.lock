@@ -542,10 +542,10 @@
   dependencies:
     "@babel/types" "^7.3.0"
 
-"@types/chrome@0.0.82":
-  version "0.0.82"
-  resolved "https://registry.yarnpkg.com/@types/chrome/-/chrome-0.0.82.tgz#baa7b8a162f715b83294375f745acb60af818e74"
-  integrity sha512-Gpbjs+bnOZ41p2ZV2l/x9XaJUGpwZJMwAv76QPb1kO7IbHuCuczyg/BdJQkkWEWLCR1T4SnA2K1yJ3vScZITiw==
+"@types/chrome@0.0.83":
+  version "0.0.83"
+  resolved "https://registry.yarnpkg.com/@types/chrome/-/chrome-0.0.83.tgz#f71cb2aaec0b83cdb039243e7e5afec27bbabe1c"
+  integrity sha512-noEu2ehY4CjOQnPr30NgBVuakUWs04+LNHNBz6+LUyAK0LzpP41O/5vTVBq7vfXyMsuTePEvL9k1nXkx3anirA==
   dependencies:
     "@types/filesystem" "*"
 
@@ -617,7 +617,7 @@
   resolved "https://registry.yarnpkg.com/@types/minimatch/-/minimatch-3.0.3.tgz#3dca0e3f33b200fc7d1139c0cd96c1268cadfd9d"
   integrity sha512-tHq6qdbT9U1IRSGf14CL0pUlULksvY9OZ+5eEgl1N7t+OA3tGvNpxJCzuKQlsNgCVwbAs670L1vcVQi8j9HjnA==
 
-"@types/node@*", "@types/node@^11.13.4":
+"@types/node@*", "@types/node@^11.13.4", "@types/node@^11.13.5":
   version "11.13.5"
   resolved "https://registry.yarnpkg.com/@types/node/-/node-11.13.5.tgz#266564afa8a6a09dc778dfacc703ed3f09c80516"
   integrity sha512-/OMMBnjVtDuwX1tg2pkYVSqRIDSmNTnvVvmvP/2xiMAAWf4a5+JozrApCrO4WCAILmXVxfNoQ3E+0HJbNpFVGg==
@@ -5126,6 +5126,7 @@ posix-character-classes@^0.1.0:
 
 postcss-advanced-variables@MaxMilton/postcss-advanced-variables#precompiled:
   version "3.0.0"
+  uid "13ca503266410fbbb4ddec5aa133fe8dd0baff8d"
   resolved "https://codeload.github.com/MaxMilton/postcss-advanced-variables/tar.gz/13ca503266410fbbb4ddec5aa133fe8dd0baff8d"
   dependencies:
     "@csstools/sass-import-resolve" "^1.0.0"
@@ -6675,13 +6676,13 @@ rollup-pluginutils@^2.3.3, rollup-pluginutils@^2.5.0, rollup-pluginutils@^2.6.0:
     estree-walker "^0.6.0"
     micromatch "^3.1.10"
 
-rollup@1.10.0:
-  version "1.10.0"
-  resolved "https://registry.yarnpkg.com/rollup/-/rollup-1.10.0.tgz#91d594aa4386c51ca0883ad4ef2050b469d3e8aa"
-  integrity sha512-U9t/JaKtO0+X0pSmLVKMrAZEixrbVzITf193TiEhfoVKCnd7pDimIFo94IxUCgbn6+v5VmduHkubx2VV1s0Ftw==
+rollup@1.10.1:
+  version "1.10.1"
+  resolved "https://registry.yarnpkg.com/rollup/-/rollup-1.10.1.tgz#aeb763bbe98f707dc6496708db88372fa66687e7"
+  integrity sha512-pW353tmBE7QP622ITkGxtqF0d5gSRCVPD9xqM+fcPjudeZfoXMFW2sCzsTe2TU/zU1xamIjiS9xuFCPVT9fESw==
   dependencies:
     "@types/estree" "0.0.39"
-    "@types/node" "^11.13.4"
+    "@types/node" "^11.13.5"
     acorn "^6.1.1"
 
 rsvp@^4.8.4:
@@ -7559,10 +7560,10 @@ typedarray@^0.0.6:
   resolved "https://registry.yarnpkg.com/typedarray/-/typedarray-0.0.6.tgz#867ac74e3864187b1d3d47d996a78ec5c8830777"
   integrity sha1-hnrHTjhkGHsdPUfZlqeOxciDB3c=
 
-typescript@3.4.3:
-  version "3.4.3"
-  resolved "https://registry.yarnpkg.com/typescript/-/typescript-3.4.3.tgz#0eb320e4ace9b10eadf5bc6103286b0f8b7c224f"
-  integrity sha512-FFgHdPt4T/duxx6Ndf7hwgMZZjZpB+U0nMNGVCYPq0rEzWKjEDobm4J6yb3CS7naZ0yURFqdw9Gwc7UOh/P9oQ==
+typescript@3.4.4:
+  version "3.4.4"
+  resolved "https://registry.yarnpkg.com/typescript/-/typescript-3.4.4.tgz#aac4a08abecab8091a75f10842ffa0631818f785"
+  integrity sha512-xt5RsIRCEaf6+j9AyOBgvVuAec0i92rgCaS3S+UVf5Z/vF2Hvtsw08wtUTJqp4djwznoAgjSxeCcU4r+CcDBJA==
 
 uglify-js@^3.1.4:
   version "3.5.4"
