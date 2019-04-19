@@ -24,7 +24,9 @@
     "lint:js": "eslint --ignore-path .gitignore --ext html,js,md,svelte,ts .",
     "lint:types": "tsc --noEmit || true",
     "test": "yarn lint && jest --notify --watch",
-    "test-ci": "jest --coverage --runInBand --ci"
+    "test:e2e": "jest --config test/e2e/jest.config.js",
+    "test-ci": "jest --runInBand --ci --coverage",
+    "posttest-ci": "jest --runInBand --ci --config test/e2e/jest.config.js"
   },
   "devDependencies": {
     "@ampproject/rollup-plugin-closure-compiler": "0.9.0",
