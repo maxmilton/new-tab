@@ -98,11 +98,8 @@
   },
   "jest": {
     "preset": "minna-tools",
-    "globalSetup": "jest-environment-puppeteer/setup",
-    "globalTeardown": "jest-environment-puppeteer/teardown",
-    "testEnvironment": "jest-environment-puppeteer",
-    "setupFilesAfterEnv": [
-      "expect-puppeteer"
+    "setupFiles": [
+      "./test/__setup__.js"
     ],
     "collectCoverageFrom": [
       "src/**/*.{svelte,ts}",
