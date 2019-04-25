@@ -53,11 +53,7 @@ const loader =
   '<script>chrome.storage.local.get(null,a=>{a.t&&(document.body.className=a.t)});</script>';
 
 // extension manifest
-writeFile(
-  join(__dirname, 'dist/manifest.json'),
-  manifest,
-  handleErr,
-);
+writeFile(join(__dirname, 'dist/manifest.json'), manifest, handleErr);
 
 export default [
   {
@@ -77,7 +73,7 @@ export default [
       !isDev && compiler(compilerOpts),
       emitHtml({
         ...emitHtmlOpts,
-        content: `%CSS%${loader}%JS%`,
+        content: `%CSS%${loader}%JS%<body>`,
         title: 'New Tab',
       }),
     ],

@@ -17,20 +17,5 @@
   "prettier.eslintIntegration": true,
   "prettier.stylelintIntegration": true,
   "scss.validate": false,
-  // recommended dictionary: https://github.com/WeAreGenki/dictionary
-  "spellright.language": ["en_GB"],
-  "spellright.documentTypes": [
-    "css",
-    "html",
-    "javascript",
-    "json",
-    "jsonc",
-    "markdown",
-    "plaintext",
-    "properties",
-    "scss",
-    "typescript"
-  ],
-  "spellright.spellContext": "body code comments strings",
   "stylelint.enable": true
 }

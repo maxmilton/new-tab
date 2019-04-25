@@ -1,10 +1,8 @@
 {
   "recommendations": [
-    "ban.spellright",
     "dbaeumer.vscode-eslint",
     "drewbourne.vscode-remark-lint",
     "esbenp.prettier-vscode",
-    "shinnn.stylelint",
-    "timonwong.shellcheck"
+    "shinnn.stylelint"
   ]
 }
