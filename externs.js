@@ -35,7 +35,3 @@ var visibleNodes;
 
 // settings app props
 var pageTheme;
-
-// TODO: Remove once supported in Closure Compiler's native externs
-/** @type {Function} */
-var OffscreenCanvas;
