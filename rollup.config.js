@@ -47,6 +47,9 @@ const compilerOpts = {
     resolve('google-closure-compiler/contrib/externs/chrome_extensions.js'),
     join(__dirname, 'externs.js'),
   ],
+  language_in: 'ECMASCRIPT_NEXT',
+  language_out: 'ECMASCRIPT_2015',
+  warning_level: 'DEFAULT',
 };
 
 // loader.js run through closure compiler + manual tweaks
