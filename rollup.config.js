@@ -52,7 +52,7 @@ const compilerOpts = {
   warning_level: 'DEFAULT',
 };
 
-// loader.js run through closure compiler + manual tweaks
+// theme loader
 const loader =
   '<script>chrome.storage.local.get(null,a=>{a.t&&(document.body.className=a.t)});</script>';
 
