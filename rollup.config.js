@@ -48,7 +48,7 @@ const compilerOpts = {
     join(__dirname, 'externs.js'),
   ],
   language_in: 'ECMASCRIPT_NEXT',
-  language_out: 'ECMASCRIPT_2015',
+  language_out: 'ECMASCRIPT_2017',
   warning_level: 'DEFAULT',
 };
 
