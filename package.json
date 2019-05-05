@@ -38,7 +38,7 @@
     "chokidar": "3.0.0",
     "codecov": "3.3.0",
     "eslint": "5.16.0",
-    "jest": "24.7.1",
+    "jest": "24.8.0",
     "jest-puppeteer": "4.1.1",
     "minna-tools": "0.22.1-beta.1",
     "minna-ui": "0.22.1-beta.1",
