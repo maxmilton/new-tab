@@ -203,16 +203,6 @@
     rimraf "^2.5.4"
     strip-ansi "^5.0.0"
 
-"@jest/environment@^24.7.1":
-  version "24.7.1"
-  resolved "https://registry.yarnpkg.com/@jest/environment/-/environment-24.7.1.tgz#9b9196bc737561f67ac07817d4c5ece772e33135"
-  integrity sha512-wmcTTYc4/KqA+U5h1zQd5FXXynfa7VGP2NfF+c6QeGJ7c+2nStgh65RQWNX62SC716dTtqheTRrZl0j+54oGHw==
-  dependencies:
-    "@jest/fake-timers" "^24.7.1"
-    "@jest/transform" "^24.7.1"
-    "@jest/types" "^24.7.0"
-    jest-mock "^24.7.0"
-
 "@jest/environment@^24.8.0":
   version "24.8.0"
   resolved "https://registry.yarnpkg.com/@jest/environment/-/environment-24.8.0.tgz#0342261383c776bdd652168f68065ef144af0eac"
@@ -222,15 +212,6 @@
     "@jest/transform" "^24.8.0"
     "@jest/types" "^24.8.0"
     jest-mock "^24.8.0"
-
-"@jest/fake-timers@^24.7.1":
-  version "24.7.1"
-  resolved "https://registry.yarnpkg.com/@jest/fake-timers/-/fake-timers-24.7.1.tgz#56e5d09bdec09ee81050eaff2794b26c71d19db2"
-  integrity sha512-4vSQJDKfR2jScOe12L9282uiwuwQv9Lk7mgrCSZHA9evB9efB/qx8i0KJxsAKtp8fgJYBJdYY7ZU6u3F4/pyjA==
-  dependencies:
-    "@jest/types" "^24.7.0"
-    jest-message-util "^24.7.1"
-    jest-mock "^24.7.0"
 
 "@jest/fake-timers@^24.8.0":
   version "24.8.0"
@@ -277,15 +258,6 @@
     graceful-fs "^4.1.15"
     source-map "^0.6.0"
 
-"@jest/test-result@^24.7.1":
-  version "24.7.1"
-  resolved "https://registry.yarnpkg.com/@jest/test-result/-/test-result-24.7.1.tgz#19eacdb29a114300aed24db651e5d975f08b6bbe"
-  integrity sha512-3U7wITxstdEc2HMfBX7Yx3JZgiNBubwDqQMh+BXmZXHa3G13YWF3p6cK+5g0hGkN3iufg/vGPl3hLxQXD74Npg==
-  dependencies:
-    "@jest/console" "^24.7.1"
-    "@jest/types" "^24.7.0"
-    "@types/istanbul-lib-coverage" "^2.0.0"
-
 "@jest/test-result@^24.8.0":
   version "24.8.0"
   resolved "https://registry.yarnpkg.com/@jest/test-result/-/test-result-24.8.0.tgz#7675d0aaf9d2484caa65e048d9b467d160f8e9d3"
@@ -304,27 +276,6 @@
     jest-haste-map "^24.8.0"
     jest-runner "^24.8.0"
     jest-runtime "^24.8.0"
-
-"@jest/transform@^24.7.1":
-  version "24.7.1"
-  resolved "https://registry.yarnpkg.com/@jest/transform/-/transform-24.7.1.tgz#872318f125bcfab2de11f53b465ab1aa780789c2"
-  integrity sha512-EsOUqP9ULuJ66IkZQhI5LufCHlTbi7hrcllRMUEV/tOgqBVQi93+9qEvkX0n8mYpVXQ8VjwmICeRgg58mrtIEw==
-  dependencies:
-    "@babel/core" "^7.1.0"
-    "@jest/types" "^24.7.0"
-    babel-plugin-istanbul "^5.1.0"
-    chalk "^2.0.1"
-    convert-source-map "^1.4.0"
-    fast-json-stable-stringify "^2.0.0"
-    graceful-fs "^4.1.15"
-    jest-haste-map "^24.7.1"
-    jest-regex-util "^24.3.0"
-    jest-util "^24.7.1"
-    micromatch "^3.1.10"
-    realpath-native "^1.1.0"
-    slash "^2.0.0"
-    source-map "^0.6.1"
-    write-file-atomic "2.4.1"
 
 "@jest/transform@^24.8.0":
   version "24.8.0"
@@ -346,14 +297,6 @@
     slash "^2.0.0"
     source-map "^0.6.1"
     write-file-atomic "2.4.1"
-
-"@jest/types@^24.7.0":
-  version "24.7.0"
-  resolved "https://registry.yarnpkg.com/@jest/types/-/types-24.7.0.tgz#c4ec8d1828cdf23234d9b4ee31f5482a3f04f48b"
-  integrity sha512-ipJUa2rFWiKoBqMKP63Myb6h9+iT3FHRTF2M8OR6irxWzItisa8i4dcSg14IbvmXUnBlHBlUQPYUHWyX3UPpYA==
-  dependencies:
-    "@types/istanbul-lib-coverage" "^2.0.0"
-    "@types/yargs" "^12.0.9"
 
 "@jest/types@^24.8.0":
   version "24.8.0"
@@ -384,31 +327,31 @@
   resolved "https://registry.yarnpkg.com/@minna-ui/css/-/css-0.22.1-beta.1.tgz#c61b5fa414cd42fba1957911b6682384307c2ece"
   integrity sha512-Y92+3Xn5+l8s0pXVSZjaUO0U2w+JWmsMJoleYGz1o9+bZUUoVr6K+fYk00D+EBq3wIPom/BBalnoAtA6OUDVoA==
 
-"@minna-ui/eslint-config@^0.22.1-beta.1":
-  version "0.22.1-beta.1"
-  resolved "https://registry.yarnpkg.com/@minna-ui/eslint-config/-/eslint-config-0.22.1-beta.1.tgz#c3eded6f2e2573941b67ffb98d42fa7c5baeef0a"
-  integrity sha512-RkjOPqKoF7jDy6w7bJRD0qs+DLe0veAbWg9lZdKB3u9GEAxSPHv87WCWWnE7yZHjUr0xtdk2upvoGLvy2zlUHw==
+"@minna-ui/eslint-config@^0.22.1-beta.2":
+  version "0.22.1-beta.2"
+  resolved "https://registry.yarnpkg.com/@minna-ui/eslint-config/-/eslint-config-0.22.1-beta.2.tgz#c036d282fcb59a4c6a017149a3da41b2f154cb01"
+  integrity sha512-oYFhbqYZxIUCEZd3754F7sLzgWmWB9+0Oz26eLvvCAGJxhxuTltXNnx+fB8juA3PnsxTWc7n7ycXhHlCsx8KwQ==
   dependencies:
     "@typescript-eslint/eslint-plugin" "^1.7.0"
     "@typescript-eslint/parser" "^1.7.0"
     eslint-config-airbnb-base "^13.1.0"
     eslint-plugin-html "^5.0.3"
     eslint-plugin-import "^2.17.2"
-    eslint-plugin-jest "^22.4.1"
+    eslint-plugin-jest "^22.5.1"
     eslint-plugin-jsdoc "^4.8.3"
     eslint-plugin-markdown "^1.0.0"
     eslint-plugin-security "^1.4.0"
-    eslint-plugin-svelte3 "^1.0.0"
+    eslint-plugin-svelte3 "^1.1.0"
 
-"@minna-ui/jest-config@^0.22.1-beta.1":
-  version "0.22.1-beta.1"
-  resolved "https://registry.yarnpkg.com/@minna-ui/jest-config/-/jest-config-0.22.1-beta.1.tgz#76ceddca362820465f0c84eb5f07902aaf8e739e"
-  integrity sha512-Xo77G5YyEb07hC8tLr5vIN+xZyj3hRF6JTaJQR8YJ3AtYrQDwP5IetkaDj7KFptz+KSPR0m9evXdNFaPbgDaCQ==
+"@minna-ui/jest-config@^0.22.1-beta.2":
+  version "0.22.1-beta.2"
+  resolved "https://registry.yarnpkg.com/@minna-ui/jest-config/-/jest-config-0.22.1-beta.2.tgz#7f67d1cc3780b5e39a66ee6a49b73c209294488c"
+  integrity sha512-R5juj2b15cEysr13wh94rPF9e9ZYZPIy8auOpOa4YFnJt8E6yVX1e/f/QilApcDk/0qA2jrWvf3v+BROmCQHWw==
   dependencies:
-    "@types/jest" "^24.0.11"
-    "@types/node" "^11.13.6"
+    "@types/jest" "^24.0.12"
+    "@types/node" "^12.0.0"
     identity-obj-proxy "^3.0.0"
-    jest-circus "^24.7.1"
+    jest-circus "^24.8.0"
     sucrase "^3.0.0"
 
 "@minna-ui/navbar@^0.22.1-beta.1":
@@ -440,13 +383,10 @@
     postcss-load-config "^2.0.0"
     postcss-scss "^2.0.0"
 
-"@minna-ui/prettier-config@^0.22.1-beta.1":
-  version "0.22.1-beta.1"
-  resolved "https://registry.yarnpkg.com/@minna-ui/prettier-config/-/prettier-config-0.22.1-beta.1.tgz#11823b2f2c1cbd77ebe790c02c50527e09f51409"
-  integrity sha512-anhMRMA2nwbal924n5SIr3TCsGiiOAIHoKKcMGN18bF48796M2CeKFcgNSlp4MPYiYHTRSnAgh9pemtiA5hkrw==
-  dependencies:
-    "@types/prettier" "^1.16.3"
-    deepmerge "^3.1.0"
+"@minna-ui/prettier-config@^0.22.1-beta.2":
+  version "0.22.1-beta.2"
+  resolved "https://registry.yarnpkg.com/@minna-ui/prettier-config/-/prettier-config-0.22.1-beta.2.tgz#c97aab1df0c398c2700d4f96e27472a6ee62a4e4"
+  integrity sha512-Eujp6J9RLihmB59byf4VJ2QQu7uKkGble8po2x7U2msJKkB81Uu8xG1w2A9oKZAXjDArw9YT8zDQWaQTVdhErA==
 
 "@minna-ui/remark-config@^0.22.1-beta.0":
   version "0.22.1-beta.0"
@@ -458,15 +398,15 @@
     remark-preset-lint-markdown-style-guide "^2.1.2"
     remark-preset-lint-recommended "^3.0.2"
 
-"@minna-ui/rollup-plugin-dev-server@^0.22.1-beta.0":
-  version "0.22.1-beta.0"
-  resolved "https://registry.yarnpkg.com/@minna-ui/rollup-plugin-dev-server/-/rollup-plugin-dev-server-0.22.1-beta.0.tgz#69c2087300bedd7d553f95f0a6a15fedee0a2425"
-  integrity sha512-q/nyUkLFYfPSIa9zoEQpm00Yb1Q5qKcJZhNfvnp2tFpmrAU5TnHmzjICXi60vM/wdpqYf3YKkUffhb64zLNWKA==
+"@minna-ui/rollup-plugin-dev-server@^0.22.1-beta.2":
+  version "0.22.1-beta.2"
+  resolved "https://registry.yarnpkg.com/@minna-ui/rollup-plugin-dev-server/-/rollup-plugin-dev-server-0.22.1-beta.2.tgz#d156188168d45abc46740cceeda4901364b3bd35"
+  integrity sha512-T8jooNYKGGS+YjusR5cxuDHNgewlqpoVkcWnoLuHoEIAkX0JXRw4d4EmEvBebv6hvAo5a/tk5uW7KBNC6cbhjQ==
   dependencies:
     "@minna-ui/utils" "^0.22.1-beta.0"
     "@wearegenki/node-utils" "^0.2.0"
     deepmerge "^3.1.0"
-    sirv "^0.3.1"
+    sirv "^0.4.0"
 
 "@minna-ui/rollup-plugin-emit-css@^0.22.1-beta.0":
   version "0.22.1-beta.0"
@@ -508,15 +448,15 @@
   resolved "https://registry.yarnpkg.com/@minna-ui/select/-/select-0.22.1-beta.1.tgz#57de529ba50349f54d6ff9f1ddef691bb5108ff5"
   integrity sha512-vRT8EC5sdr5MGIuG4oPFmmsrccODmhVSzsk+y5sMl2L/VYSTlchmACgsj+4QJnl4DJeYY43PnP8keveJS/2Zqg==
 
-"@minna-ui/stylelint-config@^0.22.1-beta.1":
-  version "0.22.1-beta.1"
-  resolved "https://registry.yarnpkg.com/@minna-ui/stylelint-config/-/stylelint-config-0.22.1-beta.1.tgz#9016cf9fcbd1867e6be639eae9edad8206a0ff03"
-  integrity sha512-Xc31IpBDqkWI/2XtOz0NkcZkJfHzAI1mRiG6TEIRgTqkDtYUo2JeV6DFNTZ9s8UpKAXcuRGGfx5aRiI/93rf2w==
+"@minna-ui/stylelint-config@^0.22.1-beta.2":
+  version "0.22.1-beta.2"
+  resolved "https://registry.yarnpkg.com/@minna-ui/stylelint-config/-/stylelint-config-0.22.1-beta.2.tgz#73832d76c1f58dc0708a1854b41b1df9a42bfb67"
+  integrity sha512-LV6xHtE2KUhmW9K9KQEtCXaZ6c0cL3q34CuMfBH2nJvsbq3DKyL6ZzAt21OFo6zK79JxR86p7yq8ATRSFHY/vA==
   dependencies:
-    stylelint-a11y "^1.1.11"
+    stylelint-a11y "^1.2.0"
     stylelint-config-css-modules "^1.4.0"
     stylelint-config-standard "^18.3.0"
-    stylelint-declaration-strict-value "^1.1.2"
+    stylelint-declaration-strict-value "^1.1.3"
     stylelint-high-performance-animation "^1.2.0"
     stylelint-order "^3.0.0"
 
@@ -684,10 +624,17 @@
   dependencies:
     "@types/puppeteer" "*"
 
-"@types/jest@*", "@types/jest@^24.0.11":
+"@types/jest@*":
   version "24.0.11"
   resolved "https://registry.yarnpkg.com/@types/jest/-/jest-24.0.11.tgz#1f099bea332c228ea6505a88159bfa86a5858340"
   integrity sha512-2kLuPC5FDnWIDvaJBzsGTBQaBbnDweznicvK7UGYzlIJP4RJR2a4A/ByLUXEyEgag6jz8eHdlWExGDtH3EYUXQ==
+  dependencies:
+    "@types/jest-diff" "*"
+
+"@types/jest@^24.0.12":
+  version "24.0.12"
+  resolved "https://registry.yarnpkg.com/@types/jest/-/jest-24.0.12.tgz#0553dd0a5ac744e7dc4e8700da6d3baedbde3e8f"
+  integrity sha512-60sjqMhat7i7XntZckcSGV8iREJyXXI6yFHZkSZvCPUeOnEJ/VP1rU/WpEWQ56mvoh8NhC+sfKAuJRTyGtCOow==
   dependencies:
     "@types/jest-diff" "*"
 
@@ -701,20 +648,15 @@
   resolved "https://registry.yarnpkg.com/@types/node/-/node-11.13.5.tgz#266564afa8a6a09dc778dfacc703ed3f09c80516"
   integrity sha512-/OMMBnjVtDuwX1tg2pkYVSqRIDSmNTnvVvmvP/2xiMAAWf4a5+JozrApCrO4WCAILmXVxfNoQ3E+0HJbNpFVGg==
 
-"@types/node@^11.13.6":
-  version "11.13.6"
-  resolved "https://registry.yarnpkg.com/@types/node/-/node-11.13.6.tgz#37ec75690830acb0d74ce3c6c43caab787081e85"
-  integrity sha512-Xoo/EBzEe8HxTSwaZNLZjaW6M6tA/+GmD3/DZ6uo8qSaolE/9Oarko0oV1fVfrLqOz0tx0nXJB4rdD5c+vixLw==
-
 "@types/node@^11.13.9":
   version "11.13.9"
   resolved "https://registry.yarnpkg.com/@types/node/-/node-11.13.9.tgz#f80697caca7f7fb2526527a5c5a2743487f05ccc"
   integrity sha512-NJ4yuEVw5podZbINp3tEqUIImMSAEHaCXRiWCf3KC32l6hIKf0iPJEh2uZdT0fELfRYk310yLmMXqy2leZQUbg==
 
-"@types/prettier@^1.16.3":
-  version "1.16.3"
-  resolved "https://registry.yarnpkg.com/@types/prettier/-/prettier-1.16.3.tgz#141bdf4dcbaac06fd2b3f05e233ff23b66866f9f"
-  integrity sha512-5Ksgx9H/Yjz6oamDbmDZstWlJGPTao7shNfambjf8o7OkHxDwAi0AJLQcFwS9pDKI4gQPdiKZXze3nT1eCOViQ==
+"@types/node@^12.0.0":
+  version "12.0.0"
+  resolved "https://registry.yarnpkg.com/@types/node/-/node-12.0.0.tgz#d11813b9c0ff8aaca29f04cbc12817f4c7d656e5"
+  integrity sha512-Jrb/x3HT4PTJp6a4avhmJCDEVrPdqLfl3e8GGMbpkGGdwAV5UGlIs4vVEfsHHfylZVOKZWpOqmqFH8CbfOZ6kg==
 
 "@types/puppeteer@*":
   version "1.12.3"
@@ -2188,10 +2130,10 @@ eslint-plugin-import@^2.17.2:
     read-pkg-up "^2.0.0"
     resolve "^1.10.0"
 
-eslint-plugin-jest@^22.4.1:
-  version "22.4.1"
-  resolved "https://registry.yarnpkg.com/eslint-plugin-jest/-/eslint-plugin-jest-22.4.1.tgz#a5fd6f7a2a41388d16f527073b778013c5189a9c"
-  integrity sha512-gcLfn6P2PrFAVx3AobaOzlIEevpAEf9chTpFZz7bYfc7pz8XRv7vuKTIE4hxPKZSha6XWKKplDQ0x9Pq8xX2mg==
+eslint-plugin-jest@^22.5.1:
+  version "22.5.1"
+  resolved "https://registry.yarnpkg.com/eslint-plugin-jest/-/eslint-plugin-jest-22.5.1.tgz#a31dfe9f9513c6af7c17ece4c65535a1370f060b"
+  integrity sha512-c3WjZR/HBoi4GedJRwo2OGHa8Pzo1EbSVwQ2HFzJ+4t2OoYM7Alx646EH/aaxZ+9eGcPiq0FT0UGkRuFFx2FHg==
 
 eslint-plugin-jsdoc@^4.8.3:
   version "4.8.3"
@@ -2218,10 +2160,10 @@ eslint-plugin-security@^1.4.0:
   dependencies:
     safe-regex "^1.1.0"
 
-eslint-plugin-svelte3@^1.0.0:
-  version "1.0.0"
-  resolved "https://registry.yarnpkg.com/eslint-plugin-svelte3/-/eslint-plugin-svelte3-1.0.0.tgz#70b729e6152056df7c0d415ea6eacb7929c719b2"
-  integrity sha512-lsKUKPrzsjB4JAwmGhfg/Xssc/+L4KU8oL5WNZ0q/D3DkYkIVE4XpT/j8TY6oEFLd31Sznm7itw8Q7RsK6g0cA==
+eslint-plugin-svelte3@^1.1.0:
+  version "1.1.0"
+  resolved "https://registry.yarnpkg.com/eslint-plugin-svelte3/-/eslint-plugin-svelte3-1.1.0.tgz#8ea6e0b2598be04e4cfcdb26b4601c49114e2cf4"
+  integrity sha512-KBZEQPXZrWGrR8uq4frTKJSXdAIWT0pOyHHoo14XcpP+O1g2QdeuewStPGNNcgXgiEqltWrJID4et+N69wuL9g==
 
 eslint-restricted-globals@^0.1.1:
   version "0.1.1"
@@ -2390,18 +2332,6 @@ expect-puppeteer@^4.1.1:
   version "4.1.1"
   resolved "https://registry.yarnpkg.com/expect-puppeteer/-/expect-puppeteer-4.1.1.tgz#cda2ab7b6fa27ac24eba273bbb0296a0de538e6d"
   integrity sha512-xNpu6uYJL9Qrrp4Z31MOpDWK68zAi+2qg5aMQlyOTVZNy7cAgBZiPvKCN0C1JmP3jgPZfcxhetVjZLaw/KcJOQ==
-
-expect@^24.7.1:
-  version "24.7.1"
-  resolved "https://registry.yarnpkg.com/expect/-/expect-24.7.1.tgz#d91defbab4e627470a152feaf35b3c31aa1c7c14"
-  integrity sha512-mGfvMTPduksV3xoI0xur56pQsg2vJjNf5+a+bXOjqCkiCBbmCayrBbHS/75y9K430cfqyocPr2ZjiNiRx4SRKw==
-  dependencies:
-    "@jest/types" "^24.7.0"
-    ansi-styles "^3.2.0"
-    jest-get-type "^24.3.0"
-    jest-matcher-utils "^24.7.0"
-    jest-message-util "^24.7.1"
-    jest-regex-util "^24.3.0"
 
 expect@^24.8.0:
   version "24.8.0"
@@ -3630,25 +3560,25 @@ jest-changed-files@^24.8.0:
     execa "^1.0.0"
     throat "^4.0.0"
 
-jest-circus@^24.7.1:
-  version "24.7.1"
-  resolved "https://registry.yarnpkg.com/jest-circus/-/jest-circus-24.7.1.tgz#f8dc4db5217eb010d71ad2f5b6e6f357590ccd01"
-  integrity sha512-zDNSS+7qQN0nSbR77qcOb+tOUWLcvZGzvXE1PjoV6xeHV5Vz7DPK9JkBIQF/n5Nz9yZbApDxq5NqGqmVCe0nnQ==
+jest-circus@^24.8.0:
+  version "24.8.0"
+  resolved "https://registry.yarnpkg.com/jest-circus/-/jest-circus-24.8.0.tgz#24ef638ac178fdf614a0d464e708d2b6e6900979"
+  integrity sha512-2QASG3QuDdk0SMP2O73D8u3/lc/A/E2G7q23v5WhbUR+hCGzWZXwRMKif18f11dSLfL1wcrMbwE4IorvV0DRVw==
   dependencies:
     "@babel/traverse" "^7.1.0"
-    "@jest/environment" "^24.7.1"
-    "@jest/test-result" "^24.7.1"
-    "@jest/types" "^24.7.0"
+    "@jest/environment" "^24.8.0"
+    "@jest/test-result" "^24.8.0"
+    "@jest/types" "^24.8.0"
     chalk "^2.0.1"
     co "^4.6.0"
-    expect "^24.7.1"
+    expect "^24.8.0"
     is-generator-fn "^2.0.0"
-    jest-each "^24.7.1"
-    jest-matcher-utils "^24.7.0"
-    jest-message-util "^24.7.1"
-    jest-snapshot "^24.7.1"
-    jest-util "^24.7.1"
-    pretty-format "^24.7.0"
+    jest-each "^24.8.0"
+    jest-matcher-utils "^24.8.0"
+    jest-message-util "^24.8.0"
+    jest-snapshot "^24.8.0"
+    jest-util "^24.8.0"
+    pretty-format "^24.8.0"
     stack-utils "^1.0.1"
     throat "^4.0.0"
 
@@ -3707,16 +3637,6 @@ jest-dev-server@^4.1.1:
     tree-kill "^1.2.1"
     wait-on "^3.2.0"
 
-jest-diff@^24.7.0:
-  version "24.7.0"
-  resolved "https://registry.yarnpkg.com/jest-diff/-/jest-diff-24.7.0.tgz#5d862899be46249754806f66e5729c07fcb3580f"
-  integrity sha512-ULQZ5B1lWpH70O4xsANC4tf4Ko6RrpwhE3PtG6ERjMg1TiYTC2Wp4IntJVGro6a8HG9luYHhhmF4grF0Pltckg==
-  dependencies:
-    chalk "^2.0.1"
-    diff-sequences "^24.3.0"
-    jest-get-type "^24.3.0"
-    pretty-format "^24.7.0"
-
 jest-diff@^24.8.0:
   version "24.8.0"
   resolved "https://registry.yarnpkg.com/jest-diff/-/jest-diff-24.8.0.tgz#146435e7d1e3ffdf293d53ff97e193f1d1546172"
@@ -3733,17 +3653,6 @@ jest-docblock@^24.3.0:
   integrity sha512-nlANmF9Yq1dufhFlKG9rasfQlrY7wINJbo3q01tu56Jv5eBU5jirylhF2O5ZBnLxzOVBGRDz/9NAwNyBtG4Nyg==
   dependencies:
     detect-newline "^2.1.0"
-
-jest-each@^24.7.1:
-  version "24.7.1"
-  resolved "https://registry.yarnpkg.com/jest-each/-/jest-each-24.7.1.tgz#fcc7dda4147c28430ad9fb6dc7211cd17ab54e74"
-  integrity sha512-4fsS8fEfLa3lfnI1Jw6NxjhyRTgfpuOVTeUZZFyVYqeTa4hPhr2YkToUhouuLTrL2eMGOfpbdMyRx0GQ/VooKA==
-  dependencies:
-    "@jest/types" "^24.7.0"
-    chalk "^2.0.1"
-    jest-get-type "^24.3.0"
-    jest-util "^24.7.1"
-    pretty-format "^24.7.0"
 
 jest-each@^24.8.0:
   version "24.8.0"
@@ -3789,34 +3698,10 @@ jest-environment-puppeteer@^4.1.1:
     jest-dev-server "^4.1.1"
     merge-deep "^3.0.2"
 
-jest-get-type@^24.3.0:
-  version "24.3.0"
-  resolved "https://registry.yarnpkg.com/jest-get-type/-/jest-get-type-24.3.0.tgz#582cfd1a4f91b5cdad1d43d2932f816d543c65da"
-  integrity sha512-HYF6pry72YUlVcvUx3sEpMRwXEWGEPlJ0bSPVnB3b3n++j4phUEoSPcS6GC0pPJ9rpyPSe4cb5muFo6D39cXow==
-
 jest-get-type@^24.8.0:
   version "24.8.0"
   resolved "https://registry.yarnpkg.com/jest-get-type/-/jest-get-type-24.8.0.tgz#a7440de30b651f5a70ea3ed7ff073a32dfe646fc"
   integrity sha512-RR4fo8jEmMD9zSz2nLbs2j0zvPpk/KCEz3a62jJWbd2ayNo0cb+KFRxPHVhE4ZmgGJEQp0fosmNz84IfqM8cMQ==
-
-jest-haste-map@^24.7.1:
-  version "24.7.1"
-  resolved "https://registry.yarnpkg.com/jest-haste-map/-/jest-haste-map-24.7.1.tgz#772e215cd84080d4bbcb759cfb668ad649a21471"
-  integrity sha512-g0tWkzjpHD2qa03mTKhlydbmmYiA2KdcJe762SbfFo/7NIMgBWAA0XqQlApPwkWOF7Cxoi/gUqL0i6DIoLpMBw==
-  dependencies:
-    "@jest/types" "^24.7.0"
-    anymatch "^2.0.0"
-    fb-watchman "^2.0.0"
-    graceful-fs "^4.1.15"
-    invariant "^2.2.4"
-    jest-serializer "^24.4.0"
-    jest-util "^24.7.1"
-    jest-worker "^24.6.0"
-    micromatch "^3.1.10"
-    sane "^4.0.3"
-    walker "^1.0.7"
-  optionalDependencies:
-    fsevents "^1.2.7"
 
 jest-haste-map@^24.8.0:
   version "24.8.0"
@@ -3866,16 +3751,6 @@ jest-leak-detector@^24.8.0:
   dependencies:
     pretty-format "^24.8.0"
 
-jest-matcher-utils@^24.7.0:
-  version "24.7.0"
-  resolved "https://registry.yarnpkg.com/jest-matcher-utils/-/jest-matcher-utils-24.7.0.tgz#bbee1ff37bc8b2e4afcaabc91617c1526af4bcd4"
-  integrity sha512-158ieSgk3LNXeUhbVJYRXyTPSCqNgVXOp/GT7O94mYd3pk/8+odKTyR1JLtNOQSPzNi8NFYVONtvSWA/e1RDXg==
-  dependencies:
-    chalk "^2.0.1"
-    jest-diff "^24.7.0"
-    jest-get-type "^24.3.0"
-    pretty-format "^24.7.0"
-
 jest-matcher-utils@^24.8.0:
   version "24.8.0"
   resolved "https://registry.yarnpkg.com/jest-matcher-utils/-/jest-matcher-utils-24.8.0.tgz#2bce42204c9af12bde46f83dc839efe8be832495"
@@ -3885,20 +3760,6 @@ jest-matcher-utils@^24.8.0:
     jest-diff "^24.8.0"
     jest-get-type "^24.8.0"
     pretty-format "^24.8.0"
-
-jest-message-util@^24.7.1:
-  version "24.7.1"
-  resolved "https://registry.yarnpkg.com/jest-message-util/-/jest-message-util-24.7.1.tgz#f1dc3a6c195647096a99d0f1dadbc447ae547018"
-  integrity sha512-dk0gqVtyqezCHbcbk60CdIf+8UHgD+lmRHifeH3JRcnAqh4nEyPytSc9/L1+cQyxC+ceaeP696N4ATe7L+omcg==
-  dependencies:
-    "@babel/code-frame" "^7.0.0"
-    "@jest/test-result" "^24.7.1"
-    "@jest/types" "^24.7.0"
-    "@types/stack-utils" "^1.0.1"
-    chalk "^2.0.1"
-    micromatch "^3.1.10"
-    slash "^2.0.0"
-    stack-utils "^1.0.1"
 
 jest-message-util@^24.8.0:
   version "24.8.0"
@@ -3913,13 +3774,6 @@ jest-message-util@^24.8.0:
     micromatch "^3.1.10"
     slash "^2.0.0"
     stack-utils "^1.0.1"
-
-jest-mock@^24.7.0:
-  version "24.7.0"
-  resolved "https://registry.yarnpkg.com/jest-mock/-/jest-mock-24.7.0.tgz#e49ce7262c12d7f5897b0d8af77f6db8e538023b"
-  integrity sha512-6taW4B4WUcEiT2V9BbOmwyGuwuAFT2G8yghF7nyNW1/2gq5+6aTqSPcS9lS6ArvEkX55vbPAS/Jarx5LSm4Fng==
-  dependencies:
-    "@jest/types" "^24.7.0"
 
 jest-mock@^24.8.0:
   version "24.8.0"
@@ -3954,17 +3808,6 @@ jest-resolve-dependencies@^24.8.0:
     "@jest/types" "^24.8.0"
     jest-regex-util "^24.3.0"
     jest-snapshot "^24.8.0"
-
-jest-resolve@^24.7.1:
-  version "24.7.1"
-  resolved "https://registry.yarnpkg.com/jest-resolve/-/jest-resolve-24.7.1.tgz#e4150198299298380a75a9fd55043fa3b9b17fde"
-  integrity sha512-Bgrc+/UUZpGJ4323sQyj85hV9d+ANyPNu6XfRDUcyFNX1QrZpSoM0kE4Mb2vZMAYTJZsBFzYe8X1UaOkOELSbw==
-  dependencies:
-    "@jest/types" "^24.7.0"
-    browser-resolve "^1.11.3"
-    chalk "^2.0.1"
-    jest-pnp-resolver "^1.2.1"
-    realpath-native "^1.1.0"
 
 jest-resolve@^24.8.0:
   version "24.8.0"
@@ -4036,24 +3879,6 @@ jest-serializer@^24.4.0:
   resolved "https://registry.yarnpkg.com/jest-serializer/-/jest-serializer-24.4.0.tgz#f70c5918c8ea9235ccb1276d232e459080588db3"
   integrity sha512-k//0DtglVstc1fv+GY/VHDIjrtNjdYvYjMlbLUed4kxrE92sIUewOi5Hj3vrpB8CXfkJntRPDRjCrCvUhBdL8Q==
 
-jest-snapshot@^24.7.1:
-  version "24.7.1"
-  resolved "https://registry.yarnpkg.com/jest-snapshot/-/jest-snapshot-24.7.1.tgz#bd5a35f74aedff070975e9e9c90024f082099568"
-  integrity sha512-8Xk5O4p+JsZZn4RCNUS3pxA+ORKpEKepE+a5ejIKrId9CwrVN0NY+vkqEkXqlstA5NMBkNahXkR/4qEBy0t5yA==
-  dependencies:
-    "@babel/types" "^7.0.0"
-    "@jest/types" "^24.7.0"
-    chalk "^2.0.1"
-    expect "^24.7.1"
-    jest-diff "^24.7.0"
-    jest-matcher-utils "^24.7.0"
-    jest-message-util "^24.7.1"
-    jest-resolve "^24.7.1"
-    mkdirp "^0.5.1"
-    natural-compare "^1.4.0"
-    pretty-format "^24.7.0"
-    semver "^5.5.0"
-
 jest-snapshot@^24.8.0:
   version "24.8.0"
   resolved "https://registry.yarnpkg.com/jest-snapshot/-/jest-snapshot-24.8.0.tgz#3bec6a59da2ff7bc7d097a853fb67f9d415cb7c6"
@@ -4071,24 +3896,6 @@ jest-snapshot@^24.8.0:
     natural-compare "^1.4.0"
     pretty-format "^24.8.0"
     semver "^5.5.0"
-
-jest-util@^24.7.1:
-  version "24.7.1"
-  resolved "https://registry.yarnpkg.com/jest-util/-/jest-util-24.7.1.tgz#b4043df57b32a23be27c75a2763d8faf242038ff"
-  integrity sha512-/KilOue2n2rZ5AnEBYoxOXkeTu6vi7cjgQ8MXEkih0oeAXT6JkS3fr7/j8+engCjciOU1Nq5loMSKe0A1oeX0A==
-  dependencies:
-    "@jest/console" "^24.7.1"
-    "@jest/fake-timers" "^24.7.1"
-    "@jest/source-map" "^24.3.0"
-    "@jest/test-result" "^24.7.1"
-    "@jest/types" "^24.7.0"
-    callsites "^3.0.0"
-    chalk "^2.0.1"
-    graceful-fs "^4.1.15"
-    is-ci "^2.0.0"
-    mkdirp "^0.5.1"
-    slash "^2.0.0"
-    source-map "^0.6.0"
 
 jest-util@^24.8.0:
   version "24.8.0"
@@ -4703,22 +4510,22 @@ minizlib@^1.1.1:
   dependencies:
     minipass "^2.2.1"
 
-minna-tools@0.22.1-beta.1:
-  version "0.22.1-beta.1"
-  resolved "https://registry.yarnpkg.com/minna-tools/-/minna-tools-0.22.1-beta.1.tgz#5d50c4027cf78ef17d899415c17ee3e38201f103"
-  integrity sha512-C2P+K/EvYaF4v7DvUJYfJIDeZhE2cQv/Qg+Wngc3vCaL7L7J2eF7CVWVGAEz5bWDsIjTx6wre7HeOndtsS8wTQ==
+minna-tools@0.22.1-beta.2:
+  version "0.22.1-beta.2"
+  resolved "https://registry.yarnpkg.com/minna-tools/-/minna-tools-0.22.1-beta.2.tgz#66731119a63389392b7f1109cbf41d7fb996c555"
+  integrity sha512-JBrDPC64M5x0rWaxLC+7sFcBsVnIrL45A7YJsjVwYzEaglFNf/P4E2YsZCJBBd35/m0JhEFLOirDXh21odGcCA==
   dependencies:
     "@minna-ui/browserslist-config" "^0.22.1-beta.0"
-    "@minna-ui/eslint-config" "^0.22.1-beta.1"
-    "@minna-ui/jest-config" "^0.22.1-beta.1"
-    "@minna-ui/prettier-config" "^0.22.1-beta.1"
+    "@minna-ui/eslint-config" "^0.22.1-beta.2"
+    "@minna-ui/jest-config" "^0.22.1-beta.2"
+    "@minna-ui/prettier-config" "^0.22.1-beta.2"
     "@minna-ui/remark-config" "^0.22.1-beta.0"
-    "@minna-ui/rollup-plugin-dev-server" "^0.22.1-beta.0"
+    "@minna-ui/rollup-plugin-dev-server" "^0.22.1-beta.2"
     "@minna-ui/rollup-plugin-emit-css" "^0.22.1-beta.0"
     "@minna-ui/rollup-plugin-emit-html" "^0.22.1-beta.0"
     "@minna-ui/rollup-plugin-postcss" "^0.22.1-beta.0"
     "@minna-ui/rollup-plugin-purgecss" "^0.22.1-beta.1"
-    "@minna-ui/stylelint-config" "^0.22.1-beta.1"
+    "@minna-ui/stylelint-config" "^0.22.1-beta.2"
     "@minna-ui/ts-config" "^0.22.1-beta.0"
     "@minna-ui/utils" "^0.22.1-beta.0"
 
@@ -5807,16 +5614,6 @@ prettier@1.17.0:
   version "1.17.0"
   resolved "https://registry.yarnpkg.com/prettier/-/prettier-1.17.0.tgz#53b303676eed22cc14a9f0cec09b477b3026c008"
   integrity sha512-sXe5lSt2WQlCbydGETgfm1YBShgOX4HxQkFPvbxkcwgDvGDeqVau8h+12+lmSVlP3rHPz0oavfddSZg/q+Szjw==
-
-pretty-format@^24.7.0:
-  version "24.7.0"
-  resolved "https://registry.yarnpkg.com/pretty-format/-/pretty-format-24.7.0.tgz#d23106bc2edcd776079c2daa5da02bcb12ed0c10"
-  integrity sha512-apen5cjf/U4dj7tHetpC7UEFCvtAgnNZnBDkfPv3fokzIqyOJckAG9OlAPC1BlFALnqT/lGB2tl9EJjlK6eCsA==
-  dependencies:
-    "@jest/types" "^24.7.0"
-    ansi-regex "^4.0.0"
-    ansi-styles "^3.2.0"
-    react-is "^16.8.4"
 
 pretty-format@^24.8.0:
   version "24.8.0"
@@ -7082,10 +6879,10 @@ simple-swizzle@^0.2.2:
   dependencies:
     is-arrayish "^0.3.1"
 
-sirv@^0.3.1:
-  version "0.3.1"
-  resolved "https://registry.yarnpkg.com/sirv/-/sirv-0.3.1.tgz#a346c5d9bb4b50f60cb73423041b9c1694532287"
-  integrity sha512-03p4fuXPfhlNrDjUBw5bGF//4i0Rjwf7hVm8XhuKgeguHGQPr4pV+lgAJZKSP9BaJKn+QG9QvTxLX1wSYshccg==
+sirv@^0.4.0:
+  version "0.4.0"
+  resolved "https://registry.yarnpkg.com/sirv/-/sirv-0.4.0.tgz#531bafb86806135bac7ac053cb19efa42a0347e9"
+  integrity sha512-k/dcRW7Ry2VgERDiLyyq3peGZEnqP2EcTcG5646QjoLwz7lnDA50i20m/3Rn7J4FLtimyoKQsG4E2BItctwjhg==
   dependencies:
     "@polka/url" "^0.5.0"
     mime "^2.3.1"
@@ -7401,10 +7198,10 @@ stylehacks@^4.0.0:
     postcss "^7.0.0"
     postcss-selector-parser "^3.0.0"
 
-stylelint-a11y@^1.1.11:
-  version "1.1.11"
-  resolved "https://registry.yarnpkg.com/stylelint-a11y/-/stylelint-a11y-1.1.11.tgz#970d708903d32633f811e16240c960f82298a0d3"
-  integrity sha512-L+qZm0GPqDfxMv/p5G8LkCSRMnQsInNE9qxaDj8LnJZ1XOtoY/0/pC0tiuHrmVqzQCk2WKVhThU3lcvSBAs1hQ==
+stylelint-a11y@^1.2.0:
+  version "1.2.0"
+  resolved "https://registry.yarnpkg.com/stylelint-a11y/-/stylelint-a11y-1.2.0.tgz#f7b852140f6f76a4e4a75ff768baf5e88f327c26"
+  integrity sha512-yMy0ctlRm5NnH26j30r45tMUwo4KR8y8/mGQQp+SBxGjqyU2J3wDcM7LcAUM2TnX45OK+FyUvo5klaWk6kls4w==
 
 stylelint-config-css-modules@^1.4.0:
   version "1.4.0"
@@ -7423,10 +7220,10 @@ stylelint-config-standard@^18.3.0:
   dependencies:
     stylelint-config-recommended "^2.2.0"
 
-stylelint-declaration-strict-value@^1.1.2:
-  version "1.1.2"
-  resolved "https://registry.yarnpkg.com/stylelint-declaration-strict-value/-/stylelint-declaration-strict-value-1.1.2.tgz#f524dd4a666327d0810e7dbc612fc441dad2bfae"
-  integrity sha512-dB96SKr4+dFGaaIrcqL0HL6OSRbZUaqmCLeyu9AtyDiOU3OpPn8vxl5KaACN9ionOaTmcGa1k4QgIkp1vvlqyA==
+stylelint-declaration-strict-value@^1.1.3:
+  version "1.1.3"
+  resolved "https://registry.yarnpkg.com/stylelint-declaration-strict-value/-/stylelint-declaration-strict-value-1.1.3.tgz#5afaf44019c08ddca76975dbd66f1f4f77abbb0d"
+  integrity sha512-k/DvGu9lEKE0X59aZfc5t0lHJJE1DfD7btRTM+FMZNX0TPACv5RuE9l5YuPGBXlBDX5QTJeSKakEddMn3jEg6g==
 
 stylelint-high-performance-animation@^1.2.0:
   version "1.2.0"
