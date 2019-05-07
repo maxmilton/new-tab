@@ -67,6 +67,7 @@
     },
     "syntax": "postcss-scss"
   },
+  "prettier": "minna-tools/prettier",
   "eslintConfig": {
     "root": true,
     "extends": [
