@@ -11,6 +11,7 @@
     "chrome",
     "google-chrome",
     "maxmilton",
+    "new-tab-page",
     "ntp",
     "svelte"
   ],
@@ -36,12 +37,12 @@
     "@types/puppeteer": "1.12.4",
     "@wearegenki/renovate-config": "1.0.0",
     "chokidar": "3.0.0",
-    "codecov": "3.3.0",
+    "codecov": "3.4.0",
     "eslint": "5.16.0",
     "jest": "24.8.0",
     "jest-puppeteer": "4.1.1",
-    "minna-tools": "0.22.1-beta.2",
-    "minna-ui": "0.22.1-beta.2",
+    "minna-tools": "0.22.1",
+    "minna-ui": "0.22.1",
     "postcss": "7.0.16",
     "postcss-scss": "2.0.0",
     "prettier": "1.17.0",
@@ -52,7 +53,7 @@
     "rollup-plugin-svelte": "5.0.3",
     "rollup-plugin-typescript": "1.0.1",
     "stylelint": "10.0.1",
-    "svelte": "3.2.1",
+    "svelte": "3.2.2",
     "typescript": "3.4.5"
   },
   "browserslist": [
