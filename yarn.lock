@@ -7328,10 +7328,10 @@ supports-color@^6.1.0:
   dependencies:
     has-flag "^3.0.0"
 
-svelte@3.2.1:
-  version "3.2.1"
-  resolved "https://registry.yarnpkg.com/svelte/-/svelte-3.2.1.tgz#2bd89dbb49de623cea72730a4acaf92b4c1ec8e4"
-  integrity sha512-DH3WZHua5t87AjvCx8gU5cLQlhRF/KCyRWLpz4TXWwDVs1FEibIhXTXUWRd0EqU8/m/1e4stzL4MnboF8LxyHg==
+svelte@3.2.2:
+  version "3.2.2"
+  resolved "https://registry.yarnpkg.com/svelte/-/svelte-3.2.2.tgz#e647879b0a0edb4d4bb5f8af971af8a1f4cb29ef"
+  integrity sha512-B6ePpPodCQodVFDwv/uByaWs0KvXojaXZiB/db1x7WXbyxgLJ8xZF3j1lk5M83Ox0AWlX0fQnCTAaZmfT6xqdw==
 
 svg-tags@^1.0.0:
   version "1.0.0"
