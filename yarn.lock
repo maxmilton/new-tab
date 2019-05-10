@@ -307,10 +307,10 @@
     "@types/istanbul-reports" "^1.1.1"
     "@types/yargs" "^12.0.9"
 
-"@minna-ui/browserslist-config@^0.22.1-beta.0":
-  version "0.22.1-beta.0"
-  resolved "https://registry.yarnpkg.com/@minna-ui/browserslist-config/-/browserslist-config-0.22.1-beta.0.tgz#ef680de79e32aa7b63a406541cecee9b6d85bb2c"
-  integrity sha512-8tIfZvojKZJr89G74zIK6eIYk8Tqy39PKkPqKORuw5h3NSe4Sy+onRCLZDPy20KdWN4TYI5GqiME5atnjHhXYQ==
+"@minna-ui/browserslist-config@^0.22.1":
+  version "0.22.1"
+  resolved "https://registry.yarnpkg.com/@minna-ui/browserslist-config/-/browserslist-config-0.22.1.tgz#2a4933f25412d625cfbcf5e090f1df8384963123"
+  integrity sha512-oAf4raQzI5PHImkJydjnOIX4jZJb3wkWFpftSMWEboxXYtPBFzNdnZxTfOS7hsbuwQXJAYwT2eCe19SwEzX0yA==
 
 "@minna-ui/code-view@^0.22.1":
   version "0.22.1"
@@ -327,10 +327,10 @@
   resolved "https://registry.yarnpkg.com/@minna-ui/css/-/css-0.22.1.tgz#365746ea5f805e344cbdda5ed3b60d3e4825a4bd"
   integrity sha512-DuPbXSXIQUktxjQIo0lJ0Wzmb4FRxTSz67EORITPZSjLr4DLp0nCtQDJti6ENgoMIWVNRYWoSDxYhu+wC44qlA==
 
-"@minna-ui/eslint-config@^0.22.1-beta.2":
-  version "0.22.1-beta.2"
-  resolved "https://registry.yarnpkg.com/@minna-ui/eslint-config/-/eslint-config-0.22.1-beta.2.tgz#c036d282fcb59a4c6a017149a3da41b2f154cb01"
-  integrity sha512-oYFhbqYZxIUCEZd3754F7sLzgWmWB9+0Oz26eLvvCAGJxhxuTltXNnx+fB8juA3PnsxTWc7n7ycXhHlCsx8KwQ==
+"@minna-ui/eslint-config@^0.22.1":
+  version "0.22.1"
+  resolved "https://registry.yarnpkg.com/@minna-ui/eslint-config/-/eslint-config-0.22.1.tgz#662545c8906092a39bb89d497fb76eb54bc81e3a"
+  integrity sha512-tcm9ZLS08rzNcRdyhJBcpsWPzac0yFCmhn4X8aPJfsOHwmdm29AG+lNMRP6D2PAChoEJvM9c8QC4nVD+MCS7kw==
   dependencies:
     "@typescript-eslint/eslint-plugin" "^1.7.0"
     "@typescript-eslint/parser" "^1.7.0"
@@ -343,10 +343,10 @@
     eslint-plugin-security "^1.4.0"
     eslint-plugin-svelte3 "^1.1.0"
 
-"@minna-ui/jest-config@^0.22.1-beta.2":
-  version "0.22.1-beta.2"
-  resolved "https://registry.yarnpkg.com/@minna-ui/jest-config/-/jest-config-0.22.1-beta.2.tgz#7f67d1cc3780b5e39a66ee6a49b73c209294488c"
-  integrity sha512-R5juj2b15cEysr13wh94rPF9e9ZYZPIy8auOpOa4YFnJt8E6yVX1e/f/QilApcDk/0qA2jrWvf3v+BROmCQHWw==
+"@minna-ui/jest-config@^0.22.1":
+  version "0.22.1"
+  resolved "https://registry.yarnpkg.com/@minna-ui/jest-config/-/jest-config-0.22.1.tgz#c8fee306bdb3939196e0695d2ee7e3aa2218e891"
+  integrity sha512-lgVpjMUjLTzjCBV6wqlFQnhjH4kL7REXTvMLFJVcGFnFIDcc4cy3kh949FOJH6gvf/vMliefImWkDn86og5b1A==
   dependencies:
     "@types/jest" "^24.0.12"
     "@types/node" "^12.0.0"
@@ -383,61 +383,61 @@
     postcss-load-config "^2.0.0"
     postcss-scss "^2.0.0"
 
-"@minna-ui/prettier-config@^0.22.1-beta.2":
-  version "0.22.1-beta.2"
-  resolved "https://registry.yarnpkg.com/@minna-ui/prettier-config/-/prettier-config-0.22.1-beta.2.tgz#c97aab1df0c398c2700d4f96e27472a6ee62a4e4"
-  integrity sha512-Eujp6J9RLihmB59byf4VJ2QQu7uKkGble8po2x7U2msJKkB81Uu8xG1w2A9oKZAXjDArw9YT8zDQWaQTVdhErA==
+"@minna-ui/prettier-config@^0.22.1":
+  version "0.22.1"
+  resolved "https://registry.yarnpkg.com/@minna-ui/prettier-config/-/prettier-config-0.22.1.tgz#48d8ea5e430feaee091b3af0666b190da774f66f"
+  integrity sha512-kOCcziS7s1UyWbUWfSfw5ImGnR35vZInsWdFW5OxPwfwmP8PZX5zGq5m4efpU0Xah2geHSyv/pZYzyKje73IDQ==
 
-"@minna-ui/remark-config@^0.22.1-beta.0":
-  version "0.22.1-beta.0"
-  resolved "https://registry.yarnpkg.com/@minna-ui/remark-config/-/remark-config-0.22.1-beta.0.tgz#5d4930540ddbf1b3009974b68ae66fe3a487efbd"
-  integrity sha512-6rDGM97NR8rLGK4RkcqWYcd6pBIReSF3632VUQiBmUx0bx4MB5LJkWhD+T30xpQT77w3LCW8ZlKmDAjFn7ZaEQ==
+"@minna-ui/remark-config@^0.22.1":
+  version "0.22.1"
+  resolved "https://registry.yarnpkg.com/@minna-ui/remark-config/-/remark-config-0.22.1.tgz#6fa9788c987b456c99bd1fd4c9769957af21a66b"
+  integrity sha512-4ZdCpMCB32YKpKBFTAKudCqA+EBDPJmvgpKZG2aihP+iYL5JoVBehqGlywxsM2S9ei/TyklsCPhGc13a/cSkdA==
   dependencies:
     remark-lint "^6.0.4"
     remark-preset-lint-consistent "^2.0.2"
     remark-preset-lint-markdown-style-guide "^2.1.2"
     remark-preset-lint-recommended "^3.0.2"
 
-"@minna-ui/rollup-plugin-dev-server@^0.22.1-beta.2":
-  version "0.22.1-beta.2"
-  resolved "https://registry.yarnpkg.com/@minna-ui/rollup-plugin-dev-server/-/rollup-plugin-dev-server-0.22.1-beta.2.tgz#d156188168d45abc46740cceeda4901364b3bd35"
-  integrity sha512-T8jooNYKGGS+YjusR5cxuDHNgewlqpoVkcWnoLuHoEIAkX0JXRw4d4EmEvBebv6hvAo5a/tk5uW7KBNC6cbhjQ==
+"@minna-ui/rollup-plugin-dev-server@^0.22.1":
+  version "0.22.1"
+  resolved "https://registry.yarnpkg.com/@minna-ui/rollup-plugin-dev-server/-/rollup-plugin-dev-server-0.22.1.tgz#bab54053b0e9064ed6f10c246a1f59053ba4e28f"
+  integrity sha512-1zl6T6C49mzQO+GdXeFciwS35WWRDVSqVoheLQFPmO57gDeqhFwak1PcS/25T3LvqO2gPhaR2OkZP+m7OQDUfA==
   dependencies:
-    "@minna-ui/utils" "^0.22.1-beta.0"
+    "@minna-ui/utils" "^0.22.1"
     "@wearegenki/node-utils" "^0.2.0"
     deepmerge "^3.1.0"
-    sirv "^0.4.0"
+    sirv "^0.4.2"
 
-"@minna-ui/rollup-plugin-emit-css@^0.22.1-beta.0":
-  version "0.22.1-beta.0"
-  resolved "https://registry.yarnpkg.com/@minna-ui/rollup-plugin-emit-css/-/rollup-plugin-emit-css-0.22.1-beta.0.tgz#7c4a99d1f75637cf4b80852b87fae0242e178fd4"
-  integrity sha512-R1dy9gQWUa3XXhD9ppL21TmY+4G7vtPQuwWoTpVNyn/cj9v9o/kltdsap3OaBDOfdoHf2AYHjXO10xgc/48FjA==
+"@minna-ui/rollup-plugin-emit-css@^0.22.1":
+  version "0.22.1"
+  resolved "https://registry.yarnpkg.com/@minna-ui/rollup-plugin-emit-css/-/rollup-plugin-emit-css-0.22.1.tgz#a3332515282c4159cb5c9e8abdb60aae8c860367"
+  integrity sha512-ihVcjZ+WzJy//zJWZrtjPUmwy0TB//uFI364f9Hg2p5yC5vBwZZOcbkjiwkNJZaTjZZKfacOByqt9avrh4ZYxg==
   dependencies:
     clean-css "^4.2.1"
     rollup-pluginutils "^2.6.0"
 
-"@minna-ui/rollup-plugin-emit-html@^0.22.1-beta.0":
-  version "0.22.1-beta.0"
-  resolved "https://registry.yarnpkg.com/@minna-ui/rollup-plugin-emit-html/-/rollup-plugin-emit-html-0.22.1-beta.0.tgz#f2e22d0ebf6859cc18f0690a4c68b8eb8579c8de"
-  integrity sha512-wQaYlu0+tHNo2DrcnAkt6r1/mqQLjzbzzy04A7CW3N0It78NT9gsqSZbtSa04KW3bfnFyJ3+H0vfAaz0lVxWXg==
+"@minna-ui/rollup-plugin-emit-html@^0.22.1":
+  version "0.22.1"
+  resolved "https://registry.yarnpkg.com/@minna-ui/rollup-plugin-emit-html/-/rollup-plugin-emit-html-0.22.1.tgz#5b58037792da8868ff42107dd2003e83895bfed7"
+  integrity sha512-HfyrtjN4PWyanA5Jj3fTwXJrjMTGoGxtkNMAQGocy2HAlJr9yLunik72SocwCpT6UeozRzMmps7XjnP8kGX7Jg==
   dependencies:
     clean-css "^4.2.1"
     rollup-pluginutils "^2.6.0"
 
-"@minna-ui/rollup-plugin-postcss@^0.22.1-beta.0":
-  version "0.22.1-beta.0"
-  resolved "https://registry.yarnpkg.com/@minna-ui/rollup-plugin-postcss/-/rollup-plugin-postcss-0.22.1-beta.0.tgz#9cac677ff11ae5e1417f5fc2ff6836e5ad64a53b"
-  integrity sha512-+RQ2PxhbGvuMZEqWRLzX3sfLmwv8qmgYK98RBPHwIVDbiGM9fEkXA/iDw1EFkNOqrLb2nvxxWGb5+c5ZdchBTw==
+"@minna-ui/rollup-plugin-postcss@^0.22.1":
+  version "0.22.1"
+  resolved "https://registry.yarnpkg.com/@minna-ui/rollup-plugin-postcss/-/rollup-plugin-postcss-0.22.1.tgz#efa59e93818c46d8d6712bd09aa1797fe16552c9"
+  integrity sha512-dc7hHkCnz3MltiTJn5NYS1esXfRp2qDjUSvI3+2tqCTjqGsVX7/bMB5aWkr3xrTvYcVQ9dovbxppklzJu0KISQ==
   dependencies:
     deepmerge "^3.1.0"
     postcss-load-config "^2.0.0"
     postcss-scss "^2.0.0"
     rollup-pluginutils "^2.6.0"
 
-"@minna-ui/rollup-plugin-purgecss@^0.22.1-beta.1":
-  version "0.22.1-beta.1"
-  resolved "https://registry.yarnpkg.com/@minna-ui/rollup-plugin-purgecss/-/rollup-plugin-purgecss-0.22.1-beta.1.tgz#186387069150624cf04445d134a7480f8519a6bf"
-  integrity sha512-TAT2y5eT+kkcklTzNkLMS3lsGN7/fe6LResrwbXyQ4GPkoDAzpqb/CCHj49PU+D1DYldzQho7pbfPZvN8JI09g==
+"@minna-ui/rollup-plugin-purgecss@^0.22.1":
+  version "0.22.1"
+  resolved "https://registry.yarnpkg.com/@minna-ui/rollup-plugin-purgecss/-/rollup-plugin-purgecss-0.22.1.tgz#b4293ae600a5bb93a5c2b12d4a6cca9261433b1d"
+  integrity sha512-aSRQE8D+dT5UPFuAW+ssExcmqC2XgS79EAo6rv41IkMvpDsjBGm7/SX23YT7e/9oPfVrYtEl5nYSGbyimjHfkQ==
   dependencies:
     deepmerge "^3.1.0"
     purgecss "^1.3.0"
@@ -448,16 +448,16 @@
   resolved "https://registry.yarnpkg.com/@minna-ui/select/-/select-0.22.1.tgz#c8fa121c19f459da57c6e9b9efb741a23c2d8e25"
   integrity sha512-0zvHrn5AQ6pQJk8JVLfKRBfG0HbbIQM+ul7/ByzXDV+0AbAnfoD91MwbxBcfjCncUnggF120zAzFV7Nf+jJ8Bg==
 
-"@minna-ui/stylelint-config@^0.22.1-beta.2":
-  version "0.22.1-beta.2"
-  resolved "https://registry.yarnpkg.com/@minna-ui/stylelint-config/-/stylelint-config-0.22.1-beta.2.tgz#73832d76c1f58dc0708a1854b41b1df9a42bfb67"
-  integrity sha512-LV6xHtE2KUhmW9K9KQEtCXaZ6c0cL3q34CuMfBH2nJvsbq3DKyL6ZzAt21OFo6zK79JxR86p7yq8ATRSFHY/vA==
+"@minna-ui/stylelint-config@^0.22.1":
+  version "0.22.1"
+  resolved "https://registry.yarnpkg.com/@minna-ui/stylelint-config/-/stylelint-config-0.22.1.tgz#748889763067075e19fd29c4bfb7617b50f59953"
+  integrity sha512-drt1APOZCTHGHMUqd3o/PhbhGSJbBR8njH6pArTkd66rE1Ms9hhfzA/1ZANiKo6Wv+VfW991dFADuttynP7Rfw==
   dependencies:
     stylelint-a11y "^1.2.0"
     stylelint-config-css-modules "^1.4.0"
     stylelint-config-standard "^18.3.0"
     stylelint-declaration-strict-value "^1.1.3"
-    stylelint-high-performance-animation "^1.2.0"
+    stylelint-high-performance-animation "^1.2.1"
     stylelint-order "^3.0.0"
 
 "@minna-ui/switch@^0.22.1":
@@ -480,15 +480,15 @@
   resolved "https://registry.yarnpkg.com/@minna-ui/tooltip/-/tooltip-0.22.1.tgz#8978c8730acdce799d9cd0f7b8a90eb2dadf3032"
   integrity sha512-/pXMGbe4XKcnVQ4VHCma7Puv+BVx/aumgLPgL10Kx/l+9jgkmSQHduXhRCqRxTxvTn/1wS13FsPcMHX16KlfqQ==
 
-"@minna-ui/ts-config@^0.22.1-beta.0":
-  version "0.22.1-beta.0"
-  resolved "https://registry.yarnpkg.com/@minna-ui/ts-config/-/ts-config-0.22.1-beta.0.tgz#ce8087f26cfb74604e1ca81ebf54b164faa45c0e"
-  integrity sha512-eyrFMDzjb3RwOsmjQmHwPOpVJ8x9iW/ZRjkomvCcIZNqeKqOJSpi4yp+vrQD8U4RDOFMFAgNdXeM5nMafzxS6g==
+"@minna-ui/ts-config@^0.22.1":
+  version "0.22.1"
+  resolved "https://registry.yarnpkg.com/@minna-ui/ts-config/-/ts-config-0.22.1.tgz#1e1bbe9d05af6db2613e9a9ad83227d3f472925a"
+  integrity sha512-r6T1YZhnhM2b0htmxw97sRz2Vh0GVLkSyqlGRRYmXBf1Ur+33OQSoiZpeeU7C08Y+busLn3hE76ZpWCWfMD/dA==
 
-"@minna-ui/utils@^0.22.1-beta.0":
-  version "0.22.1-beta.0"
-  resolved "https://registry.yarnpkg.com/@minna-ui/utils/-/utils-0.22.1-beta.0.tgz#3fc132396346df76d711eb6195717d5d17227bcf"
-  integrity sha512-qX6d8qGMtbpGUKSfSzFEcqDMob5+AGvZvcSk2t4epMwInlv1wj9FBuDOsVj6Pg2oKT/djJQe+nIqhVNVhHVvAQ==
+"@minna-ui/utils@^0.22.1":
+  version "0.22.1"
+  resolved "https://registry.yarnpkg.com/@minna-ui/utils/-/utils-0.22.1.tgz#56af24463f3cffbb8953a8454447dd4a04701b7e"
+  integrity sha512-aSAdlSmNJHSIXRP3W4boU8aKX+IMpy0AIDIQ5oqRp9E00cAUgx1MGRr+Z84MT1Uzzn558g+IVR5GhIc1jQgOGQ==
 
 "@mrmlnc/readdir-enhanced@^2.2.1":
   version "2.2.1"
@@ -4510,24 +4510,24 @@ minizlib@^1.1.1:
   dependencies:
     minipass "^2.2.1"
 
-minna-tools@0.22.1-beta.2:
-  version "0.22.1-beta.2"
-  resolved "https://registry.yarnpkg.com/minna-tools/-/minna-tools-0.22.1-beta.2.tgz#66731119a63389392b7f1109cbf41d7fb996c555"
-  integrity sha512-JBrDPC64M5x0rWaxLC+7sFcBsVnIrL45A7YJsjVwYzEaglFNf/P4E2YsZCJBBd35/m0JhEFLOirDXh21odGcCA==
+minna-tools@0.22.1:
+  version "0.22.1"
+  resolved "https://registry.yarnpkg.com/minna-tools/-/minna-tools-0.22.1.tgz#02820c226351a06cd383dad2047a48baf4af8394"
+  integrity sha512-DkYVIl/tq+8RRa5+XD6GrSeMZdD0kCIpaJL7BydXhJH/Rlr7B6wcaKR4LRO1RPO97XBqHTIxapu4hYj5UqEXCA==
   dependencies:
-    "@minna-ui/browserslist-config" "^0.22.1-beta.0"
-    "@minna-ui/eslint-config" "^0.22.1-beta.2"
-    "@minna-ui/jest-config" "^0.22.1-beta.2"
-    "@minna-ui/prettier-config" "^0.22.1-beta.2"
-    "@minna-ui/remark-config" "^0.22.1-beta.0"
-    "@minna-ui/rollup-plugin-dev-server" "^0.22.1-beta.2"
-    "@minna-ui/rollup-plugin-emit-css" "^0.22.1-beta.0"
-    "@minna-ui/rollup-plugin-emit-html" "^0.22.1-beta.0"
-    "@minna-ui/rollup-plugin-postcss" "^0.22.1-beta.0"
-    "@minna-ui/rollup-plugin-purgecss" "^0.22.1-beta.1"
-    "@minna-ui/stylelint-config" "^0.22.1-beta.2"
-    "@minna-ui/ts-config" "^0.22.1-beta.0"
-    "@minna-ui/utils" "^0.22.1-beta.0"
+    "@minna-ui/browserslist-config" "^0.22.1"
+    "@minna-ui/eslint-config" "^0.22.1"
+    "@minna-ui/jest-config" "^0.22.1"
+    "@minna-ui/prettier-config" "^0.22.1"
+    "@minna-ui/remark-config" "^0.22.1"
+    "@minna-ui/rollup-plugin-dev-server" "^0.22.1"
+    "@minna-ui/rollup-plugin-emit-css" "^0.22.1"
+    "@minna-ui/rollup-plugin-emit-html" "^0.22.1"
+    "@minna-ui/rollup-plugin-postcss" "^0.22.1"
+    "@minna-ui/rollup-plugin-purgecss" "^0.22.1"
+    "@minna-ui/stylelint-config" "^0.22.1"
+    "@minna-ui/ts-config" "^0.22.1"
+    "@minna-ui/utils" "^0.22.1"
 
 minna-ui@0.22.1:
   version "0.22.1"
@@ -6879,10 +6879,10 @@ simple-swizzle@^0.2.2:
   dependencies:
     is-arrayish "^0.3.1"
 
-sirv@^0.4.0:
-  version "0.4.0"
-  resolved "https://registry.yarnpkg.com/sirv/-/sirv-0.4.0.tgz#531bafb86806135bac7ac053cb19efa42a0347e9"
-  integrity sha512-k/dcRW7Ry2VgERDiLyyq3peGZEnqP2EcTcG5646QjoLwz7lnDA50i20m/3Rn7J4FLtimyoKQsG4E2BItctwjhg==
+sirv@^0.4.2:
+  version "0.4.2"
+  resolved "https://registry.yarnpkg.com/sirv/-/sirv-0.4.2.tgz#842ed22f3aab58faee84eea66cf66066e123d6db"
+  integrity sha512-dQbZnsMaIiTQPZmbGmktz+c74zt/hyrJEB4tdp2Jj0RNv9J6B/OWR5RyrZEvIn9fyh9Zlg2OlE2XzKz6wMKGAw==
   dependencies:
     "@polka/url" "^0.5.0"
     mime "^2.3.1"
@@ -7225,10 +7225,10 @@ stylelint-declaration-strict-value@^1.1.3:
   resolved "https://registry.yarnpkg.com/stylelint-declaration-strict-value/-/stylelint-declaration-strict-value-1.1.3.tgz#5afaf44019c08ddca76975dbd66f1f4f77abbb0d"
   integrity sha512-k/DvGu9lEKE0X59aZfc5t0lHJJE1DfD7btRTM+FMZNX0TPACv5RuE9l5YuPGBXlBDX5QTJeSKakEddMn3jEg6g==
 
-stylelint-high-performance-animation@^1.2.0:
-  version "1.2.0"
-  resolved "https://registry.yarnpkg.com/stylelint-high-performance-animation/-/stylelint-high-performance-animation-1.2.0.tgz#2993102baca5138b3cda1138baf0264bed22d413"
-  integrity sha512-OeHiAmnx0ItB7FbDNulsuEG9clVbNGNWmefybN1zgvctceh9aK/pHjCmHNmDuD6RuFRfBKYdueOhYMeVOpxqfA==
+stylelint-high-performance-animation@^1.2.1:
+  version "1.2.1"
+  resolved "https://registry.yarnpkg.com/stylelint-high-performance-animation/-/stylelint-high-performance-animation-1.2.1.tgz#544ab13978707c19d1d581d079aa848fa709717a"
+  integrity sha512-jHkX30yZP7Z7/EdbS7XyBEn7tWgTZAeJ0XnRXIS776QnVy4FBzsE2GcY9oQPJOPk/z7DdBr4jjpSuh9tn8UeIw==
 
 stylelint-order@^3.0.0:
   version "3.0.0"
