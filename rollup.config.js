@@ -23,6 +23,7 @@ const svelteOpts = {
   emitCss: true,
   immutable: true,
   preprocess,
+  preserveWhitespace: true, // resuts in smaller code with closure compiler
 };
 
 const emitHtmlOpts = {
@@ -46,9 +47,12 @@ const compilerOpts = {
     resolve('google-closure-compiler/contrib/externs/chrome_extensions.js'),
     join(__dirname, 'externs.js'),
   ],
+  language_in: 'ECMASCRIPT_NEXT',
+  language_out: 'ECMASCRIPT_2017',
+  warning_level: 'DEFAULT',
 };
 
-// loader.js run through closure compiler + manual tweaks
+// theme loader
 const loader =
   '<script>chrome.storage.local.get(null,a=>{a.t&&(document.body.className=a.t)});</script>';
 

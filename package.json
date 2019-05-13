@@ -11,6 +11,7 @@
     "chrome",
     "google-chrome",
     "maxmilton",
+    "new-tab-page",
     "ntp",
     "svelte"
   ],
@@ -53,7 +54,6 @@
     "rollup-plugin-typescript": "1.0.1",
     "stylelint": "10.0.1",
     "svelte": "3.3.0",
-    "tslib": "1.9.3",
     "typescript": "3.4.5"
   },
   "browserslist": [
@@ -68,6 +68,7 @@
     },
     "syntax": "postcss-scss"
   },
+  "prettier": "minna-tools/prettier",
   "eslintConfig": {
     "root": true,
     "extends": [
