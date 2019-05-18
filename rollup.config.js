@@ -23,7 +23,7 @@ const svelteOpts = {
   emitCss: true,
   immutable: true,
   preprocess,
-  preserveWhitespace: true, // resuts in smaller code with closure compiler
+  preserveWhitespace: true, // results in smaller code with closure compiler
 };
 
 const emitHtmlOpts = {
