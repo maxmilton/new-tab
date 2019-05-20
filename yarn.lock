@@ -1571,9 +1571,9 @@ copy-descriptor@^0.1.0:
   integrity sha1-Z29us8OZl8LuGsOpJP1hJHSPV40=
 
 core-js@^2.5.7:
-  version "2.6.5"
-  resolved "https://registry.yarnpkg.com/core-js/-/core-js-2.6.5.tgz#44bc8d249e7fb2ff5d00e0341a7ffb94fbf67895"
-  integrity sha512-klh/kDpwX8hryYL14M9w/xei6vrv6sE8gTHDG7/T/+SEovB/G4ejwcfE/CBzO6Edsu+OETZMZ3wcX/EjUkrl5A==
+  version "2.6.6"
+  resolved "https://registry.yarnpkg.com/core-js/-/core-js-2.6.6.tgz#00eb6d6bf815471cc16d8563edd7d38786dec50b"
+  integrity sha512-Mt/LaAym54NXnrjEMdo918cT2h70tqb/Yl7T3uPHQHRm5SxVoqlKmerUy4mL11k8saSBDWQ7ULIHxmeFyT3pfg==
 
 core-util-is@1.0.2, core-util-is@~1.0.0:
   version "1.0.2"
@@ -2150,9 +2150,9 @@ eslint-plugin-security@^1.4.0:
     safe-regex "^1.1.0"
 
 eslint-plugin-svelte3@^1.2.0:
-  version "1.2.0"
-  resolved "https://registry.yarnpkg.com/eslint-plugin-svelte3/-/eslint-plugin-svelte3-1.2.0.tgz#e463fb673d278b11bb8f03dcacf970a3afe3a751"
-  integrity sha512-7tuYh8YdwE9PP96U9qNJUSVMaxxUS/HZEZtEDlNGSAe0g40xd12pJo6lrc5wGxOmXpR6adGy5DnkSSF1UXGDKg==
+  version "1.2.2"
+  resolved "https://registry.yarnpkg.com/eslint-plugin-svelte3/-/eslint-plugin-svelte3-1.2.2.tgz#eaf573a32cfcfdcee6a8ee97d5c203956f236dbe"
+  integrity sha512-PS9Kid/Lg9L+RnxJ3nUEBdTJ0F/RAWaAt1ufiEZ50wVdhiNeY+MHfs8rUZWqMG2iPz+K3Oq5Bv0eTza8QNj9ZA==
 
 eslint-restricted-globals@^0.1.1:
   version "0.1.1"
@@ -7590,9 +7590,9 @@ typescript@3.5.0-rc:
   integrity sha512-8Os3bqTeHc6bf+bkPFL3O/pb09j8SbDa2LUBxTXWpZlcHUW9ziGuiEFiqMcArkbAjGLqEzshkl4zvxhb0gVPuQ==
 
 uglify-js@^3.1.4:
-  version "3.5.13"
-  resolved "https://registry.yarnpkg.com/uglify-js/-/uglify-js-3.5.13.tgz#d2d8857b598d77f8764ae3bfcf90bb1df134d2bd"
-  integrity sha512-Lho+IJlquX6sdJgyKSJx/M9y4XbDd3ekPjD8S6HYmT5yVSwDtlSuca2w5hV4g2dIsp0Y/4orbfWxKexodmFv7w==
+  version "3.5.14"
+  resolved "https://registry.yarnpkg.com/uglify-js/-/uglify-js-3.5.14.tgz#edf2a322c37fd7173a954fb35af199b52fb10946"
+  integrity sha512-dgyjIw8KFK6AyVl5vm2tEqPewv5TKGEiiVFLI1LbF+oHua/Njd8tZk3lIbF1AWU1rNdEg7scaceADb4zqCcWXg==
   dependencies:
     commander "~2.20.0"
     source-map "~0.6.1"
