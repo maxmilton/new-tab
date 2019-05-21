@@ -21,7 +21,7 @@
     "prebuild": "rm -rf dist && mkdir dist && cp icon* dist",
     "lint": "yarn lint:md && yarn lint:css && yarn lint:js && yarn lint:types",
     "lint:md": "remark --frail --quiet .",
-    "lint:css": "stylelint --ignore-path .gitignore '**/*.{css,html,js,md,svelte,ts}'",
+    "lint:css": "stylelint --ignore-path .gitignore **/*.{css,html,js,md,svelte,ts}",
     "lint:js": "eslint --ignore-path .gitignore --ext html,js,md,svelte,ts .",
     "lint:types": "tsc --noEmit || true",
     "test": "yarn lint && jest --notify --watch",
