@@ -23,7 +23,7 @@
     "lint:md": "remark --frail --quiet .",
     "lint:css": "stylelint --ignore-path .gitignore **/*.{css,html,js,md,svelte,ts}",
     "lint:js": "eslint --ignore-path .gitignore --ext html,js,md,svelte,ts .",
-    "lint:types": "tsc --noEmit || true",
+    "lint:types": "tsc --noEmit --allowJs --checkJs",
     "test": "yarn lint && jest --notify --watch",
     "test:e2e": "jest --config test/e2e/jest.config.js",
     "test-ci": "jest --runInBand --ci --coverage",
