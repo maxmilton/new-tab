@@ -14,7 +14,6 @@ const { resolve } = require;
 const isDev = !!process.env.ROLLUP_WATCH;
 
 const watch = {
-  chokidar: true,
   clearScreen: false,
 };
 
