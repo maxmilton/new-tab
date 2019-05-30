@@ -2,13 +2,13 @@
   import { afterUpdate } from 'svelte';
   import { DEFAULT_ORDER } from './common';
 
-  let resultsOrder = [];
+  let order = [];
   let pageTheme = '';
 
   // check existing settings
   chrome.storage.local.get(null, (settings) => {
     /* eslint-disable dot-notation */ // prevent closure mangling
-    resultsOrder = settings['o'] || DEFAULT_ORDER;
+    order = settings['o'] || DEFAULT_ORDER;
     pageTheme = settings['t'];
     /* eslint-enable */
   });
@@ -17,22 +17,22 @@
   afterUpdate(() => {
     /* eslint-disable quote-props */ // prevent closure mangling
     chrome.storage.local.set({
-      'o': JSON.stringify(resultsOrder) === JSON.stringify(DEFAULT_ORDER)
+      'o': JSON.stringify(order) === JSON.stringify(DEFAULT_ORDER)
         ? null
-        : resultsOrder,
+        : order,
       't': pageTheme,
     });
     /* eslint-enable */
   });
 
   function resetOrder() {
-    resultsOrder = [...DEFAULT_ORDER];
+    order = [...DEFAULT_ORDER];
   }
 
   function moveItem(from, to) {
-    const ordered = [...resultsOrder];
+    const ordered = [...order];
     // eslint-disable-next-line security/detect-object-injection
-    const item = resultsOrder[from];
+    const item = order[from];
 
     // remove from previous location
     ordered.splice(from, 1);
@@ -40,13 +40,13 @@
     // add to new location
     ordered.splice(to, 0, item);
 
-    resultsOrder = ordered;
+    order = ordered;
   }
 
   function removeItem(index) {
-    const ordered = [...resultsOrder];
+    const ordered = [...order];
     ordered.splice(index, 1);
-    resultsOrder = ordered;
+    order = ordered;
   }
 
   function handleDragStart(event, index) {
@@ -145,7 +145,7 @@
   <label>List order:</label>
   <button on:click="{resetOrder}">Reset</button>
   <ul>
-    {#each resultsOrder as _item, index (_item)}
+    {#each order as _item, index (_item)}
       <li
         class="item"
         draggable="true"
