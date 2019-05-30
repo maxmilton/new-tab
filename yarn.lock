@@ -327,10 +327,10 @@
   resolved "https://registry.yarnpkg.com/@minna-ui/css/-/css-0.24.0.tgz#dc490a1c8b3e9b608d34a5e966e715ba3237cb46"
   integrity sha512-yIT77MKNnIGrtjk8D/PY5+vTUoRAT9brgUBqno8DQHH8LEBCVqzZWrl5XJVs/SWoID3aJJ/Cl9crM8WiUxRO/g==
 
-"@minna-ui/eslint-config@^0.24.0":
-  version "0.24.0"
-  resolved "https://registry.yarnpkg.com/@minna-ui/eslint-config/-/eslint-config-0.24.0.tgz#25cf85855d432449317cfc6341494ef1bbda659a"
-  integrity sha512-TLwN0SvBGZ73d5Gw03+IWVblK3z88yd0ktnvlPMyu4Sry1SzWgXR9PU4/VXMztJLk/zQ3q4SzqOOGGhMbWHO+w==
+"@minna-ui/eslint-config@^0.24.1":
+  version "0.24.1"
+  resolved "https://registry.yarnpkg.com/@minna-ui/eslint-config/-/eslint-config-0.24.1.tgz#55fda067bc176ef176d65d801bb31255dcbf42f7"
+  integrity sha512-gSg/hfZqfvcvx9QR6OKSXVOQWe48ZmVp8QZ9BVY3dqPrPJnOqh4hQ7uvV5ZjARLcyItlAea9XToBYeDX0ixzxw==
   dependencies:
     "@types/eslint" "^4.16.6"
     "@typescript-eslint/eslint-plugin" "^1.9.0"
@@ -339,18 +339,18 @@
     eslint-plugin-html "^5.0.5"
     eslint-plugin-import "^2.17.2"
     eslint-plugin-jest "^22.6.4"
-    eslint-plugin-jsdoc "^7.0.2"
+    eslint-plugin-jsdoc "^7.2.0"
     eslint-plugin-markdown "^1.0.0"
     eslint-plugin-security "^1.4.0"
     eslint-plugin-svelte3 "^1.2.3"
 
-"@minna-ui/jest-config@^0.24.0":
-  version "0.24.0"
-  resolved "https://registry.yarnpkg.com/@minna-ui/jest-config/-/jest-config-0.24.0.tgz#48e1c29dfd41ff7f37fba42c19f2d80732c6598d"
-  integrity sha512-PvdTJENDrBDOqJFLbzgfVx9YGzBdMhP+uXFiNwhFrdtfP3EH71HEt3DnXsg9G/hD/yFe0Ofoym/7EvLphjvFJA==
+"@minna-ui/jest-config@^0.24.1":
+  version "0.24.1"
+  resolved "https://registry.yarnpkg.com/@minna-ui/jest-config/-/jest-config-0.24.1.tgz#90f16a6777422dcaad6dd520ef3c88ea5121ed76"
+  integrity sha512-PxT1hvFfibbm+p9i97GTDHEaZXc/Ge4O7Fv5yDyJA+kd3HmtpHCmHMdVT19UFGmlQNdJBhMWim70ougyM59Hdw==
   dependencies:
     "@types/jest" "^24.0.13"
-    "@types/node" "^12.0.2"
+    "@types/node" "^12.0.3"
     identity-obj-proxy "^3.0.0"
     jest-circus "^24.8.0"
     sucrase "^3.0.0"
@@ -399,12 +399,12 @@
     remark-preset-lint-markdown-style-guide "^2.1.2"
     remark-preset-lint-recommended "^3.0.2"
 
-"@minna-ui/rollup-plugin-dev-server@^0.24.0":
-  version "0.24.0"
-  resolved "https://registry.yarnpkg.com/@minna-ui/rollup-plugin-dev-server/-/rollup-plugin-dev-server-0.24.0.tgz#dfaa807fc624bcb3d35a9b6caff2f122f56a53a5"
-  integrity sha512-QKyyIGo2JmYjtKS5gXKHKvYikxDvqwzGM8s62XAhG3BJelfXRYNaazn7ra0lKsf7w3OwgBkP+FmiOmA5QZDPpA==
+"@minna-ui/rollup-plugin-dev-server@^0.24.1":
+  version "0.24.1"
+  resolved "https://registry.yarnpkg.com/@minna-ui/rollup-plugin-dev-server/-/rollup-plugin-dev-server-0.24.1.tgz#e47c871cbc45f8193f62481927b51eb9f2eff0d3"
+  integrity sha512-Q4D43aFkcCsz3XAcYtI3GDJKMzqavDibWYNbT04k5IqVnSvV4KUZ7+bMCdUYaQhONskNRvFUHgrcz5Tgrqu1EQ==
   dependencies:
-    "@minna-ui/utils" "^0.24.0"
+    "@minna-ui/utils" "^0.24.1"
     "@wearegenki/node-utils" "^0.2.0"
     deepmerge "^3.1.0"
     sirv "^0.4.2"
@@ -486,10 +486,10 @@
   resolved "https://registry.yarnpkg.com/@minna-ui/ts-config/-/ts-config-0.24.0.tgz#74aea441477ea224309e940fe6a204b1f27f97c7"
   integrity sha512-STolEp9U0xqRF6/WfGqewXujVvaxbQmplwpfxVWwBvVLSZZ9aq2IDMYYTj+lqI0HFqa6SLHG1FheIPk8YTFcfg==
 
-"@minna-ui/utils@^0.24.0":
-  version "0.24.0"
-  resolved "https://registry.yarnpkg.com/@minna-ui/utils/-/utils-0.24.0.tgz#a827272f45267f0f220e121e99359fdbbe27641a"
-  integrity sha512-nBa8DwwaBK7BY6+nU4afUL8GUwzo/8A+iPpg+MSHjmjMBHcDmTu7cXSPf6JbahusyXrysCo952h7Bt8SI9tTUw==
+"@minna-ui/utils@^0.24.1":
+  version "0.24.1"
+  resolved "https://registry.yarnpkg.com/@minna-ui/utils/-/utils-0.24.1.tgz#2e102f669f990d8e18bc81ebec1345b9c035a315"
+  integrity sha512-xg9cl81OYTBEbdKLRG07ujnYKGK3C9t8kKgE80xg0E5aRcP45r4hTJRG8HsK3p0lZAR/I5A1g7ue1ULGF/Qqmg==
 
 "@mrmlnc/readdir-enhanced@^2.2.1":
   version "2.2.1"
@@ -661,6 +661,11 @@
   version "12.0.2"
   resolved "https://registry.yarnpkg.com/@types/node/-/node-12.0.2.tgz#3452a24edf9fea138b48fad4a0a028a683da1e40"
   integrity sha512-5tabW/i+9mhrfEOUcLDu2xBPsHJ+X5Orqy9FKpale3SjDA17j5AEpYq5vfy3oAeAHGcvANRCO3NV3d2D6q3NiA==
+
+"@types/node@^12.0.3":
+  version "12.0.3"
+  resolved "https://registry.yarnpkg.com/@types/node/-/node-12.0.3.tgz#5d8d24e0033fc6393efadc85cb59c1f638095c9a"
+  integrity sha512-zkOxCS/fA+3SsdA+9Yun0iANxzhQRiNwTvJSr6N95JhuJ/x27z9G2URx1Jpt3zYFfCGUXZGL5UDxt5eyLE7wgw==
 
 "@types/puppeteer@*", "@types/puppeteer@1.12.4":
   version "1.12.4"
@@ -2141,10 +2146,10 @@ eslint-plugin-jest@^22.6.4:
   resolved "https://registry.yarnpkg.com/eslint-plugin-jest/-/eslint-plugin-jest-22.6.4.tgz#2895b047dd82f90f43a58a25cf136220a21c9104"
   integrity sha512-36OqnZR/uMCDxXGmTsqU4RwllR0IiB/XF8GW3ODmhsjiITKuI0GpgultWFt193ipN3HARkaIcKowpE6HBvRHNg==
 
-eslint-plugin-jsdoc@^7.0.2:
-  version "7.0.2"
-  resolved "https://registry.yarnpkg.com/eslint-plugin-jsdoc/-/eslint-plugin-jsdoc-7.0.2.tgz#d1c1bf04f65c121a50928a87658a7508a7cdd57f"
-  integrity sha512-iqPdJsBy88FLrr8ru69Ab+SKPrjNEQwK2vicGXrBbDA6aia8IRVz2J2LPCfwdyuSxrI91bd4Za1Z57TC5tUp2w==
+eslint-plugin-jsdoc@^7.2.0:
+  version "7.2.0"
+  resolved "https://registry.yarnpkg.com/eslint-plugin-jsdoc/-/eslint-plugin-jsdoc-7.2.0.tgz#a65927fc12e008dfe0ae8d66dff6bf1e637dcf7e"
+  integrity sha512-3Lap6GIRlFAEiGheWXYDkGE30MH+X6pu4E1ZRjBoBVjfV5EyrfUgQI9m8LtSI4v9RBFtmEf8A8MZOqCGnR6I8A==
   dependencies:
     comment-parser "^0.5.4"
     jsdoctypeparser "3.1.0"
@@ -4511,24 +4516,24 @@ minizlib@^1.1.1:
   dependencies:
     minipass "^2.2.1"
 
-minna-tools@0.24.0:
-  version "0.24.0"
-  resolved "https://registry.yarnpkg.com/minna-tools/-/minna-tools-0.24.0.tgz#7cd8b671fb372ee8da1984e6a4836326830b405e"
-  integrity sha512-iNSDg3AKhx9HElRrANkvMjc4raGgAqeNyEl/ZrROYbjXddWmIEKAcroVLTuYnO6g+0e8dXYLgIgPBB1laKX4pA==
+minna-tools@0.24.1:
+  version "0.24.1"
+  resolved "https://registry.yarnpkg.com/minna-tools/-/minna-tools-0.24.1.tgz#3fdbd31f45873f45cac00df8d3d83fdf896dba33"
+  integrity sha512-wT8YSOTaYtRPq5Ex+bxvIsMijuQyQYEVmp7MKbgkJXc6oscvh0pf/0XQaRIf5vf8kkQgUc8HiyRHFjPlyeHfew==
   dependencies:
     "@minna-ui/browserslist-config" "^0.24.0"
-    "@minna-ui/eslint-config" "^0.24.0"
-    "@minna-ui/jest-config" "^0.24.0"
+    "@minna-ui/eslint-config" "^0.24.1"
+    "@minna-ui/jest-config" "^0.24.1"
     "@minna-ui/prettier-config" "^0.24.0"
     "@minna-ui/remark-config" "^0.24.0"
-    "@minna-ui/rollup-plugin-dev-server" "^0.24.0"
+    "@minna-ui/rollup-plugin-dev-server" "^0.24.1"
     "@minna-ui/rollup-plugin-emit-css" "^0.24.0"
     "@minna-ui/rollup-plugin-emit-html" "^0.24.0"
     "@minna-ui/rollup-plugin-postcss" "^0.24.0"
     "@minna-ui/rollup-plugin-purgecss" "^0.24.0"
     "@minna-ui/stylelint-config" "^0.24.0"
     "@minna-ui/ts-config" "^0.24.0"
-    "@minna-ui/utils" "^0.24.0"
+    "@minna-ui/utils" "^0.24.1"
 
 minna-ui@0.24.0:
   version "0.24.0"
