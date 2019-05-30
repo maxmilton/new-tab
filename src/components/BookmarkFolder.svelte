@@ -3,7 +3,6 @@
 
   import { onDestroy } from 'svelte';
   import BookmarkNode from './BookmarkNode'; // eslint-disable-line import/no-cycle
-  import { shorten } from '../common';
 
   // props
   export let lvl = 0;
@@ -127,7 +126,7 @@
   on:mouseenter="{handleMouseEnter}"
   on:mouseleave="{handleMouseLeave}"
 >
-  {shorten(_node.title, maxLen)}
+  {node.title}
 
   {#if lvl !== 0}
     <div class="caret">▸</div>

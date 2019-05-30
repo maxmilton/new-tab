@@ -12,6 +12,7 @@ export function debounce(fn: Function, delay = 260): Function {
   let context: any;
   let timer: NodeJS.Timeout | null;
 
+  /* prettier-ignore */
   return function (...params: any[]) {
     args = params;
     // @ts-ignore
@@ -53,15 +54,4 @@ export function handleLinkClick(event: MouseEvent): void {
       chrome.tabs.update({ url });
     }
   }
-}
-
-/**
- * Shorten a string to a specified length.
- */
-export function shorten(text: string, max: number): string {
-  if (max === undefined) {
-    return text;
-  }
-
-  return text.length > max ? `${text.slice(0, max)}…` : text;
 }

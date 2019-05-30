@@ -8,11 +8,7 @@
 
 <script>
   /* eslint-disable no-underscore-dangle */
-
-  import { shorten } from '../common';
-
-  export let _node;
-  export let maxLen;
+  export let node;
 </script>
 
 <style type="text/postcss">
@@ -20,34 +16,20 @@
   :global(img) {
     width: 16px;
     height: 16px; /* prevents slight realignment jump on initial load */
+    margin: 0 6px 0 0;
     pointer-events: none; /* prevent being the click event target */
   }
 
-  :global(.pad) {
-    margin: 0 6px 0 0;
-  }
-
-  /* stylelint-disable-next-line no-descending-specificity */
   :global(a),
   :global(.item) {
-    display: flex;
-    align-items: center;
+    display: block;
     color: var(--t);
     white-space: nowrap;
     cursor: pointer;
-
-    :global(#bookmarks) & {
-      padding: 0 13px;
-
-      &:hover,
-      &:focus { /* stylelint-disable-line no-descending-specificity */
-        background-color: var(--c);
-      }
-    }
   }
 </style>
 
-<a href="{_node.url}" title="{_node.title}">
-  <img src="chrome://favicon/{_node.url}" class="{_node.title && 'pad'}">
-  {shorten(_node.title, maxLen)}
+<a href="{node.url}" title="{node.title}">
+  <img src="chrome://favicon/{node.url}">
+  {node.title}
 </a>
