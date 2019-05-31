@@ -3,8 +3,6 @@
   import BookmarkGroup from './components/BookmarkGroup.svelte';
   import Menu from './components/Menu.svelte';
   import Search from './components/Search.svelte';
-
-  window.addEventListener('click', handleLinkClick, true);
 </script>
 
 <style type="text/postcss">
@@ -41,6 +39,8 @@
     }
   }
 </style>
+
+<svelte:window on:click={handleLinkClick}/>
 
 <BookmarkGroup/>
 <Search/>
