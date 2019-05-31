@@ -5,33 +5,28 @@
 
 /* eslint-disable strict, no-var, @typescript-eslint/no-unused-vars, no-underscore-dangle */
 
-/* FIXME: Workaround?? :'( */
 // new tab app props
-var _node;
-var barEl;
-var bookmarksBar;
-var bookmarksList;
-var bookmarksOther;
+var bList;
+var bOther;
+var bRaw;
 var closeTimer;
-var endNode;
-var historyList;
-var historyRaw;
+var el;
+var end;
+var hList;
+var hRaw;
 var isOpen;
 var itemCount;
 var lvl;
-var maxLen;
+var node;
+var oNodes;
 var openTimer;
-var overflowNodes;
-var resultsList;
-var resultsName;
-var resultsOrder;
-var resultsRaw;
+var order;
 var searchText;
 var tabsList;
 var tabsRaw;
-var topSitesList;
-var topSitesRaw;
-var visibleNodes;
+var tList;
+var tRaw;
+var vNodes;
 
 // settings app props
 var pageTheme;
