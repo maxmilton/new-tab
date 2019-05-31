@@ -11,7 +11,7 @@
 
   :global(body) {
     margin: 80px 0;
-    /* overflow-y: scroll; */ /* prevents jump on load */
+    overflow-y: scroll; /* prevent jump on load */
     font-size: 18px;
     /**
      * Normally you would use a unitless value for line-height but this is kind
