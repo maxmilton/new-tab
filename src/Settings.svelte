@@ -136,8 +136,8 @@
 <div class="row">
   <label>Theme:</label>
   <select bind:value="{pageTheme}">
-    <option value="d">Dark</option>
-    <option value="">Light</option>
+    <option value="">Dark</option>
+    <option value="l">Light</option>
   </select>
 </div>
 
