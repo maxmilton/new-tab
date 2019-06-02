@@ -21,6 +21,10 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 - New way of generating the extension manifest.
 - Updated dependencies.
 
+### Fixed
+
+- Occasional white background flash when loading the page in `dark` theme (which was very off-putting at night time!). Dark theme is now the default.
+
 ## [0.14.0] - 2018-12-17
 
 ### Added
