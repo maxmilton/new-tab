@@ -4,8 +4,9 @@
   "extends": "@minna-ui/ts-config",
   "compilerOptions": {
     "baseUrl": ".",
-    "importHelpers": true,
-    "outDir": "dist"
+    "isolatedModules": true, // ensure compatibility with sucrase
+    "outDir": "dist",
+    "target": "esnext"
   },
   "exclude": [
     "**/.*rc.js",

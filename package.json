@@ -21,9 +21,9 @@
     "prebuild": "rm -rf dist && mkdir dist && cp icon* dist",
     "lint": "yarn lint:md && yarn lint:css && yarn lint:js && yarn lint:types",
     "lint:md": "remark --frail --quiet .",
-    "lint:css": "stylelint --ignore-path .gitignore '**/*.{css,html,js,md,svelte,ts}'",
+    "lint:css": "stylelint --ignore-path .gitignore **/*.{css,html,js,md,svelte,ts}",
     "lint:js": "eslint --ignore-path .gitignore --ext html,js,md,svelte,ts .",
-    "lint:types": "tsc --noEmit || true",
+    "lint:types": "tsc --noEmit --allowJs --checkJs",
     "test": "yarn lint && jest --notify --watch",
     "test:e2e": "jest --config test/e2e/jest.config.js",
     "test-ci": "jest --runInBand --ci --coverage",
@@ -36,7 +36,6 @@
     "@types/jest-environment-puppeteer": "4.0.0",
     "@types/puppeteer": "1.12.4",
     "@wearegenki/renovate-config": "1.0.0",
-    "chokidar": "3.0.0",
     "codecov": "3.5.0",
     "eslint": "5.16.0",
     "jest": "24.8.0",
@@ -82,6 +81,9 @@
       "browser": true,
       "context": true,
       "jestPuppeteer": true
+    },
+    "rules": {
+      "dot-notation": "off"
     }
   },
   "stylelint": {
