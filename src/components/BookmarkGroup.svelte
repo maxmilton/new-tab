@@ -5,77 +5,78 @@
   // faster than adding an element to the DOM but we need to manually
   // calculate any padding etc.
 
-  const FONT = '18px sans-serif';
-  const TITLE_MAX_WIDTH = 144;
-  const FAVICON_WIDTH = 16;
-  const FAVICON_MARGIN = 6; // margin right
-  const ITEM_PADDING = 13 + 13; // padding left + right
+  // const FONT = '18px sans-serif';
+  // const TITLE_MAX_WIDTH = 144;
+  // const FAVICON_WIDTH = 16;
+  // const FAVICON_MARGIN = 6; // margin right
+  // const ITEM_PADDING = 13 + 13; // padding left + right
 
   // reuse the same canvas
-  const canvas2d = new OffscreenCanvas(0, 0).getContext('2d');
-  canvas2d.font = FONT;
-  const ellipsisWidth = canvas2d.measureText('…').width;
-  const titleMaxInnerWidth = TITLE_MAX_WIDTH - ellipsisWidth;
+  // const canvas2d = new OffscreenCanvas(0, 0).getContext('2d');
+  // canvas2d.font = FONT;
+  // const ellipsisWidth = canvas2d.measureText('…').width;
+  // const titleMaxInnerWidth = TITLE_MAX_WIDTH - ellipsisWidth;
 
   // data
-  let bookmarksBar = [];
-  let bookmarksOther = { children: [] };
+  let bBar = [];
+  let bOther = { children: [] };
   let itemCount;
 
-  // refs
-  let barEl;
+  /** Bookmarks bar DIV element reference */
+  let el;
 
-  // computed properties
-  $: visibleNodes = bookmarksBar.slice(0, itemCount);
-  $: overflowNodes = ({ children: bookmarksBar.slice(itemCount), title: '»' });
+  /** Visible bookmark nodes */
+  $: vNodes = bBar.slice(0, itemCount);
+  /** Overflow bookmark nodes */
+  $: oNodes = ({ children: bBar.slice(itemCount), title: '»' });
 
+  // FIXME: Reimplement simply now that CSS only item text width works
   function handleResize() {
-    const { length } = bookmarksBar;
-    const otherBookmarksWidth = !bookmarksOther.children.length
-      ? 0
-      : canvas2d.measureText(bookmarksOther.title).width + ITEM_PADDING;
-    // eslint-disable-next-line max-len
-    const bookmarksBarWidth = barEl.offsetWidth - ITEM_PADDING - FAVICON_MARGIN - otherBookmarksWidth;
-    let maxItems = 0;
-    let width = 0;
+    // const { length } = bBar;
+    // const otherBookmarksWidth = !bOther.children.length
+    //   ? 0
+    //   : canvas2d.measureText(bOther.title).width + ITEM_PADDING;
+    // // eslint-disable-next-line max-len
+    // const bBarWidth = el.offsetWidth - ITEM_PADDING - FAVICON_MARGIN - otherBookmarksWidth;
+    // let maxItems = 0;
+    // let width = 0;
 
-    for (; maxItems < length; maxItems += 1) {
-      // eslint-disable-next-line security/detect-object-injection
-      const { children, title } = bookmarksBar[maxItems];
-      const hasTitle = title !== undefined;
-      // eslint-disable-next-line no-nested-ternary
-      const faviconWidth = children !== undefined
-        ? 0
-        : hasTitle
-          ? FAVICON_WIDTH + FAVICON_MARGIN
-          : FAVICON_WIDTH;
-      const realTitleWidth = hasTitle ? canvas2d.measureText(title).width : 0;
-      const titleWidth = realTitleWidth > titleMaxInnerWidth
-        ? TITLE_MAX_WIDTH
-        : realTitleWidth;
-      const itemWidth = ITEM_PADDING + faviconWidth + titleWidth;
-      const nextWidth = width + itemWidth;
+    // for (; maxItems < length; maxItems += 1) {
+    //   // eslint-disable-next-line security/detect-object-injection
+    //   const { children, title } = bBar[maxItems];
+    //   const hasTitle = title !== undefined;
+    //   // eslint-disable-next-line no-nested-ternary
+    //   const faviconWidth = children !== undefined
+    //     ? 0
+    //     : hasTitle
+    //       ? FAVICON_WIDTH + FAVICON_MARGIN
+    //       : FAVICON_WIDTH;
+    //   const realTitleWidth = hasTitle ? canvas2d.measureText(title).width : 0;
+    //   const titleWidth = realTitleWidth > titleMaxInnerWidth
+    //     ? TITLE_MAX_WIDTH
+    //     : realTitleWidth;
+    //   const itemWidth = ITEM_PADDING + faviconWidth + titleWidth;
+    //   const nextWidth = width + itemWidth;
 
-      if (nextWidth > bookmarksBarWidth) break;
+    //   if (nextWidth > bBarWidth) break;
 
-      width = nextWidth;
-    }
+    //   width = nextWidth;
+    // }
 
-    itemCount = maxItems;
+    // itemCount = maxItems;
+    itemCount = 11;
   }
 
   chrome.bookmarks.getTree((tree) => {
-    bookmarksBar = tree[0].children[0].children;
-    bookmarksOther = tree[0].children[1]; // eslint-disable-line prefer-destructuring
+    bBar = tree[0].children[0].children;
+    bOther = tree[0].children[1]; // eslint-disable-line prefer-destructuring
 
     handleResize();
   });
-
-  window.addEventListener('resize', handleResize);
 </script>
 
 <style type="text/postcss">
-  :global(#bookmarks) {
+  :global(.bookmarks) {
     position: fixed;
     top: 0;
     right: 0;
@@ -86,19 +87,48 @@
     background: var(--c0);
     box-shadow: var(--s);
     backface-visibility: hidden; /* performance hack; force GPU */
+
+    :global(a),
+    :global(.item) {
+      padding: 0 13px;
+
+      &:hover,
+      &:focus {
+        background-color: var(--c);
+      }
+    }
+
+    :global(a) {
+      min-width: max-content;
+      max-width: 16ch;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+  }
+
+  :global(.container) :global(a) {
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  :global(.subfolder) :global(a) {
+    min-width: auto;
+    max-width: 38ch;
   }
 </style>
 
-<div id="bookmarks" bind:this="{barEl}">
-  {#each visibleNodes as _node}
-    <BookmarkNode {_node} maxLen="{15}" lvl="{0}" />
+<svelte:window on:resize={handleResize} />
+
+<div class="bookmarks" bind:this="{el}">
+  {#each vNodes as node}
+    <BookmarkNode {node} />
   {/each}
 
-  {#if overflowNodes.children.length}
-    <BookmarkNode _node="{overflowNodes}" lvl="{0}" maxLen="{40}" endNode />
+  {#if oNodes.children.length}
+    <BookmarkNode node="{oNodes}" end />
   {/if}
 
-  {#if bookmarksOther.children.length}
-    <BookmarkNode _node="{bookmarksOther}" lvl="{0}" maxLen="{40}" endNode />
+  {#if bOther.children.length}
+    <BookmarkNode node="{bOther}" end />
   {/if}
 </div>

@@ -5,28 +5,28 @@
   optimisation these titles should be refactored.
 -->
 
+<!-- FIXME: "Show more" doesn't work -->
+
 <script>
   import LinkItem from './LinkItem.svelte';
 
-  // props
-  export let resultsName;
-  export let resultsList;
-  export let resultsRaw;
+  export let name;
+  export let list;
+  export let raw;
 
   const MORE_RESULTS_AMOUNT = 100;
 
-  /** @param {number} length - Current length of list. */
-  function loadMore(length) {
-    resultsList = resultsRaw.slice(0, length + MORE_RESULTS_AMOUNT);
+  function loadMore() {
+    list = raw.slice(0, list.length + MORE_RESULTS_AMOUNT);
   }
 </script>
 
-<h2>{`${resultsName} (${resultsList.length}/${resultsRaw.length})`}</h2>
+<h2>{`${name} (${list.length}/${raw.length})`}</h2>
 
-{#each resultsList as _node}
-  <LinkItem {_node} />
+{#each list as node}
+  <LinkItem {node} />
 {/each}
 
-{#if resultsName !== 'Top Sites' && resultsList.length < resultsRaw.length}
-  <button on:click="{() => loadMore(resultsList.length)}">Show more ▾</button>
+{#if name !== 'Top Sites' && list.length < raw.length}
+  <button on:click="{loadMore}">Show more ▾</button>
 {/if}

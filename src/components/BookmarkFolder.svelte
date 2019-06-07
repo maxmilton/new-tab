@@ -2,28 +2,23 @@
   /* eslint-disable no-underscore-dangle */
 
   import { onDestroy } from 'svelte';
+  import { listen } from 'svelte/internal';
   import BookmarkNode from './BookmarkNode'; // eslint-disable-line import/no-cycle
-  import { shorten } from '../common';
 
-  // props
   export let lvl = 0;
-  export let maxLen = 0;
-  export let endNode = false;
-  export let _node;
-
-  // reactive data
-  let isOpen = false;
+  export let end;
+  export let node;
 
   const EVENT_NAME = 'open';
   const OPEN_DELAY = 200;
   const CLOSE_DELAY = 400;
-
   const openEvent = new CustomEvent(EVENT_NAME, { detail: lvl });
-  let openTimer = null;
-  let closeTimer = null;
+  let isOpen = false;
+  let openTimer;
+  let closeTimer;
 
   function resetCloseTimer() {
-    if (closeTimer !== null) {
+    if (closeTimer) {
       clearTimeout(closeTimer);
       closeTimer = null;
     }
@@ -41,9 +36,11 @@
     }
   }
 
+  let cancelOpenListener;
+
   function onOpen() {
     window.dispatchEvent(openEvent);
-    window.addEventListener(EVENT_NAME, handleOpen);
+    cancelOpenListener = listen(window, EVENT_NAME, handleOpen);
     isOpen = true;
   }
 
@@ -60,7 +57,7 @@
   // subfolder mouse leave
   function handleMouseLeave() {
     // reset open timer
-    if (openTimer !== null) {
+    if (openTimer) {
       clearTimeout(openTimer);
       openTimer = null;
     }
@@ -69,13 +66,15 @@
     if (isOpen) {
       closeTimer = setTimeout(() => {
         isOpen = false;
-        window.removeEventListener(EVENT_NAME, handleOpen);
+        cancelOpenListener();
       }, CLOSE_DELAY);
     }
   }
 
   onDestroy(() => {
-    window.removeEventListener(EVENT_NAME, handleOpen);
+    if (cancelOpenListener) {
+      cancelOpenListener();
+    }
   });
 </script>
 
@@ -104,15 +103,19 @@
 
   /* bookmark item pushed to the right */
   :global(.right) { /* stylelint-disable-line no-descending-specificity */
-    justify-content: flex-end;
     width: 100%;
+    text-align: right;
+
+    & + & {
+      width: auto;
+    }
   }
 
   /* folder which opens to the left */
   :global(.left) { /* stylelint-disable-line no-descending-specificity */
     right: 0;
     left: initial;
-    justify-content: initial;
+    text-align: left;
 
     :global(.subfolder) {
       right: 100%;
@@ -122,21 +125,21 @@
 </style>
 
 <div
-  class="item folder{endNode ? ' right' : ''}"
-  title="{_node.title}"
+  class="item folder {end ? 'right' : ''}"
+  title="{node.title}"
   on:mouseenter="{handleMouseEnter}"
   on:mouseleave="{handleMouseLeave}"
 >
-  {shorten(_node.title, maxLen)}
+  {node.title}
 
   {#if lvl !== 0}
     <div class="caret">▸</div>
   {/if}
 
   {#if isOpen}
-    <div class="subfolder{endNode ? ' left' : ''}">
-      {#each _node.children as childNode}
-        <BookmarkNode _node="{childNode}" lvl="{lvl + 1}" maxLen="{40}" />
+    <div class="subfolder {end ? 'left' : ''}">
+      {#each node.children as childNode}
+        <BookmarkNode node="{childNode}" lvl="{lvl + 1}" />
       {:else}
         <div class="item">(empty)</div>
       {/each}

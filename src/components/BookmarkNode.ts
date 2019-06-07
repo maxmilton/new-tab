@@ -7,7 +7,7 @@ import BookmarkFolder from './BookmarkFolder.svelte';
 // eslint-disable-next-line @typescript-eslint/explicit-function-return-type
 export default function BookmarkNode(context: IComponentOptions) {
   // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-  return new (context.props!._node.children !== undefined
+  return new (context.props!.node.children !== undefined
     ? BookmarkFolder
     : LinkItem)(context);
 }

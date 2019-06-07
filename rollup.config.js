@@ -49,6 +49,9 @@ const compilerOpts = {
   language_in: 'ECMASCRIPT_NEXT',
   language_out: 'ECMASCRIPT_2017',
   warning_level: 'DEFAULT',
+
+  // debug: true,
+  // formatting: 'PRETTY_PRINT',
 };
 
 // theme loader
