@@ -77,6 +77,9 @@
 </script>
 
 <style type="text/postcss">
+  /* FIXME: Stylelint */
+  /* stylelint-disable no-descending-specificity */
+
   :global(.bookmarks) {
     position: fixed;
     top: 0;
