@@ -44,7 +44,7 @@
     "minna-ui": "0.24.0",
     "postcss": "7.0.16",
     "postcss-scss": "2.0.0",
-    "prettier": "1.17.1",
+    "prettier": "1.18.0",
     "puppeteer": "1.17.0",
     "remark-cli": "6.0.1",
     "rollup": "1.14.0",
