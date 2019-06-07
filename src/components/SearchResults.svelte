@@ -5,8 +5,6 @@
   optimisation these titles should be refactored.
 -->
 
-<!-- FIXME: "Show more" doesn't work -->
-
 <script>
   import LinkItem from './LinkItem.svelte';
 
