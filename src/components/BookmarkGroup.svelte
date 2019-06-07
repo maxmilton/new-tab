@@ -37,7 +37,8 @@
     //   ? 0
     //   : canvas2d.measureText(bOther.title).width + ITEM_PADDING;
     // // eslint-disable-next-line max-len
-    // const bBarWidth = el.offsetWidth - ITEM_PADDING - FAVICON_MARGIN - otherBookmarksWidth;
+    // const bBarWidth =
+    //   el.offsetWidth - ITEM_PADDING - FAVICON_MARGIN - otherBookmarksWidth;
     // let maxItems = 0;
     // let width = 0;
 
