@@ -1,9 +1,3 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`BookmarkGroup component renders correctly 1`] = `
-"<div id=\\"bookmarks\\">
-
-  
-
-  </div>"
-`;
+exports[`BookmarkGroup component renders correctly 1`] = `"<div class=\\"bookmarks\\">  </div>"`;
