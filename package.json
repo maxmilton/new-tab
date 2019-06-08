@@ -27,7 +27,7 @@
     "test": "yarn lint && jest --notify --watch",
     "test:e2e": "jest --config test/e2e/jest.config.js",
     "test-ci": "jest --runInBand --ci --coverage",
-    "posttest-ci": "jest --runInBand --ci --config test/e2e/jest.config.js"
+    "FIXME__posttest-ci": "jest --runInBand --ci --config test/e2e/jest.config.js"
   },
   "devDependencies": {
     "@ampproject/rollup-plugin-closure-compiler": "0.9.0",

@@ -11,9 +11,9 @@ module.exports = {
     args: [
       `--disable-extensions-except=${dist}`,
       `--load-extension=${dist}`,
-      // allow running chromium in docker
-      '-–no-sandbox',
-      '–-disable-setuid-sandbox',
+      // required to run chromium in docker
+      // '-–no-sandbox',
+      // '–-disable-setuid-sandbox',
     ],
     dumpio: true,
     // extensions are only supported in headfull mode
