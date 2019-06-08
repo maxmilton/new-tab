@@ -322,10 +322,10 @@
   resolved "https://registry.yarnpkg.com/@minna-ui/css/-/css-0.25.0.tgz#e4e682b6b0663f3768ab02b1bf12823ae7b74d24"
   integrity sha512-Kyq/JWTQuADiUgJihzNyXgkYP+hAqGYLgeA69i8mLwWYz4Xulg1RsHRKnE5nqx8Tlj7Ijw9rqM3o/mJLembYBA==
 
-"@minna-ui/eslint-config@^0.25.0":
-  version "0.25.0"
-  resolved "https://registry.yarnpkg.com/@minna-ui/eslint-config/-/eslint-config-0.25.0.tgz#0c12f1445bdf03a82ade0e9e1e2073a5d330ecd2"
-  integrity sha512-yYVhtVZDhBUP22C0BDkrNEcanP68WcinoeoJitCfKX9Ca9i0io1xKyQoDGbbdS54MZ++wpMT21bMCLeWsvdCag==
+"@minna-ui/eslint-config@^0.25.1":
+  version "0.25.1"
+  resolved "https://registry.yarnpkg.com/@minna-ui/eslint-config/-/eslint-config-0.25.1.tgz#0452fcfde4c6a0355d23e7108cac1c2f769e63ad"
+  integrity sha512-1Zav1m+qu9wWFUD1Ec5eu7drp+BpPx0oBLKGOuzqwzjHUYEljtDrDhdeMluY1g4+Nmm+swMWTonWBW51OfeL3w==
   dependencies:
     "@types/eslint" "^4.16.6"
     "@typescript-eslint/eslint-plugin" "^1.9.0"
@@ -364,7 +364,7 @@
     css-mqpacker "^7.0.0"
     cssnano "^4.1.8"
     deepmerge "^3.1.0"
-    postcss-advanced-variables MaxMilton/postcss-advanced-variables#precompiled
+    postcss-advanced-variables "github:MaxMilton/postcss-advanced-variables#precompiled"
     postcss-color-mod-function "^3.0.3"
     postcss-flexbugs-fixes "^4.1.0"
     postcss-nested "^4.1.2"
@@ -631,6 +631,11 @@
   integrity sha512-tHq6qdbT9U1IRSGf14CL0pUlULksvY9OZ+5eEgl1N7t+OA3tGvNpxJCzuKQlsNgCVwbAs670L1vcVQi8j9HjnA==
 
 "@types/node@*", "@types/node@^12.0.3", "@types/node@^12.0.7":
+  version "12.0.7"
+  resolved "https://registry.yarnpkg.com/@types/node/-/node-12.0.7.tgz#4f2563bad652b2acb1722d7e7aae2b0ff62d192c"
+  integrity sha512-1YKeT4JitGgE4SOzyB9eMwO0nGVNkNEsm9qlIt1Lqm/tG2QEiSMTD4kS3aO6L+w5SClLVxALmIBESK6Mk5wX0A==
+
+"@types/node@^12.0.7":
   version "12.0.7"
   resolved "https://registry.yarnpkg.com/@types/node/-/node-12.0.7.tgz#4f2563bad652b2acb1722d7e7aae2b0ff62d192c"
   integrity sha512-1YKeT4JitGgE4SOzyB9eMwO0nGVNkNEsm9qlIt1Lqm/tG2QEiSMTD4kS3aO6L+w5SClLVxALmIBESK6Mk5wX0A==
@@ -981,6 +986,19 @@ autoprefixer@^9.5.1, autoprefixer@^9.6.0:
     postcss "^7.0.16"
     postcss-value-parser "^3.3.1"
 
+autoprefixer@^9.6.0:
+  version "9.6.0"
+  resolved "https://registry.yarnpkg.com/autoprefixer/-/autoprefixer-9.6.0.tgz#0111c6bde2ad20c6f17995a33fad7cf6854b4c87"
+  integrity sha512-kuip9YilBqhirhHEGHaBTZKXL//xxGnzvsD0FtBQa6z+A69qZD6s/BAX9VzDF1i9VKDquTJDQaPLSEhOnL6FvQ==
+  dependencies:
+    browserslist "^4.6.1"
+    caniuse-lite "^1.0.30000971"
+    chalk "^2.4.2"
+    normalize-range "^0.1.2"
+    num2fraction "^1.2.2"
+    postcss "^7.0.16"
+    postcss-value-parser "^3.3.1"
+
 aws-sign2@~0.7.0:
   version "0.7.0"
   resolved "https://registry.yarnpkg.com/aws-sign2/-/aws-sign2-0.7.0.tgz#b46e890934a9591f2d2f6f86d7e6a9f1b3fe76a8"
@@ -1120,6 +1138,15 @@ browserslist@^4.0.0, browserslist@^4.6.1:
     electron-to-chromium "^1.3.150"
     node-releases "^1.1.23"
 
+browserslist@^4.6.1:
+  version "4.6.2"
+  resolved "https://registry.yarnpkg.com/browserslist/-/browserslist-4.6.2.tgz#574c665950915c2ac73a4594b8537a9eba26203f"
+  integrity sha512-2neU/V0giQy9h3XMPwLhEY3+Ao0uHSwHvU8Q1Ea6AgLVL1sXbX3dzPrJ8NWe5Hi4PoTkCYXOtVR9rfRLI0J/8Q==
+  dependencies:
+    caniuse-lite "^1.0.30000974"
+    electron-to-chromium "^1.3.150"
+    node-releases "^1.1.23"
+
 bser@^2.0.0:
   version "2.0.0"
   resolved "https://registry.yarnpkg.com/bser/-/bser-2.0.0.tgz#9ac78d3ed5d915804fd87acb158bc797147a1719"
@@ -1211,6 +1238,11 @@ caniuse-api@^3.0.0:
     lodash.uniq "^4.5.0"
 
 caniuse-lite@^1.0.0, caniuse-lite@^1.0.30000971, caniuse-lite@^1.0.30000974:
+  version "1.0.30000974"
+  resolved "https://registry.yarnpkg.com/caniuse-lite/-/caniuse-lite-1.0.30000974.tgz#b7afe14ee004e97ce6dc73e3f878290a12928ad8"
+  integrity sha512-xc3rkNS/Zc3CmpMKuczWEdY2sZgx09BkAxfvkxlAEBTqcMHeL8QnPqhKse+5sRTi3nrw2pJwToD2WvKn1Uhvww==
+
+caniuse-lite@^1.0.30000974:
   version "1.0.30000974"
   resolved "https://registry.yarnpkg.com/caniuse-lite/-/caniuse-lite-1.0.30000974.tgz#b7afe14ee004e97ce6dc73e3f878290a12928ad8"
   integrity sha512-xc3rkNS/Zc3CmpMKuczWEdY2sZgx09BkAxfvkxlAEBTqcMHeL8QnPqhKse+5sRTi3nrw2pJwToD2WvKn1Uhvww==
@@ -1955,6 +1987,11 @@ ecc-jsbn@~0.1.1:
   dependencies:
     jsbn "~0.1.0"
     safer-buffer "^2.1.0"
+
+electron-to-chromium@^1.3.150:
+  version "1.3.151"
+  resolved "https://registry.yarnpkg.com/electron-to-chromium/-/electron-to-chromium-1.3.151.tgz#d4099131871ba2448706141162095ab977db805c"
+  integrity sha512-Lk5HHXw8hSGB6vYJO/yosy4U2JgVFoXn+uDMmZ0sYxltaKon5mKl2AbjNPkY+zBX9asnGDqEJzuzRq1t2aPm1Q==
 
 electron-to-chromium@^1.3.150:
   version "1.3.151"
@@ -4447,13 +4484,13 @@ minizlib@^1.2.1:
   dependencies:
     minipass "^2.2.1"
 
-minna-tools@0.25.0:
-  version "0.25.0"
-  resolved "https://registry.yarnpkg.com/minna-tools/-/minna-tools-0.25.0.tgz#741888d573ab34435f0aee3eed1a445360d74274"
-  integrity sha512-sGJ3sbY7utTB3qBcmXO6TEgBSjYMemODGHCdGwziUV+v+GNt3s7F9XfgyDwA0UgXcrSg+aPX/DbKkNZOHyOtiw==
+minna-tools@0.25.1:
+  version "0.25.1"
+  resolved "https://registry.yarnpkg.com/minna-tools/-/minna-tools-0.25.1.tgz#6128c511d0e473b6d412a939503b41b8d2e975d4"
+  integrity sha512-ggfHeC5upsvOemHu4L5nX09WLms59WWiyv9HohzfJPfjilN74eyOzKDtKV2C9CaZKDETdeiC4Axi1jKuEQBSsw==
   dependencies:
     "@minna-ui/browserslist-config" "^0.25.0"
-    "@minna-ui/eslint-config" "^0.25.0"
+    "@minna-ui/eslint-config" "^0.25.1"
     "@minna-ui/jest-config" "^0.25.0"
     "@minna-ui/prettier-config" "^0.25.0"
     "@minna-ui/remark-config" "^0.25.0"
@@ -4614,6 +4651,13 @@ node-pre-gyp@^0.12.0:
     rimraf "^2.6.1"
     semver "^5.3.0"
     tar "^4"
+
+node-releases@^1.1.23:
+  version "1.1.23"
+  resolved "https://registry.yarnpkg.com/node-releases/-/node-releases-1.1.23.tgz#de7409f72de044a2fa59c097f436ba89c39997f0"
+  integrity sha512-uq1iL79YjfYC0WXoHbC/z28q/9pOl8kSHaXdWmAAc8No+bDwqkZbzIJz55g/MUsPgSGm9LZ7QSUbzTcH5tz47w==
+  dependencies:
+    semver "^5.3.0"
 
 node-releases@^1.1.23:
   version "1.1.23"
@@ -5091,8 +5135,9 @@ posix-character-classes@^0.1.0:
   resolved "https://registry.yarnpkg.com/posix-character-classes/-/posix-character-classes-0.1.1.tgz#01eac0fe3b5af71a2a6c02feabb8c1fef7e00eab"
   integrity sha1-AerA/jta9xoqbAL+q7jB/vfgDqs=
 
-postcss-advanced-variables@MaxMilton/postcss-advanced-variables#precompiled:
+"postcss-advanced-variables@github:MaxMilton/postcss-advanced-variables#precompiled":
   version "3.0.0"
+  uid "13ca503266410fbbb4ddec5aa133fe8dd0baff8d"
   resolved "https://codeload.github.com/MaxMilton/postcss-advanced-variables/tar.gz/13ca503266410fbbb4ddec5aa133fe8dd0baff8d"
   dependencies:
     "@csstools/sass-import-resolve" "^1.0.0"
@@ -5511,7 +5556,7 @@ postcss-values-parser@^2.0.0:
     indexes-of "^1.0.1"
     uniq "^1.0.1"
 
-postcss@7.0.17, postcss@^7.0.0, postcss@^7.0.1, postcss@^7.0.14, postcss@^7.0.16, postcss@^7.0.2, postcss@^7.0.5, postcss@^7.0.6, postcss@^7.0.7:
+postcss@7.0.17, postcss@^7.0.16:
   version "7.0.17"
   resolved "https://registry.yarnpkg.com/postcss/-/postcss-7.0.17.tgz#4da1bdff5322d4a0acaab4d87f3e782436bad31f"
   integrity sha512-546ZowA+KZ3OasvQZHsbuEpysvwTZNGJv9EfyCQdsIDltPSWHAeTQ5fQy/Npi2ZDtLI3zs7Ps/p6wThErhm9fQ==
@@ -6635,7 +6680,22 @@ rollup-plugin-typescript@1.0.1:
     resolve "^1.10.0"
     rollup-pluginutils "^2.5.0"
 
-rollup-pluginutils@^2.3.3, rollup-pluginutils@^2.5.0, rollup-pluginutils@^2.8.0, rollup-pluginutils@^2.8.1:
+rollup-pluginutils@^2.3.3, rollup-pluginutils@^2.5.0:
+  version "2.7.1"
+  resolved "https://registry.yarnpkg.com/rollup-pluginutils/-/rollup-pluginutils-2.7.1.tgz#a7915ce8b12c177364784bf38a1590cc6c2c8250"
+  integrity sha512-3nRf3buQGR9qz/IsSzhZAJyoK663kzseps8itkYHr+Z7ESuaffEPfgRinxbCRA0pf0gzLqkNKkSb8aNVTq75NA==
+  dependencies:
+    estree-walker "^0.6.0"
+    micromatch "^3.1.10"
+
+rollup-pluginutils@^2.8.0:
+  version "2.8.0"
+  resolved "https://registry.yarnpkg.com/rollup-pluginutils/-/rollup-pluginutils-2.8.0.tgz#d7ece1502958a35748a74080c7ac5e95681bcbe9"
+  integrity sha512-8TomM64VQH6w+13lemFHX5sZYxLCxHhf9gzdRUEFNXH3Z+0CDYy7Grzqa6YUbZc0GIrfbWoD5GXZ3o5Teqh9ew==
+  dependencies:
+    estree-walker "^0.6.1"
+
+rollup-pluginutils@^2.8.1:
   version "2.8.1"
   resolved "https://registry.yarnpkg.com/rollup-pluginutils/-/rollup-pluginutils-2.8.1.tgz#8fa6dd0697344938ef26c2c09d2488ce9e33ce97"
   integrity sha512-J5oAoysWar6GuZo0s+3bZ6sVZAC0pfqKz68De7ZgDi5z63jOVZn1uJL/+z1jeKHNbGII8kAyHF5q8LnxSX5lQg==
