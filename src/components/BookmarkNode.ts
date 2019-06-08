@@ -1,5 +1,4 @@
-// eslint-disable-next-line import/no-extraneous-dependencies
-import { SvelteComponent } from 'svelte/internal';
+import { SvelteComponent } from 'svelte/internal'; // eslint-disable-line import/no-extraneous-dependencies
 import LinkItem from './LinkItem.svelte';
 import BookmarkFolder from './BookmarkFolder.svelte';
 
