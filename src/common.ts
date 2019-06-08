@@ -35,23 +35,21 @@ export function debounce(fn: Function, delay = 260): Function {
  */
 export function handleLinkClick(event: MouseEvent): void {
   const { target, ctrlKey } = event;
-  const url = target.href;
-
-  // handle open settings from Menu.html component
-  if (target.id === 'o') {
-    chrome.runtime.openOptionsPage();
-  }
+  const url = (target as HTMLAnchorElement).href;
 
   // only apply special handling to non-http links
   if (url && url.charAt(0) !== 'h') {
     event.preventDefault();
 
-    if (target.target === '_blank' || ctrlKey) {
+    if ((target as HTMLAnchorElement).target === '_blank' || ctrlKey) {
       // open the location in a new tab
       chrome.tabs.create({ url });
     } else {
       // update the location in the current tab
       chrome.tabs.update({ url });
     }
+  } else if ((target as HTMLAnchorElement).id === 'o') {
+    // handle open settings from Menu.html component
+    chrome.runtime.openOptionsPage();
   }
 }
