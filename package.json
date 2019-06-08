@@ -102,7 +102,7 @@
   "jest": {
     "preset": "minna-tools",
     "setupFiles": [
-      "./test/__setup__.js"
+      "./test/__setup__.ts"
     ],
     "collectCoverageFrom": [
       "src/**/*.{svelte,ts}",
