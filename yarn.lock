@@ -4487,10 +4487,10 @@ minizlib@^1.1.1:
   dependencies:
     minipass "^2.2.1"
 
-minna-tools@0.26.0:
-  version "0.26.0"
-  resolved "https://registry.yarnpkg.com/minna-tools/-/minna-tools-0.26.0.tgz#25dfaaa062c47680b654e449739b2358016ad84f"
-  integrity sha512-dRWgY8/d7Z2IrHLzgU4jPFByPyUG6cnx3CfGgEx47rnodsJht/36gYFAiSH/QwDJQzS8JX++QZS7WqgvRJOQGw==
+minna-tools@0.26.1:
+  version "0.26.1"
+  resolved "https://registry.yarnpkg.com/minna-tools/-/minna-tools-0.26.1.tgz#43787f61d18dbdc37e42ad3eb7d37de3bb2ef615"
+  integrity sha512-1ZOAwErjZwdLlgRlkJMMybQ5QKELa+XD6Ba9GJhUpJtPpth7pBraILaQ12G/Tdmd1w8rbdl9tb0Zx548zC1zLA==
   dependencies:
     "@minna-ui/browserslist-config" "^0.26.0"
     "@minna-ui/eslint-config" "^0.26.0"
