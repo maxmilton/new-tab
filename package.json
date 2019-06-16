@@ -53,7 +53,7 @@
     "rollup-plugin-typescript": "1.0.1",
     "stylelint": "10.1.0",
     "svelte": "3.5.1",
-    "typescript": "3.5.1"
+    "typescript": "3.5.2"
   },
   "browserslist": [
     "last 2 Chrome versions"
