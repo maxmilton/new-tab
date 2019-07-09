@@ -52,7 +52,7 @@
     "rollup-plugin-svelte": "5.1.0",
     "rollup-plugin-typescript": "1.0.1",
     "stylelint": "10.1.0",
-    "svelte": "3.6.5",
+    "svelte": "3.6.6",
     "typescript": "3.5.2"
   },
   "browserslist": [
