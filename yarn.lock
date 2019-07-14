@@ -312,15 +312,15 @@
   resolved "https://registry.yarnpkg.com/@minna-ui/browserslist-config/-/browserslist-config-0.26.0.tgz#e0f9f6cd1032edf6a60d58ee8c91b5d4a4065e23"
   integrity sha512-YrYg83bKHSWB/F0SqK7eGdg3q2i0kJZNVi78RSSi4wajVDRjxNlrTmYiBoRQ4dtZbe6FeB5EJU+rqqrq9sWxAw==
 
-"@minna-ui/collapse@^0.26.0":
-  version "0.26.0"
-  resolved "https://registry.yarnpkg.com/@minna-ui/collapse/-/collapse-0.26.0.tgz#db37b4af13da2310922ccfdd3f24ae5bd33a95d2"
-  integrity sha512-O4qf1UiGWWV/YmpNA6P+SPw8J4k9NL1dcCxndMCM5SUXjpHtrCxSnBvq2uaT9XDoYPxbFDGKC93zPlRFhMu95g==
+"@minna-ui/collapse@^0.27.0":
+  version "0.27.0"
+  resolved "https://registry.yarnpkg.com/@minna-ui/collapse/-/collapse-0.27.0.tgz#5fa0d4353e1fee6d9a3301cb5a42297edeff062f"
+  integrity sha512-GNuPuM5OP/7jct1qYGfhecowoNsurRxzg1JacYaPxYmgM3FP5Dtz+JIs+vhax+8aNIcakUk6xHZLEBXfEYdhsg==
 
-"@minna-ui/css@^0.26.0":
-  version "0.26.0"
-  resolved "https://registry.yarnpkg.com/@minna-ui/css/-/css-0.26.0.tgz#190fd7f1c862f6b51e57ea378a8b2e13c4a45b63"
-  integrity sha512-dYYX9WG0dwOTRLrYeKo+oV9IiydxP8F1LlynNGbxQGPRoFTdgrzo7eh8I+i674BrKbI/Ubkf4Bcbd8FekOJ6kw==
+"@minna-ui/css@^0.27.0":
+  version "0.27.0"
+  resolved "https://registry.yarnpkg.com/@minna-ui/css/-/css-0.27.0.tgz#c9e8cf3702fc84d19fa68de5b28c8cfc5b2c41cf"
+  integrity sha512-GJaQqOTmrueyQ5UK1kOh3NwBaczWHKjlWm0WFA1v9sJlhrITCdeKLiDkjx6M1PVDGu1mv2OQvCi0rC9Iv5sAhg==
 
 "@minna-ui/eslint-config@^0.26.0":
   version "0.26.0"
@@ -350,32 +350,32 @@
     jest-circus "^24.8.0"
     sucrase "^3.0.0"
 
-"@minna-ui/navbar@^0.26.0":
-  version "0.26.0"
-  resolved "https://registry.yarnpkg.com/@minna-ui/navbar/-/navbar-0.26.0.tgz#abe8026fd5304328a5c45b922a31c4c7c43e34ae"
-  integrity sha512-0IW4EpcD+Cu3JzIu+H6waxcTWpzgS5viZDCrRsqFt9TtvztBTesQgCbBP7ReugrZFF7bcdkDmJ/xLFdZL0qOeg==
+"@minna-ui/navbar@^0.27.0":
+  version "0.27.0"
+  resolved "https://registry.yarnpkg.com/@minna-ui/navbar/-/navbar-0.27.0.tgz#13d7466a8af3a67ef07efb722be2c66103c9703f"
+  integrity sha512-T+mCVEBZvzq6sC41nClRs6WCdUcfOR+gDuz6S+pBfXbuZ4KUFXb/71NNKCULNy/tqbcjPcKniNHp7TBys5hqPw==
 
-"@minna-ui/postcss-config@^0.26.0":
-  version "0.26.0"
-  resolved "https://registry.yarnpkg.com/@minna-ui/postcss-config/-/postcss-config-0.26.0.tgz#6689ca159959ca33bbf0a71426055c9a08226839"
-  integrity sha512-DP4umBopMf6wQwCvaGhi77IOtajKFrLUTc7rLunRd0ZMOJWvqKm7o6hXggFziY5TGXKaYsOyUaO+yzrzKQFHyA==
+"@minna-ui/postcss-config@^0.27.0":
+  version "0.27.0"
+  resolved "https://registry.yarnpkg.com/@minna-ui/postcss-config/-/postcss-config-0.27.0.tgz#65ff98ecf8e4ba1e45d6590c4e6b9adc96fc9fbb"
+  integrity sha512-dl7ASPW+K/FNqAVgGvkat0Uy2849qfjlM8Z3swnuxYD0ynOihTWfAuBywpQwbdAIEH5bhnQ5fdYmcwhMfTQyrA==
   dependencies:
-    autoprefixer "^9.6.0"
+    autoprefixer "^9.6.1"
     css-mqpacker "^7.0.0"
     cssnano "^4.1.8"
-    deepmerge "^3.1.0"
+    deepmerge "^4.0.0"
     postcss-advanced-variables "github:MaxMilton/postcss-advanced-variables#precompiled"
     postcss-color-mod-function "^3.0.3"
     postcss-flexbugs-fixes "^4.1.0"
     postcss-nested "^4.1.2"
     postcss-use "^3.0.0"
 
-"@minna-ui/preprocess@^0.26.0":
-  version "0.26.0"
-  resolved "https://registry.yarnpkg.com/@minna-ui/preprocess/-/preprocess-0.26.0.tgz#2e2d1c073fda819f2314f7ba81dab2f31c741f8a"
-  integrity sha512-iEepB+3b+MGPnJicTiec/eNYe1NOl8sSlPA+pXQfR0BwSqsJGf3Qlg3bIGk+86kSZE8xsWO5RCZ7mVjBthMkpg==
+"@minna-ui/preprocess@^0.27.0":
+  version "0.27.0"
+  resolved "https://registry.yarnpkg.com/@minna-ui/preprocess/-/preprocess-0.27.0.tgz#4f3639a06cb1809ca1289f04ded5ad005bd02e0c"
+  integrity sha512-O/cZ3cfbq4Vf/AiGRRMIjzBEL3QHbz+sUJ4S35z97if2GwRyYhkV7O3KXuRLsSRojUn6tm33GYh9E4U4myT0pQ==
   dependencies:
-    deepmerge "^3.1.0"
+    deepmerge "^4.0.0"
     postcss-load-config "^2.0.0"
     postcss-scss "^2.0.0"
 
@@ -439,10 +439,10 @@
     purgecss "^1.3.0"
     rollup-pluginutils "^2.8.1"
 
-"@minna-ui/select@^0.26.0":
-  version "0.26.0"
-  resolved "https://registry.yarnpkg.com/@minna-ui/select/-/select-0.26.0.tgz#9dd2406953e4eff5f928cce5127444edda5647fe"
-  integrity sha512-j5tHCq+VB/pojR2jRLRBAF3IX4nxNHf9NfSE3kNFix9PsuD5IAia5gKKVdGyE2VEmK4fDmcjNjCjHJgygi//yA==
+"@minna-ui/select@^0.27.0":
+  version "0.27.0"
+  resolved "https://registry.yarnpkg.com/@minna-ui/select/-/select-0.27.0.tgz#34e0f3f66f0fa109cf6b0537dcc341ea308e1ec1"
+  integrity sha512-ecUSHB5q7BxcAi2F+5s4hbu+BiXLCD/UE15O8yjjC3pHMI5qMS1q6h+aDT5Q6y+bJ8UsyR4RCXKa3V3ZJ+n1wQ==
 
 "@minna-ui/stylelint-config@^0.26.0":
   version "0.26.0"
@@ -456,15 +456,15 @@
     stylelint-high-performance-animation "^1.2.1"
     stylelint-order "^3.0.0"
 
-"@minna-ui/switch@^0.26.0":
-  version "0.26.0"
-  resolved "https://registry.yarnpkg.com/@minna-ui/switch/-/switch-0.26.0.tgz#ed85399598047b533253b367dfb5717751b801d4"
-  integrity sha512-6QBsHdpXewkTdH8ycQLWonaV5GrBWtMEETSpRbYL0Uj8IOZRbqVQF6KFmHp+S/HVprQPCvluZfMiY+vsJCEUDw==
+"@minna-ui/switch@^0.27.0":
+  version "0.27.0"
+  resolved "https://registry.yarnpkg.com/@minna-ui/switch/-/switch-0.27.0.tgz#1ca0c7ca28c0a9abd1e8f6973c6699f3ea19a708"
+  integrity sha512-fSWOCStEEzoNxdIPsKQnMLJxtujOBAxN6gmkuZlWULE6ecUH2fTm84keq18E3YtbWQSVN9CNyctT5AnIYlIOpg==
 
-"@minna-ui/tooltip@^0.26.0":
-  version "0.26.0"
-  resolved "https://registry.yarnpkg.com/@minna-ui/tooltip/-/tooltip-0.26.0.tgz#ffe57d9a5daaa1cd3bfb2dd6abe988c346696169"
-  integrity sha512-e9Yt4kaWU7AgCCTUAsLNKT6fZ9aNkj6ksqw+vnINa0gcehqvN9BgWBh9Mkb3eVBrOAATqpPcU1CAxT89ORPYPA==
+"@minna-ui/tooltip@^0.27.0":
+  version "0.27.0"
+  resolved "https://registry.yarnpkg.com/@minna-ui/tooltip/-/tooltip-0.27.0.tgz#c7541541755747cfa2335851a9a032d5cefaf28e"
+  integrity sha512-2Ned+/nHGeYvhT9PQ9NIj8PBBisALqQu4bcMi/8gILXPIdEapxCZbLaas8jSk7IQBJr/VoIWFjkkf6NVPUNjew==
 
 "@minna-ui/ts-config@^0.26.0":
   version "0.26.0"
@@ -1004,18 +1004,18 @@ autoprefixer@^9.5.1:
     postcss "^7.0.14"
     postcss-value-parser "^3.3.1"
 
-autoprefixer@^9.6.0:
-  version "9.6.0"
-  resolved "https://registry.yarnpkg.com/autoprefixer/-/autoprefixer-9.6.0.tgz#0111c6bde2ad20c6f17995a33fad7cf6854b4c87"
-  integrity sha512-kuip9YilBqhirhHEGHaBTZKXL//xxGnzvsD0FtBQa6z+A69qZD6s/BAX9VzDF1i9VKDquTJDQaPLSEhOnL6FvQ==
+autoprefixer@^9.6.1:
+  version "9.6.1"
+  resolved "https://registry.yarnpkg.com/autoprefixer/-/autoprefixer-9.6.1.tgz#51967a02d2d2300bb01866c1611ec8348d355a47"
+  integrity sha512-aVo5WxR3VyvyJxcJC3h4FKfwCQvQWb1tSI5VHNibddCVWrcD1NvlxEweg3TSgiPztMnWfjpy2FURKA2kvDE+Tw==
   dependencies:
-    browserslist "^4.6.1"
-    caniuse-lite "^1.0.30000971"
+    browserslist "^4.6.3"
+    caniuse-lite "^1.0.30000980"
     chalk "^2.4.2"
     normalize-range "^0.1.2"
     num2fraction "^1.2.2"
-    postcss "^7.0.16"
-    postcss-value-parser "^3.3.1"
+    postcss "^7.0.17"
+    postcss-value-parser "^4.0.0"
 
 aws-sign2@~0.7.0:
   version "0.7.0"
@@ -1156,14 +1156,14 @@ browserslist@^4.0.0, browserslist@^4.5.4:
     electron-to-chromium "^1.3.137"
     node-releases "^1.1.21"
 
-browserslist@^4.6.1:
-  version "4.6.2"
-  resolved "https://registry.yarnpkg.com/browserslist/-/browserslist-4.6.2.tgz#574c665950915c2ac73a4594b8537a9eba26203f"
-  integrity sha512-2neU/V0giQy9h3XMPwLhEY3+Ao0uHSwHvU8Q1Ea6AgLVL1sXbX3dzPrJ8NWe5Hi4PoTkCYXOtVR9rfRLI0J/8Q==
+browserslist@^4.6.3:
+  version "4.6.4"
+  resolved "https://registry.yarnpkg.com/browserslist/-/browserslist-4.6.4.tgz#fd0638b3f8867fec2c604ed0ed9300379f8ec7c2"
+  integrity sha512-ErJT8qGfRt/VWHSr1HeqZzz50DvxHtr1fVL1m5wf20aGrG8e1ce8fpZ2EjZEfs09DDZYSvtRaDlMpWslBf8Low==
   dependencies:
-    caniuse-lite "^1.0.30000974"
-    electron-to-chromium "^1.3.150"
-    node-releases "^1.1.23"
+    caniuse-lite "^1.0.30000981"
+    electron-to-chromium "^1.3.188"
+    node-releases "^1.1.25"
 
 bser@^2.0.0:
   version "2.0.0"
@@ -1260,10 +1260,10 @@ caniuse-lite@^1.0.0, caniuse-lite@^1.0.30000957, caniuse-lite@^1.0.30000971:
   resolved "https://registry.yarnpkg.com/caniuse-lite/-/caniuse-lite-1.0.30000971.tgz#d1000e4546486a6977756547352bc96a4cfd2b13"
   integrity sha512-TQFYFhRS0O5rdsmSbF1Wn+16latXYsQJat66f7S7lizXW1PVpWJeZw9wqqVLIjuxDRz7s7xRUj13QCfd8hKn6g==
 
-caniuse-lite@^1.0.30000974:
-  version "1.0.30000974"
-  resolved "https://registry.yarnpkg.com/caniuse-lite/-/caniuse-lite-1.0.30000974.tgz#b7afe14ee004e97ce6dc73e3f878290a12928ad8"
-  integrity sha512-xc3rkNS/Zc3CmpMKuczWEdY2sZgx09BkAxfvkxlAEBTqcMHeL8QnPqhKse+5sRTi3nrw2pJwToD2WvKn1Uhvww==
+caniuse-lite@^1.0.30000980, caniuse-lite@^1.0.30000981:
+  version "1.0.30000984"
+  resolved "https://registry.yarnpkg.com/caniuse-lite/-/caniuse-lite-1.0.30000984.tgz#dc96c3c469e9bcfc6ad5bdd24c77ec918ea76fe0"
+  integrity sha512-n5tKOjMaZ1fksIpQbjERuqCyfgec/m9pferkFQbLmWtqLUdmt12hNhjSwsmPdqeiG2NkITOQhr1VYIwWSAceiA==
 
 capture-exit@^2.0.0:
   version "2.0.0"
@@ -1880,6 +1880,11 @@ deepmerge@^3.1.0:
   resolved "https://registry.yarnpkg.com/deepmerge/-/deepmerge-3.2.0.tgz#58ef463a57c08d376547f8869fdc5bcee957f44e"
   integrity sha512-6+LuZGU7QCNUnAJyX8cIrlzoEgggTM6B7mm+znKOX4t5ltluT9KLjN6g61ECMS0LTsLW7yDpNoxhix5FZcrIow==
 
+deepmerge@^4.0.0:
+  version "4.0.0"
+  resolved "https://registry.yarnpkg.com/deepmerge/-/deepmerge-4.0.0.tgz#3e3110ca29205f120d7cb064960a39c3d2087c09"
+  integrity sha512-YZ1rOP5+kHor4hMAH+HRQnBQHg+wvS1un1hAOuIcxcBy0hzcUf6Jg2a1w65kpoOUnurOfZbERwjI1TfZxNjcww==
+
 define-properties@^1.1.2, define-properties@^1.1.3:
   version "1.1.3"
   resolved "https://registry.yarnpkg.com/define-properties/-/define-properties-1.1.3.tgz#cf88da6cbee26fe6db7094f61d870cbd84cee9f1"
@@ -2011,10 +2016,10 @@ electron-to-chromium@^1.3.137:
   resolved "https://registry.yarnpkg.com/electron-to-chromium/-/electron-to-chromium-1.3.139.tgz#17a149701d934bbb91d2aa4ae09e5270c38dc0ff"
   integrity sha512-8cR7h6doIC/XLgPdsTM3BXpfWLzqrHS6jWrvWLsdZWZWFvVQQUJTbU/wUZsjRGK33OY5ZIiS1n6JbqowuWrmYg==
 
-electron-to-chromium@^1.3.150:
-  version "1.3.151"
-  resolved "https://registry.yarnpkg.com/electron-to-chromium/-/electron-to-chromium-1.3.151.tgz#d4099131871ba2448706141162095ab977db805c"
-  integrity sha512-Lk5HHXw8hSGB6vYJO/yosy4U2JgVFoXn+uDMmZ0sYxltaKon5mKl2AbjNPkY+zBX9asnGDqEJzuzRq1t2aPm1Q==
+electron-to-chromium@^1.3.188:
+  version "1.3.191"
+  resolved "https://registry.yarnpkg.com/electron-to-chromium/-/electron-to-chromium-1.3.191.tgz#c451b422cd8b2eab84dedabab5abcae1eaefb6f0"
+  integrity sha512-jasjtY5RUy/TOyiUYM2fb4BDaPZfm6CXRFeJDMfFsXYADGxUN49RBqtgB7EL2RmJXeIRUk9lM1U6A5yk2YJMPQ==
 
 emoji-regex@^7.0.1:
   version "7.0.3"
@@ -4532,19 +4537,19 @@ minna-tools@0.26.1:
     "@minna-ui/ts-config" "^0.26.0"
     "@minna-ui/utils" "^0.26.0"
 
-minna-ui@0.26.0:
-  version "0.26.0"
-  resolved "https://registry.yarnpkg.com/minna-ui/-/minna-ui-0.26.0.tgz#ca70356a194729b34e690abdefada95d832fd214"
-  integrity sha512-mKJneCSl1TORLFXKNDoWwxFm0tjMOtsN3xuUbJj7DFx8BrO+dzyviygsUvhaUWSFblxgy4WyXLoe4acKgQRNvQ==
+minna-ui@0.27.0:
+  version "0.27.0"
+  resolved "https://registry.yarnpkg.com/minna-ui/-/minna-ui-0.27.0.tgz#aa588935ab94ed0bc02d7b1972c9d40fc7335c97"
+  integrity sha512-LciCbJ0NNdT3PxzNYxEufS8pENsKIgWfXRhqBkxy/hgXOyUqucPr3/SQmugYsEnSHZS737YfNZirLj038h6RWQ==
   dependencies:
-    "@minna-ui/collapse" "^0.26.0"
-    "@minna-ui/css" "^0.26.0"
-    "@minna-ui/navbar" "^0.26.0"
-    "@minna-ui/postcss-config" "^0.26.0"
-    "@minna-ui/preprocess" "^0.26.0"
-    "@minna-ui/select" "^0.26.0"
-    "@minna-ui/switch" "^0.26.0"
-    "@minna-ui/tooltip" "^0.26.0"
+    "@minna-ui/collapse" "^0.27.0"
+    "@minna-ui/css" "^0.27.0"
+    "@minna-ui/navbar" "^0.27.0"
+    "@minna-ui/postcss-config" "^0.27.0"
+    "@minna-ui/preprocess" "^0.27.0"
+    "@minna-ui/select" "^0.27.0"
+    "@minna-ui/switch" "^0.27.0"
+    "@minna-ui/tooltip" "^0.27.0"
 
 mixin-deep@^1.2.0:
   version "1.3.1"
@@ -4688,10 +4693,10 @@ node-releases@^1.1.21:
   dependencies:
     semver "^5.3.0"
 
-node-releases@^1.1.23:
-  version "1.1.23"
-  resolved "https://registry.yarnpkg.com/node-releases/-/node-releases-1.1.23.tgz#de7409f72de044a2fa59c097f436ba89c39997f0"
-  integrity sha512-uq1iL79YjfYC0WXoHbC/z28q/9pOl8kSHaXdWmAAc8No+bDwqkZbzIJz55g/MUsPgSGm9LZ7QSUbzTcH5tz47w==
+node-releases@^1.1.25:
+  version "1.1.25"
+  resolved "https://registry.yarnpkg.com/node-releases/-/node-releases-1.1.25.tgz#0c2d7dbc7fed30fbe02a9ee3007b8c90bf0133d3"
+  integrity sha512-fI5BXuk83lKEoZDdH3gRhtsNgh05/wZacuXkgbiYkceE7+QIMXOg98n9ZV7mz27B+kFHnqHcUpscZZlGRSmTpQ==
   dependencies:
     semver "^5.3.0"
 
@@ -5571,6 +5576,11 @@ postcss-value-parser@^3.0.0, postcss-value-parser@^3.3.1:
   resolved "https://registry.yarnpkg.com/postcss-value-parser/-/postcss-value-parser-3.3.1.tgz#9ff822547e2893213cf1c30efa51ac5fd1ba8281"
   integrity sha512-pISE66AbVkp4fDQ7VHBwRNXzAAKJjw4Vw7nWI/+Q3vuly7SNfgYXvm6i5IgFylHGK5sP/xHAbB7N49OS4gWNyQ==
 
+postcss-value-parser@^4.0.0:
+  version "4.0.0"
+  resolved "https://registry.yarnpkg.com/postcss-value-parser/-/postcss-value-parser-4.0.0.tgz#99a983d365f7b2ad8d0f9b8c3094926eab4b936d"
+  integrity sha512-ESPktioptiSUchCKgggAkzdmkgzKfmp0EU8jXH+5kbIUB+unr0Y4CY9SRMvibuvYUBjNh1ACLbxqYNpdTQOteQ==
+
 postcss-values-parser@^2.0.0:
   version "2.0.1"
   resolved "https://registry.yarnpkg.com/postcss-values-parser/-/postcss-values-parser-2.0.1.tgz#da8b472d901da1e205b47bdc98637b9e9e550e5f"
@@ -5580,7 +5590,7 @@ postcss-values-parser@^2.0.0:
     indexes-of "^1.0.1"
     uniq "^1.0.1"
 
-postcss@7.0.17, postcss@^7.0.16:
+postcss@7.0.17, postcss@^7.0.17:
   version "7.0.17"
   resolved "https://registry.yarnpkg.com/postcss/-/postcss-7.0.17.tgz#4da1bdff5322d4a0acaab4d87f3e782436bad31f"
   integrity sha512-546ZowA+KZ3OasvQZHsbuEpysvwTZNGJv9EfyCQdsIDltPSWHAeTQ5fQy/Npi2ZDtLI3zs7Ps/p6wThErhm9fQ==
