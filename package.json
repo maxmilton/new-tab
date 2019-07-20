@@ -41,7 +41,7 @@
     "jest": "24.8.0",
     "jest-puppeteer": "4.3.0",
     "minna-tools": "0.27.0",
-    "minna-ui": "0.27.0",
+    "minna-ui": "0.28.0",
     "postcss": "7.0.17",
     "postcss-scss": "2.0.0",
     "prettier": "1.18.2",
