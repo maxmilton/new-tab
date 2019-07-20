@@ -84,8 +84,9 @@
   }
 
   :global(.caret) {
-    padding: 0 6px;
+    float: right;
     margin-left: auto;
+    padding: 0 6px;
   }
 
   :global(.subfolder) {
