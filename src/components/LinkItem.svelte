@@ -1,23 +1,19 @@
 <!--
-  TODO: Try to accomplish the same short text like shorten() but with CSS only
-  and without  adding any wrapper elements.
-
   TODO: Add padding to img if there is a textNode but try to do it without
   using JS based logic to keep the component logic free.
 -->
 
 <script>
-  /* eslint-disable no-underscore-dangle */
   export let node;
 </script>
 
 <style type="text/postcss">
-  /* all <img> are favicons */
+  /* All <img> are favicons */
   :global(img) {
     width: 16px;
-    height: 16px; /* prevents slight realignment jump on initial load */
+    height: 16px; /* Prevents slight realignment jump on initial load */
     margin: 0 6px 0 0;
-    pointer-events: none; /* prevent being the click event target */
+    pointer-events: none; /* Prevent being the click event target */
   }
 
   :global(a),

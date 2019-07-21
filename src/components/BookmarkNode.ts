@@ -3,10 +3,10 @@ import LinkItem from './LinkItem.svelte';
 import BookmarkFolder from './BookmarkFolder.svelte';
 
 export default function BookmarkNode(
-  context: ComponentOptions,
+  context: SvelteComponent['$$'],
 ): SvelteComponent {
-  // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-  return new (context.props!.node.children !== undefined
-    ? BookmarkFolder
-    : LinkItem)(context);
+  return new (context.props.node.children ? BookmarkFolder : LinkItem)(
+    // @ts-ignore
+    context,
+  );
 }

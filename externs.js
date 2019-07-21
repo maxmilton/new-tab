@@ -1,11 +1,11 @@
 /**
- * @fileoverview Closure Compiler externs declarations.
+ * @file Closure Compiler externs declarations.
  * @externs
  */
 
-/* eslint-disable strict, no-var, @typescript-eslint/no-unused-vars, no-underscore-dangle */
+/* eslint-disable strict, no-var, @typescript-eslint/no-unused-vars */
 
-// new tab app props
+// New tab app props
 var bList;
 var bOther;
 var bRaw;
@@ -28,5 +28,5 @@ var tList;
 var tRaw;
 var vNodes;
 
-// settings app props
+// Settings app props
 var pageTheme;

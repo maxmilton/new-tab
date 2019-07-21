@@ -2,6 +2,7 @@ import Menu from '../Menu.svelte';
 
 describe('Menu component', () => {
   it('renders correctly', () => {
+    expect.assertions(1);
     const target = document.createElement('div');
     new Menu({ target });
     expect(target.innerHTML).toMatchSnapshot();

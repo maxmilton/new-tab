@@ -4,6 +4,7 @@ import App from '../App.svelte';
 
 describe('App component', () => {
   it('renders correctly', () => {
+    expect.assertions(1);
     const target = document.createElement('div');
     new App({ target });
     expect(target.innerHTML).toMatchSnapshot();
@@ -12,7 +13,7 @@ describe('App component', () => {
 
 describe('App click handler', () => {
   it.skip('triggers on mouse click event', () => {
-    expect.assertions(1);
+    expect.assertions(3);
     const target = document.createElement('div');
     const spy1 = jest.spyOn(chrome.tabs, 'update');
     new App({ target });

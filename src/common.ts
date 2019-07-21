@@ -1,21 +1,23 @@
-/** @type {Array<string>} */
 export const DEFAULT_ORDER = ['Open Tabs', 'Bookmarks', 'History', 'Top Sites'];
+const DEFAULT_DEBOUNCE_DELAY_MS = 260;
 
 /**
  * Delay running a function until X ms have passed since its last call.
  *
  * @see https://github.com/developit/decko/blob/master/src/decko.js
  */
-export function debounce(fn: Function, delay = 260): Function {
+export function debounce(
+  fn: Function,
+  delay = DEFAULT_DEBOUNCE_DELAY_MS,
+): Function {
   /* eslint-disable @typescript-eslint/no-explicit-any, func-names */
   let args: any;
   let context: any;
   let timer: NodeJS.Timeout | null;
 
   /* prettier-ignore */
-  return function (...params: any[]) {
+  return function (this: any, ...params: any[]) {
     args = params;
-    // @ts-ignore
     context = this;
 
     if (!timer) {

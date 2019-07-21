@@ -1,5 +1,3 @@
-/* eslint-disable no-underscore-dangle */
-
 import BookmarkFolder from '../BookmarkFolder.svelte';
 
 const node = {
@@ -8,6 +6,7 @@ const node = {
 
 describe('BookmarkFolder component', () => {
   it('renders correctly', () => {
+    expect.assertions(1);
     const target = document.createElement('div');
     new BookmarkFolder({
       props: { node },

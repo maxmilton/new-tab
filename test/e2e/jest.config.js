@@ -1,5 +1,5 @@
 /**
- * Jest config for end-to-end testing
+ * Jest config for end-to-end testing.
  */
 
 /* eslint-disable sort-keys */

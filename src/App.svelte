@@ -9,9 +9,10 @@
   @import './themes/light.css';
   @import './themes/dark.css';
 
-  :global(body) {
+  :global(body) { /* stylelint-disable-line a11y/line-height-is-vertical-rhythmed */
     margin: 80px 0;
-    overflow-y: scroll; /* prevent jump on load */
+    overflow-y: scroll; /* Prevent jump on load */
+    color: var(--t);
     font-size: 18px;
     /**
      * Normally you would use a unitless value for line-height but this is kind
@@ -21,7 +22,6 @@
     line-height: 41px;
     text-rendering: optimizeSpeed;
     font-variant-ligatures: none;
-    color: var(--t);
     background-color: var(--b);
   }
 
