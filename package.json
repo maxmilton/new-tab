@@ -19,10 +19,11 @@
     "dev": "rollup --config --watch",
     "build": "NODE_ENV=production rollup --config",
     "prebuild": "rm -rf dist && mkdir dist && cp icon* dist",
-    "lint": "yarn lint:md && yarn lint:css && yarn lint:js && yarn lint:types",
     "lint:md": "remark --frail --quiet .",
-    "lint:css": "stylelint --ignore-path .gitignore **/*.{css,html,js,md,svelte,ts}",
-    "lint:js": "eslint --ignore-path .gitignore --ext html,js,md,svelte,ts .",
+    "lint": "yarn lint:md && yarn lint:css && yarn lint:js && yarn lint:types",
+    "FIXME__lint:css": "stylelint **/*.{css,html,js,md,svelte,svg,ts} --report-needless-disables",
+    "lint:css": "stylelint **/*.{css,html,js,md,svelte,svg,ts}",
+    "lint:js": "eslint --ext html,js,md,mjs,snap,svelte,svg,ts --report-unused-disable-directives .",
     "lint:types": "tsc --noEmit --allowJs --checkJs",
     "test": "jest --notify --watch",
     "test:e2e": "jest --config test/e2e/jest.config.js",
@@ -87,8 +88,19 @@
       "dot-notation": "off"
     }
   },
+  "eslintIgnore": [
+    "**/dist/**",
+    "**/node_modules/**",
+    "/test/coverage/**"
+  ],
   "stylelint": {
     "extends": "minna-tools/stylelint",
+    "ignoreFiles": [
+      "**/*.d.ts",
+      "**/dist/**",
+      "**/node_modules/**",
+      "test/coverage/**"
+    ],
     "rules": {
       "color-no-hex": null,
       "scale-unlimited/declaration-strict-value": null,
