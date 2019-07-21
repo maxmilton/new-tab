@@ -17,21 +17,15 @@
   // const ellipsisWidth = canvas2d.measureText('…').width;
   // const titleMaxInnerWidth = TITLE_MAX_WIDTH - ellipsisWidth;
 
-  // data
   let bBar = [];
   let bOther = { children: [] };
   let itemCount;
 
-  /** Bookmarks bar DIV element reference */
+  /** Bookmarks bar DIV element reference. */
   let el;
 
-  /** Visible bookmark nodes */
-  $: vNodes = bBar.slice(0, itemCount);
-  /** Overflow bookmark nodes */
-  $: oNodes = ({ children: bBar.slice(itemCount), title: '»' });
-
   // FIXME: Reimplement simply now that CSS only item text width works
-  function handleResize() {
+  const handleResize = () => {
     // const { length } = bBar;
     // const otherBookmarksWidth = !bOther.children.length
     //   ? 0
@@ -66,7 +60,12 @@
 
     // itemCount = maxItems;
     itemCount = 11;
-  }
+  };
+
+  /** Visible bookmark nodes. */
+  $: vNodes = bBar.slice(0, itemCount);
+  /** Overflow bookmark nodes. */
+  $: oNodes = ({ children: bBar.slice(itemCount), title: '»' });
 
   chrome.bookmarks.getTree((tree) => {
     bBar = tree[0].children[0].children;
@@ -77,7 +76,6 @@
 </script>
 
 <style type="text/postcss">
-  /* FIXME: Stylelint */
   /* stylelint-disable no-descending-specificity */
 
   :global(.bookmarks) {

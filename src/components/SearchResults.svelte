@@ -14,9 +14,9 @@
 
   const MORE_RESULTS_AMOUNT = 100;
 
-  function loadMore() {
+  const loadMore = () => {
     list = raw.slice(0, list.length + MORE_RESULTS_AMOUNT);
-  }
+  };
 </script>
 
 <h2>{`${name} (${list.length}/${raw.length})`}</h2>

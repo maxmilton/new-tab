@@ -1,53 +1,46 @@
 <script>
+  // Svelte will hoist pure functions if they're defined using a declaration
+  // (they use the `function` keyword). Functions with side effects we define
+  // using `const` expressions for better compile time minification.
+
   import { afterUpdate } from 'svelte';
   import { DEFAULT_ORDER } from './common';
 
   let order = [];
   let pageTheme = '';
 
-  // check existing settings
-  chrome.storage.local.get(null, (settings) => {
-    /* eslint-disable dot-notation */ // prevent closure mangling
-    order = settings['o'] || DEFAULT_ORDER;
-    pageTheme = settings['t'];
-    /* eslint-enable */
-  });
-
-  // this callback runs after the view is updated
-  afterUpdate(() => {
-    /* eslint-disable quote-props */ // prevent closure mangling
-    chrome.storage.local.set({
-      'o': JSON.stringify(order) === JSON.stringify(DEFAULT_ORDER)
-        ? null
-        : order,
-      't': pageTheme,
-    });
-    /* eslint-enable */
-  });
-
-  function resetOrder() {
+  const resetOrder = () => {
     order = [...DEFAULT_ORDER];
-  }
+  };
 
-  function moveItem(from, to) {
+  const moveItem = (from, to) => {
     const ordered = [...order];
     // eslint-disable-next-line security/detect-object-injection
     const item = order[from];
 
-    // remove from previous location
+    // Remove from previous location
     ordered.splice(from, 1);
 
-    // add to new location
+    // Add to new location
     ordered.splice(to, 0, item);
 
     order = ordered;
-  }
+  };
 
-  function removeItem(index) {
+  const removeItem = (index) => {
     const ordered = [...order];
     ordered.splice(index, 1);
     order = ordered;
-  }
+  };
+
+  const handleDrop = (event, index) => {
+    event.preventDefault();
+    const from = event.dataTransfer.getData('from');
+    moveItem(from, index);
+
+    // Remove class in case the `dragleave` event didn't fire
+    event.target.classList.remove('over');
+  };
 
   function handleDragStart(event, index) {
     event.dataTransfer.setData('from', index);
@@ -71,14 +64,24 @@
     event.target.classList.remove('over');
   }
 
-  function handleDrop(event, index) {
-    event.preventDefault();
-    const from = event.dataTransfer.getData('from');
-    moveItem(from, index);
+  // Check existing settings
+  chrome.storage.local.get(null, (settings) => {
+    /* eslint-disable dot-notation */ // Prevent closure mangling
+    order = settings['o'] || DEFAULT_ORDER;
+    pageTheme = settings['t'];
+    /* eslint-enable */
+  });
 
-    // remove class in case the dragleave event didn't fire
-    event.target.classList.remove('over');
-  }
+  afterUpdate(() => {
+    /* eslint-disable quote-props */ // Prevent closure mangling
+    chrome.storage.local.set({
+      'o': JSON.stringify(order) === JSON.stringify(DEFAULT_ORDER)
+        ? null
+        : order,
+      't': pageTheme,
+    });
+    /* eslint-enable */
+  });
 </script>
 
 <style type="text/postcss">
@@ -96,11 +99,11 @@
   }
 
   :global(.item) {
-    padding: 6px 10px;
     margin: 6px 0;
-    cursor: grab;
+    padding: 6px 10px;
     border: 1px solid rgba(0, 0, 0, 0.25);
     border-radius: 2px;
+    cursor: grab;
   }
 
   /* TODO: Improve the styling technique */

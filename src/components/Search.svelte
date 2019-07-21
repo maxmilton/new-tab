@@ -2,38 +2,31 @@
   import { DEFAULT_ORDER, debounce } from '../common';
   import SearchResults from './SearchResults.svelte';
 
-  const SEARCH_DEBOUNCE_DELAY = 260; // ms
+  const SEARCH_DEBOUNCE_DELAY_MS = 260;
   const DEFAULT_RESULTS_AMOUNT = 10;
 
-  // URL protocol regex
-  const protocol = /^.*?:\/\//;
+  /** URL protocol regex. */
+  const protocolRe = /^.*?:\/\//;
 
-  /** Bookmarks list sorted */
+  /** Sorted bookmarks list. */
   let bList = [];
-  /** Bookmarks list raw */
+  /** Raw bookmarks list. */
   let bRaw = [];
-  /** History list sorted */
+  /** Sorted history list. */
   let hList = [];
-  /** History list raw */
+  /** Raw history list. */
   let hRaw = [];
-  /** Top sites list sorted */
+  /** Sorted top sites list. */
   let tList = [];
-  /** Top sites list raw */
+  /** Raw top sites list. */
   let tRaw = [];
-
-  // tabs
   let tabsList = [];
   let tabsRaw = [];
-
   let order = [];
   let searchText = '';
 
-  chrome.storage.local.get(null, (settings) => {
-    order = settings['o'] || DEFAULT_ORDER;
-  });
-
   /** Query the browser for a list of the currently open tabs. */
-  function getTabs() {
+  const getTabs = () => {
     chrome.tabs.query({}, (tabs) => {
       if (searchText === '') {
         // eslint-disable-next-line no-multi-assign
@@ -42,29 +35,29 @@
         tabsRaw = tabs;
       }
     });
-  }
+  };
 
   /** @param {MouseEvent} obj - A link item mouse click event. */
-  function handleTabClick({ target }) {
+  const handleTabClick = ({ target }) => {
     const windowId = target.getAttribute('w');
 
-    // update current tab
+    // Update current tab
     chrome.tabs.update(+target.id, { active: true });
 
-    // switch active window if the tab isn't in the current window
+    // Switch active window if the tab isn't in the current window
     chrome.windows.getCurrent({}, (currentWindow) => {
       if (currentWindow.id !== windowId) {
         chrome.windows.update(windowId, { focused: true });
       }
     });
 
-    // close this NTP
+    // Close this NTP
     chrome.tabs.getCurrent((currentTab) => {
       chrome.tabs.remove(currentTab.id);
     });
-  }
+  };
 
-  function maybeCancelSearch(event) {
+  const maybeCancelSearch = (event) => {
     if (event.key === 'Escape') {
       searchText = '';
       // eslint-disable-next-line no-multi-assign
@@ -72,7 +65,56 @@
       tabsList = tabsRaw;
       tList = tRaw;
     }
-  }
+  };
+
+  /**
+   * Check if either title or URL match a query.
+   *
+   * @this {string} Search query.
+   * @param {object} obj - Options.
+   * @param {string} obj.title - Title to match against.
+   * @param {string} obj.url - URL to match against.
+   * @returns {boolean} True if a match is found.
+   */
+  const searchFilter = ({ title, url }) =>
+    title.toLowerCase().indexOf(this) > -1
+    // Remove URL protocol since it's unlikely to be searched for
+    || url.replace(protocolRe, '').toLowerCase().indexOf(this) > -1;
+
+
+  const doSearch = () => {
+    // Reset search when input is empty
+    if (!searchText) {
+      // eslint-disable-next-line no-multi-assign
+      bList = hList = [];
+      tabsList = tabsRaw;
+      tList = tRaw;
+      return;
+    }
+
+    // Search history (run first since it takes the longest)
+    chrome.history.search({ text: searchText }, (results) => {
+      hRaw = results;
+      hList = results.slice(0, DEFAULT_RESULTS_AMOUNT);
+    });
+
+    // Search bookmarks
+    chrome.bookmarks.search(searchText, (results) => {
+      bRaw = results;
+      bList = results.slice(0, DEFAULT_RESULTS_AMOUNT);
+    });
+
+    // Search open tabs
+    tabsList = tabsRaw.filter(searchFilter, searchText);
+    // Search top sites
+    tList = tRaw.filter(searchFilter, searchText);
+  };
+
+  const onSearch = debounce(doSearch, SEARCH_DEBOUNCE_DELAY_MS);
+
+  chrome.storage.local.get(null, (settings) => {
+    order = settings['o'] || DEFAULT_ORDER;
+  });
 
   getTabs();
 
@@ -81,59 +123,16 @@
     tList = tRaw = sites;
   });
 
-  // update tab list on tab events
+  // Update tab list on tab events
   chrome.tabs.onUpdated.addListener(getTabs);
   chrome.tabs.onRemoved.addListener(getTabs);
   chrome.tabs.onMoved.addListener(getTabs);
-
-  /**
-   * Check if either title or URL match a query.
-   *
-   * @this {string} Search query
-   * @param {{ title: string, url: string }} item - Item to match against.
-   * @returns {boolean} True if a match is found.
-   */
-  function searchFilter({ title, url }) {
-    return title.toLowerCase().indexOf(this) > -1
-      // remove URL protocol since it's unlikely to be searched for
-      || url.replace(protocol, '').toLowerCase().indexOf(this) > -1;
-  }
-
-  function doSearch() {
-    // reset search when input is empty
-    if (searchText === '') {
-      // eslint-disable-next-line no-multi-assign
-      bList = hList = [];
-      tabsList = tabsRaw;
-      tList = tRaw;
-      return;
-    }
-
-    // search history (run first since it takes the longest)
-    chrome.history.search({ text: searchText }, (results) => {
-      hRaw = results;
-      hList = results.slice(0, DEFAULT_RESULTS_AMOUNT);
-    });
-
-    // search bookmarks
-    chrome.bookmarks.search(searchText, (results) => {
-      bRaw = results;
-      bList = results.slice(0, DEFAULT_RESULTS_AMOUNT);
-    });
-
-    // search open tabs
-    tabsList = tabsRaw.filter(searchFilter, searchText);
-    // search top sites
-    tList = tRaw.filter(searchFilter, searchText);
-  }
-
-  const onSearch = debounce(doSearch, SEARCH_DEBOUNCE_DELAY);
 
   $: if (searchText) onSearch();
 </script>
 
 <style type="text/postcss">
-  /* load more buttons */
+  /* "Load more" buttons */
   :global(button) {
     width: initial;
     margin-top: 9px;
@@ -142,8 +141,8 @@
 
   :global(.container) {
     max-width: 800px;
-    padding: 0 18px;
     margin: 0 auto;
+    padding: 0 18px;
   }
 
   /* stylelint-disable no-descending-specificity */
@@ -151,10 +150,10 @@
   :global(#search) {
     box-sizing: border-box;
     width: 100%;
-    padding: 11px 20px;
     margin: 0 0 18px;
-    font-size: 22px;
+    padding: 11px 20px;
     color: var(--t);
+    font-size: 22px;
     background: var(--c2);
     border: 0;
     border-radius: 24px;
