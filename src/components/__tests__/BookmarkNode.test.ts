@@ -1,14 +1,13 @@
-/* eslint-disable no-underscore-dangle */
-
 import BookmarkNode from '../BookmarkNode';
 
-const _node = {};
+const node = {};
 
 describe('BookmarkNode component', () => {
   it.skip('renders correctly', () => {
+    expect.assertions(1);
     const target = document.createElement('div');
     new BookmarkNode({
-      props: { _node },
+      props: { node },
       target,
     });
     expect(target.innerHTML).toMatchSnapshot();

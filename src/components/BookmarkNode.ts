@@ -1,13 +1,12 @@
-/* eslint-disable no-underscore-dangle */
-
+import { SvelteComponent } from 'svelte/internal'; // eslint-disable-line import/no-extraneous-dependencies
 import LinkItem from './LinkItem.svelte';
 import BookmarkFolder from './BookmarkFolder.svelte';
 
-// TODO: Use real svelte types once they're availiable
-// eslint-disable-next-line @typescript-eslint/explicit-function-return-type
-export default function BookmarkNode(context: IComponentOptions) {
-  // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-  return new (context.props!._node.children !== undefined
-    ? BookmarkFolder
-    : LinkItem)(context);
+export default function BookmarkNode(
+  context: SvelteComponent['$$'],
+): SvelteComponent {
+  return new (context.props.node.children ? BookmarkFolder : LinkItem)(
+    // @ts-ignore
+    context,
+  );
 }

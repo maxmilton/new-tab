@@ -11,12 +11,19 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ### Added
 
-- Ability to remove unwanted sections.
+- Ability to remove unwanted sections via updated settings UI.
 
 ### Changed
 
-- Converted internals to use Svelte v3 beta.
+- Update to Svelte v3 (from v2 before) + update syntax of all components.
+- Convert all JavaScript files to TypeScript.
+- Lots of improvements for faster performance and to minimise file size.
 - New way of generating the extension manifest.
+- Updated dependencies.
+
+### Fixed
+
+- Occasional white background flash when loading the page in `dark` theme (which was very off-putting at night time!). Dark theme is now the default.
 
 ## [0.14.0] - 2018-12-17
 
@@ -36,8 +43,8 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 - Better click event capture.
 - Tweak shadow colours and animation timing.
 - Move `manifest.js` into `src` directory.
-- Move most devtooling configs into `package.json` for a cleaner and less intimidating root directory.
-- Update dependencies.
+- Move most tooling configs into `package.json` for a cleaner and less intimidating root directory.
+- Updated dependencies.
 
 ### Removed
 
@@ -78,7 +85,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
   - Refactor bookmark bar resize handler loop.
   - Add a new reusable `LinkItem` component which is shared between the bookmarks bar and the search result.
   - Complete refactor of `BookmarkItem` and `Search` components to do the minimum necessary to achieve the desired functionality.
-- Update dependencies.
+- Updated dependencies.
 
 ### Removed
 
@@ -99,7 +106,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ### Changed
 
-- Update dependencies — including a Svelte update which _might_ bring improved performance by doing batched component updates.
+- Updated dependencies — including a Svelte update which _might_ bring improved performance by doing batched component updates.
 
 ## [0.12.2] - 2018-08-28
 
@@ -124,7 +131,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 ### Changed
 
 - Only set the search component as `immutable` rather than the whole app.
-- Update dependencies.
+- Updated dependencies.
 
 ### Fixed
 
@@ -149,13 +156,13 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 ### Changed
 
 - Small improvement to tab event handling.
-- Update dependencies.
+- Updated dependencies.
 
 ## [0.11.2] - 2018-08-23
 
 ### Changed
 
-- Update dependencies.
+- Updated dependencies.
 
 ### Removed
 
@@ -190,7 +197,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ### Changed
 
-- Update dependencies.
+- Updated dependencies.
 
 ## [0.9.0] - 2018-08-09
 
@@ -246,7 +253,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 ### Changed
 
 - Disable immutable build option.
-- Update dependencies.
+- Updated dependencies.
 
 ## [0.7.4] - 2018-07-19
 
@@ -255,7 +262,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 - Use keyed each loops for search results items. This leads to better performance when performing searches due to less DOM changes.
 - Optimise updating state for tabs and search results; don't set state multiple times if it can be avoided.
 - Set `immutable` to `true` in Svelte built options for better runtime performance.
-- Update dependencies.
+- Updated dependencies.
 
 ### Fixed
 
@@ -267,7 +274,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 ### Changed
 
 - Better CSS minification.
-- Update dependencies.
+- Updated dependencies.
 
 ## [0.7.2] - 2018-06-27
 
@@ -277,14 +284,14 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ### Changed
 
-- Update dependencies.
+- Updated dependencies.
 
 ## [0.7.1] - 2018-06-24
 
 ### Changed
 
 - Minor improvements to loaders.
-- Update dependencies.
+- Updated dependencies.
 
 ## [0.7.0] - 2018-06-15
 
@@ -293,7 +300,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 - Load JavaScript in a way which is faster and more consistent for page load performance. Uses some new browser APIs which are not available in Chrome =< v63.
 - Increase the click area of bookmark items.
 - Trim whitespace from HTML.
-- Update dependencies.
+- Updated dependencies.
 
 ## [0.6.6] - 2018-06-14
 
@@ -306,7 +313,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 - Much more restrictive CSP for better security.
 - Shorten search placeholder text.
 - Minor clean up of build script.
-- Update dependencies.
+- Updated dependencies.
 
 ### Removed
 
@@ -321,7 +328,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 ### Changed
 
 - Because `uglifyjs` is no longer supported, it's been swapped out for `terser` its active fork.
-- Update dependencies.
+- Updated dependencies.
 
 ## [0.6.4] - 2018-05-18
 
@@ -400,7 +407,7 @@ Known issues:
 - Move main JavaScript bundle to higher for a small performance improvement.
 - Use a background script instead of a background page and set up an event handler for new installs and updates which saves the default settings.
 - Build process improvements.
-- Update dependencies.
+- Updated dependencies.
 - Developer tooling configuration tweaks.
 
 ### Fixed

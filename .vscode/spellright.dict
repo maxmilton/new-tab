@@ -2,9 +2,13 @@
 ⚡
 ci
 codecov
+color
+const
 contrib
 CSP
+css
 ctrl
+debounce
 eslint
 esm
 ext
@@ -13,6 +17,7 @@ extension
 extensions
 externs
 iife
+lvl
 markdownlint
 markup
 minna
@@ -21,6 +26,9 @@ mkdir
 NTP
 oncreate
 onstate
+param
 preprocess
+px
+stylelint
 subfolder
 unhandledrejection

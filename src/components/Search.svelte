@@ -1,153 +1,138 @@
 <script>
-  import { beforeUpdate } from 'svelte';
   import { DEFAULT_ORDER, debounce } from '../common';
   import SearchResults from './SearchResults.svelte';
 
-  const SEARCH_DEBOUNCE_DELAY = 260; // ms
+  const SEARCH_DEBOUNCE_DELAY_MS = 260;
   const DEFAULT_RESULTS_AMOUNT = 10;
 
-  // URL protocol regex
-  const protocol = /^.*?:\/\//;
+  /** URL protocol regex. */
+  const protocolRe = /^.*?:\/\//;
 
-  // reactive data
-  let bookmarksList = [];
-  let bookmarksRaw = [];
-  let historyList = [];
-  let historyRaw = [];
-  let resultsOrder = DEFAULT_ORDER;
-  let searchText = '';
+  /** Sorted bookmarks list. */
+  let bList = [];
+  /** Raw bookmarks list. */
+  let bRaw = [];
+  /** Sorted history list. */
+  let hList = [];
+  /** Raw history list. */
+  let hRaw = [];
+  /** Sorted top sites list. */
+  let tList = [];
+  /** Raw top sites list. */
+  let tRaw = [];
   let tabsList = [];
   let tabsRaw = [];
-  let topSitesList = [];
-  let topSitesRaw = [];
-
-  // computed properties
-  $: isSearching = !!searchText;
-
-  /**
-   * Check if either title or URL match a query.
-   *
-   * @this {string} Search query
-   * @param {{ title: string, url: string }} item - Item to match against.
-   * @returns {boolean} True is a match is found.
-   */
-  function searchFilter({ title, url }) {
-    return title.toLowerCase().indexOf(this) > -1
-      // remove URL protocol since it's unlikely to be searched for
-      || url.replace(protocol, '').toLowerCase().indexOf(this) > -1;
-  }
-
-  function doSearch() {
-    // reset search when input is empty
-    if (searchText === '') {
-      bookmarksList = [];
-      historyList = [];
-      tabsList = tabsRaw;
-      topSitesList = topSitesRaw;
-      return;
-    }
-
-    // search history (run first since it takes the longest)
-    chrome.history.search({ text: searchText }, (results) => {
-      historyRaw = results;
-      historyList = results.slice(0, DEFAULT_RESULTS_AMOUNT);
-    });
-
-    // search bookmarks
-    chrome.bookmarks.search(searchText, (results) => {
-      bookmarksRaw = results;
-      bookmarksList = results.slice(0, DEFAULT_RESULTS_AMOUNT);
-    });
-
-    // search open tabs
-    tabsList = tabsRaw.filter(searchFilter, searchText);
-    // search top sites
-    topSitesList = topSitesRaw.filter(searchFilter, searchText);
-  }
+  let order = [];
+  let searchText = '';
 
   /** Query the browser for a list of the currently open tabs. */
-  function getTabs() {
+  const getTabs = () => {
     chrome.tabs.query({}, (tabs) => {
       if (searchText === '') {
-        tabsList = tabs;
-        tabsRaw = tabs;
+        // eslint-disable-next-line no-multi-assign
+        tabsList = tabsRaw = tabs;
       } else {
         tabsRaw = tabs;
       }
     });
-  }
+  };
 
-  /**
-   * @param {Tab} tab - A browser tab object.
-   * @param {MouseEvent} event - A mouse event.
-   */
-  function handleTabClick(tab, event) {
-    event.preventDefault();
+  /** @param {MouseEvent} obj - A link item mouse click event. */
+  const handleTabClick = ({ target }) => {
+    const windowId = target.getAttribute('w');
 
-    // update current tab
-    chrome.tabs.update(tab.id, { active: true });
+    // Update current tab
+    chrome.tabs.update(+target.id, { active: true });
 
-    // switch active window if the tab isn't in the current window
+    // Switch active window if the tab isn't in the current window
     chrome.windows.getCurrent({}, (currentWindow) => {
-      if (currentWindow.id !== tab.windowId) {
-        chrome.windows.update(tab.windowId, { focused: true });
+      if (currentWindow.id !== windowId) {
+        chrome.windows.update(windowId, { focused: true });
       }
     });
 
-    // close this NTP
+    // Close this NTP
     chrome.tabs.getCurrent((currentTab) => {
       chrome.tabs.remove(currentTab.id);
     });
-  }
+  };
 
-  function maybeCancelSearch(event) {
+  const maybeCancelSearch = (event) => {
     if (event.key === 'Escape') {
       searchText = '';
-      bookmarksList = [];
-      historyList = [];
+      // eslint-disable-next-line no-multi-assign
+      bList = hList = [];
       tabsList = tabsRaw;
-      topSitesList = topSitesRaw;
+      tList = tRaw;
     }
-  }
+  };
+
+  /**
+   * Check if either title or URL match a query.
+   *
+   * @this {string} Search query.
+   * @param {object} obj - Options.
+   * @param {string} obj.title - Title to match against.
+   * @param {string} obj.url - URL to match against.
+   * @returns {boolean} True if a match is found.
+   */
+  const searchFilter = ({ title, url }) =>
+    title.toLowerCase().indexOf(this) > -1
+    // Remove URL protocol since it's unlikely to be searched for
+    || url.replace(protocolRe, '').toLowerCase().indexOf(this) > -1;
+
+
+  const doSearch = () => {
+    // Reset search when input is empty
+    if (!searchText) {
+      // eslint-disable-next-line no-multi-assign
+      bList = hList = [];
+      tabsList = tabsRaw;
+      tList = tRaw;
+      return;
+    }
+
+    // Search history (run first since it takes the longest)
+    chrome.history.search({ text: searchText }, (results) => {
+      hRaw = results;
+      hList = results.slice(0, DEFAULT_RESULTS_AMOUNT);
+    });
+
+    // Search bookmarks
+    chrome.bookmarks.search(searchText, (results) => {
+      bRaw = results;
+      bList = results.slice(0, DEFAULT_RESULTS_AMOUNT);
+    });
+
+    // Search open tabs
+    tabsList = tabsRaw.filter(searchFilter, searchText);
+    // Search top sites
+    tList = tRaw.filter(searchFilter, searchText);
+  };
+
+  const onSearch = debounce(doSearch, SEARCH_DEBOUNCE_DELAY_MS);
 
   chrome.storage.local.get(null, (settings) => {
-    /* eslint-disable dot-notation */ // prevent closure from mangling
-    if (settings['o']) {
-      resultsOrder = settings['o'];
-    }
-    /* eslint-enable */
+    order = settings['o'] || DEFAULT_ORDER;
   });
 
   getTabs();
 
   chrome.topSites.get((sites) => {
-    topSitesList = sites;
-    topSitesRaw = sites;
+    // eslint-disable-next-line no-multi-assign
+    tList = tRaw = sites;
   });
 
-  const onSearch = debounce(doSearch, SEARCH_DEBOUNCE_DELAY);
-
-  // update tab list on tab events
+  // Update tab list on tab events
   chrome.tabs.onUpdated.addListener(getTabs);
   chrome.tabs.onRemoved.addListener(getTabs);
   chrome.tabs.onMoved.addListener(getTabs);
-  chrome.tabs.onAttached.addListener(getTabs);
 
-  // this callback runs whenever props change
-  beforeUpdate(() => {
-    // TODO: When search is active, rerun when tab events trigger and
-    // getTabs() is run
-
-    // FIXME: Do we need to track the previous value of `searchText` and only
-    // run this if it's changed?
-    if (searchText) {
-      onSearch();
-    }
-  });
+  $: if (searchText) onSearch();
 </script>
 
 <style type="text/postcss">
-  /* load more buttons */
+  /* "Load more" buttons */
   :global(button) {
     width: initial;
     margin-top: 9px;
@@ -156,8 +141,8 @@
 
   :global(.container) {
     max-width: 800px;
-    padding: 0 18px;
     margin: 0 auto;
+    padding: 0 18px;
   }
 
   /* stylelint-disable no-descending-specificity */
@@ -165,10 +150,10 @@
   :global(#search) {
     box-sizing: border-box;
     width: 100%;
-    padding: 11px 20px;
     margin: 0 0 18px;
-    font-size: 22px;
+    padding: 11px 20px;
     color: var(--t);
+    font-size: 22px;
     background: var(--c2);
     border: 0;
     border-radius: 24px;
@@ -191,43 +176,29 @@
     on:keyup="{maybeCancelSearch}"
   >
 
-  {#each resultsOrder as resultSection}
+  {#each order as resultSection}
     {#if resultSection === 'Open Tabs'}
       <h2>{`Open Tabs (${tabsList.length}/${tabsRaw.length})`}</h2>
 
-      {#each tabsList as _node}
-        <!-- XXX: This is the same as <LinkItem> but with a click handler -->
-        <!-- TODO: Once the "better composition" RFC lands see if this can be improved: https://github.com/sveltejs/rfcs/pull/12 -->
-        <a
-          href="{_node.url}"
-          title="{_node.title}"
-          on:click="{event => handleTabClick(_node, event)}"
-        >
-          <img
-            src="chrome://favicon/{_node.url}"
-            class="{_node.title ? 'pad' : ''}"
+      <div on:click|capture="{handleTabClick}">
+        {#each tabsList as _node}
+          <a
+            href="{_node.url}"
+            id="{_node.id}"
+            w="{_node.windowId}"
+            title="{_node.title}"
           >
-          {_node.title}
-        </a>
-      {/each}
+            <img src="chrome://favicon/{_node.url}">
+            {_node.title}
+          </a>
+        {/each}
+      </div>
     {:else if resultSection === 'Top Sites'}
-      <SearchResults
-        resultsName="Top Sites"
-        resultsList="{topSitesList}"
-        resultsRaw="{topSitesRaw}"
-      />
-    {:else if isSearching && resultSection === 'Bookmarks'}
-      <SearchResults
-        resultsName="Bookmarks"
-        resultsList="{bookmarksList}"
-        resultsRaw="{bookmarksRaw}"
-      />
-    {:else if isSearching && resultSection === 'History'}
-      <SearchResults
-        resultsName="History"
-        resultsList="{historyList}"
-        resultsRaw="{historyRaw}"
-      />
+      <SearchResults name="Top Sites" list="{tList}" raw="{tRaw}" />
+    {:else if !!searchText && resultSection === 'Bookmarks'}
+      <SearchResults name="Bookmarks" list="{bList}" raw="{bRaw}" />
+    {:else if !!searchText && resultSection === 'History'}
+      <SearchResults name="History" list="{hList}" raw="{hRaw}" />
     {/if}
   {/each}
 </div>

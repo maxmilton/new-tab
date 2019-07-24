@@ -4,15 +4,15 @@ version: 2
 jobs:
   build:
     docker:
-      - image: circleci/node:11
+      - image: circleci/node:12-browsers
     working_directory: ~/repo
     steps:
       - checkout
       - restore_cache:
           keys:
-          - v2-dependencies-{{ .Branch }}-{{ checksum "yarn.lock" }}
-          - v2-dependencies-{{ .Branch }}-
-          - v2-dependencies-
+            - v2-dependencies-{{ .Branch }}-{{ checksum "yarn.lock" }}
+            - v2-dependencies-{{ .Branch }}-
+            - v2-dependencies-
       - run: yarn install --frozen-lockfile
       - save_cache:
           paths:
@@ -21,8 +21,8 @@ jobs:
 
       - run: yarn run lint
       - run: yarn run test-ci
-      - run: yarn codecov
+      - run: cat ./test/coverage/lcov.info | yarn codacy-coverage
 
       - store_artifacts:
           path: test/coverage
-          prefix: coverage
+          destination: coverage

@@ -1,10 +1,10 @@
 /**
- * Light Theme (default)
+ * Light Theme
  */
 
 /* stylelint-disable max-line-length */
 
-:global(:root) {
+:global(.l) {
   --s: 0 2px 4px rgba(0, 0, 17, 0.15); /* shadow */
   --b: #fafafa; /* background colour */
   --t: #383a42; /* text colour */

@@ -19,15 +19,16 @@
     "dev": "rollup --config --watch",
     "build": "NODE_ENV=production rollup --config",
     "prebuild": "rm -rf dist && mkdir dist && cp icon* dist",
-    "lint": "yarn lint:md && yarn lint:css && yarn lint:js && yarn lint:types",
     "lint:md": "remark --frail --quiet .",
-    "lint:css": "stylelint --ignore-path .gitignore **/*.{css,html,js,md,svelte,ts}",
-    "lint:js": "eslint --ignore-path .gitignore --ext html,js,md,svelte,ts .",
+    "lint": "yarn lint:md && yarn lint:css && yarn lint:js && yarn lint:types",
+    "FIXME__lint:css": "stylelint **/*.{css,html,js,md,svelte,svg,ts} --report-needless-disables",
+    "lint:css": "stylelint **/*.{css,html,js,md,svelte,svg,ts}",
+    "lint:js": "eslint --ext html,js,md,mjs,snap,svelte,svg,ts --report-unused-disable-directives .",
     "lint:types": "tsc --noEmit --allowJs --checkJs",
-    "test": "yarn lint && jest --notify --watch",
+    "test": "jest --notify --watch",
     "test:e2e": "jest --config test/e2e/jest.config.js",
     "test-ci": "jest --runInBand --ci --coverage",
-    "posttest-ci": "jest --runInBand --ci --config test/e2e/jest.config.js"
+    "FIXME__posttest-ci": "jest --runInBand --ci --config test/e2e/jest.config.js"
   },
   "devDependencies": {
     "@ampproject/rollup-plugin-closure-compiler": "0.10.0",
@@ -36,7 +37,7 @@
     "@types/jest-environment-puppeteer": "4.0.0",
     "@types/puppeteer": "1.12.4",
     "@wearegenki/renovate-config": "1.0.0",
-    "codecov": "3.5.0",
+    "codacy-coverage": "3.4.0",
     "eslint": "6.1.0",
     "jest": "24.8.0",
     "jest-puppeteer": "4.3.0",
@@ -53,6 +54,7 @@
     "rollup-plugin-typescript": "1.0.1",
     "stylelint": "10.1.0",
     "svelte": "3.6.8",
+    "tslib": "1.10.0",
     "typescript": "3.5.3"
   },
   "browserslist": [
@@ -86,8 +88,19 @@
       "dot-notation": "off"
     }
   },
+  "eslintIgnore": [
+    "**/dist/**",
+    "**/node_modules/**",
+    "/test/coverage/**"
+  ],
   "stylelint": {
     "extends": "minna-tools/stylelint",
+    "ignoreFiles": [
+      "**/*.d.ts",
+      "**/dist/**",
+      "**/node_modules/**",
+      "test/coverage/**"
+    ],
     "rules": {
       "color-no-hex": null,
       "scale-unlimited/declaration-strict-value": null,
@@ -102,7 +115,7 @@
   "jest": {
     "preset": "minna-tools",
     "setupFiles": [
-      "./test/__setup__.js"
+      "./test/__setup__.ts"
     ],
     "collectCoverageFrom": [
       "src/**/*.{svelte,ts}",
@@ -116,8 +129,8 @@
     ]
   },
   "engines": {
-    "node": ">11.0.0",
-    "yarn": ">1.15.0"
+    "node": ">=12.4.0",
+    "yarn": ">=1.16.0"
   },
   "os": [
     "!win32",

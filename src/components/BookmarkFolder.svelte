@@ -1,81 +1,79 @@
 <script>
-  /* eslint-disable no-underscore-dangle */
-
   import { onDestroy } from 'svelte';
-  import BookmarkNode from './BookmarkNode'; // eslint-disable-line import/no-cycle
-  import { shorten } from '../common';
+  import { listen } from 'svelte/internal';
+  import BookmarkNode from './BookmarkNode';
 
-  // props
   export let lvl = 0;
-  export let maxLen = 0;
-  export let endNode = false;
-  export let _node;
+  export let end;
+  export let node;
 
-  // reactive data
+  const OPEN_EVENT_NAME = 'open';
+  const OPEN_DELAY_MS = 200;
+  const CLOSE_DELAY_MS = 400;
+
+  const openEvent = new CustomEvent(OPEN_EVENT_NAME, { detail: lvl });
   let isOpen = false;
+  let openTimer;
+  let closeTimer;
 
-  const EVENT_NAME = 'open';
-  const OPEN_DELAY = 200;
-  const CLOSE_DELAY = 400;
-
-  const openEvent = new CustomEvent(EVENT_NAME, { detail: lvl });
-  let openTimer = null;
-  let closeTimer = null;
-
-  function resetCloseTimer() {
-    if (closeTimer !== null) {
+  const resetCloseTimer = () => {
+    if (closeTimer) {
       clearTimeout(closeTimer);
       closeTimer = null;
     }
-  }
+  };
 
   /**
    * Close subfolder when another opens.
    *
    * @param {CustomEvent} event - Event dispatched when another subfolder opens.
    */
-  function handleOpen(event) {
+  const handleOpen = (event) => {
     if (isOpen && event.detail === lvl) {
       isOpen = false;
       resetCloseTimer();
     }
-  }
+  };
 
-  function onOpen() {
+  let cancelOpenListener;
+
+  const onOpen = () => {
     window.dispatchEvent(openEvent);
-    window.addEventListener(EVENT_NAME, handleOpen);
+    cancelOpenListener = listen(window, OPEN_EVENT_NAME, handleOpen);
     isOpen = true;
-  }
+  };
 
-  // subfolder mouse enter
-  function handleMouseEnter() {
+  // Subfolder mouse enter
+  const handleMouseEnter = () => {
     if (isOpen) {
       resetCloseTimer();
     } else {
-      // delay to prevent accidental folder open
-      openTimer = setTimeout(onOpen, OPEN_DELAY);
+      // Delay to prevent accidental folder open
+      openTimer = setTimeout(onOpen, OPEN_DELAY_MS);
     }
-  }
+  };
 
-  // subfolder mouse leave
-  function handleMouseLeave() {
-    // reset open timer
-    if (openTimer !== null) {
+  // Subfolder mouse leave
+  const handleMouseLeave = () => {
+    // Reset open timer
+    if (openTimer) {
       clearTimeout(openTimer);
       openTimer = null;
     }
 
-    // set up subfolder close timer
+    // Set up subfolder close timer
     if (isOpen) {
       closeTimer = setTimeout(() => {
         isOpen = false;
-        window.removeEventListener(EVENT_NAME, handleOpen);
-      }, CLOSE_DELAY);
+        cancelOpenListener();
+      }, CLOSE_DELAY_MS);
     }
-  }
+  };
 
   onDestroy(() => {
-    window.removeEventListener(EVENT_NAME, handleOpen);
+    if (cancelOpenListener) {
+      cancelOpenListener();
+    }
   });
 </script>
 
@@ -85,8 +83,9 @@
   }
 
   :global(.caret) {
-    padding: 0 6px;
+    float: right;
     margin-left: auto;
+    padding: 0 6px;
   }
 
   :global(.subfolder) {
@@ -102,17 +101,21 @@
     }
   }
 
-  /* bookmark item pushed to the right */
+  /* Bookmark item pushed to the right */
   :global(.right) { /* stylelint-disable-line no-descending-specificity */
-    justify-content: flex-end;
     width: 100%;
+    text-align: right;
+
+    & + & {
+      width: auto;
+    }
   }
 
-  /* folder which opens to the left */
+  /* Folder which opens to the left */
   :global(.left) { /* stylelint-disable-line no-descending-specificity */
     right: 0;
     left: initial;
-    justify-content: initial;
+    text-align: left;
 
     :global(.subfolder) {
       right: 100%;
@@ -122,21 +125,21 @@
 </style>
 
 <div
-  class="item folder{endNode ? ' right' : ''}"
-  title="{_node.title}"
+  class="item folder {end ? 'right' : ''}"
+  title="{node.title}"
   on:mouseenter="{handleMouseEnter}"
   on:mouseleave="{handleMouseLeave}"
 >
-  {shorten(_node.title, maxLen)}
+  {node.title}
 
   {#if lvl !== 0}
     <div class="caret">▸</div>
   {/if}
 
   {#if isOpen}
-    <div class="subfolder{endNode ? ' left' : ''}">
-      {#each _node.children as childNode}
-        <BookmarkNode _node="{childNode}" lvl="{lvl + 1}" maxLen="{40}" />
+    <div class="subfolder {end ? 'left' : ''}">
+      {#each node.children as childNode}
+        <BookmarkNode node="{childNode}" lvl="{lvl + 1}" />
       {:else}
         <div class="item">(empty)</div>
       {/each}

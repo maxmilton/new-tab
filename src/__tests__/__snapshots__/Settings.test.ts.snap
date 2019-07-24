@@ -1,9 +1,3 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Settings component renders correctly 1`] = `
-"<div class=\\"row\\"><label>Theme:</label> <select><option value=\\"d\\">Dark</option><option value=\\"\\">Light</option></select></div> <div class=\\"row\\"><label>List order:</label> <button>Reset</button> <ul><li class=\\"item\\"><span class=\\"icon\\">☰</span> Open Tabs <button class=\\"rm\\" title=\\"Remove section\\">🗑
-        ️</button> </li><li class=\\"item\\"><span class=\\"icon\\">☰</span> Bookmarks <button class=\\"rm\\" title=\\"Remove section\\">🗑
-        ️</button> </li><li class=\\"item\\"><span class=\\"icon\\">☰</span> History <button class=\\"rm\\" title=\\"Remove section\\">🗑
-        ️</button> </li><li class=\\"item\\"><span class=\\"icon\\">☰</span> Top Sites <button class=\\"rm\\" title=\\"Remove section\\">🗑
-        ️</button> </li></ul></div>"
-`;
+exports[`Settings component renders correctly 1`] = `"<div class=\\"row\\"><label>Theme:</label> <select><option value=\\"\\">Dark</option><option value=\\"l\\">Light</option></select></div> <div class=\\"row\\"><label>List order:</label> <button>Reset</button> <ul></ul></div>"`;

@@ -1,10 +1,10 @@
 /**
- * Dark Theme
+ * Dark Theme (default)
  */
 
 /* stylelint-disable max-line-length */
 
-:global(.d) {
+:global(:root) {
   --b: #23252d; /* background colour */
   --t: #9da5b4; /* text colour */
   --c: #21252b; /* bookmark item hover background, hr */

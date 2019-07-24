@@ -1,53 +1,31 @@
 <!--
-  TODO: Try to accomplish the same short text like shorten() but with CSS only
-  and without  adding any wrapper elements.
-
   TODO: Add padding to img if there is a textNode but try to do it without
   using JS based logic to keep the component logic free.
 -->
 
 <script>
-  /* eslint-disable no-underscore-dangle */
-
-  import { shorten } from '../common';
-
-  export let _node;
-  export let maxLen;
+  export let node;
 </script>
 
 <style type="text/postcss">
-  /* all <img> are favicons */
+  /* All <img> are favicons */
   :global(img) {
     width: 16px;
-    height: 16px; /* prevents slight realignment jump on initial load */
-    pointer-events: none; /* prevent being the click event target */
-  }
-
-  :global(.pad) {
+    height: 16px; /* Prevents slight realignment jump on initial load */
     margin: 0 6px 0 0;
+    pointer-events: none; /* Prevent being the click event target */
   }
 
-  /* stylelint-disable-next-line no-descending-specificity */
   :global(a),
   :global(.item) {
-    display: flex;
-    align-items: center;
+    display: block;
     color: var(--t);
     white-space: nowrap;
     cursor: pointer;
-
-    :global(#bookmarks) & {
-      padding: 0 13px;
-
-      &:hover,
-      &:focus { /* stylelint-disable-line no-descending-specificity */
-        background-color: var(--c);
-      }
-    }
   }
 </style>
 
-<a href="{_node.url}" title="{_node.title}">
-  <img src="chrome://favicon/{_node.url}" class="{_node.title && 'pad'}">
-  {shorten(_node.title, maxLen)}
+<a href="{node.url}" title="{node.title}">
+  <img src="chrome://favicon/{node.url}">
+  {node.title}
 </a>
