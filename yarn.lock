@@ -349,15 +349,15 @@
   resolved "https://registry.yarnpkg.com/@minna-ui/browserslist-config/-/browserslist-config-0.29.0.tgz#406df8e16bf67deaffc035805ed707a89e0fe581"
   integrity sha512-AYVsx6R6jrmNhQbNRtKIdmyl6ZT+8GCJY+I/w4BVaFlL3ks6STs3WtlsfYQEtjVdet3Vr8naN+wiqqnReODqLA==
 
-"@minna-ui/collapse@^0.28.0":
-  version "0.28.0"
-  resolved "https://registry.yarnpkg.com/@minna-ui/collapse/-/collapse-0.28.0.tgz#86752a55bd0bbda95f863fe2199a341775ff9b01"
-  integrity sha512-G3OQElgIxpJVilj4MsdjrXU/JqBSueH29uoKqI105kNih/S54R4HLRC+3CC5NlzaoHh9AH64WUC5wq2cwzC1nA==
+"@minna-ui/collapse@^0.29.0":
+  version "0.29.0"
+  resolved "https://registry.yarnpkg.com/@minna-ui/collapse/-/collapse-0.29.0.tgz#db73a87bb9683b30fb959bc427be90fa64f45545"
+  integrity sha512-ZWew21o5E4iK2JUXrZvrUvNGZDjOp8bdrMrOwQ0gxR5YPFEUEWnjEgj4XpqJ9rlt7HMdDANs5xe5O2/kLVc6wg==
 
-"@minna-ui/css@^0.28.0":
-  version "0.28.0"
-  resolved "https://registry.yarnpkg.com/@minna-ui/css/-/css-0.28.0.tgz#ffa0c6f9e27b0ca13e43165687997e121f4656ae"
-  integrity sha512-dJN2bLX0M99CYqRPSPa2TLiHIJVxzafUuQpKwOX6PhMaZI53DIt7adK0HQmIx9UM0ffAwFB19OSkSMIn/qzeMQ==
+"@minna-ui/css@^0.29.0":
+  version "0.29.0"
+  resolved "https://registry.yarnpkg.com/@minna-ui/css/-/css-0.29.0.tgz#c90a2eae19c5038e50c163d1bad5b466a02bc9d6"
+  integrity sha512-F2rmd8R2dHQKIGswKU7PItt7eyLujEy3lC/iyfOOZna0OQwq3SGcuAQXpGv0/RdSIg8YAEU9WGLCzn7n4CqVIA==
 
 "@minna-ui/eslint-config@^0.29.0":
   version "0.29.0"
@@ -395,15 +395,15 @@
     jest-circus "^24.8.0"
     sucrase "^3.10.1"
 
-"@minna-ui/navbar@^0.28.0":
-  version "0.28.0"
-  resolved "https://registry.yarnpkg.com/@minna-ui/navbar/-/navbar-0.28.0.tgz#e6aab8e24332bcbe9e9a045aea69dbf48f636c17"
-  integrity sha512-In/Lgh06t9swPgianV/OL0gJOHv7CejuBPGg7lcC8MBqmYE5R4iPUT+UGKmLdQqFMwHclRe02Y1XD2HC6Bi2VQ==
+"@minna-ui/navbar@^0.29.0":
+  version "0.29.0"
+  resolved "https://registry.yarnpkg.com/@minna-ui/navbar/-/navbar-0.29.0.tgz#d6e13a17211e4d5b4fbe06fffdae66b9f34d683c"
+  integrity sha512-xTGYact563WDOUBl/6S8wgdnafohOO2TnqYol8qmLjWjj5MPcmWinpuERFI57pNd5vypCN7fe6qGr6YH5WPHsA==
 
-"@minna-ui/postcss-config@^0.28.0":
-  version "0.28.0"
-  resolved "https://registry.yarnpkg.com/@minna-ui/postcss-config/-/postcss-config-0.28.0.tgz#7922c0977b381262d1133b89e0db86e7db352afd"
-  integrity sha512-P6Ip2+jwkUbnQG5vI+xe4oHpAWgaDiLJBn1SMODVW8ce7PSbI5C8T2PKnGB/Ka9OHvIeJupsn1Sc/bkJejEZ3w==
+"@minna-ui/postcss-config@^0.29.0":
+  version "0.29.0"
+  resolved "https://registry.yarnpkg.com/@minna-ui/postcss-config/-/postcss-config-0.29.0.tgz#876916a75db3b28261ad2c209a397bc72552c831"
+  integrity sha512-MlY/rE3mnw9r5itpYXi0N+AKiJP2px1F3XmvKoO49+1E0L5kCQwJFMs2Wm1LuJDaFNiwn13K8IbTDMoTXmGJVA==
   dependencies:
     autoprefixer "^9.6.1"
     css-mqpacker "^7.0.0"
@@ -415,10 +415,10 @@
     postcss-nested "^4.1.2"
     postcss-use "^3.0.0"
 
-"@minna-ui/preprocess@^0.28.0":
-  version "0.28.0"
-  resolved "https://registry.yarnpkg.com/@minna-ui/preprocess/-/preprocess-0.28.0.tgz#384a92f83800165ab59e7786ab9de8303cb8638b"
-  integrity sha512-wAUdJ1x4Eu0gr9PdLEN0N9sy3dXlIMEejF3QHa5apcLzAMRr2E1XQyBn/OgJqzhURGcidFrlP5IMGb65TEG70w==
+"@minna-ui/preprocess@^0.29.0":
+  version "0.29.0"
+  resolved "https://registry.yarnpkg.com/@minna-ui/preprocess/-/preprocess-0.29.0.tgz#0ea9af0058142a3472e27cd92132828071c3b49c"
+  integrity sha512-LDzRY0a7U+4yL+5eIndgew/TbaXtjoGf8Olex2GYIoNa8ilTt5T3vZoqVUl3PO7Qor+lh7bUanbb90pLOwd7Vw==
   dependencies:
     deepmerge "^4.0.0"
     postcss-load-config "^2.0.0"
@@ -484,10 +484,10 @@
     purgecss "^1.3.0"
     rollup-pluginutils "^2.8.1"
 
-"@minna-ui/select@^0.28.0":
-  version "0.28.0"
-  resolved "https://registry.yarnpkg.com/@minna-ui/select/-/select-0.28.0.tgz#dfd6f6ef2f23b090b86b3c457c2d8f781c3d6e51"
-  integrity sha512-ypx+j22otMTEGzqyXvbb+NJtJRhmvXCudytaZJMFqBjsw7FUGxRZvi/ookzy9pUcmDsH8whtYlxuvLHOlfU54w==
+"@minna-ui/select@^0.29.0":
+  version "0.29.0"
+  resolved "https://registry.yarnpkg.com/@minna-ui/select/-/select-0.29.0.tgz#30d195a2218cada6e6085607f1e2a27b81940819"
+  integrity sha512-dTZC9D+MJBNVHAgx5eOU4cxwEwF0tCPKsiiFNoXB9rBlW+04QILjmAObNju91qUK1+RmTyTjjGbLHuu/LPY++A==
 
 "@minna-ui/stylelint-config@^0.29.0":
   version "0.29.0"
@@ -501,15 +501,15 @@
     stylelint-high-performance-animation "^1.2.1"
     stylelint-order "^3.0.1"
 
-"@minna-ui/switch@^0.28.0":
-  version "0.28.0"
-  resolved "https://registry.yarnpkg.com/@minna-ui/switch/-/switch-0.28.0.tgz#26937bb8311bbfab27d650e9f1978a077be59f9f"
-  integrity sha512-j2WKj6dPEex0V8l2DXg9VJ2R2KA6ImDd4TlGeOYZPk080caB37wdOB5BSaa3jV0SwhK+9BAEbV1JN4T2VKwgGw==
+"@minna-ui/switch@^0.29.0":
+  version "0.29.0"
+  resolved "https://registry.yarnpkg.com/@minna-ui/switch/-/switch-0.29.0.tgz#a37b6a3fa9aa9bdb85dc2493086f893be94fd893"
+  integrity sha512-kXZkw62R1q8Q+oO7NIyf0Pfx2BaGd6YYTaYsAs2aUppR+1iGLsTvz7AB1QkB+jBKPUxG+O2HbpWHWtPpLCREDw==
 
-"@minna-ui/tooltip@^0.28.0":
-  version "0.28.0"
-  resolved "https://registry.yarnpkg.com/@minna-ui/tooltip/-/tooltip-0.28.0.tgz#d642f99d7724d7a8366a411ca862c11e7e6d460a"
-  integrity sha512-623t3ZW4Mbzk5M88q2/2aLiTE7hD2PWkE3lEjEAvnRJAp19juFcAQEG4rF/1mVlaWI+KIZtP/2pnjK6vvOtCUQ==
+"@minna-ui/tooltip@^0.29.0":
+  version "0.29.0"
+  resolved "https://registry.yarnpkg.com/@minna-ui/tooltip/-/tooltip-0.29.0.tgz#ffa238a0b28ae37e54b13f7c173b6b66d69090e6"
+  integrity sha512-0WNsgAWJN9BuEIlEijK3aMFQmUdfVlDJvDgwp8o4XMFpM8IThV0kvar09qoHuinwhhV0S/OGLaRDLbS9ZZVLQQ==
 
 "@minna-ui/ts-config@^0.29.0":
   version "0.29.0"
@@ -4601,19 +4601,19 @@ minna-tools@0.29.0:
     "@minna-ui/ts-config" "^0.29.0"
     "@minna-ui/utils" "^0.29.0"
 
-minna-ui@0.28.0:
-  version "0.28.0"
-  resolved "https://registry.yarnpkg.com/minna-ui/-/minna-ui-0.28.0.tgz#5f1438614bf5fdec4ba6008429971be5aec7e486"
-  integrity sha512-UTBMHLcbW8OsND3BH8/PF+Y+AMi8ewGalnZF0hvF0c2zCLr3rG31mIe/e1GAzxWBMWrS00xmz+CYggEAQeF8Jw==
+minna-ui@0.29.0:
+  version "0.29.0"
+  resolved "https://registry.yarnpkg.com/minna-ui/-/minna-ui-0.29.0.tgz#7b0386fd6905dc70eeffb1281f9361581a543aab"
+  integrity sha512-vxkw3wsjc0UnWvcM3W/pzqKGH6LQYXdyr8G3xtlXhRtmxheFg+5EbZ9o44H/GS5GeJJSw5e5En0Uh7CzE5KIOQ==
   dependencies:
-    "@minna-ui/collapse" "^0.28.0"
-    "@minna-ui/css" "^0.28.0"
-    "@minna-ui/navbar" "^0.28.0"
-    "@minna-ui/postcss-config" "^0.28.0"
-    "@minna-ui/preprocess" "^0.28.0"
-    "@minna-ui/select" "^0.28.0"
-    "@minna-ui/switch" "^0.28.0"
-    "@minna-ui/tooltip" "^0.28.0"
+    "@minna-ui/collapse" "^0.29.0"
+    "@minna-ui/css" "^0.29.0"
+    "@minna-ui/navbar" "^0.29.0"
+    "@minna-ui/postcss-config" "^0.29.0"
+    "@minna-ui/preprocess" "^0.29.0"
+    "@minna-ui/select" "^0.29.0"
+    "@minna-ui/switch" "^0.29.0"
+    "@minna-ui/tooltip" "^0.29.0"
 
 mixin-deep@^1.2.0:
   version "1.3.1"
