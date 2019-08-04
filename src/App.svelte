@@ -1,6 +1,6 @@
 <script>
   import { handleLinkClick } from './common';
-  import BookmarkGroup from './components/BookmarkGroup.svelte';
+  import BookmarksBar from './components/BookmarksBar.svelte';
   import Menu from './components/Menu.svelte';
   import Search from './components/Search.svelte';
 </script>
@@ -42,6 +42,6 @@
 
 <svelte:window on:click={handleLinkClick}/>
 
-<BookmarkGroup/>
+<BookmarksBar/>
 <Search/>
 <Menu/>

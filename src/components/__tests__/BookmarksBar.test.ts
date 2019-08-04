@@ -1,10 +1,10 @@
-import BookmarkGroup from '../BookmarkGroup.svelte';
+import BookmarksBar from '../BookmarksBar.svelte';
 
-describe('BookmarkGroup component', () => {
+describe('BookmarksBar component', () => {
   it('renders correctly', () => {
     expect.assertions(1);
     const target = document.createElement('div');
-    new BookmarkGroup({ target });
+    new BookmarksBar({ target });
     expect(target.innerHTML).toMatchSnapshot();
   });
 });
