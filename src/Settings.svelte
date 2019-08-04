@@ -66,7 +66,6 @@
 
   // Check existing settings
   chrome.storage.local.get(null, (settings) => {
-    /* eslint-disable dot-notation */ // Prevent closure mangling
     order = settings['o'] || DEFAULT_ORDER;
     pageTheme = settings['t'];
     /* eslint-enable */
