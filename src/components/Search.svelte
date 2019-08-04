@@ -188,7 +188,7 @@
             w="{_node.windowId}"
             title="{_node.title}"
           >
-            <img src="chrome://favicon/{_node.url}">
+            <img src="chrome://favicon/{_node.url}" />
             {_node.title}
           </a>
         {/each}

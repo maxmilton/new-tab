@@ -26,6 +26,6 @@
 </style>
 
 <a href="{node.url}" title="{node.title}">
-  <img src="chrome://favicon/{node.url}">
+  <img src="chrome://favicon/{node.url}" />
   {node.title}
 </a>
