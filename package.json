@@ -48,7 +48,7 @@
     "prettier": "1.18.2",
     "puppeteer": "1.19.0",
     "remark-cli": "7.0.0",
-    "rollup": "1.18.0",
+    "rollup": "1.19.4",
     "rollup-plugin-node-resolve": "5.2.0",
     "rollup-plugin-svelte": "5.1.0",
     "rollup-plugin-typescript": "1.0.1",
