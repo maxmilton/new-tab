@@ -349,10 +349,10 @@
   resolved "https://registry.yarnpkg.com/@minna-ui/browserslist-config/-/browserslist-config-0.31.0.tgz#9e475bcd0c92154db69be807ccc14d36d5a31242"
   integrity sha512-2PqGrpPSCavxLyMeal0DwmizqTKEKEfLGGipDPIrP/KkVx+Ay/mHETkkMrQ4KXoPmV9/Ez/kkWr9CdLK01EOtw==
 
-"@minna-ui/collapse@^0.31.0":
-  version "0.31.0"
-  resolved "https://registry.yarnpkg.com/@minna-ui/collapse/-/collapse-0.31.0.tgz#fcc5c31c2807b008aa3f56f6095c65b1b05bf942"
-  integrity sha512-tX8c6eDaThPWcgL1jE5LBXtxW0rv+1iV64rdwZWnWpnFQshMeY1YhAS6ZaxNGsyz9TXefKP4I70ndNLseGWIuA==
+"@minna-ui/collapse@^0.31.3":
+  version "0.31.3"
+  resolved "https://registry.yarnpkg.com/@minna-ui/collapse/-/collapse-0.31.3.tgz#291bb1dcc0a5333ff3a1b9b4348adf66162d94e1"
+  integrity sha512-8U7o2tV0hspTCiQp+1e0Y+YOrnnn+2xS82iOflms+5wV+cTqvdvqiO5nJ8Q8IB4yVBNb21JxAlgnWtDhLSMwkQ==
 
 "@minna-ui/css@^0.31.0":
   version "0.31.0"
@@ -384,21 +384,21 @@
   dependencies:
     resolve "^1.12.0"
 
-"@minna-ui/jest-config@^0.31.0":
-  version "0.31.0"
-  resolved "https://registry.yarnpkg.com/@minna-ui/jest-config/-/jest-config-0.31.0.tgz#81b2e22fb989c94e8ac85eb6fba2468664a4dacb"
-  integrity sha512-8vly/0g09NIAtry6X4RGUDwBQeRgQuBZUyCTmnsX1Z+I6norDrm/TyfFQmSQkYKxHDfzNMJPt1FnioH68eewKg==
+"@minna-ui/jest-config@^0.31.3":
+  version "0.31.3"
+  resolved "https://registry.yarnpkg.com/@minna-ui/jest-config/-/jest-config-0.31.3.tgz#10397b1c8ba666b39bbe19c89eaa7c7ac96506a4"
+  integrity sha512-1drNCrQRQ3N8a6rfOeLlYbVVlswXGbgU+7cU8mGB/mECLpf3r5jnPwYuAt4DIIZ1wIeNtoqUnpWhqhGG/RLTdg==
   dependencies:
-    "@types/jest" "^24.0.16"
-    "@types/node" "^12.6.9"
+    "@types/jest" "^24.0.17"
+    "@types/node" "^12.7.0"
     identity-obj-proxy "^3.0.0"
     jest-circus "^24.8.0"
     sucrase "^3.10.1"
 
-"@minna-ui/navbar@^0.31.0":
-  version "0.31.0"
-  resolved "https://registry.yarnpkg.com/@minna-ui/navbar/-/navbar-0.31.0.tgz#3dccb699573dd07558b5fa9438a28ab5ddfc38fe"
-  integrity sha512-SU9luGVVLZ6x81W6w61hRSCMmn5OtyuN5nZXMmeR91pQHJPSIBQHHGMKnQpw+oQpwbuhbjBE7yP96/MQ66D/cA==
+"@minna-ui/navbar@^0.31.3":
+  version "0.31.3"
+  resolved "https://registry.yarnpkg.com/@minna-ui/navbar/-/navbar-0.31.3.tgz#ac22a628230f8c10fc721166648d09c56ad60cb1"
+  integrity sha512-30UGxuxepKwIiXh3ewFDUp3wN3sM7FIYM4ItQZKpwblH6n8MboDLSloBWapDWlV/CR/Ns+ZpINsIs0YuKNrFQg==
 
 "@minna-ui/postcss-config@^0.31.0":
   version "0.31.0"
@@ -439,12 +439,12 @@
     remark-preset-lint-markdown-style-guide "^2.1.3"
     remark-preset-lint-recommended "^3.0.3"
 
-"@minna-ui/rollup-plugin-dev-server@^0.31.0":
-  version "0.31.0"
-  resolved "https://registry.yarnpkg.com/@minna-ui/rollup-plugin-dev-server/-/rollup-plugin-dev-server-0.31.0.tgz#a90330b85554cb6a92ed983e9ca75a0f1143cc30"
-  integrity sha512-vWuYxeGQJAL7pLkbSJhJ6sEq/xyLjwYzTcxXe1gvuAmLrMlO+V7SZ6ec1S2yWePD6crQzlrKuwQZuFX2C2Lbzw==
+"@minna-ui/rollup-plugin-dev-server@^0.31.3":
+  version "0.31.3"
+  resolved "https://registry.yarnpkg.com/@minna-ui/rollup-plugin-dev-server/-/rollup-plugin-dev-server-0.31.3.tgz#bab5498197c3a47bbae2dd8627b04e367b8abbb6"
+  integrity sha512-6/uYIBKcefHXiQ0J89d//ktruiMij8/3LbMsURmzFus6gs379W+fRGBQP8q2T617Rv823xdJPlZ9h/2+bvTeAQ==
   dependencies:
-    "@minna-ui/utils" "^0.31.0"
+    "@minna-ui/utils" "^0.31.3"
     "@wearegenki/node-utils" "^0.3.0"
     deepmerge "^4.0.0"
     sirv "^0.4.2"
@@ -485,10 +485,10 @@
     purgecss "^1.3.0"
     rollup-pluginutils "^2.8.1"
 
-"@minna-ui/select@^0.31.0":
-  version "0.31.0"
-  resolved "https://registry.yarnpkg.com/@minna-ui/select/-/select-0.31.0.tgz#f540944c9799d67c1b8327fecbadab859a67d09e"
-  integrity sha512-vXgVwQwXpqg2oGZpozUwX65XSbUb9kmhJRc71mFp3CXyljxcKeeXXIcxOZTvYHDjCux86+xoJPaN+ZvKPTXcqQ==
+"@minna-ui/select@^0.31.3":
+  version "0.31.3"
+  resolved "https://registry.yarnpkg.com/@minna-ui/select/-/select-0.31.3.tgz#e7793741c4838779f5caaa7f1f7558e975588df0"
+  integrity sha512-o001GC4xX00bSf2nzeeC2Hs59dPb5pPoFESi2usSbjATsQmAMmolmMKi2roDv5LFAVkL5+rTzTu9lsRE1On93w==
 
 "@minna-ui/stylelint-config@^0.31.0":
   version "0.31.0"
@@ -502,25 +502,25 @@
     stylelint-high-performance-animation "^1.2.1"
     stylelint-order "^3.0.1"
 
-"@minna-ui/switch@^0.31.0":
-  version "0.31.0"
-  resolved "https://registry.yarnpkg.com/@minna-ui/switch/-/switch-0.31.0.tgz#61c6839eeba1a1d8b5991810dc3c2d349b8ca753"
-  integrity sha512-f1R+i/cIItbOa4xUWl8+ktVytbWjmJUdRJ9jx3iVXk65NadX60LQeB2IHQHHSe1s2pflfwpaAcE8c7wogV2ljA==
+"@minna-ui/switch@^0.31.3":
+  version "0.31.3"
+  resolved "https://registry.yarnpkg.com/@minna-ui/switch/-/switch-0.31.3.tgz#b376af5cdafe7c54fe59f873146a4a1eec58a2f8"
+  integrity sha512-m2l4+axV6EPTY5quLZ0iwAOWE6qzHc056g47ms7H51YK806nldSxlrhzk1nTmJkK5LynbvyVYSZe3UCjLy9jwA==
 
-"@minna-ui/tooltip@^0.31.0":
-  version "0.31.0"
-  resolved "https://registry.yarnpkg.com/@minna-ui/tooltip/-/tooltip-0.31.0.tgz#dda0c6c9edd1fba634a70a56eb300bfbbf6fd43c"
-  integrity sha512-MeQHVYsnWHF6BpNNN/7fRKvv9Y9QfH244zKvUQycoVY+P0FtszbVM9q3Um0QZBvfUO1K1s7UnFQ1EmzXtzu4Eg==
+"@minna-ui/tooltip@^0.31.3":
+  version "0.31.3"
+  resolved "https://registry.yarnpkg.com/@minna-ui/tooltip/-/tooltip-0.31.3.tgz#87a195ff20f801ac2264fa0084013a5d03cc3068"
+  integrity sha512-YUxuLnhJnctaBsVolqwMK/vWcoWmDMEypVQiuVX2DeDhNBQxEixa1+kfvmMdGKt3YYoz9LNHUpbuVwKS1puc8w==
 
 "@minna-ui/ts-config@^0.31.0":
   version "0.31.0"
   resolved "https://registry.yarnpkg.com/@minna-ui/ts-config/-/ts-config-0.31.0.tgz#9a73f61e95066a8f8ca015e90d0f12acc01a8a04"
   integrity sha512-VXJBILOuEBAfjHWQuVieAPFvUyygpC+zw3Ly7Jlc4gKvt0sfkucAIqvT39khyRuUyi/rfOSlTYSLZVvOOg0q6w==
 
-"@minna-ui/utils@^0.31.0":
-  version "0.31.0"
-  resolved "https://registry.yarnpkg.com/@minna-ui/utils/-/utils-0.31.0.tgz#61ea9b02012ff64aa6ba1013d15877ca6fde7176"
-  integrity sha512-FspJJT8uu0ufjg6xLdQQTTG8yXSXAN4q+hdAipWTuwnWli5cwNy32Dp4YvBMPlzY7dGozF04A224vMeAiKrwOg==
+"@minna-ui/utils@^0.31.3":
+  version "0.31.3"
+  resolved "https://registry.yarnpkg.com/@minna-ui/utils/-/utils-0.31.3.tgz#b5ff8906fd1fd2cc0f3ff930c6e560d4f8944c60"
+  integrity sha512-s9sPQZKaFuKUw4d7EzTyuvCpEV6w96ndtTqqAdzq/yoR7lEY8gJldDZshffiAO1kyGYtO/CW5K2p72qDDzeU6g==
 
 "@mrmlnc/readdir-enhanced@^2.2.1":
   version "2.2.1"
@@ -573,10 +573,10 @@
   dependencies:
     "@babel/types" "^7.3.0"
 
-"@types/chrome@0.0.87":
-  version "0.0.87"
-  resolved "https://registry.yarnpkg.com/@types/chrome/-/chrome-0.0.87.tgz#8914a18ae7013879d1787ad6c999f7480a705493"
-  integrity sha512-8erepjs1N+bWQTb4ip4M5qxZJHmf0Z7cZ5G0M+fbLvapBHXyA1n91s2zAv+vq2kX02VnsTITvmWazjj7KLdBVw==
+"@types/chrome@0.0.88":
+  version "0.0.88"
+  resolved "https://registry.yarnpkg.com/@types/chrome/-/chrome-0.0.88.tgz#0041a101d69f78008910927c5b3299a00d8660db"
+  integrity sha512-JBsIrBZ2adJhlXvJ+1j0xLbcfOfwee/WAg7Lp2NE+Wf3m0vXMJFWv/PPjqNk5ZUXDeY/qDxPHe+PUjxnl8HWFg==
   dependencies:
     "@types/filesystem" "*"
 
@@ -678,10 +678,10 @@
   dependencies:
     "@types/jest-diff" "*"
 
-"@types/jest@^24.0.16":
-  version "24.0.16"
-  resolved "https://registry.yarnpkg.com/@types/jest/-/jest-24.0.16.tgz#8d3e406ec0f0dc1688d6711af3062ff9bd428066"
-  integrity sha512-JrAiyV+PPGKZzw6uxbI761cHZ0G7QMOHXPhtSpcl08rZH6CswXaaejckn3goFKmF7M3nzEoJ0lwYCbqLMmjziQ==
+"@types/jest@^24.0.17":
+  version "24.0.17"
+  resolved "https://registry.yarnpkg.com/@types/jest/-/jest-24.0.17.tgz#b66ea026efb746eb5db1356ee28518aaff7af416"
+  integrity sha512-1cy3xkOAfSYn78dsBWy4M3h/QF/HeWPchNFDjysVtp3GHeTdSmtluNnELfCmfNRRHo0OWEcpf+NsEJQvwQfdqQ==
   dependencies:
     "@types/jest-diff" "*"
 
@@ -695,7 +695,7 @@
   resolved "https://registry.yarnpkg.com/@types/minimatch/-/minimatch-3.0.3.tgz#3dca0e3f33b200fc7d1139c0cd96c1268cadfd9d"
   integrity sha512-tHq6qdbT9U1IRSGf14CL0pUlULksvY9OZ+5eEgl1N7t+OA3tGvNpxJCzuKQlsNgCVwbAs670L1vcVQi8j9HjnA==
 
-"@types/node@*", "@types/node@^12.6.3":
+"@types/node@*":
   version "12.6.8"
   resolved "https://registry.yarnpkg.com/@types/node/-/node-12.6.8.tgz#e469b4bf9d1c9832aee4907ba8a051494357c12c"
   integrity sha512-aX+gFgA5GHcDi89KG5keey2zf0WfZk/HAQotEamsK2kbey+8yGKcson0hbK8E+v0NArlCJQCqMP161YhV6ZXLg==
@@ -704,6 +704,11 @@
   version "12.6.9"
   resolved "https://registry.yarnpkg.com/@types/node/-/node-12.6.9.tgz#ffeee23afdc19ab16e979338e7b536fdebbbaeaf"
   integrity sha512-+YB9FtyxXGyD54p8rXwWaN1EWEyar5L58GlGWgtH2I9rGmLGBQcw63+0jw+ujqVavNuO47S1ByAjm9zdHMnskw==
+
+"@types/node@^12.7.0":
+  version "12.7.1"
+  resolved "https://registry.yarnpkg.com/@types/node/-/node-12.7.1.tgz#3b5c3a26393c19b400844ac422bd0f631a94d69d"
+  integrity sha512-aK9jxMypeSrhiYofWWBf/T7O+KwaiAHzM4sveCdWPn71lzUSMimRnKzhXDKfKwV1kWoBo2P1aGgaIYGLf9/ljw==
 
 "@types/puppeteer@*":
   version "1.12.4"
@@ -856,7 +861,7 @@ acorn@^5.5.3:
   resolved "https://registry.yarnpkg.com/acorn/-/acorn-5.7.3.tgz#67aa231bf8812974b85235a96771eb6bd07ea279"
   integrity sha512-T/zvzYRfbVojPWahDsE5evJdHb3oJoQfFbsrKM7w5Zcs++Tr257tia3BmMP8XYVjp1S9RZXQMh7gao96BlqZOw==
 
-acorn@^6.0.1, acorn@^6.0.7, acorn@^6.2.0:
+acorn@^6.0.1, acorn@^6.0.7, acorn@^6.2.1:
   version "6.2.1"
   resolved "https://registry.yarnpkg.com/acorn/-/acorn-6.2.1.tgz#3ed8422d6dec09e6121cc7a843ca86a330a86b51"
   integrity sha512-JD0xT5FCRDNyjDda3Lrg/IxFscp9q4tiYtxE1/nOzlKCk7hIRuYjhq1kCNkbPjMRMZuFq20HNQn1I9k8Oj0E+Q==
@@ -4640,38 +4645,38 @@ minizlib@^1.2.1:
   dependencies:
     minipass "^2.2.1"
 
-minna-tools@0.31.0:
-  version "0.31.0"
-  resolved "https://registry.yarnpkg.com/minna-tools/-/minna-tools-0.31.0.tgz#6ba61e73d9c8ee4f0bad49fb990297c8b8886f2d"
-  integrity sha512-U33wGD0/e91yl6LwX22tca41gVK+tmMagCQoMhYJd1m9gM3GdGLPGP9WVj5J2ZHhpvt8PU0was+8zAiRTheZ1A==
+minna-tools@0.31.3:
+  version "0.31.3"
+  resolved "https://registry.yarnpkg.com/minna-tools/-/minna-tools-0.31.3.tgz#1b5ab9b8ad585d2db9b98f365f2aeb322d3a54ca"
+  integrity sha512-sFz9cUNF/NBKaD8jit0G7XBCqOSKaZ/xm/K1iTRdKoF9ULOGXC0SLV+WIxNiqnsxzi+o0iCEv1Rp5eiQ/B5JLQ==
   dependencies:
     "@minna-ui/browserslist-config" "^0.31.0"
     "@minna-ui/eslint-config" "^0.31.0"
-    "@minna-ui/jest-config" "^0.31.0"
+    "@minna-ui/jest-config" "^0.31.3"
     "@minna-ui/prettier-config" "^0.31.0"
     "@minna-ui/remark-config" "^0.31.0"
-    "@minna-ui/rollup-plugin-dev-server" "^0.31.0"
+    "@minna-ui/rollup-plugin-dev-server" "^0.31.3"
     "@minna-ui/rollup-plugin-emit-css" "^0.31.0"
     "@minna-ui/rollup-plugin-emit-html" "^0.31.0"
     "@minna-ui/rollup-plugin-postcss" "^0.31.0"
     "@minna-ui/rollup-plugin-purgecss" "^0.31.0"
     "@minna-ui/stylelint-config" "^0.31.0"
     "@minna-ui/ts-config" "^0.31.0"
-    "@minna-ui/utils" "^0.31.0"
+    "@minna-ui/utils" "^0.31.3"
 
-minna-ui@0.31.0:
-  version "0.31.0"
-  resolved "https://registry.yarnpkg.com/minna-ui/-/minna-ui-0.31.0.tgz#b09fa18d883a30700dab7028e241a1241fd4f0a2"
-  integrity sha512-Z70k4M023LLdrUBoTkwDGLCRip8xLESbsyUpyacGbkyNQquUJX3xm6rXi8eWgdtbiRkrD18GMcjuSewhM3gsfg==
+minna-ui@0.31.3:
+  version "0.31.3"
+  resolved "https://registry.yarnpkg.com/minna-ui/-/minna-ui-0.31.3.tgz#7bd129554917a72b7e97afd24d6242f98d5b1e39"
+  integrity sha512-8c/V2I+I2JtceKVYIRCSjyy/vZzTp1yDH2p6yWUu/5Tvlq5wy2Xwsptc2GoW6c+3UVUiXKxIqH5ibfkiJlHGXg==
   dependencies:
-    "@minna-ui/collapse" "^0.31.0"
+    "@minna-ui/collapse" "^0.31.3"
     "@minna-ui/css" "^0.31.0"
-    "@minna-ui/navbar" "^0.31.0"
+    "@minna-ui/navbar" "^0.31.3"
     "@minna-ui/postcss-config" "^0.31.0"
     "@minna-ui/preprocess" "^0.31.0"
-    "@minna-ui/select" "^0.31.0"
-    "@minna-ui/switch" "^0.31.0"
-    "@minna-ui/tooltip" "^0.31.0"
+    "@minna-ui/select" "^0.31.3"
+    "@minna-ui/switch" "^0.31.3"
+    "@minna-ui/tooltip" "^0.31.3"
 
 mixin-deep@^1.2.0:
   version "1.3.2"
@@ -6912,14 +6917,14 @@ rollup-pluginutils@^2.3.3, rollup-pluginutils@^2.5.0, rollup-pluginutils@^2.8.1:
   dependencies:
     estree-walker "^0.6.1"
 
-rollup@1.18.0:
-  version "1.18.0"
-  resolved "https://registry.yarnpkg.com/rollup/-/rollup-1.18.0.tgz#98ea36472523ed712e20c0e996fd051882f787e6"
-  integrity sha512-MBAWr6ectF948gW/bs/yfi0jW7DzwI8n0tEYG/ZMQutmK+blF/Oazyhg3oPqtScCGV8bzCtL9KzlzPtTriEOJA==
+rollup@1.19.4:
+  version "1.19.4"
+  resolved "https://registry.yarnpkg.com/rollup/-/rollup-1.19.4.tgz#0cb4e4d6fa127adab59b11d0be50e8dd1c78123a"
+  integrity sha512-G24w409GNj7i/Yam2cQla6qV2k6Nug8bD2DZg9v63QX/cH/dEdbNJg8H4lUm5M1bRpPKRUC465Rm9H51JTKOfQ==
   dependencies:
     "@types/estree" "0.0.39"
-    "@types/node" "^12.6.3"
-    acorn "^6.2.0"
+    "@types/node" "^12.6.9"
+    acorn "^6.2.1"
 
 rsvp@^4.8.4:
   version "4.8.5"
@@ -7539,10 +7544,10 @@ supports-color@^6.0.0, supports-color@^6.1.0:
   dependencies:
     has-flag "^3.0.0"
 
-svelte@3.6.11:
-  version "3.6.11"
-  resolved "https://registry.yarnpkg.com/svelte/-/svelte-3.6.11.tgz#1ad6638d629ff8f280639687aef0a6a659f09802"
-  integrity sha512-pm8k34grr20MaL0+Tx2m7rxJ0MP6mqj0FxWcTWuOc6TR6TYLq5251shgfhVpy5n7NQUGyp2VqiBAGdSodWmvtg==
+svelte@3.7.1:
+  version "3.7.1"
+  resolved "https://registry.yarnpkg.com/svelte/-/svelte-3.7.1.tgz#a4c8cbacb6a2a83c5f6a5dcf8b2e8a6b95f5761e"
+  integrity sha512-MKjFy3YZ2pNUVPTwLNQ9JAVx6KVwfYnm/vbUF/pKLrfDDZiCBKfWPwnffpwGlnIAn7aS+aJoKV0soj464DOs4Q==
 
 svg-tags@^1.0.0:
   version "1.0.0"
