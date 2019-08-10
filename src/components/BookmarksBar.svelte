@@ -88,6 +88,7 @@
     height: 41px;
     background: var(--c0);
     box-shadow: var(--s);
+    contain: size;
     backface-visibility: hidden; /* performance hack; force GPU */
 
     :global(a),
