@@ -39,7 +39,7 @@
     "@wearegenki/renovate-config": "1.0.0",
     "codacy-coverage": "3.4.0",
     "eslint": "6.1.0",
-    "jest": "24.8.0",
+    "jest": "24.9.0",
     "jest-puppeteer": "4.3.0",
     "minna-tools": "0.31.3",
     "minna-ui": "0.31.3",
