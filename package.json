@@ -55,7 +55,7 @@
     "stylelint": "10.1.0",
     "svelte": "3.8.1",
     "tslib": "1.10.0",
-    "typescript": "3.5.3"
+    "typescript": "3.6.2"
   },
   "browserslist": [
     "last 2 Chrome versions"
