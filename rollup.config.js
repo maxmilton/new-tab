@@ -79,7 +79,8 @@ export default [
       !isDev && compiler(compilerOpts),
       emitHtml({
         ...emitHtmlOpts,
-        content: `%CSS%${loader}%JS%<body>`,
+        content: `%CSS%<body>${loader}%JS%`,
+        scriptAttr: '',
         title: 'New Tab',
       }),
     ],
