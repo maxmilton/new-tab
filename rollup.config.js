@@ -22,7 +22,7 @@ const svelteOpts = {
   emitCss: true,
   immutable: true,
   preprocess,
-  preserveWhitespace: true, // results in smaller code with closure compiler
+  preserveWhitespace: true, // Results in smaller code with closure compiler
 };
 
 const emitHtmlOpts = {
@@ -54,11 +54,11 @@ const compilerOpts = {
   // formatting: 'PRETTY_PRINT',
 };
 
-// theme loader
+// Theme loader
 const loader =
   '<script>chrome.storage.local.get(null,a=>{a.t&&(document.body.className=a.t)});</script>';
 
-// extension manifest
+// Extension manifest
 writeFile(join(__dirname, 'dist/manifest.json'), manifest, handleErr);
 
 export default [

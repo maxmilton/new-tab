@@ -150,10 +150,10 @@
   :global(#search) {
     box-sizing: border-box;
     width: 100%;
-    margin: 0 0 18px;
+    margin: 0 0 35px;
     padding: 11px 20px;
     color: var(--t);
-    font-size: 22px;
+    font-size: 21px;
     background: var(--c2);
     border: 0;
     border-radius: 24px;
@@ -188,7 +188,7 @@
             w="{_node.windowId}"
             title="{_node.title}"
           >
-            <img src="chrome://favicon/{_node.url}">
+            <img src="chrome://favicon/{_node.url}" />
             {_node.title}
           </a>
         {/each}
