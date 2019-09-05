@@ -4,19 +4,15 @@
   "extends": "@minna-ui/ts-config",
   "compilerOptions": {
     "baseUrl": ".",
-    "isolatedModules": true, // ensure compatibility with sucrase
+    "isolatedModules": true, // Ensure compatibility with sucrase
     "outDir": "dist",
     "target": "esnext"
   },
   "exclude": [
     "**/.*rc.js",
     "**/*.config.js",
-    "**/*.test.ts", // FIXME: Add correct types to tests
     "dist",
     "node_modules",
     "test/coverage"
-  ],
-  "typeAcquisition": {
-    "enable": true
-  }
+  ]
 }
