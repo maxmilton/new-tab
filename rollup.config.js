@@ -74,6 +74,7 @@ export default [
       svelte(svelteOpts),
       nodeResolve(),
       typescript({
+        tsconfig: 'tsconfig.build.json',
         typescript: require('typescript'),
       }),
       !isDev && compiler(compilerOpts),
@@ -98,6 +99,7 @@ export default [
       svelte(svelteOpts),
       nodeResolve(),
       typescript({
+        tsconfig: 'tsconfig.build.json',
         typescript: require('typescript'),
       }),
       !isDev && compiler(compilerOpts),
