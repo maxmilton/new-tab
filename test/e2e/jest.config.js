@@ -2,7 +2,7 @@
  * Jest config for end-to-end testing.
  */
 
-/* eslint-disable sort-keys */
+/* eslint-disable sort-keys, strict */
 
 'use strict';
 
