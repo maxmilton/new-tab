@@ -533,10 +533,10 @@
   resolved "https://registry.yarnpkg.com/@minna-ui/tooltip/-/tooltip-0.33.0.tgz#d92108ff432c0e690b42e28b3ffc77ba7aadd98d"
   integrity sha512-1TQnOVT0QFVxXZKGU0WHTwc+4fEnBCTzY4yk0vb4/fpAjvDzwMA3UESRuWIacNGVAnm1xh07RTir3HSKlja/DQ==
 
-"@minna-ui/ts-config@^0.33.0":
-  version "0.33.0"
-  resolved "https://registry.yarnpkg.com/@minna-ui/ts-config/-/ts-config-0.33.0.tgz#11e57852051216039f468a8dddac8a41cf813ef5"
-  integrity sha512-H8e29xpXmIWLXYhzoI6rO/ohAkM2EbDnsz9WkvTsqsoY2Qmug9C7Ssl1q2dIXsj6Si91sdemNCec0Dfq4nFaDg==
+"@minna-ui/ts-config@^0.33.1":
+  version "0.33.1"
+  resolved "https://registry.yarnpkg.com/@minna-ui/ts-config/-/ts-config-0.33.1.tgz#0caee2260367fa7d7d764bc7f3b690036df27563"
+  integrity sha512-hNJVSUcFH9cJx06XRtgyegyZR0EXLxfD+Ws+Y5C8wdNQ2QquHLxZ+0Xg4rElQDZLj7gqq2NTfOxe6++czRik1Q==
 
 "@minna-ui/utils@^0.33.0":
   version "0.33.0"
@@ -4747,10 +4747,10 @@ minizlib@^1.2.1:
   dependencies:
     minipass "^2.2.1"
 
-minna-tools@0.33.0:
-  version "0.33.0"
-  resolved "https://registry.yarnpkg.com/minna-tools/-/minna-tools-0.33.0.tgz#fbb5f7904ca726581a0d0e4bc9c3a76cd5b04042"
-  integrity sha512-0KSwixsd/NVVJgqmW2w2eYDXkmk+GL/RIiRqzwyZ0MnHoKsJQeaRpqwopsuGPHrTWYNaNrtIP5aSfRz4ZoK78Q==
+minna-tools@0.33.1:
+  version "0.33.1"
+  resolved "https://registry.yarnpkg.com/minna-tools/-/minna-tools-0.33.1.tgz#6839b12aad0e3174092c18dcd29ae1554b135a4e"
+  integrity sha512-zzWkebRMjjiSNmXDDB76FTemTwD8Syx7NfNI1FRP4GiZu8On8LxpBOyygyEdnQ9U30Jr62aejOaX2tIDTFZmHQ==
   dependencies:
     "@minna-ui/browserslist-config" "^0.33.0"
     "@minna-ui/eslint-config" "^0.33.0"
@@ -4763,7 +4763,7 @@ minna-tools@0.33.0:
     "@minna-ui/rollup-plugin-postcss" "^0.33.0"
     "@minna-ui/rollup-plugin-purgecss" "^0.33.0"
     "@minna-ui/stylelint-config" "^0.33.0"
-    "@minna-ui/ts-config" "^0.33.0"
+    "@minna-ui/ts-config" "^0.33.1"
     "@minna-ui/utils" "^0.33.0"
 
 minna-ui@0.33.0:
