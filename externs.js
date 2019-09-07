@@ -3,7 +3,7 @@
  * @externs
  */
 
-/* eslint-disable strict, no-var, @typescript-eslint/no-unused-vars */
+/* eslint-disable no-var, @typescript-eslint/no-unused-vars */
 
 // New tab app props
 var bList;

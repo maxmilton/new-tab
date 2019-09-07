@@ -1,0 +1,15 @@
+// https://www.typescriptlang.org/docs/handbook/tsconfig-json.html
+
+// Config for actual package builds
+
+{
+  "extends": "./tsconfig.json",
+  "compilerOptions": {
+    "allowJs": false,
+    "baseUrl": "./src",
+    "checkJs": false,
+    "isolatedModules": false,
+    "noEmit": false
+  },
+  "exclude": ["**/__tests__/*", "dist", "node_modules"]
+}

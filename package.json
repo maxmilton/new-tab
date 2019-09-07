@@ -23,7 +23,7 @@
     "lint": "yarn lint:md && yarn lint:css && yarn lint:js && yarn lint:types",
     "FIXME__lint:css": "stylelint **/*.{css,html,js,md,svelte,svg,ts} --report-needless-disables",
     "lint:css": "stylelint **/*.{css,html,js,md,svelte,svg,ts}",
-    "lint:js": "eslint --ext html,js,md,mjs,snap,svelte,svg,ts --report-unused-disable-directives .",
+    "lint:js": "eslint --ext html,js,md,mjs,svelte,svg,ts .",
     "lint:types": "tsc --noEmit --allowJs --checkJs",
     "test": "jest --notify --watch",
     "test:e2e": "jest --config test/e2e/jest.config.js",
@@ -41,8 +41,8 @@
     "eslint": "6.3.0",
     "jest": "24.9.0",
     "jest-puppeteer": "4.3.0",
-    "minna-tools": "0.33.0",
-    "minna-ui": "0.33.0",
+    "minna-tools": "0.33.1",
+    "minna-ui": "0.33.2",
     "postcss": "7.0.18",
     "postcss-scss": "2.0.0",
     "prettier": "1.18.2",
@@ -129,14 +129,6 @@
     ]
   },
   "engines": {
-    "node": ">=12.4.0",
-    "yarn": ">=1.16.0"
-  },
-  "os": [
-    "!win32",
-    "darwin",
-    "freebsd",
-    "linux",
-    "openbsd"
-  ]
+    "node": ">12.0.0"
+  }
 }

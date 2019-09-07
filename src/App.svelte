@@ -1,6 +1,6 @@
 <script>
   import { handleLinkClick } from './common';
-  import BookmarkGroup from './components/BookmarkGroup.svelte';
+  import BookmarksBar from './components/BookmarksBar.svelte';
   import Menu from './components/Menu.svelte';
   import Search from './components/Search.svelte';
 </script>
@@ -10,9 +10,8 @@
   @import './themes/dark.css';
 
   :global(body) { /* stylelint-disable-line a11y/line-height-is-vertical-rhythmed */
-    margin: 80px 0;
+    margin: 110px 0;
     overflow-y: scroll; /* Prevent jump on load */
-    color: var(--t);
     font-size: 18px;
     /**
      * Normally you would use a unitless value for line-height but this is kind
@@ -42,6 +41,6 @@
 
 <svelte:window on:click={handleLinkClick}/>
 
-<BookmarkGroup/>
+<BookmarksBar/>
 <Search/>
 <Menu/>

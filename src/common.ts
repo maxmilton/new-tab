@@ -40,7 +40,7 @@ export function handleLinkClick(event: MouseEvent): void {
   const url = (target as HTMLAnchorElement).href;
 
   // only apply special handling to non-http links
-  if (url && url.charAt(0) !== 'h') {
+  if (url && url.startsWith('h')) {
     event.preventDefault();
 
     if ((target as HTMLAnchorElement).target === '_blank' || ctrlKey) {
