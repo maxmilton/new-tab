@@ -52,7 +52,7 @@
     "rollup-plugin-node-resolve": "5.2.0",
     "rollup-plugin-svelte": "5.1.0",
     "rollup-plugin-typescript": "1.0.1",
-    "stylelint": "10.1.0",
+    "stylelint": "11.0.0",
     "svelte": "3.12.1",
     "tslib": "1.10.0",
     "typescript": "3.6.3"
