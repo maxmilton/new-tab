@@ -74,7 +74,8 @@ export default [
       svelte(svelteOpts),
       nodeResolve(),
       typescript({
-        tsconfig: 'tsconfig.build.json',
+        // FIXME: Generates larger output
+        // tsconfig: 'tsconfig.build.json',
         typescript: require('typescript'),
       }),
       !isDev && compiler(compilerOpts),
@@ -99,7 +100,7 @@ export default [
       svelte(svelteOpts),
       nodeResolve(),
       typescript({
-        tsconfig: 'tsconfig.build.json',
+        // tsconfig: 'tsconfig.build.json',
         typescript: require('typescript'),
       }),
       !isDev && compiler(compilerOpts),
