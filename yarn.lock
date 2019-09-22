@@ -438,13 +438,13 @@
     remark-preset-lint-recommended "^3.0.3"
     remark-validate-links "^9.0.1"
 
-"@minna-ui/rollup-plugin-dev-server@^0.34.0":
-  version "0.34.0"
-  resolved "https://registry.yarnpkg.com/@minna-ui/rollup-plugin-dev-server/-/rollup-plugin-dev-server-0.34.0.tgz#0a4f8ecc7bac646ddff47e6b3b51a9f4455b6514"
-  integrity sha512-cyqpVL0KooZ+BSVBAoCUkmb7Pqk7uT35k6AAs2bm0O+6VOWC0lx/oM+1VN7LQHtdhfj2jSxsCWWKeQxWdvNzqA==
+"@minna-ui/rollup-plugin-dev-server@^0.34.1":
+  version "0.34.1"
+  resolved "https://registry.yarnpkg.com/@minna-ui/rollup-plugin-dev-server/-/rollup-plugin-dev-server-0.34.1.tgz#50b4b24b0ad62fa87d199d62fc386cc72eda0362"
+  integrity sha512-GeYj7jSq0PM2lyESa6SffErR8XYMLJk0mX3QBJ/iRHS5qp2ID/+FWn34SjMNI4FLRTbObPh/YLjHo1tiQ5HjYg==
   dependencies:
     "@minna-ui/utils" "^0.34.0"
-    "@wearegenki/node-utils" "^0.3.0"
+    "@wearegenki/node-utils" "^0.4.1"
     deepmerge "^4.0.0"
     sirv "^0.4.2"
 
@@ -812,10 +812,10 @@
     lodash.unescape "4.0.1"
     semver "^6.3.0"
 
-"@wearegenki/node-utils@^0.3.0":
-  version "0.3.0"
-  resolved "https://registry.yarnpkg.com/@wearegenki/node-utils/-/node-utils-0.3.0.tgz#97a152a67dc3a8a07db4f3cb8138cd07f990855c"
-  integrity sha512-OVrr/r8lYARWZ6ePoIMFPTFjOJSliXUljHPZ+IArWTm8vD73escaW+N1DUy3bDYmOOOnSKrEhzlmwz4BhGa5oQ==
+"@wearegenki/node-utils@^0.4.1":
+  version "0.4.1"
+  resolved "https://registry.yarnpkg.com/@wearegenki/node-utils/-/node-utils-0.4.1.tgz#07181e3910b895a6e27a1cc5189381671fd3e6b8"
+  integrity sha512-zLgIwu3yWxBDwxzEK6nYPTpiOTdvMyQoVr1GZWmC0apMYeJigY68qTpVSVUSoyK8cWiCHVcU0HvkXH6XbLmwDA==
   dependencies:
     colorette "^1.0.7"
 
@@ -4678,17 +4678,17 @@ minizlib@^1.2.1:
   dependencies:
     minipass "^2.2.1"
 
-minna-tools@0.34.0:
-  version "0.34.0"
-  resolved "https://registry.yarnpkg.com/minna-tools/-/minna-tools-0.34.0.tgz#cf6fc83653a01c66cf161ecff5eb0f36753dbb3d"
-  integrity sha512-Ays//S2oxP7QU8XuysQhFSXSGgaeBRQ9ZcHOiIlG1PS5ec38BdpO/8d0dWZlHy8IKfxQ1KyztsbZKXvBqcesWw==
+minna-tools@0.34.1:
+  version "0.34.1"
+  resolved "https://registry.yarnpkg.com/minna-tools/-/minna-tools-0.34.1.tgz#466f3a66d351a5bebac93b402e3c923ad468ea41"
+  integrity sha512-7BtARhqxBnOSopbyyERu3iuLPChIfvEp9lzjBD1GmybDzOo87cgRqPR4hLptf1tijkSXaIqy97ZBrg/QEBXBtw==
   dependencies:
     "@minna-ui/browserslist-config" "^0.34.0"
     "@minna-ui/eslint-config" "^0.34.0"
     "@minna-ui/jest-config" "^0.34.0"
     "@minna-ui/prettier-config" "^0.34.0"
     "@minna-ui/remark-config" "^0.34.0"
-    "@minna-ui/rollup-plugin-dev-server" "^0.34.0"
+    "@minna-ui/rollup-plugin-dev-server" "^0.34.1"
     "@minna-ui/rollup-plugin-emit-css" "^0.34.0"
     "@minna-ui/rollup-plugin-emit-html" "^0.34.0"
     "@minna-ui/rollup-plugin-postcss" "^0.34.0"
