@@ -507,10 +507,10 @@
   resolved "https://registry.yarnpkg.com/@minna-ui/switch/-/switch-0.34.0.tgz#3a7def9537071c83bdbfc33171926504a5ea401d"
   integrity sha512-xAAIFwvm47OHaZyqHlL1ip9dfMJvdW0B7YpmGD8IOezslzEzFcpRB1++/FXFC/nX4A76gGXhULbMZuR4FlV0ow==
 
-"@minna-ui/tooltip@^0.34.0":
-  version "0.34.0"
-  resolved "https://registry.yarnpkg.com/@minna-ui/tooltip/-/tooltip-0.34.0.tgz#4638b91ef6c9766ed983fbb295a3f98ed986d1f0"
-  integrity sha512-ysQ8AmAYu45CUK7BMj283T3epH7/aeuGmTj43JNVRuTl90pA7XmzVtG4IvgEXrOsRVItTCik3yg592YYZXdECQ==
+"@minna-ui/tooltip@^0.34.1":
+  version "0.34.1"
+  resolved "https://registry.yarnpkg.com/@minna-ui/tooltip/-/tooltip-0.34.1.tgz#cb4dcaac63a078628dd211807cfc26020050ec45"
+  integrity sha512-6wyR5WJyIztdJSc3IJSpMBHnJdDZ9Z3ynh/+CYpjAnsszE1c6HisxiEo76ODknInBKFcIGQ+1R7BlEq8TjVnkw==
 
 "@minna-ui/ts-config@^0.34.0":
   version "0.34.0"
@@ -4697,10 +4697,10 @@ minna-tools@0.34.0:
     "@minna-ui/ts-config" "^0.34.0"
     "@minna-ui/utils" "^0.34.0"
 
-minna-ui@0.34.0:
-  version "0.34.0"
-  resolved "https://registry.yarnpkg.com/minna-ui/-/minna-ui-0.34.0.tgz#028ee4a15766c3a6f667ed9a4f87cabfcf8c39e9"
-  integrity sha512-99Z1TBaeUr0eMiSCxUA51yFMiBihiIYtrgZvlZpW6NbpjqLBnirSKT8THLMNe/qZEaU4uHJ2ye+ECW3EU+GM3A==
+minna-ui@0.34.1:
+  version "0.34.1"
+  resolved "https://registry.yarnpkg.com/minna-ui/-/minna-ui-0.34.1.tgz#c905397b573f1af5b3537cafbd0ead91fe566f1b"
+  integrity sha512-6UzIj7ZL6C52BwEPMZPZJ/GUFcbbHrcit7dl+WB4Glib+MGxyuGG4jlT4Zpfl5/rQcd3vgbaSVFgOPbYbzKEkQ==
   dependencies:
     "@minna-ui/collapse" "^0.34.0"
     "@minna-ui/css" "^0.34.0"
@@ -4709,7 +4709,7 @@ minna-ui@0.34.0:
     "@minna-ui/preprocess" "^0.34.0"
     "@minna-ui/select" "^0.34.0"
     "@minna-ui/switch" "^0.34.0"
-    "@minna-ui/tooltip" "^0.34.0"
+    "@minna-ui/tooltip" "^0.34.1"
 
 mixin-deep@^1.2.0:
   version "1.3.2"
