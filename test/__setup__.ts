@@ -1,19 +1,17 @@
-/* eslint-disable @typescript-eslint/array-type, @typescript-eslint/ban-types, @typescript-eslint/indent */
-
-// @ts-ignore - we don't need to worry about `--isolatedModules` here
-type DeepPartial<T> = {
-  [P in keyof T]?: T[P] extends Array<infer U>
-    ? Array<DeepPartial<U>>
+export type DeepPartial<T> = {
+  [P in keyof T]?: T[P] extends (infer U)[]
+    ? DeepPartial<U>[]
     : T[P] extends ReadonlyArray<infer U>
-    ? ReadonlyArray<DeepPartial<U>>
-    : DeepPartial<T[P]>;
+      ? ReadonlyArray<DeepPartial<U>>
+      : DeepPartial<T[P]>;
 };
-/* eslint-enable */
 
-// eslint-disable-next-line @typescript-eslint/no-namespace
-declare namespace NodeJS {
-  interface Global {
-    chrome: DeepPartial<typeof chrome>;
+declare global {
+  // eslint-disable-next-line @typescript-eslint/no-namespace
+  namespace NodeJS {
+    interface Global {
+      chrome: DeepPartial<typeof chrome>;
+    }
   }
 }
 

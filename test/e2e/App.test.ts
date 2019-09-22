@@ -1,3 +1,4 @@
+// @ts-ignore - FIXME: Remove this ignore after adding an import
 beforeEach(async () => {
   await page.goto('chrome://newtab');
 });
