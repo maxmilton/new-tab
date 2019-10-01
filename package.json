@@ -38,7 +38,7 @@
     "@types/puppeteer": "1.20.0",
     "@wearegenki/renovate-config": "1.0.0",
     "codacy-coverage": "3.4.0",
-    "eslint": "6.5.0",
+    "eslint": "6.5.1",
     "jest": "24.9.0",
     "jest-puppeteer": "4.3.0",
     "minna-tools": "0.34.1",
