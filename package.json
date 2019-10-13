@@ -32,13 +32,13 @@
   },
   "devDependencies": {
     "@ampproject/rollup-plugin-closure-compiler": "0.10.0",
-    "@types/chrome": "0.0.88",
-    "@types/expect-puppeteer": "3.3.1",
+    "@types/chrome": "0.0.89",
+    "@types/expect-puppeteer": "3.3.2",
     "@types/jest-environment-puppeteer": "4.3.1",
-    "@types/puppeteer": "1.19.1",
+    "@types/puppeteer": "1.20.2",
     "@wearegenki/renovate-config": "1.0.0",
     "codacy-coverage": "3.4.0",
-    "eslint": "6.4.0",
+    "eslint": "6.5.1",
     "jest": "24.9.0",
     "jest-puppeteer": "4.3.0",
     "minna-tools": "0.34.1",
@@ -48,14 +48,14 @@
     "prettier": "1.18.2",
     "puppeteer": "1.20.0",
     "remark-cli": "7.0.0",
-    "rollup": "1.21.4",
+    "rollup": "1.23.1",
     "rollup-plugin-node-resolve": "5.2.0",
     "rollup-plugin-svelte": "5.1.0",
     "rollup-plugin-typescript": "1.0.1",
-    "stylelint": "11.0.0",
+    "stylelint": "11.1.1",
     "svelte": "3.12.1",
     "tslib": "1.10.0",
-    "typescript": "3.6.3"
+    "typescript": "3.6.4"
   },
   "browserslist": [
     "last 2 Chrome versions"
