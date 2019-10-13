@@ -2,7 +2,7 @@
 
 // TODO: Actually implement unit tests
 
-import * as common from '../common';
+import * as common from '../utils';
 
 describe('Helper debounce function', () => {
   it('function exists', () => {
