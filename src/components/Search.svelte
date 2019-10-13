@@ -1,5 +1,5 @@
 <script>
-  import { DEFAULT_ORDER, debounce } from '../common';
+  import { DEFAULT_ORDER, debounce } from '../utils';
   import SearchResults from './SearchResults.svelte';
 
   const SEARCH_DEBOUNCE_DELAY_MS = 260;

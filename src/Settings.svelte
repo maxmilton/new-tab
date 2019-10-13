@@ -4,7 +4,7 @@
   // using `const` expressions for better compile time minification.
 
   import { afterUpdate } from 'svelte';
-  import { DEFAULT_ORDER } from './common';
+  import { DEFAULT_ORDER } from './utils';
 
   let order = [];
   let pageTheme = '';
