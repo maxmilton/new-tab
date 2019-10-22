@@ -12,7 +12,7 @@ describe('App component', () => {
 });
 
 describe('App click handler', () => {
-  it.skip('triggers on mouse click event', () => {
+  it('triggers on mouse click event', () => {
     expect.assertions(3);
     const target = document.createElement('div');
     const spy1 = jest.spyOn(chrome.tabs, 'update');
@@ -31,7 +31,7 @@ describe('App click handler', () => {
     spy2.mockRestore();
   });
 
-  it.skip('handles regular HTTP links', () => {
+  it('handles regular HTTP links', () => {
     expect.assertions(2);
     const target = document.createElement('div');
     const component = new App({ target });
@@ -45,13 +45,13 @@ describe('App click handler', () => {
     const spy1 = jest.spyOn(component, '_onLinkClick');
     const spy2 = jest.spyOn(event, 'preventDefault');
     window.dispatchEvent(event);
-    expect(spy1).toHaveBeenCalled();
+    expect(spy1).toHaveBeenCalledWith('');
     expect(spy2).not.toHaveBeenCalled();
     spy1.mockRestore();
     spy2.mockRestore();
   });
 
-  it.skip('handles chrome internal links', () => {
+  it('handles chrome internal links', () => {
     expect.assertions(4);
     const target = document.createElement('div');
     const component = new App({ target });
@@ -64,20 +64,20 @@ describe('App click handler', () => {
     Object.defineProperty(event, 'target', { enumerable: true, value: link });
     const spy1 = jest.spyOn(component, '_onLinkClick');
     const spy2 = jest.spyOn(event, 'preventDefault');
-    const spy3 = jest.spyOn(chrome.tabs, 'create', 'get');
-    const spy4 = jest.spyOn(chrome.tabs, 'update', 'get');
+    const spy3 = jest.spyOn(chrome.tabs, 'create');
+    const spy4 = jest.spyOn(chrome.tabs, 'update');
     window.dispatchEvent(event);
-    expect(spy1).toHaveBeenCalled();
-    expect(spy2).toHaveBeenCalled();
+    expect(spy1).toHaveBeenCalledWith('');
+    expect(spy2).toHaveBeenCalledWith('');
     expect(spy3).not.toHaveBeenCalled();
-    expect(spy4).toHaveBeenCalled();
+    expect(spy4).toHaveBeenCalledWith('');
     spy1.mockRestore();
     spy2.mockRestore();
     spy3.mockRestore();
     spy4.mockRestore();
   });
 
-  it.skip('handles chrome internal links with _blank target', () => {
+  it('handles chrome internal links with _blank target', () => {
     expect.assertions(4);
     const target = document.createElement('div');
     const component = new App({ target });
@@ -94,12 +94,12 @@ describe('App click handler', () => {
     });
     const spy1 = jest.spyOn(component, '_onLinkClick');
     const spy2 = jest.spyOn(event, 'preventDefault');
-    const spy3 = jest.spyOn(chrome.tabs, 'create', 'get');
-    const spy4 = jest.spyOn(chrome.tabs, 'update', 'get');
+    const spy3 = jest.spyOn(chrome.tabs, 'create');
+    const spy4 = jest.spyOn(chrome.tabs, 'update');
     window.dispatchEvent(event);
-    expect(spy1).toHaveBeenCalled();
-    expect(spy2).toHaveBeenCalled();
-    expect(spy3).toHaveBeenCalled();
+    expect(spy1).toHaveBeenCalledWith('');
+    expect(spy2).toHaveBeenCalledWith('');
+    expect(spy3).toHaveBeenCalledWith('');
     expect(spy4).not.toHaveBeenCalled();
     spy1.mockRestore();
     spy2.mockRestore();
@@ -107,7 +107,7 @@ describe('App click handler', () => {
     spy4.mockRestore();
   });
 
-  it.skip('handles chrome internal links with ctrl key', () => {
+  it('handles chrome internal links with ctrl key', () => {
     expect.assertions(4);
     const target = document.createElement('div');
     const component = new App({ target });
@@ -121,12 +121,12 @@ describe('App click handler', () => {
     Object.defineProperty(event, 'target', { enumerable: true, value: link });
     const spy1 = jest.spyOn(component, '_onLinkClick');
     const spy2 = jest.spyOn(event, 'preventDefault');
-    const spy3 = jest.spyOn(chrome.tabs, 'create', 'get');
-    const spy4 = jest.spyOn(chrome.tabs, 'update', 'get');
+    const spy3 = jest.spyOn(chrome.tabs, 'create');
+    const spy4 = jest.spyOn(chrome.tabs, 'update');
     window.dispatchEvent(event);
-    expect(spy1).toHaveBeenCalled();
-    expect(spy2).toHaveBeenCalled();
-    expect(spy3).toHaveBeenCalled();
+    expect(spy1).toHaveBeenCalledWith('');
+    expect(spy2).toHaveBeenCalledWith('');
+    expect(spy3).toHaveBeenCalledWith('');
     expect(spy4).not.toHaveBeenCalled();
     spy1.mockRestore();
     spy2.mockRestore();
