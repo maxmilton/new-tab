@@ -31,7 +31,7 @@
     "FIXME__posttest-ci": "jest --runInBand --ci --config test/e2e/jest.config.js"
   },
   "devDependencies": {
-    "@ampproject/rollup-plugin-closure-compiler": "0.10.0",
+    "@ampproject/rollup-plugin-closure-compiler": "0.11.0",
     "@types/chrome": "0.0.91",
     "@types/expect-puppeteer": "3.3.2",
     "@types/jest-environment-puppeteer": "4.3.1",
