@@ -46,7 +46,7 @@
     "postcss": "7.0.20",
     "postcss-scss": "2.0.0",
     "prettier": "1.18.2",
-    "puppeteer": "1.20.0",
+    "puppeteer": "2.0.0",
     "remark-cli": "7.0.0",
     "rollup": "1.25.2",
     "rollup-plugin-node-resolve": "5.2.0",
