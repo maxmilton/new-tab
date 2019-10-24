@@ -31,7 +31,7 @@
     "FIXME__posttest-ci": "jest --runInBand --ci --config test/e2e/jest.config.js"
   },
   "devDependencies": {
-    "@ampproject/rollup-plugin-closure-compiler": "0.11.0",
+    "@ampproject/rollup-plugin-closure-compiler": "0.12.0",
     "@types/chrome": "0.0.91",
     "@types/expect-puppeteer": "3.3.2",
     "@types/jest-environment-puppeteer": "4.3.1",
@@ -43,10 +43,10 @@
     "jest-puppeteer": "4.3.0",
     "minna-tools": "0.34.1",
     "minna-ui": "0.34.1",
-    "postcss": "7.0.18",
+    "postcss": "7.0.20",
     "postcss-scss": "2.0.0",
     "prettier": "1.18.2",
-    "puppeteer": "1.20.0",
+    "puppeteer": "2.0.0",
     "remark-cli": "7.0.0",
     "rollup": "1.25.2",
     "rollup-plugin-node-resolve": "5.2.0",
