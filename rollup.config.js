@@ -50,9 +50,6 @@ const compilerOpts = {
     resolve('google-closure-compiler/contrib/externs/chrome_extensions.js'),
     join(__dirname, 'externs.js'),
   ],
-  language_in: 'ECMASCRIPT_NEXT',
-  language_out: 'ECMASCRIPT_2017',
-  warning_level: 'DEFAULT',
 
   // debug: true,
   // formatting: 'PRETTY_PRINT',
@@ -78,8 +75,6 @@ export default [
       svelte(svelteOpts),
       nodeResolve(),
       typescript({
-        // FIXME: Generates larger output
-        // tsconfig: 'tsconfig.build.json',
         typescript: require('typescript'),
       }),
       !isDev && compiler(compilerOpts),
@@ -104,7 +99,6 @@ export default [
       svelte(svelteOpts),
       nodeResolve(),
       typescript({
-        // tsconfig: 'tsconfig.build.json',
         typescript: require('typescript'),
       }),
       !isDev && compiler(compilerOpts),
