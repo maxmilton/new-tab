@@ -15,8 +15,6 @@
   },
   "files.eol": "\n",
   "javascript.implicitProjectConfig.checkJs": true,
-  // "prettier.eslintIntegration": true,
-  "prettier.stylelintIntegration": true,
-  "scss.validate": false,
+  // "scss.validate": false,
   "stylelint.enable": true
 }
