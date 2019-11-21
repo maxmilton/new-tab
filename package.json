@@ -1,11 +1,29 @@
 {
-  "private": true,
   "name": "new-tab",
   "version": "0.14.0",
+  "private": true,
   "description": "⚡ A high performance new tab page that gets you where you need to go faster.",
-  "homepage": "https://github.com/MaxMilton/new-tab",
-  "author": "Max Milton <max@wearegenki.com>",
   "license": "MIT",
+  "author": "Max Milton <max@wearegenki.com>",
+  "homepage": "https://github.com/MaxMilton/new-tab",
+  "engines": {
+    "node": ">12.0.0"
+  },
+  "scripts": {
+    "FIXME__lint:css": "stylelint **/*.{css,html,js,md,svelte,svg,ts} --report-needless-disables",
+    "FIXME__posttest-ci": "jest --runInBand --ci --config test/e2e/jest.config.js",
+    "build": "NODE_ENV=production rollup --config",
+    "dev": "rollup --config --watch",
+    "lint": "yarn lint:md && yarn lint:css && yarn lint:js && yarn lint:types",
+    "lint:css": "stylelint **/*.{css,html,js,md,svelte,svg,ts}",
+    "lint:js": "eslint --ext html,js,md,mjs,svelte,svg,ts .",
+    "lint:md": "remark --frail --quiet .",
+    "lint:types": "tsc --noEmit --allowJs --checkJs",
+    "prebuild": "rm -rf dist && mkdir dist && cp icon* dist",
+    "test": "jest --notify --watch",
+    "test-ci": "jest --runInBand --ci --coverage",
+    "test:e2e": "jest --config test/e2e/jest.config.js"
+  },
   "keywords": [
     "chrome-extension",
     "chrome",
@@ -15,21 +33,6 @@
     "ntp",
     "svelte"
   ],
-  "scripts": {
-    "dev": "rollup --config --watch",
-    "build": "NODE_ENV=production rollup --config",
-    "prebuild": "rm -rf dist && mkdir dist && cp icon* dist",
-    "lint:md": "remark --frail --quiet .",
-    "lint": "yarn lint:md && yarn lint:css && yarn lint:js && yarn lint:types",
-    "FIXME__lint:css": "stylelint **/*.{css,html,js,md,svelte,svg,ts} --report-needless-disables",
-    "lint:css": "stylelint **/*.{css,html,js,md,svelte,svg,ts}",
-    "lint:js": "eslint --ext html,js,md,mjs,svelte,svg,ts .",
-    "lint:types": "tsc --noEmit --allowJs --checkJs",
-    "test": "jest --notify --watch",
-    "test:e2e": "jest --config test/e2e/jest.config.js",
-    "test-ci": "jest --runInBand --ci --coverage",
-    "FIXME__posttest-ci": "jest --runInBand --ci --config test/e2e/jest.config.js"
-  },
   "devDependencies": {
     "@ampproject/rollup-plugin-closure-compiler": "0.12.2",
     "@types/chrome": "0.0.91",
@@ -41,8 +44,8 @@
     "eslint": "6.6.0",
     "jest": "24.9.0",
     "jest-puppeteer": "4.3.0",
-    "minna-tools": "0.34.1",
-    "minna-ui": "0.34.1",
+    "minna-tools": "0.35.0",
+    "minna-ui": "0.35.0",
     "postcss": "7.0.23",
     "postcss-scss": "2.0.0",
     "prettier": "1.19.1",
@@ -60,16 +63,6 @@
   "browserslist": [
     "last 2 Chrome versions"
   ],
-  "postcss": {
-    "map": false,
-    "plugins": {
-      "minna-ui/postcss": {
-        "unsafe": true
-      }
-    },
-    "syntax": "postcss-scss"
-  },
-  "prettier": "minna-tools/prettier",
   "eslintConfig": {
     "root": true,
     "extends": [
@@ -93,6 +86,37 @@
     "**/node_modules/**",
     "/test/coverage/**"
   ],
+  "jest": {
+    "preset": "minna-tools",
+    "setupFiles": [
+      "./test/__setup__.ts"
+    ],
+    "collectCoverageFrom": [
+      "src/**/*.{svelte,ts}",
+      "!src/app.ts",
+      "!src/settings.ts"
+    ]
+  },
+  "postcss": {
+    "map": false,
+    "plugins": {
+      "minna-ui/postcss": {
+        "unsafe": true
+      }
+    },
+    "syntax": "postcss-scss"
+  },
+  "prettier": "minna-tools/prettier",
+  "remarkConfig": {
+    "plugins": [
+      "minna-tools/remark"
+    ]
+  },
+  "renovate": {
+    "extends": [
+      "@wearegenki"
+    ]
+  },
   "stylelint": {
     "extends": "minna-tools/stylelint",
     "ignoreFiles": [
@@ -106,29 +130,5 @@
       "scale-unlimited/declaration-strict-value": null,
       "selector-max-id": null
     }
-  },
-  "remarkConfig": {
-    "plugins": [
-      "minna-tools/remark"
-    ]
-  },
-  "jest": {
-    "preset": "minna-tools",
-    "setupFiles": [
-      "./test/__setup__.ts"
-    ],
-    "collectCoverageFrom": [
-      "src/**/*.{svelte,ts}",
-      "!src/app.ts",
-      "!src/settings.ts"
-    ]
-  },
-  "renovate": {
-    "extends": [
-      "@wearegenki"
-    ]
-  },
-  "engines": {
-    "node": ">12.0.0"
   }
 }
