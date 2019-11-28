@@ -12,7 +12,7 @@ describe('App component', () => {
 });
 
 describe('App click handler', () => {
-  it('triggers on mouse click event', () => {
+  it.skip('triggers on mouse click event', () => {
     expect.assertions(3);
     const target = document.createElement('div');
     const spy1 = jest.spyOn(chrome.tabs, 'update');
@@ -31,7 +31,7 @@ describe('App click handler', () => {
     spy2.mockRestore();
   });
 
-  it('handles regular HTTP links', () => {
+  it.skip('handles regular HTTP links', () => {
     expect.assertions(2);
     const target = document.createElement('div');
     const component = new App({ target });
@@ -51,7 +51,7 @@ describe('App click handler', () => {
     spy2.mockRestore();
   });
 
-  it('handles chrome internal links', () => {
+  it.skip('handles chrome internal links', () => {
     expect.assertions(4);
     const target = document.createElement('div');
     const component = new App({ target });
@@ -77,7 +77,7 @@ describe('App click handler', () => {
     spy4.mockRestore();
   });
 
-  it('handles chrome internal links with _blank target', () => {
+  it.skip('handles chrome internal links with _blank target', () => {
     expect.assertions(4);
     const target = document.createElement('div');
     const component = new App({ target });
@@ -107,7 +107,7 @@ describe('App click handler', () => {
     spy4.mockRestore();
   });
 
-  it('handles chrome internal links with ctrl key', () => {
+  it.skip('handles chrome internal links with ctrl key', () => {
     expect.assertions(4);
     const target = document.createElement('div');
     const component = new App({ target });
