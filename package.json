@@ -60,6 +60,9 @@
     "tslib": "1.10.0",
     "typescript": "3.7.2"
   },
+  "resolutions": {
+    "vfile": "^4.0.2"
+  },
   "browserslist": [
     "last 2 Chrome versions"
   ],
