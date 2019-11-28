@@ -123,6 +123,9 @@
     }
   }
 
+  /* FIXME: Style specificity */
+  /* stylelint-disable no-descending-specificity */
+
   :global(.rm) {
     margin: 0 0 0 auto;
     border-top: 0;

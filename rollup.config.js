@@ -1,4 +1,4 @@
-/* eslint-disable @typescript-eslint/camelcase, global-require */
+/* eslint-disable @typescript-eslint/no-require-imports, @typescript-eslint/camelcase, global-require */
 
 // @ts-ignore - FIXME: Doesn't provide types
 import compiler from '@ampproject/rollup-plugin-closure-compiler';
