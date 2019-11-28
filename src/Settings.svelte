@@ -88,7 +88,12 @@
     font-size: 18px;
   }
 
+  :global(button) {
+    cursor: pointer;
+  }
+
   :global(ul) {
+    margin-top: 0;
     padding-left: 0;
     list-style: none;
   }
@@ -98,40 +103,63 @@
   }
 
   :global(.item) {
+    display: flex;
+    align-items: center;
     margin: 6px 0;
-    padding: 6px 10px;
+    padding: 0 0 0 10px;
+    line-height: 0;
+    background: rgba(255, 255, 255, 0.55);
     border: 1px solid rgba(0, 0, 0, 0.25);
     border-radius: 2px;
     cursor: grab;
+
+    &:first-of-type {
+      margin-top: 0;
+    }
+
+    &:hover,
+    &:focus {
+      border-color: rgba(0, 0, 0, 0.5);
+    }
   }
 
-  /* TODO: Improve the styling technique */
   :global(.rm) {
-    position: relative;
-    top: -7px;
-    right: -12px;
-    float: right;
-    cursor: pointer;
+    margin: 0 0 0 auto;
+    border-top: 0;
+    border-right: 0;
+    border-bottom: 0;
   }
 
   :global(.icon) {
     margin-right: 10px;
-    color: rgb(180, 180, 180);
+    color: rgb(215, 215, 215);
+    font-size: 150%;
 
-    .item:hover > &,
-    .item:focus > & {
+    :global(.item):hover > &,
+    :global(.item):focus > & {
       color: rgb(110, 110, 110);
     }
   }
 
-  :global(.dragging) { /* stylelint-disable-line no-descending-specificity */
+  :global(.dragging) {
     border-style: dashed;
     opacity: 0.4;
+
+    & > .icon,
+    & > .rm {
+      opacity: 0;
+    }
   }
 
-  :global(.over) { /* stylelint-disable-line no-descending-specificity */
+  :global(.over) {
     /* stylelint-disable-next-line declaration-no-important */
     border-color: rgb(21, 48, 167) !important;
+  }
+
+  :global(.reset) {
+    background: none;
+    border: 0;
+    box-shadow: none;
   }
 </style>
 
@@ -145,7 +173,7 @@
 
 <div class="row">
   <label>List order:</label>
-  <button on:click="{resetOrder}">Reset</button>
+  <button on:click="{resetOrder}" class="reset">Reset</button>
   <ul>
     {#each order as _item, index (_item)}
       <li
