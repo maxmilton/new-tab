@@ -1,0 +1,28 @@
+name: ci
+on: [push]
+jobs:
+  test:
+    runs-on: ${{ matrix.os }}
+    strategy:
+      matrix:
+        node-version: [12, 13]
+        os: [ubuntu-latest, windows-latest, macOS-latest]
+    steps:
+      - run: git config --global core.autocrlf false
+      - uses: actions/checkout@v1
+      - uses: actions/setup-node@v1
+        with:
+          node-version: ${{ matrix.node-version }}
+      - run: yarn install --frozen-lockfile
+      - run: yarn build
+      - run: yarn run test-ci
+        env:
+          CI: true
+  lint:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v1
+      - uses: actions/setup-node@v1
+      - run: yarn install --frozen-lockfile
+      - run: yarn build
+      - run: yarn run lint

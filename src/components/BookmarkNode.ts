@@ -20,6 +20,6 @@ interface ComponentContext {
 
 export default function BookmarkNode(
   context: ComponentContext,
-): BookmarkFolder {
+): BookmarkFolder | LinkItem {
   return new (context.props.node.children ? BookmarkFolder : LinkItem)(context);
 }

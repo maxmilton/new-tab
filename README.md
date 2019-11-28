@@ -1,7 +1,7 @@
 <!-- markdownlint-disable first-line-h1 no-inline-html -->
 
 [![Build status](https://img.shields.io/circleci/project/github/MaxMilton/new-tab.svg)](https://circleci.com/gh/MaxMilton/new-tab)
-[![Coverage status](https://img.shields.io/codecov/c/github/MaxMilton/new-tab.svg)](https://codecov.io/gh/MaxMilton/new-tab)
+[![Coverage status](https://img.shields.io/codeclimate/coverage/MaxMilton/new-tab)](https://codeclimate.com/github/MaxMilton/new-tab)
 [![Chrome web store version](https://img.shields.io/chrome-web-store/v/cpcibnbdmpmcmnkhoiilpnlaepkepknb.svg)](https://chrome.google.com/webstore/detail/new-tab/cpcibnbdmpmcmnkhoiilpnlaepkepknb)
 [![Licence](https://img.shields.io/github/license/MaxMilton/new-tab.svg)](https://github.com/MaxMilton/new-tab/blob/master/LICENSE)
 ![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg)

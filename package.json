@@ -6,14 +6,10 @@
   "license": "MIT",
   "author": "Max Milton <max@wearegenki.com>",
   "homepage": "https://github.com/MaxMilton/new-tab",
-  "engines": {
-    "node": ">12.0.0"
-  },
   "scripts": {
     "FIXME__lint:css": "stylelint **/*.{css,html,js,md,svelte,svg,ts} --report-needless-disables",
-    "FIXME__posttest-ci": "jest --runInBand --ci --config test/e2e/jest.config.js",
-    "build": "NODE_ENV=production rollup --config",
-    "dev": "rollup --config --watch",
+    "build": "cross-env NODE_ENV=production rollup --config",
+    "dev": "cross-env NODE_ENV=development rollup --config --watch",
     "lint": "yarn lint:md && yarn lint:css && yarn lint:js && yarn lint:types",
     "lint:css": "stylelint **/*.{css,html,js,md,svelte,svg,ts}",
     "lint:js": "eslint --ext html,js,md,mjs,svelte,svg,ts .",
@@ -21,8 +17,8 @@
     "lint:types": "tsc --noEmit --allowJs --checkJs",
     "prebuild": "rm -rf dist && mkdir dist && cp icon* dist",
     "test": "jest --notify --watch",
-    "test-ci": "jest --runInBand --ci --coverage",
-    "test:e2e": "jest --config test/e2e/jest.config.js"
+    "test-ci": "jest --ci --coverage",
+    "test-e2e": "jest --ci --config test/e2e/jest.config.js"
   },
   "keywords": [
     "chrome-extension",
@@ -40,9 +36,9 @@
     "@types/jest-environment-puppeteer": "4.3.1",
     "@types/puppeteer": "2.0.0",
     "@wearegenki/renovate-config": "1.0.0",
-    "codacy-coverage": "3.4.0",
+    "cross-env": "6.0.3",
     "eslint": "6.7.1",
-    "jest": "24.9.0",
+    "jest": "25.0.0",
     "jest-puppeteer": "4.3.0",
     "minna-tools": "0.35.1",
     "minna-ui": "0.35.0",
@@ -59,6 +55,9 @@
     "svelte": "3.15.0",
     "tslib": "1.10.0",
     "typescript": "3.7.2"
+  },
+  "resolutions": {
+    "vfile": "^4.0.2"
   },
   "browserslist": [
     "last 2 Chrome versions"

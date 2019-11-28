@@ -1,3 +1,7 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Search component renders correctly 1`] = `"<div class=\\"container\\"><input id=\\"search\\" placeholder=\\"Search browser…\\" autocomplete=\\"off\\"> </div>"`;
+exports[`Search component renders correctly 1`] = `
+"<div class=\\"container\\"><input id=\\"search\\" placeholder=\\"Search browser…\\" autocomplete=\\"off\\">
+
+  </div>"
+`;
