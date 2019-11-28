@@ -12,14 +12,14 @@
   :global(#menu) {
     position: fixed;
     top: 90px;
-    padding: 10px 84px 84px 42px;
     margin: -28px -84px -64px 0;
+    padding: 10px 84px 84px 42px;
     font-size: 20px;
   }
 
   :global(#icon) {
-    font-size: 30px;
     color: var(--c1);
+    font-size: 30px;
   }
 
   :global(#dropdown) {

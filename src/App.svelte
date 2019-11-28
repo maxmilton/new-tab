@@ -1,5 +1,5 @@
 <script>
-  import { handleLinkClick } from './common';
+  import { handleLinkClick } from './utils';
   import BookmarksBar from './components/BookmarksBar.svelte';
   import Menu from './components/Menu.svelte';
   import Search from './components/Search.svelte';

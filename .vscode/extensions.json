@@ -3,6 +3,6 @@
     "dbaeumer.vscode-eslint",
     "drewbourne.vscode-remark-lint",
     "esbenp.prettier-vscode",
-    "shinnn.stylelint"
+    "hex-ci.stylelint-plus"
   ]
 }

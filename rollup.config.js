@@ -1,13 +1,17 @@
 /* eslint-disable @typescript-eslint/camelcase, global-require */
 
+// @ts-ignore - FIXME: Doesn't provide types
 import compiler from '@ampproject/rollup-plugin-closure-compiler';
 import { writeFile } from 'fs';
 import { emitHtml, handleErr } from 'minna-tools';
 import { preprocess } from 'minna-ui';
 import { join } from 'path';
 import nodeResolve from 'rollup-plugin-node-resolve';
+// @ts-ignore - FIXME: Doesn't provide types
 import svelte from 'rollup-plugin-svelte';
+// @ts-ignore - FIXME: Doesn't provide types
 import typescript from 'rollup-plugin-typescript';
+// @ts-ignore - TS can't resolve .mjs files yet
 import manifest from './manifest.config.mjs';
 
 const { resolve } = require;
@@ -46,9 +50,6 @@ const compilerOpts = {
     resolve('google-closure-compiler/contrib/externs/chrome_extensions.js'),
     join(__dirname, 'externs.js'),
   ],
-  language_in: 'ECMASCRIPT_NEXT',
-  language_out: 'ECMASCRIPT_2017',
-  warning_level: 'DEFAULT',
 
   // debug: true,
   // formatting: 'PRETTY_PRINT',
@@ -74,8 +75,6 @@ export default [
       svelte(svelteOpts),
       nodeResolve(),
       typescript({
-        // FIXME: Generates larger output
-        // tsconfig: 'tsconfig.build.json',
         typescript: require('typescript'),
       }),
       !isDev && compiler(compilerOpts),
@@ -100,7 +99,6 @@ export default [
       svelte(svelteOpts),
       nodeResolve(),
       typescript({
-        // tsconfig: 'tsconfig.build.json',
         typescript: require('typescript'),
       }),
       !isDev && compiler(compilerOpts),

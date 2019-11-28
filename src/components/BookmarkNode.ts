@@ -9,15 +9,17 @@
  * not change at runtime, there'sno performance impact.
  */
 
-import { SvelteComponent } from 'svelte/internal'; // eslint-disable-line import/no-extraneous-dependencies
 import LinkItem from './LinkItem.svelte';
 import BookmarkFolder from './BookmarkFolder.svelte';
 
+interface ComponentContext {
+  target: Element;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  props: Record<string, any>;
+}
+
 export default function BookmarkNode(
-  context: SvelteComponent['$$'],
-): SvelteComponent {
-  return new (context.props.node.children ? BookmarkFolder : LinkItem)(
-    // @ts-ignore
-    context,
-  );
+  context: ComponentContext,
+): BookmarkFolder {
+  return new (context.props.node.children ? BookmarkFolder : LinkItem)(context);
 }
