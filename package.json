@@ -8,7 +8,6 @@
   "homepage": "https://github.com/MaxMilton/new-tab",
   "scripts": {
     "FIXME__lint:css": "stylelint **/*.{css,html,js,md,svelte,svg,ts} --report-needless-disables",
-    "FIXME__posttest-ci": "jest --runInBand --ci --config test/e2e/jest.config.js",
     "build": "NODE_ENV=production rollup --config",
     "dev": "rollup --config --watch",
     "lint": "yarn lint:md && yarn lint:css && yarn lint:js && yarn lint:types",
@@ -18,8 +17,8 @@
     "lint:types": "tsc --noEmit --allowJs --checkJs",
     "prebuild": "rm -rf dist && mkdir dist && cp icon* dist",
     "test": "jest --notify --watch",
-    "test-ci": "jest --runInBand --ci --coverage",
-    "test:e2e": "jest --config test/e2e/jest.config.js"
+    "test-ci": "jest --ci --coverage",
+    "test-e2e": "jest --ci --config test/e2e/jest.config.js"
   },
   "keywords": [
     "chrome-extension",
