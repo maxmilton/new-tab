@@ -21,7 +21,12 @@ jobs:
 
       - run: yarn run lint
       - run: yarn run test-ci
-      - run: cat ./test/coverage/lcov.info | yarn codacy-coverage
+      - run:
+          command: |
+            curl -L https://codeclimate.com/downloads/test-reporter/test-reporter-latest-linux-amd64 > ./cc-test-reporter
+            chmod +x ./cc-test-reporter
+            ./cc-test-reporter format-coverage -t lcov -o coverage/codeclimate.json test/coverage/lcov.info
+            ./cc-test-reporter upload-coverage || true
 
       - store_artifacts:
           path: test/coverage
