@@ -8,8 +8,8 @@
   "homepage": "https://github.com/MaxMilton/new-tab",
   "scripts": {
     "FIXME__lint:css": "stylelint **/*.{css,html,js,md,svelte,svg,ts} --report-needless-disables",
-    "build": "NODE_ENV=production rollup --config",
-    "dev": "rollup --config --watch",
+    "build": "cross-env NODE_ENV=production rollup --config",
+    "dev": "cross-env NODE_ENV=development rollup --config --watch",
     "lint": "yarn lint:md && yarn lint:css && yarn lint:js && yarn lint:types",
     "lint:css": "stylelint **/*.{css,html,js,md,svelte,svg,ts}",
     "lint:js": "eslint --ext html,js,md,mjs,svelte,svg,ts .",
@@ -36,6 +36,7 @@
     "@types/jest-environment-puppeteer": "4.3.1",
     "@types/puppeteer": "2.0.0",
     "@wearegenki/renovate-config": "1.0.0",
+    "cross-env": "6.0.3",
     "eslint": "6.7.1",
     "jest": "25.0.0",
     "jest-puppeteer": "4.3.0",
