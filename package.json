@@ -6,9 +6,6 @@
   "license": "MIT",
   "author": "Max Milton <max@wearegenki.com>",
   "homepage": "https://github.com/MaxMilton/new-tab",
-  "engines": {
-    "node": ">12.0.0"
-  },
   "scripts": {
     "FIXME__lint:css": "stylelint **/*.{css,html,js,md,svelte,svg,ts} --report-needless-disables",
     "FIXME__posttest-ci": "jest --runInBand --ci --config test/e2e/jest.config.js",
