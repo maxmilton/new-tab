@@ -30,7 +30,7 @@
     "svelte"
   ],
   "devDependencies": {
-    "@ampproject/rollup-plugin-closure-compiler": "0.13.0",
+    "@ampproject/rollup-plugin-closure-compiler": "0.16.0",
     "@types/chrome": "0.0.91",
     "@types/expect-puppeteer": "3.3.3",
     "@types/jest-environment-puppeteer": "4.3.1",
