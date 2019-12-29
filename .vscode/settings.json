@@ -9,8 +9,8 @@
     "*.css": "scss",
     "*.svelte": "html"
   },
-  "files.eol": "\n",
   "javascript.implicitProjectConfig.checkJs": true,
   // "scss.validate": false,
+  "stylelint.autoFixOnSave": true,
   "stylelint.enable": true
 }
