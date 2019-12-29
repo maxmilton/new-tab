@@ -2,15 +2,14 @@
 
 // @ts-ignore - FIXME: Doesn't provide types
 import compiler from '@ampproject/rollup-plugin-closure-compiler';
+import nodeResolve from '@rollup/plugin-node-resolve';
+import typescript from '@rollup/plugin-typescript';
 import { writeFile } from 'fs';
 import { emitHtml, handleErr } from 'minna-tools';
 import { preprocess } from 'minna-ui';
 import { join } from 'path';
-import nodeResolve from 'rollup-plugin-node-resolve';
 // @ts-ignore - FIXME: Doesn't provide types
 import svelte from 'rollup-plugin-svelte';
-// @ts-ignore - FIXME: Doesn't provide types
-import typescript from 'rollup-plugin-typescript';
 // @ts-ignore - TS can't resolve .mjs files yet
 import manifest from './manifest.config.mjs';
 
@@ -50,7 +49,6 @@ const compilerOpts = {
     resolve('google-closure-compiler/contrib/externs/chrome_extensions.js'),
     join(__dirname, 'externs.js'),
   ],
-
   // debug: true,
   // formatting: 'PRETTY_PRINT',
 };
