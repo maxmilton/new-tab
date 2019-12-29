@@ -30,7 +30,7 @@
     "svelte"
   ],
   "devDependencies": {
-    "@ampproject/rollup-plugin-closure-compiler": "0.17.0",
+    "@ampproject/rollup-plugin-closure-compiler": "0.18.1",
     "@rollup/plugin-node-resolve": "6.0.0",
     "@rollup/plugin-typescript": "2.0.1",
     "@types/chrome": "0.0.91",
