@@ -1,5 +1,18 @@
+# TODO: Use aliases instead once they're supported
+# aliases:
+#   - &cache-dir
+#     id: yarn-cache
+#     run: echo "::set-output name=dir::$(yarn cache dir)"
+#   - &cache-restore
+#     uses: actions/cache@v1
+#     with:
+#       path: ${{ steps.yarn-cache.outputs.dir }}
+#       key: v1-${{ runner.os }}-yarn-${{ hashFiles('**/yarn.lock') }}
+#       restore-keys: |
+#         v1-${{ runner.os }}-yarn-
+
 name: ci
-on: [push]
+on: push
 jobs:
   test:
     runs-on: ${{ matrix.os }}
@@ -13,16 +26,45 @@ jobs:
       - uses: actions/setup-node@v1
         with:
           node-version: ${{ matrix.node-version }}
+      # - *cache-dir
+      # - *cache-restore
+      - id: yarn-cache
+        run: echo "::set-output name=dir::$(yarn cache dir)"
+      - uses: actions/cache@v1
+        with:
+          path: ${{ steps.yarn-cache.outputs.dir }}
+          key: v1-${{ runner.os }}-yarn-${{ hashFiles('**/yarn.lock') }}
+          restore-keys: |
+            v1-${{ runner.os }}-yarn-
       - run: yarn install --frozen-lockfile
       - run: yarn build
       - run: yarn run test-ci
         env:
           CI: true
+      - name: report coverage
+        if: matrix.os == 'ubuntu-latest' && matrix.node-version == 13
+        run: |
+          curl -L https://codeclimate.com/downloads/test-reporter/test-reporter-latest-linux-amd64 > ./cc-test-reporter
+          chmod +x ./cc-test-reporter
+          ./cc-test-reporter format-coverage -t lcov -o coverage/codeclimate.json test/coverage/lcov.info
+          ./cc-test-reporter upload-coverage --id ${{ secrets.CC_TEST_REPORTER_ID }} || true
   lint:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v1
       - uses: actions/setup-node@v1
+        with:
+          node-version: 13
+      # - *cache-dir
+      # - *cache-restore
+      - id: yarn-cache
+        run: echo "::set-output name=dir::$(yarn cache dir)"
+      - uses: actions/cache@v1
+        with:
+          path: ${{ steps.yarn-cache.outputs.dir }}
+          key: v1-${{ runner.os }}-yarn-${{ hashFiles('**/yarn.lock') }}
+          restore-keys: |
+            v1-${{ runner.os }}-yarn-
       - run: yarn install --frozen-lockfile
       - run: yarn build
       - run: yarn run lint
