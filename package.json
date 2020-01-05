@@ -31,8 +31,8 @@
   ],
   "devDependencies": {
     "@ampproject/rollup-plugin-closure-compiler": "0.18.1",
-    "@rollup/plugin-node-resolve": "6.0.0",
-    "@rollup/plugin-typescript": "2.0.1",
+    "@rollup/plugin-node-resolve": "6.1.0",
+    "@rollup/plugin-typescript": "2.0.2",
     "@types/chrome": "0.0.91",
     "@types/expect-puppeteer": "3.3.3",
     "@types/jest-environment-puppeteer": "4.3.1",
