@@ -1,20 +1,16 @@
 {
   "css.validate": false,
+  "editor.codeActionsOnSave": {
+    "source.fixAll": true
+  },
   "editor.formatOnSave": true,
   "eslint.enable": true,
-  "eslint.autoFixOnSave": true,
-  "eslint.validate": [
-    { "language": "html", "autoFix": true },
-    { "language": "javascript", "autoFix": true },
-    { "language": "markdown", "autoFix": true },
-    { "language": "typescript", "autoFix": true }
-  ],
   "files.associations": {
     "*.css": "scss",
     "*.svelte": "html"
   },
-  "files.eol": "\n",
   "javascript.implicitProjectConfig.checkJs": true,
   // "scss.validate": false,
+  "stylelint.autoFixOnSave": true,
   "stylelint.enable": true
 }

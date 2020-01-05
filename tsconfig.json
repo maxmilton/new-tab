@@ -1,14 +1,12 @@
 // https://www.typescriptlang.org/docs/handbook/tsconfig-json.html
 
-// Config for base settings, linting, and VS Code
-
 {
   "extends": "@minna-ui/ts-config",
   "compilerOptions": {
     "allowJs": true,
     "baseUrl": ".",
     "checkJs": true,
-    "isolatedModules": true, // Ensure compatibility with sucrase & @babel/preset-typescript
+    "isolatedModules": true, // Ensure compatibility with sucrase (used in tests)
     "noEmit": true,
     "outDir": "dist",
     "sourceMap": true,
