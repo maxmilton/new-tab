@@ -620,10 +620,10 @@
     is-module "^1.0.0"
     resolve "^1.11.1"
 
-"@rollup/plugin-typescript@2.0.2":
-  version "2.0.2"
-  resolved "https://registry.yarnpkg.com/@rollup/plugin-typescript/-/plugin-typescript-2.0.2.tgz#b6f682ff0015e817dcffb31072c5bca9377801a0"
-  integrity sha512-35+2T4qKG5Nx/GQ9DAkUhDWKvUvmVywddVkfWz4U/MHWlnrkh0/v3KEqi9hgkcmoxVMspCFNKYHOS7biFDCu7g==
+"@rollup/plugin-typescript@2.1.0":
+  version "2.1.0"
+  resolved "https://registry.yarnpkg.com/@rollup/plugin-typescript/-/plugin-typescript-2.1.0.tgz#9d4e39cdd152901893285d90b7beb3e2755fb255"
+  integrity sha512-7lXKGY06aofrceVez/YnN2axttFdHSqlUBpCJ6ebzDfxwLDKMgSV5lD4ykBcdgE7aK3egxuLkD/HKyRB5L8Log==
   dependencies:
     "@rollup/pluginutils" "^3.0.0"
     resolve "^1.13.1"
