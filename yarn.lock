@@ -7555,10 +7555,10 @@ supports-color@^7.0.0, supports-color@^7.1.0:
   dependencies:
     has-flag "^4.0.0"
 
-svelte@3.17.0:
-  version "3.17.0"
-  resolved "https://registry.yarnpkg.com/svelte/-/svelte-3.17.0.tgz#c633d13aa436ef37d701bb24e1022837230af318"
-  integrity sha512-/ycVYZ7etveSnJU7pSeZ3KHbuK9OfdQRheEIBPf12lomElNMc1c3tML0STVQUrpcFClUAAwufEaaeiuY43X12w==
+svelte@3.17.1:
+  version "3.17.1"
+  resolved "https://registry.yarnpkg.com/svelte/-/svelte-3.17.1.tgz#71aedbfb5bf831dad7b00a944f2fdded6b482184"
+  integrity sha512-IjX6agpbu01VHBaL/12oFem+ufPRyZNLkg4ay7lJl7IbUB/er90kdIsWCNZX44XaniSEhG/0Hja4GsrtufTwCw==
 
 svg-tags@^1.0.0:
   version "1.0.0"
