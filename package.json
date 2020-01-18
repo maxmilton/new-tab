@@ -54,7 +54,7 @@
     "stylelint": "13.0.0",
     "svelte": "3.17.1",
     "tslib": "1.10.0",
-    "typescript": "3.7.4"
+    "typescript": "3.7.5"
   },
   "resolutions": {
     "vfile": "^4.0.2"
