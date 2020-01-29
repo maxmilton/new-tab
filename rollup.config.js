@@ -1,9 +1,10 @@
-/* eslint-disable @typescript-eslint/no-require-imports, @typescript-eslint/camelcase, global-require */
+/* eslint-disable @typescript-eslint/camelcase */
 
 // @ts-ignore - FIXME: Doesn't provide types
 import compiler from '@ampproject/rollup-plugin-closure-compiler';
 import nodeResolve from '@rollup/plugin-node-resolve';
-import typescript from '@rollup/plugin-typescript';
+// @ts-ignore - FIXME: Doesn't provide types
+import sucrase from '@rollup/plugin-sucrase';
 import { writeFile } from 'fs';
 import { emitHtml, handleErr } from 'minna-tools';
 import { preprocess } from 'minna-ui';
@@ -28,17 +29,9 @@ const svelteOpts = {
   preserveWhitespace: true, // Results in smaller code with closure compiler
 };
 
-const emitHtmlOpts = {
-  inlineCss: true,
-  optimize: !isDev && {
-    level: {
-      2: {
-        restructureRules: true,
-      },
-    },
-  },
-  scriptAttr: 'async',
-  template: 'src/template.html',
+const sucraseOpts = {
+  exclude: ['**/*.css'],
+  transforms: ['typescript'],
 };
 
 const compilerOpts = {
@@ -51,6 +44,19 @@ const compilerOpts = {
   ],
   // debug: true,
   // formatting: 'PRETTY_PRINT',
+};
+
+const emitHtmlOpts = {
+  inlineCss: true,
+  optimize: !isDev && {
+    level: {
+      2: {
+        restructureRules: true,
+      },
+    },
+  },
+  scriptAttr: 'async',
+  template: 'src/template.html',
 };
 
 // Theme loader
@@ -72,9 +78,7 @@ export default [
     plugins: [
       svelte(svelteOpts),
       nodeResolve(),
-      typescript({
-        typescript: require('typescript'),
-      }),
+      sucrase(sucraseOpts),
       !isDev && compiler(compilerOpts),
       emitHtml({
         ...emitHtmlOpts,
@@ -96,9 +100,7 @@ export default [
     plugins: [
       svelte(svelteOpts),
       nodeResolve(),
-      typescript({
-        typescript: require('typescript'),
-      }),
+      sucrase(sucraseOpts),
       !isDev && compiler(compilerOpts),
       emitHtml(emitHtmlOpts),
     ],
