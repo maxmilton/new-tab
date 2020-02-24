@@ -131,7 +131,7 @@
     <BookmarkNode node="{oNodes}" end />
   {/if}
 
-  {#if bOther.children.length}
+  {#if bOther && bOther.children.length}
     <BookmarkNode node="{bOther}" end />
   {/if}
 </div>
