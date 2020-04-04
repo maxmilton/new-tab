@@ -854,10 +854,10 @@
   resolved "https://registry.yarnpkg.com/@types/estree/-/estree-0.0.42.tgz#8d0c1f480339efedb3e46070e22dd63e0430dd11"
   integrity sha512-K1DPVvnBCPxzD+G51/cxVIoc2X8uUVl1zpJeE6iKcgHMj4+tbat5Xu4TjV7v2QSDbIeAfLi2hIk+u2+s0MlpUQ==
 
-"@types/expect-puppeteer@4.4.0":
-  version "4.4.0"
-  resolved "https://registry.yarnpkg.com/@types/expect-puppeteer/-/expect-puppeteer-4.4.0.tgz#8e1ee1e7ed7e12f36efcfe81c17d4d6b817cb3d2"
-  integrity sha512-j2zKlMms/qrdr5clPWWnhTqFGc2HFWv465gowMmCfBkorrFhDXpYgTduJRFSAwYcmNOopK5pgNXKb7dwon8pqQ==
+"@types/expect-puppeteer@4.4.1":
+  version "4.4.1"
+  resolved "https://registry.yarnpkg.com/@types/expect-puppeteer/-/expect-puppeteer-4.4.1.tgz#88588e4f1d8b4f60e8a9fa5736389cc85c9d2763"
+  integrity sha512-PHqoQBIoFpiI6+bBEEetuoxqWx6UHpPzl4lK4bfZaP1FVRq7cKkRp4QPwJJSllwWgalFBhCwP88eMZf+QM1R2Q==
   dependencies:
     "@types/jest" "*"
     "@types/puppeteer" "*"
