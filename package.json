@@ -48,7 +48,7 @@
     "prettier": "2.0.5",
     "puppeteer": "3.0.1",
     "remark-cli": "8.0.0",
-    "rollup": "2.7.1",
+    "rollup": "2.7.2",
     "rollup-plugin-svelte": "5.2.1",
     "stylelint": "13.3.3",
     "svelte": "3.20.1",
