@@ -38,7 +38,7 @@
     "@types/jest-environment-puppeteer": "4.3.1",
     "@types/puppeteer": "3.0.0",
     "@wearegenki/renovate-config": "1.0.0",
-    "eslint": "7.0.0",
+    "eslint": "7.1.0",
     "jest": "26.0.1",
     "jest-puppeteer": "4.4.0",
     "minna-tools": "0.36.0",
