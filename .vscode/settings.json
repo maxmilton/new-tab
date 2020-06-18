@@ -1,16 +1,26 @@
 {
   "css.validate": false,
-  "editor.codeActionsOnSave": {
-    "source.fixAll": true
-  },
-  "editor.formatOnSave": true,
+  // "editor.codeActionsOnSave": {
+  //   "source.fixAll": true,
+  //   "source.organizeImports": true
+  // },
+  "editor.codeActionsOnSave": [
+    "source.organizeImports",
+    "source.fixAll.format",
+    "source.fixAll.eslint",
+    "source.fixAll.stylelint"
+  ],
+  "editor.defaultFormatter": "esbenp.prettier-vscode",
+  "editor.formatOnSave": false,
   "eslint.enable": true,
   "files.associations": {
     "*.css": "scss",
     "*.svelte": "html"
   },
   "javascript.implicitProjectConfig.checkJs": true,
-  // "scss.validate": false,
-  "stylelint.autoFixOnSave": true,
-  "stylelint.enable": true
+  "scss.validate": false,
+  // "stylelint.customSyntax": "postcss-scss",
+  "stylelint.enable": true,
+  "stylelint.reportNeedlessDisables": true
+  // "typescript.tsdk": "./node_modules/typescript/lib"
 }
