@@ -30,7 +30,7 @@
     "svelte"
   ],
   "devDependencies": {
-    "@ampproject/rollup-plugin-closure-compiler": "0.25.2",
+    "@ampproject/rollup-plugin-closure-compiler": "0.26.0",
     "@rollup/plugin-node-resolve": "8.4.0",
     "@rollup/plugin-sucrase": "3.1.0",
     "@types/chrome": "0.0.122",
@@ -49,14 +49,11 @@
     "puppeteer": "5.2.1",
     "remark-cli": "8.0.1",
     "rollup": "2.23.0",
-    "rollup-plugin-svelte": "5.2.2",
+    "rollup-plugin-svelte": "5.2.3",
     "stylelint": "13.6.1",
     "svelte": "3.24.0",
     "tslib": "2.0.0",
     "typescript": "3.9.7"
-  },
-  "resolutions": {
-    "vfile": "^4.0.3"
   },
   "browserslist": [
     "last 2 Chrome versions"
