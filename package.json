@@ -46,7 +46,7 @@
     "postcss": "7.0.32",
     "postcss-scss": "2.1.1",
     "prettier": "2.0.5",
-    "puppeteer": "4.0.0",
+    "puppeteer": "4.0.1",
     "remark-cli": "8.0.1",
     "rollup": "2.17.1",
     "rollup-plugin-svelte": "5.2.2",
