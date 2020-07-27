@@ -49,4 +49,5 @@ const chromeMock: DeepPartial<typeof chrome> = {
   },
 };
 
+// @ts-expect-error - FIXME: `DeepPartial` is no longer viable here in newer TS
 global.chrome = chromeMock;
