@@ -50,7 +50,7 @@
     "remark-cli": "8.0.1",
     "rollup": "2.33.1",
     "rollup-plugin-svelte": "5.2.2",
-    "stylelint": "13.6.1",
+    "stylelint": "13.7.2",
     "svelte": "3.29.4",
     "tslib": "2.0.0",
     "typescript": "4.0.5"
