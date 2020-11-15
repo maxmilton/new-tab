@@ -76,6 +76,7 @@ export default [
       sourcemap: isDev,
     },
     plugins: [
+      // @ts-ignore - TODO: Remove this once package types are fixed
       svelte(svelteOpts),
       nodeResolve(),
       sucrase(sucraseOpts),
@@ -98,6 +99,7 @@ export default [
       sourcemap: isDev,
     },
     plugins: [
+      // @ts-ignore - TODO: Remove this once package types are fixed
       svelte(svelteOpts),
       nodeResolve(),
       sucrase(sucraseOpts),

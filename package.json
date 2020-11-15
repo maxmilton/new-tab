@@ -17,8 +17,7 @@
     "lint:types": "tsc --noEmit --allowJs --checkJs",
     "prebuild": "rm -rf dist && mkdir dist && cp icon* dist",
     "test": "jest --notify --watch",
-    "test-ci": "jest --ci --coverage",
-    "test-e2e": "jest --ci --config test/e2e/jest.config.js"
+    "test-ci": "jest --ci --coverage"
   },
   "keywords": [
     "chrome-extension",
@@ -30,33 +29,31 @@
     "svelte"
   ],
   "devDependencies": {
-    "@ampproject/rollup-plugin-closure-compiler": "0.25.2",
+    "@ampproject/rollup-plugin-closure-compiler": "0.26.0",
     "@rollup/plugin-node-resolve": "10.0.0",
     "@rollup/plugin-sucrase": "3.1.0",
     "@types/chrome": "0.0.126",
     "@types/expect-puppeteer": "4.4.5",
+    "@types/google-closure-compiler" : "0.0.18",
     "@types/jest-environment-puppeteer": "4.4.0",
     "@types/puppeteer": "5.4.0",
     "@wearegenki/renovate-config": "1.0.0",
-    "eslint": "7.12.1",
-    "jest": "26.6.2",
+    "eslint": "7.13.0",
+    "jest": "26.6.3",
     "jest-puppeteer": "4.4.0",
     "minna-tools": "0.36.0",
     "minna-ui": "0.36.0",
-    "postcss": "7.0.35",
-    "postcss-scss": "3.0.2",
+    "postcss": "8.1.7",
+    "postcss-scss": "3.0.4",
     "prettier": "2.1.2",
     "puppeteer": "5.4.1",
     "remark-cli": "9.0.0",
-    "rollup": "2.33.1",
-    "rollup-plugin-svelte": "6.1.0",
+    "rollup": "2.33.2",
+    "rollup-plugin-svelte": "6.1.1",
     "stylelint": "13.7.2",
-    "svelte": "3.29.4",
+    "svelte": "3.29.7",
     "tslib": "2.0.3",
     "typescript": "4.0.5"
-  },
-  "resolutions": {
-    "vfile": "^4.0.3"
   },
   "browserslist": [
     "last 2 Chrome versions"
@@ -68,12 +65,6 @@
     ],
     "env": {
       "webextensions": true
-    },
-    "globals": {
-      "page": true,
-      "browser": true,
-      "context": true,
-      "jestPuppeteer": true
     },
     "rules": {
       "dot-notation": "off"
