@@ -995,6 +995,13 @@
   resolved "https://registry.yarnpkg.com/@types/filewriter/-/filewriter-0.0.28.tgz#c054e8af4d9dd75db4e63abc76f885168714d4b3"
   integrity sha1-wFTor02d11205jq8dviFFocU1LM=
 
+"@types/google-closure-compiler@0.0.18":
+  version "0.0.18"
+  resolved "https://registry.yarnpkg.com/@types/google-closure-compiler/-/google-closure-compiler-0.0.18.tgz#fe233d02d9bf9c7af95c9e007f042fb7609b9ec4"
+  integrity sha1-/iM9Atm/nHr5XJ4AfwQvt2CbnsQ=
+  dependencies:
+    "@types/node" "*"
+
 "@types/graceful-fs@^4.1.2":
   version "4.1.4"
   resolved "https://registry.yarnpkg.com/@types/graceful-fs/-/graceful-fs-4.1.4.tgz#4ff9f641a7c6d1a3508ff88bc3141b152772e753"
