@@ -1,54 +1,31 @@
-/* eslint-disable @typescript-eslint/camelcase */
-
-// @ts-ignore - FIXME: Doesn't provide types
-import compiler from '@ampproject/rollup-plugin-closure-compiler';
 import nodeResolve from '@rollup/plugin-node-resolve';
-// @ts-ignore - FIXME: Doesn't provide types
-import sucrase from '@rollup/plugin-sucrase';
 import { writeFile } from 'fs';
 import { emitHtml, handleErr } from 'minna-tools';
 import { preprocess } from 'minna-ui';
 import { join } from 'path';
-// @ts-ignore - FIXME: Doesn't provide types
+import esbuild from 'rollup-plugin-esbuild';
 import svelte from 'rollup-plugin-svelte';
-// @ts-ignore - TS can't resolve .mjs files yet
-import manifest from './manifest.config.mjs';
+import manifest from './manifest.config.js';
 
-const { resolve } = require;
-const isDev = !!process.env.ROLLUP_WATCH;
-
-const watch = {
-  clearScreen: false,
-};
+const dev = process.env.NODE_ENV === 'development';
 
 const svelteOpts = {
-  dev: isDev,
+  compilerOptions: {
+    dev,
+    immutable: true,
+  },
   emitCss: true,
-  immutable: true,
   preprocess,
-  preserveWhitespace: true, // Results in smaller code with closure compiler
 };
 
-const sucraseOpts = {
-  exclude: ['**/*.css'],
-  transforms: ['typescript'],
-};
-
-const compilerOpts = {
-  charset: 'UTF-8',
-  compilation_level: 'ADVANCED',
-  externs: [
-    resolve('google-closure-compiler/contrib/externs/chrome.js'),
-    resolve('google-closure-compiler/contrib/externs/chrome_extensions.js'),
-    join(__dirname, 'externs.js'),
-  ],
-  // debug: true,
-  // formatting: 'PRETTY_PRINT',
+const esbuildOpts = {
+  minify: !dev,
+  target: 'es2020',
 };
 
 const emitHtmlOpts = {
   inlineCss: true,
-  optimize: !isDev && {
+  optimize: !dev && {
     level: {
       2: {
         restructureRules: true,
@@ -72,15 +49,13 @@ export default [
     output: {
       assetFileNames: '[name][extname]',
       file: 'dist/n.js',
-      format: 'esm',
-      sourcemap: isDev,
+      format: 'iife',
+      sourcemap: dev,
     },
     plugins: [
-      // @ts-ignore - TODO: Remove this once package types are fixed
       svelte(svelteOpts),
       nodeResolve(),
-      sucrase(sucraseOpts),
-      !isDev && compiler(compilerOpts),
+      esbuild(esbuildOpts),
       emitHtml({
         ...emitHtmlOpts,
         content: `%CSS%<body>${loader}%JS%`,
@@ -88,24 +63,20 @@ export default [
         title: 'New Tab',
       }),
     ],
-    watch,
   },
   {
     input: 'src/settings.ts',
     output: {
       assetFileNames: '[name][extname]',
       file: 'dist/s.js',
-      format: 'esm',
-      sourcemap: isDev,
+      format: 'iife',
+      sourcemap: dev,
     },
     plugins: [
-      // @ts-ignore - TODO: Remove this once package types are fixed
       svelte(svelteOpts),
       nodeResolve(),
-      sucrase(sucraseOpts),
-      !isDev && compiler(compilerOpts),
+      esbuild(esbuildOpts),
       emitHtml(emitHtmlOpts),
     ],
-    watch,
   },
 ];

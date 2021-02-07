@@ -1,4 +1,4 @@
-/* eslint-disable @typescript-eslint/camelcase, import/no-extraneous-dependencies, sort-keys */
+/* eslint-disable @typescript-eslint/camelcase, sort-keys */
 
 import { gitDescribe } from 'minna-tools';
 import pkg from './package.json';
@@ -35,7 +35,7 @@ export default JSON.stringify({
   incognito: 'not_allowed',
   content_security_policy:
     "default-src 'none';" +
-    // allow `loader.ts` to be embedded in the document
+    // allow theme loader script to be embedded inline in the document
     " script-src 'self' 'sha256-FtIFk1UjzWWlhfMrIdJ9n60rbnTmldIAss9HFJTJeUM=';" +
     " style-src 'unsafe-inline';" +
     // `data:` used in settings page
