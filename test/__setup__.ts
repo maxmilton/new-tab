@@ -1,19 +1,4 @@
-export type DeepPartial<T> = {
-  [P in keyof T]?: T[P] extends (infer U)[]
-    ? DeepPartial<U>[]
-    : T[P] extends ReadonlyArray<infer U>
-      ? ReadonlyArray<DeepPartial<U>>
-      : DeepPartial<T[P]>;
-};
-
-declare global {
-  // eslint-disable-next-line @typescript-eslint/no-namespace
-  namespace NodeJS {
-    interface Global {
-      chrome: DeepPartial<typeof chrome>;
-    }
-  }
-}
+export {};
 
 /**
  * Chrome web extension mocks.
@@ -22,7 +7,7 @@ declare global {
  * @see https://developers.chrome.com/apps/api_index
  * @see https://developers.chrome.com/extensions/devguide
  */
-const chromeMock: DeepPartial<typeof chrome> = {
+const chromeMock = {
   bookmarks: {
     getTree: jest.fn(),
   },
@@ -49,5 +34,5 @@ const chromeMock: DeepPartial<typeof chrome> = {
   },
 };
 
-// @ts-expect-error - FIXME: `DeepPartial` is no longer viable here in newer TS
+// @ts-expect-error
 global.chrome = chromeMock;
