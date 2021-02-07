@@ -51,7 +51,7 @@ export function handleLinkClick(event: MouseEvent): void {
       chrome.tabs.update({ url });
     }
   } else if ((target as HTMLAnchorElement).id === 'o') {
-    // handle open settings from Menu.html component
+    // handle open settings from Menu.svelte component
     chrome.runtime.openOptionsPage();
   }
 }
