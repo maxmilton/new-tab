@@ -3,14 +3,18 @@
 {
   "extends": "@minna-ui/ts-config",
   "compilerOptions": {
-    "allowJs": true,
+    // "allowJs": true,
     "baseUrl": ".",
-    "checkJs": true,
+    // "checkJs": true,
     "isolatedModules": true, // Ensure compatibility with sucrase (used in tests)
     "noEmit": true,
     "outDir": "dist",
     "sourceMap": true,
-    "target": "esnext"
+    "target": "esnext",
+
+    // TODO: Remove these; workaround for svelte type issues
+    "allowJs": false,
+    "checkJs": false
   },
   "exclude": ["dist", "node_modules", "test/coverage"]
 }
