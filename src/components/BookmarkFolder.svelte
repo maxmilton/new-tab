@@ -77,7 +77,7 @@
   });
 </script>
 
-<style type="text/postcss">
+<style lang="xcss">
   :global(.folder) {
     position: relative;
   }

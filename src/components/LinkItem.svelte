@@ -7,7 +7,7 @@
   export let node;
 </script>
 
-<style type="text/postcss">
+<style lang="xcss">
   /* All <img> are favicons */
   :global(img) {
     width: 16px;

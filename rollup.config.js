@@ -1,7 +1,9 @@
 import nodeResolve from '@rollup/plugin-node-resolve';
+// TODO: Remove; just here for plugin dev!!
+import xcss from '@xxcss/rollup';
+import preprocess from '@xxcss/svelte';
 import { writeFile } from 'fs';
-import { emitHtml, handleErr } from 'minna-tools';
-import { preprocess } from 'minna-ui';
+import { emitHtml } from 'minna-tools';
 import { join } from 'path';
 import esbuild from 'rollup-plugin-esbuild';
 import svelte from 'rollup-plugin-svelte';
@@ -15,7 +17,9 @@ const svelteOpts = {
     immutable: true,
   },
   emitCss: true,
-  preprocess,
+  preprocess: preprocess({
+    plugins: [],
+  }),
 };
 
 const esbuildOpts = {
@@ -25,13 +29,7 @@ const esbuildOpts = {
 
 const emitHtmlOpts = {
   inlineCss: true,
-  optimize: !dev && {
-    level: {
-      2: {
-        restructureRules: true,
-      },
-    },
-  },
+  optimize: false,
   scriptAttr: 'async',
   template: 'src/template.html',
 };
@@ -41,7 +39,9 @@ const loader =
   '<script>chrome.storage.local.get(null,a=>{a.t&&(document.body.className=a.t)});</script>';
 
 // Extension manifest
-writeFile(join(__dirname, 'dist/manifest.json'), manifest, handleErr);
+writeFile(join(__dirname, 'dist/manifest.json'), manifest, (err) => {
+  if (err) throw err;
+});
 
 export default [
   {
@@ -56,6 +56,8 @@ export default [
       svelte(svelteOpts),
       nodeResolve(),
       esbuild(esbuildOpts),
+      // TODO: Remove; just here for plugin dev!!
+      xcss(),
       emitHtml({
         ...emitHtmlOpts,
         content: `%CSS%<body>${loader}%JS%`,

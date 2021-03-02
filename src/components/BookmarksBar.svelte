@@ -75,7 +75,7 @@
   });
 </script>
 
-<style type="text/postcss">
+<style lang="xcss">
   /* stylelint-disable no-descending-specificity */
 
   :global(.bookmarks) {

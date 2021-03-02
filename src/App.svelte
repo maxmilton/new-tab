@@ -3,11 +3,12 @@
   import BookmarksBar from './components/BookmarksBar.svelte';
   import Menu from './components/Menu.svelte';
   import Search from './components/Search.svelte';
+  import TimeLeft from './components/TimeLeft.svelte';
 </script>
 
-<style type="text/postcss">
-  @import './themes/light.css';
+<style lang="xcss">
   @import './themes/dark.css';
+  @import './themes/light.css';
 
   :global(body) { /* stylelint-disable-line a11y/line-height-is-vertical-rhythmed */
     margin: 110px 0;
@@ -44,3 +45,4 @@
 <BookmarksBar/>
 <Search/>
 <Menu/>
+<TimeLeft/>

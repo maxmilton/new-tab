@@ -83,7 +83,7 @@
   });
 </script>
 
-<style type="text/postcss">
+<style lang="xcss">
   :global(body) {
     font-size: 18px;
   }

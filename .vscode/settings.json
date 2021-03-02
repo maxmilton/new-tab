@@ -5,7 +5,7 @@
   //   "source.organizeImports": true
   // },
   "editor.codeActionsOnSave": [
-    "source.organizeImports",
+    // "source.organizeImports",
     "source.fixAll.format",
     "source.fixAll.eslint",
     "source.fixAll.stylelint"
@@ -14,7 +14,7 @@
   "editor.formatOnSave": false,
   "eslint.enable": true,
   "files.associations": {
-    "*.css": "scss",
+    "*.xcss": "scss",
     "*.svelte": "html"
   },
   "javascript.implicitProjectConfig.checkJs": true,

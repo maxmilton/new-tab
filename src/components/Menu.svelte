@@ -1,4 +1,4 @@
-<style type="text/postcss">
+<style lang="xcss">
   :global(hr) {
     border: 0;
     border-bottom: 1px solid var(--c);

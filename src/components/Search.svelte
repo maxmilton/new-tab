@@ -131,7 +131,7 @@
   $: if (searchText) onSearch();
 </script>
 
-<style type="text/postcss">
+<style lang="xcss">
   /* "Load more" buttons */
   :global(button) {
     width: initial;
@@ -171,10 +171,10 @@
   <input
     id="search"
     bind:value="{searchText}"
-    placeholder="Search browser…"
+    placeholder="Search…"
     autocomplete="off"
     on:keyup="{maybeCancelSearch}"
-  >
+  />
 
   {#each order as resultSection}
     {#if resultSection === 'Open Tabs'}
