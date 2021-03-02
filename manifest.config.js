@@ -1,9 +1,12 @@
 /* eslint-disable @typescript-eslint/camelcase, sort-keys */
 
-import { gitDescribe } from 'minna-tools';
-import pkg from './package.json';
+// const { gitDescribe } = require('minna-tools');
+const pkg = require('./package.json');
 
-export default JSON.stringify({
+// FIXME:
+const gitDescribe = () => '0.0.0';
+
+const manifest = {
   manifest_version: 2,
 
   name: 'New Tab',
@@ -13,8 +16,9 @@ export default JSON.stringify({
   version_name: gitDescribe(),
   homepage_url: pkg.homepage,
   icons: {
-    128: 'icon128.png',
+    16: 'icon16.png',
     48: 'icon48.png',
+    128: 'icon128.png',
   },
   permissions: [
     'bookmarks',
@@ -25,19 +29,21 @@ export default JSON.stringify({
     'topSites',
   ],
   chrome_url_overrides: {
-    newtab: 'n.html',
+    newtab: 'newtab.html',
   },
   options_ui: {
-    chrome_style: true,
-    page: 's.html',
+    // chrome_style: true,
+    page: 'settings.html',
   },
   offline_enabled: true,
   incognito: 'not_allowed',
   content_security_policy:
     "default-src 'none';" +
-    // allow theme loader script to be embedded inline in the document
+    // theme loader script to be embedded inline in the document
     " script-src 'self' 'sha256-FtIFk1UjzWWlhfMrIdJ9n60rbnTmldIAss9HFJTJeUM=';" +
     " style-src 'unsafe-inline';" +
     // `data:` used in settings page
     ' img-src chrome://favicon data:;',
-});
+};
+
+module.exports = JSON.stringify(manifest);

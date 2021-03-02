@@ -4,114 +4,32 @@
   "private": true,
   "description": "⚡ A high performance new tab page that gets you where you need to go faster.",
   "license": "MIT",
+  "repository": "MaxMilton/new-tab",
   "author": "Max Milton <max@wearegenki.com>",
   "homepage": "https://github.com/MaxMilton/new-tab",
   "scripts": {
-    "FIXME__lint:css": "stylelint **/*.{css,html,js,md,svelte,svg,ts} --report-needless-disables",
-    "build": "NODE_ENV=production rollup --config",
-    "dev": "NODE_ENV=development rollup --config --watch",
-    "lint": "yarn lint:md && yarn lint:css && yarn lint:js && yarn lint:types",
-    "lint:css": "stylelint **/*.{css,html,js,md,svelte,svg,ts}",
-    "lint:js": "eslint --ext html,js,md,mjs,svelte,svg,ts .",
-    "lint:md": "remark --frail --quiet .",
-    "lint:types": "tsc --noEmit --allowJs --checkJs",
-    "prebuild": "rm -rf dist && mkdir dist && cp icon* dist",
-    "test": "jest --notify --watch",
-    "test-ci": "jest --ci --coverage"
+    "build": "NODE_ENV=production yarn node build.js",
+    "dev": "NODE_ENV=development yarn node build.js",
+    "prebuild": "rm -rf dist; mkdir dist && cp -r static/. dist/"
   },
-  "keywords": [
-    "chrome-extension",
-    "chrome",
-    "google-chrome",
-    "maxmilton",
-    "new-tab-page",
-    "ntp",
-    "svelte"
-  ],
-  "devDependencies": {
-    "@rollup/plugin-node-resolve": "11.1.1",
-    "@types/chrome": "0.0.129",
+  "dependencies": {
+    "@types/chrome": "0.0.133",
     "@wearegenki/renovate-config": "1.0.0",
-    "@xxcss/rollup": "link:../xxcss/packages/xxcss-rollup",
-    "@xxcss/svelte": "link:../xxcss/packages/xxcss-svelte",
-    "esbuild": "0.8.44",
-    "eslint": "7.19.0",
-    "jest": "26.6.3",
+    "esbuild": "0.8.54",
     "minna-tools": "0.36.0",
-    "postcss-xcss": "link:../xxcss/packages/postcss-xcss",
     "prettier": "2.2.1",
-    "remark-cli": "9.0.0",
-    "rollup": "2.38.5",
-    "rollup-plugin-esbuild": "2.6.1",
-    "rollup-plugin-svelte": "7.1.0",
-    "stylelint": "13.10.0",
-    "svelte": "3.32.3",
-    "typescript": "4.1.5",
+    "stage0": "0.0.25",
     "xxcss": "link:../xxcss/packages/xxcss"
   },
-  "browserslist": [
-    "last 2 Chrome versions"
-  ],
-  "eslintConfig": {
-    "root": true,
-    "extends": [
-      "./node_modules/minna-tools/eslint.js"
-    ],
-    "env": {
-      "webextensions": true
-    },
-    "rules": {
-      "dot-notation": "off"
-    }
-  },
-  "eslintIgnore": [
-    "**/dist/**",
-    "**/node_modules/**",
-    "/test/coverage/**"
-  ],
-  "jest": {
-    "preset": "minna-tools",
-    "setupFiles": [
-      "./test/__setup__.ts"
-    ],
-    "collectCoverageFrom": [
-      "src/**/*.{svelte,ts}",
-      "!src/app.ts",
-      "!src/settings.ts"
-    ]
-  },
-  "postcss": {
-    "map": false,
-    "plugins": {
-      "minna-ui/postcss": {
-        "unsafe": true
-      }
-    },
-    "syntax": "postcss-scss"
-  },
-  "prettier": "minna-tools/prettier",
-  "remarkConfig": {
-    "plugins": [
-      "minna-tools/remark"
-    ]
+  "prettier": {
+    "arrowParens": "always",
+    "endOfLine": "lf",
+    "singleQuote": true,
+    "trailingComma": "all"
   },
   "renovate": {
     "extends": [
       "@wearegenki"
     ]
-  },
-  "stylelint": {
-    "extends": "minna-tools/stylelint",
-    "ignoreFiles": [
-      "**/*.d.ts",
-      "**/dist/**",
-      "**/node_modules/**",
-      "test/coverage/**"
-    ],
-    "rules": {
-      "color-no-hex": null,
-      "scale-unlimited/declaration-strict-value": null,
-      "selector-max-id": null
-    }
   }
 }

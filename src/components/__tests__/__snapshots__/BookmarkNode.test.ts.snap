@@ -1,6 +1,0 @@
-// Jest Snapshot v1, https://goo.gl/fbAQLP
-
-exports[`BookmarkNode component renders correctly 1`] = `
-"<a><img src=\\"chrome://favicon/undefined\\">
-  undefined</a>"
-`;

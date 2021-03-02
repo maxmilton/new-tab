@@ -1,9 +1,5 @@
 {
   "css.validate": false,
-  // "editor.codeActionsOnSave": {
-  //   "source.fixAll": true,
-  //   "source.organizeImports": true
-  // },
   "editor.codeActionsOnSave": [
     // "source.organizeImports",
     "source.fixAll.format",
@@ -12,15 +8,12 @@
   ],
   "editor.defaultFormatter": "esbenp.prettier-vscode",
   "editor.formatOnSave": false,
-  "eslint.enable": true,
   "files.associations": {
-    "*.xcss": "scss",
-    "*.svelte": "html"
+    "*.xcss": "scss"
   },
-  "javascript.implicitProjectConfig.checkJs": true,
-  "scss.validate": false,
-  // "stylelint.customSyntax": "postcss-scss",
-  "stylelint.enable": true,
-  "stylelint.reportNeedlessDisables": true
+  "js/ts.implicitProjectConfig.checkJs": true,
+  "scss.validate": false
+  // "stylelint.enable": true,
+  // "stylelint.reportNeedlessDisables": true,
   // "typescript.tsdk": "./node_modules/typescript/lib"
 }

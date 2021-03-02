@@ -1,20 +1,28 @@
 // https://www.typescriptlang.org/docs/handbook/tsconfig-json.html
-
 {
-  "extends": "@minna-ui/ts-config",
   "compilerOptions": {
-    // "allowJs": true,
-    "baseUrl": ".",
-    // "checkJs": true,
-    "isolatedModules": true, // Ensure compatibility with sucrase (used in tests)
+    "target": "es2020",
+    "module": "commonjs",
+    "moduleResolution": "node",
+    "allowSyntheticDefaultImports": true,
+    "esModuleInterop": true,
+    "resolveJsonModule": true,
+    "alwaysStrict": true,
+    "skipLibCheck": true,
+    "allowJs": true,
+    "checkJs": true,
     "noEmit": true,
-    "outDir": "dist",
-    "sourceMap": true,
-    "target": "esnext",
 
-    // TODO: Remove these; workaround for svelte type issues
-    "allowJs": false,
-    "checkJs": false
+    "strict": true,
+    "allowUnreachableCode": false,
+    "forceConsistentCasingInFileNames": true,
+    "importsNotUsedAsValues": "error",
+    "noFallthroughCasesInSwitch": true,
+    "noUnusedLocals": true,
+    "noUnusedParameters": true,
+    "useDefineForClassFields": true,
+
+    "isolatedModules": true
   },
-  "exclude": ["dist", "node_modules", "test/coverage"]
+  "exclude": ["node_modules", "test/coverage"]
 }

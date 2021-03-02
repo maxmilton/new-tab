@@ -1,0 +1,236 @@
+/**
+ * Dark Theme (default)
+ */
+
+:root {
+  --b: #23252d; /* background colour */
+  --t: #9da5b4; /* text colour */
+  --c: #21252b; /* bookmark item hover background, hr */
+  --c0: #292d35; /* bookmarks bar, search input, menu dropdown, load more button */
+  --c1: #383e4a; /* menu hamburger icon, h2, muted text */
+  --c2: #292d35; /* search input */
+}
+
+/**
+ * Light Theme
+ */
+
+.l {
+  --s: 0 2px 4px rgba(0, 0, 17, 0.15); /* shadow */
+  --b: #fafafa; /* background colour */
+  --t: #383a42; /* text colour */
+  --c: #e5e5e6; /* bookmark item hover background, hr */
+  --c0: #fff; /* bookmarks bar, search input, menu dropdown, load more button */
+  --c1: #dbdbdc; /* menu hamburger icon, h2, muted text */
+  --c2: #eef0f2; /* search input */
+}
+
+/* LE STYLES */
+
+body {
+  margin: 110px 0;
+  overflow-y: scroll; /* Prevent jump on load */
+  font-size: 18px;
+  /**
+   * Normally you would use a unitless value for line-height but this is kind
+   * of a hack for alignment with the minimum possible style properties. Same
+   * as bookmark bar height.
+   */
+  line-height: 41px;
+  text-rendering: optimizeSpeed;
+  font-variant-ligatures: none;
+  background-color: var(--b);
+}
+
+h2,
+.muted {
+  color: var(--c1);
+}
+
+a {
+  text-decoration: none;
+
+  &:hover,
+  &:focus {
+    text-decoration: underline;
+  }
+}
+
+/* All <img> are favicons */
+img {
+  width: 16px;
+  height: 16px; /* Prevents slight realignment jump on initial load */
+  margin: 0 6px 0 0;
+  pointer-events: none; /* Prevent being the click event target */
+}
+
+a,
+.item {
+  display: block;
+  color: var(--t);
+  white-space: nowrap;
+  cursor: pointer;
+}
+
+/* "Load more" buttons */
+button {
+  width: initial;
+  margin-top: 9px;
+  cursor: pointer;
+}
+
+.container {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 0 18px;
+}
+
+button,
+#search {
+  box-sizing: border-box;
+  width: 100%;
+  margin: 0 0 35px;
+  padding: 11px 20px;
+  color: var(--t);
+  font-size: 21px;
+  background: var(--c2);
+  border: 0;
+  border-radius: 24px;
+  outline: none;
+
+  &:hover,
+  &:focus {
+    background: var(--c1);
+  }
+}
+
+.bookmarks {
+  position: fixed;
+  top: 0;
+  right: 0;
+  left: 0;
+  z-index: 2;
+  display: flex;
+  height: 41px;
+  background: var(--c0);
+  box-shadow: var(--s);
+  contain: size;
+  backface-visibility: hidden; /* performance hack; force GPU */
+
+  a,
+  .item {
+    padding: 0 13px;
+
+    &:hover,
+    &:focus {
+      background-color: var(--c);
+    }
+  }
+
+  a {
+    min-width: max-content;
+    max-width: 16ch;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+}
+
+.container a {
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.subfolder a {
+  min-width: auto;
+  max-width: 38ch;
+}
+
+.caret {
+  float: right;
+  margin-left: auto;
+  padding: 0 6px;
+}
+
+.subfolder {
+  position: fixed;
+  background: var(--c0);
+  box-shadow: var(--s);
+  overflow-y: auto;
+  max-height: calc(100vh - 41px);
+}
+
+/* Bookmark item pushed to the right */
+.right {
+  width: 100%;
+  text-align: right;
+
+  & + & {
+    width: auto;
+  }
+}
+
+/* Folder which opens to the left */
+.left {
+  right: 0;
+  left: initial;
+  text-align: left;
+
+  .subfolder {
+    right: 100%;
+    left: initial;
+  }
+}
+
+/* Menu */
+
+hr {
+  border: 0;
+  border-bottom: 1px solid var(--c);
+}
+
+.menuitem {
+  display: block;
+  color: var(--t);
+}
+
+#menu {
+  position: fixed;
+  top: 90px;
+  margin: -28px -84px -64px 0;
+  padding: 10px 84px 84px 42px;
+  font-size: 20px;
+}
+
+#icon {
+  color: var(--c1);
+  font-size: 30px;
+}
+
+#dropdown {
+  position: absolute;
+  top: 10px;
+  z-index: 1;
+  padding: 18px;
+  white-space: nowrap;
+  background: var(--c0);
+  box-shadow: var(--s);
+  opacity: 0;
+  transition: opacity 160ms ease-out, transform 160ms ease-out;
+  transform: scale(0.8);
+  transform-origin: 0 10px;
+
+  #menu:hover > &,
+  #menu:focus > & {
+    opacity: 1;
+    transition-duration: 192ms;
+    transform: scale(1);
+  }
+}
+
+/* TimeLeft */
+#time {
+  position: absolute;
+  right: 2em;
+  top: 6em;
+  color: var(--t);
+}

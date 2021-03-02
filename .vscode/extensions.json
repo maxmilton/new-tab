@@ -1,9 +1,0 @@
-{
-  "recommendations": [
-    "dbaeumer.vscode-eslint",
-    "drewbourne.vscode-remark-lint",
-    "esbenp.prettier-vscode",
-    "rohit-gohri.format-code-action",
-    "stylelint.vscode-stylelint"
-  ]
-}
