@@ -49,6 +49,7 @@ esbuild
     sourcemap: dev,
     watch: dev,
     write: dev,
+    banner: '"use strict";',
   })
   .then(compressTemplateStrings)
   .catch(() => process.exit(1));
@@ -67,6 +68,7 @@ esbuild
     sourcemap: dev,
     watch: dev,
     write: dev,
+    banner: '"use strict";',
   })
   .then(compressTemplateStrings)
   .catch(() => process.exit(1));
