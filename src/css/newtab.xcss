@@ -8,18 +8,8 @@
   --b: #23252d; // background colour
   --t: #9da5b4; // text colour
   --c1: #21252b; // bookmark item hover background, hr
-  --c2: #292d35; // bookmarks bar, search input, menu dropdown, load more button
-  --c3: #383e4a; // menu hamburger icon, h2, muted text
-}
-
-// Black Theme
-.b {
-  --s: 0 1px #191919; // shadow
-  --b: #000; // background colour
-  --t: #d60544; // text colour
-  --c1: #222; // bookmark item hover background, hr
-  --c2: #0e0e0e; // bookmarks bar, search input, menu dropdown, load more button
-  --c3: #333; // menu hamburger icon, h2, muted text
+  --c2: #292d35; // bookmarks bar, menu dropdown, load more button
+  --c3: #383e4a; // icons, h2, muted text
 }
 
 // Light Theme
@@ -27,8 +17,18 @@
   --b: #fafafa; // background colour
   --t: #383a42; // text colour
   --c1: #e5e5e6; // bookmark item hover background, hr
-  --c2: #fff; // bookmarks bar, search input, menu dropdown, load more button
-  --c3: #dbdbdc; // menu hamburger icon, h2, muted text
+  --c2: #fff; // bookmarks bar, menu dropdown, load more button
+  --c3: #dbdbdc; // icons, h2, muted text
+}
+
+// Rich Black Theme
+.b {
+  --s: 0 1px #201313; // shadow
+  --b: #0a0000; // background colour
+  --t: #795548; // text colour
+  --c1: #1d1616; // bookmark item hover background, hr
+  --c2: #0f0b0b; // bookmarks bar, menu dropdown, load more button
+  --c3: #392d2d; // icons, h2, muted text
 }
 
 /**
@@ -46,8 +46,9 @@ body {
    */
   line-height: 42px;
   text-rendering: optimizeSpeed;
-  font-variant-ligatures: none;
-  background-color: var(--b);
+  // font-variant-ligatures: none;
+  // background-color: var(--b);
+  background: var(--b);
 }
 
 h2,
@@ -79,14 +80,15 @@ a,
   cursor: pointer;
 }
 
-/* "Load more" buttons */
-button {
-  width: initial;
-  margin-top: 9px;
-  cursor: pointer;
+svg {
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 2px;
+  stroke-linecap: round;
 }
 
 .container {
+  position: relative;
   max-width: 800px;
   margin: 0 auto;
   padding: 0 18px;
@@ -97,7 +99,7 @@ button,
   box-sizing: border-box;
   width: 100%;
   margin: 0 0 35px;
-  padding: 11px 20px;
+  padding: 11px 20px 11px 58px;
   color: var(--t);
   font-size: 21px;
   background: inherit;
@@ -109,6 +111,20 @@ button,
   &:focus {
     border-color: var(--c3);
   }
+}
+
+/* "Load more" buttons */
+button {
+  width: initial;
+  margin-top: 9px;
+  padding: 11px 20px;
+  cursor: pointer;
+}
+
+.s-icon {
+  position: absolute;
+  left: 38px;
+  top: 14px;
 }
 
 .bookmarks {
@@ -154,6 +170,7 @@ button,
   max-width: 38ch;
 }
 
+// FIXME: Show this in the folder component
 .caret {
   float: right;
   margin-left: auto;
@@ -165,30 +182,34 @@ button,
   background: var(--c2);
   box-shadow: var(--s);
   overflow-y: auto;
-  max-height: calc(100vh - 41px);
+  // FIXME: Height needs to be calculated depending on the folder top position
+  max-height: calc(100vh - 42px);
 }
 
-/* Bookmark item pushed to the right */
+// /* Bookmark item pushed to the right */
+// .right {
+//   width: 100%;
+//   text-align: right;
+
+//   & + & {
+//     width: auto;
+//   }
+// }
+
+// /* Folder which opens to the left */
+// .left {
+//   right: 0;
+//   left: initial;
+//   text-align: left;
+
+//   .subfolder {
+//     right: 100%;
+//     left: initial;
+//   }
+// }
+
 .right {
-  // width: 100%;
-  // text-align: right;
   margin-left: auto;
-
-  // & + & {
-  //   width: auto;
-  // }
-}
-
-/* Folder which opens to the left */
-.left {
-  right: 0;
-  left: initial;
-  text-align: left;
-
-  .subfolder {
-    right: 100%;
-    left: initial;
-  }
 }
 
 /* Menu */
@@ -196,11 +217,6 @@ button,
 hr {
   border: 0;
   border-bottom: 1px solid var(--c1);
-}
-
-.menuitem {
-  display: block;
-  color: var(--t);
 }
 
 #menu {
@@ -211,9 +227,9 @@ hr {
   font-size: 20px;
 }
 
-#icon {
+.s-icon,
+.icon {
   color: var(--c3);
-  font-size: 30px;
 }
 
 #dropdown {

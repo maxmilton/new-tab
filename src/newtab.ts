@@ -1,4 +1,4 @@
-// FIXME: Submit a PR to add `export default` for consistency
+// FIXME: Submit a PR to fix types
 import { setupSyntheticEvent } from 'stage0/syntheticEvents';
 import { BookmarkBar } from './components/BookmarkBar';
 import { Menu } from './components/Menu';

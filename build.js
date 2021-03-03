@@ -83,7 +83,9 @@ function makeHTML(name, stylePath, body = '') {
     if (err) throw err;
 
     const { css } = compile(data, {
-      from: 'src/css/newtab.xcss',
+      from: stylePath,
+      // Pass an empty array to prevent default browser prefixer plugin
+      plugins: [],
     });
 
     // TODO: Not sure about the script "defer" attr
