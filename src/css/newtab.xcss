@@ -1,42 +1,50 @@
 /**
- * Dark Theme (default)
- */
+* Themes
+*/
 
+// Dark Theme (default)
 :root {
-  --b: #23252d; /* background colour */
-  --t: #9da5b4; /* text colour */
-  --c: #21252b; /* bookmark item hover background, hr */
-  --c0: #292d35; /* bookmarks bar, search input, menu dropdown, load more button */
-  --c1: #383e4a; /* menu hamburger icon, h2, muted text */
-  --c2: #292d35; /* search input */
+  --s: 0 2px 4px rgba(0, 0, 17, 0.15); // shadow
+  --b: #23252d; // background colour
+  --t: #9da5b4; // text colour
+  --c1: #21252b; // bookmark item hover background, hr
+  --c2: #292d35; // bookmarks bar, search input, menu dropdown, load more button
+  --c3: #383e4a; // menu hamburger icon, h2, muted text
+}
+
+// Black Theme
+.b {
+  --s: 0 1px #191919; // shadow
+  --b: #000; // background colour
+  --t: #d60544; // text colour
+  --c1: #222; // bookmark item hover background, hr
+  --c2: #0e0e0e; // bookmarks bar, search input, menu dropdown, load more button
+  --c3: #333; // menu hamburger icon, h2, muted text
+}
+
+// Light Theme
+.l {
+  --b: #fafafa; // background colour
+  --t: #383a42; // text colour
+  --c1: #e5e5e6; // bookmark item hover background, hr
+  --c2: #fff; // bookmarks bar, search input, menu dropdown, load more button
+  --c3: #dbdbdc; // menu hamburger icon, h2, muted text
 }
 
 /**
- * Light Theme
- */
-
-.l {
-  --s: 0 2px 4px rgba(0, 0, 17, 0.15); /* shadow */
-  --b: #fafafa; /* background colour */
-  --t: #383a42; /* text colour */
-  --c: #e5e5e6; /* bookmark item hover background, hr */
-  --c0: #fff; /* bookmarks bar, search input, menu dropdown, load more button */
-  --c1: #dbdbdc; /* menu hamburger icon, h2, muted text */
-  --c2: #eef0f2; /* search input */
-}
-
-/* LE STYLES */
+* App styles
+*/
 
 body {
-  margin: 110px 0;
+  margin: 108px 0;
   overflow-y: scroll; /* Prevent jump on load */
   font-size: 18px;
   /**
-   * Normally you would use a unitless value for line-height but this is kind
-   * of a hack for alignment with the minimum possible style properties. Same
-   * as bookmark bar height.
+   * Although it's best practise to use a unitless value for line-height, this
+   * is a hack for alignment with the minimum possible style properties. Must be
+   * the same as as bookmark bar height.
    */
-  line-height: 41px;
+  line-height: 42px;
   text-rendering: optimizeSpeed;
   font-variant-ligatures: none;
   background-color: var(--b);
@@ -44,7 +52,7 @@ body {
 
 h2,
 .muted {
-  color: var(--c1);
+  color: var(--c3);
 }
 
 a {
@@ -60,8 +68,7 @@ a {
 img {
   width: 16px;
   height: 16px; /* Prevents slight realignment jump on initial load */
-  margin: 0 6px 0 0;
-  pointer-events: none; /* Prevent being the click event target */
+  margin: 0 10px 0 0;
 }
 
 a,
@@ -93,14 +100,14 @@ button,
   padding: 11px 20px;
   color: var(--t);
   font-size: 21px;
-  background: var(--c2);
-  border: 0;
+  background: inherit;
+  border: 2px solid var(--c1);
   border-radius: 24px;
   outline: none;
 
   &:hover,
   &:focus {
-    background: var(--c1);
+    border-color: var(--c3);
   }
 }
 
@@ -111,8 +118,10 @@ button,
   left: 0;
   z-index: 2;
   display: flex;
-  height: 41px;
-  background: var(--c0);
+  // FIXME: We want this kind of behaviour but to push overflowing items into a separate magically overflow folder
+  flex-wrap: wrap;
+  height: 42px;
+  background: var(--c2);
   box-shadow: var(--s);
   contain: size;
   backface-visibility: hidden; /* performance hack; force GPU */
@@ -123,7 +132,7 @@ button,
 
     &:hover,
     &:focus {
-      background-color: var(--c);
+      background-color: var(--c1);
     }
   }
 
@@ -153,7 +162,7 @@ button,
 
 .subfolder {
   position: fixed;
-  background: var(--c0);
+  background: var(--c2);
   box-shadow: var(--s);
   overflow-y: auto;
   max-height: calc(100vh - 41px);
@@ -161,12 +170,13 @@ button,
 
 /* Bookmark item pushed to the right */
 .right {
-  width: 100%;
-  text-align: right;
+  // width: 100%;
+  // text-align: right;
+  margin-left: auto;
 
-  & + & {
-    width: auto;
-  }
+  // & + & {
+  //   width: auto;
+  // }
 }
 
 /* Folder which opens to the left */
@@ -185,7 +195,7 @@ button,
 
 hr {
   border: 0;
-  border-bottom: 1px solid var(--c);
+  border-bottom: 1px solid var(--c1);
 }
 
 .menuitem {
@@ -202,7 +212,7 @@ hr {
 }
 
 #icon {
-  color: var(--c1);
+  color: var(--c3);
   font-size: 30px;
 }
 
@@ -212,7 +222,7 @@ hr {
   z-index: 1;
   padding: 18px;
   white-space: nowrap;
-  background: var(--c0);
+  background: var(--c2);
   box-shadow: var(--s);
   opacity: 0;
   transition: opacity 160ms ease-out, transform 160ms ease-out;

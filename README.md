@@ -6,7 +6,7 @@
 
 # New Tab
 
-A high performance new tab page that gets you where you need to go faster. Utilises the latest tools and tech, packaged into a Google Chrome extension.
+A high performance new tab page that gets you where you need to go faster. Utilises the latest tools and tech, packaged into a Chrome browser extension.
 
 [![Add to Chrome](https://storage.googleapis.com/chrome-gcs-uploader.appspot.com/image/WlD8wC6g8khYWPJUsQceQkhXSlv1/mPGKYBIR2uCP0ApchDXE.png)](https://chrome.google.com/webstore/detail/new-tab/cpcibnbdmpmcmnkhoiilpnlaepkepknb)
 

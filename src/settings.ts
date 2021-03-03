@@ -74,6 +74,7 @@ const settingsView = h`
       <select #t>
         <option value="">Dark</option>
         <option value="l">Light</option>
+        <option value="b">Black</option>
       </select>
     </div>
 

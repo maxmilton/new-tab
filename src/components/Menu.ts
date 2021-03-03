@@ -37,10 +37,7 @@ export function Menu() {
   const root = view;
   const { settings } = view.collect(root);
 
-  // settings.__click = () => {
-  //   chrome.runtime.openOptionsPage();
-  // };
-  settings.onclick = () => {
+  settings.__click = () => {
     chrome.runtime.openOptionsPage();
   };
 

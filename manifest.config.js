@@ -1,10 +1,7 @@
 /* eslint-disable @typescript-eslint/camelcase, sort-keys */
 
-// const { gitDescribe } = require('minna-tools');
+const { gitDescribe } = require('@minna-ui/utils');
 const pkg = require('./package.json');
-
-// FIXME:
-const gitDescribe = () => '0.0.0';
 
 const manifest = {
   manifest_version: 2,
@@ -32,7 +29,6 @@ const manifest = {
     newtab: 'newtab.html',
   },
   options_ui: {
-    // chrome_style: true,
     page: 'settings.html',
   },
   offline_enabled: true,

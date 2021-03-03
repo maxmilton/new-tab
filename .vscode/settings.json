@@ -12,8 +12,8 @@
     "*.xcss": "scss"
   },
   "js/ts.implicitProjectConfig.checkJs": true,
-  "scss.validate": false
-  // "stylelint.enable": true,
-  // "stylelint.reportNeedlessDisables": true,
+  "scss.validate": false,
+  "stylelint.enable": true,
+  "stylelint.reportNeedlessDisables": true
   // "typescript.tsdk": "./node_modules/typescript/lib"
 }
