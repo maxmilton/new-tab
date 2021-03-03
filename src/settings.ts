@@ -5,10 +5,10 @@ import reuseNodes from 'stage0/reuseNodes';
 import { DEFAULT_ORDER } from './utils';
 
 const itemView = h`
-  <li class="item" draggable="true">
-    <span class="icon">☰</span>
+  <li class=item draggable=true>
+    <span class=icon>☰</span>
     #name
-    <button class="rm" title="Remove section" #rm>REMOVE</button>
+    <button class=rm title="Remove section" #rm>REMOVE</button>
   </li>
 `;
 
@@ -67,20 +67,38 @@ function save(order: string[], theme: string) {
   });
 }
 
+// const settingsView = h`
+//   <div>
+//     <div class="row">
+//       <label>Theme:</label>
+//       <select #t>
+//         <option value="">Dark</option>
+//         <option value="l">Light</option>
+//         <option value="b">Rich black</option>
+//       </select>
+//     </div>
+
+//     <div class="row">
+//       <label>List order:</label>
+//       <button class="reset" #reset>Reset</button>
+//       <ul #o></ul>
+//     </div>
+//   </div>
+// `;
 const settingsView = h`
   <div>
-    <div class="row">
+    <div class=row>
       <label>Theme:</label>
       <select #t>
         <option value="">Dark</option>
-        <option value="l">Light</option>
-        <option value="b">Rich black</option>
+        <option value=l>Light</option>
+        <option value=b>Rich black</option>
       </select>
     </div>
 
-    <div class="row">
+    <div class=row>
       <label>List order:</label>
-      <button class="reset" #reset>Reset</button>
+      <button class=reset #reset>Reset</button>
       <ul #o></ul>
     </div>
   </div>

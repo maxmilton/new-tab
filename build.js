@@ -82,11 +82,14 @@ function makeHTML(name, stylePath, body = '') {
   readFile(join(__dirname, stylePath), 'utf8', (err, data) => {
     if (err) throw err;
 
-    const { css } = compile(data, {
+    let { css } = compile(data, {
       from: stylePath,
       // Pass an empty array to prevent default browser prefixer plugin
       plugins: [],
     });
+
+    // XXX: XCSS/stylis doesn't remove the unnecessary trailing ;
+    css = css.replace(/;}/g, '}');
 
     // TODO: Not sure about the script "defer" attr
     const template = `<!doctype html>
