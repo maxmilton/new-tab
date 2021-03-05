@@ -32,20 +32,15 @@
   resolved "https://registry.yarnpkg.com/@types/har-format/-/har-format-1.2.5.tgz#4f6648814d0fdcb6a510e3364a9db439a753c4b1"
   integrity sha512-IG8AE1m2pWtPqQ7wXhFhy6Q59bwwnLwO36v5Rit2FrbXCIp8Sk8E2PfUCreyrdo17STwFSKDAkitVuVYbpEHvQ==
 
-"@types/stylis@^4.0.0":
-  version "4.0.0"
-  resolved "https://registry.yarnpkg.com/@types/stylis/-/stylis-4.0.0.tgz#ad0f07d60dd7291676d968498fa21d6b9bb1afe8"
-  integrity sha512-DB1wPXVDfTTyLO9tr4wTeAptinTGd+EemFDDJTdCfsLedYXuF1mRWpJtU74Rucqx7N7HecBmMwEERbPpLt1tGA==
-
 "@wearegenki/renovate-config@1.0.0":
   version "1.0.0"
   resolved "https://registry.yarnpkg.com/@wearegenki/renovate-config/-/renovate-config-1.0.0.tgz#3b2665c76d978a0a56a76093b2657f0c4579bf7b"
   integrity sha512-gAZGXBe9VJ4/H7Oj75//HSLVrPZv1gp06CaZJGpzpDYfWL3MgQzQlzGFn28I9FS7jYahC1zfadL+GuHua3evVQ==
 
-esbuild@0.8.54:
-  version "0.8.54"
-  resolved "https://registry.yarnpkg.com/esbuild/-/esbuild-0.8.54.tgz#2f32ff80e95c69a0f25b799d76a27c05e2857cdf"
-  integrity sha512-DJH38OiTgXJxFb/EhHrCrY8eGmtdkTtWymHpN9IYN9AF+4jykT0dQArr7wzFejpVbaB0TMIq2+vfNRWr3LXpvw==
+esbuild@0.8.56:
+  version "0.8.56"
+  resolved "https://registry.yarnpkg.com/esbuild/-/esbuild-0.8.56.tgz#9c7c3d6e614db7367afa348adb0ab287c296735e"
+  integrity sha512-PTMdAWK3JI2MNW811znGssGP5GR44tQPr++VQ1rPP0n8Z1cTKbCPD3S/kXPLr3ZZDIwAaVm08fuFym6Rp8l/0A==
 
 prettier@2.2.1:
   version "2.2.1"
@@ -57,11 +52,5 @@ stage0@0.0.25:
   resolved "https://registry.yarnpkg.com/stage0/-/stage0-0.0.25.tgz#9c701732c79a7eaf584083b293224069325b80da"
   integrity sha512-3PPjCh3ocSPJ/sJUPIgluWHKgcgG94hBaN2olDQ1HvyWQOsnZ26pAIxzqB92PZDe0MgvG4O1heLgORP+eP+0og==
 
-stylis@^4.0.7:
-  version "4.0.7"
-  resolved "https://registry.yarnpkg.com/stylis/-/stylis-4.0.7.tgz#412a90c28079417f3d27c028035095e4232d2904"
-  integrity sha512-OFFeUXFgwnGOKvEXaSv0D0KQ5ADP0n6g3SVONx6I/85JzNZ3u50FRwB3lVIk1QO2HNdI75tbVzc4Z66Gdp9voA==
-
 "xxcss@link:../xxcss/packages/xxcss":
   version "0.0.0"
-  uid ""

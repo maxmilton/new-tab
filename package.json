@@ -20,7 +20,7 @@
     "@minna-ui/utils": "0.36.0",
     "@types/chrome": "0.0.133",
     "@wearegenki/renovate-config": "1.0.0",
-    "esbuild": "0.8.54",
+    "esbuild": "0.8.56",
     "prettier": "2.2.1",
     "stage0": "0.0.25",
     "xxcss": "link:../xxcss/packages/xxcss"
