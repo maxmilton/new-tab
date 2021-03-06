@@ -1,16 +1,19 @@
-// TODO: Implement search and list filtering
-
-// TODO: Implement search reset
-
 import h from 'stage0';
 import { SearchResult } from './SearchResult';
 import { debounce, DEFAULT_ORDER } from '../utils';
 
-function searchLists(text) {
+type SearchComponent = HTMLDivElement;
+
+interface RefNodes {
+  input: HTMLInputElement;
+}
+
+// TODO: Implement search and list filtering
+function doSearch(text: string) {
   console.log('## SEARCH TEXT', text);
 }
 
-const doSearch = debounce(searchLists);
+const debouncedDoSearch = debounce(doSearch);
 
 const view = h`
   <div class=container>
@@ -22,19 +25,19 @@ const view = h`
   </div>
 `;
 
-export function Search() {
-  const root = view;
-  const { input } = view.collect(root);
+export function Search(): SearchComponent {
+  const root = view as SearchComponent;
+  const { input } = view.collect(root) as RefNodes;
 
-  const state = {};
+  const state: Record<string, ReturnType<typeof SearchResult>> = {};
 
   input.oninput = (event) => {
-    doSearch(input.value);
+    debouncedDoSearch(input.value);
   };
 
   input.onkeyup = (event) => {
     if (event.key === 'Escape') {
-      // reset filter
+      input.value = '';
     }
   };
 

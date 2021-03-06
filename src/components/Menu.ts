@@ -1,5 +1,11 @@
 import h from 'stage0';
 
+type MenuComponent = HTMLDivElement;
+
+interface RefNodes {
+  settings: HTMLAnchorElement;
+}
+
 // <div id=icon>☰</div>
 const view = h`
   <div id=menu>
@@ -38,9 +44,9 @@ const view = h`
   </div>
 `;
 
-export function Menu() {
-  const root = view;
-  const { settings } = view.collect(root);
+export function Menu(): MenuComponent {
+  const root = view as MenuComponent;
+  const { settings } = view.collect(root) as RefNodes;
 
   settings.__click = () => {
     chrome.runtime.openOptionsPage();

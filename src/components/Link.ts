@@ -1,7 +1,17 @@
 import h from 'stage0';
-// import { handleClick } from '../utils';
 
-export interface LinkProps {}
+export interface LinkProps {
+  href: string;
+  title: string;
+  url: string;
+}
+
+export type LinkComponent = HTMLAnchorElement;
+
+interface RefNodes {
+  img: HTMLImageElement;
+  title: Text;
+}
 
 const linkView = h`
   <a>
@@ -10,16 +20,14 @@ const linkView = h`
   </a>
 `;
 
-export function Link(item: LinkProps) {
-  const root = linkView.cloneNode(true);
-  const { img, title } = linkView.collect(root);
+export function Link(item: LinkProps): LinkComponent {
+  const root = linkView.cloneNode(true) as LinkComponent;
+  const { img, title } = linkView.collect(root) as RefNodes;
 
   root.href = item.url;
   root.title = item.title;
-  img.src = 'chrome://favicon/' + item.url;
+  img.src = `chrome://favicon/${item.url}`;
   title.nodeValue = item.title;
-
-  // root.__click = handleClick;
 
   return root;
 }

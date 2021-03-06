@@ -6,7 +6,10 @@
 
 // FIXME: max-height (for scroll) needs to be dynamic depending on where the folder opens from
 
-import { Link, LinkProps } from './Link';
+import { Link, LinkProps, LinkComponent } from './Link';
+
+type FolderComponent = HTMLDivElement;
+type SubFolderComponent = HTMLDivElement;
 
 const CLOSE_DELAY_MS = 400;
 let openFolders = 0;
@@ -20,21 +23,24 @@ interface SubFolderProps {
 const subFolderView = document.createElement('div');
 subFolderView.className = 'subfolder';
 
-function SubFolder({ children, level, parent }: SubFolderProps, scope) {
-  const root = subFolderView.cloneNode(true) as HTMLDivElement;
+function SubFolder(
+  { children, level, parent }: SubFolderProps,
+  scope,
+): SubFolderComponent {
+  const root = subFolderView.cloneNode(true) as SubFolderComponent;
 
   const parentPos = parent.getBoundingClientRect();
 
   if (level > 0) {
     // nested subfolders show beside their parent
-    root.style.top = parentPos.top + 'px';
-    root.style.left = parentPos.right + 'px';
+    root.style.top = `${parentPos.top}px`;
+    root.style.left = `${parentPos.right}px`;
   } else {
     // top level subfolders show bellow their parent
     // root.style.top = parentPos.bottom + 'px';
     // root.style.left = parentPos.left + 'px';
 
-    root.style.top = parentPos.bottom + 'px';
+    root.style.top = `${parentPos.bottom}px`;
 
     // show from the right if folder would overflow right
     // FIXME: instead of 200 get the folder width
@@ -44,7 +50,7 @@ function SubFolder({ children, level, parent }: SubFolderProps, scope) {
       root.style.right = '0px';
       console.log('@@ root', root);
     } else {
-      root.style.left = parentPos.left + 'px';
+      root.style.left = `${parentPos.left}px`;
     }
   }
 
@@ -68,11 +74,11 @@ interface FolderProps extends chrome.bookmarks.BookmarkTreeNode {
 const folderView = document.createElement('div');
 folderView.className = 'item';
 
-function Folder(item: FolderProps) {
-  const root = folderView.cloneNode(true) as HTMLDivElement;
+function Folder(item: FolderProps): FolderComponent {
+  const root = folderView.cloneNode(true) as FolderComponent;
 
   // TODO: Keep? Implement "Other Bookmarks"
-  if (item.end) root.className = root.className + ' right';
+  if (item.end) root.className += ' right';
   root.textContent = item.title;
 
   let subfolder: Element;
@@ -119,7 +125,8 @@ function Folder(item: FolderProps) {
   return root;
 }
 
-// FIXME: Shouldn't it be | and not & union?
-export function BookmarkNode(item: FolderProps | LinkProps) {
+export function BookmarkNode(
+  item: FolderProps | LinkProps,
+): FolderComponent | LinkComponent {
   return (item.children ? Folder : Link)(item);
 }

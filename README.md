@@ -66,7 +66,7 @@ See [CHANGELOG.md](https://github.com/MaxMilton/new-tab/blob/master/CHANGELOG.md
 
 The extension [lightning bolt icon](https://github.com/twitter/twemoji/blob/master/assets/svg/26a1.svg) is from [twitter/twemoji](https://github.com/twitter/twemoji) which is licensed [CC-BY 4.0](https://github.com/twitter/twemoji#license).
 
-The icons used in the app are from [feathericons/feather](https://github.com/feathericons/feather) which is licensed [MIT](https://github.com/feathericons/feather/blob/master/LICENSE).
+Icons used in the app are from [feathericons/feather](https://github.com/feathericons/feather) which is licensed [MIT](https://github.com/feathericons/feather/blob/master/LICENSE).
 
 ---
 

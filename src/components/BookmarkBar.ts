@@ -2,7 +2,9 @@
 
 import { BookmarkNode } from './BookmarkNode';
 
-export function BookmarkBar() {
+type BookmarkBarComponent = HTMLDivElement;
+
+export function BookmarkBar(): BookmarkBarComponent {
   const root = document.createElement('div');
   root.className = 'bookmarks';
 
