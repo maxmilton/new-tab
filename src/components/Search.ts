@@ -1,8 +1,9 @@
-import h from 'stage0';
-import { SearchResult } from './SearchResult';
+import h, { HNode } from 'stage0';
+import type { UserStorageData } from '../types';
 import { debounce, DEFAULT_ORDER } from '../utils';
+import { SearchResult } from './SearchResult';
 
-type SearchComponent = HTMLDivElement;
+type SearchComponent = HNode<HTMLDivElement>;
 
 interface RefNodes {
   input: HTMLInputElement;
@@ -29,11 +30,9 @@ export function Search(): SearchComponent {
   const root = view as SearchComponent;
   const { input } = view.collect(root) as RefNodes;
 
-  const state: Record<string, ReturnType<typeof SearchResult>> = {};
+  const section: Record<string, ReturnType<typeof SearchResult>> = {};
 
-  input.oninput = (event) => {
-    debouncedDoSearch(input.value);
-  };
+  input.oninput = () => debouncedDoSearch(input.value);
 
   input.onkeyup = (event) => {
     if (event.key === 'Escape') {
@@ -42,24 +41,26 @@ export function Search(): SearchComponent {
   };
 
   const update = () => {
-    chrome.tabs.query({}, (tabs) => {
-      state['Open Tabs'].update(tabs);
-    });
+    if (section['Open Tabs']) {
+      chrome.tabs.query({}, (tabs) => {
+        section['Open Tabs'].update(tabs);
+      });
+    }
   };
 
   // Get user settings
-  chrome.storage.local.get(null, (settings) => {
+  chrome.storage.local.get(null, (settings: UserStorageData) => {
     const order = settings.o || DEFAULT_ORDER;
 
     order.forEach((name) => {
-      state[name] = root.appendChild(SearchResult(name, []));
+      section[name] = root.appendChild(SearchResult(name, []));
     });
 
     update();
 
-    if (state['Top Sites']) {
+    if (section['Top Sites']) {
       chrome.topSites.get((sites) => {
-        state['Top Sites'].update(sites);
+        section['Top Sites'].update(sites);
       });
     }
   });

@@ -2,7 +2,34 @@
 
 import h from 'stage0';
 import reuseNodes from 'stage0/reuseNodes';
+import type { UserStorageData } from './types';
 import { DEFAULT_ORDER } from './utils';
+
+interface ItemComponent extends HTMLLIElement {
+  update(newItem: string): void;
+}
+
+interface ItemRefNodes {
+  name: Text;
+  rm: HTMLButtonElement;
+}
+
+type ItemScope = {
+  indexOf(item: string): number;
+  moveItem(from: number, to: number): void;
+  removeItem(index: number): void;
+};
+
+interface SettingsRefNodes {
+  o: HTMLOListElement;
+  reset: HTMLButtonElement;
+  t: HTMLSelectElement;
+}
+
+interface SettingsState {
+  order: string[];
+  theme: string;
+}
 
 const itemView = h`
   <li class=item draggable=true>
@@ -12,47 +39,47 @@ const itemView = h`
   </li>
 `;
 
-function Item(item: string, scope) {
-  const root = itemView.cloneNode(true) as HTMLLIElement;
-  const { name, rm } = itemView.collect(root);
+function Item(item: string, scope: ItemScope): ItemComponent {
+  const root = itemView.cloneNode(true) as ItemComponent;
+  const { name, rm } = itemView.collect(root) as ItemRefNodes;
 
   let _item = item;
   name.nodeValue = _item;
 
   root.ondragstart = (event) => {
-    event.dataTransfer.setData('from', scope.indexOf(_item));
-    event.target.classList.add('dragging');
+    event.dataTransfer!.setData('from', scope.indexOf(_item));
+    event.target!.classList.add('dragging');
   };
 
   root.ondragend = (event) => {
-    event.target.classList.remove('dragging');
+    event.target!.classList.remove('dragging');
   };
 
   root.ondragover = (event) => {
     event.preventDefault();
-    event.dataTransfer.dropEffect = 'move';
+    event.dataTransfer!.dropEffect = 'move';
   };
 
   root.ondragenter = (event) => {
-    event.target.classList.add('over');
+    event.target!.classList.add('over');
   };
 
   root.ondragleave = (event) => {
-    event.target.classList.remove('over');
+    event.target!.classList.remove('over');
   };
 
   root.ondrop = (event) => {
     event.preventDefault();
-    const from = event.dataTransfer.getData('from');
+    const from = event.dataTransfer!.getData('from');
     scope.moveItem(from, scope.indexOf(_item));
 
     // Remove class in case the `dragleave` event didn't fire
-    event.target.classList.remove('over');
+    event.target!.classList.remove('over');
   };
 
   rm.onclick = () => scope.removeItem(scope.indexOf(_item));
 
-  root.update = (newItem: string) => {
+  root.update = (newItem) => {
     name.nodeValue = newItem;
     _item = newItem;
   };
@@ -62,29 +89,13 @@ function Item(item: string, scope) {
 
 function save(order: string[], theme: string) {
   chrome.storage.local.set({
-    o: JSON.stringify(order) === JSON.stringify(DEFAULT_ORDER) ? null : order,
+    // cheap deep compare using JSON serialisation
+    // o: JSON.stringify(order) === JSON.stringify(DEFAULT_ORDER) ? null : order,
+    o: order,
     t: theme,
   });
 }
 
-// const settingsView = h`
-//   <div>
-//     <div class="row">
-//       <label>Theme:</label>
-//       <select #t>
-//         <option value="">Dark</option>
-//         <option value="l">Light</option>
-//         <option value="b">Rich black</option>
-//       </select>
-//     </div>
-
-//     <div class="row">
-//       <label>List order:</label>
-//       <button class="reset" #reset>Reset</button>
-//       <ul #o></ul>
-//     </div>
-//   </div>
-// `;
 const settingsView = h`
   <div>
     <div class=row>
@@ -104,14 +115,9 @@ const settingsView = h`
   </div>
 `;
 
-interface SettingsState {
-  order: string[];
-  theme: string;
-}
-
 function Settings() {
   const root = settingsView;
-  const { o, reset, t } = settingsView.collect(root);
+  const { o, reset, t } = settingsView.collect(root) as SettingsRefNodes;
 
   const state: SettingsState = {
     order: [],
@@ -163,8 +169,8 @@ function Settings() {
     }
   }
 
-  t.onchange = (event: InputEvent) => {
-    updateTheme(event.target.value);
+  t.onchange = (event) => {
+    updateTheme(event.target!.value);
   };
 
   reset.onclick = () => {
@@ -172,9 +178,9 @@ function Settings() {
   };
 
   // Get user settings data
-  chrome.storage.local.get(null, (settings) => {
+  chrome.storage.local.get(null, (settings: UserStorageData) => {
     const order = settings.o || DEFAULT_ORDER;
-    const theme = settings.t;
+    const theme = settings.t || '';
 
     updateOrder(order);
     updateTheme(theme);

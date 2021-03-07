@@ -34,16 +34,17 @@ export function SearchResult(name: string, raw: any[]): SearchResultComponent {
 
   title.nodeValue = name;
 
+  // eslint-disable-next-line @typescript-eslint/naming-convention
   let _raw = raw;
   let renderedData: any[] = [];
 
-  const update = (raw: any[], showCount = DEFAULT_RESULTS_COUNT) => {
-    const partial = isOpenTabs ? raw : raw.slice(0, showCount);
-    const rawLength = raw.length;
+  const update = (newRaw: any[], showCount = DEFAULT_RESULTS_COUNT) => {
+    const partial = isOpenTabs ? newRaw : newRaw.slice(0, showCount);
+    const rawLength = newRaw.length;
 
     reuseNodes(list, renderedData, partial, isOpenTabs ? TabLink : Link);
 
-    _raw = raw;
+    _raw = newRaw;
     renderedData = partial;
 
     root.style.display = rawLength ? 'block' : 'none';

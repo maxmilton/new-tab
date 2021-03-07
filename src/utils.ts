@@ -30,7 +30,7 @@ export function debounce<T extends Function>(
   let timer: NodeJS.Timeout;
 
   // @ts-expect-error
-  return function (...args) {
+  return function (this: any, ...args) {
     const context = this;
 
     clearTimeout(timer);

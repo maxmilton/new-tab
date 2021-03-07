@@ -1,4 +1,4 @@
-/* eslint-disable @typescript-eslint/camelcase, sort-keys */
+/* eslint-disable @typescript-eslint/no-var-requires */
 
 const { gitDescribe } = require('@minna-ui/utils');
 const pkg = require('./package.json');
@@ -34,12 +34,12 @@ const manifest = {
   offline_enabled: true,
   incognito: 'not_allowed',
   content_security_policy:
-    "default-src 'none';" +
+    "default-src 'none';"
     // theme loader script to be embedded inline in the document
-    " script-src 'self' 'sha256-FtIFk1UjzWWlhfMrIdJ9n60rbnTmldIAss9HFJTJeUM=';" +
-    " style-src 'unsafe-inline';" +
+    + " script-src 'self' 'sha256-FtIFk1UjzWWlhfMrIdJ9n60rbnTmldIAss9HFJTJeUM=';"
+    + " style-src 'unsafe-inline';"
     // `data:` used in settings page
-    ' img-src chrome://favicon data:;',
+    + ' img-src chrome://favicon data:;',
 };
 
 module.exports = JSON.stringify(manifest);

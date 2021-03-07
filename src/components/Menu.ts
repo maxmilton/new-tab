@@ -1,9 +1,9 @@
-import h from 'stage0';
+import h, { HNode } from 'stage0';
 
-type MenuComponent = HTMLDivElement;
+type MenuComponent = HNode<HTMLDivElement>;
 
 interface RefNodes {
-  settings: HTMLAnchorElement;
+  s: HTMLAnchorElement;
 }
 
 // <div id=icon>☰</div>
@@ -34,7 +34,7 @@ const view = h`
 
       <hr>
 
-      <a #settings>
+      <a #s>
         New Tab Settings
       </a>
       <a href=https://github.com/MaxMilton/new-tab/issues>
@@ -46,9 +46,9 @@ const view = h`
 
 export function Menu(): MenuComponent {
   const root = view as MenuComponent;
-  const { settings } = view.collect(root) as RefNodes;
+  const { s } = view.collect(root) as RefNodes;
 
-  settings.__click = () => {
+  s.__click = () => {
     chrome.runtime.openOptionsPage();
   };
 

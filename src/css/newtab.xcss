@@ -7,7 +7,7 @@
   --s: 0 2px 4px rgba(0, 0, 17, 0.15); // shadow
   --b: #23252d; // background colour
   --t: #9da5b4; // text colour
-  --c1: #21252b; // bookmark item hover background, hr
+  --c1: #2c313a; // bookmark item hover background, hr
   --c2: #292d35; // bookmarks bar, menu dropdown, load more button
   --c3: #383e4a; // icons, h2, muted text
 }
@@ -153,7 +153,6 @@ button {
   }
 
   a {
-    min-width: max-content;
     max-width: 16ch;
     overflow: hidden;
     text-overflow: ellipsis;
@@ -166,7 +165,7 @@ button {
 }
 
 .subfolder a {
-  min-width: auto;
+  min-width: 200px;
   max-width: 38ch;
 }
 

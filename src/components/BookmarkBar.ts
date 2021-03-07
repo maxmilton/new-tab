@@ -1,5 +1,3 @@
-// FIXME: Only show amount of bookmarks which will fit including other bookmarks
-
 import { BookmarkNode } from './BookmarkNode';
 
 type BookmarkBarComponent = HTMLDivElement;

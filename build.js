@@ -1,4 +1,6 @@
-'use strict';
+/* eslint-disable @typescript-eslint/no-var-requires */
+
+'use strict'; // eslint-disable-line
 
 const esbuild = require('esbuild');
 const { readFile, writeFile } = require('fs');
@@ -44,12 +46,12 @@ esbuild
     define: {
       'process.env.NODE_ENV': JSON.stringify(mode),
     },
+    banner: '"use strict";',
     bundle: true,
     minify: !dev,
     sourcemap: dev,
     watch: dev,
     write: dev,
-    banner: '"use strict";',
   })
   .then(compressTemplateStrings)
   .catch(() => process.exit(1));
@@ -63,12 +65,12 @@ esbuild
     define: {
       'process.env.NODE_ENV': JSON.stringify(mode),
     },
+    banner: '"use strict";',
     bundle: true,
     minify: !dev,
     sourcemap: dev,
     watch: dev,
     write: dev,
-    banner: '"use strict";',
   })
   .then(compressTemplateStrings)
   .catch(() => process.exit(1));

@@ -11,21 +11,32 @@ import { Link, LinkProps, LinkComponent } from './Link';
 type FolderComponent = HTMLDivElement;
 type SubFolderComponent = HTMLDivElement;
 
-const CLOSE_DELAY_MS = 400;
-let openFolders = 0;
-
 interface SubFolderProps {
   children: chrome.bookmarks.BookmarkTreeNode[];
   level: number;
-  parent: Node;
+  parent: Element;
 }
+
+interface FolderProps extends chrome.bookmarks.BookmarkTreeNode {
+  children: chrome.bookmarks.BookmarkTreeNode[];
+  end?: boolean;
+  level?: number;
+}
+
+type SubFolderScope = {
+  clearTimer(): void;
+  resetTimer(): void;
+};
+
+const CLOSE_DELAY_MS = 400;
+let openFolders = 0;
 
 const subFolderView = document.createElement('div');
 subFolderView.className = 'subfolder';
 
 function SubFolder(
   { children, level, parent }: SubFolderProps,
-  scope,
+  scope: SubFolderScope,
 ): SubFolderComponent {
   const root = subFolderView.cloneNode(true) as SubFolderComponent;
 
@@ -65,12 +76,6 @@ function SubFolder(
   return root;
 }
 
-interface FolderProps extends chrome.bookmarks.BookmarkTreeNode {
-  children: chrome.bookmarks.BookmarkTreeNode[];
-  end?: boolean;
-  level?: number;
-}
-
 const folderView = document.createElement('div');
 folderView.className = 'item';
 
@@ -81,7 +86,7 @@ function Folder(item: FolderProps): FolderComponent {
   if (item.end) root.className += ' right';
   root.textContent = item.title;
 
-  let subfolder: Element;
+  let subfolder: Element | null;
   let timer: NodeJS.Timeout;
 
   const scope = {

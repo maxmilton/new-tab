@@ -7,7 +7,7 @@ interface TabLinkProps extends LinkProps {
 }
 
 function handleTabClick({ id, windowId }: TabLinkProps) {
-  return (event: MouseEvent) => {
+  return (_event: MouseEvent) => {
     // Switch to the clicked tab
     chrome.tabs.update(id, { active: true });
 

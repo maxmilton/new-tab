@@ -5,8 +5,9 @@ import { Menu } from './components/Menu';
 import { Search } from './components/Search';
 import { handleClick } from './utils';
 
+// TODO: Mention this when creating a types improvement PR to stage0
 declare global {
-  interface Node {
+  interface HTMLElement {
     /** Synthetic click event handler. */
     __click(event: MouseEvent): void;
   }
