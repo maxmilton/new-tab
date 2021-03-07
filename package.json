@@ -19,10 +19,17 @@
   "dependencies": {
     "@minna-ui/utils": "0.36.0",
     "@types/chrome": "0.0.133",
+    "@types/node": "14.14.32",
+    "@typescript-eslint/eslint-plugin": "4.16.1",
+    "@typescript-eslint/parser": "4.16.1",
     "@wearegenki/renovate-config": "1.0.0",
-    "esbuild": "0.8.54",
+    "esbuild": "0.8.56",
+    "eslint": "7.21.0",
+    "eslint-config-airbnb-typescript": "12.3.1",
+    "eslint-plugin-import": "2.22.1",
     "prettier": "2.2.1",
     "stage0": "0.0.25",
+    "typescript": "4.2.3",
     "xxcss": "link:../xxcss/packages/xxcss"
   },
   "prettier": {
