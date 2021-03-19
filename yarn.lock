@@ -104,11 +104,6 @@
   resolved "https://registry.yarnpkg.com/@types/node/-/node-14.14.32.tgz#90c5c4a8d72bbbfe53033f122341343249183448"
   integrity sha512-/Ctrftx/zp4m8JOujM5ZhwzlWLx22nbQJiVqz8/zE15gOeEW+uly3FSX4fGFpcfEvFzXcMCJwq9lGVWgyARXhg==
 
-"@types/stylis@^4.0.0":
-  version "4.0.0"
-  resolved "https://registry.yarnpkg.com/@types/stylis/-/stylis-4.0.0.tgz#ad0f07d60dd7291676d968498fa21d6b9bb1afe8"
-  integrity sha512-DB1wPXVDfTTyLO9tr4wTeAptinTGd+EemFDDJTdCfsLedYXuF1mRWpJtU74Rucqx7N7HecBmMwEERbPpLt1tGA==
-
 "@typescript-eslint/eslint-plugin@4.16.1":
   version "4.16.1"
   resolved "https://registry.yarnpkg.com/@typescript-eslint/eslint-plugin/-/eslint-plugin-4.16.1.tgz#2caf6a79dd19c3853b8d39769a27fccb24e4e651"
@@ -471,10 +466,10 @@ es-to-primitive@^1.2.1:
     is-date-object "^1.0.1"
     is-symbol "^1.0.2"
 
-esbuild@0.8.56:
-  version "0.8.56"
-  resolved "https://registry.yarnpkg.com/esbuild/-/esbuild-0.8.56.tgz#9c7c3d6e614db7367afa348adb0ab287c296735e"
-  integrity sha512-PTMdAWK3JI2MNW811znGssGP5GR44tQPr++VQ1rPP0n8Z1cTKbCPD3S/kXPLr3ZZDIwAaVm08fuFym6Rp8l/0A==
+esbuild@0.9.5:
+  version "0.9.5"
+  resolved "https://registry.yarnpkg.com/esbuild/-/esbuild-0.9.5.tgz#200e7836580c0a78849ee257656efd40dbf0b4df"
+  integrity sha512-ZBOtZX9HxgSdwkAroVifEUgylWqbOjqbu1i1ohRvhoaYt6aj81dxbizODx419gwDAupqut44ehFVwUq7WRN/OA==
 
 escape-string-regexp@^1.0.5:
   version "1.0.5"
@@ -1417,11 +1412,6 @@ strip-json-comments@^3.1.0, strip-json-comments@^3.1.1:
   resolved "https://registry.yarnpkg.com/strip-json-comments/-/strip-json-comments-3.1.1.tgz#31f1281b3832630434831c310c01cccda8cbe006"
   integrity sha512-6fPc+R4ihwqP6N/aIv2f1gMH8lOVtWQHoqC4yK6oSDVVocumAsfCqjkXnqiYMhmMwS/mEHLp7Vehlt3ql6lEig==
 
-stylis@^4.0.7:
-  version "4.0.7"
-  resolved "https://registry.yarnpkg.com/stylis/-/stylis-4.0.7.tgz#412a90c28079417f3d27c028035095e4232d2904"
-  integrity sha512-OFFeUXFgwnGOKvEXaSv0D0KQ5ADP0n6g3SVONx6I/85JzNZ3u50FRwB3lVIk1QO2HNdI75tbVzc4Z66Gdp9voA==
-
 supports-color@^5.3.0:
   version "5.5.0"
   resolved "https://registry.yarnpkg.com/supports-color/-/supports-color-5.5.0.tgz#e2e69a44ac8772f78a1ec0b35b689df6530efc8f"
@@ -1557,7 +1547,6 @@ wrappy@1:
 
 "xxcss@link:../xxcss/packages/xxcss":
   version "0.0.0"
-  uid ""
 
 yallist@^4.0.0:
   version "4.0.0"
