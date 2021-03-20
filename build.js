@@ -1,11 +1,12 @@
-/* eslint-disable @typescript-eslint/no-var-requires */
+/* eslint-env node */
+/* eslint-disable @typescript-eslint/no-var-requires, import/no-extraneous-dependencies */
 
 'use strict'; // eslint-disable-line
 
+const xcss = require('ekscss');
 const esbuild = require('esbuild');
-const { readFile, writeFile } = require('fs');
-const { join } = require('path');
-const { compile } = require('xxcss');
+const fs = require('fs');
+const path = require('path');
 const manifest = require('./manifest.config.js');
 
 const mode = process.env.NODE_ENV;
@@ -21,7 +22,7 @@ function handleErr(err) {
 function compressTemplateStrings(buildResult) {
   if (!buildResult.outputFiles) return;
 
-  const { path } = buildResult.outputFiles[0];
+  const filePath = buildResult.outputFiles[0].path;
   const code = buildResult.outputFiles[0].text
     // reduce multiple whitespace down to a single space
     .replace(/\s{2,}/gm, ' ')
@@ -34,7 +35,7 @@ function compressTemplateStrings(buildResult) {
     .replace(/` </g, '`<')
     .replace(/> `/g, '>`');
 
-  writeFile(path, code, 'utf8', handleErr);
+  fs.writeFile(filePath, code, 'utf8', handleErr);
 }
 
 // New Tab app
@@ -46,7 +47,7 @@ esbuild
     define: {
       'process.env.NODE_ENV': JSON.stringify(mode),
     },
-    banner: '"use strict";',
+    banner: { js: '"use strict";' },
     bundle: true,
     minify: !dev,
     sourcemap: dev,
@@ -65,7 +66,7 @@ esbuild
     define: {
       'process.env.NODE_ENV': JSON.stringify(mode),
     },
-    banner: '"use strict";',
+    banner: { js: '"use strict";' },
     bundle: true,
     minify: !dev,
     sourcemap: dev,
@@ -83,17 +84,24 @@ esbuild
  * @param {string} body
  */
 function makeHTML(name, stylePath, body = '') {
-  readFile(join(__dirname, stylePath), 'utf8', (err, data) => {
+  fs.readFile(path.join(__dirname, stylePath), 'utf8', (err, data) => {
     if (err) throw err;
 
-    let { css } = compile(data, {
+    const result = xcss.compile(data, {
       from: stylePath,
-      // Pass an empty array to prevent default browser prefixer plugin
+      map: false,
+      // empty array to disable default browser prefixer plugin
       plugins: [],
     });
 
-    // XXX: XCSS/stylis doesn't remove the unnecessary trailing ;
-    css = css.replace(/;}/g, '}');
+    // eslint-disable-next-line no-restricted-syntax
+    for (const warning of result.warnings) {
+      // eslint-disable-next-line no-console
+      console.error('XCSS WARNING:', warning.message);
+    }
+
+    // XXX: XCSS/stylis doesn't remove the unnecessary trailing semicolon (;)
+    const css = result.css.replace(/;}/g, '}');
 
     // TODO: Not sure about the script "defer" attr
     const template = `<!doctype html>
@@ -104,7 +112,11 @@ function makeHTML(name, stylePath, body = '') {
 <script src="${name}.js" defer></script>
 ${body}`;
 
-    writeFile(join(__dirname, `dist/${name}.html`), template, handleErr);
+    fs.writeFile(
+      path.join(__dirname, `dist/${name}.html`),
+      template,
+      handleErr,
+    );
   });
 }
 
@@ -116,4 +128,4 @@ makeHTML(
 makeHTML('settings', 'src/css/settings.xcss');
 
 // Extension manifest
-writeFile(join(__dirname, 'dist/manifest.json'), manifest, handleErr);
+fs.writeFile(path.join(__dirname, 'dist/manifest.json'), manifest, handleErr);

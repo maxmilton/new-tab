@@ -1,4 +1,3 @@
-// FIXME: Submit a PR to fix syntheticEvents types
 import { setupSyntheticEvent } from 'stage0/syntheticEvents';
 import { BookmarkBar } from './components/BookmarkBar';
 import { Menu } from './components/Menu';
