@@ -38,7 +38,7 @@ Originally an experimental project to give me a chance for me to play with the C
 
 - [stage0](https://github.com/Freak613/stage0) JavaScript framework
 - [Chrome browser APIs](https://developer.chrome.com/apps/api_index)
-- [XCSS](https://github.com/MaxMilton/xcss) style preprocessor
+- [ekscss](https://github.com/MaxMilton/ekscss) style preprocessor
 - [esbuild](https://esbuild.github.io/) JavaScript bundler
 
 ## Known issues
