@@ -10,7 +10,7 @@ module.exports = {
     project: './tsconfig.json',
   },
   env: {
-    node: true,
+    browser: true,
   },
   extends: [
     'eslint:recommended',
