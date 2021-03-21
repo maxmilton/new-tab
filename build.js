@@ -3,6 +3,7 @@
 
 'use strict'; // eslint-disable-line
 
+const csso = require('csso');
 const xcss = require('ekscss');
 const esbuild = require('esbuild');
 const fs = require('fs');
@@ -87,7 +88,7 @@ function makeHTML(name, stylePath, body = '') {
   fs.readFile(path.join(__dirname, stylePath), 'utf8', (err, data) => {
     if (err) throw err;
 
-    const result = xcss.compile(data, {
+    const compiled = xcss.compile(data, {
       from: stylePath,
       map: false,
       // empty array to disable default browser prefixer plugin
@@ -95,13 +96,12 @@ function makeHTML(name, stylePath, body = '') {
     });
 
     // eslint-disable-next-line no-restricted-syntax
-    for (const warning of result.warnings) {
+    for (const warning of compiled.warnings) {
       // eslint-disable-next-line no-console
       console.error('XCSS WARNING:', warning.message);
     }
 
-    // XXX: XCSS/stylis doesn't remove the unnecessary trailing semicolon (;)
-    const css = result.css.replace(/;}/g, '}');
+    const { css } = csso.minify(compiled.css, {});
 
     // TODO: Not sure about the script "defer" attr
     const template = `<!doctype html>
