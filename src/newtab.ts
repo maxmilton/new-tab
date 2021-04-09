@@ -7,7 +7,7 @@ import { handleClick } from './utils';
 // TODO: Mention this when creating a types improvement PR to stage0
 declare global {
   interface HTMLElement {
-    /** Synthetic click event handler. */
+    /** stage0 synthetic click event handler. */
     __click(event: MouseEvent): void;
   }
 }

@@ -1,7 +1,6 @@
 import h from 'stage0';
 
 export interface LinkProps {
-  href: string;
   title: string;
   url: string;
 }

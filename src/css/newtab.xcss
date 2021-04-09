@@ -2,7 +2,7 @@
 * Themes
 */
 
-// Dark Theme (default)
+// Dark theme (default)
 :root {
   --s: 0 2px 4px rgba(0, 0, 17, 0.15); // shadow
   --b: #23252d; // background colour
@@ -12,7 +12,7 @@
   --c3: #383e4a; // icons, h2, muted text
 }
 
-// Light Theme
+// Light theme
 .l {
   --b: #fafafa; // background colour
   --t: #383a42; // text colour
@@ -21,7 +21,7 @@
   --c3: #dbdbdc; // icons, h2, muted text
 }
 
-// Rich Black Theme
+// Rich black theme
 .b {
   --s: 0 1px #201313; // shadow
   --b: #0a0000; // background colour
