@@ -1,17 +1,16 @@
 /* eslint-env node */
 /* eslint-disable @typescript-eslint/no-var-requires, import/no-extraneous-dependencies */
 
-'use strict'; // eslint-disable-line
-
-const csso = require('csso');
-const xcss = require('ekscss');
-const esbuild = require('esbuild');
-const fs = require('fs');
-const path = require('path');
-const manifest = require('./manifest.config.js');
+import csso from 'csso';
+import xcss from 'ekscss';
+import esbuild from 'esbuild';
+import fs from 'fs';
+import path from 'path';
+import manifest from './manifest.config.js';
 
 const mode = process.env.NODE_ENV;
 const dev = mode === 'development';
+const dirname = path.resolve(); // no __dirname in node ESM
 
 /** @param {Error?} err */
 function handleErr(err) {
@@ -19,7 +18,7 @@ function handleErr(err) {
 }
 
 /** @param {esbuild.BuildResult} buildResult */
-// this aproach is flaky and could cause issues later... but it works!
+// this approach is flaky and could cause issues later... but it works!
 function compressTemplateStrings(buildResult) {
   if (!buildResult.outputFiles) return;
 
@@ -44,6 +43,7 @@ esbuild
   .build({
     entryPoints: ['src/newtab.ts'],
     outfile: 'dist/newtab.js',
+    platform: 'browser',
     target: ['chrome88'],
     define: {
       'process.env.NODE_ENV': JSON.stringify(mode),
@@ -54,6 +54,7 @@ esbuild
     sourcemap: dev,
     watch: dev,
     write: dev,
+    logLevel: 'info',
   })
   .then(compressTemplateStrings)
   .catch(() => process.exit(1));
@@ -63,6 +64,7 @@ esbuild
   .build({
     entryPoints: ['src/settings.ts'],
     outfile: 'dist/settings.js',
+    platform: 'browser',
     target: ['chrome88'],
     define: {
       'process.env.NODE_ENV': JSON.stringify(mode),
@@ -73,6 +75,7 @@ esbuild
     sourcemap: dev,
     watch: dev,
     write: dev,
+    logLevel: 'info',
   })
   .then(compressTemplateStrings)
   .catch(() => process.exit(1));
@@ -85,14 +88,12 @@ esbuild
  * @param {string} body
  */
 function makeHTML(name, stylePath, body = '') {
-  fs.readFile(path.join(__dirname, stylePath), 'utf8', (err, data) => {
+  fs.readFile(path.join(dirname, stylePath), 'utf8', (err, data) => {
     if (err) throw err;
 
     const compiled = xcss.compile(data, {
       from: stylePath,
       map: false,
-      // empty array to disable default browser prefixer plugin
-      plugins: [],
     });
 
     // eslint-disable-next-line no-restricted-syntax
@@ -103,7 +104,6 @@ function makeHTML(name, stylePath, body = '') {
 
     const { css } = csso.minify(compiled.css, {});
 
-    // TODO: Not sure about the script "defer" attr
     const template = `<!doctype html>
 <meta charset=utf-8>
 <meta name=google value=notranslate>
@@ -112,11 +112,7 @@ function makeHTML(name, stylePath, body = '') {
 <script src="${name}.js" defer></script>
 ${body}`;
 
-    fs.writeFile(
-      path.join(__dirname, `dist/${name}.html`),
-      template,
-      handleErr,
-    );
+    fs.writeFile(path.join(dirname, `dist/${name}.html`), template, handleErr);
   });
 }
 
@@ -128,4 +124,4 @@ makeHTML(
 makeHTML('settings', 'src/css/settings.xcss');
 
 // Extension manifest
-fs.writeFile(path.join(__dirname, 'dist/manifest.json'), manifest, handleErr);
+fs.writeFile(path.join(dirname, 'dist/manifest.json'), manifest, handleErr);

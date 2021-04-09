@@ -8,11 +8,11 @@
   "author": "Max Milton <max@wearegenki.com>",
   "homepage": "https://github.com/MaxMilton/new-tab",
   "scripts": {
-    "build": "NODE_ENV=production node build.js",
-    "dev": "NODE_ENV=development node build.js",
-    "lint": "yarn run lint:js && yarn run lint:types",
+    "build": "NODE_ENV=production node build.mjs",
+    "dev": "NODE_ENV=development node build.mjs",
+    "lint": "yarn run lint:js && yarn run lint:ts",
     "lint:js": "eslint --ext ts,js .",
-    "lint:types": "tsc --noEmit",
+    "lint:ts": "tsc --noEmit",
     "prebuild": "rm -rf dist; cp -r static dist",
     "test": "echo 'TODO: WRITE TESTS'; exit 2"
   },

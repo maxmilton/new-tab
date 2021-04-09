@@ -7,6 +7,7 @@ module.exports = {
   root: true,
   parser: '@typescript-eslint/parser',
   parserOptions: {
+    extraFileExtensions: ['.mjs', '.cjs'],
     project: './tsconfig.json',
   },
   env: {
