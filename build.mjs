@@ -1,5 +1,5 @@
 /* eslint-env node */
-/* eslint-disable @typescript-eslint/no-var-requires, import/no-extraneous-dependencies */
+/* eslint-disable import/no-extraneous-dependencies */
 
 import csso from 'csso';
 import xcss from 'ekscss';
@@ -10,7 +10,7 @@ import manifest from './manifest.config.js';
 
 const mode = process.env.NODE_ENV;
 const dev = mode === 'development';
-const dirname = path.resolve(); // no __dirname in node ESM
+const dir = path.resolve(); // no __dirname in node ESM
 
 /** @param {Error?} err */
 function handleErr(err) {
@@ -88,7 +88,7 @@ esbuild
  * @param {string} body
  */
 function makeHTML(name, stylePath, body = '') {
-  fs.readFile(path.join(dirname, stylePath), 'utf8', (err, data) => {
+  fs.readFile(path.join(dir, stylePath), 'utf8', (err, data) => {
     if (err) throw err;
 
     const compiled = xcss.compile(data, {
@@ -109,10 +109,10 @@ function makeHTML(name, stylePath, body = '') {
 <meta name=google value=notranslate>
 <title>New Tab</title>
 <style>${css}</style>
-<script src="${name}.js" defer></script>
+<script src=${name}.js defer></script>
 ${body}`;
 
-    fs.writeFile(path.join(dirname, `dist/${name}.html`), template, handleErr);
+    fs.writeFile(path.join(dir, `dist/${name}.html`), template, handleErr);
   });
 }
 
@@ -124,4 +124,4 @@ makeHTML(
 makeHTML('settings', 'src/css/settings.xcss');
 
 // Extension manifest
-fs.writeFile(path.join(dirname, 'dist/manifest.json'), manifest, handleErr);
+fs.writeFile(path.join(dir, 'dist/manifest.json'), manifest, handleErr);
