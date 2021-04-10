@@ -3,18 +3,41 @@ import type { UserStorageData } from '../types';
 import { debounce, DEFAULT_ORDER } from '../utils';
 import { SearchResult } from './SearchResult';
 
+type Sections = Record<string, ReturnType<typeof SearchResult> | undefined>;
+
+function doSearch(text: string, section: Sections) {
+  const bookmarks = section.Bookmarks;
+  const history = section.History;
+  const openTabs = section['Open Tabs'];
+  const topSites = section['Top Sites'];
+
+  if (history) {
+    if (text) {
+      chrome.history.search({ text }, history.update);
+    } else {
+      history.update([]);
+    }
+  }
+
+  if (bookmarks) {
+    if (text) {
+      chrome.bookmarks.search(text, bookmarks.update);
+    } else {
+      bookmarks.update([]);
+    }
+  }
+
+  if (openTabs) openTabs.filter(text);
+  if (topSites) topSites.filter(text);
+}
+
+const debouncedDoSearch = debounce(doSearch);
+
 type SearchComponent = HNode<HTMLDivElement>;
 
 interface RefNodes {
   input: HTMLInputElement;
 }
-
-// TODO: Implement search and list filtering
-function doSearch(text: string) {
-  console.log('## SEARCH TEXT', text);
-}
-
-const debouncedDoSearch = debounce(doSearch);
 
 const view = h`
   <div class=container>
@@ -29,22 +52,14 @@ const view = h`
 export function Search(): SearchComponent {
   const root = view as SearchComponent;
   const { input } = view.collect(root) as RefNodes;
+  const section: Sections = {};
 
-  const section: Record<string, ReturnType<typeof SearchResult>> = {};
-
-  input.oninput = () => debouncedDoSearch(input.value);
+  input.oninput = () => debouncedDoSearch(input.value, section);
 
   input.onkeyup = (event) => {
     if (event.key === 'Escape') {
       input.value = '';
-    }
-  };
-
-  const update = () => {
-    if (section['Open Tabs']) {
-      chrome.tabs.query({}, (tabs) => {
-        section['Open Tabs'].update(tabs);
-      });
+      doSearch('', section);
     }
   };
 
@@ -56,19 +71,26 @@ export function Search(): SearchComponent {
       section[name] = root.appendChild(SearchResult(name, []));
     });
 
-    update();
+    const openTabs = section['Open Tabs'];
+    const topSites = section['Top Sites'];
 
-    if (section['Top Sites']) {
-      chrome.topSites.get((sites) => {
-        section['Top Sites'].update(sites);
-      });
+    if (openTabs) {
+      const updateOpenTabs = () => {
+        chrome.tabs.query({}, openTabs.update);
+      };
+
+      updateOpenTabs();
+
+      // Update tab list on tab events
+      chrome.tabs.onUpdated.addListener(updateOpenTabs);
+      chrome.tabs.onRemoved.addListener(updateOpenTabs);
+      chrome.tabs.onMoved.addListener(updateOpenTabs);
+    }
+
+    if (topSites) {
+      chrome.topSites.get(topSites.update);
     }
   });
-
-  // Update tab list on tab events
-  chrome.tabs.onUpdated.addListener(update);
-  chrome.tabs.onRemoved.addListener(update);
-  chrome.tabs.onMoved.addListener(update);
 
   return root;
 }

@@ -4,13 +4,14 @@ import { Link } from './Link';
 import { TabLink } from './TabLink';
 
 interface SearchResultComponent extends HTMLDivElement {
-  update(raw: any[]): void;
+  update: (this: void, data: any[]) => void;
+  filter: (text: string) => void;
 }
 
 interface RefNodes {
+  name: Text;
   list: HTMLDivElement;
   more: HTMLButtonElement;
-  title: Text;
 }
 
 const DEFAULT_RESULTS_COUNT = 10;
@@ -18,7 +19,7 @@ const MORE_RESULTS_COUNT = 50;
 
 const view = h`
   <div style=display:none>
-    <h2>#title</h2>
+    <h2 #name></h2>
 
     <div #list></div>
 
@@ -26,37 +27,51 @@ const view = h`
   </div>
 `;
 
-export function SearchResult(name: string, raw: any[]): SearchResultComponent {
+export function SearchResult<T extends { title: string; url: string }>(
+  sectionName: string,
+  raw: T[],
+): SearchResultComponent {
   const root = view.cloneNode(true) as SearchResultComponent;
-  const { title, list, more } = view.collect(root) as RefNodes;
+  const { name, list, more } = view.collect(root) as RefNodes;
+  const isOpenTabs = sectionName === 'Open Tabs';
 
-  const isOpenTabs = name === 'Open Tabs';
-
-  title.nodeValue = name;
+  name.textContent = sectionName;
 
   // eslint-disable-next-line @typescript-eslint/naming-convention
   let _raw = raw;
-  let renderedData: any[] = [];
+  let renderedData: T[] = [];
 
-  const update = (newRaw: any[], showCount = DEFAULT_RESULTS_COUNT) => {
-    const partial = isOpenTabs ? newRaw : newRaw.slice(0, showCount);
-    const rawLength = newRaw.length;
+  const renderList = (data: T[], showCount = DEFAULT_RESULTS_COUNT) => {
+    const partial = isOpenTabs ? data : data.slice(0, showCount);
+    const rawLength = data.length;
 
     reuseNodes(list, renderedData, partial, isOpenTabs ? TabLink : Link);
 
-    _raw = newRaw;
     renderedData = partial;
 
     root.style.display = rawLength ? 'block' : 'none';
     more.style.display = isOpenTabs || showCount >= rawLength ? 'none' : 'block';
   };
 
-  root.update = update;
-  update(raw);
+  const update = (newRaw: T[]) => {
+    renderList(newRaw);
 
-  more.__click = () => {
-    update(_raw, renderedData.length + MORE_RESULTS_COUNT);
+    _raw = newRaw;
   };
+
+  root.update = update;
+
+  root.filter = (text) => renderList(
+    _raw.filter(
+      ({ title, url }) => `${url.slice(url.indexOf('://'))}/${title}`
+        .toLowerCase()
+        .indexOf(text.toLowerCase()) > -1,
+    ),
+  );
+
+  more.__click = () => renderList(_raw, renderedData.length + MORE_RESULTS_COUNT);
+
+  update(raw);
 
   return root;
 }
