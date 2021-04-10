@@ -89,8 +89,6 @@ function Item(item: string, scope: ItemScope): ItemComponent {
 
 function save(order: string[], theme: string) {
   chrome.storage.local.set({
-    // cheap deep compare using JSON serialisation
-    // o: JSON.stringify(order) === JSON.stringify(DEFAULT_ORDER) ? null : order,
     o: order,
     t: theme,
   });
@@ -147,7 +145,7 @@ function Settings() {
     },
   };
 
-  function updateOrder(order: string[]) {
+  function updateOrder(order: typeof DEFAULT_ORDER) {
     if (order !== state.order) {
       reuseNodes(
         o,
