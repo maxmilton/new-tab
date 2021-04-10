@@ -48,9 +48,7 @@ export function Menu(): MenuComponent {
   const root = view as MenuComponent;
   const { s } = view.collect(root) as RefNodes;
 
-  s.__click = () => {
-    chrome.runtime.openOptionsPage();
-  };
+  s.__click = () => chrome.runtime.openOptionsPage();
 
   return root;
 }

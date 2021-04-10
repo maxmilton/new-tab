@@ -1,4 +1,4 @@
-import { BookmarkNode } from './BookmarkNode';
+import { BookmarkNode, Folder } from './BookmarkNode';
 
 type BookmarkBarComponent = HTMLDivElement;
 
@@ -24,14 +24,12 @@ export function BookmarkBar(): BookmarkBarComponent {
     const overflow = bookmarks?.slice(maxNodes);
 
     if (overflow?.length) {
-      root.appendChild(
-        BookmarkNode({ children: overflow, end: true, title: '>>' }),
-      );
+      root.appendChild(Folder({ children: overflow, end: true, title: '>>' }));
     }
 
     if (otherBookmarks.children?.length) {
       otherBookmarks.end = true;
-      root.appendChild(BookmarkNode(otherBookmarks));
+      root.appendChild(Folder(otherBookmarks));
     }
   });
 

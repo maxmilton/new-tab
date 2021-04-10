@@ -78,7 +78,7 @@ function SubFolder(
 const folderView = document.createElement('div');
 folderView.className = 'item';
 
-function Folder(item: FolderProps): FolderComponent {
+export function Folder(item: FolderProps): FolderComponent {
   const root = folderView.cloneNode(true) as FolderComponent;
 
   // TODO: Keep? Implement "Other Bookmarks"

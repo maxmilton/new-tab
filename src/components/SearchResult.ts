@@ -33,7 +33,6 @@ export function SearchResult<T extends LinkProps>(
   const root = view.cloneNode(true) as SearchResultComponent;
   const { name, list, more } = view.collect(root) as RefNodes;
   const isOpenTabs = sectionName === 'Open Tabs';
-
   let rawData: T[];
   let renderedLength: number;
 
@@ -67,9 +66,9 @@ export function SearchResult<T extends LinkProps>(
     ),
   );
 
-  more.__click = () => renderList(rawData, renderedLength + MORE_RESULTS_COUNT);
-
   name.textContent = sectionName;
+
+  more.__click = () => renderList(rawData, renderedLength + MORE_RESULTS_COUNT);
 
   update(data);
 
