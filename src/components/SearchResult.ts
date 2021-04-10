@@ -1,6 +1,5 @@
 import h from 'stage0';
-import reuseNodes from 'stage0/reuseNodes';
-import { Link } from './Link';
+import { Link, LinkProps } from './Link';
 import { TabLink } from './TabLink';
 
 interface SearchResultComponent extends HTMLDivElement {
@@ -27,7 +26,7 @@ const view = h`
   </div>
 `;
 
-export function SearchResult<T extends { title: string; url: string }>(
+export function SearchResult<T extends LinkProps>(
   sectionName: string,
   raw: T[],
 ): SearchResultComponent {
@@ -35,22 +34,24 @@ export function SearchResult<T extends { title: string; url: string }>(
   const { name, list, more } = view.collect(root) as RefNodes;
   const isOpenTabs = sectionName === 'Open Tabs';
 
-  name.textContent = sectionName;
-
   // eslint-disable-next-line @typescript-eslint/naming-convention
-  let _raw = raw;
-  let renderedData: T[] = [];
+  let _raw: T[];
+  let renderedLength: number;
 
   const renderList = (data: T[], showCount = DEFAULT_RESULTS_COUNT) => {
     const partial = isOpenTabs ? data : data.slice(0, showCount);
-    const rawLength = data.length;
+    renderedLength = partial.length;
 
-    reuseNodes(list, renderedData, partial, isOpenTabs ? TabLink : Link);
+    // Remove all child nodes
+    list.textContent = '';
 
-    renderedData = partial;
+    // eslint-disable-next-line no-restricted-syntax
+    for (const item of partial) {
+      list.appendChild((isOpenTabs ? TabLink : Link)(item));
+    }
 
-    root.style.display = rawLength ? 'block' : 'none';
-    more.style.display = isOpenTabs || showCount >= rawLength ? 'none' : 'block';
+    root.style.display = renderedLength ? 'block' : 'none';
+    more.style.display = isOpenTabs || renderedLength >= data.length ? 'none' : 'block';
   };
 
   const update = (newRaw: T[]) => {
@@ -63,13 +64,13 @@ export function SearchResult<T extends { title: string; url: string }>(
 
   root.filter = (text) => renderList(
     _raw.filter(
-      ({ title, url }) => `${url.slice(url.indexOf('://'))}/${title}`
-        .toLowerCase()
-        .indexOf(text.toLowerCase()) > -1,
+      ({ title, url }) => `${url}/${title}`.toLowerCase().indexOf(text.toLowerCase()) > -1,
     ),
   );
 
-  more.__click = () => renderList(_raw, renderedData.length + MORE_RESULTS_COUNT);
+  more.__click = () => renderList(_raw, renderedLength + MORE_RESULTS_COUNT);
+
+  name.textContent = sectionName;
 
   update(raw);
 

@@ -1,13 +1,17 @@
 import { Link, LinkProps, LinkComponent } from './Link';
 
-interface TabLinkProps extends LinkProps {
+export interface TabLinkProps extends LinkProps {
   /** Tab ID. */
   id: number;
   windowId: number;
 }
 
-function handleTabClick({ id, windowId }: TabLinkProps) {
-  return (_event: MouseEvent) => {
+export function TabLink(props: TabLinkProps): LinkComponent {
+  const root = Link(props);
+
+  root.__click = () => {
+    const { id, windowId } = props;
+
     // Switch to the clicked tab
     chrome.tabs.update(id, { active: true });
 
@@ -18,17 +22,11 @@ function handleTabClick({ id, windowId }: TabLinkProps) {
       }
     });
 
-    // Close this "new-tab" tab
+    // Close current "new-tab" page
     chrome.tabs.getCurrent((currentTab) => {
       chrome.tabs.remove(currentTab!.id!);
     });
   };
-}
-
-export function TabLink(props: TabLinkProps): LinkComponent {
-  const root = Link(props);
-
-  root.__click = handleTabClick(props);
 
   return root;
 }

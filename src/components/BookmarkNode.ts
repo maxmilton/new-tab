@@ -59,7 +59,6 @@ function SubFolder(
       // FIXME:
       // root.style.right = parentPos.right + 'px';
       root.style.right = '0px';
-      console.log('@@ root', root);
     } else {
       root.style.left = `${parentPos.left}px`;
     }
