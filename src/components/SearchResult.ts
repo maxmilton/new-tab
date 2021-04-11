@@ -1,8 +1,8 @@
-import h from 'stage0';
+import h, { HNode } from 'stage0';
 import { Link, LinkProps } from './Link';
 import { TabLink } from './TabLink';
 
-interface SearchResultComponent extends HTMLDivElement {
+interface SearchResultComponent extends HNode<HTMLDivElement> {
   update: (this: void, newData: any[]) => void;
   filter: (text: string) => void;
 }
@@ -54,7 +54,6 @@ export function SearchResult<T extends LinkProps>(
 
   const update = (newData: T[]) => {
     renderList(newData);
-
     rawData = newData;
   };
 

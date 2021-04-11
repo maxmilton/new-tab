@@ -18,16 +18,14 @@ function handleErr(err) {
 }
 
 /** @param {esbuild.BuildResult} buildResult */
-// this approach is flaky and could cause issues later... but it works!
 function compressTemplateStrings(buildResult) {
   if (!buildResult.outputFiles) return;
 
-  const filePath = buildResult.outputFiles[0].path;
-  const code = buildResult.outputFiles[0].text
-    // reduce multiple whitespace down to a single space
-    .replace(/\s{2,}/gm, ' ')
-    // convert remaining whitespace characters into a space
-    .replace(/\s/gm, ' ')
+  const file = buildResult.outputFiles[0];
+  // TODO: Would be nice to have an AST and only mange template literal strings
+  const code = file.text
+    // reduce whitespace to a single space
+    .replace(/\s+/gm, ' ')
     // remove whitespace after and before tags
     .replace(/> /g, '>')
     .replace(/ </g, '<')
@@ -35,7 +33,7 @@ function compressTemplateStrings(buildResult) {
     .replace(/` </g, '`<')
     .replace(/> `/g, '>`');
 
-  fs.writeFile(filePath, code, 'utf8', handleErr);
+  fs.writeFile(file.path, code, 'utf8', handleErr);
 }
 
 // New Tab app
@@ -85,7 +83,7 @@ esbuild
  *
  * @param {string} name
  * @param {string} stylePath
- * @param {string} body
+ * @param {string} [body]
  */
 function makeHTML(name, stylePath, body = '') {
   fs.readFile(path.join(dir, stylePath), 'utf8', (err, data) => {

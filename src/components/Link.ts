@@ -1,11 +1,11 @@
-import h from 'stage0';
+import h, { HNode } from 'stage0';
 
 export interface LinkProps {
   title: string;
   url: string;
 }
 
-export type LinkComponent = HTMLAnchorElement;
+export type LinkComponent = HNode<HTMLAnchorElement>;
 
 interface RefNodes {
   img: HTMLImageElement;

@@ -6,7 +6,7 @@
 
 # New Tab
 
-A high performance new tab page that gets you where you need to go faster. Utilises the latest tools and tech, packaged into a Chrome browser extension.
+A high performance browser new tab page that gets you where you need to go faster. Utilises the latest tools and tech, packaged into a Chrome browser extension.
 
 [![Add to Chrome](https://storage.googleapis.com/chrome-gcs-uploader.appspot.com/image/WlD8wC6g8khYWPJUsQceQkhXSlv1/mPGKYBIR2uCP0ApchDXE.png)](https://chrome.google.com/webstore/detail/new-tab/cpcibnbdmpmcmnkhoiilpnlaepkepknb)
 
@@ -14,14 +14,14 @@ A high performance new tab page that gets you where you need to go faster. Utili
 
 I was left frustrated by the default Google Chrome new tab page experience. The "top sites" feature quickly outgrew its usefulness and I found myself using bookmarks instead every time. I never used the Google web search input either, as the search bar is all I need. I wondered... "If I could design my own new tab what would it look like?"... enter the `New Tab` extension.
 
-Originally an experimental project to give me a chance for me to play with the Chrome browser APIs and explore web performance optimisations. This grew into something that actually improved my productivity and so, now `New Tab` is available for anyone to use.
+Originally an experimental project to give me a chance for me to play with the Chrome browser APIs and explore web performance optimisations. It grew into something that actually improved my productivity and so, now `New Tab` is available for anyone to use.
 
 ### Features
 
 - Fastest loading of any new tab page with all the basic features.
 - Minimal design aesthetic with multiple themes.
-- See a list of your open tabs.
-- Quickly search open tabs, bookmarks, history, and top sites in one place.
+- List of your open tabs.
+- Search open tabs, bookmarks, history, and top sites in one place.
 - Simple bookmarks bar.
 - Links to common places in your browser.
 

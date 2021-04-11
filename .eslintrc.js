@@ -3,8 +3,10 @@
 const OFF = 0;
 const WARN = 1;
 
+/** @type {import('eslint').Linter.Config} */
 module.exports = {
   root: true,
+  reportUnusedDisableDirectives: true,
   parser: '@typescript-eslint/parser',
   parserOptions: {
     extraFileExtensions: ['.mjs', '.cjs'],

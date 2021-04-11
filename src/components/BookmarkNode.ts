@@ -6,21 +6,14 @@
 
 // FIXME: max-height (for scroll) needs to be dynamic depending on where the folder opens from
 
-import { Link, LinkProps, LinkComponent } from './Link';
+import { Link, LinkComponent, LinkProps } from './Link';
 
-type FolderComponent = HTMLDivElement;
 type SubFolderComponent = HTMLDivElement;
 
 interface SubFolderProps {
   children: chrome.bookmarks.BookmarkTreeNode[];
   level: number;
   parent: Element;
-}
-
-interface FolderProps extends chrome.bookmarks.BookmarkTreeNode {
-  children: chrome.bookmarks.BookmarkTreeNode[];
-  end?: boolean;
-  level?: number;
 }
 
 type SubFolderScope = {
@@ -73,6 +66,14 @@ function SubFolder(
   root.onmouseleave = scope.resetTimer;
 
   return root;
+}
+
+type FolderComponent = HTMLDivElement;
+
+interface FolderProps extends chrome.bookmarks.BookmarkTreeNode {
+  children: chrome.bookmarks.BookmarkTreeNode[];
+  end?: boolean;
+  level?: number;
 }
 
 const folderView = document.createElement('div');
