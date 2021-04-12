@@ -1,6 +1,7 @@
 /* eslint-disable @typescript-eslint/no-var-requires */
+/* eslint-disable import/no-extraneous-dependencies */
 
-const { gitDescribe } = require('@minna-ui/utils');
+const { gitRef } = require('git-ref');
 const pkg = require('./package.json');
 
 const manifest = {
@@ -10,7 +11,7 @@ const manifest = {
   description:
     '⚡ A high performance new tab page that gets you where you need to go faster.',
   version: pkg.version,
-  version_name: gitDescribe(),
+  version_name: gitRef(),
   homepage_url: pkg.homepage,
   icons: {
     16: 'icon16.png',

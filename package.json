@@ -20,7 +20,6 @@
     "stage0": "0.0.25"
   },
   "devDependencies": {
-    "@minna-ui/utils": "0.36.0",
     "@types/chrome": "0.0.134",
     "@types/csso": "3.5.1",
     "@types/node": "14.14.37",
@@ -33,6 +32,7 @@
     "eslint": "7.24.0",
     "eslint-config-airbnb-typescript": "12.3.1",
     "eslint-plugin-import": "2.22.1",
+    "git-ref": "0.0.2",
     "prettier": "2.2.1",
     "typescript": "4.2.4"
   },
