@@ -19,7 +19,7 @@ Originally an experimental project to give me a chance for me to play with the C
 ### Features
 
 - Fastest loading of any new tab page with all the basic features.
-- Minimal design aesthetic with multiple themes.
+- Distraction-free, minimal design aesthetic with multiple themes.
 - List of your open tabs.
 - Search open tabs, bookmarks, history, and top sites in one place.
 - Simple bookmarks bar.

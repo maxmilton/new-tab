@@ -12,16 +12,13 @@ interface RefNodes {
   title: Text;
 }
 
-const linkView = h`
-  <a>
-    <img #img />
-    #title
-  </a>
+const view = h`
+  <a><img #img />#title</a>
 `;
 
 export function Link(item: LinkProps): LinkComponent {
-  const root = linkView.cloneNode(true) as LinkComponent;
-  const { img, title } = linkView.collect(root) as RefNodes;
+  const root = view.cloneNode(true) as LinkComponent;
+  const { img, title } = view.collect(root) as RefNodes;
 
   root.href = item.url;
   root.title = item.title;

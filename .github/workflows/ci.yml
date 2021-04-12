@@ -10,7 +10,7 @@ jobs:
           node-version: 15
       - run: yarn install --frozen-lockfile
       - run: yarn run build
-      - run: yarn run test-ci
+      - run: yarn run test
         env:
           CI: true
       - name: report coverage
@@ -27,5 +27,4 @@ jobs:
         with:
           node-version: 15
       - run: yarn install --frozen-lockfile
-      - run: yarn run build
       - run: yarn run lint
