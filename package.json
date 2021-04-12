@@ -11,10 +11,10 @@
     "build": "NODE_ENV=production node build.mjs",
     "dev": "NODE_ENV=development node build.mjs",
     "lint": "yarn run lint:js && yarn run lint:ts",
-    "lint:js": "eslint --ext ts,js .",
+    "lint:js": "eslint --ignore-path .gitignore --ext .ts,.js,.mjs,.cjs .",
     "lint:ts": "tsc --noEmit",
     "prebuild": "rm -rf dist; cp -r static dist",
-    "test": "echo 'TODO: WRITE TESTS'; exit 2"
+    "test": "echo 'TODO: Testing'; exit 0"
   },
   "dependencies": {
     "stage0": "0.0.25"
