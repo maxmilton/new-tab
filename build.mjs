@@ -1,9 +1,9 @@
-/* eslint-env node */
 /* eslint-disable import/no-extraneous-dependencies */
 
 import csso from 'csso';
 import xcss from 'ekscss';
 import esbuild from 'esbuild';
+import { minifyTemplates, writeFiles } from 'esbuild-minify-templates';
 import fs from 'fs';
 import path from 'path';
 import manifest from './manifest.config.js';
@@ -15,25 +15,6 @@ const dir = path.resolve(); // no __dirname in node ESM
 /** @param {Error?} err */
 function handleErr(err) {
   if (err) throw err;
-}
-
-/** @param {esbuild.BuildResult} buildResult */
-function compressTemplateStrings(buildResult) {
-  if (!buildResult.outputFiles) return;
-
-  const file = buildResult.outputFiles[0];
-  // TODO: Would be nice to have an AST and only mange template literal strings
-  const code = file.text
-    // reduce whitespace to a single space
-    .replace(/\s+/gm, ' ')
-    // remove whitespace after and before tags
-    .replace(/> /g, '>')
-    .replace(/ </g, '<')
-    // remove whitespace at start and end of template string
-    .replace(/` </g, '`<')
-    .replace(/> `/g, '>`');
-
-  fs.writeFile(file.path, code, 'utf8', handleErr);
 }
 
 // New Tab app
@@ -54,8 +35,12 @@ esbuild
     write: dev,
     logLevel: 'info',
   })
-  .then(compressTemplateStrings)
-  .catch(() => process.exit(1));
+  .then(minifyTemplates)
+  .then(writeFiles)
+  .catch((err) => {
+    console.error(err);
+    process.exit(1);
+  });
 
 // Settings app
 esbuild
@@ -75,8 +60,12 @@ esbuild
     write: dev,
     logLevel: 'info',
   })
-  .then(compressTemplateStrings)
-  .catch(() => process.exit(1));
+  .then(minifyTemplates)
+  .then(writeFiles)
+  .catch((err) => {
+    console.error(err);
+    process.exit(1);
+  });
 
 /**
  * Construct a HTML file and save it to disk.
