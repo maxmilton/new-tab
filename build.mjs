@@ -1,4 +1,9 @@
+/* eslint-disable @typescript-eslint/no-unsafe-assignment */
+/* eslint-disable @typescript-eslint/restrict-template-expressions */
+/* eslint-disable import/extensions */
 /* eslint-disable import/no-extraneous-dependencies */
+/* eslint-disable no-console */
+/* eslint-disable no-restricted-syntax */
 
 import csso from 'csso';
 import xcss from 'ekscss';
@@ -83,9 +88,7 @@ function makeHTML(name, stylePath, body = '') {
       map: false,
     });
 
-    // eslint-disable-next-line no-restricted-syntax
     for (const warning of compiled.warnings) {
-      // eslint-disable-next-line no-console
       console.error('XCSS WARNING:', warning.message);
     }
 
@@ -99,7 +102,7 @@ function makeHTML(name, stylePath, body = '') {
 <script src=${name}.js defer></script>
 ${body}`;
 
-    fs.writeFile(path.join(dir, `dist/${name}.html`), template, handleErr);
+    fs.writeFile(path.join(dir, 'dist', `${name}.html`), template, handleErr);
   });
 }
 
@@ -111,4 +114,4 @@ makeHTML(
 makeHTML('settings', 'src/css/settings.xcss');
 
 // Extension manifest
-fs.writeFile(path.join(dir, 'dist/manifest.json'), manifest, handleErr);
+fs.writeFile(path.join(dir, 'dist', 'manifest.json'), manifest, handleErr);
