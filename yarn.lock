@@ -566,10 +566,10 @@ es-to-primitive@^1.2.1:
     is-date-object "^1.0.1"
     is-symbol "^1.0.2"
 
-esbuild-minify-templates@0.0.2:
-  version "0.0.2"
-  resolved "https://registry.yarnpkg.com/esbuild-minify-templates/-/esbuild-minify-templates-0.0.2.tgz#555e94dbef9c931097746b4b0ac3cb7d4172eb4b"
-  integrity sha512-tUqXaCwxUvA4MPf7c/TQB5TPdSWkUY+FTvxnGFc+Fj88SwtvTmYytP8aHox/5M14VDm8n/5fll3r8M48T28B7w==
+esbuild-minify-templates@0.0.3:
+  version "0.0.3"
+  resolved "https://registry.yarnpkg.com/esbuild-minify-templates/-/esbuild-minify-templates-0.0.3.tgz#16210823423fe4af05840ac76b027a48945e9ccf"
+  integrity sha512-USQsqMs3msV9qiVAowSrPTNOf+sbrTv0P6uKG75C8hWV0Q80tFLaMJ4Cuv3aefX+SSb11Q7Kp19jQh4Xi8i/yA==
   dependencies:
     "@ampproject/remapping" "^1.0.1"
     astray "^1.1.1"
