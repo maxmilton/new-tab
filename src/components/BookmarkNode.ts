@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/unbound-method */
 // FIXME: Calculate if the folder will be outside the viewport and render in a better place
 
 // FIXME: Hide subfolder imidiately if another is openned to prevent overlap
@@ -58,7 +59,10 @@ function SubFolder(
   }
 
   children.forEach((item) => {
+    // @ts-expect-error - FIXME
+    // eslint-disable-next-line no-param-reassign
     item.level = level + 1;
+    // @ts-expect-error - FIXME
     root.appendChild(BookmarkNode(item));
   });
 
@@ -133,5 +137,6 @@ export function Folder(item: FolderProps): FolderComponent {
 export function BookmarkNode(
   item: FolderProps | LinkProps,
 ): FolderComponent | LinkComponent {
+  // @ts-expect-error - FIXME
   return (item.children ? Folder : Link)(item);
 }

@@ -10,7 +10,8 @@
   "scripts": {
     "build": "NODE_ENV=production node build.mjs",
     "dev": "NODE_ENV=development node build.mjs",
-    "lint": "yarn run lint:js && yarn run lint:ts",
+    "lint": "yarn lint:css && yarn lint:js && yarn lint:ts",
+    "lint:css": "echo 'TODO: CSS linting'; exit 0",
     "lint:js": "eslint --ignore-path .gitignore --ext .ts,.js,.mjs,.cjs .",
     "lint:ts": "tsc --noEmit",
     "prebuild": "rm -rf dist; cp -r static dist",

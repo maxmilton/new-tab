@@ -1,7 +1,9 @@
 // FIXME: Submit a PR to stage0 to fix hElement extends from Node because it can
 // return a Text as well as HTMLElement
 //  ↳ Also include hElement > HNode + allow different base extends type
-//  ↳ Also include ability to pass through HNode type as h<T> -- ACTUALLY no, it's not so important since <node>.cloneNode() doesn't pass through the node type :'(
+//  ↳ Also include ability to pass through HNode type as h<T> -- ACTUALLY no,
+//    it's not so important since <node>.cloneNode() doesn't pass through the
+//    node type :'(
 //  ↳ Also include RefObj item as Node fix
 declare module 'stage0' {
   declare class Ref {
@@ -28,7 +30,8 @@ declare module 'stage0' {
   ): HNode;
 }
 
-// FIXME: Submit a PR to stage0 to fix named export + change "name" to "type" to be consistent with lib.dom.d.ts naming
+// FIXME: Submit a PR to stage0 to fix named export + change "name" to "type"
+// to be consistent with lib.dom.d.ts naming
 declare module 'stage0/syntheticEvents' {
   export function setupSyntheticEvent(type: string): void;
 }

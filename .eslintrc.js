@@ -28,4 +28,12 @@ module.exports = {
     // stage0 uses underscores in synthetic event handler names
     'no-underscore-dangle': OFF,
   },
+  overrides: [
+    {
+      files: ['.eslintrc.js'],
+      parserOptions: {
+        createDefaultProgram: true,
+      },
+    },
+  ],
 };

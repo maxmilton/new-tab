@@ -43,45 +43,46 @@ function Item(item: string, scope: ItemScope): ItemComponent {
   const root = itemView.cloneNode(true) as ItemComponent;
   const { name, rm } = itemView.collect(root) as ItemRefNodes;
 
-  let _item = item;
-  name.nodeValue = _item;
+  let currentItem = item;
+  name.nodeValue = currentItem;
 
   root.ondragstart = (event) => {
-    event.dataTransfer!.setData('from', scope.indexOf(_item));
-    event.target!.classList.add('dragging');
+    event.dataTransfer!.setData('from', `${scope.indexOf(currentItem)}`);
+    (event.target as ItemComponent).classList.add('dragging');
   };
 
   root.ondragend = (event) => {
-    event.target!.classList.remove('dragging');
+    (event.target as ItemComponent).classList.remove('dragging');
   };
 
   root.ondragover = (event) => {
     event.preventDefault();
+    // eslint-disable-next-line no-param-reassign
     event.dataTransfer!.dropEffect = 'move';
   };
 
   root.ondragenter = (event) => {
-    event.target!.classList.add('over');
+    (event.target as ItemComponent).classList.add('over');
   };
 
   root.ondragleave = (event) => {
-    event.target!.classList.remove('over');
+    (event.target as ItemComponent).classList.remove('over');
   };
 
   root.ondrop = (event) => {
     event.preventDefault();
     const from = event.dataTransfer!.getData('from');
-    scope.moveItem(from, scope.indexOf(_item));
+    scope.moveItem(+from, scope.indexOf(currentItem));
 
     // Remove class in case the `dragleave` event didn't fire
-    event.target!.classList.remove('over');
+    (event.target as ItemComponent).classList.remove('over');
   };
 
-  rm.onclick = () => scope.removeItem(scope.indexOf(_item));
+  rm.onclick = () => scope.removeItem(scope.indexOf(currentItem));
 
   root.update = (newItem) => {
     name.nodeValue = newItem;
-    _item = newItem;
+    currentItem = newItem;
   };
 
   return root;
