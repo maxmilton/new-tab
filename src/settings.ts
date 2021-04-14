@@ -168,8 +168,8 @@ function Settings() {
     }
   }
 
-  t.onchange = (event) => {
-    updateTheme(event.target!.value);
+  t.onchange = () => {
+    updateTheme(t.value);
   };
 
   reset.onclick = () => {

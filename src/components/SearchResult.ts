@@ -45,6 +45,7 @@ export function SearchResult<T extends LinkProps>(
 
     // eslint-disable-next-line no-restricted-syntax
     for (const item of partial) {
+      // @ts-expect-error - FIXME
       list.appendChild((isOpenTabs ? TabLink : Link)(item));
     }
 

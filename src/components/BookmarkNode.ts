@@ -23,6 +23,7 @@ type SubFolderScope = {
 };
 
 const CLOSE_DELAY_MS = 400;
+// @ts-expect-error - FIXME: Use this var or remove it
 let openFolders = 0;
 
 const subFolderView = document.createElement('div');
@@ -62,7 +63,6 @@ function SubFolder(
     // @ts-expect-error - FIXME
     // eslint-disable-next-line no-param-reassign
     item.level = level + 1;
-    // @ts-expect-error - FIXME
     root.appendChild(BookmarkNode(item));
   });
 
@@ -75,7 +75,7 @@ function SubFolder(
 type FolderComponent = HTMLDivElement;
 
 interface FolderProps extends chrome.bookmarks.BookmarkTreeNode {
-  children: chrome.bookmarks.BookmarkTreeNode[];
+  children?: chrome.bookmarks.BookmarkTreeNode[];
   end?: boolean;
   level?: number;
 }
@@ -116,7 +116,8 @@ export function Folder(item: FolderProps): FolderComponent {
   root.onmouseenter = () => {
     scope.clearTimer();
 
-    if (!subfolder) {
+    // TODO: Remove `item.children` here and instead of doing nothing show an "empty" folder
+    if (!subfolder && item.children) {
       subfolder = SubFolder(
         {
           children: item.children,
