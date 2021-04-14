@@ -15,7 +15,7 @@
     "lint:js": "eslint --ignore-path .gitignore --ext .ts,.js,.mjs,.cjs .",
     "lint:ts": "tsc --noEmit",
     "prebuild": "rm -rf dist; cp -r static dist",
-    "prepare": "yarn run lint && yarn run test && yarn run build && cd dist && zip ../chrome-extension.zip *",
+    "prepare": "sh -c 'test -z \"$(git status --porcelain)\"' && yarn run lint && yarn run test && yarn run build && cd dist && zip ../chrome-extension.zip *",
     "test": "echo 'TODO: Testing'; exit 0"
   },
   "dependencies": {
