@@ -1,5 +1,6 @@
 *.log
-dist/
-node_modules/
-package-lock.json*
-test/coverage/
+/*.zip
+/dist/
+/node_modules/
+/package-lock.json*
+/test/coverage/
