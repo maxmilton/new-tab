@@ -4,8 +4,8 @@
   "private": true,
   "description": "⚡ A high performance new tab page that gets you where you need to go faster.",
   "license": "MIT",
-  "repository": "MaxMilton/new-tab",
-  "author": "Max Milton <max@wearegenki.com>",
+  "repository": "maxmilton/new-tab",
+  "author": "Max Milton <max@happycode.ltd>",
   "homepage": "https://github.com/MaxMilton/new-tab",
   "scripts": {
     "build": "NODE_ENV=production node build.mjs",
