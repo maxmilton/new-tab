@@ -30,7 +30,7 @@
     "@wearegenki/renovate-config": "1.0.0",
     "csso": "4.2.0",
     "ekscss": "0.0.1",
-    "esbuild": "0.11.10",
+    "esbuild": "0.11.11",
     "esbuild-minify-templates": "0.0.3",
     "eslint": "7.24.0",
     "eslint-config-airbnb-typescript": "12.3.1",
