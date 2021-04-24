@@ -38,14 +38,11 @@ esbuild
     sourcemap: dev,
     watch: dev,
     write: dev,
-    logLevel: 'info',
+    logLevel: 'debug',
   })
   .then(minifyTemplates)
   .then(writeFiles)
-  .catch((err) => {
-    console.error(err);
-    process.exit(1);
-  });
+  .catch(handleErr);
 
 // Settings app
 esbuild
@@ -63,14 +60,11 @@ esbuild
     sourcemap: dev,
     watch: dev,
     write: dev,
-    logLevel: 'info',
+    logLevel: 'debug',
   })
   .then(minifyTemplates)
   .then(writeFiles)
-  .catch((err) => {
-    console.error(err);
-    process.exit(1);
-  });
+  .catch(handleErr);
 
 /**
  * Construct a HTML file and save it to disk.
