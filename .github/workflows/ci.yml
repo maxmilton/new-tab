@@ -11,11 +11,9 @@ jobs:
       - run: yarn install --frozen-lockfile
       - run: yarn run build
       - run: yarn run test
-        env:
-          CI: true
-      # - name: report coverage
+      # - name: Report coverage
       #   run: |
-      #     curl -L https://codeclimate.com/downloads/test-reporter/test-reporter-latest-linux-amd64 > ./cc-test-reporter
+      #     curl -Lo ./cc-test-reporter https://codeclimate.com/downloads/test-reporter/test-reporter-latest-linux-amd64
       #     chmod +x ./cc-test-reporter
       #     ./cc-test-reporter format-coverage -t lcov -o coverage/codeclimate.json test/coverage/lcov.info
       #     ./cc-test-reporter upload-coverage --id ${{ secrets.CC_TEST_REPORTER_ID }} || true
