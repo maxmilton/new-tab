@@ -468,10 +468,10 @@ doctrine@^3.0.0:
   dependencies:
     esutils "^2.0.2"
 
-ekscss@0.0.1:
-  version "0.0.1"
-  resolved "https://registry.yarnpkg.com/ekscss/-/ekscss-0.0.1.tgz#e4ff604d8fc35fd3b41dd47b5561ad3dfb9a4b47"
-  integrity sha512-s5M6wP9BbJR9DRKbj441nw5CP+M8jpzcqBy86V1RNUqHZxWcPxufRIqWCafKP/fTH1j7nZD7UQ5xzj2N7j917Q==
+ekscss@0.0.3:
+  version "0.0.3"
+  resolved "https://registry.yarnpkg.com/ekscss/-/ekscss-0.0.3.tgz#248d88a32d598666ebdf385bc7837b0eff141609"
+  integrity sha512-FVzpD0x8M7VQR/gDgDS47oKkmkPRLc8kjGJReUJyNnvSCNS6h0jq9Zd+WRUCL95JGMdr21Hn7JHCg9rNcO3uFQ==
   dependencies:
     "@types/stylis" "^4.0.0"
     source-map "^0.7.3"
@@ -537,10 +537,10 @@ esbuild-minify-templates@0.0.3:
     magic-string "^0.25.7"
     meriyah "^4.1.5"
 
-esbuild@0.11.16:
-  version "0.11.16"
-  resolved "https://registry.yarnpkg.com/esbuild/-/esbuild-0.11.16.tgz#435f00474fb21e70f59a545b85e4cfc7ba106485"
-  integrity sha512-34ZWjo4ouvM5cDe7uRoM9GFuMyEmpH9fnVYmomvS1cq9ED9d/0ZG1r+p4P2VbX7ihjv36zA2SWTmP8Zmt/EANA==
+esbuild@0.11.17:
+  version "0.11.17"
+  resolved "https://registry.yarnpkg.com/esbuild/-/esbuild-0.11.17.tgz#d2a929a918864ab3642178f4c0dc84784f863b53"
+  integrity sha512-Yj+rQATpLLU36ymg0/laLXn9FUoiGUl7mDPUJ0toQ5nXKFrj/rmIEkQ34T1GeiV2cP2SrT0G0s7xiNuDcsIyBg==
 
 escape-string-regexp@^1.0.5:
   version "1.0.5"
