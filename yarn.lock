@@ -679,25 +679,10 @@ doctrine@^3.0.0:
   dependencies:
     esutils "^2.0.2"
 
-domexception@^2.0.1:
-  version "2.0.1"
-  resolved "https://registry.yarnpkg.com/domexception/-/domexception-2.0.1.tgz#fb44aefba793e1574b0af6aed2801d057529f304"
-  integrity sha512-yxJ2mFy/sibVQlu5qHjOkf9J3K6zgmCxgJ94u2EdvDOV09H+32LtRswEcUsmUWN72pVLOEnTSRaIVVzVQgS0dg==
-  dependencies:
-    webidl-conversions "^5.0.0"
-
-ecc-jsbn@~0.1.1:
-  version "0.1.2"
-  resolved "https://registry.yarnpkg.com/ecc-jsbn/-/ecc-jsbn-0.1.2.tgz#3a83a904e54353287874c564b7549386849a98c9"
-  integrity sha1-OoOpBOVDUyh4dMVkt1SThoSamMk=
-  dependencies:
-    jsbn "~0.1.0"
-    safer-buffer "^2.1.0"
-
-ekscss@0.0.1:
-  version "0.0.1"
-  resolved "https://registry.yarnpkg.com/ekscss/-/ekscss-0.0.1.tgz#e4ff604d8fc35fd3b41dd47b5561ad3dfb9a4b47"
-  integrity sha512-s5M6wP9BbJR9DRKbj441nw5CP+M8jpzcqBy86V1RNUqHZxWcPxufRIqWCafKP/fTH1j7nZD7UQ5xzj2N7j917Q==
+ekscss@0.0.3:
+  version "0.0.3"
+  resolved "https://registry.yarnpkg.com/ekscss/-/ekscss-0.0.3.tgz#248d88a32d598666ebdf385bc7837b0eff141609"
+  integrity sha512-FVzpD0x8M7VQR/gDgDS47oKkmkPRLc8kjGJReUJyNnvSCNS6h0jq9Zd+WRUCL95JGMdr21Hn7JHCg9rNcO3uFQ==
   dependencies:
     "@types/stylis" "^4.0.0"
     source-map "^0.7.3"
@@ -763,18 +748,10 @@ esbuild-minify-templates@0.0.3:
     magic-string "^0.25.7"
     meriyah "^4.1.5"
 
-esbuild-register@2.5.0:
-  version "2.5.0"
-  resolved "https://registry.yarnpkg.com/esbuild-register/-/esbuild-register-2.5.0.tgz#b855d8cfa963835a16866146e310691bd8afa4f5"
-  integrity sha512-5a8W3rH7IQbIPR9pPXJFkC3+CRMtm/OSpBz3hkWUUU63oPZ3NU6dVDGfaIjKnRizCTIRoGjNE6KEDt5p1sLwEw==
-  dependencies:
-    esbuild "^0.11.5"
-    jsonc-parser "^3.0.0"
-
-esbuild@0.11.16:
-  version "0.11.16"
-  resolved "https://registry.yarnpkg.com/esbuild/-/esbuild-0.11.16.tgz#435f00474fb21e70f59a545b85e4cfc7ba106485"
-  integrity sha512-34ZWjo4ouvM5cDe7uRoM9GFuMyEmpH9fnVYmomvS1cq9ED9d/0ZG1r+p4P2VbX7ihjv36zA2SWTmP8Zmt/EANA==
+esbuild@0.11.17:
+  version "0.11.17"
+  resolved "https://registry.yarnpkg.com/esbuild/-/esbuild-0.11.17.tgz#d2a929a918864ab3642178f4c0dc84784f863b53"
+  integrity sha512-Yj+rQATpLLU36ymg0/laLXn9FUoiGUl7mDPUJ0toQ5nXKFrj/rmIEkQ34T1GeiV2cP2SrT0G0s7xiNuDcsIyBg==
 
 esbuild@^0.11.5:
   version "0.11.15"
