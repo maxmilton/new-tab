@@ -1,6 +1,7 @@
 // DOM
-// export const create = document.createElement.bind(document);
-export const create = <K extends keyof HTMLElementTagNameMap>(tagName: K) => document.createElement(tagName);
+export const create = <K extends keyof HTMLElementTagNameMap>(
+  tagName: K,
+): HTMLElementTagNameMap[K] => document.createElement(tagName);
 export const append = <T extends Node>(node: T, parent: Node): T => parent.appendChild(node);
 
 export const DEFAULT_ORDER = ['Open Tabs', 'Bookmarks', 'History', 'Top Sites'];
