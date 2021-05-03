@@ -27,7 +27,6 @@
     "@types/node": "15.0.1",
     "@typescript-eslint/eslint-plugin": "4.22.0",
     "@typescript-eslint/parser": "4.22.0",
-    "@wearegenki/renovate-config": "1.0.0",
     "csso": "4.2.0",
     "ekscss": "0.0.4",
     "esbuild": "0.11.18",
@@ -44,14 +43,5 @@
     "endOfLine": "lf",
     "singleQuote": true,
     "trailingComma": "all"
-  },
-  "renovate": {
-    "extends": [
-      "@wearegenki"
-    ],
-    "baseBranches": [
-      "master",
-      "next"
-    ]
   }
 }

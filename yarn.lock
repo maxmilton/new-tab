@@ -204,11 +204,6 @@
     "@typescript-eslint/types" "4.22.0"
     eslint-visitor-keys "^2.0.0"
 
-"@wearegenki/renovate-config@1.0.0":
-  version "1.0.0"
-  resolved "https://registry.yarnpkg.com/@wearegenki/renovate-config/-/renovate-config-1.0.0.tgz#3b2665c76d978a0a56a76093b2657f0c4579bf7b"
-  integrity sha512-gAZGXBe9VJ4/H7Oj75//HSLVrPZv1gp06CaZJGpzpDYfWL3MgQzQlzGFn28I9FS7jYahC1zfadL+GuHua3evVQ==
-
 acorn-jsx@^5.3.1:
   version "5.3.1"
   resolved "https://registry.yarnpkg.com/acorn-jsx/-/acorn-jsx-5.3.1.tgz#fc8661e11b7ac1539c47dbfea2e72b3af34d267b"
