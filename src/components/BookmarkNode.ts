@@ -7,6 +7,7 @@
 
 // FIXME: max-height (for scroll) needs to be dynamic depending on where the folder opens from
 
+import { append, create } from '../utils';
 import { Link, LinkComponent, LinkProps } from './Link';
 
 type SubFolderComponent = HTMLDivElement;
@@ -26,7 +27,7 @@ const CLOSE_DELAY_MS = 400;
 // @ts-expect-error - FIXME: Use this var or remove it
 let openFolders = 0;
 
-const subFolderView = document.createElement('div');
+const subFolderView = create('div');
 subFolderView.className = 'subfolder';
 
 function SubFolder(
@@ -63,7 +64,7 @@ function SubFolder(
     // @ts-expect-error - FIXME
     // eslint-disable-next-line no-param-reassign
     item.level = level + 1;
-    root.appendChild(BookmarkNode(item));
+    append(BookmarkNode(item), root);
   });
 
   root.onmouseenter = scope.clearTimer;
@@ -80,7 +81,7 @@ interface FolderProps extends chrome.bookmarks.BookmarkTreeNode {
   level?: number;
 }
 
-const folderView = document.createElement('div');
+const folderView = create('div');
 folderView.className = 'item';
 
 export function Folder(item: FolderProps): FolderComponent {
@@ -126,7 +127,7 @@ export function Folder(item: FolderProps): FolderComponent {
         },
         scope,
       );
-      root.appendChild(subfolder);
+      append(subfolder, root);
     }
   };
 
