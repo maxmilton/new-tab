@@ -58,7 +58,7 @@ Please report any bugs you encounter on the [GitHub issue tracker](https://githu
 
 ## Changelog
 
-See [CHANGELOG.md](https://github.com/MaxMilton/new-tab/blob/master/CHANGELOG.md).
+See [releases on GitHub](https://github.com/MaxMilton/new-tab/releases).
 
 ## License
 
