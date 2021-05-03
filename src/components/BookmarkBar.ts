@@ -1,9 +1,10 @@
+import { append, create } from '../utils';
 import { BookmarkNode, Folder } from './BookmarkNode';
 
 type BookmarkBarComponent = HTMLDivElement;
 
 export function BookmarkBar(): BookmarkBarComponent {
-  const root = document.createElement('div');
+  const root = create('div');
   root.className = 'bookmarks';
 
   chrome.bookmarks.getTree((tree) => {
@@ -13,27 +14,27 @@ export function BookmarkBar(): BookmarkBarComponent {
     const otherBookmarks = tree[0].children[1];
 
     // bookmarks?.forEach((item) => {
-    //   root.appendChild(BookmarkNode(item));
+    //   append(BookmarkNode(item), root);
     // });
 
     // FIXME: Temp
     const maxNodes = 10;
 
     bookmarks?.slice(0, maxNodes).forEach((item) => {
-      root.appendChild(BookmarkNode(item));
+      append(BookmarkNode(item), root);
     });
 
     const overflow = bookmarks?.slice(maxNodes);
 
     if (overflow?.length) {
       // @ts-expect-error - FIXME
-      root.appendChild(Folder({ children: overflow, end: true, title: '>>' }));
+      append(Folder({ children: overflow, end: true, title: '>>' }), root);
     }
 
     if (otherBookmarks.children?.length) {
       // @ts-expect-error - FIXME
       otherBookmarks.end = true;
-      root.appendChild(Folder(otherBookmarks));
+      append(Folder(otherBookmarks), root);
     }
   });
 

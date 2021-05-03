@@ -1,6 +1,6 @@
 import h, { HNode } from 'stage0';
 import type { UserStorageData } from '../types';
-import { debounce, DEFAULT_ORDER } from '../utils';
+import { append, debounce, DEFAULT_ORDER } from '../utils';
 import { SearchResult } from './SearchResult';
 
 type Sections = Record<string, ReturnType<typeof SearchResult> | undefined>;
@@ -68,7 +68,7 @@ export function Search(): SearchComponent {
     const order = settings.o || DEFAULT_ORDER;
 
     order.forEach((name) => {
-      section[name] = root.appendChild(SearchResult(name, []));
+      section[name] = append(SearchResult(name, []), root);
     });
 
     const openTabs = section['Open Tabs'];

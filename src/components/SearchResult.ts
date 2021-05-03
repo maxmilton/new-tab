@@ -1,4 +1,5 @@
 import h, { HNode } from 'stage0';
+import { append } from '../utils';
 import { Link, LinkProps } from './Link';
 import { TabLink } from './TabLink';
 
@@ -46,7 +47,7 @@ export function SearchResult<T extends LinkProps>(
     // eslint-disable-next-line no-restricted-syntax
     for (const item of partial) {
       // @ts-expect-error - FIXME
-      list.appendChild((isOpenTabs ? TabLink : Link)(item));
+      append((isOpenTabs ? TabLink : Link)(item), list);
     }
 
     root.style.display = renderedLength ? 'block' : 'none';

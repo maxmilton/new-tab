@@ -10,7 +10,7 @@ module.exports = {
   parser: '@typescript-eslint/parser',
   parserOptions: {
     extraFileExtensions: ['.mjs', '.cjs'],
-    project: './tsconfig.json',
+    project: ['./tsconfig.json', './test/tsconfig.json'],
   },
   env: {
     browser: true,

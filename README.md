@@ -58,11 +58,11 @@ Please report any bugs you encounter on the [GitHub issue tracker](https://githu
 
 ## Changelog
 
-See [CHANGELOG.md](https://github.com/MaxMilton/new-tab/blob/master/CHANGELOG.md).
+See [releases on GitHub](https://github.com/MaxMilton/new-tab/releases).
 
-## Licence
+## License
 
-`New Tab` is an MIT licensed open source project. See [LICENCE](https://github.com/MaxMilton/new-tab/blob/master/LICENSE).
+`New Tab` is an MIT licensed open source project. See [LICENSE](https://github.com/MaxMilton/new-tab/blob/master/LICENSE).
 
 The extension [lightning bolt icon](https://github.com/twitter/twemoji/blob/master/assets/svg/26a1.svg) is from [twitter/twemoji](https://github.com/twitter/twemoji) which is licensed CC-BY 4.0.
 

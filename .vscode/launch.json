@@ -1,0 +1,45 @@
+// https://code.visualstudio.com/docs/editor/debugging#_launch-configurations
+{
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "name": "Attach by Process ID",
+      "processId": "${command:PickProcess}",
+      "request": "attach",
+      "skipFiles": ["<node_internals>/**"],
+      // "smartStep": true,
+      "type": "pwa-node"
+    },
+    // https://github.com/Microsoft/vscode-recipes/tree/master/debugging-jest-tests
+    {
+      "type": "pwa-node",
+      "request": "launch",
+      "name": "UVU All",
+      "skipFiles": ["<node_internals>/**"],
+      "program": "${workspaceFolder}/node_modules/.bin/uvu",
+      "args": ["-r", "esbuild-register", "./test", "\\.test\\.ts$"],
+      "console": "integratedTerminal",
+      // "internalConsoleOptions": "neverOpen",
+      // "disableOptimisticBPs": true,
+      "windows": {
+        "program": "${workspaceFolder}/node_modules/uvu/bin.js"
+      }
+    }
+    // TODO: Implement running individual *.test.ts file
+    // FIXME: Should be like: node -r esbuild-register tests/demo.js
+    // {
+    //   "type": "node",
+    //   "request": "launch",
+    //   "name": "UVU Current File",
+    //   "program": "${workspaceFolder}/node_modules/.bin/uvu",
+    //   "skipFiles": ["<node_internals>/**"],
+    //   "args": ["${relativeFile}"],
+    //   "console": "integratedTerminal",
+    //   "internalConsoleOptions": "neverOpen",
+    //   "disableOptimisticBPs": true,
+    //   "windows": {
+    //     "program": "${workspaceFolder}/node_modules/uvu/bin.js"
+    //   }
+    // }
+  ]
+}
