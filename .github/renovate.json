@@ -1,0 +1,4 @@
+{
+  "extends": ["github>maxmilton/renovate-config"],
+  "baseBranches": ["master", "next"]
+}
