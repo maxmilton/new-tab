@@ -18,12 +18,12 @@ const DEFAULT_RESULTS_COUNT = 10;
 const MORE_RESULTS_COUNT = 50;
 
 const view = h`
-  <div hidden>
+  <div>
     <h2 #name></h2>
 
     <div #list></div>
 
-    <button hidden #more>Show more ▾</button>
+    <button #more>Show more ▾</button>
   </div>
 `;
 
