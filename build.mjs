@@ -1,9 +1,6 @@
 /* eslint-disable @typescript-eslint/no-unsafe-assignment */
 /* eslint-disable @typescript-eslint/restrict-template-expressions */
-/* eslint-disable import/extensions */
-/* eslint-disable import/no-extraneous-dependencies */
-/* eslint-disable no-console */
-/* eslint-disable no-restricted-syntax */
+/* eslint-disable import/extensions, import/no-extraneous-dependencies, no-console */
 
 import csso from 'csso';
 import xcss from 'ekscss';
@@ -84,6 +81,14 @@ function makeHTML(name, stylePath, body = '') {
 
     for (const warning of compiled.warnings) {
       console.error('XCSS WARNING:', warning.message);
+
+      if (warning.file) {
+        console.log(
+          `  at ${[warning.file, warning.line, warning.column]
+            .filter(Boolean)
+            .join(':')}`,
+        );
+      }
     }
 
     const { css } = csso.minify(compiled.css, {});
