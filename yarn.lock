@@ -678,10 +678,10 @@ ecc-jsbn@~0.1.1:
     jsbn "~0.1.0"
     safer-buffer "^2.1.0"
 
-ekscss@0.0.4:
-  version "0.0.4"
-  resolved "https://registry.yarnpkg.com/ekscss/-/ekscss-0.0.4.tgz#0e91d1c43e14eadb7310f2b135b6b63abd7ac3a9"
-  integrity sha512-CEFQA6dYqejHpBSHxdG5RZelA5TB/9AcTntVUXyicSFd4LCmy2FvttBmwjY28QWeu0YrDSurrfAAuTlniCgvRw==
+ekscss@0.0.5:
+  version "0.0.5"
+  resolved "https://registry.yarnpkg.com/ekscss/-/ekscss-0.0.5.tgz#1e2e6792e24b5c66a152ce4323b1d400b798cba7"
+  integrity sha512-ynTMVC0GXOaCps9e/g269NohRR+y8FEIdhNtGb9dGOTUWuUvRUF8nIpnaMIhmQl4QyLcYjOlwgnbgwnVWSLYqQ==
   dependencies:
     "@types/stylis" "^4.0.0"
     source-map "^0.7.3"
