@@ -27,16 +27,17 @@ Originally an experimental project to give me a chance for me to play with the C
 
 ### Motives
 
-| Issue       | Why / How                                                                                                                             |
-| ----------- | ------------------------------------------------------------------------------------------------------------------------------------- |
-| Access      | Still have access to common things like the bookmarks bar etc.                                                                        |
-| Speed       | Near instant access to functionality. Page load performance, runtime performance, and file size should all be scrupulously optimised. |
-| Privacy     | No invasive user tracking scripts (unlike most other extensions!).                                                                    |
-| Unobtrusive | No annoying things like entries in your right click menu.                                                                             |
+<!-- prettier-ignore -->
+| Issue | Why / How |
+| --- | --- |
+| Access | Still have access to common things like the bookmarks bar etc. |
+| Speed | Near instant access to functionality. Page load performance, runtime performance, and file size should all be scrupulously optimised. |
+| Privacy | No invasive user tracking scripts (unlike most other extensions!). |
+| Unobtrusive | No annoying things like entries in your right click menu. |
 
 ### Technology
 
-- [stage0](https://github.com/Freak613/stage0) JavaScript framework
+- [stage1](https://github.com/MaxMilton/stage1) JavaScript framework
 - [Chrome browser APIs](https://developer.chrome.com/apps/api_index)
 - [ekscss](https://github.com/MaxMilton/ekscss) style preprocessor
 - [esbuild](https://esbuild.github.io/) JavaScript bundler
