@@ -1,6 +1,7 @@
 // TODO: Prevent `save` running once on init
 
-import { h, reuseNodes } from 'stage1';
+import { h } from 'stage1';
+import { reuseNodes } from 'stage1/dist/reconcile/reuse-nodes';
 import type { UserStorageData } from './types';
 import { DEFAULT_ORDER } from './utils';
 
