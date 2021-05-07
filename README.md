@@ -32,21 +32,21 @@ Originally an experimental project to give me a chance for me to play with the C
 | --- | --- |
 | Access | Still have access to common things like the bookmarks bar etc. |
 | Speed | Near instant access to functionality. Page load performance, runtime performance, and file size should all be scrupulously optimised. |
-| Privacy | No invasive user tracking scripts (unlike most other extensions!). |
-| Unobtrusive | No annoying things like entries in your right click menu. |
+| Privacy | Zero user tracking (unlike most other extensions!). |
+| Unobtrusive | No annoying things like distracting colours or entries in your right click menu. |
 
 ### Technology
 
-- [stage1](https://github.com/MaxMilton/stage1) JavaScript framework
 - [Chrome browser APIs](https://developer.chrome.com/apps/api_index)
+- [stage1](https://github.com/MaxMilton/stage1) JavaScript framework
 - [ekscss](https://github.com/MaxMilton/ekscss) style preprocessor
 - [esbuild](https://esbuild.github.io/) JavaScript bundler
 
 ## Known issues
 
-1. The extension's bookmarks bar is limited in functionality. Chrome doesn't have an API to control the native bookmarks bar via extensions so I've recreated a simplistic version. The goal here is _high performance_ and not to emulate all the native bookmarks bar features. Use the bookmark manager for access to all features.
+1. The extension's bookmarks bar functionality is limited. Chrome doesn't allow extensions to control the native bookmarks bar visibility so I've recreated a simple version. The goal is _high performance_ and quick access rather than trying to emulate the native bookmarks bar. Use the bookmark manager for access to all features.
 1. Page needs to be reloaded after adding, editing, or removing bookmarks. Bookmarks don't change often, so changes are not live.
-1. Searching the browsing history is slow when you history is _very_ big. This is just a reality of Chrome. 😢
+1. Searching the browsing history is slow when you history is _very_ big. Nothing I can do here; this is just a reality of Chrome.
 1. The project is set up for development on Linux and may not build on other operating systems.
 
 ## Browser support
