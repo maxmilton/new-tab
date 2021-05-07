@@ -37,7 +37,7 @@ const manifest = {
   content_security_policy:
     "default-src 'none';"
     // theme loader script to be embedded inline in the document
-    + " script-src 'self' 'sha256-FtIFk1UjzWWlhfMrIdJ9n60rbnTmldIAss9HFJTJeUM=';"
+    + " script-src 'self' 'sha256-yUfwd/5tnHh3e2Mku2Vc0BJ5IZB9UqXV9uPv8xpMp/4=';"
     + " style-src 'unsafe-inline';"
     // `data:` used in settings page
     + ' img-src chrome://favicon data:;',

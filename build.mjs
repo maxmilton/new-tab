@@ -108,7 +108,7 @@ ${body}`;
 makeHTML(
   'newtab',
   'src/css/newtab.xcss',
-  '<script>chrome.storage.local.get(null,a=>{a.t&&(document.body.className=a.t)});</script>',
+  '<script>chrome.storage.local.get(null,a=>a.t&&(document.body.className=a.t))</script>',
 );
 makeHTML('settings', 'src/css/settings.xcss');
 
