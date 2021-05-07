@@ -1,7 +1,6 @@
 // TODO: Prevent `save` running once on init
 
-import h from 'stage0';
-import reuseNodes from 'stage0/reuseNodes';
+import { h, reuseNodes } from 'stage1';
 import type { UserStorageData } from './types';
 import { DEFAULT_ORDER } from './utils';
 

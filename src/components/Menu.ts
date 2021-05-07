@@ -1,10 +1,9 @@
-import h, { HNode } from 'stage0';
+import { h, S1Node } from 'stage1';
 
-type MenuComponent = HNode<HTMLDivElement>;
-
-interface RefNodes {
+type MenuComponent = S1Node & HTMLDivElement;
+type RefNodes = {
   s: HTMLAnchorElement;
-}
+};
 
 // <div id=icon>☰</div>
 const view = h`
@@ -32,7 +31,7 @@ const view = h`
 
 export function Menu(): MenuComponent {
   const root = view as MenuComponent;
-  const { s } = view.collect(root) as RefNodes;
+  const { s } = view.collect<RefNodes>(root);
 
   s.__click = () => chrome.runtime.openOptionsPage();
 

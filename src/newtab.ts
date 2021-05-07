@@ -1,13 +1,12 @@
-import { setupSyntheticEvent } from 'stage0/syntheticEvents';
+import { setupSyntheticEvent } from 'stage1';
 import { BookmarkBar } from './components/BookmarkBar';
 import { Menu } from './components/Menu';
 import { Search } from './components/Search';
 import { append, create, handleClick } from './utils';
 
-// TODO: Mention this when creating a types improvement PR to stage0
 declare global {
   interface HTMLElement {
-    /** `stage0` synthetic click event handler. */
+    /** `stage1` synthetic click event handler. */
     __click(event: MouseEvent): void;
   }
 }
