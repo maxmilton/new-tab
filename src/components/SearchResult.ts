@@ -18,12 +18,12 @@ const DEFAULT_RESULTS_COUNT = 10;
 const MORE_RESULTS_COUNT = 50;
 
 const view = h`
-  <div style=display:none>
+  <div hidden>
     <h2 #name></h2>
 
     <div #list></div>
 
-    <button style=display:none #more>Show more ▾</button>
+    <button hidden #more>Show more ▾</button>
   </div>
 `;
 
@@ -50,8 +50,8 @@ export function SearchResult<T extends LinkProps>(
       append((isOpenTabs ? TabLink : Link)(item), list);
     }
 
-    root.style.display = renderedLength ? 'block' : 'none';
-    more.style.display = isOpenTabs || renderedLength >= listData.length ? 'none' : 'block';
+    root.hidden = !renderedLength;
+    more.hidden = isOpenTabs || renderedLength >= listData.length;
   };
 
   const update = (newData: T[]) => {
