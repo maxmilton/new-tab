@@ -8,7 +8,7 @@ type RefNodes = {
 // <div id=icon>☰</div>
 const view = h`
   <div id=menu>
-    <svg xmlns=http://www.w3.org/2000/svg width=30 height=30 viewBox="0 0 24 24" class=icon>
+    <svg xmlns=http://www.w3.org/2000/svg viewBox="0 0 24 24" class=icon>
       <line x1=3 y1=12 x2=21 y2=12 />
       <line x1=3 y1=6 x2=21 y2=6 />
       <line x1=3 y1=18 x2=21 y2=18 />

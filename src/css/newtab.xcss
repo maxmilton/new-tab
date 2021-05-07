@@ -121,6 +121,12 @@ button {
   cursor: pointer;
 }
 
+.s-icon,
+.icon {
+  width: 24px;
+  color: var(--c3);
+}
+
 .s-icon {
   position: absolute;
   left: 38px;
@@ -224,11 +230,6 @@ hr {
   margin: -28px -84px -64px 0;
   padding: 10px 84px 84px 42px;
   font-size: 20px;
-}
-
-.s-icon,
-.icon {
-  color: var(--c3);
 }
 
 #dropdown {
