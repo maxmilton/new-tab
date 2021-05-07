@@ -1,4 +1,4 @@
-import h, { HNode } from 'stage0';
+import { h, S1Node } from 'stage1';
 import type { UserStorageData } from '../types';
 import { append, debounce, DEFAULT_ORDER } from '../utils';
 import { SearchResult } from './SearchResult';
@@ -33,11 +33,10 @@ function doSearch(text: string, section: Sections) {
 
 const debouncedDoSearch = debounce(doSearch);
 
-type SearchComponent = HNode<HTMLDivElement>;
-
-interface RefNodes {
+type SearchComponent = S1Node & HTMLDivElement;
+type RefNodes = {
   input: HTMLInputElement;
-}
+};
 
 const view = h`
   <div class=container>
@@ -51,7 +50,7 @@ const view = h`
 
 export function Search(): SearchComponent {
   const root = view as SearchComponent;
-  const { input } = view.collect(root) as RefNodes;
+  const { input } = view.collect<RefNodes>(root);
   const section: Sections = {};
 
   input.oninput = () => debouncedDoSearch(input.value, section);

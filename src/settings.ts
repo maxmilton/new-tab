@@ -1,7 +1,6 @@
 // TODO: Prevent `save` running once on init
 
-import h from 'stage0';
-import reuseNodes from 'stage0/reuseNodes';
+import { h, reuseNodes } from 'stage1';
 import type { UserStorageData } from './types';
 import { DEFAULT_ORDER } from './utils';
 
@@ -9,10 +8,10 @@ interface ItemComponent extends HTMLLIElement {
   update(newItem: string): void;
 }
 
-interface ItemRefNodes {
+type ItemRefNodes = {
   name: Text;
   rm: HTMLButtonElement;
-}
+};
 
 type ItemScope = {
   indexOf(item: string): number;
@@ -20,11 +19,11 @@ type ItemScope = {
   removeItem(index: number): void;
 };
 
-interface SettingsRefNodes {
+type SettingsRefNodes = {
   o: HTMLOListElement;
   reset: HTMLButtonElement;
   t: HTMLSelectElement;
-}
+};
 
 interface SettingsState {
   order: string[];
@@ -41,7 +40,7 @@ const itemView = h`
 
 function Item(item: string, scope: ItemScope): ItemComponent {
   const root = itemView.cloneNode(true) as ItemComponent;
-  const { name, rm } = itemView.collect(root) as ItemRefNodes;
+  const { name, rm } = itemView.collect<ItemRefNodes>(root);
 
   let currentItem = item;
   name.nodeValue = currentItem;
@@ -116,7 +115,7 @@ const settingsView = h`
 
 function Settings() {
   const root = settingsView;
-  const { o, reset, t } = settingsView.collect(root) as SettingsRefNodes;
+  const { o, reset, t } = settingsView.collect<SettingsRefNodes>(root);
 
   const state: SettingsState = {
     order: [],

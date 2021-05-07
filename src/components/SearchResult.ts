@@ -1,18 +1,18 @@
-import h, { HNode } from 'stage0';
+import { h, S1Node } from 'stage1';
 import { append } from '../utils';
 import { Link, LinkProps } from './Link';
 import { TabLink } from './TabLink';
 
-interface SearchResultComponent extends HNode<HTMLDivElement> {
+export type SearchResultComponent = S1Node &
+HTMLDivElement & {
   update: (this: void, newData: any[]) => void;
   filter: (text: string) => void;
-}
-
-interface RefNodes {
+};
+type RefNodes = {
   name: Text;
   list: HTMLDivElement;
   more: HTMLButtonElement;
-}
+};
 
 const DEFAULT_RESULTS_COUNT = 10;
 const MORE_RESULTS_COUNT = 50;
@@ -32,7 +32,7 @@ export function SearchResult<T extends LinkProps>(
   data: T[],
 ): SearchResultComponent {
   const root = view.cloneNode(true) as SearchResultComponent;
-  const { name, list, more } = view.collect(root) as RefNodes;
+  const { name, list, more } = view.collect<RefNodes>(root);
   const isOpenTabs = sectionName === 'Open Tabs';
   let rawData: T[];
   let renderedLength: number;
