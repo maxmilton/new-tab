@@ -25,6 +25,7 @@ module.exports = {
   rules: {
     '@typescript-eslint/no-use-before-define': WARN,
     'import/prefer-default-export': OFF,
+    'no-restricted-syntax': OFF,
     // stage1 uses underscores in synthetic event handler names
     'no-underscore-dangle': OFF,
   },

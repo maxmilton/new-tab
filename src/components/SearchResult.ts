@@ -44,7 +44,6 @@ export function SearchResult<T extends LinkProps>(
     // Remove all child nodes
     list.textContent = '';
 
-    // eslint-disable-next-line no-restricted-syntax
     for (const item of partial) {
       // @ts-expect-error - FIXME
       append((isOpenTabs ? TabLink : Link)(item), list);
