@@ -2133,10 +2133,10 @@ sshpk@^1.7.0:
     safer-buffer "^2.0.2"
     tweetnacl "~0.14.0"
 
-stage1@0.0.2:
-  version "0.0.2"
-  resolved "https://registry.yarnpkg.com/stage1/-/stage1-0.0.2.tgz#9ef4f0cd5c59e6de163a68b55f5ff43f72ad9a4b"
-  integrity sha512-ne2wEdVVD3tgBzETVwGM995GFhi1GkI1B69a1GkWUt0evldqw5BhSLU7waAoFKpO0a00QOh9WjE71MfQ91tYOg==
+stage1@0.0.3:
+  version "0.0.3"
+  resolved "https://registry.yarnpkg.com/stage1/-/stage1-0.0.3.tgz#c5bf2f9d5d96b784a10f9156bf7f2ebe1aec8359"
+  integrity sha512-tm7cNDfbowPRKyfMgIsEvsmg6NL7JKoaEgsYT6+Z3CQwVcWaLMjbdbp0K53n38zt/rESe9M4rR3W3m6A3X5GzQ==
 
 stealthy-require@^1.1.1:
   version "1.1.1"
