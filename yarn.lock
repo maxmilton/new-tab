@@ -737,10 +737,10 @@ es-to-primitive@^1.2.1:
     is-date-object "^1.0.1"
     is-symbol "^1.0.2"
 
-esbuild-minify-templates@0.2.0:
-  version "0.2.0"
-  resolved "https://registry.yarnpkg.com/esbuild-minify-templates/-/esbuild-minify-templates-0.2.0.tgz#4aed799906cde32e645378328864a75d6eb8caf5"
-  integrity sha512-ED/lr1IMMMxx6HKzOVa7Lho1erBQ75Rh/Y9RzfJ/D1avO79rCgP/EVu1GbhCg57uy8FwLKeRe+EqDjORnMSWbg==
+esbuild-minify-templates@0.3.0:
+  version "0.3.0"
+  resolved "https://registry.yarnpkg.com/esbuild-minify-templates/-/esbuild-minify-templates-0.3.0.tgz#3b1a4b976d5845f1f0bf4be42c50bfde353d8b98"
+  integrity sha512-TVWdk0Eb/6Y8DxVpM9EGvkIVunX+53jBoZieIuj7fTczSgZ/L3QW0YiNzZwY2I1Wz1Iu2MebUQRszvESgsMy2w==
   dependencies:
     "@ampproject/remapping" "^1.0.1"
     astray "^1.1.1"
@@ -1279,11 +1279,11 @@ is-bigint@^1.0.1:
   integrity sha512-0JV5+SOCQkIdzjBK9buARcV804Ddu7A0Qet6sHi3FimE9ne6m4BGQZfRn+NZiXbBk4F4XmHfDZIipLj9pX8dSA==
 
 is-boolean-object@^1.1.0:
-  version "1.1.0"
-  resolved "https://registry.yarnpkg.com/is-boolean-object/-/is-boolean-object-1.1.0.tgz#e2aaad3a3a8fca34c28f6eee135b156ed2587ff0"
-  integrity sha512-a7Uprx8UtD+HWdyYwnD1+ExtTgqQtD2k/1yJgtXP6wnMm8byhkoTZRl+95LLThpzNZJ5aEvi46cdH+ayMFRwmA==
+  version "1.1.1"
+  resolved "https://registry.yarnpkg.com/is-boolean-object/-/is-boolean-object-1.1.1.tgz#3c0878f035cb821228d350d2e1e36719716a3de8"
+  integrity sha512-bXdQWkECBUIAcCkeH1unwJLIpZYaa5VvuygSyS/c2lf719mTKZDU5UdDRlpd01UjADgmW8RfqaP+mRaVPdr/Ng==
   dependencies:
-    call-bind "^1.0.0"
+    call-bind "^1.0.2"
 
 is-callable@^1.1.4, is-callable@^1.2.3:
   version "1.2.3"
@@ -2133,10 +2133,10 @@ sshpk@^1.7.0:
     safer-buffer "^2.0.2"
     tweetnacl "~0.14.0"
 
-stage1@0.0.3:
-  version "0.0.3"
-  resolved "https://registry.yarnpkg.com/stage1/-/stage1-0.0.3.tgz#c5bf2f9d5d96b784a10f9156bf7f2ebe1aec8359"
-  integrity sha512-tm7cNDfbowPRKyfMgIsEvsmg6NL7JKoaEgsYT6+Z3CQwVcWaLMjbdbp0K53n38zt/rESe9M4rR3W3m6A3X5GzQ==
+stage1@0.0.4:
+  version "0.0.4"
+  resolved "https://registry.yarnpkg.com/stage1/-/stage1-0.0.4.tgz#da739fe698005fb762ab8017e961dde6a394fb99"
+  integrity sha512-oL4aJlqIhJu8e45gVmQlMU26AIfhMLZAet/2numHaX2NI8vxDN/m550++wArrfOnTC1fwYXbj5LjibKK5v3HHA==
 
 stealthy-require@^1.1.1:
   version "1.1.1"

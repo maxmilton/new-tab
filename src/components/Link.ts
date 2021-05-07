@@ -6,13 +6,17 @@ export interface LinkProps {
 }
 
 export type LinkComponent = S1Node & HTMLAnchorElement;
+
 type RefNodes = {
   img: HTMLImageElement;
   title: Text;
 };
 
 const view = h`
-  <a><img #img />#title</a>
+  <a>
+    <img #img />
+    #title
+  </a>
 `;
 
 export function Link(item: LinkProps): LinkComponent {
