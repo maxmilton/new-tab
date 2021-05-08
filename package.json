@@ -34,7 +34,7 @@
     "esbuild": "0.11.20",
     "esbuild-minify-templates": "0.3.0",
     "esbuild-register": "2.5.0",
-    "eslint": "7.26.0",
+    "eslint": "7.25.0",
     "eslint-config-airbnb-typescript": "12.3.1",
     "eslint-plugin-import": "2.22.1",
     "git-ref": "0.0.2",
