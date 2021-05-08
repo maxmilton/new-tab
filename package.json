@@ -31,7 +31,7 @@
     "c8": "7.7.2",
     "csso": "4.2.0",
     "ekscss": "0.0.5",
-    "esbuild": "0.11.19",
+    "esbuild": "0.11.20",
     "esbuild-minify-templates": "0.3.0",
     "esbuild-register": "2.5.0",
     "eslint": "7.25.0",
