@@ -14,7 +14,7 @@ type RefNodes = {
 
 const view = h`
   <a>
-    <img #img />
+    <img #img>
     #title
   </a>
 `;
