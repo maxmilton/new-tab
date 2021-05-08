@@ -36,7 +36,7 @@ const manifest = {
   incognito: 'not_allowed',
   content_security_policy:
     "default-src 'none';"
-    // theme loader script to be embedded inline in the document
+    // SHA of theme loader script embedded inline in the document
     + " script-src 'self' 'sha256-FtIFk1UjzWWlhfMrIdJ9n60rbnTmldIAss9HFJTJeUM=';"
     + " style-src 'unsafe-inline';"
     // `data:` used in settings page

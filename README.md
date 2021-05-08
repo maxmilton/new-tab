@@ -32,8 +32,8 @@ Originally an experimental project to give me a chance for me to play with the C
 | --- | --- |
 | Access | Still have access to common things like the bookmarks bar etc. |
 | Speed | Near instant access to functionality. Page load performance, runtime performance, and file size should all be scrupulously optimised. |
-| Privacy | Zero user tracking (unlike most other extensions!). |
-| Unobtrusive | No annoying things like distracting colours or entries in your right click menu. |
+| Privacy & Security | Zero user tracking (unlike most other extensions!). Very restrictive [Content Security Policy](https://developer.mozilla.org/en-US/docs/Web/HTTP/CSP). Local data only; no remote data fetching. |
+| Unobtrusive | No annoying things like distracting colours, illegible text, or entries in your right click menu. |
 
 ### Technology
 

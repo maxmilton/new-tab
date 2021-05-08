@@ -14,7 +14,7 @@ const mode = process.env.NODE_ENV;
 const dev = mode === 'development';
 const dir = path.resolve(); // no __dirname in node ESM
 
-/** @param {Error?} err */
+/** @param {Error|null} err */
 function handleErr(err) {
   if (err) throw err;
 }
