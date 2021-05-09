@@ -92,13 +92,13 @@ export function cleanup(): void {
   });
 }
 
-// eslint-disable-next-line @typescript-eslint/ban-types
+/* eslint-disable @typescript-eslint/ban-types */
 type DeepPartial<T> = T extends Function
   ? T
-  : // eslint-disable-next-line @typescript-eslint/ban-types
-  T extends object
+  : T extends object
     ? { [P in keyof T]?: DeepPartial<T[P]> }
     : T;
+/* eslint-enable @typescript-eslint/ban-types */
 type ChromeAPI = DeepPartial<typeof window.chrome>;
 
 export function mocksSetup(): void {
