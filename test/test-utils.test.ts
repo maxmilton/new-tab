@@ -5,6 +5,20 @@ import {
 } from './utils';
 // import { Test } from './TestComponent';
 
+// TODO: Migrate to "describe" with nested "test"?
+// // https://github.com/lukeed/uvu/issues/43#issuecomment-740817223
+// function describe(name: string, fn: (test: ReturnType<typeof suite>) => void) {
+//   const testSuite = suite(name);
+//   fn(testSuite);
+//   testSuite.run();
+// }
+//
+// describe('thing', (test) => {
+//   test.before(setup);
+//   test.after(teardown);
+//   test('does the thing', () => {});
+// });
+
 type TestComponent = typeof import('./TestComponent');
 
 const utilSetup = suite('setup');
