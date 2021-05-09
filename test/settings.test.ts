@@ -1,14 +1,13 @@
 import { test } from 'uvu';
 import * as assert from 'uvu/assert';
 import {
-  cleanup, mocksSetup, mocksTeardown, setup, teardown,
+  mocksSetup, mocksTeardown, setup, teardown,
 } from './utils';
 
 test.before(setup);
 test.before(mocksSetup);
 test.after(mocksTeardown);
 test.after(teardown);
-test.after.each(cleanup);
 
 test('renders entire settings app', () => {
   // eslint-disable-next-line global-require
