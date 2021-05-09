@@ -92,9 +92,11 @@ export function cleanup(): void {
   });
 }
 
+// eslint-disable-next-line @typescript-eslint/ban-types
 type DeepPartial<T> = T extends Function
   ? T
-  : T extends object
+  : // eslint-disable-next-line @typescript-eslint/ban-types
+  T extends object
     ? { [P in keyof T]?: DeepPartial<T[P]> }
     : T;
 type ChromeAPI = DeepPartial<typeof window.chrome>;
@@ -113,7 +115,9 @@ export function mocksSetup(): void {
     },
     storage: {
       local: {
+        // @ts-expect-error - FIXME:
         get: (_keys, callback) => {
+          // eslint-disable-next-line @typescript-eslint/no-unsafe-call
           callback({});
         },
         set: (_items) => {},
@@ -131,6 +135,7 @@ export function mocksSetup(): void {
       onUpdated: {
         addListener() {},
       },
+      // @ts-expect-error - FIXME:
       query() {},
       remove() {},
       update() {},
