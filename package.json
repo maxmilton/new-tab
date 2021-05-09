@@ -41,7 +41,7 @@
     "eslint-plugin-import": "2.22.1",
     "git-ref": "0.0.2",
     "jsdom": "16.5.3",
-    "prettier": "2.2.1",
+    "prettier": "2.3.0",
     "typescript": "4.2.4",
     "uvu": "0.5.1"
   },
