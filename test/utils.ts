@@ -50,7 +50,7 @@ export function teardown(): void {
 
   // https://github.com/jsdom/jsdom#closing-down-a-jsdom
   global.window.close();
-  // @ts-expect-error - Cleaning up
+  // @ts-expect-error - cleaning up
   // eslint-disable-next-line no-multi-assign
   global.window = global.document = undefined;
 }
@@ -90,4 +90,65 @@ export function cleanup(): void {
       document.body.removeChild(container);
     }
   });
+}
+
+type DeepPartial<T> = T extends Function
+  ? T
+  : T extends object
+    ? { [P in keyof T]?: DeepPartial<T[P]> }
+    : T;
+type ChromeAPI = DeepPartial<typeof window.chrome>;
+
+export function mocksSetup(): void {
+  const mockChrome: ChromeAPI = {
+    bookmarks: {
+      getTree() {},
+      search() {},
+    },
+    history: {
+      search() {},
+    },
+    runtime: {
+      openOptionsPage() {},
+    },
+    storage: {
+      local: {
+        get: (_keys, callback) => {
+          callback({});
+        },
+        set: (_items) => {},
+      },
+    },
+    tabs: {
+      create() {},
+      getCurrent() {},
+      onMoved: {
+        addListener() {},
+      },
+      onRemoved: {
+        addListener() {},
+      },
+      onUpdated: {
+        addListener() {},
+      },
+      query() {},
+      remove() {},
+      update() {},
+    },
+    topSites: {
+      get: () => {},
+    },
+    windows: {
+      getCurrent() {},
+      update() {},
+    },
+  };
+
+  // @ts-expect-error - just a partial mock
+  global.chrome = mockChrome;
+}
+
+export function mocksTeardown(): void {
+  // @ts-expect-error - cleaning up
+  global.chrome = undefined;
 }

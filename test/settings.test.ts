@@ -10,12 +10,12 @@ test.after(mocksTeardown);
 test.after(teardown);
 test.after.each(cleanup);
 
-test('renders entire newtab app', () => {
+test('renders entire settings app', () => {
   // eslint-disable-next-line global-require
-  require('../dist/newtab');
+  require('../dist/settings');
 
   // TODO: Better assertions
-  assert.is(document.body.innerHTML.length > 900, true);
+  assert.is(document.body.innerHTML.length > 600, true);
 });
 
 test.run();
