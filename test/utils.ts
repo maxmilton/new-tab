@@ -5,6 +5,10 @@ import { JSDOM } from 'jsdom';
 
 const mountedContainers = new Set<{ container: HTMLDivElement }>();
 
+// export function sleep(ms: number): Promise<void> {
+//   return new Promise((resolve) => setTimeout(resolve, ms));
+// }
+
 function innerText(el: HTMLElement) {
   // eslint-disable-next-line no-param-reassign
   el = el.cloneNode(true) as HTMLElement;
