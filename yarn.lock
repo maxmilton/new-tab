@@ -1291,9 +1291,9 @@ is-callable@^1.1.4, is-callable@^1.2.3:
   integrity sha512-J1DcMe8UYTBSrKezuIUTUwjXsho29693unXM2YhJUTR2txK/eG47bvNa/wipPFmZFgr/N6f1GA66dv0mEyTIyQ==
 
 is-core-module@^2.2.0:
-  version "2.3.0"
-  resolved "https://registry.yarnpkg.com/is-core-module/-/is-core-module-2.3.0.tgz#d341652e3408bca69c4671b79a0954a3d349f887"
-  integrity sha512-xSphU2KG9867tsYdLD4RWQ1VqdFl4HTO9Thf3I/3dLEfr0dbPTWKsuCKrgqMljg4nPE+Gq0VCnzT3gr0CyBmsw==
+  version "2.4.0"
+  resolved "https://registry.yarnpkg.com/is-core-module/-/is-core-module-2.4.0.tgz#8e9fc8e15027b011418026e98f0e6f4d86305cc1"
+  integrity sha512-6A2fkfq1rfeQZjxrZJGerpLCTHRNEBiSgnu0+obeJpEPZRUooHgsizvzv0ZjJwOz3iWIHdJtVWJ/tmPr3D21/A==
   dependencies:
     has "^1.0.3"
 
@@ -2133,10 +2133,10 @@ sshpk@^1.7.0:
     safer-buffer "^2.0.2"
     tweetnacl "~0.14.0"
 
-stage1@0.0.6:
-  version "0.0.6"
-  resolved "https://registry.yarnpkg.com/stage1/-/stage1-0.0.6.tgz#30bbd867d9e27f9ee9c3e41d0752c60eff22a862"
-  integrity sha512-37QF2SM246/RH+YZwXI0biHGGFLoTQx8ibktjgfqycNIXUdD5CGlQeEEPk1nE1MKiM2MyoMdsuPArFD6Io3esQ==
+stage1@0.0.7:
+  version "0.0.7"
+  resolved "https://registry.yarnpkg.com/stage1/-/stage1-0.0.7.tgz#1fedb96e335e687f23e6ee1122ef662790ec70ff"
+  integrity sha512-MWkihmOuFnBmrsCUrGYl2buU/irpOedpV1apCCRUL7FI6L1ozALD73CDGEkk9kR6wSbkKiB0bMRqxfFVho7e4g==
 
 stealthy-require@^1.1.1:
   version "1.1.1"
