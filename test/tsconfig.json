@@ -1,7 +1,5 @@
 {
   "extends": "../tsconfig.json",
-  "compilerOptions": {
-    "rootDir": ".."
-  },
+  "include": ["../**/*", "../.*.cjs", "../*.mjs"],
   "exclude": ["coverage", "dist", "node_modules"]
 }
