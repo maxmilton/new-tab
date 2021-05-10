@@ -4,10 +4,10 @@ import {
   mocksSetup, mocksTeardown, setup, teardown,
 } from './utils';
 
-test.before(setup);
-test.before(mocksSetup);
-test.after(mocksTeardown);
-test.after(teardown);
+test.before.each(setup);
+test.before.each(mocksSetup);
+test.after.each(mocksTeardown);
+test.after.each(teardown);
 
 test('renders entire settings app', () => {
   // eslint-disable-next-line global-require
