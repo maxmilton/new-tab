@@ -15,7 +15,7 @@ test('renders correctly', () => {
   // eslint-disable-next-line @typescript-eslint/no-var-requires, global-require
   const { Menu } = require('../src/components/Menu') as MenuComponent;
   const rendered = render(Menu());
-  assert.snapshot(
+  assert.fixture(
     rendered.container.innerHTML,
     `<div id="menu">
     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" class="icon">
