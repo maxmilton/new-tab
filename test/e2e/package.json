@@ -1,0 +1,14 @@
+{
+  "name": "e2e",
+  "version": "0.0.0",
+  "private": true,
+  "scripts": {
+    "debug": "PWDEBUG=console yarn run test-e2e",
+    "test-e2e": "node -r esbuild-register index.ts"
+  },
+  "dependencies": {
+    "esbuild-register": "2.5.0",
+    "playwright-chromium": "1.11.0",
+    "uvu": "0.5.1"
+  }
+}

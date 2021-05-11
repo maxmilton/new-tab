@@ -11,6 +11,8 @@ jobs:
       - run: yarn install --frozen-lockfile
       - run: yarn run build
       - run: yarn run test
+      - run: yarn install --cwd=test/e2e --frozen-lockfile
+      - run: yarn run --cwd=test/e2e test-e2e
       - name: Report coverage
         run: |
           curl -Lo ./cc-test-reporter https://codeclimate.com/downloads/test-reporter/test-reporter-latest-linux-amd64
