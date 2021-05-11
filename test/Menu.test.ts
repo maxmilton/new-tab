@@ -2,7 +2,7 @@ import { test } from 'uvu';
 import * as assert from 'uvu/assert';
 // import { Menu } from '../src/components/Menu';
 import {
-  setup, render, cleanup, teardown,
+  cleanup, render, setup, teardown,
 } from './utils';
 
 type MenuComponent = typeof import('../src/components/Menu');

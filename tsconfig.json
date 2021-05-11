@@ -11,7 +11,7 @@
     "allowJs": true,
     "checkJs": true,
 
-    "noEmit": true, // prevents issues in VS Code and ESLint
+    "noEmit": true, // prevents errors in VS Code and ESLint
     "sourceMap": true,
 
     "strict": true,

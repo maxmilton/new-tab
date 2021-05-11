@@ -1,7 +1,7 @@
 import { suite } from 'uvu';
 import * as assert from 'uvu/assert';
 import {
-  setup, render, cleanup, teardown,
+  cleanup, render, setup, teardown,
 } from './utils';
 // import { Test } from './TestComponent';
 
@@ -21,20 +21,20 @@ import {
 
 type TestComponent = typeof import('./TestComponent');
 
-const utilSetup = suite('setup');
-const utilTeardown = suite('teardown');
-const utilRender = suite('render');
-const utilCleanup = suite('clean');
+const setupUtil = suite('setup');
+const teardownUtil = suite('teardown');
+const renderUtil = suite('render');
+const cleanupUtil = suite('clean');
 
-utilSetup.after.each(teardown);
-utilTeardown.before.each(setup);
-utilRender.before(setup);
-utilRender.after(teardown);
-utilRender.after.each(cleanup);
-utilCleanup.before(setup);
-utilCleanup.after(teardown);
+setupUtil.after.each(teardown);
+teardownUtil.before.each(setup);
+renderUtil.before(setup);
+renderUtil.after(teardown);
+renderUtil.after.each(cleanup);
+cleanupUtil.before(setup);
+cleanupUtil.after(teardown);
 
-utilSetup('adds DOM globals', () => {
+setupUtil('adds DOM globals', () => {
   assert.not.ok(global.window);
   assert.not.ok(global.document);
   setup();
@@ -42,7 +42,7 @@ utilSetup('adds DOM globals', () => {
   assert.ok(global.document);
 });
 
-utilSetup('adds innerText mock', () => {
+setupUtil('adds innerText mock', () => {
   setup();
   const el = document.createElement('div');
   assert.is('innerText' in el, true);
@@ -51,7 +51,7 @@ utilSetup('adds innerText mock', () => {
   assert.is(el.innerText, 'abc');
 });
 
-utilSetup('throws when teardown has not run', () => {
+setupUtil('throws when teardown has not run', () => {
   setup();
   assert.throws(() => setup());
   assert.throws(
@@ -60,7 +60,7 @@ utilSetup('throws when teardown has not run', () => {
   );
 });
 
-utilTeardown('removes DOM globals', () => {
+teardownUtil('removes DOM globals', () => {
   assert.ok(global.window);
   assert.ok(global.document);
   teardown();
@@ -68,7 +68,7 @@ utilTeardown('removes DOM globals', () => {
   assert.not.ok(global.document);
 });
 
-utilTeardown('throws when setup has not run', () => {
+teardownUtil('throws when setup has not run', () => {
   teardown();
   assert.throws(() => teardown());
   assert.throws(
@@ -77,12 +77,12 @@ utilTeardown('throws when setup has not run', () => {
   );
 });
 
-utilRender('returns a container element', () => {
+renderUtil('returns a container element', () => {
   const rendered = render(document.createElement('div'));
   assert.instance(rendered.container, window.Element);
 });
 
-utilRender('returns a debug function', () => {
+renderUtil('returns a debug function', () => {
   const rendered = render(document.createElement('div'));
   // eslint-disable-next-line @typescript-eslint/unbound-method
   assert.type(rendered.debug, 'function');
@@ -104,13 +104,13 @@ utilRender('returns a debug function', () => {
 //   const rendered = render(el);
 // });
 
-utilRender('mounts supplied element in container', () => {
+renderUtil('mounts supplied element in container', () => {
   const el = document.createElement('span');
   const rendered = render(el);
   assert.is(rendered.container.firstChild, el);
 });
 
-utilRender('mounts container div to document body', () => {
+renderUtil('mounts container div to document body', () => {
   assert.not.ok(document.body.firstChild);
   const rendered = render(document.createElement('div'));
   assert.is(document.body.firstChild, rendered.container);
@@ -118,7 +118,7 @@ utilRender('mounts container div to document body', () => {
   assert.instance(document.body.firstChild, window.HTMLDivElement);
 });
 
-utilRender(
+renderUtil(
   'mounts containers when other DOM elements exist on document body',
   () => {
     document.body.append(document.createElement('span'));
@@ -134,21 +134,21 @@ utilRender(
   },
 );
 
-utilRender('renders TestComponent correctly', () => {
+renderUtil('renders TestComponent correctly', () => {
   // eslint-disable-next-line @typescript-eslint/no-var-requires, global-require
   const { Test } = require('./TestComponent') as TestComponent;
   const rendered = render(Test({ text: 'abc' }));
   assert.snapshot(rendered.container.innerHTML, '<div id="test">abc</div>');
 });
 
-utilCleanup('removes mounted container from document body', () => {
+cleanupUtil('removes mounted container from document body', () => {
   render(document.createElement('div'));
   assert.ok(document.body.firstChild);
   cleanup();
   assert.not.ok(document.body.firstChild);
 });
 
-utilCleanup('removes multiple mounted containers from document body', () => {
+cleanupUtil('removes multiple mounted containers from document body', () => {
   render(document.createElement('div'));
   render(document.createElement('div'));
   render(document.createElement('div'));
@@ -157,7 +157,7 @@ utilCleanup('removes multiple mounted containers from document body', () => {
   assert.is(document.body.childNodes.length, 0);
 });
 
-utilCleanup('only removes mounted containers and not other DOM nodes', () => {
+cleanupUtil('only removes mounted containers and not other DOM nodes', () => {
   document.body.append(document.createElement('span'));
   document.body.append(document.createElement('span'));
   render(document.createElement('a'));
@@ -171,7 +171,7 @@ utilCleanup('only removes mounted containers and not other DOM nodes', () => {
   });
 });
 
-utilSetup.run();
-utilTeardown.run();
-utilRender.run();
-utilCleanup.run();
+setupUtil.run();
+teardownUtil.run();
+renderUtil.run();
+cleanupUtil.run();
