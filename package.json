@@ -16,8 +16,6 @@
     "lint:ts": "tsc --noEmit",
     "prebuild": "rm -rf dist; cp -r static dist",
     "test": "c8 --all --include=src --reporter=text --reporter=lcovonly uvu -r esbuild-register test '\\.test\\.ts$'",
-    "test_": "uvu -r esbuild-register test '\\.test\\.ts$'",
-    "test__": "node -r esbuild-register test/test-utils.test.ts",
     "zip": "sh -c 'test -z \"$(git status --porcelain)\"' && yarn run lint && yarn run test && yarn run build && cd dist && zip ../chrome-extension.zip *"
   },
   "dependencies": {
