@@ -7,8 +7,10 @@
     "test-e2e": "node -r esbuild-register index.ts"
   },
   "dependencies": {
+    "playwright-chromium": "1.11.0"
+  },
+  "devDependencies": {
     "esbuild-register": "2.5.0",
-    "playwright-chromium": "1.11.0",
     "uvu": "0.5.1"
   }
 }
