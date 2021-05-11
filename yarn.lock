@@ -722,10 +722,10 @@ ecc-jsbn@~0.1.1:
     jsbn "~0.1.0"
     safer-buffer "^2.1.0"
 
-ekscss@0.0.5:
-  version "0.0.5"
-  resolved "https://registry.yarnpkg.com/ekscss/-/ekscss-0.0.5.tgz#1e2e6792e24b5c66a152ce4323b1d400b798cba7"
-  integrity sha512-ynTMVC0GXOaCps9e/g269NohRR+y8FEIdhNtGb9dGOTUWuUvRUF8nIpnaMIhmQl4QyLcYjOlwgnbgwnVWSLYqQ==
+ekscss@0.0.6:
+  version "0.0.6"
+  resolved "https://registry.yarnpkg.com/ekscss/-/ekscss-0.0.6.tgz#7dc8be629271c23fcb2d232a3ffd024e744757a0"
+  integrity sha512-iFPd/sJqL0sJVDx6kYFlDv3mxFmDJq5FZcDCwoLjeW3c60bHrat4j3BD6mVWCWX46SPETJcfwqOmmA4rlnYMnQ==
   dependencies:
     "@types/stylis" "^4.0.0"
     source-map "^0.7.3"
