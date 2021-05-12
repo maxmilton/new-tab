@@ -1,7 +1,7 @@
-[![Build status](https://img.shields.io/github/workflow/status/MaxMilton/new-tab/ci)](https://github.com/MaxMilton/new-tab/actions)
+[![Build status](https://img.shields.io/github/workflow/status/maxmilton/new-tab/ci)](https://github.com/maxmilton/new-tab/actions)
 [![Coverage status](https://img.shields.io/codeclimate/coverage/MaxMilton/new-tab)](https://codeclimate.com/github/MaxMilton/new-tab)
 [![Chrome web store version](https://img.shields.io/chrome-web-store/v/cpcibnbdmpmcmnkhoiilpnlaepkepknb.svg)](https://chrome.google.com/webstore/detail/new-tab/cpcibnbdmpmcmnkhoiilpnlaepkepknb)
-[![Licence](https://img.shields.io/github/license/MaxMilton/new-tab.svg)](https://github.com/MaxMilton/new-tab/blob/master/LICENSE)
+[![Licence](https://img.shields.io/github/license/maxmilton/new-tab.svg)](https://github.com/maxmilton/new-tab/blob/master/LICENSE)
 ![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg)
 
 # New Tab
@@ -38,8 +38,8 @@ Originally an experimental project to give me a chance for me to play with the C
 ### Technology
 
 - [Chrome browser APIs](https://developer.chrome.com/apps/api_index)
-- [stage1](https://github.com/MaxMilton/stage1) JavaScript framework
-- [ekscss](https://github.com/MaxMilton/ekscss) style preprocessor
+- [stage1](https://github.com/maxmilton/stage1) JavaScript framework
+- [ekscss](https://github.com/maxmilton/ekscss) style preprocessor
 - [esbuild](https://esbuild.github.io/) JavaScript bundler
 
 ## Known issues
@@ -55,15 +55,15 @@ Recent versions of Google Chrome and other Chromium based browsers (e.g. Brave, 
 
 ## Bugs
 
-Please report any bugs you encounter on the [GitHub issue tracker](https://github.com/MaxMilton/new-tab/issues).
+Please report any bugs you encounter on the [GitHub issue tracker](https://github.com/maxmilton/new-tab/issues).
 
 ## Changelog
 
-See [releases on GitHub](https://github.com/MaxMilton/new-tab/releases).
+See [releases on GitHub](https://github.com/maxmilton/new-tab/releases).
 
 ## License
 
-`New Tab` is an MIT licensed open source project. See [LICENSE](https://github.com/MaxMilton/new-tab/blob/master/LICENSE).
+`New Tab` is an MIT licensed open source project. See [LICENSE](https://github.com/maxmilton/new-tab/blob/master/LICENSE).
 
 The extension [lightning bolt icon](https://github.com/twitter/twemoji/blob/master/assets/svg/26a1.svg) is from [twitter/twemoji](https://github.com/twitter/twemoji) which is licensed CC-BY 4.0.
 
