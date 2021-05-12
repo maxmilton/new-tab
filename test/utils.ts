@@ -19,8 +19,8 @@ function mockInnerText() {
       el.querySelectorAll('script,style').forEach((s) => s.remove());
       return el.textContent;
     },
-    set(value: string) {
-      (this as HTMLElement).textContent = value;
+    set(this: HTMLElement, value: string) {
+      this.textContent = value;
     },
   });
 }
