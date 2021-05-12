@@ -15,6 +15,9 @@
 //    - open tab to chrome internal page)
 //  - Every use of the "chrome" API
 
+// TODO: If we want to collect coverage during e2e testing, we might need
+// something custom like https://github.com/bricss/dopant/blob/master/test/fixtures/index.mjs
+
 import fs from 'fs';
 import path from 'path';
 import { suite } from 'uvu';
