@@ -3,6 +3,9 @@
 
 import { JSDOM } from 'jsdom';
 
+// increase limit from 10
+global.Error.stackTraceLimit = 100;
+
 const mountedContainers = new Set<HTMLDivElement>();
 
 // export function sleep(ms: number): Promise<void> {
