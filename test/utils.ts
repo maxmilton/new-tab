@@ -3,7 +3,7 @@
 
 import { JSDOM } from 'jsdom';
 
-const mountedContainers = new Set<{ container: HTMLDivElement }>();
+const mountedContainers = new Set<HTMLDivElement>();
 
 // export function sleep(ms: number): Promise<void> {
 //   return new Promise((resolve) => setTimeout(resolve, ms));
@@ -76,7 +76,7 @@ export function render(component: Node): RenderResult {
   container.appendChild(component);
   document.body.appendChild(container);
 
-  mountedContainers.add({ container });
+  mountedContainers.add(container);
 
   return {
     container,
@@ -89,7 +89,7 @@ export function render(component: Node): RenderResult {
 }
 
 export function cleanup(): void {
-  mountedContainers.forEach(({ container }) => {
+  mountedContainers.forEach((container) => {
     if (container.parentNode === document.body) {
       document.body.removeChild(container);
     }
