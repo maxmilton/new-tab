@@ -12,17 +12,12 @@ const mountedContainers = new Set<HTMLDivElement>();
 //   return new Promise((resolve) => setTimeout(resolve, ms));
 // }
 
-function innerText(el: HTMLElement) {
-  // eslint-disable-next-line no-param-reassign
-  el = el.cloneNode(true) as HTMLElement;
-  el.querySelectorAll('script,style').forEach((s) => s.remove());
-  return el.textContent;
-}
-
 function mockInnerText() {
   Object.defineProperty(global.window.HTMLElement.prototype, 'innerText', {
-    get() {
-      return innerText(this);
+    get(this: HTMLElement) {
+      const el = this.cloneNode(true) as HTMLElement;
+      el.querySelectorAll('script,style').forEach((s) => s.remove());
+      return el.textContent;
     },
     set(value: string) {
       (this as HTMLElement).textContent = value;
