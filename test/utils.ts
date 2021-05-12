@@ -64,8 +64,10 @@ export interface RenderResult {
    * A helper to print the HTML structure of the mounted container. The HTML is
    * prettified and may not accurately represent your actual HTML. It's intended
    * for debugging tests only and should not be used in any assertions.
+   *
+   * @param el - An element to inspect. Default is the mounted container.
    */
-  debug(): void;
+  debug(el?: Element): void;
 }
 
 export function render(component: Node): RenderResult {
@@ -78,11 +80,14 @@ export function render(component: Node): RenderResult {
 
   return {
     container,
-    debug() {
+    debug(el = container) {
       // TODO: Prettify HTML
       console.log('DEBUG:');
-      console.log(container.innerHTML);
+      console.log(el.innerHTML);
     },
+    // unmount() {
+    //   container.removeChild(component);
+    // },
   };
 }
 
@@ -91,6 +96,8 @@ export function cleanup(): void {
     if (container.parentNode === document.body) {
       document.body.removeChild(container);
     }
+
+    mountedContainers.delete(container);
   });
 }
 
