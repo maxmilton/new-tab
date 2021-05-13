@@ -43,7 +43,7 @@ jobs:
         with:
           node-version: 16
       - run: yarn install --frozen-lockfile
-      - run: yarn install --cwd=test/e2e --production --frozen-lockfile
+      - run: yarn install --cwd=test/e2e --frozen-lockfile
         env:
           PLAYWRIGHT_SKIP_BROWSER_DOWNLOAD: 1
       - run: yarn run lint
