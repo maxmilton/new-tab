@@ -1,3 +1,5 @@
+/* eslint-disable import/no-extraneous-dependencies */
+
 // TODO: Write tests to verify:
 //  - No console logs/errors -- including/especially CSP violations
 //  - Theme loader works
