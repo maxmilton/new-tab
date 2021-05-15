@@ -8,10 +8,6 @@ global.Error.stackTraceLimit = 100;
 
 const mountedContainers = new Set<HTMLDivElement>();
 
-// export function sleep(ms: number): Promise<void> {
-//   return new Promise((resolve) => setTimeout(resolve, ms));
-// }
-
 function mockInnerText() {
   Object.defineProperty(global.window.HTMLElement.prototype, 'innerText', {
     get(this: HTMLElement) {
@@ -92,6 +88,12 @@ export function render(component: Node): RenderResult {
 }
 
 export function cleanup(): void {
+  if (!mountedContainers || !mountedContainers.size) {
+    throw new Error(
+      'No mounted components exist, did you forget to call render()?',
+    );
+  }
+
   mountedContainers.forEach((container) => {
     if (container.parentNode === document.body) {
       document.body.removeChild(container);
