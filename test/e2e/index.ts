@@ -34,7 +34,8 @@ import {
   sleep,
 } from './utils';
 
-const test = suite<E2ETestContext>('test');
+const fileTest = suite('file');
+const test = suite<E2ETestContext>('e2e');
 
 // FIXME: Use hooks normally once issue is fixed -- https://github.com/lukeed/uvu/issues/80
 // test.before(setup);
@@ -75,7 +76,7 @@ test.after.each(async (context) => {
   'settings.js',
   'settings.html',
 ].forEach((filename) => {
-  test(`dist/${filename} exists`, () => {
+  fileTest(`dist/${filename} exists`, () => {
     const filePath = path.join(DIST_DIR, filename);
     assert.ok(fs.statSync(filePath));
   });
@@ -107,4 +108,5 @@ test('renders settings app', async (context) => {
   assert.is(context.consoleMessages.length, 0, 'zero console messages');
 });
 
+fileTest.run();
 test.run();
