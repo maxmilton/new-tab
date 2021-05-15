@@ -1,4 +1,4 @@
-/* eslint-disable import/no-extraneous-dependencies */
+/* eslint-disable import/no-extraneous-dependencies, no-console */
 
 // TODO: Write tests to verify:
 //  - No console logs/errors -- including/especially CSP violations
