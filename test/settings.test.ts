@@ -11,7 +11,7 @@ test.after.each(teardown);
 
 test('renders entire settings app', () => {
   // eslint-disable-next-line global-require
-  require('../dist/settings');
+  require('../dist/settings.js');
 
   // TODO: Better assertions
   assert.is(document.body.innerHTML.length > 600, true);

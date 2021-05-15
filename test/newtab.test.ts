@@ -11,7 +11,7 @@ test.after.each(teardown);
 
 test('renders entire newtab app', () => {
   // eslint-disable-next-line global-require
-  require('../dist/newtab');
+  require('../dist/newtab.js');
 
   // TODO: Better assertions
   assert.is(document.body.innerHTML.length > 900, true);
