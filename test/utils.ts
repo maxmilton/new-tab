@@ -88,6 +88,12 @@ export function render(component: Node): RenderResult {
 }
 
 export function cleanup(): void {
+  if (!mountedContainers || !mountedContainers.size) {
+    throw new Error(
+      'No mounted components exist, did you forget to call render()?',
+    );
+  }
+
   mountedContainers.forEach((container) => {
     if (container.parentNode === document.body) {
       document.body.removeChild(container);
