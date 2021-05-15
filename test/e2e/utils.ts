@@ -1,15 +1,36 @@
+/* eslint-disable import/no-extraneous-dependencies, no-console, no-multi-assign */
+
 import fs from 'fs';
+import colors from 'kleur';
 import os from 'os';
 import path from 'path';
-import { BrowserContext, chromium, Page } from 'playwright-chromium';
+import {
+  BrowserContext,
+  chromium,
+  ConsoleMessage,
+  Page,
+} from 'playwright-chromium';
 
 export interface E2ETestContext {
   tmpDir: string;
   browser: BrowserContext;
-  pages: Set<{ page: Page }>;
+  pages: Set<Page>;
+  consoleMessages: ConsoleMessage[];
+  unhandledErrors: Error[];
 }
 
-export const distDir = path.join(__dirname, '../../dist');
+interface RenderResult {
+  page: Page;
+}
+
+// increase limit from 10
+global.Error.stackTraceLimit = 100;
+
+export const DIST_DIR = path.join(__dirname, '../../dist');
+
+export function sleep(ms: number): Promise<void> {
+  return new Promise((resolve) => setTimeout(resolve, ms));
+}
 
 export async function setup(context: E2ETestContext): Promise<void> {
   if (context.browser) {
@@ -19,7 +40,7 @@ export async function setup(context: E2ETestContext): Promise<void> {
   }
 
   // if no dist files the browser will hang so fail early
-  fs.statSync(distDir);
+  fs.statSync(DIST_DIR);
 
   context.tmpDir = await fs.promises.mkdtemp(
     path.join(os.tmpdir(), 'newtab-test-'),
@@ -28,13 +49,13 @@ export async function setup(context: E2ETestContext): Promise<void> {
     // headless mode doesn't support extensions
     headless: false,
     args: [
-      `--disable-extensions-except=${distDir}`,
-      `--load-extension=${distDir}`,
+      `--disable-extensions-except=${DIST_DIR}`,
+      `--load-extension=${DIST_DIR}`,
     ],
     timeout: 10000,
   });
 
-  context.pages = new Set<{ page: Page }>();
+  context.pages = new Set<Page>();
 }
 
 export async function teardown(context: E2ETestContext): Promise<void> {
@@ -51,25 +72,42 @@ export async function teardown(context: E2ETestContext): Promise<void> {
   });
 }
 
-interface RenderResult {
-  page: Page;
-}
-
-export async function render(
+export async function renderPage(
   context: E2ETestContext,
   url: string,
 ): Promise<RenderResult> {
+  context.unhandledErrors = [];
+  context.consoleMessages = [];
   const page = await context.browser.newPage();
+  page.on('crash', (crashedPage) => {
+    throw new Error(`Page crashed: ${crashedPage.url()}`);
+  });
+  page.on('pageerror', (err) => {
+    console.error(colors.red('Page Error:'), err);
+    context.unhandledErrors.push(err);
+  });
+  page.on('console', (msg) => {
+    const loc = msg.location();
+    console.log(
+      colors.dim(
+        `${loc.url}:${loc.lineNumber}:${loc.columnNumber} ${msg.type()} >>`,
+      ),
+      msg.text(),
+    );
+    context.consoleMessages.push(msg);
+  });
   await page.goto(url);
 
-  context.pages.add({ page });
+  context.pages.add(page);
 
   return { page };
 }
 
-export async function cleanup(context: E2ETestContext): Promise<void> {
-  for (const { page } of context.pages) {
+export async function cleanupPage(context: E2ETestContext): Promise<void> {
+  for (const page of context.pages) {
     // eslint-disable-next-line no-await-in-loop
     await page.close();
   }
+  // @ts-expect-error - reset for next renderPage
+  context.unhandledErrors = context.consoleMessages = undefined;
 }

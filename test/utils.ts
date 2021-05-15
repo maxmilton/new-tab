@@ -8,10 +8,6 @@ global.Error.stackTraceLimit = 100;
 
 const mountedContainers = new Set<HTMLDivElement>();
 
-// export function sleep(ms: number): Promise<void> {
-//   return new Promise((resolve) => setTimeout(resolve, ms));
-// }
-
 function mockInnerText() {
   Object.defineProperty(global.window.HTMLElement.prototype, 'innerText', {
     get(this: HTMLElement) {
