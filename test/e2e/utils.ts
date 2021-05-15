@@ -35,7 +35,7 @@ export function sleep(ms: number): Promise<void> {
 export async function setup(context: E2ETestContext): Promise<void> {
   if (context.browser) {
     throw new Error(
-      'browser instance already exists, did you forget to call teardown()?',
+      'Browser instance already exists, did you forget to call teardown()?',
     );
   }
 
@@ -61,7 +61,7 @@ export async function setup(context: E2ETestContext): Promise<void> {
 export async function teardown(context: E2ETestContext): Promise<void> {
   if (!context.browser) {
     throw new Error(
-      'browser instance does not exist, did you forget to call setup()?',
+      'Browser instance does not exist, did you forget to call setup()?',
     );
   }
 
@@ -76,9 +76,16 @@ export async function renderPage(
   context: E2ETestContext,
   url: string,
 ): Promise<RenderResult> {
+  if (!context.browser) {
+    throw new Error(
+      'Browser instance does not exist, did you forget to call setup()?',
+    );
+  }
+
+  const page = await context.browser.newPage();
+  context.pages.add(page);
   context.unhandledErrors = [];
   context.consoleMessages = [];
-  const page = await context.browser.newPage();
   page.on('crash', (crashedPage) => {
     throw new Error(`Page crashed: ${crashedPage.url()}`);
   });
@@ -97,13 +104,14 @@ export async function renderPage(
     context.consoleMessages.push(msg);
   });
   await page.goto(url);
-
-  context.pages.add(page);
-
   return { page };
 }
 
 export async function cleanupPage(context: E2ETestContext): Promise<void> {
+  if (!context.pages || !context.pages.size) {
+    throw new Error('No pages exist, did you forget to call renderPage()?');
+  }
+
   for (const page of context.pages) {
     // eslint-disable-next-line no-await-in-loop
     await page.close();
