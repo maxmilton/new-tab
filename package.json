@@ -1,12 +1,12 @@
 {
   "name": "new-tab",
   "version": "0.15.0",
-  "private": true,
   "description": "⚡ A high performance new tab page that gets you where you need to go faster.",
-  "license": "MIT",
   "repository": "maxmilton/new-tab",
-  "author": "Max Milton <max@happycode.ltd>",
   "homepage": "https://github.com/MaxMilton/new-tab",
+  "author": "Max Milton <max@happycode.ltd>",
+  "license": "MIT",
+  "private": true,
   "scripts": {
     "build": "NODE_ENV=production node build.mjs",
     "dev": "NODE_ENV=development node build.mjs",
