@@ -27,15 +27,10 @@ jobs:
       - uses: actions/setup-node@v2
         with:
           node-version: 16
-      # TODO: Use playwright CLI instead when playwright@1.12.0 is released -- https://github.com/microsoft/playwright-github-action/pull/44
-      - uses: maxmilton/action-setup-playwright@v1
-        with:
-          browsers: chromium
-          headless: false
       - run: yarn install --frozen-lockfile
       - run: yarn run build
       - run: yarn install --cwd=test/e2e --frozen-lockfile
-      # - run: yarn --cwd=test/e2e playwright install-deps chromium
+      - run: yarn --cwd=test/e2e playwright install-deps chromium
       - run: xvfb-run --auto-servernum -- yarn run --cwd=test/e2e test-e2e
   lint:
     runs-on: ubuntu-latest
