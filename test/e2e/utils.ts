@@ -1,4 +1,4 @@
-/* eslint-disable import/no-extraneous-dependencies, no-console, no-multi-assign */
+/* eslint-disable no-console, no-multi-assign */
 
 import fs from 'fs';
 import colors from 'kleur';

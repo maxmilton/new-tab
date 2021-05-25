@@ -8,15 +8,16 @@
   "license": "MIT",
   "private": true,
   "scripts": {
-    "build": "NODE_ENV=production node build.mjs",
+    "build": "pnpm run prebuild && NODE_ENV=production node build.mjs",
     "dev": "NODE_ENV=development node build.mjs",
-    "lint": "yarn lint:css && yarn lint:js && yarn lint:ts",
+    "lint": "pnpm run lint:css && pnpm run lint:js && pnpm run lint:ts",
     "lint:css": "echo 'TODO: CSS linting'; exit 0",
     "lint:js": "eslint --ignore-path .gitignore --ext .ts,.js,.mjs,.cjs .",
     "lint:ts": "tsc --noEmit",
     "prebuild": "rm -rf dist; cp -r static dist",
     "test": "c8 --all --include=src --reporter=text --reporter=lcovonly uvu -r esbuild-register test '\\.test\\.ts$'",
-    "zip": "sh -c 'test -z \"$(git status --porcelain)\"' && yarn run lint && yarn run test && yarn run build && cd dist && zip ../chrome-extension.zip *"
+    "test-e2e": "node -r esbuild-register test/e2e/index.ts",
+    "zip": "sh -c 'test -z \"$(git status --porcelain)\"' && pnpm run lint && pnpm run test && pnpm run build && cd dist && zip ../chrome-extension.zip *"
   },
   "dependencies": {
     "stage1": "0.0.7"
@@ -39,6 +40,8 @@
     "eslint-plugin-import": "2.23.2",
     "git-ref": "0.0.3",
     "jsdom": "16.5.3",
+    "kleur": "4.1.4",
+    "playwright-chromium": "1.11.0",
     "prettier": "2.3.0",
     "typescript": "4.2.4",
     "uvu": "0.5.1"
