@@ -13,18 +13,18 @@ export function TabLink(props: TabLinkProps): LinkComponent {
     const { id, windowId } = props;
 
     // Switch to the clicked tab
-    chrome.tabs.update(id, { active: true });
+    void chrome.tabs.update(id, { active: true });
 
     // Switch active window if the tab isn't in the current window
     chrome.windows.getCurrent({}, (currentWindow) => {
       if (currentWindow.id !== windowId) {
-        chrome.windows.update(windowId, { focused: true });
+        void chrome.windows.update(windowId, { focused: true });
       }
     });
 
     // Close current "new-tab" page
     chrome.tabs.getCurrent((currentTab) => {
-      chrome.tabs.remove(currentTab!.id!);
+      void chrome.tabs.remove(currentTab!.id!);
     });
   };
 

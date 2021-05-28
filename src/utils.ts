@@ -16,10 +16,10 @@ export function handleClick(event: MouseEvent): void {
 
     if ((target as HTMLAnchorElement).target === '_blank' || ctrlKey) {
       // open the location in a new tab
-      chrome.tabs.create({ url });
+      void chrome.tabs.create({ url });
     } else {
       // update the location in the current tab
-      chrome.tabs.update({ url });
+      void chrome.tabs.update({ url });
     }
   }
 }
