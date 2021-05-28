@@ -23,7 +23,7 @@
     "stage1": "0.0.7"
   },
   "devDependencies": {
-    "@types/chrome": "0.0.142",
+    "@types/chrome": "0.0.143",
     "@types/csso": "3.5.1",
     "@types/jsdom": "16.2.10",
     "@types/node": "15.6.1",
@@ -32,7 +32,7 @@
     "c8": "7.7.2",
     "csso": "4.2.0",
     "ekscss": "0.0.7",
-    "esbuild": "0.12.2",
+    "esbuild": "0.12.5",
     "esbuild-minify-templates": "0.4.1",
     "esbuild-register": "2.5.0",
     "eslint": "7.27.0",
@@ -43,7 +43,7 @@
     "kleur": "4.1.4",
     "playwright-chromium": "1.11.1",
     "prettier": "2.3.0",
-    "typescript": "4.2.4",
+    "typescript": "4.3.2",
     "uvu": "0.5.1"
   },
   "prettier": {
