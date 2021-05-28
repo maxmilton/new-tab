@@ -10,7 +10,7 @@ test.after.each(mocksTeardown);
 test.after.each(teardown);
 
 test('renders entire settings app', () => {
-  // eslint-disable-next-line global-require
+  // eslint-disable-next-line global-require, import/extensions
   require('../dist/settings.js');
 
   // TODO: Better assertions

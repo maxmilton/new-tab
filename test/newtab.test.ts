@@ -10,7 +10,7 @@ test.after.each(mocksTeardown);
 test.after.each(teardown);
 
 test('renders entire newtab app', () => {
-  // eslint-disable-next-line global-require
+  // eslint-disable-next-line global-require, import/extensions
   require('../dist/newtab.js');
 
   // TODO: Better assertions
