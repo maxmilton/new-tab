@@ -112,51 +112,83 @@ type DeepPartial<T> = T extends Function
 /* eslint-enable @typescript-eslint/ban-types */
 type ChromeAPI = DeepPartial<typeof window.chrome>;
 
+type MockFn<T> = T & {
+  calledTimes(): number;
+};
+
+const noop = () => {};
+
+// @ts-expect-error - FIXME:!
+// eslint-disable-next-line @typescript-eslint/ban-types
+export function mockFn<T extends Function>(imlp: T = noop): MockFn<T> {
+  let callCount = 0;
+
+  // @ts-expect-error - FIXME:!
+  const fn: MockFn<T> = new Proxy(imlp, {
+    apply(target, thisArg, args) {
+      callCount += 1;
+      // eslint-disable-next-line @typescript-eslint/no-unsafe-return
+      return Reflect.apply(target, thisArg, args);
+    },
+  });
+
+  fn.calledTimes = () => callCount;
+
+  return fn;
+}
+
 export function mocksSetup(): void {
   const mockChrome: ChromeAPI = {
     bookmarks: {
-      getTree() {},
-      search() {},
+      // @ts-expect-error - FIXME:!
+      getTree: noop,
+      // @ts-expect-error - FIXME:!
+      search: noop,
     },
     history: {
-      search() {},
+      search: noop,
     },
     runtime: {
-      openOptionsPage() {},
+      openOptionsPage: noop,
     },
     storage: {
       local: {
-        // @ts-expect-error - FIXME:
+        // @ts-expect-error - FIXME:!
         get: (_keys, callback) => {
-          // eslint-disable-next-line @typescript-eslint/no-unsafe-call
           callback({});
         },
-        set: (_items) => {},
+        set: noop,
       },
     },
     tabs: {
-      create() {},
-      getCurrent() {},
+      // @ts-expect-error - FIXME:!
+      create: noop,
+      // @ts-expect-error - FIXME:!
+      getCurrent: noop,
       onMoved: {
-        addListener() {},
+        addListener: noop,
       },
       onRemoved: {
-        addListener() {},
+        addListener: noop,
       },
       onUpdated: {
-        addListener() {},
+        addListener: noop,
       },
-      // @ts-expect-error - FIXME:
-      query() {},
-      remove() {},
-      update() {},
+      // @ts-expect-error - FIXME:!
+      query: noop,
+      // @ts-expect-error - FIXME:!
+      remove: noop,
+      // @ts-expect-error - FIXME:!
+      update: noop,
     },
     topSites: {
-      get: () => {},
+      get: noop,
     },
     windows: {
-      getCurrent() {},
-      update() {},
+      // @ts-expect-error - FIXME:!
+      getCurrent: noop,
+      // @ts-expect-error - FIXME:!
+      update: noop,
     },
   };
 

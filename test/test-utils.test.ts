@@ -1,7 +1,7 @@
 import { suite } from 'uvu';
 import * as assert from 'uvu/assert';
 import {
-  cleanup, render, setup, teardown,
+  cleanup, render, setup, teardown, mockFn,
 } from './utils';
 // import { Test } from './TestComponent';
 
@@ -25,6 +25,7 @@ const setupUtil = suite('setup');
 const teardownUtil = suite('teardown');
 const renderUtil = suite('render');
 const cleanupUtil = suite('clean');
+const mockFnUtil = suite('mockFn');
 
 setupUtil.after.each(teardown);
 teardownUtil.before.each(setup);
@@ -171,7 +172,28 @@ cleanupUtil('only removes mounted containers and not other DOM nodes', () => {
   });
 });
 
+mockFnUtil('proxy target is the passed impl argument', () => {
+  const ref = 'abc';
+  function fn() {
+    return ref;
+  }
+  const mocked = mockFn(fn);
+  assert.is(mocked(), ref);
+});
+
+mockFnUtil('increments calledTimes() counter on each call', () => {
+  const mocked = mockFn();
+  assert.is(mocked.calledTimes(), 0);
+  mocked();
+  assert.is(mocked.calledTimes(), 1);
+  mocked();
+  assert.is(mocked.calledTimes(), 2);
+  mocked();
+  assert.is(mocked.calledTimes(), 3);
+});
+
 setupUtil.run();
 teardownUtil.run();
 renderUtil.run();
 cleanupUtil.run();
+mockFnUtil.run();
