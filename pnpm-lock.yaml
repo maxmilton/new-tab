@@ -352,8 +352,8 @@ packages:
     hasBin: true
     dev: true
 
-  /acorn/8.2.4:
-    resolution: {integrity: sha512-Ibt84YwBDDA890eDiDCEqcbwvHlBvzzDkU2cGBBDDI1QWT12jTiXIOn2CIw5KK4i6N5Z2HUxwYjzriDyqaqqZg==}
+  /acorn/8.3.0:
+    resolution: {integrity: sha512-tqPKHZ5CaBJw0Xmy0ZZvLs1qTV+BNFSyvn77ASXkpBNfIRk8ev26fKrD9iLGwGA9zedPao52GSHzq8lyZG0NUw==}
     engines: {node: '>=0.4.0'}
     hasBin: true
     dev: true
@@ -1480,7 +1480,7 @@ packages:
         optional: true
     dependencies:
       abab: 2.0.5
-      acorn: 8.2.4
+      acorn: 8.3.0
       acorn-globals: 6.0.0
       cssom: 0.4.4
       cssstyle: 2.3.0
