@@ -8,7 +8,7 @@ jobs:
       - uses: actions/setup-node@v2
         with:
           node-version: 16
-      - run: npm install -g pnpm
+      - run: npm install --global pnpm
       - run: pnpm install --frozen-lockfile
         env:
           PLAYWRIGHT_SKIP_BROWSER_DOWNLOAD: 1
@@ -30,7 +30,7 @@ jobs:
       - uses: actions/setup-node@v2
         with:
           node-version: 16
-      - run: npm install -g pnpm
+      - run: npm install --global pnpm
       - run: pnpm install --frozen-lockfile
       - run: pnpm run build
       - run: pnpm playwright install-deps chromium
@@ -42,7 +42,7 @@ jobs:
       - uses: actions/setup-node@v2
         with:
           node-version: 16
-      - run: npm install -g pnpm
+      - run: npm install --global pnpm
       - run: pnpm install --frozen-lockfile
         env:
           PLAYWRIGHT_SKIP_BROWSER_DOWNLOAD: 1
