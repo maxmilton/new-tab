@@ -6,6 +6,7 @@
       "name": "Attach by Process ID",
       "processId": "${command:PickProcess}",
       "request": "attach",
+      "sourceMaps": true,
       "skipFiles": ["<node_internals>/**"],
       "smartStep": true,
       "type": "pwa-node"
@@ -15,6 +16,7 @@
       "name": "uvu All",
       "type": "pwa-node",
       "request": "launch",
+      "sourceMaps": true,
       "skipFiles": ["<node_internals>/**"],
       "program": "${workspaceFolder}/node_modules/.bin/uvu",
       "args": ["-r", "esbuild-register", "./test", "\\.test\\.ts$"],
@@ -28,6 +30,7 @@
       "name": "uvu Current File",
       "type": "pwa-node",
       "request": "launch",
+      "sourceMaps": true,
       "skipFiles": ["<node_internals>/**"],
       "args": ["-r", "esbuild-register", "${relativeFile}"],
       "console": "integratedTerminal"
