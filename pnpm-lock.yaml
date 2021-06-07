@@ -16,7 +16,7 @@ specifiers:
   eslint: 7.28.0
   eslint-config-airbnb-typescript: 12.3.1
   eslint-plugin-import: 2.23.4
-  git-ref: 0.0.3
+  git-ref: 0.2.0
   jsdom: 16.6.0
   kleur: 4.1.4
   playwright-chromium: 1.11.1
@@ -44,7 +44,7 @@ devDependencies:
   eslint: 7.28.0
   eslint-config-airbnb-typescript: 12.3.1_75473f0babdc4ff1c55efce786fd63eb
   eslint-plugin-import: 2.23.4_eslint@7.28.0
-  git-ref: 0.0.3
+  git-ref: 0.2.0
   jsdom: 16.6.0
   kleur: 4.1.4
   playwright-chromium: 1.11.1
@@ -376,8 +376,8 @@ packages:
       uri-js: 4.4.1
     dev: true
 
-  /ajv/8.5.0:
-    resolution: {integrity: sha512-Y2l399Tt1AguU3BPRP9Fn4eN+Or+StUGWCUpbnFyXSo8NZ9S4uj+AG2pjs5apK+ZMOwYOz1+a+VKvKH7CudXgQ==}
+  /ajv/8.6.0:
+    resolution: {integrity: sha512-cnUG4NSBiM4YFBxgZIj/In3/6KX+rQ2l2YPRVcvAMQGWEPKuXoPIhxzwqh31jA3IPbI4qEOp/5ILI4ynioXsGQ==}
     dependencies:
       fast-deep-equal: 3.1.3
       json-schema-traverse: 1.0.0
@@ -1196,8 +1196,8 @@ packages:
       pump: 3.0.0
     dev: true
 
-  /git-ref/0.0.3:
-    resolution: {integrity: sha512-IGkY7xniQ8yoMMj1SV8TszC/rCbiBphbGTnV4c21CHp3jeeXIML93pf1jI6+WzTRyhOrAcsMTrVyr/B0Kjvmig==}
+  /git-ref/0.2.0:
+    resolution: {integrity: sha512-71R1W/aXeZsne3IJFIIaqa8YtgpXtrtiHJxE1jSIktbcdEg9JZ4sqxX9gt9WdOvjJ13h1ONcS/YK+pq8CfT+VQ==}
     dev: true
 
   /glob-parent/5.1.2:
@@ -2229,7 +2229,7 @@ packages:
     resolution: {integrity: sha512-ZGum47Yi6KOOFDE8m223td53ath2enHcYLgOCjGr5ngu8bdIARQk6mN/wRMv4yMRcHnCSnHbCEha4sobQx5yWg==}
     engines: {node: '>=10.0.0'}
     dependencies:
-      ajv: 8.5.0
+      ajv: 8.6.0
       lodash.clonedeep: 4.5.0
       lodash.truncate: 4.4.2
       slice-ansi: 4.0.0
