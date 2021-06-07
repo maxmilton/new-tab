@@ -16,7 +16,7 @@ specifiers:
   eslint: 7.28.0
   eslint-config-airbnb-typescript: 12.3.1
   eslint-plugin-import: 2.23.4
-  git-ref: 0.0.3
+  git-ref: 0.1.0
   jsdom: 16.6.0
   kleur: 4.1.4
   playwright-chromium: 1.11.1
@@ -44,7 +44,7 @@ devDependencies:
   eslint: 7.28.0
   eslint-config-airbnb-typescript: 12.3.1_75473f0babdc4ff1c55efce786fd63eb
   eslint-plugin-import: 2.23.4_eslint@7.28.0
-  git-ref: 0.0.3
+  git-ref: 0.1.0
   jsdom: 16.6.0
   kleur: 4.1.4
   playwright-chromium: 1.11.1
@@ -1196,8 +1196,8 @@ packages:
       pump: 3.0.0
     dev: true
 
-  /git-ref/0.0.3:
-    resolution: {integrity: sha512-IGkY7xniQ8yoMMj1SV8TszC/rCbiBphbGTnV4c21CHp3jeeXIML93pf1jI6+WzTRyhOrAcsMTrVyr/B0Kjvmig==}
+  /git-ref/0.1.0:
+    resolution: {integrity: sha512-oDx2a5lOZSVXUU2dRdlG/3uvDOxN7c+w+bAZIFC0384rxcg7dIPQaEJT3XgUybn/4b7i7sF0TsCxfHfbvmH7Cg==}
     dev: true
 
   /glob-parent/5.1.2:
