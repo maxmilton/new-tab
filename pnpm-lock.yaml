@@ -3,7 +3,7 @@ lockfileVersion: 5.3
 specifiers:
   '@types/chrome': 0.0.144
   '@types/csso': 3.5.1
-  '@types/jsdom': 16.2.10
+  '@types/jsdom': 16.2.11
   '@types/node': 15.12.1
   '@typescript-eslint/eslint-plugin': 4.26.1
   '@typescript-eslint/parser': 4.26.1
@@ -31,7 +31,7 @@ dependencies:
 devDependencies:
   '@types/chrome': 0.0.144
   '@types/csso': 3.5.1
-  '@types/jsdom': 16.2.10
+  '@types/jsdom': 16.2.11
   '@types/node': 15.12.1
   '@typescript-eslint/eslint-plugin': 4.26.1_c8cbd5e7f5f92609ec78d991aced454b
   '@typescript-eslint/parser': 4.26.1_eslint@7.28.0+typescript@4.3.2
@@ -177,8 +177,8 @@ packages:
     resolution: {integrity: sha512-sz7iLqvVUg1gIedBOvlkxPlc8/uVzyS5OwGz1cKjXzkl3FpL3al0crU8YGU1WoHkxn0Wxbw5tyi6hvzJKNzFsw==}
     dev: true
 
-  /@types/jsdom/16.2.10:
-    resolution: {integrity: sha512-q3aIjp3ehhVSXSbvNyuireAfvU2umRiZ2aLumyeZewCnoNaokrRDdTu5IvaeE9pzNtWHXrUnM9lb22Vl3W08EA==}
+  /@types/jsdom/16.2.11:
+    resolution: {integrity: sha512-Dvtx0zFQOJqn06VgjRur7P5CeSNUOaQ5ivSSvdAdA3sBWzL3kl9OWApQRExKnS3XN39OaZdeCHpoYxVmX6FwCQ==}
     dependencies:
       '@types/node': 15.12.1
       '@types/parse5': 6.0.0
