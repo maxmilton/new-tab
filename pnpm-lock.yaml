@@ -19,7 +19,7 @@ specifiers:
   git-ref: 0.2.0
   jsdom: 16.6.0
   kleur: 4.1.4
-  playwright-chromium: 1.12.1
+  playwright-chromium: 1.12.2
   prettier: 2.3.1
   stage1: 0.0.7
   typescript: 4.3.2
@@ -47,7 +47,7 @@ devDependencies:
   git-ref: 0.2.0
   jsdom: 16.6.0
   kleur: 4.1.4
-  playwright-chromium: 1.12.1
+  playwright-chromium: 1.12.2
   prettier: 2.3.1
   typescript: 4.3.2
   uvu: 0.5.1
@@ -65,17 +65,19 @@ packages:
   /@babel/code-frame/7.12.11:
     resolution: {integrity: sha512-Zt1yodBx1UcyiePMSkWnU4hPqhwq7hGi2nFL1LeA3EUl+q2LQx16MISgJ0+z7dnmgvP9QtIleuETGOiOH1RcIw==}
     dependencies:
-      '@babel/highlight': 7.14.0
+      '@babel/highlight': 7.14.5
     dev: true
 
-  /@babel/helper-validator-identifier/7.14.0:
-    resolution: {integrity: sha512-V3ts7zMSu5lfiwWDVWzRDGIN+lnCEUdaXgtVHJgLb1rGaA6jMrtB9EmE7L18foXJIE8Un/A/h6NJfGQp/e1J4A==}
+  /@babel/helper-validator-identifier/7.14.5:
+    resolution: {integrity: sha512-5lsetuxCLilmVGyiLEfoHBRX8UCFD+1m2x3Rj97WrW3V7H3u4RWRXA4evMjImCsin2J2YT0QaVDGf+z8ondbAg==}
+    engines: {node: '>=6.9.0'}
     dev: true
 
-  /@babel/highlight/7.14.0:
-    resolution: {integrity: sha512-YSCOwxvTYEIMSGaBQb5kDDsCopDdiUGsqpatp3fOlI4+2HQSkTmEVWnVuySdAC5EWCqSWWTv0ib63RjR7dTBdg==}
+  /@babel/highlight/7.14.5:
+    resolution: {integrity: sha512-qf9u2WFWVV0MppaL877j2dBtQIDgmidgjGk5VIMw3OadXvYaXn66U1BFlH2t4+t3i+8PhedppRv+i40ABzd+gg==}
+    engines: {node: '>=6.9.0'}
     dependencies:
-      '@babel/helper-validator-identifier': 7.14.0
+      '@babel/helper-validator-identifier': 7.14.5
       chalk: 2.4.2
       js-tokens: 4.0.0
     dev: true
@@ -352,8 +354,8 @@ packages:
     hasBin: true
     dev: true
 
-  /acorn/8.3.0:
-    resolution: {integrity: sha512-tqPKHZ5CaBJw0Xmy0ZZvLs1qTV+BNFSyvn77ASXkpBNfIRk8ev26fKrD9iLGwGA9zedPao52GSHzq8lyZG0NUw==}
+  /acorn/8.4.0:
+    resolution: {integrity: sha512-ULr0LDaEqQrMFGyQ3bhJkLsbtrQ8QibAseGZeaSUiT/6zb9IvIkomWHJIvgvwad+hinRAgsI51JcWk2yvwyL+w==}
     engines: {node: '>=0.4.0'}
     hasBin: true
     dev: true
@@ -1483,7 +1485,7 @@ packages:
         optional: true
     dependencies:
       abab: 2.0.5
-      acorn: 8.3.0
+      acorn: 8.4.0
       acorn-globals: 6.0.0
       cssom: 0.4.4
       cssstyle: 2.3.0
@@ -1891,8 +1893,8 @@ packages:
       find-up: 2.1.0
     dev: true
 
-  /playwright-chromium/1.12.1:
-    resolution: {integrity: sha512-a6AXk2Sd7NjXk6tQYf5BW53a9YlBU5+AITpQ8L3MYhMqtMHRFk7X0z2EavtklbmahbbDdxYLUeOL3NDFtPq88w==}
+  /playwright-chromium/1.12.2:
+    resolution: {integrity: sha512-+N4M6F9+tBLrP4w6jfQAfucIaHdAl/o2FkBkPJtbbygHC88Ul5h5mOAQXRT4yeIrkd1+dyyq8J9GYN2a1RzUjg==}
     engines: {node: '>=12'}
     hasBin: true
     requiresBuild: true
