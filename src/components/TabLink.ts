@@ -1,4 +1,4 @@
-import { Link, LinkProps, LinkComponent } from './Link';
+import { Link, LinkComponent, LinkProps } from './Link';
 
 export interface TabLinkProps extends LinkProps {
   /** Tab ID. */

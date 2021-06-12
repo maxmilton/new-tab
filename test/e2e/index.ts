@@ -30,8 +30,8 @@ import {
   E2ETestContext,
   renderPage,
   setup,
-  teardown,
   sleep,
+  teardown,
 } from './utils';
 
 const fileTest = suite('file');

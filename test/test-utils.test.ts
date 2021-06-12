@@ -1,7 +1,7 @@
 import { suite } from 'uvu';
 import * as assert from 'uvu/assert';
 import {
-  cleanup, render, setup, teardown, mockFn,
+  cleanup, mockFn, render, setup, teardown,
 } from './utils';
 // import { Test } from './TestComponent';
 
