@@ -4,6 +4,7 @@
 const { gitRef } = require('git-ref');
 const pkg = require('./package.json');
 
+/** @type {chrome.runtime.Manifest} */
 const manifest = {
   manifest_version: 2,
 
