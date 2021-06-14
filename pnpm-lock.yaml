@@ -7,7 +7,7 @@ specifiers:
   '@types/node': 15.12.2
   '@typescript-eslint/eslint-plugin': 4.26.1
   '@typescript-eslint/parser': 4.26.1
-  c8: 7.7.2
+  c8: 7.7.3
   csso: 4.2.0
   ekscss: 0.0.7
   esbuild: 0.12.8
@@ -35,7 +35,7 @@ devDependencies:
   '@types/node': 15.12.2
   '@typescript-eslint/eslint-plugin': 4.26.1_c8cbd5e7f5f92609ec78d991aced454b
   '@typescript-eslint/parser': 4.26.1_eslint@7.28.0+typescript@4.3.2
-  c8: 7.7.2
+  c8: 7.7.3
   csso: 4.2.0
   ekscss: 0.0.7
   esbuild: 0.12.8
@@ -484,8 +484,8 @@ packages:
     resolution: {integrity: sha1-DTM+PwDqxQqhRUq9MO+MKl2ackI=}
     dev: true
 
-  /c8/7.7.2:
-    resolution: {integrity: sha512-8AqNnUMxB3hsgYCYso2GJjlwnaNPlrEEbYbCQb7N76V1nrOgCKXiTcE3gXU18rIj0FeduPywROrIBMC7XAKApg==}
+  /c8/7.7.3:
+    resolution: {integrity: sha512-ZyA7n3w8i4ETV25tVYMHwJxCSnaOf/LfA8vOcuZOPbonuQfD7tBT/gMWZy7eczRpCDuHcvMXwoqAemg6R0p3+A==}
     engines: {node: '>=10.12.0'}
     hasBin: true
     dependencies:
@@ -498,7 +498,7 @@ packages:
       istanbul-reports: 3.0.2
       rimraf: 3.0.2
       test-exclude: 6.0.0
-      v8-to-istanbul: 7.1.2
+      v8-to-istanbul: 8.0.0
       yargs: 16.2.0
       yargs-parser: 20.2.7
     dev: true
@@ -2358,9 +2358,9 @@ packages:
     resolution: {integrity: sha512-l8lCEmLcLYZh4nbunNZvQCJc5pv7+RCwa8q/LdUx8u7lsWvPDKmpodJAJNwkAhJC//dFY48KuIEmjtd4RViDrA==}
     dev: true
 
-  /v8-to-istanbul/7.1.2:
-    resolution: {integrity: sha512-TxNb7YEUwkLXCQYeudi6lgQ/SZrzNO4kMdlqVxaZPUIUjCv6iSSypUQX70kNBSERpQ8fk48+d61FXk+tgqcWow==}
-    engines: {node: '>=10.10.0'}
+  /v8-to-istanbul/8.0.0:
+    resolution: {integrity: sha512-LkmXi8UUNxnCC+JlH7/fsfsKr5AU110l+SYGJimWNkWhxbN5EyeOtm1MJ0hhvqMMOhGwBj1Fp70Yv9i+hX0QAg==}
+    engines: {node: '>=10.12.0'}
     dependencies:
       '@types/istanbul-lib-coverage': 2.0.3
       convert-source-map: 1.7.0
