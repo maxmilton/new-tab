@@ -1,0 +1,27 @@
+name: publish
+on:
+  push:
+    tags:
+      - v*.*.*
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-node@v2
+        with:
+          node-version: 16
+      - run: npm install --global pnpm
+      - run: pnpm install --frozen-lockfile
+      - run: pnpm run build
+      - run: pnpm run lint
+      - run: pnpm run test
+      - run: cd dist && zip ../chrome-extension.zip *
+      - uses: maxmilton/action-create-release@v0
+        with:
+          files: |
+            chrome-extension.zip
+          git-tag: ${{ github.ref }}
+          github-token: ${{ secrets.GITHUB_TOKEN }}
