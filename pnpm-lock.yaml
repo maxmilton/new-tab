@@ -4,7 +4,7 @@ specifiers:
   '@types/chrome': 0.0.145
   '@types/csso': 3.5.1
   '@types/jsdom': 16.2.11
-  '@types/node': 15.12.2
+  '@types/node': 15.12.4
   '@typescript-eslint/eslint-plugin': 4.27.0
   '@typescript-eslint/parser': 4.27.0
   c8: 7.7.3
@@ -32,7 +32,7 @@ devDependencies:
   '@types/chrome': 0.0.145
   '@types/csso': 3.5.1
   '@types/jsdom': 16.2.11
-  '@types/node': 15.12.2
+  '@types/node': 15.12.4
   '@typescript-eslint/eslint-plugin': 4.27.0_b7b1357bbf6753e7455d6ef3191d413d
   '@typescript-eslint/parser': 4.27.0_eslint@7.29.0+typescript@4.3.4
   c8: 7.7.3
@@ -182,7 +182,7 @@ packages:
   /@types/jsdom/16.2.11:
     resolution: {integrity: sha512-Dvtx0zFQOJqn06VgjRur7P5CeSNUOaQ5ivSSvdAdA3sBWzL3kl9OWApQRExKnS3XN39OaZdeCHpoYxVmX6FwCQ==}
     dependencies:
-      '@types/node': 15.12.2
+      '@types/node': 15.12.4
       '@types/parse5': 6.0.0
       '@types/tough-cookie': 4.0.0
     dev: true
@@ -195,8 +195,8 @@ packages:
     resolution: {integrity: sha1-7ihweulOEdK4J7y+UnC86n8+ce4=}
     dev: true
 
-  /@types/node/15.12.2:
-    resolution: {integrity: sha512-zjQ69G564OCIWIOHSXyQEEDpdpGl+G348RAKY0XXy9Z5kU9Vzv1GMNnkar/ZJ8dzXB3COzD9Mo9NtRZ4xfgUww==}
+  /@types/node/15.12.4:
+    resolution: {integrity: sha512-zrNj1+yqYF4WskCMOHwN+w9iuD12+dGm0rQ35HLl9/Ouuq52cEtd0CH9qMgrdNmi5ejC1/V7vKEXYubB+65DkA==}
     dev: true
 
   /@types/parse5/6.0.0:
@@ -214,7 +214,7 @@ packages:
   /@types/yauzl/2.9.1:
     resolution: {integrity: sha512-A1b8SU4D10uoPjwb0lnHmmu8wZhR9d+9o2PKBQT2jU5YPTKsxac6M2qGAdY7VcL+dHHhARVUDmeg0rOrcd9EjA==}
     dependencies:
-      '@types/node': 15.12.2
+      '@types/node': 15.12.4
     dev: true
     optional: true
 
@@ -581,8 +581,8 @@ packages:
     resolution: {integrity: sha512-gNld/3lySHwuhaVluJUKLePYirM3QNCKzVxqAdhJII9/WXKVX5PURzMVJspS1jTslSqjeuG4KMVTSouit5YPHA==}
     dev: true
 
-  /convert-source-map/1.7.0:
-    resolution: {integrity: sha512-4FJkXzKXEDB1snCFZlLP4gpC3JILicCpGbzG9f9G7tGqGCzETQ2hWPrcinA9oU4wtf2biUaEH5065UnMeR33oA==}
+  /convert-source-map/1.8.0:
+    resolution: {integrity: sha512-+OQdjP49zViI/6i7nIJpA8rAl4sV/JdPfU9nZs3VqOwGIgizICvuN2ru6fMd+4llL0tar18UYJXfZ/TWtmhUjA==}
     dependencies:
       safe-buffer: 5.1.2
     dev: true
@@ -2363,7 +2363,7 @@ packages:
     engines: {node: '>=10.12.0'}
     dependencies:
       '@types/istanbul-lib-coverage': 2.0.3
-      convert-source-map: 1.7.0
+      convert-source-map: 1.8.0
       source-map: 0.7.3
     dev: true
 
