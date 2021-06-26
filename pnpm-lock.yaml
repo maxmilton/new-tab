@@ -142,7 +142,7 @@ packages:
   /@types/chrome/0.0.145:
     resolution: {integrity: sha512-vLvTMmfc8mvwOZzkmn2UwlWSNu0t0txBkyuIv8NgihRkvFCe6XJX65YZAgAP/RdBit3enhU2GTxCr+prn4uZmA==}
     dependencies:
-      '@types/filesystem': 0.0.30
+      '@types/filesystem': 0.0.31
       '@types/har-format': 1.2.6
     dev: true
 
@@ -161,8 +161,8 @@ packages:
     dev: true
     optional: true
 
-  /@types/filesystem/0.0.30:
-    resolution: {integrity: sha512-NCoRgmGmLpTT9VFL6Bb6z0jQuqI3d0E5FGl7M0JOv/J5RQYo9s5aOItPYnpckx9MbYQk1APLXcF8f20Vqnf2yA==}
+  /@types/filesystem/0.0.31:
+    resolution: {integrity: sha512-9Dj1Gb7ZhknhJ8J1H/lTQrEorwIHWZlO9Tfi0WMrvyO1+2GUIUF8Sg4zrID77hj0ywArzQRJ1MwlT9H7c9QmEQ==}
     dependencies:
       '@types/filewriter': 0.0.29
     dev: true
@@ -353,8 +353,8 @@ packages:
     hasBin: true
     dev: true
 
-  /acorn/8.4.0:
-    resolution: {integrity: sha512-ULr0LDaEqQrMFGyQ3bhJkLsbtrQ8QibAseGZeaSUiT/6zb9IvIkomWHJIvgvwad+hinRAgsI51JcWk2yvwyL+w==}
+  /acorn/8.4.1:
+    resolution: {integrity: sha512-asabaBSkEKosYKMITunzX177CXxQ4Q8BSSzMTKD+FefUhipQC70gfW5SiUDhYQ3vk8G+81HqQk7Fv9OXwwn9KA==}
     engines: {node: '>=0.4.0'}
     hasBin: true
     dev: true
@@ -631,7 +631,7 @@ packages:
     dependencies:
       abab: 2.0.5
       whatwg-mimetype: 2.3.0
-      whatwg-url: 8.6.0
+      whatwg-url: 8.7.0
     dev: true
 
   /debug/2.6.9:
@@ -658,8 +658,8 @@ packages:
       ms: 2.1.2
     dev: true
 
-  /decimal.js/10.2.1:
-    resolution: {integrity: sha512-KaL7+6Fw6i5A2XSnsbhm/6B+NuEA7TZ4vqxnd5tXz9sbKtrN9Srj8ab4vKVdK8YAqZO9P1kg45Y6YLoduPf+kw==}
+  /decimal.js/10.3.1:
+    resolution: {integrity: sha512-V0pfhfr8suzyPGOx3nmq4aHqabehUZn6Ch9kyFpV79TGDTWFmHqUqXdabR7QHqxzrYolF4+tVmJhUG4OURg5dQ==}
     dev: true
 
   /deep-is/0.1.3:
@@ -1478,12 +1478,12 @@ packages:
         optional: true
     dependencies:
       abab: 2.0.5
-      acorn: 8.4.0
+      acorn: 8.4.1
       acorn-globals: 6.0.0
       cssom: 0.4.4
       cssstyle: 2.3.0
       data-urls: 2.0.0
-      decimal.js: 10.2.1
+      decimal.js: 10.3.1
       domexception: 2.0.1
       escodegen: 2.0.0
       form-data: 3.0.1
@@ -1501,7 +1501,7 @@ packages:
       webidl-conversions: 6.1.0
       whatwg-encoding: 1.0.5
       whatwg-mimetype: 2.3.0
-      whatwg-url: 8.6.0
+      whatwg-url: 8.7.0
       ws: 7.5.0
       xml-name-validator: 3.0.0
     transitivePeerDependencies:
@@ -2406,8 +2406,8 @@ packages:
     resolution: {integrity: sha512-M4yMwr6mAnQz76TbJm914+gPpB/nCwvZbJU28cUD6dR004SAxDLOOSUaB1JDRqLtaOV/vi0IC5lEAGFgrjGv/g==}
     dev: true
 
-  /whatwg-url/8.6.0:
-    resolution: {integrity: sha512-os0KkeeqUOl7ccdDT1qqUcS4KH4tcBTSKK5Nl5WKb2lyxInIZ/CpjkqKa1Ss12mjfdcRX9mHmPPs7/SxG1Hbdw==}
+  /whatwg-url/8.7.0:
+    resolution: {integrity: sha512-gAojqb/m9Q8a5IV96E3fHJM70AzCkgt4uXYX2O7EmuyOnLrViCQlsEBmF9UQIu3/aeAIp2U17rtbpZWNntQqdg==}
     engines: {node: '>=10'}
     dependencies:
       lodash: 4.17.21
