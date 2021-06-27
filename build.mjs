@@ -91,7 +91,12 @@ function makeHTML(name, stylePath, body = '') {
       }
     }
 
-    const { css } = csso.minify(compiled.css, {});
+    const { css } = csso.minify(
+      csso.minify(compiled.css, {
+        restructure: true,
+        forceMediaMerge: true,
+      }).css,
+    );
 
     const template = `<!doctype html>
 <meta charset=utf-8>
