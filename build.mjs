@@ -113,4 +113,8 @@ makeHTML(
 makeHTML('settings', 'src/css/settings.xcss');
 
 // Extension manifest
-fs.writeFile(path.join(dir, 'dist', 'manifest.json'), manifest, handleErr);
+fs.writeFile(
+  path.join(dir, 'dist', 'manifest.json'),
+  JSON.stringify(manifest),
+  handleErr,
+);
