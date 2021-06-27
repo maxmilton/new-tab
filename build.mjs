@@ -25,7 +25,7 @@ esbuild
     entryPoints: ['src/newtab.ts'],
     outfile: 'dist/newtab.js',
     platform: 'browser',
-    target: ['chrome88'],
+    target: ['chrome91'],
     define: {
       'process.env.NODE_ENV': JSON.stringify(mode),
     },
@@ -47,7 +47,7 @@ esbuild
     entryPoints: ['src/settings.ts'],
     outfile: 'dist/settings.js',
     platform: 'browser',
-    target: ['chrome88'],
+    target: ['chrome91'],
     define: {
       'process.env.NODE_ENV': JSON.stringify(mode),
     },
