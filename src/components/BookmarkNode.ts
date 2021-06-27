@@ -1,4 +1,5 @@
-/* eslint-disable @typescript-eslint/unbound-method */
+/* eslint-disable @typescript-eslint/restrict-plus-operands */
+
 // FIXME: Calculate if the folder will be outside the viewport and render in a better place
 
 // FIXME: Hide subfolder imidiately if another is openned to prevent overlap
@@ -19,8 +20,8 @@ interface SubFolderProps {
 }
 
 type SubFolderScope = {
-  clearTimer(): void;
-  resetTimer(): void;
+  clearTimer(this: void): void;
+  resetTimer(this: void): void;
 };
 
 const CLOSE_DELAY_MS = 400;
@@ -28,7 +29,7 @@ const CLOSE_DELAY_MS = 400;
 let openFolders = 0;
 
 const subFolderView = create('div');
-subFolderView.className = 'subfolder';
+subFolderView.className = 'sf';
 
 function SubFolder(
   { children, level, parent }: SubFolderProps,
@@ -40,14 +41,14 @@ function SubFolder(
 
   if (level > 0) {
     // nested subfolders show beside their parent
-    root.style.top = `${parentPos.top}px`;
-    root.style.left = `${parentPos.right}px`;
+    root.style.top = parentPos.top + 'px';
+    root.style.left = parentPos.right + 'px';
   } else {
     // top level subfolders show bellow their parent
     // root.style.top = parentPos.bottom + 'px';
     // root.style.left = parentPos.left + 'px';
 
-    root.style.top = `${parentPos.bottom}px`;
+    root.style.top = parentPos.bottom + 'px';
 
     // show from the right if folder would overflow right
     // FIXME: instead of 200 get the folder width
@@ -56,12 +57,12 @@ function SubFolder(
       // root.style.right = parentPos.right + 'px';
       root.style.right = '0px';
     } else {
-      root.style.left = `${parentPos.left}px`;
+      root.style.left = parentPos.left + 'px';
     }
   }
 
   children.forEach((item) => {
-    // @ts-expect-error - FIXME
+    // @ts-expect-error - FIXME:!
     // eslint-disable-next-line no-param-reassign
     item.level = level + 1;
     append(BookmarkNode(item), root);
@@ -75,30 +76,30 @@ function SubFolder(
 
 type FolderComponent = HTMLDivElement;
 
-interface FolderProps extends chrome.bookmarks.BookmarkTreeNode {
+export interface FolderProps
+  extends Omit<chrome.bookmarks.BookmarkTreeNode, 'id'> {
   children?: chrome.bookmarks.BookmarkTreeNode[];
   end?: boolean;
   level?: number;
 }
 
 const folderView = create('div');
-folderView.className = 'item';
+folderView.className = 'f';
 
 export function Folder(item: FolderProps): FolderComponent {
   const root = folderView.cloneNode(true) as FolderComponent;
 
-  // TODO: Keep? Implement "Other Bookmarks"
-  if (item.end) root.className += ' right';
+  if (item.end) root.className += ' end';
   root.textContent = item.title;
 
   let subfolder: Element | null;
   let timer: NodeJS.Timeout;
 
   const scope = {
-    clearTimer() {
+    clearTimer(this: void) {
       if (timer) clearTimeout(timer);
     },
-    resetTimer() {
+    resetTimer(this: void) {
       scope.clearTimer();
 
       timer = setTimeout(() => {
@@ -139,6 +140,6 @@ export function Folder(item: FolderProps): FolderComponent {
 export function BookmarkNode(
   item: FolderProps | LinkProps,
 ): FolderComponent | LinkComponent {
-  // @ts-expect-error - FIXME
+  // @ts-expect-error - FIXME:!
   return (item.children ? Folder : Link)(item);
 }
