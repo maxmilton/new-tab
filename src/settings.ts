@@ -3,7 +3,7 @@
 import { h } from 'stage1';
 import { reuseNodes } from 'stage1/dist/reconcile/reuse-nodes';
 import type { UserStorageData } from './types';
-import { DEFAULT_ORDER } from './utils';
+import { append, DEFAULT_ORDER } from './utils';
 
 interface ItemComponent extends HTMLLIElement {
   update(newItem: string): void;
@@ -128,7 +128,7 @@ function Settings() {
       return state.order.indexOf(item);
     },
     moveItem(from: number, to: number) {
-      const ordered = state.order.slice();
+      const ordered = [...state.order];
       const item = state.order[from];
 
       // Remove from previous location
@@ -140,7 +140,7 @@ function Settings() {
       updateOrder(ordered);
     },
     removeItem(index: number) {
-      const ordered = state.order.slice();
+      const ordered = [...state.order];
       ordered.splice(index, 1);
       updateOrder(ordered);
     },
@@ -156,7 +156,7 @@ function Settings() {
         (node, item) => node.update(item),
       );
       save(order, state.theme);
-      state.order = order.slice();
+      state.order = [...order];
     }
   }
 
@@ -188,4 +188,4 @@ function Settings() {
   return root;
 }
 
-document.body.appendChild(Settings());
+append(Settings(), document.body);
