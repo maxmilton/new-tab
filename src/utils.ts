@@ -6,6 +6,7 @@ export const create = <K extends keyof HTMLElementTagNameMap>(
 export const append = <T extends Node>(node: T, parent: Node): T => parent.appendChild(node);
 
 export const DEFAULT_ORDER = ['Open Tabs', 'Bookmarks', 'History', 'Top Sites'];
+const DEFAULT_DEBOUNCE_DELAY_MS = 260;
 
 export function handleClick(event: MouseEvent): void {
   const { target, ctrlKey } = event;
@@ -25,8 +26,6 @@ export function handleClick(event: MouseEvent): void {
   }
 }
 
-const DEFAULT_DEBOUNCE_DELAY_MS = 260;
-
 /**
  * Delay running a function until X ms have passed since its last call.
  */
@@ -36,9 +35,9 @@ export function debounce<T extends (...args: any[]) => any>(
   let timer: NodeJS.Timeout;
 
   // @ts-expect-error - Transparent wraper will not change input function type
-  return function (this: any, ...args) {
-    // eslint-disable-next-line max-len
-    // eslint-disable-next-line @typescript-eslint/no-this-alias, @typescript-eslint/no-unsafe-assignment
+  // eslint-disable-next-line func-names
+  return function (this: unknown, ...args) {
+    // eslint-disable-next-line @typescript-eslint/no-this-alias, unicorn/no-this-assignment
     const context = this;
 
     clearTimeout(timer);

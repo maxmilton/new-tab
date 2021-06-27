@@ -5,16 +5,15 @@ type RefNodes = {
   s: HTMLAnchorElement;
 };
 
-// <div id=icon>☰</div>
 const view = h`
-  <div id=menu>
-    <svg xmlns=http://www.w3.org/2000/svg viewBox="0 0 24 24" class=icon>
+  <div id=m>
+    <svg viewBox="0 0 24 24" class=i>
       <line x1=3 y1=12 x2=21 y2=12 />
       <line x1=3 y1=6 x2=21 y2=6 />
       <line x1=3 y1=18 x2=21 y2=18 />
     </svg>
 
-    <div id=dropdown>
+    <div id=d>
       <a href=chrome-search://local-ntp/local-ntp.html>Open Default Tab</a>
       <a href=chrome://bookmarks/>Bookmarks Manager</a>
       <a href=chrome://downloads/>Downloads</a>
@@ -23,7 +22,7 @@ const view = h`
 
       <hr>
 
-      <a #s>New Tab Settings</a>
+      <a #s href>New Tab Settings</a>
       <a href=https://github.com/MaxMilton/new-tab/issues>Submit Bug</a>
     </div>
   </div>

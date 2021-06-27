@@ -35,13 +35,13 @@ const debouncedDoSearch = debounce(doSearch);
 
 type SearchComponent = S1Node & HTMLDivElement;
 type RefNodes = {
-  input: HTMLInputElement;
+  s: HTMLInputElement;
 };
 
 const view = h`
-  <div class=container>
-    <input #input id=search placeholder="Search browser..." autocomplete=off>
-    <svg xmlns=http://www.w3.org/2000/svg viewBox="0 0 24 24" class=s-icon>
+  <div class=con>
+    <input #s id=s placeholder="Search browser..." autocomplete=off>
+    <svg viewBox="0 0 24 24" class=is>
       <circle cx=11 cy=11 r=8 />
       <line x1=24 y1=24 x2=16.65 y2=16.65 />
     </svg>
@@ -50,23 +50,23 @@ const view = h`
 
 export function Search(): SearchComponent {
   const root = view as SearchComponent;
-  const { input } = view.collect<RefNodes>(root);
+  const { s } = view.collect<RefNodes>(root);
   const section: Sections = {};
 
-  input.oninput = () => debouncedDoSearch(input.value, section);
+  s.oninput = () => debouncedDoSearch(s.value, section);
 
-  input.onkeyup = (event) => {
+  s.onkeyup = (event) => {
     if (event.key === 'Escape') {
-      input.value = '';
+      s.value = '';
       doSearch('', section);
     }
   };
 
   // Get user settings
   chrome.storage.local.get(null, (settings: UserStorageData) => {
-    const order = settings.o || DEFAULT_ORDER;
+    const sectionOrder = settings.o || DEFAULT_ORDER;
 
-    order.forEach((name) => {
+    sectionOrder.forEach((name) => {
       section[name] = append(SearchResult(name, []), root);
     });
 
