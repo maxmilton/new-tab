@@ -8,25 +8,25 @@ export interface LinkProps {
 export type LinkComponent = S1Node & HTMLAnchorElement;
 
 type RefNodes = {
-  img: HTMLImageElement;
-  title: Text;
+  i: HTMLImageElement;
+  t: Text;
 };
 
 const view = h`
   <a>
-    <img #img>
-    #title
+    <img #i loading=lazy decoding=async>
+    #t
   </a>
 `;
 
 export function Link(item: LinkProps): LinkComponent {
   const root = view.cloneNode(true) as LinkComponent;
-  const { img, title } = view.collect<RefNodes>(root);
+  const { i, t } = view.collect<RefNodes>(root);
 
   root.href = item.url;
   root.title = item.title;
-  img.src = `chrome://favicon/${item.url}`;
-  title.nodeValue = item.title;
+  i.src = 'chrome://favicon/' + item.url;
+  t.nodeValue = item.title;
 
   return root;
 }
