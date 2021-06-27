@@ -1,4 +1,5 @@
 // DOM
+export const createFragment = (): DocumentFragment => new DocumentFragment();
 export const create = <K extends keyof HTMLElementTagNameMap>(
   tagName: K,
 ): HTMLElementTagNameMap[K] => document.createElement(tagName);

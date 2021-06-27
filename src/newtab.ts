@@ -2,7 +2,7 @@ import { setupSyntheticEvent } from 'stage1';
 import { BookmarkBar } from './components/BookmarkBar';
 import { Menu } from './components/Menu';
 import { Search } from './components/Search';
-import { append, create, handleClick } from './utils';
+import { append, createFragment, handleClick } from './utils';
 
 declare global {
   interface HTMLElement {
@@ -14,8 +14,8 @@ declare global {
 setupSyntheticEvent('click');
 document.body.__click = handleClick;
 
-const app = create('div');
-append(BookmarkBar(), app);
-append(Search(), app);
-append(Menu(), app);
-append(app, document.body);
+const frag = createFragment();
+append(BookmarkBar(), frag);
+append(Search(), frag);
+append(Menu(), frag);
+append(frag, document.body);
