@@ -52,7 +52,7 @@ export async function setup(context: E2ETestContext): Promise<void> {
       `--disable-extensions-except=${DIST_DIR}`,
       `--load-extension=${DIST_DIR}`,
     ],
-    timeout: 10000,
+    timeout: 10_000,
   });
 
   context.pages = new Set<Page>();
@@ -108,7 +108,7 @@ export async function renderPage(
 }
 
 export async function cleanupPage(context: E2ETestContext): Promise<void> {
-  if (!context.pages || !context.pages.size) {
+  if (!context.pages || context.pages.size === 0) {
     throw new Error('No pages exist, did you forget to call renderPage()?');
   }
 

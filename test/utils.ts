@@ -8,18 +8,18 @@ global.Error.stackTraceLimit = 100;
 
 const mountedContainers = new Set<HTMLDivElement>();
 
-function mockInnerText() {
-  Object.defineProperty(global.window.HTMLElement.prototype, 'innerText', {
-    get(this: HTMLElement) {
-      const el = this.cloneNode(true) as HTMLElement;
-      el.querySelectorAll('script,style').forEach((s) => s.remove());
-      return el.textContent;
-    },
-    set(this: HTMLElement, value: string) {
-      this.textContent = value;
-    },
-  });
-}
+// function mockInnerText() {
+//   Object.defineProperty(global.window.HTMLElement.prototype, 'innerText', {
+//     get(this: HTMLElement) {
+//       const el = this.cloneNode(true) as HTMLElement;
+//       for (const s of el.querySelectorAll('script,style')) s.remove();
+//       return el.textContent;
+//     },
+//     set(this: HTMLElement, value: string) {
+//       this.textContent = value;
+//     },
+//   });
+// }
 
 export function setup(): void {
   if (global.window) {
@@ -38,7 +38,7 @@ export function setup(): void {
   global.document = global.window.document;
 
   // JSDOM doesn't support innerText yet -- https://github.com/jsdom/jsdom/issues/1245
-  mockInnerText();
+  // mockInnerText();
 }
 
 export function teardown(): void {
@@ -88,7 +88,7 @@ export function render(component: Node): RenderResult {
 }
 
 export function cleanup(): void {
-  if (!mountedContainers || !mountedContainers.size) {
+  if (!mountedContainers || mountedContainers.size === 0) {
     throw new Error(
       'No mounted components exist, did you forget to call render()?',
     );
@@ -96,7 +96,7 @@ export function cleanup(): void {
 
   mountedContainers.forEach((container) => {
     if (container.parentNode === document.body) {
-      document.body.removeChild(container);
+      container.remove();
     }
 
     mountedContainers.delete(container);
@@ -194,9 +194,14 @@ export function mocksSetup(): void {
 
   // @ts-expect-error - just a partial mock
   global.chrome = mockChrome;
+
+  global.DocumentFragment = window.DocumentFragment;
 }
 
 export function mocksTeardown(): void {
   // @ts-expect-error - cleaning up
   global.chrome = undefined;
+
+  // @ts-expect-error - cleaning up
+  global.DocumentFragment = undefined;
 }

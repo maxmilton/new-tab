@@ -1,4 +1,4 @@
-/* eslint-disable no-console */
+/* eslint-disable no-console, unicorn/no-process-exit */
 
 // TODO: Write tests to verify:
 //  - No console logs/errors -- including/especially CSP violations
@@ -44,24 +44,24 @@ const test = suite<E2ETestContext>('e2e');
 test.before(async (context) => {
   try {
     await setup(context);
-  } catch (err) {
-    console.error(err);
+  } catch (error) {
+    console.error(error);
     process.exit(1);
   }
 });
 test.after(async (context) => {
   try {
     await teardown(context);
-  } catch (err) {
-    console.error(err);
+  } catch (error) {
+    console.error(error);
     process.exit(1);
   }
 });
 test.after.each(async (context) => {
   try {
     await cleanupPage(context);
-  } catch (err) {
-    console.error(err);
+  } catch (error) {
+    console.error(error);
     process.exit(1);
   }
 });
@@ -88,9 +88,10 @@ test('renders newtab app', async (context) => {
     'chrome-extension://cpcibnbdmpmcmnkhoiilpnlaepkepknb/newtab.html',
   );
   // TODO: Better assertions
-  assert.ok(await page.$('.bookmarks'));
-  assert.ok(await page.$('#search'));
-  assert.ok(await page.$('#menu'));
+  assert.ok(await page.$('#b')); // bookmarks bar
+  assert.ok(await page.$('#s')); // search input
+  assert.ok(await page.$('#m')); // menu wrapper
+  assert.ok(await page.$('#d')); // menu dropdown
   await sleep(200);
   assert.is(context.unhandledErrors.length, 0, 'zero unhandled errors');
   assert.is(context.consoleMessages.length, 0, 'zero console messages');

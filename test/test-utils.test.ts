@@ -43,14 +43,17 @@ setupUtil('adds DOM globals', () => {
   assert.ok(global.document);
 });
 
-setupUtil('adds innerText mock', () => {
-  setup();
-  const el = document.createElement('div');
-  assert.is('innerText' in el, true);
-  assert.is(el.innerText, '');
-  el.innerText = 'abc';
-  assert.is(el.innerText, 'abc');
-});
+// setupUtil('adds innerText mock', () => {
+//   setup();
+//   const el = document.createElement('div');
+//   assert.is('innerText' in el, true);
+//   // eslint-disable-next-line unicorn/prefer-dom-node-text-content
+//   assert.is(el.innerText, '');
+//   // eslint-disable-next-line unicorn/prefer-dom-node-text-content
+//   el.innerText = 'abc';
+//   // eslint-disable-next-line unicorn/prefer-dom-node-text-content
+//   assert.is(el.innerText, 'abc');
+// });
 
 setupUtil('throws when teardown has not run', () => {
   setup();
@@ -167,9 +170,9 @@ cleanupUtil('only removes mounted containers and not other DOM nodes', () => {
   assert.is(document.body.childNodes.length, 5);
   cleanup();
   assert.is(document.body.childNodes.length, 3);
-  [...document.body.childNodes].forEach((node) => {
+  for (const node of document.body.childNodes) {
     assert.instance(node, window.HTMLSpanElement);
-  });
+  }
 });
 
 mockFnUtil('proxy target is the passed impl argument', () => {
