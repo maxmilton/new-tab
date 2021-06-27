@@ -1,62 +1,58 @@
 /**
-* Themes
-*/
+ * Themes
+ */
 
 // Dark theme (default)
 :root {
-  --s: 0 2px 4px rgba(0, 0, 17, 0.15); // shadow
-  --b: #23252d; // background colour
-  --t: #9da5b4; // text colour
+  --s: 0 2px 4px #00001126; // shadow
+  --b: #23252d; // background
+  --t: #9da5b4; // text
   --c1: #2c313a; // bookmark item hover background, hr
-  --c2: #292d35; // bookmarks bar, menu dropdown, load more button
-  --c3: #383e4a; // icons, h2, muted text
+  --c2: #292d35; // bookmarks bar, menu dropdown, "load more" button
+  --c3: #383e4a; // icons, text fallback
 }
 
 // Light theme
 .l {
-  --b: #fafafa; // background colour
-  --t: #383a42; // text colour
-  --c1: #e5e5e6; // bookmark item hover background, hr
-  --c2: #fff; // bookmarks bar, menu dropdown, load more button
-  --c3: #dbdbdc; // icons, h2, muted text
+  --b: #fafafa;
+  --t: #383a42;
+  --c1: #e5e5e6;
+  --c2: #fff;
+  --c3: #dbdbdc;
 }
 
 // Rich black theme
 .b {
-  --s: 0 1px #201313; // shadow
-  --b: #0a0000; // background colour
-  --t: #795548; // text colour
-  --c1: #1d1616; // bookmark item hover background, hr
-  --c2: #0f0b0b; // bookmarks bar, menu dropdown, load more button
-  --c3: #392d2d; // icons, h2, muted text
+  --s: 0 1px #201313;
+  --b: #0a0000;
+  --t: #795548;
+  --c1: #1d1616;
+  --c2: #0f0b0b;
+  --c3: #392d2d;
 }
 
 /**
-* App styles
-*/
+ * App styles
+ */
 
 body {
   margin: 108px 0;
-  overflow-y: scroll; /* Prevent jump on load */
+  overflow-y: scroll; // prevent jump on load
   font-size: 18px;
   /**
    * Although it's best practise to use a unitless value for line-height, this
-   * is a hack for alignment with the minimum possible style properties. Must be
-   * the same as as bookmark bar height.
+   * is a hack for alignment with the minimum possible style properties. Value
+   * should be the same as as bookmark bar height.
    */
   line-height: 42px;
   text-rendering: optimizeSpeed;
-  // font-variant-ligatures: none;
-  // background-color: var(--b);
+  color: var(--c3);
   background: var(--b);
 }
 
-h2,
-.muted {
-  color: var(--c3);
-}
-
 a {
+  overflow: hidden;
+  text-overflow: ellipsis;
   text-decoration: none;
 
   &:hover,
@@ -65,29 +61,32 @@ a {
   }
 }
 
-/* All <img> are favicons */
-img {
-  width: 16px;
-  height: 16px; /* Prevents slight realignment jump on initial load */
-  margin: 0 10px 0 0;
-}
-
 a,
-.item {
+// folder
+.f {
   display: block;
   color: var(--t);
   white-space: nowrap;
-  cursor: pointer;
+}
+
+// all <img> are favicons
+img {
+  width: 16px;
+  height: 16px; // prevents realignment jump on load
+  // margin: 0 10px 0 0;
+  margin-right: 10px;
 }
 
 svg {
+  width: 24px;
   fill: none;
   stroke: currentColor;
   stroke-width: 2px;
   stroke-linecap: round;
 }
 
-.container {
+// container
+.con {
   position: relative;
   max-width: 800px;
   margin: 0 auto;
@@ -95,8 +94,8 @@ svg {
 }
 
 button,
-#search {
-  box-sizing: border-box;
+// search input
+#s {
   width: 100%;
   margin: 0 0 35px;
   padding: 11px 20px 11px 58px;
@@ -113,43 +112,47 @@ button,
   }
 }
 
-/* "Load more" buttons */
+/* "Load more" button */
 button {
   width: initial;
   margin-top: 9px;
   padding: 11px 20px;
-  cursor: pointer;
 }
 
-.s-icon,
-.icon {
-  width: 24px;
+// icon
+.i,
+.is {
   color: var(--c3);
 }
 
-.s-icon {
+// search icon
+.is {
   position: absolute;
   left: 38px;
   top: 14px;
 }
 
-.bookmarks {
+// overflow bookmark folder icon
+.io {
+  padding: 8px;
+}
+
+#b {
   position: fixed;
   top: 0;
   right: 0;
   left: 0;
-  z-index: 2;
+  z-index: 1;
   display: flex;
-  // FIXME: We want this kind of behaviour but to push overflowing items into a separate magically overflow folder
-  flex-wrap: wrap;
   height: 42px;
   background: var(--c2);
   box-shadow: var(--s);
   contain: size;
-  backface-visibility: hidden; /* performance hack; force GPU */
 
   a,
-  .item {
+  // folder
+  .f {
+    flex-shrink: 0;
     padding: 0 13px;
 
     &:hover,
@@ -160,19 +163,7 @@ button {
 
   a {
     max-width: 16ch;
-    overflow: hidden;
-    text-overflow: ellipsis;
   }
-}
-
-.container a {
-  overflow: hidden;
-  text-overflow: ellipsis;
-}
-
-.subfolder a {
-  min-width: 200px;
-  max-width: 38ch;
 }
 
 // FIXME: Show this in the folder component
@@ -182,17 +173,24 @@ button {
   padding: 0 6px;
 }
 
-.subfolder {
+// subfolder
+.sf {
   position: fixed;
   background: var(--c2);
   box-shadow: var(--s);
   overflow-y: auto;
   // FIXME: Height needs to be calculated depending on the folder top position
   max-height: calc(100vh - 42px);
+
+  & a {
+    min-width: 200px;
+    max-width: 38ch;
+  }
 }
 
 // /* Bookmark item pushed to the right */
-// .right {
+// // direction right
+// .dr {
 //   width: 100%;
 //   text-align: right;
 
@@ -202,42 +200,40 @@ button {
 // }
 
 // /* Folder which opens to the left */
-// .left {
+// // direction left
+// .dl {
 //   right: 0;
 //   left: initial;
 //   text-align: left;
 
-//   .subfolder {
+//   .sf {
 //     right: 100%;
 //     left: initial;
 //   }
 // }
 
-.right {
+.end {
   margin-left: auto;
 }
-
-/* Menu */
 
 hr {
   border: 0;
   border-bottom: 1px solid var(--c1);
 }
 
-#menu {
+// menu
+#m {
   position: fixed;
   top: 90px;
   margin: -28px -84px -64px 0;
   padding: 10px 84px 84px 42px;
-  font-size: 20px;
 }
 
-#dropdown {
+// menu dropdown
+#d {
   position: absolute;
   top: 10px;
-  z-index: 1;
   padding: 18px;
-  white-space: nowrap;
   background: var(--c2);
   box-shadow: var(--s);
   opacity: 0;
@@ -245,8 +241,8 @@ hr {
   transform: scale(0.8);
   transform-origin: 0 10px;
 
-  #menu:hover > &,
-  #menu:focus > & {
+  #m:hover > &,
+  #m:focus > & {
     opacity: 1;
     transition-duration: 192ms;
     transform: scale(1);
