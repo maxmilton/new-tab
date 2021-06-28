@@ -119,16 +119,17 @@ function Settings() {
       return state.order.indexOf(item);
     },
     moveItem(from: number, to: number) {
-      const ordered = [...state.order];
-      const item = state.order[from];
+      const reordered = [...state.order];
 
-      // Remove from previous location
-      ordered.splice(from, 1);
+      // add to new location
+      reordered.splice(
+        to,
+        0,
+        // remove from previous location
+        reordered.splice(from, 1)[0],
+      );
 
-      // Add to new location
-      ordered.splice(to, 0, item);
-
-      updateOrder(ordered);
+      updateOrder(reordered);
     },
     removeItem(index: number) {
       const ordered = [...state.order];
