@@ -16,7 +16,7 @@ specifiers:
   eslint: 7.29.0
   eslint-config-airbnb-typescript: 12.3.1
   eslint-plugin-import: 2.23.4
-  eslint-plugin-unicorn: 33.0.1
+  eslint-plugin-unicorn: 34.0.0
   git-ref: 0.2.0
   jsdom: 16.6.0
   kleur: 4.1.4
@@ -45,7 +45,7 @@ devDependencies:
   eslint: 7.29.0
   eslint-config-airbnb-typescript: 12.3.1_bc3e9ea18fd8282796505226ca920ee6
   eslint-plugin-import: 2.23.4_eslint@7.29.0
-  eslint-plugin-unicorn: 33.0.1_eslint@7.29.0
+  eslint-plugin-unicorn: 34.0.0_eslint@7.29.0
   git-ref: 0.2.0
   jsdom: 16.6.0
   kleur: 4.1.4
@@ -1251,18 +1251,17 @@ packages:
       tsconfig-paths: 3.9.0
     dev: true
 
-  /eslint-plugin-unicorn/33.0.1_eslint@7.29.0:
-    resolution: {integrity: sha512-VxX/L/9DUEyB3D0v00185LrgsB5/fBwkgA4IC7ehHRu5hFSgA6VecmdpFybhsr4GQ/Y1iyXMHf6q+JKvcR2MwA==}
+  /eslint-plugin-unicorn/34.0.0_eslint@7.29.0:
+    resolution: {integrity: sha512-O2S5Y823IymGWjFG1sa+F3zZYa8F9NukNT0qZfsAnLciY9721/kKxAsfSomlFR3o+8OfohytHdVVKGb3sNy7dA==}
     engines: {node: '>=12'}
     peerDependencies:
-      eslint: '>=7.23.0'
+      eslint: '>=7.28.0'
     dependencies:
       ci-info: 3.2.0
       clean-regexp: 1.0.0
       eslint: 7.29.0
       eslint-template-visitor: 2.3.2_eslint@7.29.0
       eslint-utils: 3.0.0_eslint@7.29.0
-      import-modules: 2.1.0
       is-builtin-module: 3.1.0
       lodash: 4.17.21
       pluralize: 8.0.0
@@ -1704,11 +1703,6 @@ packages:
     dependencies:
       parent-module: 1.0.1
       resolve-from: 4.0.0
-    dev: true
-
-  /import-modules/2.1.0:
-    resolution: {integrity: sha512-8HEWcnkbGpovH9yInoisxaSoIg9Brbul+Ju3Kqe2UsYDUBJD/iQjSgEj0zPcTDPKfPp2fs5xlv1i+JSye/m1/A==}
-    engines: {node: '>=8'}
     dev: true
 
   /imurmurhash/0.1.4:
