@@ -36,6 +36,10 @@ const manifest = {
   chrome_url_overrides: {
     newtab: 'newtab.html',
   },
+  background: {
+    // empty persistent background script
+    scripts: ['background.js'],
+  },
   options_ui: {
     page: 'settings.html',
   },

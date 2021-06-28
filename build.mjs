@@ -63,6 +63,18 @@ esbuild
   .then(writeFiles)
   .catch(handleErr);
 
+// Background script
+esbuild
+  .build({
+    entryPoints: ['src/background.ts'],
+    outfile: 'dist/background.js',
+    format: 'esm',
+    bundle: true,
+    minify: !dev,
+    logLevel: 'debug',
+  })
+  .catch(handleErr);
+
 /**
  * Construct a HTML file and save it to disk.
  *
