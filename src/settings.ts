@@ -77,13 +77,6 @@ function OrderSection(item: string, scope: SectionScope): SectionComponent {
   return root;
 }
 
-function save(order: string[], theme: string) {
-  chrome.storage.local.set({
-    o: order,
-    t: theme,
-  });
-}
-
 type SettingsRefNodes = {
   o: HTMLOListElement;
   reset: HTMLButtonElement;
@@ -92,7 +85,6 @@ type SettingsRefNodes = {
 
 interface SettingsState {
   order: string[];
-  theme: string;
 }
 
 const settingsView = h`
@@ -120,7 +112,6 @@ function Settings() {
 
   const state: SettingsState = {
     order: [],
-    theme: '',
   };
 
   const scope = {
@@ -146,7 +137,10 @@ function Settings() {
     },
   };
 
-  function updateOrder(order: typeof SECTION_DEFAULT_ORDER) {
+  const updateOrder = (
+    order: typeof SECTION_DEFAULT_ORDER,
+    noSet?: boolean,
+  ) => {
     if (order !== state.order) {
       reuseNodes(
         o,
@@ -155,35 +149,35 @@ function Settings() {
         (item: string) => OrderSection(item, scope),
         (node, item) => node.update(item),
       );
-      save(order, state.theme);
-      state.order = [...order];
-    }
-  }
+      state.order = order;
 
-  function updateTheme(theme: string) {
-    if (theme !== state.theme) {
-      t.value = theme;
-      save(state.order, theme);
-      state.theme = theme;
+      if (!noSet) {
+        chrome.storage.local.set({
+          o: order,
+        });
+      }
     }
-  }
+  };
 
   t.onchange = () => {
-    updateTheme(t.value);
+    localStorage.t = t.value;
   };
 
   reset.onclick = () => {
     updateOrder(SECTION_DEFAULT_ORDER);
   };
 
-  // Get user settings data
+  // get user settings data
   chrome.storage.local.get(null, (settings: UserStorageData) => {
     const order = settings.o || SECTION_DEFAULT_ORDER;
-    const theme = settings.t || '';
 
-    updateOrder(order);
-    updateTheme(theme);
+    updateOrder(order, true);
   });
+
+  // get user theme setting -- it's a special case which uses localStorage
+  // because it must be sync (chrome.storage is async) to prevent default theme
+  // colours flashing on initial page load
+  t.value = localStorage.t as string;
 
   return root;
 }

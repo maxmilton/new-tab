@@ -125,7 +125,9 @@ ${body}`;
 makeHTML(
   'newtab',
   'src/css/newtab.xcss',
-  '<script>chrome.storage.local.get(null,a=>{a.t&&(document.body.className=a.t)});</script>',
+  // theme loader as inline script for earliest possible execution start time,
+  // uses localStorage so it's sync to prevent flash of default theme colours
+  '<script>document.documentElement.className=localStorage.t;</script>',
 );
 makeHTML('settings', 'src/css/settings.xcss');
 

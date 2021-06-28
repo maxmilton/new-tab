@@ -48,7 +48,7 @@ const manifest = {
   content_security_policy:
     "default-src 'none';"
     // SHA of theme loader script embedded inline in the document
-    + " script-src 'self' 'sha256-FtIFk1UjzWWlhfMrIdJ9n60rbnTmldIAss9HFJTJeUM=';"
+    + " script-src 'self' 'sha256-voCR095V6FwrM9k3O4gGU9fEUZARXBle7DybCUxpBFE=';"
     // app styles are embedded in the HTML page for fastest load performance
     + " style-src 'unsafe-inline';"
     + ' img-src chrome://favicon;',
