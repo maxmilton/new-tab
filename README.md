@@ -5,7 +5,7 @@
 
 # New Tab
 
-A high performance browser new tab page that gets you where you need to go faster. Utilises the latest tools and tech, packaged into a Chrome browser extension.
+A high performance browser new tab page that gets you where you need to go faster. Utilises the latest tools and tech, packaged into an easy to use Chrome browser extension.
 
 [![Add to Chrome](https://storage.googleapis.com/chrome-gcs-uploader.appspot.com/image/WlD8wC6g8khYWPJUsQceQkhXSlv1/mPGKYBIR2uCP0ApchDXE.png)](https://chrome.google.com/webstore/detail/new-tab/cpcibnbdmpmcmnkhoiilpnlaepkepknb)
 
@@ -17,9 +17,9 @@ Originally an experimental project to give me a chance for me to play with the C
 
 ### Features
 
-- Fastest loading of any new tab page with all the basic features.
+- Fastest loading of any new tab page with all the features you expect.
 - Distraction-free, minimal design aesthetic with multiple themes.
-- List of your open tabs.
+- List of your open tabs and top sites.
 - Search open tabs, bookmarks, history, and top sites in one place.
 - Simple bookmarks bar.
 - Links to common places in your browser.
@@ -30,13 +30,13 @@ Originally an experimental project to give me a chance for me to play with the C
 | Issue | Why / How |
 | --- | --- |
 | Access | Still have access to common things like the bookmarks bar etc. |
-| Speed | Near instant access to functionality. Page load performance, runtime performance, and file size should all be scrupulously optimised. |
+| Speed | Near-instant access to functionality. Page load performance, runtime performance, and file size should all be scrupulously optimised. |
 | Privacy & Security | Zero user tracking (unlike most other extensions!). Very restrictive [Content Security Policy](https://developer.mozilla.org/en-US/docs/Web/HTTP/CSP). Local data only; no remote data fetching. |
 | Unobtrusive | No annoying things like distracting colours, illegible text, or entries in your right click menu. |
 
 ### Technology
 
-- [Chrome browser APIs](https://developer.chrome.com/apps/api_index)
+- [Chrome browser APIs](https://developer.chrome.com/docs/extensions/reference/)
 - [stage1](https://github.com/maxmilton/stage1) JavaScript framework
 - [ekscss](https://github.com/maxmilton/ekscss) style preprocessor
 - [esbuild](https://esbuild.github.io/) JavaScript bundler
@@ -45,12 +45,11 @@ Originally an experimental project to give me a chance for me to play with the C
 
 1. The extension's bookmarks bar functionality is limited. Chrome doesn't allow extensions to control the native bookmarks bar visibility so I've recreated a simple version. The goal is _high performance_ and quick access rather than trying to emulate the native bookmarks bar. Use the bookmark manager for access to all features.
 1. Page needs to be reloaded after adding, editing, or removing bookmarks. Bookmarks don't change often, so changes are not live.
-1. Searching the browsing history is slow when you history is _very_ big. Nothing I can do here; this is just a reality of Chrome.
 1. The project is set up for development on Linux and may not build on other operating systems.
 
 ## Browser support
 
-Recent versions of Google Chrome and other Chromium based browsers (e.g. Brave, Edge).
+Recent versions of Google Chrome and other Chromium based browsers (e.g., Brave, Edge).
 
 ## Bugs
 
