@@ -196,12 +196,11 @@ export function mocksSetup(): void {
   global.chrome = mockChrome;
 
   global.DocumentFragment = window.DocumentFragment;
+  global.localStorage = window.localStorage;
 }
 
 export function mocksTeardown(): void {
   // @ts-expect-error - cleaning up
-  global.chrome = undefined;
-
-  // @ts-expect-error - cleaning up
-  global.DocumentFragment = undefined;
+  // eslint-disable-next-line no-multi-assign
+  global.chrome = global.DocumentFragment = global.localStorage = undefined;
 }

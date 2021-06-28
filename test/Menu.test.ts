@@ -24,14 +24,14 @@ test('renders correctly', () => {
 <line x1="3" y1="18" x2="21" y2="18"></line>
 </svg>
 <div id="d">
-<a href="chrome-search://local-ntp/local-ntp.html">Open Default Tab</a>
-<a href="chrome://bookmarks/">Bookmarks Manager</a>
-<a href="chrome://downloads/">Downloads</a>
-<a href="chrome://history/">History</a>
+<a href="chrome://new-tab-page">Open Default Tab</a>
+<a href="chrome://bookmarks">Bookmarks Manager</a>
+<a href="chrome://downloads">Downloads</a>
+<a href="chrome://history">History</a>
 <a href="chrome://settings/passwords">Passwords</a>
 <hr>
 <a href="">New Tab Settings</a>
-<a href="https://github.com/MaxMilton/new-tab/issues">Submit Bug</a>
+<a href="https://github.com/maxmilton/new-tab/issues">Submit Bug</a>
 </div>
 </div>`,
   );
