@@ -1,15 +1,15 @@
 import { h, S1Node } from 'stage1';
 import type { UserStorageData } from '../types';
-import { append, debounce, DEFAULT_ORDER } from '../utils';
-import { SearchResult } from './SearchResult';
+import { append, SECTION_DEFAULT_ORDER } from '../utils';
+import { SearchResult, SearchResultComponent } from './SearchResult';
 
-type Sections = Record<string, ReturnType<typeof SearchResult> | undefined>;
+type SectionRefs = Record<string, SearchResultComponent>;
 
-function doSearch(text: string, section: Sections) {
-  const bookmarks = section.Bookmarks;
-  const history = section.History;
-  const openTabs = section['Open Tabs'];
-  const topSites = section['Top Sites'];
+function runSearch(text: string, section: SectionRefs) {
+  const openTabs = section[SECTION_DEFAULT_ORDER[0]];
+  const bookmarks = section[SECTION_DEFAULT_ORDER[1]];
+  const history = section[SECTION_DEFAULT_ORDER[2]];
+  const topSites = section[SECTION_DEFAULT_ORDER[3]];
 
   if (history) {
     if (text) {
@@ -27,11 +27,9 @@ function doSearch(text: string, section: Sections) {
     }
   }
 
-  if (openTabs) openTabs.filter(text);
-  if (topSites) topSites.filter(text);
+  openTabs?.filter(text);
+  topSites?.filter(text);
 }
-
-const debouncedDoSearch = debounce(doSearch);
 
 type SearchComponent = S1Node & HTMLDivElement;
 type RefNodes = {
@@ -51,36 +49,32 @@ const view = h`
 export function Search(): SearchComponent {
   const root = view as SearchComponent;
   const { s } = view.collect<RefNodes>(root);
-  const section: Sections = {};
+  const section: SectionRefs = {};
 
-  s.oninput = () => debouncedDoSearch(s.value, section);
+  s.oninput = () => runSearch(s.value, section);
 
   s.onkeyup = (event) => {
     if (event.key === 'Escape') {
       s.value = '';
-      doSearch('', section);
+      runSearch('', section);
     }
   };
 
-  // Get user settings
-  chrome.storage.local.get(null, (settings: UserStorageData) => {
-    const sectionOrder = settings.o || DEFAULT_ORDER;
+  chrome.storage.local.get(null, (userSettings: UserStorageData) => {
+    const sectionOrder = userSettings.o || SECTION_DEFAULT_ORDER;
 
     sectionOrder.forEach((name) => {
       section[name] = append(SearchResult(name, []), root);
     });
 
-    const openTabs = section['Open Tabs'];
-    const topSites = section['Top Sites'];
+    const openTabs = section[SECTION_DEFAULT_ORDER[0]];
+    const topSites = section[SECTION_DEFAULT_ORDER[3]];
 
     if (openTabs) {
-      const updateOpenTabs = () => {
-        chrome.tabs.query({}, openTabs.update);
-      };
+      const updateOpenTabs = () => chrome.tabs.query({}, openTabs.update);
 
       updateOpenTabs();
 
-      // Update tab list on tab events
       chrome.tabs.onUpdated.addListener(updateOpenTabs);
       chrome.tabs.onRemoved.addListener(updateOpenTabs);
       chrome.tabs.onMoved.addListener(updateOpenTabs);

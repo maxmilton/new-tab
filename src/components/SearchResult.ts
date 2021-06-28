@@ -1,12 +1,12 @@
 import { h, S1Node } from 'stage1';
-import { append, createFragment } from '../utils';
+import { append, createFragment, SECTION_DEFAULT_ORDER } from '../utils';
 import { Link, LinkProps } from './Link';
 import { TabLink } from './TabLink';
 
 export type SearchResultComponent = S1Node &
 HTMLDivElement & {
   update: (this: void, newData: any[]) => void;
-  filter: (text: string) => void;
+  filter: (this: void, text: string) => void;
 };
 type RefNodes = {
   t: Text;
@@ -33,7 +33,7 @@ export function SearchResult<T extends LinkProps>(
 ): SearchResultComponent {
   const root = view.cloneNode(true) as SearchResultComponent;
   const { t, l, m } = view.collect<RefNodes>(root);
-  const isOpenTabs = sectionName === 'Open Tabs';
+  const isOpenTabs = sectionName === SECTION_DEFAULT_ORDER[0];
   let rawData: T[];
   let renderedLength: number;
 

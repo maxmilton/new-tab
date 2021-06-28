@@ -3,35 +3,24 @@
 import { h } from 'stage1';
 import { reuseNodes } from 'stage1/dist/reconcile/reuse-nodes';
 import type { UserStorageData } from './types';
-import { append, DEFAULT_ORDER } from './utils';
+import { append, SECTION_DEFAULT_ORDER } from './utils';
 
-interface ItemComponent extends HTMLLIElement {
+interface SectionComponent extends HTMLLIElement {
   update(newItem: string): void;
 }
 
-type ItemRefNodes = {
+type SectionRefNodes = {
   name: Text;
   rm: HTMLButtonElement;
 };
 
-type ItemScope = {
+type SectionScope = {
   indexOf(item: string): number;
   moveItem(from: number, to: number): void;
   removeItem(index: number): void;
 };
 
-type SettingsRefNodes = {
-  o: HTMLOListElement;
-  reset: HTMLButtonElement;
-  t: HTMLSelectElement;
-};
-
-interface SettingsState {
-  order: string[];
-  theme: string;
-}
-
-const itemView = h`
+const sectionView = h`
   <li class=item draggable=true>
     <span class=icon>☰</span>
     #name
@@ -39,20 +28,20 @@ const itemView = h`
   </li>
 `;
 
-function Item(item: string, scope: ItemScope): ItemComponent {
-  const root = itemView.cloneNode(true) as ItemComponent;
-  const { name, rm } = itemView.collect<ItemRefNodes>(root);
+function OrderSection(item: string, scope: SectionScope): SectionComponent {
+  const root = sectionView.cloneNode(true) as SectionComponent;
+  const { name, rm } = sectionView.collect<SectionRefNodes>(root);
 
   let currentItem = item;
   name.nodeValue = currentItem;
 
   root.ondragstart = (event) => {
     event.dataTransfer!.setData('from', `${scope.indexOf(currentItem)}`);
-    (event.target as ItemComponent).classList.add('dragging');
+    (event.target as SectionComponent).classList.add('dragging');
   };
 
   root.ondragend = (event) => {
-    (event.target as ItemComponent).classList.remove('dragging');
+    (event.target as SectionComponent).classList.remove('dragging');
   };
 
   root.ondragover = (event) => {
@@ -62,11 +51,11 @@ function Item(item: string, scope: ItemScope): ItemComponent {
   };
 
   root.ondragenter = (event) => {
-    (event.target as ItemComponent).classList.add('over');
+    (event.target as SectionComponent).classList.add('over');
   };
 
   root.ondragleave = (event) => {
-    (event.target as ItemComponent).classList.remove('over');
+    (event.target as SectionComponent).classList.remove('over');
   };
 
   root.ondrop = (event) => {
@@ -75,7 +64,7 @@ function Item(item: string, scope: ItemScope): ItemComponent {
     scope.moveItem(+from, scope.indexOf(currentItem));
 
     // Remove class in case the `dragleave` event didn't fire
-    (event.target as ItemComponent).classList.remove('over');
+    (event.target as SectionComponent).classList.remove('over');
   };
 
   rm.onclick = () => scope.removeItem(scope.indexOf(currentItem));
@@ -93,6 +82,17 @@ function save(order: string[], theme: string) {
     o: order,
     t: theme,
   });
+}
+
+type SettingsRefNodes = {
+  o: HTMLOListElement;
+  reset: HTMLButtonElement;
+  t: HTMLSelectElement;
+};
+
+interface SettingsState {
+  order: string[];
+  theme: string;
 }
 
 const settingsView = h`
@@ -146,13 +146,13 @@ function Settings() {
     },
   };
 
-  function updateOrder(order: typeof DEFAULT_ORDER) {
+  function updateOrder(order: typeof SECTION_DEFAULT_ORDER) {
     if (order !== state.order) {
       reuseNodes(
         o,
         state.order,
         order,
-        (item: string) => Item(item, scope),
+        (item: string) => OrderSection(item, scope),
         (node, item) => node.update(item),
       );
       save(order, state.theme);
@@ -173,12 +173,12 @@ function Settings() {
   };
 
   reset.onclick = () => {
-    updateOrder(DEFAULT_ORDER);
+    updateOrder(SECTION_DEFAULT_ORDER);
   };
 
   // Get user settings data
   chrome.storage.local.get(null, (settings: UserStorageData) => {
-    const order = settings.o || DEFAULT_ORDER;
+    const order = settings.o || SECTION_DEFAULT_ORDER;
     const theme = settings.t || '';
 
     updateOrder(order);
