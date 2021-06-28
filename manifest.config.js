@@ -21,11 +21,16 @@ const manifest = {
     128: 'icon128.png',
   },
   permissions: [
+    // https://developer.chrome.com/docs/extensions/reference/bookmarks/
     'bookmarks',
     'chrome://favicon/',
+    // https://developer.chrome.com/docs/extensions/reference/history/
     'history',
+    // https://developer.chrome.com/docs/extensions/reference/storage/
     'storage',
+    // https://developer.chrome.com/docs/extensions/reference/tabs/
     'tabs',
+    // https://developer.chrome.com/docs/extensions/reference/topSites/
     'topSites',
   ],
   chrome_url_overrides: {
@@ -40,9 +45,9 @@ const manifest = {
     "default-src 'none';"
     // SHA of theme loader script embedded inline in the document
     + " script-src 'self' 'sha256-FtIFk1UjzWWlhfMrIdJ9n60rbnTmldIAss9HFJTJeUM=';"
+    // app styles are embedded in the HTML page for fastest load performance
     + " style-src 'unsafe-inline';"
-    // `data:` used in settings page
-    + ' img-src chrome://favicon data:;',
+    + ' img-src chrome://favicon;',
 
   // https://chrome.google.com/webstore/detail/new-tab/cpcibnbdmpmcmnkhoiilpnlaepkepknb
   key: 'MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAk9BfRa5CXuCX1ElY0yu9kJSqxFirFtSy79ZR/fyKHdOzZurQXNmhIyxVnQXd2bxHvuKUyZGahm/gwgyyzGuxhsQEue6wTD9TnOvvM2vusXpnoCr6Ili7sBwUo9vA2aPI77NB0eArXz9WWNmoDWW5WEqI/rk26Tinl8SNU9iDJISbL+dMses1QPw64oYFWB1J4JeB1MhXnzTxECpGZTn33LhgBU4J3ooT6eoqrsJdRvuc0vjPMxq/jfqLkdBbzlsnrMbgtDoJ9WiWj2lA0MzHGDAQ8HgnMEi3SpXRNnod9CCBnxmkHqv3u4u7Tvp/WLAgJ+QjCt+9yYyw3nOYHpEweQIDAQAB',
