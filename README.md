@@ -3,7 +3,7 @@
 [![Chrome web store version](https://img.shields.io/chrome-web-store/v/cpcibnbdmpmcmnkhoiilpnlaepkepknb.svg)](https://chrome.google.com/webstore/detail/new-tab/cpcibnbdmpmcmnkhoiilpnlaepkepknb)
 [![Licence](https://img.shields.io/github/license/maxmilton/new-tab.svg)](https://github.com/maxmilton/new-tab/blob/master/LICENSE)
 
-# New Tab
+# New Tab ![](./static/icon48.png)
 
 A high performance browser new tab page that gets you where you need to go faster. Utilises the latest tools and tech, packaged into an easy to use Chrome browser extension.
 
