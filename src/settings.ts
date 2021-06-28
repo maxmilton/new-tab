@@ -20,6 +20,8 @@ type SectionScope = {
   removeItem(index: number): void;
 };
 
+const DRAG_TYPE = 'text/plain';
+
 const sectionView = h`
   <li class=item draggable=true>
     <span class=icon>☰</span>
@@ -36,7 +38,7 @@ function OrderSection(item: string, scope: SectionScope): SectionComponent {
   name.nodeValue = currentItem;
 
   root.ondragstart = (event) => {
-    event.dataTransfer!.setData('from', `${scope.indexOf(currentItem)}`);
+    event.dataTransfer!.setData(DRAG_TYPE, `${scope.indexOf(currentItem)}`);
     (event.target as SectionComponent).classList.add('dragging');
   };
 
@@ -60,7 +62,7 @@ function OrderSection(item: string, scope: SectionScope): SectionComponent {
 
   root.ondrop = (event) => {
     event.preventDefault();
-    const from = event.dataTransfer!.getData('from');
+    const from = event.dataTransfer!.getData(DRAG_TYPE);
     scope.moveItem(+from, scope.indexOf(currentItem));
 
     // Remove class in case the `dragleave` event didn't fire
