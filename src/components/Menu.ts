@@ -22,7 +22,7 @@ const view = h`
 
       <hr>
 
-      <a #s href>New Tab Settings</a>
+      <a #s>New Tab Settings</a>
       <a href=https://github.com/maxmilton/new-tab/issues>Submit Bug</a>
     </div>
   </div>
