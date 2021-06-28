@@ -10,7 +10,7 @@ specifiers:
   c8: 7.7.3
   csso: 4.2.0
   ekscss: 0.0.7
-  esbuild: 0.12.10
+  esbuild: 0.12.11
   esbuild-minify-templates: 0.4.1
   esbuild-register: 2.6.0
   eslint: 7.29.0
@@ -39,8 +39,8 @@ devDependencies:
   c8: 7.7.3
   csso: 4.2.0
   ekscss: 0.0.7
-  esbuild: 0.12.10
-  esbuild-minify-templates: 0.4.1_esbuild@0.12.10
+  esbuild: 0.12.11
+  esbuild-minify-templates: 0.4.1_esbuild@0.12.11
   esbuild-register: 2.6.0
   eslint: 7.29.0
   eslint-config-airbnb-typescript: 12.3.1_bc3e9ea18fd8282796505226ca920ee6
@@ -1038,7 +1038,7 @@ packages:
       is-symbol: 1.0.4
     dev: true
 
-  /esbuild-minify-templates/0.4.1_esbuild@0.12.10:
+  /esbuild-minify-templates/0.4.1_esbuild@0.12.11:
     resolution: {integrity: sha512-quB2qCDtRcjthgoyiu/TuyOJbCYUKpsv+2KcO6/6iYjOH+MZgMCbF9MWZbC9EoKDugMC86maQMCf//8MD473Hg==}
     engines: {node: '>= 12'}
     peerDependencies:
@@ -1046,7 +1046,7 @@ packages:
     dependencies:
       '@ampproject/remapping': 1.0.1
       astray: 1.1.1
-      esbuild: 0.12.10
+      esbuild: 0.12.11
       magic-string: 0.25.7
       meriyah: 4.1.5
     dev: true
@@ -1060,6 +1060,12 @@ packages:
 
   /esbuild/0.12.10:
     resolution: {integrity: sha512-KTZ84HqvKL1V76cVwv5W2/es+Bhdv8O9DYRKhJ0wHf1d2iLH6WEGX0zh7W+UzniWnZbUZg2c7GsdH2aWeFsfzQ==}
+    hasBin: true
+    requiresBuild: true
+    dev: true
+
+  /esbuild/0.12.11:
+    resolution: {integrity: sha512-h83GwI6lYOrnSv5hSY2i2XZ191v3haj2IGDzwrkfWHhuO/kVMX3RYjhwRNG9E5VSxVLPaUjTVwrv8HWLvhk2nQ==}
     hasBin: true
     requiresBuild: true
     dev: true
