@@ -69,14 +69,15 @@ test.after.each(async (context) => {
 });
 
 [
+  'background.js',
   'icon16.png',
   'icon48.png',
   'icon128.png',
   'manifest.json',
-  'newtab.js',
   'newtab.html',
-  'settings.js',
+  'newtab.js',
   'settings.html',
+  'settings.js',
 ].forEach((filename) => {
   fileTest(`dist/${filename} exists`, () => {
     const filePath = path.join(DIST_DIR, filename);

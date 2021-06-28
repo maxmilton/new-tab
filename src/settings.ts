@@ -1,5 +1,3 @@
-// TODO: Prevent `save` running once on init
-
 import { h } from 'stage1';
 import { reuseNodes } from 'stage1/dist/reconcile/reuse-nodes';
 import type { UserStorageData } from './types';
