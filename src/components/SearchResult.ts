@@ -14,7 +14,7 @@ type RefNodes = {
   m: HTMLButtonElement;
 };
 
-const DEFAULT_RESULTS_AMOUNT = 10;
+const DEFAULT_RESULTS_AMOUNT = 12; // chrome.topSites.get returns 12 items
 const MORE_RESULTS_AMOUNT = 50;
 
 const view = h`
