@@ -37,7 +37,7 @@
     "@types/google-closure-compiler" : "0.0.18",
     "@types/jest-environment-puppeteer": "4.4.1",
     "@types/puppeteer": "5.4.3",
-    "eslint": "7.26.0",
+    "eslint": "7.30.0",
     "jest": "26.6.3",
     "jest-puppeteer": "4.4.0",
     "minna-tools": "0.36.0",
