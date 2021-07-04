@@ -151,6 +151,9 @@ export function mocksSetup(): void {
     runtime: {
       openOptionsPage: noop,
     },
+    sessions: {
+      getRecentlyClosed: noop,
+    },
     storage: {
       local: {
         // @ts-expect-error - FIXME:!
