@@ -4,6 +4,7 @@ export const SECTION_DEFAULT_ORDER = [
   'Bookmarks',
   'History',
   'Top Sites',
+  'Recently Closed Tabs',
 ];
 
 // DOM

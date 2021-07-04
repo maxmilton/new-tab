@@ -26,6 +26,8 @@ const manifest = {
     'chrome://favicon/',
     // https://developer.chrome.com/docs/extensions/reference/history/
     'history',
+    // https://developer.chrome.com/docs/extensions/reference/sessions/
+    'sessions',
     // https://developer.chrome.com/docs/extensions/reference/storage/
     'storage',
     // https://developer.chrome.com/docs/extensions/reference/tabs/

@@ -10,6 +10,7 @@ function runSearch(text: string, section: SectionRefs) {
   const bookmarks = section[SECTION_DEFAULT_ORDER[1]];
   const history = section[SECTION_DEFAULT_ORDER[2]];
   const topSites = section[SECTION_DEFAULT_ORDER[3]];
+  const recentlyClosed = section[SECTION_DEFAULT_ORDER[4]];
 
   if (history) {
     if (text) {
@@ -29,6 +30,7 @@ function runSearch(text: string, section: SectionRefs) {
 
   openTabs?.filter(text);
   topSites?.filter(text);
+  recentlyClosed?.filter(text);
 }
 
 type SearchComponent = S1Node & HTMLDivElement;
@@ -69,6 +71,7 @@ export function Search(): SearchComponent {
 
     const openTabs = section[SECTION_DEFAULT_ORDER[0]];
     const topSites = section[SECTION_DEFAULT_ORDER[3]];
+    const recentlyClosed = section[SECTION_DEFAULT_ORDER[4]];
 
     if (openTabs) {
       const updateOpenTabs = () => chrome.tabs.query({}, openTabs.update);
@@ -82,6 +85,14 @@ export function Search(): SearchComponent {
 
     if (topSites) {
       chrome.topSites.get(topSites.update);
+    }
+
+    if (recentlyClosed) {
+      chrome.sessions.getRecentlyClosed({}, (sessions) => {
+        recentlyClosed.update(
+          sessions.map((session) => session.tab).filter((tab) => !!tab),
+        );
+      });
     }
   });
 
