@@ -11,7 +11,7 @@ specifiers:
   csso: 4.2.0
   ekscss: 0.0.7
   esbuild: 0.12.14
-  esbuild-minify-templates: 0.4.1
+  esbuild-minify-templates: 0.5.0
   esbuild-register: 2.6.0
   eslint: 7.30.0
   eslint-config-airbnb-typescript: 12.3.1
@@ -40,7 +40,7 @@ devDependencies:
   csso: 4.2.0
   ekscss: 0.0.7
   esbuild: 0.12.14
-  esbuild-minify-templates: 0.4.1_esbuild@0.12.14
+  esbuild-minify-templates: 0.5.0_esbuild@0.12.14
   esbuild-register: 2.6.0
   eslint: 7.30.0
   eslint-config-airbnb-typescript: 12.3.1_7a43497441e8360bebf6d3e14c009f6b
@@ -1053,8 +1053,8 @@ packages:
       is-symbol: 1.0.4
     dev: true
 
-  /esbuild-minify-templates/0.4.1_esbuild@0.12.14:
-    resolution: {integrity: sha512-quB2qCDtRcjthgoyiu/TuyOJbCYUKpsv+2KcO6/6iYjOH+MZgMCbF9MWZbC9EoKDugMC86maQMCf//8MD473Hg==}
+  /esbuild-minify-templates/0.5.0_esbuild@0.12.14:
+    resolution: {integrity: sha512-SRjej2ZIpf1Msp4NQ9Kx+DKhsV55oOtrSXokDyUUKa8zgnCLPSVK7aqNT69uHNBAUFhckn2zlYRznVRRz949oA==}
     engines: {node: '>= 12'}
     peerDependencies:
       esbuild: ^0.10.0 || ^0.11.0 || ^0.12.0
