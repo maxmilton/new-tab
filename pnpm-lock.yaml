@@ -2,7 +2,7 @@ lockfileVersion: 5.3
 
 specifiers:
   '@types/chrome': 0.0.146
-  '@types/csso': 3.5.1
+  '@types/csso': 3.5.2
   '@types/jsdom': 16.2.12
   '@types/node': 16.0.0
   '@typescript-eslint/eslint-plugin': 4.28.2
@@ -31,7 +31,7 @@ dependencies:
 
 devDependencies:
   '@types/chrome': 0.0.146
-  '@types/csso': 3.5.1
+  '@types/csso': 3.5.2
   '@types/jsdom': 16.2.12
   '@types/node': 16.0.0
   '@typescript-eslint/eslint-plugin': 4.28.2_5031fffb45dfb7117e61c1d8ea1ef3ff
@@ -380,8 +380,8 @@ packages:
     resolution: {integrity: sha512-3uTnqSdmUGrTRoGT8UjzpYSbK2EtrTTJTpdFr6MdMj6wMOSAdjHW1V+YqOgUzVrQsi3AwH+LHcBtXEuy0Sn/LQ==}
     dev: true
 
-  /@types/csso/3.5.1:
-    resolution: {integrity: sha512-NnALC1ZR5H4kg/9wUOa8/U2HOAwN4O71Av90HClgCteuwj6UHBEr37I0Cl10EY2gHd5p/JtsbY2r0WbOhYN+gw==}
+  /@types/csso/3.5.2:
+    resolution: {integrity: sha512-Ou6PegjBPB4Jdz4w1NkrBAximhK9MJE4k3ii8qbtW/ypvzF4RrMIYgac8naLLp+opCgOgZ8LDx3NmdYLNhWhFA==}
     dependencies:
       '@types/css-tree': 1.0.5
     dev: true
