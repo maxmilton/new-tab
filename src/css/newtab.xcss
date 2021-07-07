@@ -148,7 +148,6 @@ button {
   height: 42px;
   background: var(--c2);
   box-shadow: var(--s);
-  contain: size;
 
   a,
   // folder
