@@ -15,7 +15,12 @@ setupSyntheticEvent('click');
 document.body.__click = handleClick;
 
 const frag = createFragment();
-append(BookmarkBar(), frag);
+// Create Search component first because it has asynchronous calls that can
+// execute while the remaining components are constructed
 append(Search(), frag);
 append(Menu(), frag);
+// Create BookmarkBar component last because it needs to synchronously and
+// sequentially calculate DOM layout multiple times and could cause reflow in
+// extreme situations, so better to paint the rest of the app first
+append(BookmarkBar(), frag);
 append(frag, document.body);
