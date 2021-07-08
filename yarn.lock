@@ -1001,10 +1001,10 @@
   resolved "https://registry.yarnpkg.com/@types/filewriter/-/filewriter-0.0.28.tgz#c054e8af4d9dd75db4e63abc76f885168714d4b3"
   integrity sha1-wFTor02d11205jq8dviFFocU1LM=
 
-"@types/google-closure-compiler@0.0.18":
-  version "0.0.18"
-  resolved "https://registry.yarnpkg.com/@types/google-closure-compiler/-/google-closure-compiler-0.0.18.tgz#fe233d02d9bf9c7af95c9e007f042fb7609b9ec4"
-  integrity sha1-/iM9Atm/nHr5XJ4AfwQvt2CbnsQ=
+"@types/google-closure-compiler@0.0.19":
+  version "0.0.19"
+  resolved "https://registry.yarnpkg.com/@types/google-closure-compiler/-/google-closure-compiler-0.0.19.tgz#7f2bcb91c432ebc18e3d2270f6b81b80aea82872"
+  integrity sha512-5fs1oWR2H84+54UU0fWKlGxjekBH03+nyWav8+0xlUDl0lEQ9abI2cUc7SJJsnf7lC/cJofxeTQ2R4x3vWENmw==
   dependencies:
     "@types/node" "*"
 
