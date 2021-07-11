@@ -9,7 +9,7 @@
   --t: #9da5b4; // text
   --c1: #2c313a; // bookmark node hover background, hr, button border, search input border
   --c2: #292d35; // bookmarks bar, menu dropdown, "load more" button
-  --c3: #383e4a; // icons, text fallback
+  --c3: #383e4a; // icons, empty folder text, text fallback (headings, etc.)
 }
 
 // Light theme
@@ -118,6 +118,7 @@ button {
   width: initial;
   margin-top: 9px;
   padding: 11px 20px;
+  font-size: 18px;
 }
 
 // icon
@@ -149,20 +150,20 @@ button {
   background: var(--c2);
   box-shadow: var(--s);
 
-  a,
+  & > a,
   // folder
-  .f {
+  & > .f {
     flex-shrink: 0;
-    padding: 0 13px;
-
-    &:hover,
-    &:focus {
-      background-color: var(--c1);
-    }
-  }
-
-  a {
     max-width: 16ch;
+    padding: 0 13px;
+  }
+}
+
+#b a,
+.f {
+  &:hover,
+  &:focus {
+    background-color: var(--c1);
   }
 }
 
@@ -171,51 +172,38 @@ button {
   color: var(--c3);
 }
 
-// FIXME: Show this in the folder component
-.caret {
-  float: right;
-  margin-left: auto;
-  padding: 0 6px;
-}
-
 // subfolder
 .sf {
   position: fixed;
+  overflow-y: auto;
   background: var(--c2);
   box-shadow: var(--s);
-  overflow-y: auto;
+
   // FIXME: Height needs to be calculated depending on the folder top position
   max-height: calc(100vh - 42px);
 
-  & a {
-    min-width: 200px;
+  a,
+  // folder
+  .f {
+    min-width: 5ch;
     max-width: 38ch;
+    padding: 0 13px;
+  }
+
+  .f {
+    position: relative;
+    padding-right: 23px;
+
+    // caret
+    &::after {
+      position: absolute;
+      display: block;
+      right: 2px;
+      top: -2px;
+      content: '▸';
+    }
   }
 }
-
-// /* Bookmark item pushed to the right */
-// // direction right
-// .dr {
-//   width: 100%;
-//   text-align: right;
-
-//   & + & {
-//     width: auto;
-//   }
-// }
-
-// /* Folder which opens to the left */
-// // direction left
-// .dl {
-//   right: 0;
-//   left: initial;
-//   text-align: left;
-
-//   .sf {
-//     right: 100%;
-//     left: initial;
-//   }
-// }
 
 .end {
   margin-left: auto;
