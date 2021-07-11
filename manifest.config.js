@@ -49,9 +49,9 @@ const manifest = {
   incognito: 'not_allowed',
   content_security_policy:
     "default-src 'none';"
-    // SHA of theme loader script embedded inline in the document
+    // hash of inline theme loader script embedded in the HTML
     + " script-src 'self' 'sha256-voCR095V6FwrM9k3O4gGU9fEUZARXBle7DybCUxpBFE=';"
-    // app styles are embedded in the HTML page for fastest load performance
+    // app styles are embedded in the HTML for fastest load performance
     + " style-src 'unsafe-inline';"
     + ' img-src chrome://favicon;',
 

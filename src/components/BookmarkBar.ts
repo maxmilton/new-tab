@@ -23,7 +23,7 @@ export function BookmarkBar(): BookmarkBarComponent {
       // we can use clientWidth instead of offsetWidth for better performance
       let currentWidth = 0;
 
-      if (otherBookmarks.children?.length) {
+      if (otherBookmarks.children!.length) {
         (otherBookmarks as FolderProps).end = true;
         otherBookmarksFolder = append(Folder(otherBookmarks), root);
         currentWidth = otherBookmarksFolder.clientWidth;

@@ -60,9 +60,7 @@ type FolderComponent = HTMLDivElement & {
 
 export interface FolderProps
   extends Omit<chrome.bookmarks.BookmarkTreeNode, 'id'> {
-  children?: chrome.bookmarks.BookmarkTreeNode[];
   end?: boolean;
-  level?: number;
 }
 
 const folderView = create('div');
@@ -101,7 +99,12 @@ export function Folder(item: FolderProps): FolderComponent {
         .querySelectorAll<FolderComponent>('.f')
         .forEach((folder) => folder.closePopup());
 
-      popup = FolderPopup(root, item.children!, parent.id === 'b');
+      popup = FolderPopup(
+        root,
+        item.children!,
+        // BookmarkBar (bookmarks top level) has ID of 'b'
+        parent.id === 'b',
+      );
 
       popup.onmouseenter = clearTimer;
       popup.onmouseleave = resetTimer;
