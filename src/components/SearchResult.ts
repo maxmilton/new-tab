@@ -23,7 +23,7 @@ const view = h`
 
     <div #l></div>
 
-    <button #m>Show more ▾</button>
+    <button #m>Show more</button>
   </div>
 `;
 
