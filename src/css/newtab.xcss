@@ -178,9 +178,7 @@ button {
   overflow-y: auto;
   background: var(--c2);
   box-shadow: var(--s);
-
-  // FIXME: Height needs to be calculated depending on the folder top position
-  max-height: calc(100vh - 42px);
+  z-index: 1;
 
   a,
   // folder

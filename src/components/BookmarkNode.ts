@@ -4,7 +4,9 @@ import { h } from 'stage1';
 import { append, create } from '../utils';
 import { Link, LinkComponent, LinkProps } from './Link';
 
-type FolderPopupComponent = HTMLDivElement;
+type FolderPopupComponent = HTMLDivElement & {
+  adjustPosition(): void;
+};
 
 const CLOSE_DELAY_MS = 600;
 let emptyPopupView;
@@ -18,30 +20,23 @@ function FolderPopup(
   topLevel: boolean,
 ): FolderPopupComponent {
   const root = folderPopupView.cloneNode(true) as FolderPopupComponent;
+  const parentRect = parent.getBoundingClientRect();
+  let top: number;
+  let left: number;
 
-  const parentPos = parent.getBoundingClientRect();
-
-  if (!topLevel) {
-    // show nested folder popup beside its parent
-    root.style.top = parentPos.top + 'px';
-    root.style.left = parentPos.right + 'px';
-  } else {
+  if (topLevel) {
     // show top level folder popup bellow its parent
-    // root.style.top = parentPos.bottom + 'px';
-    // root.style.left = parentPos.left + 'px';
-
-    root.style.top = parentPos.bottom + 'px';
-
-    // show from the right if folder would overflow right
-    // FIXME: instead of 200 get the folder width
-    if (parentPos.left + 200 > window.innerWidth) {
-      // FIXME:
-      // root.style.right = parentPos.right + 'px';
-      root.style.right = '0px';
-    } else {
-      root.style.left = parentPos.left + 'px';
-    }
+    top = parentRect.bottom;
+    left = parentRect.left;
+  } else {
+    // show nested folder popup beside its parent
+    top = parentRect.top;
+    left = parentRect.right;
   }
+
+  root.style.cssText = `top:${top}px;left:${left}px;max-height:${
+    window.innerHeight - top
+  }px`;
 
   if (!children.length) {
     append((emptyPopupView ??= h`<div class=empty>(empty)</div>`), root);
@@ -50,6 +45,23 @@ function FolderPopup(
       append(BookmarkNode(item), root);
     });
   }
+
+  // TODO: Although popup position somewhat works it's still buggy in many
+  // scenarios especially in folders with scrollbars
+
+  // should be called directly after mounting component to the DOM
+  root.adjustPosition = () => {
+    const viewportWidth = document.documentElement.clientWidth;
+    const width = root.offsetWidth;
+
+    if (left + width > viewportWidth) {
+      // show top level aligned to the right edge of the viewport
+      // show nested show to the left of its parent
+      root.style.left = topLevel
+        ? viewportWidth - width + 'px'
+        : parentRect.left - width + 'px';
+    }
+  };
 
   return root;
 }
@@ -110,6 +122,7 @@ export function Folder(item: FolderProps): FolderComponent {
       popup.onmouseleave = resetTimer;
 
       append(popup, root);
+      popup.adjustPosition();
     }
   };
 
