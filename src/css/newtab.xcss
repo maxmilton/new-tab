@@ -166,6 +166,11 @@ button {
   }
 }
 
+.empty {
+  padding: 0 13px;
+  color: var(--c3);
+}
+
 // FIXME: Show this in the folder component
 .caret {
   float: right;
