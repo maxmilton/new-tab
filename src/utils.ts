@@ -1,4 +1,4 @@
-// when updating also update references that get an item by index
+// NOTE: When updating also update references that get an item by index
 export const SECTION_DEFAULT_ORDER = [
   'Open Tabs',
   'Bookmarks',

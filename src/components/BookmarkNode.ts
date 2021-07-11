@@ -25,11 +25,11 @@ function FolderPopup(
   let left: number;
 
   if (topLevel) {
-    // show top level folder popup bellow its parent
+    // Show top level folder popup bellow its parent
     top = parentRect.bottom;
     left = parentRect.left;
   } else {
-    // show nested folder popup beside its parent
+    // Show nested folder popup beside its parent
     top = parentRect.top;
     left = parentRect.right;
   }
@@ -49,14 +49,15 @@ function FolderPopup(
   // TODO: Although popup position somewhat works it's still buggy in many
   // scenarios especially in folders with scrollbars
 
-  // should be called directly after mounting component to the DOM
+  // Only after the component is mounted in the DOM do we have element size
+  // information so final position adjustment is split into a separate step
   root.adjustPosition = () => {
     const viewportWidth = document.documentElement.clientWidth;
     const width = root.offsetWidth;
 
     if (left + width > viewportWidth) {
-      // show top level aligned to the right edge of the viewport
-      // show nested show to the left of its parent
+      // Show top level aligned to the right edge of the viewport
+      // Show nested show to the left of its parent
       root.style.left = topLevel
         ? viewportWidth - width + 'px'
         : parentRect.left - width + 'px';
@@ -106,7 +107,7 @@ export function Folder(item: FolderProps): FolderComponent {
     if (!popup) {
       const parent = root.parentNode as Element;
 
-      // immediately close any folder popups on the parent level
+      // Immediately close any folder popups on the parent level
       parent
         .querySelectorAll<FolderComponent>('.f')
         .forEach((folder) => folder.closePopup());

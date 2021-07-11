@@ -15,11 +15,11 @@ export function BookmarkBar(): BookmarkBarComponent {
     // Add BookmarkNodes one at a time until they can't fit in the bookmark
     // bar and then create a folder with the overflowing items
     const resize = () => {
-      // remove all child nodes
+      // Remove all child nodes
       root.textContent = '';
 
       let otherBookmarksFolder;
-      // XXX: None of the elements we're measuring have a border or margin so
+      // NOTE: None of the elements we're measuring have a border or margin so
       // we can use clientWidth instead of offsetWidth for better performance
       let currentWidth = 0;
 

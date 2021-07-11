@@ -47,7 +47,7 @@ export function SearchResult<T extends LinkProps>(
       append((isOpenTabs ? TabLink : Link)(item), frag);
     });
 
-    // remove all child nodes
+    // Remove all child nodes
     l.textContent = '';
 
     append(frag, l);
