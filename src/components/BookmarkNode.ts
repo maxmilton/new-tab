@@ -1,50 +1,33 @@
 /* eslint-disable @typescript-eslint/restrict-plus-operands */
 
-// FIXME: Calculate if the folder will be outside the viewport and render in a better place
-
-// FIXME: Hide subfolder imidiately if another is openned to prevent overlap
-
-// FIXME: Continue to show subfolder when moving mouse back onto parent
-
-// FIXME: max-height (for scroll) needs to be dynamic depending on where the folder opens from
-
+import { h } from 'stage1';
 import { append, create } from '../utils';
 import { Link, LinkComponent, LinkProps } from './Link';
 
-type SubFolderComponent = HTMLDivElement;
+type FolderPopupComponent = HTMLDivElement;
 
-interface SubFolderProps {
-  children: chrome.bookmarks.BookmarkTreeNode[];
-  level: number;
-  parent: Element;
-}
+const CLOSE_DELAY_MS = 600;
 
-type SubFolderScope = {
-  clearTimer(this: void): void;
-  resetTimer(this: void): void;
-};
+const emptyPopupView = h`<div class=empty>(empty)</div>`;
 
-const CLOSE_DELAY_MS = 400;
-// @ts-expect-error - FIXME: Use this var or remove it
-let openFolders = 0;
+const folderPopupView = create('div');
+folderPopupView.className = 'sf';
 
-const subFolderView = create('div');
-subFolderView.className = 'sf';
-
-function SubFolder(
-  { children, level, parent }: SubFolderProps,
-  scope: SubFolderScope,
-): SubFolderComponent {
-  const root = subFolderView.cloneNode(true) as SubFolderComponent;
+function FolderPopup(
+  parent: Element,
+  children: chrome.bookmarks.BookmarkTreeNode[],
+  topLevel: boolean,
+): FolderPopupComponent {
+  const root = folderPopupView.cloneNode(true) as FolderPopupComponent;
 
   const parentPos = parent.getBoundingClientRect();
 
-  if (level > 0) {
-    // nested subfolders show beside their parent
+  if (!topLevel) {
+    // show nested folder popup beside its parent
     root.style.top = parentPos.top + 'px';
     root.style.left = parentPos.right + 'px';
   } else {
-    // top level subfolders show bellow their parent
+    // show top level folder popup bellow its parent
     // root.style.top = parentPos.bottom + 'px';
     // root.style.left = parentPos.left + 'px';
 
@@ -61,20 +44,20 @@ function SubFolder(
     }
   }
 
-  children.forEach((item) => {
-    // @ts-expect-error - FIXME:!
-    // eslint-disable-next-line no-param-reassign
-    item.level = level + 1;
-    append(BookmarkNode(item), root);
-  });
-
-  root.onmouseenter = scope.clearTimer;
-  root.onmouseleave = scope.resetTimer;
+  if (!children.length) {
+    append(emptyPopupView, root);
+  } else {
+    children.forEach((item) => {
+      append(BookmarkNode(item), root);
+    });
+  }
 
   return root;
 }
 
-type FolderComponent = HTMLDivElement;
+type FolderComponent = HTMLDivElement & {
+  closePopup(this: void): void;
+};
 
 export interface FolderProps
   extends Omit<chrome.bookmarks.BookmarkTreeNode, 'id'> {
@@ -88,51 +71,47 @@ folderView.className = 'f';
 
 export function Folder(item: FolderProps): FolderComponent {
   const root = folderView.cloneNode(true) as FolderComponent;
+  let popup: FolderPopupComponent | null;
+  let timer: NodeJS.Timeout;
+
+  const clearTimer = () => clearTimeout(timer);
+
+  const resetTimer = () => {
+    clearTimer();
+    timer = setTimeout(root.closePopup, CLOSE_DELAY_MS);
+  };
 
   if (item.end) root.className += ' end';
   root.textContent = item.title;
 
-  let subfolder: Element | null;
-  let timer: NodeJS.Timeout;
-
-  const scope = {
-    clearTimer(this: void) {
-      if (timer) clearTimeout(timer);
-    },
-    resetTimer(this: void) {
-      scope.clearTimer();
-
-      timer = setTimeout(() => {
-        if (subfolder) {
-          subfolder.remove();
-          subfolder = null;
-
-          if (!item.level || item.level === 0) {
-            openFolders -= 1;
-          }
-        }
-      }, CLOSE_DELAY_MS);
-    },
-  };
-
-  root.onmouseenter = () => {
-    scope.clearTimer();
-
-    // TODO: Remove `item.children` here and instead of doing nothing show an "empty" folder
-    if (!subfolder && item.children) {
-      subfolder = SubFolder(
-        {
-          children: item.children,
-          level: item.level || 0,
-          parent: root,
-        },
-        scope,
-      );
-      append(subfolder, root);
+  root.closePopup = () => {
+    if (popup) {
+      popup.remove();
+      popup = null;
     }
   };
 
-  root.onmouseleave = scope.resetTimer;
+  root.onmouseenter = () => {
+    clearTimer();
+
+    if (!popup) {
+      const parent = root.parentNode as Element;
+
+      // immediately close any folder popups on the parent level
+      parent
+        .querySelectorAll<FolderComponent>('.f')
+        .forEach((folder) => folder.closePopup());
+
+      popup = FolderPopup(root, item.children!, parent.id === 'b');
+
+      popup.onmouseenter = clearTimer;
+      popup.onmouseleave = resetTimer;
+
+      append(popup, root);
+    }
+  };
+
+  root.onmouseleave = resetTimer;
 
   return root;
 }
