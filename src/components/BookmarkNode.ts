@@ -7,8 +7,7 @@ import { Link, LinkComponent, LinkProps } from './Link';
 type FolderPopupComponent = HTMLDivElement;
 
 const CLOSE_DELAY_MS = 600;
-
-const emptyPopupView = h`<div class=empty>(empty)</div>`;
+let emptyPopupView;
 
 const folderPopupView = create('div');
 folderPopupView.className = 'sf';
@@ -45,7 +44,7 @@ function FolderPopup(
   }
 
   if (!children.length) {
-    append(emptyPopupView, root);
+    append((emptyPopupView ??= h`<div class=empty>(empty)</div>`), root);
   } else {
     children.forEach((item) => {
       append(BookmarkNode(item), root);
