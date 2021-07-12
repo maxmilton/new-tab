@@ -1,5 +1,7 @@
 /* eslint-disable @typescript-eslint/restrict-plus-operands */
 
+// FIXME: Memory leaks with event listeners
+
 import { h } from 'stage1';
 import { append, create } from '../utils';
 import { Link, LinkComponent, LinkProps } from './Link';
@@ -45,9 +47,6 @@ function FolderPopup(
       append(BookmarkNode(item), root);
     });
   }
-
-  // TODO: Although popup position somewhat works it's still buggy in many
-  // scenarios especially in folders with scrollbars
 
   // Only after the component is mounted in the DOM do we have element size
   // information so final position adjustment is split into a separate step
@@ -115,7 +114,7 @@ export function Folder(item: FolderProps): FolderComponent {
       popup = FolderPopup(
         root,
         item.children!,
-        // BookmarkBar (bookmarks top level) has ID of 'b'
+        // BookmarkBar (bookmarks top level) has attribute id="b"
         parent.id === 'b',
       );
 
