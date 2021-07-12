@@ -1,6 +1,9 @@
 /* eslint-disable @typescript-eslint/no-var-requires */
 /* eslint-disable import/no-extraneous-dependencies */
 
+// https://developer.chrome.com/docs/extensions/mv2/manifest/
+// https://developer.chrome.com/docs/extensions/reference/
+
 const { gitRef } = require('git-ref');
 const pkg = require('./package.json');
 
