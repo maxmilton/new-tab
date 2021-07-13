@@ -31,14 +31,14 @@
   --c3: #392d2d;
 }
 
-// Hacker terminal green
+// Hacker terminal theme
 .h {
   --s: 0 0 0 1px #1b6225;
   --b: #0a0000;
   --t: #26ba3c;
   --c1: #113321;
-  --c2: #0f0b0b;
-  --c3: var(--t);
+  --c2: #0a0000;
+  --c3: #26ba3c;
 
   * {
     font-family: monospace;
