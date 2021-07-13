@@ -16,7 +16,7 @@ const manifest = {
   version: pkg.version,
   version_name: process.env.GITHUB_REF
     ? process.env.GITHUB_REF.replace('refs/tags/', '')
-    : gitRef(),
+    : gitRef().replace(/^v/, ''),
   homepage_url: pkg.homepage,
   icons: {
     16: 'icon16.png',
