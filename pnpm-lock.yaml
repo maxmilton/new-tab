@@ -2,7 +2,7 @@ lockfileVersion: 5.3
 
 specifiers:
   '@types/chrome': 0.0.146
-  '@types/csso': 3.5.2
+  '@types/csso': 4.2.0
   '@types/jsdom': 16.2.13
   '@types/node': 16.3.1
   '@typescript-eslint/eslint-plugin': 4.28.3
@@ -31,7 +31,7 @@ dependencies:
 
 devDependencies:
   '@types/chrome': 0.0.146
-  '@types/csso': 3.5.2
+  '@types/csso': 4.2.0
   '@types/jsdom': 16.2.13
   '@types/node': 16.3.1
   '@typescript-eslint/eslint-plugin': 4.28.3_8da3816a7c3fb8ebc9f4c4b3e4b2e38f
@@ -380,8 +380,8 @@ packages:
     resolution: {integrity: sha512-zjSMDm4C7J1azi9SdT1XwNaVCzeHZx+Y5AVebcg/mrtUULNxZjeamc8oQpUDKpaudM5R+Sy7RFvm2xphfwN64w==}
     dev: true
 
-  /@types/csso/3.5.2:
-    resolution: {integrity: sha512-Ou6PegjBPB4Jdz4w1NkrBAximhK9MJE4k3ii8qbtW/ypvzF4RrMIYgac8naLLp+opCgOgZ8LDx3NmdYLNhWhFA==}
+  /@types/csso/4.2.0:
+    resolution: {integrity: sha512-tGMZcJGgeIA67qbbm/ZKUi7ZyiTETEL0X4opRpFzULbIE1Kyt6EfOVSctw4N/WrEJZwmKw0J+1i/OApm6/CAOQ==}
     dependencies:
       '@types/css-tree': 1.0.6
     dev: true
@@ -714,9 +714,9 @@ packages:
     engines: {node: ^6 || ^7 || ^8 || ^9 || ^10 || ^11 || ^12 || >=13.7}
     hasBin: true
     dependencies:
-      caniuse-lite: 1.0.30001243
+      caniuse-lite: 1.0.30001244
       colorette: 1.2.2
-      electron-to-chromium: 1.3.772
+      electron-to-chromium: 1.3.774
       escalade: 3.1.1
       node-releases: 1.1.73
     dev: true
@@ -761,8 +761,8 @@ packages:
     engines: {node: '>=6'}
     dev: true
 
-  /caniuse-lite/1.0.30001243:
-    resolution: {integrity: sha512-vNxw9mkTBtkmLFnJRv/2rhs1yufpDfCkBZexG3Y0xdOH2Z/eE/85E4Dl5j1YUN34nZVsSp6vVRFQRrez9wJMRA==}
+  /caniuse-lite/1.0.30001244:
+    resolution: {integrity: sha512-Wb4UFZPkPoJoKKVfELPWytRzpemjP/s0pe22NriANru1NoI+5bGNxzKtk7edYL8rmCWTfQO8eRiF0pn1Dqzx7Q==}
     dev: true
 
   /chalk/2.4.2:
@@ -991,8 +991,8 @@ packages:
       stylis: 4.0.10
     dev: true
 
-  /electron-to-chromium/1.3.772:
-    resolution: {integrity: sha512-X/6VRCXWALzdX+RjCtBU6cyg8WZgoxm9YA02COmDOiNJEZ59WkQggDbWZ4t/giHi/3GS+cvdrP6gbLISANAGYA==}
+  /electron-to-chromium/1.3.774:
+    resolution: {integrity: sha512-Fggh17Q1yyv1uMzq8Qn1Ci58P50qcRXMXd2MBcB9sxo6rJxjUutWcNw8uCm3gFWMdcblBO6mDT5HzX/RVRRECA==}
     dev: true
 
   /emoji-regex/8.0.0:
@@ -1185,7 +1185,7 @@ packages:
       eslint-module-utils: 2.6.1
       find-up: 2.1.0
       has: 1.0.3
-      is-core-module: 2.4.0
+      is-core-module: 2.5.0
       minimatch: 3.0.4
       object.values: 1.1.4
       pkg-up: 2.0.0
@@ -1692,8 +1692,8 @@ packages:
     engines: {node: '>= 0.4'}
     dev: true
 
-  /is-core-module/2.4.0:
-    resolution: {integrity: sha512-6A2fkfq1rfeQZjxrZJGerpLCTHRNEBiSgnu0+obeJpEPZRUooHgsizvzv0ZjJwOz3iWIHdJtVWJ/tmPr3D21/A==}
+  /is-core-module/2.5.0:
+    resolution: {integrity: sha512-TXCMSDsEHMEEZ6eCA8rwRDbLu55MRGmrctljsBX/2v1d9/GzqHOxW5c5oPSgrUt2vBFXebu9rGqckXGPWOlYpg==}
     dependencies:
       has: 1.0.3
     dev: true
@@ -2435,7 +2435,7 @@ packages:
   /resolve/1.20.0:
     resolution: {integrity: sha512-wENBPt4ySzg4ybFQW2TT1zMQucPK95HSh/nq2CFTZVOGut2+pQvSsgtda4d26YrYcr067wjbmzOG8byDPBX63A==}
     dependencies:
-      is-core-module: 2.4.0
+      is-core-module: 2.5.0
       path-parse: 1.0.7
     dev: true
 

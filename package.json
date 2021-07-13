@@ -24,7 +24,7 @@
   },
   "devDependencies": {
     "@types/chrome": "0.0.146",
-    "@types/csso": "3.5.2",
+    "@types/csso": "4.2.0",
     "@types/jsdom": "16.2.13",
     "@types/node": "16.3.1",
     "@typescript-eslint/eslint-plugin": "4.28.3",
