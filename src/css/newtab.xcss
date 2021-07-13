@@ -214,7 +214,7 @@ button {
       display: block;
       right: 2px;
       top: -2px;
-      content: '▸';
+      content: '⏵';
     }
   }
 }
