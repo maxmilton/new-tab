@@ -4,7 +4,7 @@ specifiers:
   '@types/chrome': 0.0.147
   '@types/csso': 4.2.0
   '@types/jsdom': 16.2.13
-  '@types/node': 16.3.1
+  '@types/node': 16.3.3
   '@typescript-eslint/eslint-plugin': 4.28.3
   '@typescript-eslint/parser': 4.28.3
   c8: 7.7.3
@@ -22,18 +22,18 @@ specifiers:
   kleur: 4.1.4
   playwright-chromium: 1.12.3
   prettier: 2.3.2
-  stage1: 0.0.7
+  stage1: 0.0.8
   typescript: 4.3.5
   uvu: 0.5.1
 
 dependencies:
-  stage1: 0.0.7
+  stage1: 0.0.8
 
 devDependencies:
   '@types/chrome': 0.0.147
   '@types/csso': 4.2.0
   '@types/jsdom': 16.2.13
-  '@types/node': 16.3.1
+  '@types/node': 16.3.3
   '@typescript-eslint/eslint-plugin': 4.28.3_8da3816a7c3fb8ebc9f4c4b3e4b2e38f
   '@typescript-eslint/parser': 4.28.3_eslint@7.30.0+typescript@4.3.5
   c8: 7.7.3
@@ -412,7 +412,7 @@ packages:
   /@types/jsdom/16.2.13:
     resolution: {integrity: sha512-8JQCjdeAidptSsOcRWk2iTm9wCcwn9l+kRG6k5bzUacrnm1ezV4forq0kWjUih/tumAeoG+OspOvQEbbRucBTw==}
     dependencies:
-      '@types/node': 16.3.1
+      '@types/node': 16.3.3
       '@types/parse5': 6.0.1
       '@types/tough-cookie': 4.0.1
     dev: true
@@ -421,8 +421,8 @@ packages:
     resolution: {integrity: sha512-YSBPTLTVm2e2OoQIDYx8HaeWJ5tTToLH67kXR7zYNGupXMEHa2++G8k+DczX2cFVgalypqtyZIcU19AFcmOpmg==}
     dev: true
 
-  /@types/node/16.3.1:
-    resolution: {integrity: sha512-N87VuQi7HEeRJkhzovao/JviiqKjDKMVKxKMfUvSKw+MbkbW8R0nA3fi/MQhhlxV2fQ+2ReM+/Nt4efdrJx3zA==}
+  /@types/node/16.3.3:
+    resolution: {integrity: sha512-8h7k1YgQKxKXWckzFCMfsIwn0Y61UK6tlD6y2lOb3hTOIMlK3t9/QwHOhc81TwU+RMf0As5fj7NPjroERCnejQ==}
     dev: true
 
   /@types/normalize-package-data/2.4.1:
@@ -444,7 +444,7 @@ packages:
   /@types/yauzl/2.9.2:
     resolution: {integrity: sha512-8uALY5LTvSuHgloDVUvWP3pIauILm+8/0pDMokuDYIoNsOkSwd5AiHBTSEJjKTDcZr5z8UpgOWZkxBF4iJftoA==}
     dependencies:
-      '@types/node': 16.3.1
+      '@types/node': 16.3.3
     dev: true
     optional: true
 
@@ -607,8 +607,8 @@ packages:
       uri-js: 4.4.1
     dev: true
 
-  /ajv/8.6.1:
-    resolution: {integrity: sha512-42VLtQUOLefAvKFAQIxIZDaThq6om/PrfP0CYk3/vn+y4BMNkKnbli8ON2QCiHov4KkzOSJ/xSoBJdayiiYvVQ==}
+  /ajv/8.6.2:
+    resolution: {integrity: sha512-9807RlWAgT564wT+DjeyU5OFMPjmzxVobvDFmNAhY+5zD6A2ly3jDp6sgnfyDtlIQ+7H97oc/DGCzzfu9rjw9w==}
     dependencies:
       fast-deep-equal: 3.1.3
       json-schema-traverse: 1.0.0
@@ -714,9 +714,9 @@ packages:
     engines: {node: ^6 || ^7 || ^8 || ^9 || ^10 || ^11 || ^12 || >=13.7}
     hasBin: true
     dependencies:
-      caniuse-lite: 1.0.30001244
+      caniuse-lite: 1.0.30001245
       colorette: 1.2.2
-      electron-to-chromium: 1.3.774
+      electron-to-chromium: 1.3.779
       escalade: 3.1.1
       node-releases: 1.1.73
     dev: true
@@ -761,8 +761,8 @@ packages:
     engines: {node: '>=6'}
     dev: true
 
-  /caniuse-lite/1.0.30001244:
-    resolution: {integrity: sha512-Wb4UFZPkPoJoKKVfELPWytRzpemjP/s0pe22NriANru1NoI+5bGNxzKtk7edYL8rmCWTfQO8eRiF0pn1Dqzx7Q==}
+  /caniuse-lite/1.0.30001245:
+    resolution: {integrity: sha512-768fM9j1PKXpOCKws6eTo3RHmvTUsG9UrpT4WoREFeZgJBTi4/X9g565azS/rVUGtqb8nt7FjLeF5u4kukERnA==}
     dev: true
 
   /chalk/2.4.2:
@@ -991,8 +991,8 @@ packages:
       stylis: 4.0.10
     dev: true
 
-  /electron-to-chromium/1.3.774:
-    resolution: {integrity: sha512-Fggh17Q1yyv1uMzq8Qn1Ci58P50qcRXMXd2MBcB9sxo6rJxjUutWcNw8uCm3gFWMdcblBO6mDT5HzX/RVRRECA==}
+  /electron-to-chromium/1.3.779:
+    resolution: {integrity: sha512-nreave0y/1Qhmo8XtO6C/LpawNyC6U26+q7d814/e+tIqUK073pM+4xW7WUXyqCRa5K4wdxHmNMBAi8ap9nEew==}
     dev: true
 
   /emoji-regex/8.0.0:
@@ -2590,8 +2590,8 @@ packages:
       escape-string-regexp: 2.0.0
     dev: true
 
-  /stage1/0.0.7:
-    resolution: {integrity: sha512-MWkihmOuFnBmrsCUrGYl2buU/irpOedpV1apCCRUL7FI6L1ozALD73CDGEkk9kR6wSbkKiB0bMRqxfFVho7e4g==}
+  /stage1/0.0.8:
+    resolution: {integrity: sha512-9t6Ci/Muh1K1nxShfwIGVINwSfD5/vFjFD0WknV9GmaJM7Vs601sWOOpEQcOM/peGxj+8BjKEe0DEGvsBa/hyQ==}
     dev: false
 
   /string-width/4.2.2:
@@ -2660,7 +2660,7 @@ packages:
     resolution: {integrity: sha512-ZGum47Yi6KOOFDE8m223td53ath2enHcYLgOCjGr5ngu8bdIARQk6mN/wRMv4yMRcHnCSnHbCEha4sobQx5yWg==}
     engines: {node: '>=10.0.0'}
     dependencies:
-      ajv: 8.6.1
+      ajv: 8.6.2
       lodash.clonedeep: 4.5.0
       lodash.truncate: 4.4.2
       slice-ansi: 4.0.0
