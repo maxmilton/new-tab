@@ -24,3 +24,16 @@ append(frag, document.body);
 
 document.body.__click = handleClick;
 setupSyntheticEvent('click');
+
+// TODO: Keep? It can actually cause worse first page initial load!
+// // When the page isn't active stop the "Open Tabs" section from updating to
+// // prevent performance issues when users open many new-tab pages
+// document.onvisibilitychange = () => {
+//   if (document.hidden) {
+//     // @ts-expect-error - force override to kill API method
+//     chrome.tabs.query = () => {};
+//   } else {
+//     // eslint-disable-next-line no-restricted-globals
+//     location.reload();
+//   }
+// };
