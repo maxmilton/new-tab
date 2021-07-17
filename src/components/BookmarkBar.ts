@@ -111,8 +111,8 @@ export function BookmarkBar(): BookmarkBarComponent {
     window.onresize = resize;
   });
 
-  root.onmouseover = syntheticMouseEnterLeave;
-  root.onmouseout = syntheticMouseEnterLeave;
+  // eslint-disable-next-line no-multi-assign
+  root.onmouseover = root.onmouseout = syntheticMouseEnterLeave;
 
   return root;
 }
