@@ -1,7 +1,5 @@
 /* eslint-disable @typescript-eslint/restrict-plus-operands */
 
-// FIXME: Memory leaks with event listeners
-
 import { h } from 'stage1';
 import { append, create } from '../utils';
 import { Link, LinkComponent, LinkProps } from './Link';
@@ -95,6 +93,9 @@ export function Folder(item: FolderProps): FolderComponent {
 
   root.closePopup = () => {
     if (popup) {
+      // eslint-disable-next-line no-multi-assign
+      popup.onmouseenter = popup.onmouseleave = null;
+
       popup.remove();
       popup = null;
     }
