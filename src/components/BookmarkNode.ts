@@ -91,6 +91,7 @@ export function Folder(item: FolderProps): FolderComponent {
   if (item.end) root.className += ' end';
   root.textContent = item.title;
 
+  // TODO: Figure out how to make esbuild minify this name
   root.closePopup = () => {
     if (popup) {
       popup.remove();
