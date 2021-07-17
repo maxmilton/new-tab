@@ -2,6 +2,37 @@ import { h } from 'stage1';
 import { append, create } from '../utils';
 import { BookmarkNode, Folder, FolderProps } from './BookmarkNode';
 
+declare global {
+  interface HTMLElement {
+    /** BookmarkBar synthetic `mouseenter` event handler. */
+    __mouseover(event: MouseEvent): void;
+    /** BookmarkBar synthetic `mouseleave` event handler. */
+    __mouseout(event: MouseEvent): void;
+  }
+}
+
+// XXX: Similar to stage1 synthetic event logic but does not stop propagating
+// once an event handler is called + extra relatedTarget checks
+// https://github.com/maxmilton/stage1/blob/495ccf98af62fc1a1360bbf23de1ab2712eb586c/src/events.ts#L3
+const syntheticMouseEnterLeave = (event: MouseEvent) => {
+  const eventKey = '__' + event.type;
+  // undefined when mouse moves in from outside the viewport
+  const related = event.relatedTarget as Node | undefined;
+  let node = event.target as Node | null;
+
+  while (node) {
+    // @ts-expect-error - string indexing dom is unavoidable
+    // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
+    const eventHandler = node[eventKey];
+
+    if (eventHandler && (!related || !node.contains(related))) {
+      // eslint-disable-next-line @typescript-eslint/no-unsafe-call
+      eventHandler(event);
+    }
+    node = node.parentNode;
+  }
+};
+
 type BookmarkBarComponent = HTMLDivElement;
 
 export function BookmarkBar(): BookmarkBarComponent {
@@ -79,6 +110,9 @@ export function BookmarkBar(): BookmarkBarComponent {
 
     window.onresize = resize;
   });
+
+  root.onmouseover = syntheticMouseEnterLeave;
+  root.onmouseout = syntheticMouseEnterLeave;
 
   return root;
 }
