@@ -16,8 +16,8 @@ declare global {
 // https://github.com/maxmilton/stage1/blob/495ccf98af62fc1a1360bbf23de1ab2712eb586c/src/events.ts#L3
 const syntheticMouseEnterLeave = (event: MouseEvent) => {
   const eventKey = '__' + event.type;
-  // undefined when mouse moves in from outside the viewport
-  const related = event.relatedTarget as Node | undefined;
+  // null when mouse moves from/to outside the viewport
+  const related = event.relatedTarget as Node | null;
   let node = event.target as Node | null;
 
   while (node) {
