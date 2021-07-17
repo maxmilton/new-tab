@@ -93,15 +93,12 @@ export function Folder(item: FolderProps): FolderComponent {
 
   root.closePopup = () => {
     if (popup) {
-      // eslint-disable-next-line no-multi-assign
-      popup.onmouseenter = popup.onmouseleave = null;
-
       popup.remove();
       popup = null;
     }
   };
 
-  root.onmouseenter = () => {
+  root.__mouseover = () => {
     clearTimer();
 
     if (!popup) {
@@ -119,15 +116,15 @@ export function Folder(item: FolderProps): FolderComponent {
         parent.id === 'b',
       );
 
-      popup.onmouseenter = clearTimer;
-      popup.onmouseleave = resetTimer;
+      popup.__mouseover = clearTimer;
+      popup.__mouseout = resetTimer;
 
       append(popup, root);
       popup.adjustPosition();
     }
   };
 
-  root.onmouseleave = resetTimer;
+  root.__mouseout = resetTimer;
 
   return root;
 }

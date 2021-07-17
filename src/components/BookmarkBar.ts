@@ -2,6 +2,21 @@ import { h } from 'stage1';
 import { append, create } from '../utils';
 import { BookmarkNode, Folder, FolderProps } from './BookmarkNode';
 
+declare global {
+  interface HTMLElement {
+    /**
+     * BookmarkBar synthetic `mouseenter` event handler. Note the property is
+     * named `__mouseover` but it actually works like `mouseenter`.
+     */
+    __mouseover(event: MouseEvent): void;
+    /**
+     * BookmarkBar synthetic `mouseleave` event handler. Note the property is
+     * named `__mouseout` but it actually works like `mouseleave`.
+     */
+    __mouseout(event: MouseEvent): void;
+  }
+}
+
 type BookmarkBarComponent = HTMLDivElement;
 
 export function BookmarkBar(): BookmarkBarComponent {
@@ -79,6 +94,30 @@ export function BookmarkBar(): BookmarkBarComponent {
 
     window.onresize = resize;
   });
+
+  // Synthetic `mouseenter` and `mouseleave` event handler
+  // XXX: Similar to stage1 synthetic event logic but does not stop propagating
+  // once an event handler is called + extra relatedTarget checks
+  // https://github.com/maxmilton/stage1/blob/495ccf98af62fc1a1360bbf23de1ab2712eb586c/src/events.ts#L3
+  // eslint-disable-next-line no-multi-assign
+  root.onmouseover = root.onmouseout = (event) => {
+    const eventKey = '__' + event.type;
+    // null when mouse moves from/to outside the viewport
+    const related = event.relatedTarget as Node | null;
+    let node = event.target as Node | null;
+
+    while (node) {
+      // @ts-expect-error - string indexing dom is unavoidable
+      // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
+      const eventHandler = node[eventKey];
+
+      if (eventHandler && (!related || !node.contains(related))) {
+        // eslint-disable-next-line @typescript-eslint/no-unsafe-call
+        eventHandler(event);
+      }
+      node = node.parentNode;
+    }
+  };
 
   return root;
 }
