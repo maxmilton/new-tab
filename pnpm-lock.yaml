@@ -9,7 +9,7 @@ specifiers:
   '@typescript-eslint/parser': 4.28.3
   c8: 7.7.3
   csso: 4.2.0
-  ekscss: 0.0.7
+  ekscss: 0.0.8
   esbuild: 0.12.15
   esbuild-minify-templates: 0.5.0
   esbuild-register: 2.6.0
@@ -38,7 +38,7 @@ devDependencies:
   '@typescript-eslint/parser': 4.28.3_eslint@7.31.0+typescript@4.3.5
   c8: 7.7.3
   csso: 4.2.0
-  ekscss: 0.0.7
+  ekscss: 0.0.8
   esbuild: 0.12.15
   esbuild-minify-templates: 0.5.0_esbuild@0.12.15
   esbuild-register: 2.6.0
@@ -982,8 +982,8 @@ packages:
       webidl-conversions: 5.0.0
     dev: true
 
-  /ekscss/0.0.7:
-    resolution: {integrity: sha512-ZcjZoayII6Dhdx7Bv7s2ZCQMgXzwFlD/686XxSxAutS8cD/0uKGY4uRIpuLnPWxQNbNbqw6T77C8CR6UDG9VhA==}
+  /ekscss/0.0.8:
+    resolution: {integrity: sha512-bs6fpeaSjen/SliU4aNoUrRvSgmI6G1U2UnUKHnW83DYdjkwNF+flgBxY1llAawFP3+YfE1qJZEmbua8ram6eQ==}
     engines: {node: '>= 10'}
     dependencies:
       '@types/stylis': 4.0.1
