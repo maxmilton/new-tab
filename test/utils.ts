@@ -160,6 +160,7 @@ export function mocksSetup(): void {
         get: (_keys, callback) => {
           callback({});
         },
+        // @ts-expect-error - FIXME:!
         set: noop,
       },
     },
