@@ -24,7 +24,7 @@ Originally an experimental project to give me a chance for me to play with the C
 - Simple bookmarks bar.
 - Links to common places in your browser.
 
-### Motives
+### Design goals
 
 <!-- prettier-ignore -->
 | Issue | Why / How |
@@ -41,12 +41,6 @@ Originally an experimental project to give me a chance for me to play with the C
 - [ekscss](https://github.com/maxmilton/ekscss) style preprocessor
 - [esbuild](https://esbuild.github.io/) JavaScript bundler
 
-## Known issues
-
-1. The extension's bookmarks bar functionality is limited. Chrome doesn't allow extensions to control the native bookmarks bar visibility so I've recreated a simple version. The goal is _high performance_ and quick access rather than trying to emulate the native bookmarks bar. Use the bookmark manager for access to all features.
-1. Page needs to be reloaded after adding, editing, or removing bookmarks. Bookmarks don't change often, so changes are not live.
-1. The project is set up for development on Linux and may not build on other operating systems.
-
 ## Browser support
 
 Recent versions of Google Chrome and other Chromium based browsers (e.g., Brave, Edge).
@@ -54,6 +48,12 @@ Recent versions of Google Chrome and other Chromium based browsers (e.g., Brave,
 ## Bugs
 
 Please report any bugs you encounter on the [GitHub issue tracker](https://github.com/maxmilton/new-tab/issues).
+
+### Known issues
+
+1. The extension's bookmarks bar functionality is limited. Chrome doesn't allow extensions to control the native bookmarks bar visibility so I've recreated a simple version. The goal is _high performance_ and quick access rather than trying to emulate the native bookmarks bar. Use the bookmark manager for access to all features.
+1. Page needs to be reloaded after adding, editing, or removing bookmarks. Bookmarks don't change often, so changes are not live.
+1. The project is set up for development on Linux and may not build on other operating systems.
 
 ## Changelog
 
