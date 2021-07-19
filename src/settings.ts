@@ -154,7 +154,7 @@ function Settings() {
       state.order = order;
 
       if (!noSet) {
-        chrome.storage.local.set({
+        void chrome.storage.local.set({
           o: order,
         });
       }
