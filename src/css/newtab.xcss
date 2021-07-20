@@ -44,6 +44,64 @@
     font-family: monospace;
     font-weight: normal;
   }
+
+  img {
+    filter: sepia(1) saturate(5) hue-rotate(45deg);
+  }
+
+  svg {
+    stroke-width: 1.5px;
+  }
+
+  #s,
+  button {
+    border-radius: 0;
+  }
+}
+
+// Tilde Club theme -- inspired by http://tilde.club
+.t {
+  --s: 0 0 0 1px #fb5;
+  --b: #111;
+  --t: #fb5;
+  --c1: #fb5;
+  --c2: #111;
+  --c3: #fb5;
+
+  * {
+    font-family: 'JetBrains Mono', monospace;
+    font-weight: normal;
+  }
+
+  img {
+    filter: sepia(1) saturate(5);
+  }
+
+  svg {
+    stroke-width: 1.5px;
+  }
+
+  #s,
+  button {
+    border-width: 1px;
+    border-radius: 4px;
+  }
+
+  .is {
+    top: 12.5px;
+  }
+
+  ::placeholder {
+    color: transparent;
+  }
+
+  #b a,
+  .f {
+    &:focus,
+    &:hover {
+      color: var(--b);
+    }
+  }
 }
 
 /**

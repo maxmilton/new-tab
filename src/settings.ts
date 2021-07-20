@@ -96,6 +96,7 @@ const settingsView = h`
         <option value=l>Light</option>
         <option value=b>Rich black</option>
         <option value=h>Hacker terminal</option>
+        <option value=t>Tilde Club</option>
       </select>
     </div>
 
