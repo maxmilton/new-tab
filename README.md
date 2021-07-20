@@ -19,8 +19,8 @@ Originally an experimental project to give me a chance for me to play with the C
 
 - Fastest loading of any new tab page with all the features you expect.
 - Distraction-free, minimal design aesthetic with multiple themes.
-- List of your open tabs and top sites.
-- Search open tabs, bookmarks, history, and top sites in one place.
+- List of your open tabs, recently closed tabs, and top sites.
+- Search tabs, bookmarks, history, and top sites in one place.
 - Simple bookmarks bar.
 - Links to common places in your browser.
 
