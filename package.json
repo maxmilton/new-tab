@@ -31,7 +31,7 @@
   "devDependencies": {
     "@ampproject/rollup-plugin-closure-compiler": "0.26.0",
     "@rollup/plugin-node-resolve": "11.1.1",
-    "@rollup/plugin-sucrase": "3.1.0",
+    "@rollup/plugin-sucrase": "4.0.0",
     "@types/chrome": "0.0.130",
     "@types/expect-puppeteer": "4.4.5",
     "@types/google-closure-compiler" : "0.0.18",
