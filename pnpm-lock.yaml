@@ -20,7 +20,7 @@ specifiers:
   git-ref: 0.2.0
   jsdom: 16.6.0
   kleur: 4.1.4
-  playwright-chromium: 1.13.0
+  playwright-chromium: 1.13.1
   prettier: 2.3.2
   stage1: 0.0.8
   typescript: 4.3.5
@@ -49,7 +49,7 @@ devDependencies:
   git-ref: 0.2.0
   jsdom: 16.6.0
   kleur: 4.1.4
-  playwright-chromium: 1.13.0
+  playwright-chromium: 1.13.1
   prettier: 2.3.2
   typescript: 4.3.5
   uvu: 0.5.1
@@ -2346,8 +2346,8 @@ packages:
       find-up: 2.1.0
     dev: true
 
-  /playwright-chromium/1.13.0:
-    resolution: {integrity: sha512-Y1vB1eZZsH/LRdulLYWF1+1lo0TRJ3DkGoMO+QMBEs1Gh0pIoGRTcG25WHIE7z9dGfLaSpkfE11mf2vqU6LLKA==}
+  /playwright-chromium/1.13.1:
+    resolution: {integrity: sha512-aJnhWAbDHoI3rTTeeJJJa/PjrysSLKfURiiVM+3EauVxsouK/XCbNdere+1q/a64OlipXWIZeqzoCDlVZiaL0g==}
     engines: {node: '>=12'}
     hasBin: true
     requiresBuild: true
