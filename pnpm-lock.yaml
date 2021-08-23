@@ -4,13 +4,13 @@ specifiers:
   '@types/chrome': 0.0.154
   '@types/csso': 4.2.0
   '@types/jsdom': 16.2.13
-  '@types/node': 16.7.0
+  '@types/node': 16.7.1
   '@typescript-eslint/eslint-plugin': 4.29.3
   '@typescript-eslint/parser': 4.29.3
   c8: 7.8.0
   csso: 4.2.0
   ekscss: 0.0.8
-  esbuild: 0.12.21
+  esbuild: 0.12.22
   esbuild-minify-templates: 0.5.0
   esbuild-register: 3.0.0
   eslint: 7.32.0
@@ -34,15 +34,15 @@ devDependencies:
   '@types/chrome': 0.0.154
   '@types/csso': 4.2.0
   '@types/jsdom': 16.2.13
-  '@types/node': 16.7.0
+  '@types/node': 16.7.1
   '@typescript-eslint/eslint-plugin': 4.29.3_fd14c0002fbbfb85b8a0070d0dffb93d
   '@typescript-eslint/parser': 4.29.3_eslint@7.32.0+typescript@4.3.5
   c8: 7.8.0
   csso: 4.2.0
   ekscss: 0.0.8
-  esbuild: 0.12.21
-  esbuild-minify-templates: 0.5.0_esbuild@0.12.21
-  esbuild-register: 3.0.0_esbuild@0.12.21
+  esbuild: 0.12.22
+  esbuild-minify-templates: 0.5.0_esbuild@0.12.22
+  esbuild-register: 3.0.0_esbuild@0.12.22
   eslint: 7.32.0
   eslint-config-airbnb-base: 14.2.1_dd24990a2f914d6f3397930dfc8171b2
   eslint-config-airbnb-typescript: 13.0.0_5a932766612959030cbbaf3bc45e8537
@@ -425,6 +425,10 @@ packages:
 
   /@types/node/16.7.0:
     resolution: {integrity: sha512-e66BrnjWQ3BRBZ2+iA5e85fcH9GLNe4S0n1H0T3OalK2sXg5XWEFTO4xvmGrYQ3edy+q6fdOh5t0/HOY8OAqBg==}
+    dev: true
+
+  /@types/node/16.7.1:
+    resolution: {integrity: sha512-ncRdc45SoYJ2H4eWU9ReDfp3vtFqDYhjOsKlFFUDEn8V1Bgr2RjYal8YT5byfadWIRluhPFU6JiDOl0H6Sl87A==}
     dev: true
 
   /@types/normalize-package-data/2.4.1:
@@ -1052,7 +1056,7 @@ packages:
       is-symbol: 1.0.4
     dev: true
 
-  /esbuild-minify-templates/0.5.0_esbuild@0.12.21:
+  /esbuild-minify-templates/0.5.0_esbuild@0.12.22:
     resolution: {integrity: sha512-SRjej2ZIpf1Msp4NQ9Kx+DKhsV55oOtrSXokDyUUKa8zgnCLPSVK7aqNT69uHNBAUFhckn2zlYRznVRRz949oA==}
     engines: {node: '>= 12'}
     peerDependencies:
@@ -1060,22 +1064,22 @@ packages:
     dependencies:
       '@ampproject/remapping': 1.0.1
       astray: 1.1.1
-      esbuild: 0.12.21
+      esbuild: 0.12.22
       magic-string: 0.25.7
       meriyah: 4.2.0
     dev: true
 
-  /esbuild-register/3.0.0_esbuild@0.12.21:
+  /esbuild-register/3.0.0_esbuild@0.12.22:
     resolution: {integrity: sha512-No7U3ZUd6gPrrC6gqdb3XFcf2lNqzn8nvQXcgcyOl8szMVuN6YUvOplnmakxWyogI9d8SiJMl0uzBzJck+Aoxw==}
     peerDependencies:
       esbuild: '>=0.12 <1'
     dependencies:
-      esbuild: 0.12.21
+      esbuild: 0.12.22
       jsonc-parser: 3.0.0
     dev: true
 
-  /esbuild/0.12.21:
-    resolution: {integrity: sha512-7hyXbU3g94aREufI/5nls7Xcc+RGQeZWZApm6hoBaFvt2BPtpT4TjFMQ9Tb1jU8XyBGz00ShmiyflCogphMHFQ==}
+  /esbuild/0.12.22:
+    resolution: {integrity: sha512-yWCr9RoFehpqoe/+MwZXJpYOEIt7KOEvNnjIeMZpMSyQt+KCBASM3y7yViiN5dJRphf1wGdUz1+M4rTtWd/ulA==}
     hasBin: true
     requiresBuild: true
     dev: true
