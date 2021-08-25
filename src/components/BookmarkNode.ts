@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/restrict-plus-operands */
 
-import { h } from 'stage1';
+import { h, S1Node } from 'stage1';
 import { append, create } from '../utils';
 import { Link, LinkComponent, LinkProps } from './Link';
 
@@ -9,8 +9,8 @@ type FolderPopupComponent = HTMLDivElement & {
 };
 
 const CLOSE_DELAY_MS = 600;
-let emptyPopupView;
-let arrowView;
+let emptyPopupView: S1Node | undefined;
+let arrowView: S1Node | undefined;
 
 const folderPopupView = create('div');
 folderPopupView.className = 'sf';
