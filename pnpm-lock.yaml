@@ -724,7 +724,7 @@ packages:
     dependencies:
       caniuse-lite: 1.0.30001251
       colorette: 1.3.0
-      electron-to-chromium: 1.3.817
+      electron-to-chromium: 1.3.818
       escalade: 3.1.1
       node-releases: 1.1.75
     dev: true
@@ -999,8 +999,8 @@ packages:
       stylis: 4.0.10
     dev: true
 
-  /electron-to-chromium/1.3.817:
-    resolution: {integrity: sha512-Vw0Faepf2Id9Kf2e97M/c99qf168xg86JLKDxivvlpBQ9KDtjSeX0v+TiuSE25PqeQfTz+NJs375b64ca3XOIQ==}
+  /electron-to-chromium/1.3.818:
+    resolution: {integrity: sha512-c/Z9gIr+jDZAR9q+mn40hEc1NharBT+8ejkarjbCDnBNFviI6hvcC5j2ezkAXru//bTnQp5n6iPi0JA83Tla1Q==}
     dev: true
 
   /emoji-regex/8.0.0:
