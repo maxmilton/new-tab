@@ -127,7 +127,7 @@ makeHTML(
   'src/css/newtab.xcss',
   // theme loader as inline script for earliest possible execution start time,
   // uses localStorage so it's sync to prevent flash of default theme colours
-  '<script>document.documentElement.className=localStorage.t;</script>',
+  '<script>document.documentElement.id=localStorage.t;</script>',
 );
 makeHTML('settings', 'src/css/settings.xcss');
 

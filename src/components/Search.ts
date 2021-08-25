@@ -42,7 +42,7 @@ type RefNodes = {
 const view = h`
   <div class=con>
     <input #s id=s placeholder="Search browser..." autocomplete=off>
-    <svg viewBox="0 0 24 24" class=is>
+    <svg id=i>
       <circle cx=11 cy=11 r=8 />
       <line x1=24 y1=24 x2=16.65 y2=16.65 />
     </svg>

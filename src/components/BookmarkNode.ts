@@ -39,7 +39,7 @@ function FolderPopup(
   }px`;
 
   if (!children.length) {
-    append((emptyPopupView ??= h`<div class=empty>(empty)</div>`), root);
+    append((emptyPopupView ??= h`<div id=e>(empty)</div>`), root);
   } else {
     children.forEach((item) => {
       append(BookmarkNode(item), root);
