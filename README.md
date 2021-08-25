@@ -61,9 +61,9 @@ See [releases on GitHub](https://github.com/maxmilton/new-tab/releases).
 
 ## License
 
-`New Tab` is an MIT licensed open source project. See [LICENSE](https://github.com/maxmilton/new-tab/blob/master/LICENSE).
+MIT license. See [LICENSE](https://github.com/maxmilton/new-tab/blob/master/LICENSE).
 
-The extension's [lightning bolt icon](https://github.com/twitter/twemoji/blob/master/assets/svg/26a1.svg) is from [twitter/twemoji](https://github.com/twitter/twemoji) which is licensed CC-BY 4.0.
+The [lightning bolt icon](https://github.com/twitter/twemoji/blob/master/assets/svg/26a1.svg) is from [twitter/twemoji](https://github.com/twitter/twemoji) which is licensed CC-BY 4.0.
 
 Icons used in the app are from [feathericons/feather](https://github.com/feathericons/feather) which is licensed MIT.
 
