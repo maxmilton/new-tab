@@ -73,11 +73,13 @@ export function BookmarkBar(): BookmarkBarComponent {
           );
 
           append(
+            // https://github.com/feathericons/feather/blob/master/icons/corner-right-down.svg
             h`
               <svg viewBox="0 0 24 24" class=io>
-                <path d="M6 6h6a3 3 0 0 1 3 3v10l-4 -4m8 0l-4 4"></path>
+                <polyline points="10 15 15 20 20 15" />
+                <path d="M4 4h7a4 4 0 0 1 4 4v12" />
               </svg>
-          `,
+            `,
             overflowBookmarksFolder,
           );
         }

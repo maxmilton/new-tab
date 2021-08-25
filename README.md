@@ -65,8 +65,6 @@ MIT license. See [LICENSE](https://github.com/maxmilton/new-tab/blob/master/LICE
 
 The [lightning bolt icon](https://github.com/twitter/twemoji/blob/master/assets/svg/26a1.svg) is from [twitter/twemoji](https://github.com/twitter/twemoji) which is licensed CC-BY 4.0.
 
-Icons used in the app are from [feathericons/feather](https://github.com/feathericons/feather) which is licensed MIT.
-
 ---
 
 © 2021 [Max Milton](https://maxmilton.com)

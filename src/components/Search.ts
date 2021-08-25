@@ -38,6 +38,7 @@ type RefNodes = {
   s: HTMLInputElement;
 };
 
+// https://github.com/feathericons/feather/blob/master/icons/search.svg
 const view = h`
   <div class=con>
     <input #s id=s placeholder="Search browser..." autocomplete=off>

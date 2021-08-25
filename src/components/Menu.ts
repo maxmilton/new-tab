@@ -5,11 +5,12 @@ type RefNodes = {
   s: HTMLAnchorElement;
 };
 
+// https://github.com/feathericons/feather/blob/master/icons/menu.svg
 const view = h`
   <div id=m>
     <svg viewBox="0 0 24 24" class=i>
-      <line x1=3 y1=12 x2=21 y2=12 />
       <line x1=3 y1=6 x2=21 y2=6 />
+      <line x1=3 y1=12 x2=21 y2=12 />
       <line x1=3 y1=18 x2=21 y2=18 />
     </svg>
 
