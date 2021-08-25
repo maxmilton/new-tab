@@ -10,6 +10,7 @@ type FolderPopupComponent = HTMLDivElement & {
 
 const CLOSE_DELAY_MS = 600;
 let emptyPopupView;
+let arrowView;
 
 const folderPopupView = create('div');
 folderPopupView.className = 'sf';
@@ -88,8 +89,21 @@ export function Folder(item: FolderProps): FolderComponent {
     timer = setTimeout(root.closePopup, CLOSE_DELAY_MS);
   };
 
-  if (item.end) root.className += ' end';
   root.textContent = item.title;
+
+  if (item.end) root.className += ' end';
+
+  // parentId 0 = "other bookmarks", 1 = bookmarks bar
+  if (+item.parentId! > 1) {
+    append(
+      (arrowView ??= h`
+        <svg class=i>
+          <path d="M5 12h14M12 5l7 7-7 7"/>
+        </svg>
+      `).cloneNode(true),
+      root,
+    );
+  }
 
   // TODO: Figure out how to make esbuild minify this name
   root.closePopup = () => {

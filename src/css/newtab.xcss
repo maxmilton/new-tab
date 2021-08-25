@@ -268,17 +268,15 @@ button {
 
   .f {
     position: relative;
-    padding-right: 23px;
-
-    // caret
-    &::after {
-      position: absolute;
-      display: block;
-      right: 2px;
-      top: -2px;
-      content: '⏵';
-    }
+    padding-right: 24px;
   }
+}
+
+// subfolder arrow icon
+.i {
+  position: absolute;
+  top: 9px;
+  right: 0;
 }
 
 .end {
