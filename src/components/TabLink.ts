@@ -6,7 +6,7 @@ export interface TabLinkProps extends LinkProps {
   windowId: number;
 }
 
-export function TabLink(props: TabLinkProps): LinkComponent {
+export const TabLink = (props: TabLinkProps): LinkComponent => {
   const root = Link(props);
 
   root.__click = () => {
@@ -29,4 +29,4 @@ export function TabLink(props: TabLinkProps): LinkComponent {
   };
 
   return root;
-}
+};

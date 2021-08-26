@@ -29,11 +29,11 @@ const view = h`
   </div>
 `;
 
-export function Menu(): MenuComponent {
+export const Menu = (): MenuComponent => {
   const root = view as MenuComponent;
   const { s } = view.collect<RefNodes>(root);
 
   s.__click = () => chrome.runtime.openOptionsPage();
 
   return root;
-}
+};

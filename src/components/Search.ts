@@ -1,11 +1,11 @@
-import { h, S1Node } from 'stage1';
+import { append, h, S1Node } from 'stage1';
 import type { UserStorageData } from '../types';
-import { append, SECTION_DEFAULT_ORDER } from '../utils';
+import { SECTION_DEFAULT_ORDER } from '../utils';
 import { SearchResult, SearchResultComponent } from './SearchResult';
 
 type SectionRefs = Record<string, SearchResultComponent>;
 
-function runSearch(text: string, section: SectionRefs) {
+const runSearch = (text: string, section: SectionRefs) => {
   const openTabs = section[SECTION_DEFAULT_ORDER[0]];
   const bookmarks = section[SECTION_DEFAULT_ORDER[1]];
   const history = section[SECTION_DEFAULT_ORDER[2]];
@@ -31,7 +31,7 @@ function runSearch(text: string, section: SectionRefs) {
   openTabs?.filter(text);
   topSites?.filter(text);
   recentlyClosed?.filter(text);
-}
+};
 
 type SearchComponent = S1Node & HTMLDivElement;
 type RefNodes = {
@@ -49,7 +49,7 @@ const view = h`
   </div>
 `;
 
-export function Search(): SearchComponent {
+export const Search = (): SearchComponent => {
   const root = view as SearchComponent;
   const { s } = view.collect<RefNodes>(root);
   const section: SectionRefs = {};
@@ -98,4 +98,4 @@ export function Search(): SearchComponent {
   });
 
   return root;
-}
+};

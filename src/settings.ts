@@ -1,7 +1,7 @@
-import { h } from 'stage1';
+import { append, h } from 'stage1';
 import { reuseNodes } from 'stage1/dist/reconcile/reuse-nodes';
 import type { UserStorageData } from './types';
-import { append, SECTION_DEFAULT_ORDER } from './utils';
+import { SECTION_DEFAULT_ORDER } from './utils';
 
 interface SectionComponent extends HTMLLIElement {
   update(newItem: string): void;

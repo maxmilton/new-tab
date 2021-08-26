@@ -1,8 +1,8 @@
-import { setupSyntheticEvent } from 'stage1';
+import { append, createFragment, setupSyntheticEvent } from 'stage1';
 import { BookmarkBar } from './components/BookmarkBar';
 import { Menu } from './components/Menu';
 import { Search } from './components/Search';
-import { append, createFragment, handleClick } from './utils';
+import { handleClick } from './utils';
 
 declare global {
   interface HTMLElement {

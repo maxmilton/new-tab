@@ -19,7 +19,7 @@ const view = h`
   </a>
 `;
 
-export function Link(item: LinkProps): LinkComponent {
+export const Link = (item: LinkProps): LinkComponent => {
   const root = view.cloneNode(true) as LinkComponent;
   const { i, t } = view.collect<RefNodes>(root);
 
@@ -29,4 +29,4 @@ export function Link(item: LinkProps): LinkComponent {
   t.nodeValue = item.title;
 
   return root;
-}
+};

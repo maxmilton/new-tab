@@ -1,7 +1,8 @@
 /* eslint-disable @typescript-eslint/restrict-plus-operands */
 
-import { h, S1Node } from 'stage1';
-import { append, create } from '../utils';
+import {
+  append, create, h, S1Node,
+} from 'stage1';
 import { Link, LinkComponent, LinkProps } from './Link';
 
 type FolderPopupComponent = HTMLDivElement & {
@@ -15,11 +16,11 @@ let arrowView: S1Node | undefined;
 const folderPopupView = create('div');
 folderPopupView.className = 'sf';
 
-function FolderPopup(
+const FolderPopup = (
   parent: Element,
   children: chrome.bookmarks.BookmarkTreeNode[],
   topLevel: boolean,
-): FolderPopupComponent {
+): FolderPopupComponent => {
   const root = folderPopupView.cloneNode(true) as FolderPopupComponent;
   const parentRect = parent.getBoundingClientRect();
   let top: number;
@@ -63,7 +64,7 @@ function FolderPopup(
   };
 
   return root;
-}
+};
 
 type FolderComponent = HTMLDivElement & {
   closePopup(this: void): void;
@@ -77,7 +78,7 @@ export interface FolderProps
 const folderView = create('div');
 folderView.className = 'f';
 
-export function Folder(item: FolderProps): FolderComponent {
+export const Folder = (item: FolderProps): FolderComponent => {
   const root = folderView.cloneNode(true) as FolderComponent;
   let popup: FolderPopupComponent | null;
   let timer: NodeJS.Timeout;
@@ -142,11 +143,9 @@ export function Folder(item: FolderProps): FolderComponent {
   root.__mouseout = resetTimer;
 
   return root;
-}
+};
 
-export function BookmarkNode(
-  item: FolderProps | LinkProps,
-): FolderComponent | LinkComponent {
+export const BookmarkNode = (
+  item: LinkProps | FolderProps,
   // @ts-expect-error - FIXME:!
-  return (item.children ? Folder : Link)(item);
-}
+): LinkComponent | FolderComponent => (item.url ? Link : Folder)(item);

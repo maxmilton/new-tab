@@ -1,5 +1,4 @@
-import { h } from 'stage1';
-import { append, create } from '../utils';
+import { append, create, h } from 'stage1';
 import { BookmarkNode, Folder, FolderProps } from './BookmarkNode';
 
 declare global {
@@ -19,7 +18,7 @@ declare global {
 
 type BookmarkBarComponent = HTMLDivElement;
 
-export function BookmarkBar(): BookmarkBarComponent {
+export const BookmarkBar = (): BookmarkBarComponent => {
   const root = create('div');
   root.id = 'b';
 
@@ -122,4 +121,4 @@ export function BookmarkBar(): BookmarkBarComponent {
   };
 
   return root;
-}
+};
