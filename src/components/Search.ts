@@ -1,16 +1,16 @@
 import { append, h, S1Node } from 'stage1';
 import type { UserStorageData } from '../types';
-import { SECTION_DEFAULT_ORDER } from '../utils';
+import { DEFAULT_SECTION_ORDER } from '../utils';
 import { SearchResult, SearchResultComponent } from './SearchResult';
 
 type SectionRefs = Record<string, SearchResultComponent>;
 
 const runSearch = (text: string, section: SectionRefs) => {
-  const openTabs = section[SECTION_DEFAULT_ORDER[0]];
-  const bookmarks = section[SECTION_DEFAULT_ORDER[1]];
-  const history = section[SECTION_DEFAULT_ORDER[2]];
-  const topSites = section[SECTION_DEFAULT_ORDER[3]];
-  const recentlyClosed = section[SECTION_DEFAULT_ORDER[4]];
+  const openTabs = section[DEFAULT_SECTION_ORDER[0]];
+  const bookmarks = section[DEFAULT_SECTION_ORDER[1]];
+  const history = section[DEFAULT_SECTION_ORDER[2]];
+  const topSites = section[DEFAULT_SECTION_ORDER[3]];
+  const recentlyClosed = section[DEFAULT_SECTION_ORDER[4]];
 
   if (history) {
     if (text) {
@@ -64,15 +64,15 @@ export const Search = (): SearchComponent => {
   };
 
   chrome.storage.local.get(null, (userSettings: UserStorageData) => {
-    const sectionOrder = userSettings.o || SECTION_DEFAULT_ORDER;
+    const sectionOrder = userSettings.o || DEFAULT_SECTION_ORDER;
 
     sectionOrder.forEach((name) => {
       section[name] = append(SearchResult(name, []), root);
     });
 
-    const openTabs = section[SECTION_DEFAULT_ORDER[0]];
-    const topSites = section[SECTION_DEFAULT_ORDER[3]];
-    const recentlyClosed = section[SECTION_DEFAULT_ORDER[4]];
+    const openTabs = section[DEFAULT_SECTION_ORDER[0]];
+    const topSites = section[DEFAULT_SECTION_ORDER[3]];
+    const recentlyClosed = section[DEFAULT_SECTION_ORDER[4]];
 
     if (openTabs) {
       const updateOpenTabs = () => chrome.tabs.query({}, openTabs.update);

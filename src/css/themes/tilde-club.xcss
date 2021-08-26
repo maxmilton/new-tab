@@ -1,0 +1,49 @@
+/**
+ * Tilde Club Theme
+ *
+ * Inspired by http://tilde.club
+ */
+
+:root {
+  --s: 0 0 0 1px #fb5; // shadow
+  --b: #111; // background
+  --t: #fb5; // text
+  --c1: #fb5; // bookmark node hover background, hr, button border, search input border
+  --c2: #111; // bookmarks bar, menu dropdown, "load more" button
+  --c3: #fb5; // icons, empty folder text, text fallback (headings, etc.)
+}
+
+* {
+  font-family: 'JetBrains Mono', monospace;
+  font-weight: normal;
+}
+
+img {
+  filter: sepia(1) saturate(5);
+}
+
+svg {
+  stroke-width: 1.5px;
+}
+
+#s,
+button {
+  border-width: 1px;
+  border-radius: 4px;
+}
+
+#i {
+  top: 12.5px;
+}
+
+::placeholder {
+  color: transparent;
+}
+
+#b a,
+.f {
+  &:focus,
+  &:hover {
+    color: var(--b);
+  }
+}

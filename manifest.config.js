@@ -53,7 +53,7 @@ const manifest = {
   content_security_policy:
     "default-src 'none';"
     // hash of inline theme loader script embedded in the HTML
-    + " script-src 'self' 'sha256-saGvUmKsyK2biD//gX6NmEe5sLkFCspZq73EYAhI1Io=';"
+    + " script-src 'self' 'sha256-N5HgwudrK2iZWAvytRoTz8UeLeW+Lc/QQLSVUFL/z/0=';"
     // app styles are embedded in the HTML for fastest load performance
     + " style-src 'unsafe-inline';"
     + ' img-src chrome://favicon;',

@@ -12,3 +12,12 @@
  */
 
 export {};
+
+// FIXME: Test this works as expect on new installs!!
+// FIXME: Update description above
+chrome.runtime.onInstalled.addListener((details) => {
+  if (details.reason === 'install') {
+    // FIXME: Save default theme; maybe open settings and have settings save it
+    chrome.runtime.openOptionsPage();
+  }
+});
