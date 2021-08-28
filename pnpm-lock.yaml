@@ -23,12 +23,12 @@ specifiers:
   kleur: 4.1.4
   playwright-chromium: 1.14.1
   prettier: 2.3.2
-  stage1: 0.0.9
+  stage1: 0.0.10
   typescript: 4.4.2
   uvu: 0.5.1
 
 dependencies:
-  stage1: 0.0.9
+  stage1: 0.0.10
 
 devDependencies:
   '@types/chrome': 0.0.154
@@ -724,7 +724,7 @@ packages:
     dependencies:
       caniuse-lite: 1.0.30001252
       colorette: 1.3.0
-      electron-to-chromium: 1.3.821
+      electron-to-chromium: 1.3.822
       escalade: 3.1.1
       node-releases: 1.1.75
     dev: true
@@ -999,8 +999,8 @@ packages:
       stylis: 4.0.10
     dev: true
 
-  /electron-to-chromium/1.3.821:
-    resolution: {integrity: sha512-IadPc2Ep1RGFYfLYdp0FTOgdPUDg3lvH7vqwGGdAuHtbnVc8M2qldS+SGESzmUaXpaSqpzROozQcBKFiRSKpOg==}
+  /electron-to-chromium/1.3.822:
+    resolution: {integrity: sha512-k7jG5oYYHxF4jx6PcqwHX3JVME/OjzolqOZiIogi9xtsfsmTjTdie4x88OakYFPEa8euciTgCCzvVNwvmjHb1Q==}
     dev: true
 
   /emoji-regex/8.0.0:
@@ -2614,8 +2614,8 @@ packages:
       escape-string-regexp: 2.0.0
     dev: true
 
-  /stage1/0.0.9:
-    resolution: {integrity: sha512-1JYIQ/k7YBkBBk8TaTMEfQmopmgisMAMM6955GgR0tOox45ZS1vBsU1RYHvR/USe5jWUsLVGgrEZxh6ld9r3bw==}
+  /stage1/0.0.10:
+    resolution: {integrity: sha512-EoeK8oH/N57wAv61dhKXeqUby9nPWZ8KChC97SJvKQ4zDAeIxE8S1z5V2K18sSExT2q7AVNcL04ulR4hSbInUA==}
     dev: false
 
   /string-width/4.2.2:
