@@ -53,9 +53,9 @@ const manifest = {
   content_security_policy:
     "default-src 'none';"
     // hash of inline theme loader script embedded in the HTML
-    + " script-src 'self' 'sha256-N5HgwudrK2iZWAvytRoTz8UeLeW+Lc/QQLSVUFL/z/0=';"
+    + " script-src-elem 'self' 'sha256-N5HgwudrK2iZWAvytRoTz8UeLeW+Lc/QQLSVUFL/z/0=';"
     // app styles are embedded in the HTML for fastest load performance
-    + " style-src 'unsafe-inline';"
+    + " style-src-elem 'unsafe-inline';"
     + ' img-src chrome://favicon;',
 
   // https://chrome.google.com/webstore/detail/new-tab/cpcibnbdmpmcmnkhoiilpnlaepkepknb
