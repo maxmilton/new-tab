@@ -1,0 +1,34 @@
+/**
+ * Hacker Terminal Theme
+ */
+
+:root {
+  --s: 0 0 0 1px #1b6225; // shadow
+  --b: #0a0000; // background
+  --t: #26ba3c; // text
+  --c1: #113321; // bookmark node hover background, hr, button border, search input border
+  --c2: #0a0000; // bookmarks bar, menu dropdown, "load more" button
+  --c3: #26ba3c; // icons, empty folder text, text fallback (headings, etc.)
+}
+
+* {
+  font-family: monospace;
+  font-weight: normal;
+}
+
+img {
+  filter: sepia(1) saturate(5) hue-rotate(45deg);
+}
+
+svg {
+  stroke-width: 1.5px;
+}
+
+#s,
+button {
+  border-radius: 0;
+}
+
+::placeholder {
+  color: transparent;
+}

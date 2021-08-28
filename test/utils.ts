@@ -8,19 +8,6 @@ global.Error.stackTraceLimit = 100;
 
 const mountedContainers = new Set<HTMLDivElement>();
 
-// function mockInnerText() {
-//   Object.defineProperty(global.window.HTMLElement.prototype, 'innerText', {
-//     get(this: HTMLElement) {
-//       const el = this.cloneNode(true) as HTMLElement;
-//       for (const s of el.querySelectorAll('script,style')) s.remove();
-//       return el.textContent;
-//     },
-//     set(this: HTMLElement, value: string) {
-//       this.textContent = value;
-//     },
-//   });
-// }
-
 export function setup(): void {
   if (global.window) {
     throw new Error(
@@ -36,9 +23,6 @@ export function setup(): void {
 
   global.window = dom.window.document.defaultView!;
   global.document = global.window.document;
-
-  // JSDOM doesn't support innerText yet -- https://github.com/jsdom/jsdom/issues/1245
-  // mockInnerText();
 }
 
 export function teardown(): void {
@@ -201,10 +185,15 @@ export function mocksSetup(): void {
 
   global.DocumentFragment = window.DocumentFragment;
   global.localStorage = window.localStorage;
+
+  // @ts-expect-error - just a simple mock
+  global.fetch = () => Promise.resolve({
+    json: () => Promise.resolve({}),
+  });
 }
 
 export function mocksTeardown(): void {
   // @ts-expect-error - cleaning up
   // eslint-disable-next-line no-multi-assign
-  global.chrome = global.DocumentFragment = global.localStorage = undefined;
+  global.chrome = global.DocumentFragment = global.localStorage = global.fetch = undefined;
 }

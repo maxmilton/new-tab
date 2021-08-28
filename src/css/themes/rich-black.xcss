@@ -1,0 +1,12 @@
+/**
+ * Rich Black Theme
+ */
+
+:root {
+  --s: 0 0 0 1px #30221d; // shadow
+  --b: #0a0000; // background
+  --t: #795548; // text
+  --c1: #1d1616; // bookmark node hover background, hr, button border, search input border
+  --c2: #0f0b0b; // bookmarks bar, menu dropdown, "load more" button
+  --c3: #392d2d; // icons, empty folder text, text fallback (headings, etc.)
+}

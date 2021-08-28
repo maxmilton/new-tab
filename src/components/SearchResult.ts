@@ -1,7 +1,7 @@
 import {
   append, createFragment, h, S1Node,
 } from 'stage1';
-import { SECTION_DEFAULT_ORDER } from '../utils';
+import { DEFAULT_SECTION_ORDER } from '../utils';
 import { Link, LinkProps } from './Link';
 import { TabLink } from './TabLink';
 
@@ -35,7 +35,7 @@ export const SearchResult = <T extends LinkProps>(
 ): SearchResultComponent => {
   const root = view.cloneNode(true) as SearchResultComponent;
   const { t, l, m } = view.collect<RefNodes>(root);
-  const isOpenTabs = sectionName === SECTION_DEFAULT_ORDER[0];
+  const isOpenTabs = sectionName === DEFAULT_SECTION_ORDER[0];
   let rawData: T[];
   let renderedLength: number;
 

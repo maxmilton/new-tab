@@ -42,20 +42,21 @@ const manifest = {
     newtab: 'newtab.html',
   },
   background: {
-    // empty persistent background script
     scripts: ['background.js'],
+    persistent: false,
   },
   options_ui: {
     page: 'settings.html',
+    // open_in_tab: true, // dev only
   },
   offline_enabled: true,
   incognito: 'not_allowed',
   content_security_policy:
     "default-src 'none';"
     // hash of inline theme loader script embedded in the HTML
-    + " script-src 'self' 'sha256-saGvUmKsyK2biD//gX6NmEe5sLkFCspZq73EYAhI1Io=';"
+    + " script-src-elem 'self' 'sha256-N5HgwudrK2iZWAvytRoTz8UeLeW+Lc/QQLSVUFL/z/0=';"
     // app styles are embedded in the HTML for fastest load performance
-    + " style-src 'unsafe-inline';"
+    + " style-src-elem 'unsafe-inline';"
     + ' img-src chrome://favicon;',
 
   // https://chrome.google.com/webstore/detail/new-tab/cpcibnbdmpmcmnkhoiilpnlaepkepknb

@@ -20,13 +20,13 @@
     "zip": "sh -c 'test -z \"$(git status --porcelain)\"' && pnpm run lint && pnpm run test && pnpm run build && cd dist && zip ../chrome-extension.zip *"
   },
   "dependencies": {
-    "stage1": "0.0.9"
+    "stage1": "0.0.10"
   },
   "devDependencies": {
     "@types/chrome": "0.0.154",
     "@types/csso": "4.2.0",
     "@types/jsdom": "16.2.13",
-    "@types/node": "16.7.2",
+    "@types/node": "16.7.4",
     "@typescript-eslint/eslint-plugin": "4.29.3",
     "@typescript-eslint/parser": "4.29.3",
     "c8": "7.8.0",

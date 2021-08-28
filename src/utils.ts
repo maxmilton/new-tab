@@ -1,5 +1,5 @@
 // NOTE: When updating also update references that get an item by index
-export const SECTION_DEFAULT_ORDER = [
+export const DEFAULT_SECTION_ORDER = [
   'Open Tabs',
   'Bookmarks',
   'History',

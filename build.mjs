@@ -8,11 +8,15 @@ import esbuild from 'esbuild';
 import { minifyTemplates, writeFiles } from 'esbuild-minify-templates';
 import fs from 'fs';
 import path from 'path';
+import { performance } from 'perf_hooks';
 import manifest from './manifest.config.js';
 
 const mode = process.env.NODE_ENV;
 const dev = mode === 'development';
 const dir = path.resolve(); // no __dirname in node ESM
+
+// esbuild-minify-templates option
+process.env.MINIFY_HTML_COMMENTS = 'true';
 
 /** @param {Error|null} err */
 function handleErr(err) {
@@ -114,8 +118,8 @@ function makeHTML(name, stylePath, body = '') {
 <meta charset=utf-8>
 <meta name=google value=notranslate>
 <title>New Tab</title>
-<style>${css}</style>
 <script src=${name}.js defer></script>
+<style>${css}</style>
 ${body}`;
 
     fs.writeFile(path.join(dir, 'dist', `${name}.html`), template, handleErr);
@@ -127,7 +131,7 @@ makeHTML(
   'src/css/newtab.xcss',
   // theme loader as inline script for earliest possible execution start time,
   // uses localStorage so it's sync to prevent flash of default theme colours
-  '<script>document.documentElement.id=localStorage.t;</script>',
+  '<style id=t></style><script>t.textContent=localStorage.t</script>',
 );
 makeHTML('settings', 'src/css/settings.xcss');
 
@@ -137,3 +141,47 @@ fs.writeFile(
   JSON.stringify(manifest),
   handleErr,
 );
+
+const t1 = performance.now();
+
+const themesDir = path.resolve('.', 'src/css/themes');
+const themesData = {};
+
+const themes = await fs.promises.readdir(themesDir);
+await Promise.all(
+  themes.map((theme) => fs.promises.readFile(path.join(themesDir, theme), 'utf8').then((src) => {
+    const compiled = xcss.compile(src, {
+      from: theme,
+      map: false,
+    });
+
+    for (const warning of compiled.warnings) {
+      console.error('XCSS WARNING:', warning.message);
+
+      if (warning.file) {
+        console.log(
+          `  at ${[warning.file, warning.line, warning.column]
+            .filter(Boolean)
+            .join(':')}`,
+        );
+      }
+    }
+
+    const { css } = csso.minify(
+      csso.minify(compiled.css, {
+        restructure: true,
+        forceMediaMerge: true,
+      }).css,
+    );
+
+    themesData[path.basename(theme, '.xcss')] = css;
+  })),
+);
+
+await fs.promises.writeFile(
+  path.join(dir, 'dist', 'themes.json'),
+  JSON.stringify(themesData),
+);
+
+const t2 = performance.now();
+console.log('\ndist/themes.json done in', (t2 - t1).toFixed(2), 'ms\n');

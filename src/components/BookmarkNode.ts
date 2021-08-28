@@ -106,7 +106,6 @@ export const Folder = (item: FolderProps): FolderComponent => {
     );
   }
 
-  // TODO: Figure out how to make esbuild minify this name
   root.closePopup = () => {
     if (popup) {
       popup.remove();
