@@ -42,11 +42,12 @@ const manifest = {
     newtab: 'newtab.html',
   },
   background: {
-    // empty persistent background script
     scripts: ['background.js'],
+    persistent: false,
   },
   options_ui: {
     page: 'settings.html',
+    // open_in_tab: true, // dev only
   },
   offline_enabled: true,
   incognito: 'not_allowed',
