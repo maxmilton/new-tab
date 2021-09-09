@@ -32,7 +32,7 @@
     "c8": "7.8.0",
     "csso": "4.2.0",
     "ekscss": "0.0.8",
-    "esbuild": "0.12.25",
+    "esbuild": "0.12.26",
     "esbuild-minify-templates": "0.5.0",
     "esbuild-register": "3.0.0",
     "eslint": "7.32.0",
