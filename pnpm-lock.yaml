@@ -7,7 +7,7 @@ specifiers:
   '@types/node': 16.7.4
   '@typescript-eslint/eslint-plugin': 4.31.0
   '@typescript-eslint/parser': 4.31.0
-  c8: 7.8.0
+  c8: 7.9.0
   csso: 4.2.0
   ekscss: 0.0.8
   esbuild: 0.12.26
@@ -37,7 +37,7 @@ devDependencies:
   '@types/node': 16.7.4
   '@typescript-eslint/eslint-plugin': 4.31.0_a690ff3776b01e92cf0b93501bb5ae6a
   '@typescript-eslint/parser': 4.31.0_eslint@7.32.0+typescript@4.4.2
-  c8: 7.8.0
+  c8: 7.9.0
   csso: 4.2.0
   ekscss: 0.0.8
   esbuild: 0.12.26
@@ -738,8 +738,8 @@ packages:
     engines: {node: '>=6'}
     dev: true
 
-  /c8/7.8.0:
-    resolution: {integrity: sha512-x2Bx+IIEd608B1LmjiNQ/kizRPkCWo5XzuV57J9afPjAHSnYXALwbCSOkQ7cSaNXBNblfqcvdycj+klmL+j6yA==}
+  /c8/7.9.0:
+    resolution: {integrity: sha512-aQ7dC8gASnKdBwHUuYuzsdKCEDrKnWr7ZuZUnf4CNAL81oyKloKrs7H7zYvcrmCtIrMToudBSUhq2q+LLBMvgg==}
     engines: {node: '>=10.12.0'}
     hasBin: true
     dependencies:
