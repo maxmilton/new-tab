@@ -48,6 +48,7 @@ export interface RenderResult {
    * @param el - An element to inspect. Default is the mounted container.
    */
   debug(el?: Element): void;
+  unmount(): void;
 }
 
 export function render(component: Node): RenderResult {
@@ -61,13 +62,13 @@ export function render(component: Node): RenderResult {
   return {
     container,
     debug(el = container) {
-      // TODO: Prettify HTML
-      console.log('DEBUG:');
-      console.log(el.innerHTML);
+      // eslint-disable-next-line no-console
+      console.log('DEBUG:\n', el.innerHTML);
     },
-    // unmount() {
-    //   container.removeChild(component);
-    // },
+    unmount() {
+      // eslint-disable-next-line unicorn/prefer-dom-node-remove
+      container.removeChild(component);
+    },
   };
 }
 
