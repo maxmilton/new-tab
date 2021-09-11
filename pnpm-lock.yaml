@@ -17,7 +17,7 @@ specifiers:
   eslint-config-airbnb-base: 14.2.1
   eslint-config-airbnb-typescript: 14.0.0
   eslint-plugin-import: 2.24.2
-  eslint-plugin-unicorn: 35.0.0
+  eslint-plugin-unicorn: 36.0.0
   git-ref: 0.2.0
   jsdom: 17.0.0
   kleur: 4.1.4
@@ -47,7 +47,7 @@ devDependencies:
   eslint-config-airbnb-base: 14.2.1_b7a4de75e7d0094cbe979e30a9a325ab
   eslint-config-airbnb-typescript: 14.0.0_1b67b048a8a5232996e726fbda39d03a
   eslint-plugin-import: 2.24.2_eslint@7.32.0
-  eslint-plugin-unicorn: 35.0.0_eslint@7.32.0
+  eslint-plugin-unicorn: 36.0.0_eslint@7.32.0
   git-ref: 0.2.0
   jsdom: 17.0.0
   kleur: 4.1.4
@@ -1182,11 +1182,11 @@ packages:
       tsconfig-paths: 3.11.0
     dev: true
 
-  /eslint-plugin-unicorn/35.0.0_eslint@7.32.0:
-    resolution: {integrity: sha512-FHsaO68tDPQILfs/mGF8eSISJp8RswR4FpUuBDnueK2wyEHC6zmsc9WxjYyldXoIsBuVmru6jQyFCbCWPoW/KQ==}
+  /eslint-plugin-unicorn/36.0.0_eslint@7.32.0:
+    resolution: {integrity: sha512-xxN2vSctGWnDW6aLElm/LKIwcrmk6mdiEcW55Uv5krcrVcIFSWMmEgc/hwpemYfZacKZ5npFERGNz4aThsp1AA==}
     engines: {node: '>=12'}
     peerDependencies:
-      eslint: '>=7.28.0'
+      eslint: '>=7.32.0'
     dependencies:
       '@babel/helper-validator-identifier': 7.14.9
       ci-info: 3.2.0
