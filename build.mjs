@@ -39,8 +39,11 @@ esbuild
     sourcemap: dev,
     watch: dev,
     write: dev,
+    metafile: true,
     logLevel: 'debug',
   })
+  // eslint-disable-next-line no-sequences
+  .then((out) => (esbuild.analyzeMetafile(out.metafile).then(console.log), out))
   .then(minifyTemplates)
   .then(writeFiles)
   .catch(handleErr);
