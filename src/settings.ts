@@ -125,8 +125,8 @@ const settingsView = h`
     <div class=row>
       <label>Theme</label>
       <select #theme>
-        <option value=dark>Dark</option>
         <option value=light>Light</option>
+        <option value=dark>Dark</option>
         <option value=rich-black>Rich black</option>
         <option value=hacker-terminal>Hacker terminal</option>
         <option value=tilde-club>Tilde Club</option>
