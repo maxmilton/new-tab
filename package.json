@@ -43,7 +43,7 @@
     "git-ref": "0.2.0",
     "jsdom": "17.0.0",
     "kleur": "4.1.4",
-    "playwright-chromium": "1.14.1",
+    "playwright-chromium": "1.15.0",
     "prettier": "2.4.1",
     "typescript": "4.4.3",
     "uvu": "0.5.1"
