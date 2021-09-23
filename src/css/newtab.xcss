@@ -13,6 +13,7 @@ body {
    */
   line-height: 42px;
   text-rendering: optimizeSpeed;
+  font-variant: none;
   color: var(--c3);
   background: var(--b);
 }
