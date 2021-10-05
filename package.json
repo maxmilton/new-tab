@@ -19,6 +19,11 @@
     "test-e2e": "node -r esbuild-register test/e2e/index.ts",
     "zip": "sh -c 'test -z \"$(git status --porcelain)\"' && pnpm run lint && pnpm run test && pnpm run build && cd dist && zip ../chrome-extension.zip *"
   },
+  "__pnpm": {
+    "overrides": {
+      "stage1": "link:../stage1"
+    }
+  },
   "dependencies": {
     "stage1": "0.0.10"
   },
@@ -26,7 +31,7 @@
     "@types/chrome": "0.0.158",
     "@types/csso": "4.2.0",
     "@types/jsdom": "16.2.13",
-    "@types/node": "16.10.2",
+    "@types/node": "16.10.3",
     "@typescript-eslint/eslint-plugin": "4.33.0",
     "@typescript-eslint/parser": "4.33.0",
     "c8": "7.9.0",
@@ -43,7 +48,7 @@
     "git-ref": "0.2.0",
     "jsdom": "17.0.0",
     "kleur": "4.1.4",
-    "playwright-chromium": "1.15.1",
+    "playwright-chromium": "1.15.2",
     "prettier": "2.4.1",
     "typescript": "4.4.3",
     "uvu": "0.5.1"
