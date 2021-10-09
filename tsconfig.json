@@ -3,16 +3,13 @@
     "target": "esnext",
     "module": "esnext",
     "moduleResolution": "node",
-    "allowSyntheticDefaultImports": true,
-    "esModuleInterop": true,
-    "resolveJsonModule": true,
-    "isolatedModules": true,
     "skipLibCheck": true,
+    "esModuleInterop": true,
+    "isolatedModules": true,
+    "resolveJsonModule": true,
     "allowJs": true,
     "checkJs": true,
-
-    "noEmit": true, // prevents errors in VS Code and ESLint
-    "sourceMap": true,
+    "noEmit": true,
 
     "strict": true,
     "allowUnreachableCode": false,
@@ -22,8 +19,7 @@
     "noFallthroughCasesInSwitch": true,
     "noImplicitOverride": true,
     "noUnusedLocals": true,
-    "noUnusedParameters": true,
-    "useDefineForClassFields": true
+    "noUnusedParameters": true
   },
   "exclude": ["coverage", "dist", "node_modules", "test"]
 }
