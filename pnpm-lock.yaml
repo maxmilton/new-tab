@@ -25,7 +25,7 @@ specifiers:
   prettier: 2.4.1
   stage1: 0.0.10
   typescript: 4.4.3
-  uvu: 0.5.1
+  uvu: 0.5.2
 
 dependencies:
   stage1: 0.0.10
@@ -54,7 +54,7 @@ devDependencies:
   playwright-chromium: 1.15.2
   prettier: 2.4.1
   typescript: 4.4.3
-  uvu: 0.5.1
+  uvu: 0.5.2
 
 packages:
 
@@ -2983,8 +2983,8 @@ packages:
       punycode: 2.1.1
     dev: true
 
-  /uvu/0.5.1:
-    resolution: {integrity: sha512-JGxttnOGDFs77FaZ0yMUHIzczzQ5R1IlDeNW6Wymw6gAscwMdAffVOP6TlxLIfReZyK8tahoGwWZaTCJzNFDkg==}
+  /uvu/0.5.2:
+    resolution: {integrity: sha512-m2hLe7I2eROhh+tm3WE5cTo/Cv3WQA7Oc9f7JB6uWv+/zVKvfAm53bMyOoGOSZeQ7Ov2Fu9pLhFr7p07bnT20w==}
     engines: {node: '>=8'}
     hasBin: true
     dependencies:
