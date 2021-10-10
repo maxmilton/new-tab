@@ -23,7 +23,7 @@ specifiers:
   playwright-chromium: 1.15.2
   prettier: 2.4.1
   stage1: 0.0.10
-  tsm: 2.1.1
+  tsm: 2.1.2
   typescript: 4.4.3
   uvu: 0.5.2
 
@@ -52,7 +52,7 @@ devDependencies:
   kleur: 4.1.4
   playwright-chromium: 1.15.2
   prettier: 2.4.1
-  tsm: 2.1.1
+  tsm: 2.1.2
   typescript: 4.4.3
   uvu: 0.5.2
 
@@ -2905,8 +2905,8 @@ packages:
     resolution: {integrity: sha512-Xni35NKzjgMrwevysHTCArtLDpPvye8zV/0E4EyYn43P7/7qvQwPh9BGkHewbMulVntbigmcT7rdX3BNo9wRJg==}
     dev: true
 
-  /tsm/2.1.1:
-    resolution: {integrity: sha512-RcQg8MzgfZ9GwPvdohrxFb02WFt1fvYa2yZyrPNFGJo2rITkw8aIuQo/+IkpytbzhELPXXUUMsqCMHS/ky+HoA==}
+  /tsm/2.1.2:
+    resolution: {integrity: sha512-1jF8LNTRcPsw15ajZK2ra3RA2PSCdVGvJzF/Q1TCsu1tH2dY59HgNWxhttN2s1mfJUFoattjf9QZ410u5bgtJQ==}
     engines: {node: '>=12'}
     hasBin: true
     dependencies:
