@@ -64,7 +64,13 @@ export const BookmarkBar = (): BookmarkBarComponent => {
         if (index < len) {
           const overflowBookmarksFolder = append(
             Folder({
-              children: bookmarks!.slice(index),
+              // TODO: More elegant solution to show caret in overflow folder
+              // children: bookmarks!.slice(index),
+              children: bookmarks!.slice(index).map((item) => {
+                // eslint-disable-next-line no-param-reassign
+                item.parentId = 2 as unknown as string;
+                return item;
+              }),
               end: true,
               title: '',
             }),
