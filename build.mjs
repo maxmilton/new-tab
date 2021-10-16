@@ -1,4 +1,8 @@
+// TODO: Fix types and remove these lint exceptions once TS can handle mjs
+/* eslint-disable @typescript-eslint/no-unsafe-argument */
 /* eslint-disable @typescript-eslint/no-unsafe-assignment */
+/* eslint-disable @typescript-eslint/no-unsafe-member-access */
+/* eslint-disable @typescript-eslint/no-unsafe-return */
 /* eslint-disable @typescript-eslint/restrict-template-expressions */
 /* eslint-disable import/extensions, import/no-extraneous-dependencies, no-console */
 
@@ -23,6 +27,18 @@ function handleErr(err) {
   if (err) throw err;
 }
 
+/**
+ * @param {esbuild.BuildResult} buildResult
+ * @returns {Promise<esbuild.BuildResult>}
+ */
+async function analyzeMeta(buildResult) {
+  if (buildResult.metafile) {
+    console.log(await esbuild.analyzeMetafile(buildResult.metafile));
+  }
+
+  return buildResult;
+}
+
 // New Tab app
 esbuild
   .build({
@@ -39,11 +55,10 @@ esbuild
     sourcemap: dev,
     watch: dev,
     write: dev,
-    metafile: true,
+    metafile: process.stdout.isTTY,
     logLevel: 'debug',
   })
-  // eslint-disable-next-line no-sequences
-  .then((out) => (esbuild.analyzeMetafile(out.metafile).then(console.log), out))
+  .then(analyzeMeta)
   .then(minifyTemplates)
   .then(writeFiles)
   .catch(handleErr);
@@ -64,8 +79,10 @@ esbuild
     sourcemap: dev,
     watch: dev,
     write: dev,
+    metafile: process.stdout.isTTY,
     logLevel: 'debug',
   })
+  .then(analyzeMeta)
   .then(minifyTemplates)
   .then(writeFiles)
   .catch(handleErr);
@@ -78,8 +95,10 @@ esbuild
     format: 'esm',
     bundle: true,
     minify: !dev,
+    metafile: process.stdout.isTTY,
     logLevel: 'debug',
   })
+  .then(analyzeMeta)
   .catch(handleErr);
 
 /**
@@ -148,6 +167,7 @@ fs.writeFile(
 const t1 = performance.now();
 
 const themesDir = path.resolve('.', 'src/css/themes');
+/** @type {Record<string, string>} */
 const themesData = {};
 
 const themes = await fs.promises.readdir(themesDir);
