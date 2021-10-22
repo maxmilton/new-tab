@@ -2,7 +2,7 @@
 
 import { append, h } from 'stage1';
 import { reuseNodes } from 'stage1/dist/reconcile/reuse-nodes';
-import type { UserStorageData } from './types';
+import type { ThemesData, UserStorageData } from './types';
 import { DEFAULT_SECTION_ORDER } from './utils';
 
 interface SectionComponent extends HTMLLIElement {
@@ -23,9 +23,7 @@ type SectionScope = {
 const DRAG_TYPE = 'text/plain';
 const DEFAULT_THEME = 'light';
 
-const themesData = fetch('themes.json').then(
-  (res) => res.json() as Promise<Record<string, string>>,
-);
+const themesData = fetch('themes.json').then((res) => res.json()) as Promise<ThemesData>;
 
 // https://tabler-icons.io/i/grip-vertical
 const sectionView = h`
