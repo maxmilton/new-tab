@@ -103,6 +103,7 @@ type MockFn<T> = T & {
 
 const noop = () => {};
 
+// TODO: See if there's anything worthwhile in https://github.com/therealparmesh/snoop/blob/master/src/index.js
 // @ts-expect-error - FIXME:!
 // eslint-disable-next-line @typescript-eslint/ban-types
 export function mockFn<T extends Function>(imlp: T = noop): MockFn<T> {
