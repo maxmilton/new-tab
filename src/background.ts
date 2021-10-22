@@ -1,9 +1,14 @@
-export {};
+import type { UserStorageData } from './types';
 
-// When a user installs the extension for the first time open the settings UI
-// which will load theme styles into localStorage
+// On first install or subsequent updates load user's theme into localStorage
 chrome.runtime.onInstalled.addListener((details) => {
-  if (details.reason === 'install') {
-    chrome.runtime.openOptionsPage();
+  if (details.reason === 'install' || details.reason === 'update') {
+    void fetch('themes.json')
+      .then((res) => res.json())
+      .then((themesData: Record<string, string>) => {
+        chrome.storage.local.get(null, (settings: UserStorageData) => {
+          localStorage.t = themesData[settings.t || 'light'];
+        });
+      });
   }
 });

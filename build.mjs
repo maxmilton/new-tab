@@ -151,8 +151,9 @@ ${body}`;
 makeHTML(
   'newtab',
   'src/css/newtab.xcss',
-  // theme loader as inline script for earliest possible execution start time,
-  // uses localStorage so it's sync to prevent flash of default theme colours
+  // Theme loader as inline script for earliest possible execution start time,
+  // uses localStorage so the data retrieval is synchronous/blocking to prevent
+  // a flash of unstyled UI
   '<style id=t></style><script>t.textContent=localStorage.t</script>',
 );
 makeHTML('settings', 'src/css/settings.xcss');
