@@ -7,7 +7,7 @@ body {
   overflow-y: scroll; // prevent jump on load
   font-size: 18px;
   /**
-   * Although it's best practise to use a unitless value for line-height, this
+   * Although it's best practice to use a unitless value for line-height, this
    * is a hack for alignment with the minimum possible style properties. Value
    * should be the same as as bookmark bar height.
    */
@@ -44,8 +44,7 @@ a,
 img {
   width: 16px;
   height: 16px; // prevents realignment jump on load
-  // margin: 0 10px 0 0;
-  margin-right: 10px;
+  margin: 0 10px 0 0;
 }
 
 svg {
@@ -118,7 +117,7 @@ button {
   left: 0;
   z-index: 1;
   display: flex;
-  height: 42px;
+  height: 42px; // should be same as body line-height
   background: var(--c2);
   box-shadow: var(--s);
 
