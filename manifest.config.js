@@ -24,18 +24,12 @@ const manifest = {
     128: 'icon128.png',
   },
   permissions: [
-    // https://developer.chrome.com/docs/extensions/reference/bookmarks/
     'bookmarks',
     'chrome://favicon/',
-    // https://developer.chrome.com/docs/extensions/reference/history/
     'history',
-    // https://developer.chrome.com/docs/extensions/reference/sessions/
     'sessions',
-    // https://developer.chrome.com/docs/extensions/reference/storage/
     'storage',
-    // https://developer.chrome.com/docs/extensions/reference/tabs/
     'tabs',
-    // https://developer.chrome.com/docs/extensions/reference/topSites/
     'topSites',
   ],
   chrome_url_overrides: {
