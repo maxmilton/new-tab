@@ -1,5 +1,8 @@
-* {
-  font-size: 20px;
+body,
+button,
+select {
+  font-size: 18px;
+  color: #293742;
 }
 
 svg {
@@ -14,11 +17,13 @@ svg {
 label {
   display: block;
   margin-bottom: 6px;
-  font-size: 22px;
+  font-size: 20px;
+  font-weight: bold;
 }
 
 fieldset {
-  border: 1px solid #00000040;
+  border: 1px solid #aaa;
+  border-radius: 2px;
 }
 
 ul {
@@ -26,8 +31,7 @@ ul {
 }
 
 legend {
-  font-size: 18px;
-  letter-spacing: 1px;
+  font-size: 16px;
 }
 
 select {
@@ -49,51 +53,48 @@ ul {
 }
 
 .item-list:empty {
-  padding: 0.6rem;
+  padding: 7px 0 10px;
   text-align: center;
 
   &::after {
     display: block;
-    content: 'Drag sections here to enable or disable them';
+    content: 'Drag sections here to disable them';
     color: #6e6e6e;
   }
 }
 
 .item {
+  position: relative;
   display: flex;
   align-items: center;
-  margin: 6px 0;
+  margin: 0 0 6px;
   padding: 10px;
   line-height: 0;
   background: #ffffff8c;
-  border: 1px solid #111;
+  border: 2px solid currentColor;
   border-radius: 4px;
   cursor: grab;
+  font-weight: bold;
 
-  &:first-of-type {
-    margin-top: 0;
+  &:last-of-type {
+    margin-bottom: 0;
   }
 
   &:hover,
   &:focus {
-    // FIXME:
-    box-shadow: 0 0 20px 20px solid #2e37b8;
+    color: rgb(178, 85, 255) !important;
   }
 }
 
 .icon {
   margin-right: 10px;
-  color: #d7d7d7;
-
-  .item:hover > &,
-  .item:focus > & {
-    color: #6e6e6e;
-  }
+  // color: inherit;
 }
 
 .dragging {
   border-style: dashed;
   opacity: 0.4;
+  cursor: move;
 
   & > .icon,
   & > .rm {
@@ -102,10 +103,23 @@ ul {
 }
 
 .over {
-  border-color: #1530a7 !important;
+  margin-top: 18px;
+
+  &::before {
+    position: absolute;
+    display: block;
+    top: -14px;
+    left: 0;
+    width: 100%;
+    padding-bottom: 8px;
+    content: '';
+    border-top: 6px solid rgb(178, 85, 255);
+  }
 }
 
 // "search only"
 .so {
   margin-left: 10px;
+  font-weight: initial;
+  pointer-events: none;
 }
