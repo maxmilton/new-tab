@@ -1,13 +1,11 @@
 /* eslint-disable no-multi-assign */
 
 import { append, h } from 'stage1';
-import { reuseNodes } from 'stage1/dist/reconcile/reuse-nodes';
+import { reconcile } from 'stage1/dist/reconcile/reconcile';
 import type { ThemesData, UserStorageData } from './types';
 import { DEFAULT_SECTION_ORDER } from './utils';
 
-interface SectionComponent extends HTMLLIElement {
-  update(newItem: string): void;
-}
+type SectionComponent = HTMLLIElement;
 
 type SectionRefNodes = {
   name: Text;
@@ -42,7 +40,7 @@ const sectionView = h`
 
 const searchOnlyView = h`<small class="so muted">(search only)</small>`;
 
-function OrderSection(
+function SectionItem(
   item: string,
   list: number,
   scope: SectionScope,
@@ -50,32 +48,22 @@ function OrderSection(
   const root = sectionView.cloneNode(true) as SectionComponent;
   const { name } = sectionView.collect<SectionRefNodes>(root);
 
-  let currentItem = item;
-  name.nodeValue = currentItem;
+  name.nodeValue = item;
 
-  if (
-    currentItem === DEFAULT_SECTION_ORDER[1]
-    || currentItem === DEFAULT_SECTION_ORDER[2]
-  ) {
+  if (item === DEFAULT_SECTION_ORDER[1] || item === DEFAULT_SECTION_ORDER[2]) {
     append(searchOnlyView.cloneNode(true), root);
   }
 
   root.ondragstart = (event) => {
     event.dataTransfer!.setData(
       DRAG_TYPE,
-      JSON.stringify([list, scope.indexOf(list, currentItem)]),
+      JSON.stringify([list, scope.indexOf(list, item)]),
     );
     (event.target as SectionComponent).classList.add('dragging');
   };
 
   root.ondragend = (event) => {
     (event.target as SectionComponent).classList.remove('dragging');
-  };
-
-  root.ondragover = (event) => {
-    event.preventDefault();
-    // eslint-disable-next-line no-param-reassign
-    event.dataTransfer!.dropEffect = 'move';
   };
 
   root.ondragenter = (event) => {
@@ -89,19 +77,13 @@ function OrderSection(
   root.ondrop = (event) => {
     event.preventDefault();
 
+    (event.target as SectionComponent).classList.remove('over');
+
     const from = JSON.parse(
       event.dataTransfer!.getData(DRAG_TYPE),
     ) as ItemIndex;
 
-    scope.moveItem(from, [list, scope.indexOf(list, currentItem)]);
-
-    // Remove class in case the `dragleave` event didn't fire
-    (event.target as SectionComponent).classList.remove('over');
-  };
-
-  root.update = (newItem) => {
-    name.nodeValue = newItem;
-    currentItem = newItem;
+    scope.moveItem(from, [list, scope.indexOf(list, item)]);
   };
 
   return root;
@@ -183,9 +165,9 @@ function Settings() {
   const updateTheme = async (themeName: string) => {
     theme.value = themeName;
 
-    // save user theme setting -- it's a special case which uses localStorage so
-    // the code execution is sync (chrome.storage is async) to prevent a flash of
-    // unstyled DOM initial page load
+    // Save user theme setting -- it's a special case that uses localStorage so
+    // the data retrieval is synchronous/blocking (chrome.storage is async) to
+    // prevent a flash of unstyled DOM on initial page load
     localStorage.t = (await themesData)[themeName];
 
     void chrome.storage.local.set({
@@ -194,20 +176,8 @@ function Settings() {
   };
 
   const updateOrder = (order: SettingsState['order'], noSet?: boolean) => {
-    reuseNodes(
-      se,
-      state.order[0],
-      order[0],
-      (item: string) => OrderSection(item, 0, scope),
-      (node, item) => node.update(item),
-    );
-    reuseNodes(
-      sd,
-      state.order[1],
-      order[1],
-      (item: string) => OrderSection(item, 1, scope),
-      (node, item) => node.update(item),
-    );
+    reconcile(se, state.order[0], order[0], (item: string) => SectionItem(item, 0, scope));
+    reconcile(sd, state.order[1], order[1], (item: string) => SectionItem(item, 1, scope));
     state.order = order;
 
     if (!noSet) {
