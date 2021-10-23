@@ -55,7 +55,7 @@ export const SearchResult = <T extends LinkProps>(
     append(frag, l);
 
     root.hidden = !renderedLength;
-    m.hidden = isOpenTabs || renderedLength >= listData.length;
+    m.hidden = renderedLength >= listData.length;
   };
 
   const update = (newData: T[]) => {
@@ -67,7 +67,7 @@ export const SearchResult = <T extends LinkProps>(
 
   root.filter = (text) => renderList(
     rawData.filter(
-      ({ title, url }) => (url + '+' + title).toLowerCase().indexOf(text.toLowerCase()) > -1,
+      ({ title, url }) => (title + '+' + url).toLowerCase().indexOf(text.toLowerCase()) > -1,
     ),
   );
 
