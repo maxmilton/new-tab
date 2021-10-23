@@ -15,7 +15,7 @@ const manifest = {
     '⚡ A high performance new tab page that gets you where you need to go faster.',
   version: pkg.version,
   version_name: process.env.GITHUB_REF
-    ? process.env.GITHUB_REF.replace('refs/tags/', '')
+    ? process.env.GITHUB_REF.replace('refs/tags/v', '')
     : gitRef().replace(/^v/, ''),
   homepage_url: pkg.homepage,
   icons: {
