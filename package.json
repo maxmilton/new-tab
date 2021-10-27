@@ -49,7 +49,7 @@
     "kleur": "4.1.4",
     "playwright-chromium": "1.16.1",
     "prettier": "2.4.1",
-    "tsm": "2.1.2",
+    "tsm": "2.1.3",
     "typescript": "4.4.4",
     "uvu": "0.5.2"
   },
