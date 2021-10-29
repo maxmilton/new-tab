@@ -28,7 +28,7 @@
     "stage1": "0.0.11"
   },
   "devDependencies": {
-    "@types/chrome": "0.0.161",
+    "@types/chrome": "0.0.162",
     "@types/csso": "4.2.0",
     "@types/jsdom": "16.2.13",
     "@types/node": "16.11.6",
