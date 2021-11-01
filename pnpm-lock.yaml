@@ -18,7 +18,7 @@ specifiers:
   eslint-plugin-import: 2.25.2
   eslint-plugin-unicorn: 37.0.1
   git-ref: 0.3.0
-  jsdom: 18.0.0
+  jsdom: 18.0.1
   kleur: 4.1.4
   playwright-chromium: 1.16.2
   prettier: 2.4.1
@@ -48,7 +48,7 @@ devDependencies:
   eslint-plugin-import: 2.25.2_eslint@7.32.0
   eslint-plugin-unicorn: 37.0.1_eslint@7.32.0
   git-ref: 0.3.0
-  jsdom: 18.0.0
+  jsdom: 18.0.1
   kleur: 4.1.4
   playwright-chromium: 1.16.2
   prettier: 2.4.1
@@ -1992,8 +1992,8 @@ packages:
       esprima: 4.0.1
     dev: true
 
-  /jsdom/18.0.0:
-    resolution: {integrity: sha512-HVLuBcFmwdWulStv5U+J59b1AyzXhM92KXlM8HQ3ecYtRM2OQEUCPMa4oNuDeCBmtRcC7tJvb0Xz5OeFXMOKTA==}
+  /jsdom/18.0.1:
+    resolution: {integrity: sha512-mgVzrYP4IJiJKVqXkAdBn+jg+nQgPusBxTJulz3m1Y/1RIrkk8aDoNaQE5BNbHwe72WwiwE7k3Av2THXDpvzPQ==}
     engines: {node: '>=12'}
     peerDependencies:
       canvas: ^2.5.0
