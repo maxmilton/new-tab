@@ -8,6 +8,8 @@ module.exports = {
   reportUnusedDisableDirectives: true,
   parser: '@typescript-eslint/parser',
   parserOptions: {
+    // FIXME: Remove once TS 4.5 is released and typescript-eslint has support
+    //  ↳ https://github.com/typescript-eslint/typescript-eslint/issues/3950
     extraFileExtensions: ['.mjs', '.cjs'],
     project: ['./test/tsconfig.json'],
   },

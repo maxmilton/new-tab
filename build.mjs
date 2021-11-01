@@ -1,4 +1,6 @@
-// TODO: Fix types and remove these lint exceptions once TS can handle mjs
+// FIXME: Remove these lint exceptions once linting can handle mjs
+//  ↳ When TS 4.5 is released and typescript-eslint has support
+//  ↳ https://github.com/typescript-eslint/typescript-eslint/issues/3950
 /* eslint-disable @typescript-eslint/no-unsafe-argument */
 /* eslint-disable @typescript-eslint/no-unsafe-assignment */
 /* eslint-disable @typescript-eslint/no-unsafe-member-access */
@@ -10,7 +12,7 @@ import csso from 'csso';
 import xcss from 'ekscss';
 import esbuild from 'esbuild';
 import { minifyTemplates, writeFiles } from 'esbuild-minify-templates';
-import fs from 'fs';
+import fs from 'fs/promises';
 import path from 'path';
 import { performance } from 'perf_hooks';
 import manifest from './manifest.config.js';
@@ -21,11 +23,6 @@ const dir = path.resolve(); // no __dirname in node ESM
 
 // esbuild-minify-templates option
 process.env.MINIFY_HTML_COMMENTS = 'true';
-
-/** @param {Error|null} err */
-function handleErr(err) {
-  if (err) throw err;
-}
 
 /**
  * @param {esbuild.BuildResult} buildResult
@@ -40,7 +37,7 @@ async function analyzeMeta(buildResult) {
 }
 
 // New Tab app
-esbuild
+await esbuild
   .build({
     entryPoints: ['src/newtab.ts'],
     outfile: 'dist/newtab.js',
@@ -60,11 +57,10 @@ esbuild
   })
   .then(analyzeMeta)
   .then(minifyTemplates)
-  .then(writeFiles)
-  .catch(handleErr);
+  .then(writeFiles);
 
 // Settings app
-esbuild
+await esbuild
   .build({
     entryPoints: ['src/settings.ts'],
     outfile: 'dist/settings.js',
@@ -84,11 +80,10 @@ esbuild
   })
   .then(analyzeMeta)
   .then(minifyTemplates)
-  .then(writeFiles)
-  .catch(handleErr);
+  .then(writeFiles);
 
 // Background script
-esbuild
+await esbuild
   .build({
     entryPoints: ['src/background.ts'],
     outfile: 'dist/background.js',
@@ -98,45 +93,50 @@ esbuild
     metafile: process.stdout.isTTY,
     logLevel: 'debug',
   })
-  .then(analyzeMeta)
-  .catch(handleErr);
+  .then(analyzeMeta);
+
+/**
+ * Generate minified CSS from XCSS source.
+ *
+ * @param {string} src
+ * @param {string} from
+ */
+function compileCSS(src, from) {
+  const compiled = xcss.compile(src, {
+    from,
+    map: false,
+  });
+
+  for (const warning of compiled.warnings) {
+    console.error('XCSS WARNING:', warning.message);
+
+    if (warning.file) {
+      console.log(
+        `  at ${[warning.file, warning.line, warning.column]
+          .filter(Boolean)
+          .join(':')}`,
+      );
+    }
+  }
+
+  const { css } = csso.minify(compiled.css, {
+    restructure: true,
+    forceMediaMerge: true,
+  });
+
+  return css;
+}
 
 /**
  * Construct a HTML file and save it to disk.
  *
  * @param {string} name
  * @param {string} stylePath
- * @param {string} [body]
  */
-function makeHTML(name, stylePath, body = '') {
-  fs.readFile(path.join(dir, stylePath), 'utf8', (err, data) => {
-    if (err) throw err;
-
-    const compiled = xcss.compile(data, {
-      from: stylePath,
-      map: false,
-    });
-
-    for (const warning of compiled.warnings) {
-      console.error('XCSS WARNING:', warning.message);
-
-      if (warning.file) {
-        console.log(
-          `  at ${[warning.file, warning.line, warning.column]
-            .filter(Boolean)
-            .join(':')}`,
-        );
-      }
-    }
-
-    const { css } = csso.minify(
-      csso.minify(compiled.css, {
-        restructure: true,
-        forceMediaMerge: true,
-      }).css,
-    );
-
-    const template = `<!doctype html>
+async function makeHTML(name, stylePath, body = '') {
+  const styleSrc = await fs.readFile(path.join(dir, stylePath), 'utf8');
+  const css = compileCSS(styleSrc, stylePath);
+  const template = `<!doctype html>
 <meta charset=utf-8>
 <meta name=google value=notranslate>
 <title>New Tab</title>
@@ -144,11 +144,10 @@ function makeHTML(name, stylePath, body = '') {
 <style>${css}</style>
 ${body}`;
 
-    fs.writeFile(path.join(dir, 'dist', `${name}.html`), template, handleErr);
-  });
+  await fs.writeFile(path.join(dir, 'dist', `${name}.html`), template);
 }
 
-makeHTML(
+await makeHTML(
   'newtab',
   'src/css/newtab.xcss',
   // Theme loader as inline script for earliest possible execution start time,
@@ -156,56 +155,31 @@ makeHTML(
   // a flash of unstyled UI
   '<style id=t></style><script>t.textContent=localStorage.t</script>',
 );
-makeHTML('settings', 'src/css/settings.xcss');
+await makeHTML('settings', 'src/css/settings.xcss');
 
 // Extension manifest
-fs.writeFile(
+await fs.writeFile(
   path.join(dir, 'dist', 'manifest.json'),
   JSON.stringify(manifest),
-  handleErr,
 );
 
-const t1 = performance.now();
+const t0 = performance.now();
 
 const themesDir = path.resolve('.', 'src/css/themes');
 /** @type {Record<string, string>} */
 const themesData = {};
+const themes = await fs.readdir(themesDir);
 
-const themes = await fs.promises.readdir(themesDir);
 await Promise.all(
-  themes.map((theme) => fs.promises.readFile(path.join(themesDir, theme), 'utf8').then((src) => {
-    const compiled = xcss.compile(src, {
-      from: theme,
-      map: false,
-    });
-
-    for (const warning of compiled.warnings) {
-      console.error('XCSS WARNING:', warning.message);
-
-      if (warning.file) {
-        console.log(
-          `  at ${[warning.file, warning.line, warning.column]
-            .filter(Boolean)
-            .join(':')}`,
-        );
-      }
-    }
-
-    const { css } = csso.minify(
-      csso.minify(compiled.css, {
-        restructure: true,
-        forceMediaMerge: true,
-      }).css,
-    );
-
-    themesData[path.basename(theme, '.xcss')] = css;
+  themes.map((theme) => fs.readFile(path.join(themesDir, theme), 'utf8').then((src) => {
+    themesData[path.basename(theme, '.xcss')] = compileCSS(src, theme);
   })),
 );
 
-await fs.promises.writeFile(
+await fs.writeFile(
   path.join(dir, 'dist', 'themes.json'),
   JSON.stringify(themesData),
 );
 
-const t2 = performance.now();
-console.log('\ndist/themes.json done in', (t2 - t1).toFixed(2), 'ms\n');
+const t1 = performance.now();
+console.log('\ndist/themes.json done in', (t1 - t0).toFixed(2), 'ms\n');
