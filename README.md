@@ -1,6 +1,6 @@
 [![Build status](https://img.shields.io/github/workflow/status/maxmilton/new-tab/ci)](https://github.com/maxmilton/new-tab/actions)
-[![Coverage status](https://img.shields.io/codeclimate/coverage/MaxMilton/new-tab)](https://codeclimate.com/github/MaxMilton/new-tab)
-[![Chrome web store version](https://img.shields.io/chrome-web-store/v/cpcibnbdmpmcmnkhoiilpnlaepkepknb.svg)](https://chrome.google.com/webstore/detail/new-tab/cpcibnbdmpmcmnkhoiilpnlaepkepknb)
+[![Coverage status](https://img.shields.io/codeclimate/coverage/maxmilton/new-tab)](https://codeclimate.com/github/maxmilton/new-tab)
+[![Chrome Web Store version](https://img.shields.io/chrome-web-store/v/cpcibnbdmpmcmnkhoiilpnlaepkepknb.svg)](https://chrome.google.com/webstore/detail/new-tab/cpcibnbdmpmcmnkhoiilpnlaepkepknb)
 [![Licence](https://img.shields.io/github/license/maxmilton/new-tab.svg)](https://github.com/maxmilton/new-tab/blob/master/LICENSE)
 
 # New Tab ![](./static/icon48.png)
@@ -53,7 +53,6 @@ Please report any bugs you encounter on the [GitHub issue tracker](https://githu
 
 1. The extension's bookmarks bar functionality is limited. Chrome doesn't allow extensions to control the native bookmarks bar visibility so I've recreated a simple version. The goal is _high performance_ and quick access rather than trying to emulate the native bookmarks bar. Use the bookmark manager for access to all features.
 1. Page needs to be reloaded after adding, editing, or removing bookmarks. Bookmarks don't change often, so changes are not live.
-1. The project is set up for development on Linux and may not build on other operating systems.
 
 ## Changelog
 

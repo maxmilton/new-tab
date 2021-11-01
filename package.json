@@ -11,10 +11,10 @@
     "build": "pnpm run prebuild && NODE_ENV=production node build.mjs",
     "dev": "NODE_ENV=development node build.mjs",
     "lint": "pnpm run lint:css && pnpm run lint:js && pnpm run lint:ts",
-    "lint:css": "echo 'TODO: CSS linting'; exit 0",
+    "lint:css": "echo 'TODO: CSS linting'",
     "lint:js": "eslint --ignore-path .gitignore --ext .cjs,.js,.mjs,.ts .",
     "lint:ts": "tsc --project test",
-    "prebuild": "rm -rf dist; cp -r static dist",
+    "prebuild": "rm -rf dist && cp -r static dist",
     "test": "c8 --all --include=src --reporter=text --reporter=lcovonly uvu -r tsm test '\\.test\\.ts$'",
     "test-e2e": "node -r tsm test/e2e/index.ts",
     "zip": "sh -c 'test -z \"$(git status --porcelain)\"' && pnpm run lint && pnpm run test && pnpm run build && cd dist && zip ../chrome-extension.zip *"
