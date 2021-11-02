@@ -3,8 +3,8 @@
 //  ↳ https://github.com/typescript-eslint/typescript-eslint/issues/3950
 /* eslint-disable @typescript-eslint/no-unsafe-argument */
 /* eslint-disable @typescript-eslint/no-unsafe-assignment */
+/* eslint-disable @typescript-eslint/no-unsafe-call */
 /* eslint-disable @typescript-eslint/no-unsafe-member-access */
-/* eslint-disable @typescript-eslint/no-unsafe-return */
 /* eslint-disable @typescript-eslint/restrict-template-expressions */
 /* eslint-disable import/extensions, import/no-extraneous-dependencies, no-console */
 
@@ -21,79 +21,63 @@ const mode = process.env.NODE_ENV;
 const dev = mode === 'development';
 const dir = path.resolve(); // no __dirname in node ESM
 
-// esbuild-minify-templates option
-process.env.MINIFY_HTML_COMMENTS = 'true';
-
-/**
- * @param {esbuild.BuildResult} buildResult
- * @returns {Promise<esbuild.BuildResult>}
- */
-async function analyzeMeta(buildResult) {
-  if (buildResult.metafile) {
-    console.log(await esbuild.analyzeMetafile(buildResult.metafile));
-  }
-
-  return buildResult;
-}
+/** @type {esbuild.Plugin} */
+const analyzeMeta = {
+  name: 'analyze-meta',
+  setup(build) {
+    if (!build.initialOptions.metafile) return;
+    // @ts-expect-error - FIXME:!
+    build.onEnd((result) => esbuild.analyzeMetafile(result.metafile).then(console.log));
+  },
+};
 
 // New Tab app
-await esbuild
-  .build({
-    entryPoints: ['src/newtab.ts'],
-    outfile: 'dist/newtab.js',
-    platform: 'browser',
-    target: ['chrome91'],
-    define: {
-      'process.env.NODE_ENV': JSON.stringify(mode),
-    },
-    banner: { js: '"use strict";' },
-    bundle: true,
-    minify: !dev,
-    sourcemap: dev,
-    watch: dev,
-    write: dev,
-    metafile: process.stdout.isTTY,
-    logLevel: 'debug',
-  })
-  .then(analyzeMeta)
-  .then(minifyTemplates)
-  .then(writeFiles);
+await esbuild.build({
+  entryPoints: ['src/newtab.ts'],
+  outfile: 'dist/newtab.js',
+  platform: 'browser',
+  target: ['chrome91'],
+  define: { 'process.env.NODE_ENV': JSON.stringify(mode) },
+  banner: { js: '"use strict";' },
+  plugins: [analyzeMeta, minifyTemplates(), writeFiles()],
+  bundle: true,
+  minify: !dev,
+  sourcemap: dev,
+  watch: dev,
+  write: dev,
+  metafile: process.stdout.isTTY,
+  logLevel: 'debug',
+});
 
 // Settings app
-await esbuild
-  .build({
-    entryPoints: ['src/settings.ts'],
-    outfile: 'dist/settings.js',
-    platform: 'browser',
-    target: ['chrome91'],
-    define: {
-      'process.env.NODE_ENV': JSON.stringify(mode),
-    },
-    banner: { js: '"use strict";' },
-    bundle: true,
-    minify: !dev,
-    sourcemap: dev,
-    watch: dev,
-    write: dev,
-    metafile: process.stdout.isTTY,
-    logLevel: 'debug',
-  })
-  .then(analyzeMeta)
-  .then(minifyTemplates)
-  .then(writeFiles);
+await esbuild.build({
+  entryPoints: ['src/settings.ts'],
+  outfile: 'dist/settings.js',
+  platform: 'browser',
+  target: ['chrome91'],
+  define: { 'process.env.NODE_ENV': JSON.stringify(mode) },
+  banner: { js: '"use strict";' },
+  plugins: [analyzeMeta, minifyTemplates(), writeFiles()],
+  bundle: true,
+  minify: !dev,
+  sourcemap: dev,
+  watch: dev,
+  write: dev,
+  metafile: process.stdout.isTTY,
+  logLevel: 'debug',
+});
 
 // Background script
-await esbuild
-  .build({
-    entryPoints: ['src/background.ts'],
-    outfile: 'dist/background.js',
-    format: 'esm',
-    bundle: true,
-    minify: !dev,
-    metafile: process.stdout.isTTY,
-    logLevel: 'debug',
-  })
-  .then(analyzeMeta);
+await esbuild.build({
+  entryPoints: ['src/background.ts'],
+  outfile: 'dist/background.js',
+  format: 'esm',
+  plugins: [analyzeMeta],
+  bundle: true,
+  minify: !dev,
+  metafile: process.stdout.isTTY,
+  logLevel: 'debug',
+});
 
 /**
  * Generate minified CSS from XCSS source.

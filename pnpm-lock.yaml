@@ -11,7 +11,7 @@ specifiers:
   csso: 4.2.0
   ekscss: 0.0.10
   esbuild: 0.13.12
-  esbuild-minify-templates: 0.6.0
+  esbuild-minify-templates: 0.7.0
   eslint: 7.32.0
   eslint-config-airbnb-base: 14.2.1
   eslint-config-airbnb-typescript: 14.0.0
@@ -41,7 +41,7 @@ devDependencies:
   csso: 4.2.0
   ekscss: 0.0.10
   esbuild: 0.13.12
-  esbuild-minify-templates: 0.6.0_esbuild@0.13.12
+  esbuild-minify-templates: 0.7.0_esbuild@0.13.12
   eslint: 7.32.0
   eslint-config-airbnb-base: 14.2.1_560ef94424f7023f0ab025f67f79aa67
   eslint-config-airbnb-typescript: 14.0.0_262269c5fda90daa0117fa0d0bb21d26
@@ -93,7 +93,7 @@ packages:
       '@babel/helper-compilation-targets': 7.16.0_@babel+core@7.16.0
       '@babel/helper-module-transforms': 7.16.0
       '@babel/helpers': 7.16.0
-      '@babel/parser': 7.16.0
+      '@babel/parser': 7.16.2
       '@babel/template': 7.16.0
       '@babel/traverse': 7.16.0
       '@babel/types': 7.16.0
@@ -259,8 +259,8 @@ packages:
       js-tokens: 4.0.0
     dev: true
 
-  /@babel/parser/7.16.0:
-    resolution: {integrity: sha512-TEHWXf0xxpi9wKVyBCmRcSSDjbJ/cl6LUdlbYUHEaNQUJGhreJbZrXT6sR4+fZLxVUJqNRB4KyOvjuy/D9009A==}
+  /@babel/parser/7.16.2:
+    resolution: {integrity: sha512-RUVpT0G2h6rOZwqLDTrKk7ksNv7YpAilTnYe1/Q+eDjxEceRMKVWbCsX7t8h6C1qCFi/1Y8WZjcEPBAFG27GPw==}
     engines: {node: '>=6.0.0'}
     hasBin: true
     dev: true
@@ -270,7 +270,7 @@ packages:
     engines: {node: '>=6.9.0'}
     dependencies:
       '@babel/code-frame': 7.16.0
-      '@babel/parser': 7.16.0
+      '@babel/parser': 7.16.2
       '@babel/types': 7.16.0
     dev: true
 
@@ -283,7 +283,7 @@ packages:
       '@babel/helper-function-name': 7.16.0
       '@babel/helper-hoist-variables': 7.16.0
       '@babel/helper-split-export-declaration': 7.16.0
-      '@babel/parser': 7.16.0
+      '@babel/parser': 7.16.2
       '@babel/types': 7.16.0
       debug: 4.3.2
       globals: 11.12.0
@@ -1145,8 +1145,8 @@ packages:
     dev: true
     optional: true
 
-  /esbuild-minify-templates/0.6.0_esbuild@0.13.12:
-    resolution: {integrity: sha512-EM4ucklplkTabGbAU+SsZmrUj7FlZJujiGyFyXx0WGXay4FDdB759Z7jFW00Az6Rt9DtzRUXcXr8SX7pC2RYUw==}
+  /esbuild-minify-templates/0.7.0_esbuild@0.13.12:
+    resolution: {integrity: sha512-ubS3bNrxjhA0JDMrS3UNjWla//XRmBxpcUFYQVVHj/b/eSGX9gEcVbThfrPxofNOevae6ieiBkS2u8t6+bW+iw==}
     engines: {node: '>= 12'}
     peerDependencies:
       esbuild: ^0.13.0
