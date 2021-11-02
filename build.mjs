@@ -45,7 +45,7 @@ await esbuild.build({
   sourcemap: dev,
   watch: dev,
   write: dev,
-  metafile: process.stdout.isTTY,
+  metafile: !dev && process.stdout.isTTY,
   logLevel: 'debug',
 });
 
@@ -63,7 +63,7 @@ await esbuild.build({
   sourcemap: dev,
   watch: dev,
   write: dev,
-  metafile: process.stdout.isTTY,
+  metafile: !dev && process.stdout.isTTY,
   logLevel: 'debug',
 });
 
@@ -75,7 +75,7 @@ await esbuild.build({
   plugins: [analyzeMeta],
   bundle: true,
   minify: !dev,
-  metafile: process.stdout.isTTY,
+  metafile: !dev && process.stdout.isTTY,
   logLevel: 'debug',
 });
 
