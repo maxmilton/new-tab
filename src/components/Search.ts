@@ -41,7 +41,7 @@ type RefNodes = {
 // https://github.com/feathericons/feather/blob/master/icons/search.svg
 const view = h`
   <div class=con>
-    <input #s id=s placeholder="Search browser..." autocomplete=off>
+    <input id=s placeholder="Search browser..." autocomplete=off #s>
     <svg id=i>
       <circle cx=11 cy=11 r=8 />
       <line x1=24 y1=24 x2=16.65 y2=16.65 />

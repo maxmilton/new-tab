@@ -14,7 +14,7 @@ type RefNodes = {
 
 const view = h`
   <a>
-    <img #i decoding=async>
+    <img decoding=async #i>
     #t
   </a>
 `;

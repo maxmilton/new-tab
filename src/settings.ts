@@ -117,11 +117,11 @@ const settingsView = h`
       <label>Sections</label>
       <fieldset>
         <legend>DISPLAY ORDER</legend>
-        <ul #se class=item-list></ul>
+        <ul class=item-list #se></ul>
       </fieldset>
       <fieldset>
         <legend>DISABLED</legend>
-        <ul #sd class=item-list></ul>
+        <ul class=item-list #sd></ul>
       </fieldset>
     </div>
 
