@@ -5,13 +5,11 @@ type RefNodes = {
   s: HTMLAnchorElement;
 };
 
-// https://github.com/feathericons/feather/blob/master/icons/menu.svg
+// https://github.com/tailwindlabs/heroicons/blob/master/optimized/outline/menu.svg
 const view = h`
   <div id=m>
     <svg id=im>
-      <line x1=3 y1=6 x2=21 y2=6 />
-      <line x1=3 y1=12 x2=21 y2=12 />
-      <line x1=3 y1=18 x2=21 y2=18 />
+      <path d="M4 6h16M4 12h16M4 18h16" />
     </svg>
 
     <div id=d>
