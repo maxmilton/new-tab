@@ -9,7 +9,11 @@ test.before.each(mocksSetup);
 test.after.each(mocksTeardown);
 test.after.each(teardown);
 
-const sleep = (ms: number) => new Promise((resolve) => setTimeout(resolve, ms));
+function sleep(ms: number) {
+  return new Promise((resolve) => {
+    setTimeout(resolve, ms);
+  });
+}
 
 test('renders entire settings app', async () => {
   // eslint-disable-next-line global-require, import/extensions

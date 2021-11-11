@@ -29,7 +29,9 @@ global.Error.stackTraceLimit = 100;
 export const DIST_DIR = path.join(__dirname, '../../dist');
 
 export function sleep(ms: number): Promise<void> {
-  return new Promise((resolve) => setTimeout(resolve, ms));
+  return new Promise((resolve) => {
+    setTimeout(resolve, ms);
+  });
 }
 
 export async function setup(context: E2ETestContext): Promise<void> {
