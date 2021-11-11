@@ -19,9 +19,7 @@ test('renders correctly', () => {
     rendered.container.innerHTML,
     `<div id="m">
 <svg id="im">
-<line x1="3" y1="6" x2="21" y2="6"></line>
-<line x1="3" y1="12" x2="21" y2="12"></line>
-<line x1="3" y1="18" x2="21" y2="18"></line>
+<path d="M4 6h16M4 12h16M4 18h16"></path>
 </svg>
 <div id="d">
 <a href="chrome://new-tab-page">Open Default Tab</a>

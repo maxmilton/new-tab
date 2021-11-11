@@ -14,7 +14,7 @@ test('renders entire newtab app', () => {
   require('../dist/newtab.js');
 
   // TODO: Better assertions
-  assert.is(document.body.innerHTML.length > 1100, true);
+  assert.is(document.body.innerHTML.length > 1000, true);
   assert.ok(document.body.querySelector('#b')); // bookmarks bar
   assert.ok(document.body.querySelector('#s')); // search input
   assert.ok(document.body.querySelector('#m')); // menu wrapper
