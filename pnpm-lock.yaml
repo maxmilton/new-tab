@@ -13,7 +13,7 @@ specifiers:
   esbuild: 0.13.13
   esbuild-minify-templates: 0.7.0
   eslint: 7.32.0
-  eslint-config-airbnb-base: 14.2.1
+  eslint-config-airbnb-base: 15.0.0
   eslint-config-airbnb-typescript: 15.0.0
   eslint-plugin-import: 2.25.3
   eslint-plugin-unicorn: 38.0.1
@@ -43,7 +43,7 @@ devDependencies:
   esbuild: 0.13.13
   esbuild-minify-templates: 0.7.0_esbuild@0.13.13
   eslint: 7.32.0
-  eslint-config-airbnb-base: 14.2.1_a820dc868cc8cd66d8297be6779b9035
+  eslint-config-airbnb-base: 15.0.0_a820dc868cc8cd66d8297be6779b9035
   eslint-config-airbnb-typescript: 15.0.0_a3e0c1d12d1d1c185428170d0020881c
   eslint-plugin-import: 2.25.3_eslint@7.32.0
   eslint-plugin-unicorn: 38.0.1_eslint@7.32.0
@@ -1275,6 +1275,21 @@ packages:
       eslint-plugin-import: 2.25.3_eslint@7.32.0
       object.assign: 4.1.2
       object.entries: 1.1.5
+    dev: true
+
+  /eslint-config-airbnb-base/15.0.0_a820dc868cc8cd66d8297be6779b9035:
+    resolution: {integrity: sha512-xaX3z4ZZIcFLvh2oUNvcX5oEofXda7giYmuplVxoOg5A7EXJMrUyqRgR+mhDhPK8LZ4PttFOBvCYDbX3sUoUig==}
+    engines: {node: ^10.12.0 || >=12.0.0}
+    peerDependencies:
+      eslint: ^7.32.0 || ^8.2.0
+      eslint-plugin-import: ^2.25.2
+    dependencies:
+      confusing-browser-globals: 1.0.10
+      eslint: 7.32.0
+      eslint-plugin-import: 2.25.3_eslint@7.32.0
+      object.assign: 4.1.2
+      object.entries: 1.1.5
+      semver: 6.3.0
     dev: true
 
   /eslint-config-airbnb-typescript/15.0.0_a3e0c1d12d1d1c185428170d0020881c:
