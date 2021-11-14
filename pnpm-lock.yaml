@@ -22,13 +22,13 @@ specifiers:
   kleur: 4.1.4
   playwright-chromium: 1.16.3
   prettier: 2.4.1
-  stage1: 0.1.0
+  stage1: 0.0.13
   tsm: 2.1.4
   typescript: 4.4.4
   uvu: 0.5.2
 
 dependencies:
-  stage1: 0.1.0
+  stage1: 0.0.13
 
 devDependencies:
   '@types/chrome': 0.0.163
@@ -2744,8 +2744,8 @@ packages:
       escape-string-regexp: 2.0.0
     dev: true
 
-  /stage1/0.1.0:
-    resolution: {integrity: sha512-p5JZ/ZsYrHEgSWmiamncTN5nZmMjCnIuzm1NfURpCtiNFWydCVq/zMftmR5S/tI6y9nNp/EYSbI2s57Ymr7yFg==}
+  /stage1/0.0.13:
+    resolution: {integrity: sha512-qfscCEwmnri/WijLIRhtYsachL2Ldb4Huz7PNbB6Wo0KmEBdjIl0qFOZoIo2e5AZrr4SVa0XqnK/8up/ElnSbQ==}
     dev: false
 
   /string-width/4.2.3:
