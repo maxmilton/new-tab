@@ -22,13 +22,13 @@ specifiers:
   kleur: 4.1.4
   playwright-chromium: 1.16.3
   prettier: 2.4.1
-  stage1: 0.0.13
+  stage1: 0.1.0
   tsm: 2.1.4
   typescript: 4.4.4
   uvu: 0.5.2
 
 dependencies:
-  stage1: 0.0.13
+  stage1: 0.1.0
 
 devDependencies:
   '@types/chrome': 0.0.163
@@ -133,7 +133,7 @@ packages:
       '@babel/compat-data': 7.16.0
       '@babel/core': 7.16.0
       '@babel/helper-validator-option': 7.14.5
-      browserslist: 4.17.6
+      browserslist: 4.18.0
       semver: 6.3.0
     dev: true
 
@@ -696,13 +696,13 @@ packages:
     resolution: {integrity: sha512-9o5UecI3GhkpM6DrXr69PblIuWxPKk9Y0jHBRhdocZ2y7YECBFCsHm79Pr3OyR2AvjhDkabFJaDJMYRazHgsow==}
     dev: true
 
-  /browserslist/4.17.6:
-    resolution: {integrity: sha512-uPgz3vyRTlEiCv4ee9KlsKgo2V6qPk7Jsn0KAn2OBqbqKo3iNcPEC1Ti6J4dwnz+aIRfEEEuOzC9IBk8tXUomw==}
+  /browserslist/4.18.0:
+    resolution: {integrity: sha512-ER2M0g5iAR84fS/zjBDqEgU6iO5fS9JI2EkHr5zxDxYEFk3LjhU9Vpp/INb6RMQphxko7PDV1FH38H/qVP5yCA==}
     engines: {node: ^6 || ^7 || ^8 || ^9 || ^10 || ^11 || ^12 || >=13.7}
     hasBin: true
     dependencies:
-      caniuse-lite: 1.0.30001279
-      electron-to-chromium: 1.3.895
+      caniuse-lite: 1.0.30001280
+      electron-to-chromium: 1.3.896
       escalade: 3.1.1
       node-releases: 2.0.1
       picocolors: 1.0.0
@@ -748,8 +748,8 @@ packages:
     engines: {node: '>=6'}
     dev: true
 
-  /caniuse-lite/1.0.30001279:
-    resolution: {integrity: sha512-VfEHpzHEXj6/CxggTwSFoZBBYGQfQv9Cf42KPlO79sWXCD1QNKWKsKzFeWL7QpZHJQYAvocqV6Rty1yJMkqWLQ==}
+  /caniuse-lite/1.0.30001280:
+    resolution: {integrity: sha512-kFXwYvHe5rix25uwueBxC569o53J6TpnGu0BEEn+6Lhl2vsnAumRFWEBhDft1fwyo6m1r4i+RqA4+163FpeFcA==}
     dev: true
 
   /chalk/2.4.2:
@@ -973,8 +973,8 @@ packages:
       stylis: 4.0.10
     dev: true
 
-  /electron-to-chromium/1.3.895:
-    resolution: {integrity: sha512-9Ww3fB8CWctjqHwkOt7DQbMZMpal2x2reod+/lU4b9axO1XJEDUpPMBxs7YnjLhhqpKXIIB5SRYN/B4K0QpvyQ==}
+  /electron-to-chromium/1.3.896:
+    resolution: {integrity: sha512-NcGkBVXePiuUrPLV8IxP43n1EOtdg+dudVjrfVEUd/bOqpQUFZ2diL5PPYzbgEhZFEltdXV3AcyKwGnEQ5lhMA==}
     dev: true
 
   /emoji-regex/8.0.0:
@@ -2744,8 +2744,8 @@ packages:
       escape-string-regexp: 2.0.0
     dev: true
 
-  /stage1/0.0.13:
-    resolution: {integrity: sha512-qfscCEwmnri/WijLIRhtYsachL2Ldb4Huz7PNbB6Wo0KmEBdjIl0qFOZoIo2e5AZrr4SVa0XqnK/8up/ElnSbQ==}
+  /stage1/0.1.0:
+    resolution: {integrity: sha512-p5JZ/ZsYrHEgSWmiamncTN5nZmMjCnIuzm1NfURpCtiNFWydCVq/zMftmR5S/tI6y9nNp/EYSbI2s57Ymr7yFg==}
     dev: false
 
   /string-width/4.2.3:
