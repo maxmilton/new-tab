@@ -1,5 +1,5 @@
 // FIXME: Remove these lint exceptions once linting can handle mjs
-//  ↳ When TS 4.5 is released and typescript-eslint has support
+//  ↳ When TS 4.6 is released and typescript-eslint has support
 //  ↳ https://github.com/typescript-eslint/typescript-eslint/issues/3950
 /* eslint-disable @typescript-eslint/no-unsafe-argument */
 /* eslint-disable @typescript-eslint/no-unsafe-assignment */
@@ -7,6 +7,13 @@
 /* eslint-disable @typescript-eslint/no-unsafe-member-access */
 /* eslint-disable @typescript-eslint/restrict-template-expressions */
 /* eslint-disable import/extensions, import/no-extraneous-dependencies, no-console */
+
+// NOTE: In testing, fastest page load times are achieved by using:
+// - Main styles: Inline <style> (vs. external stylesheet)
+// - Theme: Inline <style> + textContent (vs. CSSStyleSheet + replaceSync + adoptedStyleSheets)
+//    ↳ Better cross-browser compatibility too; firefox support OK
+//    ↳ But needs CSP unsafe-inline... performance over security in this case
+// - Markup: Omit unnecessary things (vs. explicit <html>, <head>, etc.)
 
 import csso from 'csso';
 import xcss from 'ekscss';
@@ -134,9 +141,8 @@ ${body}`;
 await makeHTML(
   'newtab',
   'src/css/newtab.xcss',
-  // Theme loader as inline script for earliest possible execution start time,
-  // uses localStorage so the data retrieval is synchronous/blocking to prevent
-  // a flash of unstyled UI
+  // Theme loader as inline script for earliest possible execution start time +
+  // use localStorage for synchronous data retrieval to prevent FOUC
   '<style id=t></style><script>t.textContent=localStorage.t</script>',
 );
 await makeHTML('settings', 'src/css/settings.xcss');

@@ -19,7 +19,7 @@ type RefNodes = {
 const DEFAULT_RESULTS_AMOUNT = 12; // chrome.topSites.get returns 12 items
 const MORE_RESULTS_AMOUNT = 50;
 
-const view = h`
+const view = h(`
   <div>
     <h2 #t></h2>
 
@@ -27,7 +27,7 @@ const view = h`
 
     <button #m>Show more</button>
   </div>
-`;
+`);
 
 export const SearchResult = <T extends LinkProps>(
   sectionName: string,

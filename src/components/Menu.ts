@@ -6,7 +6,7 @@ type RefNodes = {
 };
 
 // https://github.com/tailwindlabs/heroicons/blob/master/optimized/outline/menu.svg
-const view = h`
+const view = h(`
   <div id=m>
     <svg id=im>
       <path d="M4 6h16M4 12h16M4 18h16" />
@@ -25,7 +25,7 @@ const view = h`
       <a href=https://github.com/maxmilton/new-tab/issues>Submit Bug</a>
     </div>
   </div>
-`;
+`);
 
 export const Menu = (): MenuComponent => {
   const root = view as MenuComponent;

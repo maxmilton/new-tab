@@ -12,12 +12,12 @@ type RefNodes = {
   t: Text;
 };
 
-const view = h`
+const view = h(`
   <a>
     <img decoding=async #i>
     #t
   </a>
-`;
+`);
 
 export const Link = (item: LinkProps): LinkComponent => {
   const root = view.cloneNode(true) as LinkComponent;

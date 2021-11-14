@@ -41,7 +41,7 @@ const FolderPopup = (
   }px`;
 
   if (!children.length) {
-    append((emptyPopupView ??= h`<div id=e>(empty)</div>`), root);
+    append((emptyPopupView ??= h('<div id=e>(empty)</div>')), root);
   } else {
     children.forEach((item) => {
       append(BookmarkNode(item), root);
@@ -97,11 +97,11 @@ export const Folder = (item: FolderProps): FolderComponent => {
   // parentId 0 = "other bookmarks", 1 = bookmarks bar
   if (+item.parentId! > 1) {
     append(
-      (arrowView ??= h`
+      (arrowView ??= h(`
         <svg class=i>
           <path d="M5 12h14M12 5l7 7-7 7"/>
         </svg>
-      `).cloneNode(true),
+      `)).cloneNode(true),
       root,
     );
   }

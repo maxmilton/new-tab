@@ -24,7 +24,7 @@ const DEFAULT_THEME = 'light';
 const themesData = fetch('themes.json').then((res) => res.json()) as Promise<ThemesData>;
 
 // https://tabler-icons.io/i/grip-vertical
-const sectionView = h`
+const sectionView = h(`
   <li class=item draggable=true>
     <svg viewBox="0 0 24 24" class=icon>
       <circle cx=9 cy=5 r=1 />
@@ -36,9 +36,9 @@ const sectionView = h`
     </svg>
     #name
   </li>
-`;
+`);
 
-const searchOnlyView = h`<small class="so muted">(search only)</small>`;
+const searchOnlyView = h('<small class="so muted">(search only)</small>');
 
 function SectionItem(
   item: string,
@@ -100,7 +100,7 @@ interface SettingsState {
   order: [string[], string[]];
 }
 
-const settingsView = h`
+const settingsView = h(`
   <div>
     <div class=row>
       <label>Theme</label>
@@ -130,7 +130,7 @@ const settingsView = h`
       <button #reset>Reset all settings</button>
     </div>
   </div>
-`;
+`);
 
 function Settings() {
   const root = settingsView;

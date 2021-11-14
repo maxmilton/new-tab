@@ -10,11 +10,11 @@ type RefNodes = {
   t: Text;
 };
 
-const view = h`
+const view = h(`
   <div id=test>
     #t
   </div>
-`;
+`);
 
 export function Test(props: TestProps): TestComponent {
   const root = view as TestComponent;

@@ -39,7 +39,7 @@ type RefNodes = {
 };
 
 // https://github.com/feathericons/feather/blob/master/icons/search.svg
-const view = h`
+const view = h(`
   <div class=con>
     <input id=s placeholder="Search browser..." autocomplete=off #s>
     <svg id=i>
@@ -47,7 +47,7 @@ const view = h`
       <line x1=24 y1=24 x2=16.65 y2=16.65 />
     </svg>
   </div>
-`;
+`);
 
 export const Search = (): SearchComponent => {
   const root = view as SearchComponent;
