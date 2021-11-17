@@ -1,11 +1,3 @@
-// FIXME: Remove these lint exceptions once linting can handle mjs
-//  ↳ When TS 4.6 is released and typescript-eslint has support
-//  ↳ https://github.com/typescript-eslint/typescript-eslint/issues/3950
-/* eslint-disable @typescript-eslint/no-unsafe-argument */
-/* eslint-disable @typescript-eslint/no-unsafe-assignment */
-/* eslint-disable @typescript-eslint/no-unsafe-call */
-/* eslint-disable @typescript-eslint/no-unsafe-member-access */
-/* eslint-disable @typescript-eslint/restrict-template-expressions */
 /* eslint-disable import/extensions, import/no-extraneous-dependencies, no-console */
 
 // NOTE: In testing, fastest page load times are achieved by using:
@@ -33,8 +25,14 @@ const analyzeMeta = {
   name: 'analyze-meta',
   setup(build) {
     if (!build.initialOptions.metafile) return;
-    // @ts-expect-error - FIXME:!
-    build.onEnd((result) => esbuild.analyzeMetafile(result.metafile).then(console.log));
+    build.onEnd((result) => {
+      if (result.metafile) {
+        esbuild
+          .analyzeMetafile(result.metafile)
+          .then(console.log)
+          .catch(console.error);
+      }
+    });
   },
 };
 
