@@ -32,7 +32,7 @@
     "c8": "7.10.0",
     "csso": "4.2.0",
     "ekscss": "0.0.10",
-    "esbuild": "0.13.13",
+    "esbuild": "0.13.14",
     "esbuild-minify-templates": "0.7.0",
     "eslint": "8.2.0",
     "eslint-config-airbnb-base": "15.0.0",
