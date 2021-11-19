@@ -4,7 +4,7 @@ specifiers:
   '@types/chrome': 0.0.164
   '@types/csso': 4.2.0
   '@types/jsdom': 16.2.13
-  '@types/node': 16.11.8
+  '@types/node': 16.11.9
   '@typescript-eslint/eslint-plugin': 5.4.0
   '@typescript-eslint/parser': 5.4.0
   c8: 7.10.0
@@ -34,7 +34,7 @@ devDependencies:
   '@types/chrome': 0.0.164
   '@types/csso': 4.2.0
   '@types/jsdom': 16.2.13
-  '@types/node': 16.11.8
+  '@types/node': 16.11.9
   '@typescript-eslint/eslint-plugin': 5.4.0_d6f2571581882eb2d6c9d9867e002185
   '@typescript-eslint/parser': 5.4.0_eslint@8.2.0+typescript@4.5.2
   c8: 7.10.0
@@ -409,7 +409,7 @@ packages:
   /@types/jsdom/16.2.13:
     resolution: {integrity: sha512-8JQCjdeAidptSsOcRWk2iTm9wCcwn9l+kRG6k5bzUacrnm1ezV4forq0kWjUih/tumAeoG+OspOvQEbbRucBTw==}
     dependencies:
-      '@types/node': 16.11.8
+      '@types/node': 16.11.9
       '@types/parse5': 6.0.2
       '@types/tough-cookie': 4.0.1
     dev: true
@@ -422,8 +422,8 @@ packages:
     resolution: {integrity: sha1-7ihweulOEdK4J7y+UnC86n8+ce4=}
     dev: true
 
-  /@types/node/16.11.8:
-    resolution: {integrity: sha512-hmT5gfpRkkHr7DZZHMf3jBe/zNcVGN+jXSL2f8nAsYfBPxQFToKwQlS/zES4Sjp488Bi73i+p6bvrNRRGU0x9Q==}
+  /@types/node/16.11.9:
+    resolution: {integrity: sha512-MKmdASMf3LtPzwLyRrFjtFFZ48cMf8jmX5VRYrDQiJa8Ybu5VAmkqBWqKU8fdCwD8ysw4mQ9nrEHvzg6gunR7A==}
     dev: true
 
   /@types/normalize-package-data/2.4.1:
@@ -446,7 +446,7 @@ packages:
     resolution: {integrity: sha512-8uALY5LTvSuHgloDVUvWP3pIauILm+8/0pDMokuDYIoNsOkSwd5AiHBTSEJjKTDcZr5z8UpgOWZkxBF4iJftoA==}
     requiresBuild: true
     dependencies:
-      '@types/node': 16.11.8
+      '@types/node': 16.11.9
     dev: true
     optional: true
 
