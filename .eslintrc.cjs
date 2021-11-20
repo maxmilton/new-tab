@@ -9,10 +9,11 @@ module.exports = {
   reportUnusedDisableDirectives: true,
   parser: '@typescript-eslint/parser',
   parserOptions: {
-    // FIXME: Remove once TS 4.5 is released and typescript-eslint has support
+    // FIXME: Remove once TS 4.6+ is released and typescript-eslint has support
     //  ↳ https://github.com/typescript-eslint/typescript-eslint/issues/3950
     extraFileExtensions: ['.mjs', '.cjs'],
     project: ['./test/tsconfig.json'],
+    tsconfigRootDir: __dirname,
   },
   extends: [
     'eslint:recommended',
@@ -24,6 +25,7 @@ module.exports = {
     'plugin:unicorn/recommended',
   ],
   rules: {
+    '@typescript-eslint/explicit-module-boundary-types': WARN,
     '@typescript-eslint/no-use-before-define': WARN,
     'import/extensions': WARN,
     'import/prefer-default-export': OFF,
