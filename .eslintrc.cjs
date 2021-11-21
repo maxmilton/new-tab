@@ -44,6 +44,7 @@ module.exports = {
     'unicorn/no-array-callback-reference': OFF,
     // array forEach is actually faster now!
     'unicorn/no-array-for-each': OFF,
+    'unicorn/no-await-expression-member': OFF,
     'unicorn/no-null': OFF,
     'unicorn/prefer-add-event-listener': OFF,
     'unicorn/prefer-dom-node-append': OFF,
