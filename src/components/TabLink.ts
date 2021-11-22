@@ -10,15 +10,13 @@ export const TabLink = (props: TabLinkProps): LinkComponent => {
   const root = Link(props);
 
   root.__click = () => {
-    const { id, windowId } = props;
-
     // Switch to the clicked tab
-    void chrome.tabs.update(id, { active: true });
+    void chrome.tabs.update(props.id, { active: true });
 
     // Switch active window if the tab isn't in the current window
     chrome.windows.getCurrent({}, (currentWindow) => {
-      if (currentWindow.id !== windowId) {
-        void chrome.windows.update(windowId, { focused: true });
+      if (currentWindow.id !== props.windowId) {
+        void chrome.windows.update(props.windowId, { focused: true });
       }
     });
 

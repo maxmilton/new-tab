@@ -21,12 +21,12 @@ const view = h(`
 
 export const Link = (item: LinkProps): LinkComponent => {
   const root = view.cloneNode(true) as LinkComponent;
-  const { i, t } = view.collect<RefNodes>(root);
+  const nodes = view.collect<RefNodes>(root);
 
   root.href = item.url;
   root.title = item.title;
-  i.src = 'chrome://favicon/' + item.url;
-  t.nodeValue = item.title;
+  nodes.i.src = 'chrome://favicon/' + item.url;
+  nodes.t.nodeValue = item.title;
 
   return root;
 };

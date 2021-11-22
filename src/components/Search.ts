@@ -94,7 +94,7 @@ export const Search = (): SearchComponent => {
     if (recentlyClosed) {
       chrome.sessions.getRecentlyClosed({}, (sessions) => {
         recentlyClosed.update(
-          sessions.map((session) => session.tab).filter((tab) => !!tab),
+          sessions.map((session) => session.tab).filter((tab) => tab),
         );
       });
     }

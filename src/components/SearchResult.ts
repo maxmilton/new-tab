@@ -34,7 +34,7 @@ export const SearchResult = <T extends LinkProps>(
   data: T[],
 ): SearchResultComponent => {
   const root = view.cloneNode(true) as SearchResultComponent;
-  const { t, l, m } = view.collect<RefNodes>(root);
+  const nodes = view.collect<RefNodes>(root);
   const isOpenTabs = sectionName === DEFAULT_SECTION_ORDER[0];
   let rawData: T[];
   let renderedLength: number;
@@ -50,12 +50,12 @@ export const SearchResult = <T extends LinkProps>(
     });
 
     // Remove all child nodes
-    l.textContent = '';
+    nodes.l.textContent = '';
 
-    append(frag, l);
+    append(frag, nodes.l);
 
     root.hidden = !renderedLength;
-    m.hidden = renderedLength >= listData.length;
+    nodes.m.hidden = renderedLength >= listData.length;
   };
 
   const update = (newData: T[]) => {
@@ -67,13 +67,15 @@ export const SearchResult = <T extends LinkProps>(
 
   root.filter = (text) => renderList(
     rawData.filter(
-      ({ title, url }) => (title + '+' + url).toLowerCase().indexOf(text.toLowerCase()) > -1,
+      (item) => (item.title + '+' + item.url)
+        .toLowerCase()
+        .indexOf(text.toLowerCase()) > -1,
     ),
   );
 
-  t.textContent = sectionName;
+  nodes.t.textContent = sectionName;
 
-  m.__click = () => renderList(rawData, renderedLength + MORE_RESULTS_AMOUNT);
+  nodes.m.__click = () => renderList(rawData, renderedLength + MORE_RESULTS_AMOUNT);
 
   update(data);
 
