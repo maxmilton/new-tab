@@ -39,7 +39,7 @@
     "eslint-config-airbnb-typescript": "16.0.0",
     "eslint-plugin-import": "2.25.3",
     "eslint-plugin-unicorn": "39.0.0",
-    "git-ref": "0.3.0",
+    "git-ref": "0.3.1",
     "jsdom": "18.1.1",
     "kleur": "4.1.4",
     "playwright-chromium": "1.16.3",
