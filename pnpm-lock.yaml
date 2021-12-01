@@ -1,7 +1,7 @@
 lockfileVersion: 5.3
 
 specifiers:
-  '@types/chrome': 0.0.164
+  '@types/chrome': 0.0.165
   '@types/csso': 4.2.0
   '@types/jsdom': 16.2.13
   '@types/node': 16.11.11
@@ -31,7 +31,7 @@ dependencies:
   stage1: 0.1.0
 
 devDependencies:
-  '@types/chrome': 0.0.164
+  '@types/chrome': 0.0.165
   '@types/csso': 4.2.0
   '@types/jsdom': 16.2.13
   '@types/node': 16.11.11
@@ -365,8 +365,8 @@ packages:
     engines: {node: '>= 10'}
     dev: true
 
-  /@types/chrome/0.0.164:
-    resolution: {integrity: sha512-/EvjbfcowiA+f8Fwv5PSzxHhnAgjIx50Bjy1zQQYYwxlbJ+rI07CXMhrxwz4jUZlxLjnn/kugNQBjZIN58pKyg==}
+  /@types/chrome/0.0.165:
+    resolution: {integrity: sha512-wRrWYHeGWtFIMMP1w9CsuVQfZ0fO7pRapqzVFLq5Gc3edXC+5eWlgd8rC6YGJsbeZ0kfGShM2jypF4LsQUelag==}
     dependencies:
       '@types/filesystem': 0.0.32
       '@types/har-format': 1.2.8
