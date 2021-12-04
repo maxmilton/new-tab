@@ -7,7 +7,7 @@
 //    ↳ But needs CSP unsafe-inline... performance over security in this case
 // - Markup: Omit unnecessary things (vs. explicit <html>, <head>, etc.)
 
-import csso from 'csso';
+import * as csso from 'csso';
 import xcss from 'ekscss';
 import esbuild from 'esbuild';
 import { minifyTemplates, writeFiles } from 'esbuild-minify-templates';
