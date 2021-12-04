@@ -43,7 +43,7 @@
     "jsdom": "19.0.0",
     "kleur": "4.1.4",
     "playwright-chromium": "1.17.1",
-    "prettier": "2.5.0",
+    "prettier": "2.5.1",
     "tsm": "2.2.1",
     "typescript": "4.5.2",
     "uvu": "0.5.2"
