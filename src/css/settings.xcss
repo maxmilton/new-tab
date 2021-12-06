@@ -66,11 +66,11 @@ select {
   align-items: center;
   margin: 0 0 6px;
   padding: 10px;
+  border: 2px solid currentColor;
+  border-radius: 4px;
   font-weight: bold;
   line-height: 0;
   background: #ffffff8c;
-  border: 2px solid currentColor;
-  border-radius: 4px;
   cursor: grab;
 
   &:last-of-type {
