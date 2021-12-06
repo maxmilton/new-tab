@@ -11,7 +11,7 @@
     "build": "pnpm run prebuild && NODE_ENV=production node build.mjs",
     "dev": "NODE_ENV=development node build.mjs",
     "lint": "pnpm run lint:css && pnpm run lint:js && pnpm run lint:ts",
-    "lint:css": "echo 'TODO: CSS linting'",
+    "lint:css": "stylelint --ignore-path .gitignore '**/*.{css,xcss}'",
     "lint:js": "eslint --ignore-path .gitignore --ext .cjs,.js,.mjs,.ts .",
     "lint:ts": "tsc --project test",
     "prebuild": "rm -rf dist; cp -r static dist",
@@ -23,6 +23,7 @@
     "stage1": "0.1.0"
   },
   "devDependencies": {
+    "@maxmilton/stylelint-config": "0.0.3",
     "@types/chrome": "0.0.168",
     "@types/csso": "4.2.0",
     "@types/jsdom": "16.2.13",
@@ -44,6 +45,8 @@
     "kleur": "4.1.4",
     "playwright-chromium": "1.17.1",
     "prettier": "2.5.1",
+    "stylelint": "14.1.0",
+    "stylelint-config-standard": "24.0.0",
     "tsm": "2.2.1",
     "typescript": "4.5.2",
     "uvu": "0.5.2"
@@ -53,5 +56,17 @@
     "endOfLine": "lf",
     "singleQuote": true,
     "trailingComma": "all"
+  },
+  "stylelint": {
+    "reportInvalidScopeDisables": true,
+    "reportNeedlessDisables": true,
+    "extends": [
+      "stylelint-config-standard",
+      "@maxmilton/stylelint-config"
+    ],
+    "ignoreFiles": [
+      "**/dist/**",
+      "**/node_modules/**"
+    ]
   }
 }
