@@ -79,7 +79,7 @@ select {
 
   &:hover,
   &:focus {
-    color: rgb(178 85 255) !important;
+    color: #b255ff !important;
   }
 }
 
@@ -109,7 +109,7 @@ select {
     display: block;
     width: 100%;
     padding-bottom: 8px;
-    border-top: 6px solid rgb(178 85 255);
+    border-top: 6px solid #b255ff;
     content: '';
   }
 }
