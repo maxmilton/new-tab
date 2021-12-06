@@ -19,11 +19,16 @@
     "test-e2e": "node -r tsm test/e2e/index.ts",
     "zip": "sh -c 'test -z \"$(git status --porcelain)\"' && pnpm run lint && pnpm run test && pnpm run build && cd dist && zip ../chrome-extension.zip *"
   },
+  "__pnpm": {
+    "overrides": {
+      "stage1": "../stage1"
+    }
+  },
   "dependencies": {
     "stage1": "0.1.0"
   },
   "devDependencies": {
-    "@maxmilton/stylelint-config": "0.0.3",
+    "@maxmilton/stylelint-config": "0.0.4",
     "@types/chrome": "0.0.168",
     "@types/csso": "4.2.0",
     "@types/jsdom": "16.2.13",

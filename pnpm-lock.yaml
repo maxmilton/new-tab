@@ -1,7 +1,7 @@
 lockfileVersion: 5.3
 
 specifiers:
-  '@maxmilton/stylelint-config': 0.0.3
+  '@maxmilton/stylelint-config': 0.0.4
   '@types/chrome': 0.0.168
   '@types/csso': 4.2.0
   '@types/jsdom': 16.2.13
@@ -34,7 +34,7 @@ dependencies:
   stage1: 0.1.0
 
 devDependencies:
-  '@maxmilton/stylelint-config': 0.0.3_ekscss@0.0.10+stylelint@14.1.0
+  '@maxmilton/stylelint-config': 0.0.4_ekscss@0.0.10+stylelint@14.1.0
   '@types/chrome': 0.0.168
   '@types/csso': 4.2.0
   '@types/jsdom': 16.2.13
@@ -345,8 +345,8 @@ packages:
     engines: {node: '>=6.0.0'}
     dev: true
 
-  /@maxmilton/stylelint-config/0.0.3_ekscss@0.0.10+stylelint@14.1.0:
-    resolution: {integrity: sha512-JDg+fjrJH8hCd1GDZq1pza1IWIT3Ts7WevP0YlPlAwLmSLCwtb5FQ9aCjVWm06EPagiEuA2ahhTMpHZmG4Jl/A==}
+  /@maxmilton/stylelint-config/0.0.4_ekscss@0.0.10+stylelint@14.1.0:
+    resolution: {integrity: sha512-rVEl6qIbRMM14EA8TdKzMiWH9Nkn8s718OstjYl4N6bRIGuvQRGpw2wP1V1017ZAnNMcQs7AQ54O/r8DkM5GQw==}
     peerDependencies:
       stylelint: ^14.0.0
     dependencies:
@@ -751,8 +751,8 @@ packages:
     engines: {node: ^6 || ^7 || ^8 || ^9 || ^10 || ^11 || ^12 || >=13.7}
     hasBin: true
     dependencies:
-      caniuse-lite: 1.0.30001284
-      electron-to-chromium: 1.4.11
+      caniuse-lite: 1.0.30001285
+      electron-to-chromium: 1.4.12
       escalade: 3.1.1
       node-releases: 2.0.1
       picocolors: 1.0.0
@@ -812,8 +812,8 @@ packages:
     engines: {node: '>=6'}
     dev: true
 
-  /caniuse-lite/1.0.30001284:
-    resolution: {integrity: sha512-t28SKa7g6kiIQi6NHeOcKrOrGMzCRrXvlasPwWC26TH2QNdglgzQIRUuJ0cR3NeQPH+5jpuveeeSFDLm2zbkEw==}
+  /caniuse-lite/1.0.30001285:
+    resolution: {integrity: sha512-KAOkuUtcQ901MtmvxfKD+ODHH9YVDYnBt+TGYSz2KIfnq22CiArbUxXPN9067gNbgMlnNYRSwho8OPXZPALB9Q==}
     dev: true
 
   /chalk/2.4.2:
@@ -1074,8 +1074,8 @@ packages:
       stylis: 4.0.10
     dev: true
 
-  /electron-to-chromium/1.4.11:
-    resolution: {integrity: sha512-2OhsaYgsWGhWjx2et8kaUcdktPbBGjKM2X0BReUCKcSCPttEY+hz2zie820JLbttU8jwL92+JJysWwkut3wZgA==}
+  /electron-to-chromium/1.4.12:
+    resolution: {integrity: sha512-zjfhG9Us/hIy8AlQ5OzfbR/C4aBv1Dg/ak4GX35CELYlJ4tDAtoEcQivXvyBdqdNQ+R6PhlgQqV8UNPJmhkJog==}
     dev: true
 
   /emoji-regex/8.0.0:
@@ -1119,7 +1119,7 @@ packages:
       is-shared-array-buffer: 1.0.1
       is-string: 1.0.7
       is-weakref: 1.0.1
-      object-inspect: 1.11.0
+      object-inspect: 1.11.1
       object-keys: 1.1.1
       object.assign: 4.1.2
       string.prototype.trimend: 1.0.4
@@ -2487,8 +2487,8 @@ packages:
     resolution: {integrity: sha512-h2AatdwYH+JHiZpv7pt/gSX1XoRGb7L/qSIeuqA6GwYoF9w1vP1cw42TO0aI2pNyshRK5893hNSl+1//vHK7hQ==}
     dev: true
 
-  /object-inspect/1.11.0:
-    resolution: {integrity: sha512-jp7ikS6Sd3GxQfZJPyH3cjcbJF6GZPClgdV+EFygjFLQ5FmW/dRUnTd9PQ9k0JhoNDabWFbpF1yCdSWCC6gexg==}
+  /object-inspect/1.11.1:
+    resolution: {integrity: sha512-If7BjFlpkzzBeV1cqgT3OSWT3azyoxDGajR+iGnFBfVV2EWyDyWaZZW2ERDjUaY2QM8i5jI3Sj7mhsM4DDAqWA==}
     dev: true
 
   /object-keys/1.1.1:
@@ -2989,7 +2989,7 @@ packages:
     dependencies:
       call-bind: 1.0.2
       get-intrinsic: 1.1.1
-      object-inspect: 1.11.0
+      object-inspect: 1.11.1
     dev: true
 
   /signal-exit/3.0.6:
