@@ -1,3 +1,6 @@
+// TODO: Remove disable comment and remove specificity
+// stylelint-disable no-descending-specificity
+
 /**
  * App styles
  */
@@ -5,31 +8,15 @@
 body {
   margin: 108px 0;
   overflow-y: scroll; // prevent jump on load
-  font-size: 18px;
-  /**
-   * Although it's best practice to use a unitless value for line-height, this
-   * is a hack for alignment with the minimum possible style properties. Value
-   * should be the same as as bookmark bar height.
-   */
-  line-height: 42px;
-  text-rendering: optimizeSpeed;
-  font-variant: none;
   color: var(--c3);
+  font-size: 18px;
+  font-variant: none;
+  // Although it's best practice to use a unitless value for line-height, this
+  // is a hack for alignment with the minimum possible style properties. Value
+  // should be the same as as bookmark bar height.
+  line-height: 42px;
   background: var(--b);
-}
-
-a,
-// subfolder
-.sf .f {
-  overflow: hidden;
-  text-overflow: ellipsis;
-  text-decoration: none;
-  cursor: pointer; // for menu settings link (without href)
-
-  &:hover,
-  &:focus {
-    text-decoration: underline;
-  }
+  text-rendering: optimizeSpeed;
 }
 
 a,
@@ -38,6 +25,20 @@ a,
   display: block;
   color: var(--t);
   white-space: nowrap;
+}
+
+a,
+// subfolder
+.sf .f {
+  overflow: hidden;
+  text-decoration: none;
+  text-overflow: ellipsis;
+  cursor: pointer; // for menu settings link (without href)
+
+  &:hover,
+  &:focus {
+    text-decoration: underline;
+  }
 }
 
 // all <img> are favicons
@@ -52,8 +53,8 @@ svg {
   height: 24px;
   fill: none;
   stroke: currentColor;
-  stroke-width: 2px;
   stroke-linecap: round;
+  stroke-width: 2px;
 }
 
 // container
@@ -62,6 +63,14 @@ svg {
   max-width: 800px;
   margin: 0 auto;
   padding: 0 18px;
+}
+
+/* "Load more" button */
+button {
+  width: initial;
+  margin-top: 9px;
+  padding: 11px 20px;
+  font-size: 18px;
 }
 
 button,
@@ -84,14 +93,6 @@ button,
   }
 }
 
-/* "Load more" button */
-button {
-  width: initial;
-  margin-top: 9px;
-  padding: 11px 20px;
-  font-size: 18px;
-}
-
 // menu icon
 #im,
 // search icon
@@ -101,8 +102,8 @@ button {
 
 #i {
   position: absolute;
-  left: 38px;
   top: 14px;
+  left: 38px;
 }
 
 // overflow bookmark folder icon
@@ -147,10 +148,10 @@ button {
 // subfolder
 .sf {
   position: fixed;
+  z-index: 1;
   overflow-y: auto;
   background: var(--c2);
   box-shadow: var(--s);
-  z-index: 1;
 
   a,
   // folder

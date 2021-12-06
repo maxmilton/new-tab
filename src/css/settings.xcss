@@ -1,17 +1,17 @@
 body,
 button,
 select {
-  font-size: 18px;
   color: #293742;
+  font-size: 18px;
 }
 
 svg {
   width: 24px;
   fill: none;
   stroke: currentColor;
-  stroke-width: 2px;
   stroke-linecap: round;
   stroke-linejoin: round;
+  stroke-width: 2px;
 }
 
 label {
@@ -27,7 +27,10 @@ fieldset {
 }
 
 ul {
+  margin-top: 0;
   margin-bottom: 0;
+  padding-left: 0;
+  list-style: none;
 }
 
 legend {
@@ -36,12 +39,6 @@ legend {
 
 select {
   padding: 0.25em 0.5em;
-}
-
-ul {
-  margin-top: 0;
-  padding-left: 0;
-  list-style: none;
 }
 
 .muted {
@@ -58,8 +55,8 @@ ul {
 
   &::after {
     display: block;
-    content: 'Drag sections here to disable them';
     color: #6e6e6e;
+    content: 'Drag sections here to disable them';
   }
 }
 
@@ -69,12 +66,12 @@ ul {
   align-items: center;
   margin: 0 0 6px;
   padding: 10px;
+  font-weight: bold;
   line-height: 0;
   background: #ffffff8c;
   border: 2px solid currentColor;
   border-radius: 4px;
   cursor: grab;
-  font-weight: bold;
 
   &:last-of-type {
     margin-bottom: 0;
@@ -82,7 +79,7 @@ ul {
 
   &:hover,
   &:focus {
-    color: rgb(178, 85, 255) !important;
+    color: rgb(178 85 255) !important;
   }
 }
 
@@ -93,8 +90,8 @@ ul {
 
 .dragging {
   border-style: dashed;
-  opacity: 0.4;
   cursor: move;
+  opacity: 0.4;
 
   & > .icon,
   & > .rm {
@@ -107,13 +104,13 @@ ul {
 
   &::before {
     position: absolute;
-    display: block;
     top: -14px;
     left: 0;
+    display: block;
     width: 100%;
     padding-bottom: 8px;
+    border-top: 6px solid rgb(178 85 255);
     content: '';
-    border-top: 6px solid rgb(178, 85, 255);
   }
 }
 

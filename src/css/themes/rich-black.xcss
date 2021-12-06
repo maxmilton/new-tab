@@ -9,5 +9,6 @@
   --c1: #1d1616; // bookmark node hover background, hr, button border, search input border
   --c2: #0f0b0b; // bookmarks bar, menu dropdown, "load more" button
   --c3: #392d2d; // icons, empty folder text, text fallback (headings, etc.)
+
   color-scheme: dark;
 }
