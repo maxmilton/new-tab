@@ -3,7 +3,7 @@ lockfileVersion: 5.3
 specifiers:
   '@maxmilton/stylelint-config': 0.0.5
   '@types/chrome': 0.0.168
-  '@types/csso': 4.2.0
+  '@types/csso': 5.0.0
   '@types/jsdom': 16.2.13
   '@types/node': 16.11.12
   '@typescript-eslint/eslint-plugin': 5.6.0
@@ -36,7 +36,7 @@ dependencies:
 devDependencies:
   '@maxmilton/stylelint-config': 0.0.5_ekscss@0.0.10+stylelint@14.1.0
   '@types/chrome': 0.0.168
-  '@types/csso': 4.2.0
+  '@types/csso': 5.0.0
   '@types/jsdom': 16.2.13
   '@types/node': 16.11.12
   '@typescript-eslint/eslint-plugin': 5.6.0_c73ee81e7e5a72fe329c49340cf4792a
@@ -395,8 +395,8 @@ packages:
     resolution: {integrity: sha512-Pz+DfVODpQTAV6PwPBK6kzyy7+f6EyPbr1+mYkc1YolJfl2NAJ4wbg0TC/AJPBsqn9jWfyiO19A/sgpvFLfqnw==}
     dev: true
 
-  /@types/csso/4.2.0:
-    resolution: {integrity: sha512-tGMZcJGgeIA67qbbm/ZKUi7ZyiTETEL0X4opRpFzULbIE1Kyt6EfOVSctw4N/WrEJZwmKw0J+1i/OApm6/CAOQ==}
+  /@types/csso/5.0.0:
+    resolution: {integrity: sha512-EMrCTGpXRUsbFfZBzn2jcW6Sqg8kxWXkJcpvAGYSEzFqAJ2THDJSwiMeS2fPUw+0p6RQNT/n8F/skEc9hUBc0g==}
     dependencies:
       '@types/css-tree': 1.0.7
     dev: true
