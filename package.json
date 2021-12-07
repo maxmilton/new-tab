@@ -27,7 +27,7 @@
     "@types/chrome": "0.0.168",
     "@types/csso": "4.2.0",
     "@types/jsdom": "16.2.13",
-    "@types/node": "16.11.11",
+    "@types/node": "16.11.12",
     "@typescript-eslint/eslint-plugin": "5.6.0",
     "@typescript-eslint/parser": "5.6.0",
     "c8": "7.10.0",
