@@ -23,7 +23,7 @@
     "stage1": "0.1.0"
   },
   "devDependencies": {
-    "@maxmilton/stylelint-config": "0.0.4",
+    "@maxmilton/stylelint-config": "0.0.5",
     "@types/chrome": "0.0.168",
     "@types/csso": "4.2.0",
     "@types/jsdom": "16.2.13",
