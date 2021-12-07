@@ -1,7 +1,7 @@
 lockfileVersion: 5.3
 
 specifiers:
-  '@maxmilton/stylelint-config': 0.0.4
+  '@maxmilton/stylelint-config': 0.0.5
   '@types/chrome': 0.0.168
   '@types/csso': 4.2.0
   '@types/jsdom': 16.2.13
@@ -34,7 +34,7 @@ dependencies:
   stage1: 0.1.0
 
 devDependencies:
-  '@maxmilton/stylelint-config': 0.0.4_ekscss@0.0.10+stylelint@14.1.0
+  '@maxmilton/stylelint-config': 0.0.5_ekscss@0.0.10+stylelint@14.1.0
   '@types/chrome': 0.0.168
   '@types/csso': 4.2.0
   '@types/jsdom': 16.2.13
@@ -345,12 +345,12 @@ packages:
     engines: {node: '>=6.0.0'}
     dev: true
 
-  /@maxmilton/stylelint-config/0.0.4_ekscss@0.0.10+stylelint@14.1.0:
-    resolution: {integrity: sha512-rVEl6qIbRMM14EA8TdKzMiWH9Nkn8s718OstjYl4N6bRIGuvQRGpw2wP1V1017ZAnNMcQs7AQ54O/r8DkM5GQw==}
+  /@maxmilton/stylelint-config/0.0.5_ekscss@0.0.10+stylelint@14.1.0:
+    resolution: {integrity: sha512-fB48RWYP+a0z9lpVz2Xwxy5t5qHr/PJBhqBQwZEg92FGcc015U6yfXHnQxfbKVbZRqzxa8Bs+zUM/I2ONYq6yA==}
     peerDependencies:
       stylelint: ^14.0.0
     dependencies:
-      postcss-ekscss: 0.0.1_ekscss@0.0.10
+      postcss-ekscss: 0.0.2_ekscss@0.0.10
       stylelint: 14.1.0
       stylelint-order: 5.0.0_stylelint@14.1.0
     transitivePeerDependencies:
@@ -2726,8 +2726,8 @@ packages:
     engines: {node: '>=10.13.0'}
     dev: true
 
-  /postcss-ekscss/0.0.1_ekscss@0.0.10:
-    resolution: {integrity: sha512-k5xfKMrZtjXWUfuPZs72u1sy35N1gq2mCJl4bRjQp7MYWcH0FqaNjf3VMvlRfhKXZdDzie4/6G5mGgBgWGuJxg==}
+  /postcss-ekscss/0.0.2_ekscss@0.0.10:
+    resolution: {integrity: sha512-MpQ5YZxvxt5n+YOjtCElFI/we0b7wuJ7M+aKYJqrPJH+ZuRIz5HHTpFt1P3MeFb7c+BCQMl2/WB28Z0zldEl4w==}
     peerDependencies:
       ekscss: ^0.0.10
       postcss: ^8.0.0
