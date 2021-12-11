@@ -4,10 +4,10 @@
 
 :root {
   --s: 0 0 0 1px #1b6225; // shadow
-  --b: #0a0000; // background
+  --b: #001104; // background
   --t: #26ba3c; // text
   --c1: #113321; // bookmark node hover background, hr, button border, search input border
-  --c2: #0a0000; // bookmarks bar, menu dropdown, "load more" button
+  --c2: #001104; // bookmarks bar, menu dropdown, "load more" button
   --c3: #26ba3c; // icons, empty folder text, text fallback (headings, etc.)
 
   color-scheme: dark;
