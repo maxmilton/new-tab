@@ -1,7 +1,7 @@
 /* eslint-disable no-multi-assign */
 
 import { append, h } from 'stage1';
-import { reconcile } from 'stage1/dist/reconcile/reconcile';
+import { reconcile } from 'stage1/reconcile/non-keyed';
 import type { ThemesData, UserStorageData } from './types';
 import { DEFAULT_SECTION_ORDER } from './utils';
 
