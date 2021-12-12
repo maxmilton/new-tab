@@ -10,7 +10,12 @@
 import * as csso from 'csso';
 import xcss from 'ekscss';
 import esbuild from 'esbuild';
-import { minifyTemplates, writeFiles } from 'esbuild-minify-templates';
+import {
+  decodeUTF8,
+  encodeUTF8,
+  minifyTemplates,
+  writeFiles,
+} from 'esbuild-minify-templates';
 import fs from 'fs/promises';
 import path from 'path';
 import { performance } from 'perf_hooks';
@@ -18,7 +23,7 @@ import manifest from './manifest.config.js';
 
 const mode = process.env.NODE_ENV;
 const dev = mode === 'development';
-const dir = path.resolve(); // no __dirname in node ESM
+const dir = path.resolve(); // loose alternative to __dirname in node ESM
 
 /** @type {esbuild.Plugin} */
 const analyzeMeta = {
@@ -36,33 +41,43 @@ const analyzeMeta = {
   },
 };
 
-// New Tab app
-await esbuild.build({
-  entryPoints: ['src/newtab.ts'],
-  outfile: 'dist/newtab.js',
-  platform: 'browser',
-  target: ['chrome91'],
-  define: { 'process.env.NODE_ENV': JSON.stringify(mode) },
-  banner: { js: '"use strict";' },
-  plugins: [analyzeMeta, minifyTemplates(), writeFiles()],
-  bundle: true,
-  minify: !dev,
-  sourcemap: dev,
-  watch: dev,
-  write: dev,
-  metafile: !dev && process.stdout.isTTY,
-  logLevel: 'debug',
-});
+/** @type {esbuild.Plugin} */
+const minifyJS = {
+  name: 'minify-js',
+  setup(build) {
+    if (!build.initialOptions.minify) return;
 
-// Settings app
+    build.onEnd(async (result) => {
+      if (result.outputFiles) {
+        for (let index = 0; index < result.outputFiles.length; index++) {
+          const file = result.outputFiles[index];
+
+          if (path.extname(file.path) !== '.js') return;
+
+          const src = decodeUTF8(file.contents);
+          // eslint-disable-next-line no-await-in-loop
+          const out = await esbuild.transform(src, {
+            loader: 'js',
+            minify: true,
+          });
+
+          // eslint-disable-next-line no-param-reassign
+          result.outputFiles[index].contents = encodeUTF8(out.code);
+        }
+      }
+    });
+  },
+};
+
+// New Tab & Settings apps
 await esbuild.build({
-  entryPoints: ['src/settings.ts'],
-  outfile: 'dist/settings.js',
+  entryPoints: ['src/newtab.ts', 'src/settings.ts'],
+  outdir: 'dist',
   platform: 'browser',
-  target: ['chrome91'],
+  target: ['chrome95'],
   define: { 'process.env.NODE_ENV': JSON.stringify(mode) },
   banner: { js: '"use strict";' },
-  plugins: [analyzeMeta, minifyTemplates(), writeFiles()],
+  plugins: [minifyTemplates(), minifyJS, writeFiles(), analyzeMeta],
   bundle: true,
   minify: !dev,
   sourcemap: dev,
@@ -75,7 +90,7 @@ await esbuild.build({
 // Background script
 await esbuild.build({
   entryPoints: ['src/background.ts'],
-  outfile: 'dist/background.js',
+  outdir: 'dist',
   format: 'esm',
   plugins: [analyzeMeta],
   bundle: true,
