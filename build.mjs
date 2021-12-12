@@ -55,7 +55,7 @@ const minifyJS = {
           if (path.extname(file.path) !== '.js') return;
 
           // eslint-disable-next-line no-await-in-loop
-          const out = await esbuild.transform(decodeUTF8(file.contents), {
+          const out = await build.esbuild.transform(decodeUTF8(file.contents), {
             loader: 'js',
             minify: true,
           });
