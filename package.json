@@ -24,7 +24,7 @@
   },
   "devDependencies": {
     "@maxmilton/stylelint-config": "0.0.7",
-    "@types/chrome": "0.0.170",
+    "@types/chrome": "0.0.171",
     "@types/csso": "5.0.0",
     "@types/jsdom": "16.2.13",
     "@types/node": "16.11.14",
