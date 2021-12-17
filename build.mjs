@@ -124,7 +124,7 @@ function compileCSS(src, from) {
 
   const { css } = csso.minify(compiled.css, {
     restructure: true,
-    forceMediaMerge: true,
+    forceMediaMerge: true, // unsafe!
   });
 
   return css;
