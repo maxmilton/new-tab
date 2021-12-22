@@ -42,7 +42,7 @@ module.exports = {
     'unicorn/filename-case': OFF,
     'unicorn/no-abusive-eslint-disable': WARN,
     'unicorn/no-array-callback-reference': OFF,
-    // array forEach is actually faster now!
+    // forEach is actually often faster
     'unicorn/no-array-for-each': OFF,
     'unicorn/no-await-expression-member': OFF,
     'unicorn/no-null': OFF,
