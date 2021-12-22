@@ -24,7 +24,7 @@ specifiers:
   playwright-chromium: 1.17.1
   prettier: 2.5.1
   stage1: 0.3.0
-  stylelint: 14.1.0
+  stylelint: 14.2.0
   stylelint-config-standard: 24.0.0
   tsm: 2.2.1
   typescript: 4.5.4
@@ -34,7 +34,7 @@ dependencies:
   stage1: 0.3.0
 
 devDependencies:
-  '@maxmilton/stylelint-config': 0.0.9_stylelint@14.1.0
+  '@maxmilton/stylelint-config': 0.0.9_stylelint@14.2.0
   '@types/chrome': 0.0.171
   '@types/csso': 5.0.0
   '@types/jsdom': 16.2.13
@@ -56,8 +56,8 @@ devDependencies:
   kleur: 4.1.4
   playwright-chromium: 1.17.1
   prettier: 2.5.1
-  stylelint: 14.1.0
-  stylelint-config-standard: 24.0.0_stylelint@14.1.0
+  stylelint: 14.2.0
+  stylelint-config-standard: 24.0.0_stylelint@14.2.0
   tsm: 2.2.1
   typescript: 4.5.4
   uvu: 0.5.2
@@ -327,14 +327,14 @@ packages:
     engines: {node: '>=6.0.0'}
     dev: true
 
-  /@maxmilton/stylelint-config/0.0.9_stylelint@14.1.0:
+  /@maxmilton/stylelint-config/0.0.9_stylelint@14.2.0:
     resolution: {integrity: sha512-qoJRRhlzXX6qph47mCWKHNpFtZLgF2XMQdV/JVCNIrEykTTTDn6pLvY0+CYmSdU6jsd4qqXJF++OP8jLl4WH1A==}
     peerDependencies:
       stylelint: ^14.0.0
     dependencies:
       postcss-ekscss: 0.0.5
-      stylelint: 14.1.0
-      stylelint-order: 5.0.0_stylelint@14.1.0
+      stylelint: 14.2.0
+      stylelint-order: 5.0.0_stylelint@14.2.0
     transitivePeerDependencies:
       - postcss
     dev: true
@@ -859,6 +859,10 @@ packages:
 
   /color-name/1.1.4:
     resolution: {integrity: sha512-dOy+3AuW3a2wNbZHIuMZpTcgjGuLU/uBL/ubcZF9OXbDo8ff4O8yVp5Bf0efS8uEoYo5q4Fx7dY9OgQGXgAsQA==}
+    dev: true
+
+  /colord/2.9.2:
+    resolution: {integrity: sha512-Uqbg+J445nc1TKn4FoDPS6ZZqAvEDnwrH42yo8B40JSOgSLxMZ/gt3h4nmCtPLQeXhjJJkqBx7SCY35WnIixaQ==}
     dev: true
 
   /combined-stream/1.0.8:
@@ -1798,7 +1802,7 @@ packages:
       array-union: 2.1.0
       dir-glob: 3.0.1
       fast-glob: 3.2.7
-      ignore: 5.1.9
+      ignore: 5.2.0
       merge2: 1.4.1
       slash: 3.0.0
     dev: true
@@ -1911,6 +1915,11 @@ packages:
 
   /ignore/5.1.9:
     resolution: {integrity: sha512-2zeMQpbKz5dhZ9IwL0gbxSW5w0NK/MSAMtNuhgIHEPmaU3vPdKPL0UdvUCXs5SS4JAwsBxysK5sFMW8ocFiVjQ==}
+    engines: {node: '>= 4'}
+    dev: true
+
+  /ignore/5.2.0:
+    resolution: {integrity: sha512-CmxgYGiEPCLhfLnpPp1MoRmifwEIOgjcHXxOBjv7mY96c+eWScsOP9c112ZyLdWHi0FxHjI+4uVhKYp/gcdRmQ==}
     engines: {node: '>= 4'}
     dev: true
 
@@ -2227,8 +2236,8 @@ packages:
     engines: {node: '>=6'}
     dev: true
 
-  /known-css-properties/0.23.0:
-    resolution: {integrity: sha512-h9ivI88e1lFNmTT4HovBN33Ysn0OIJG7IPG2mkpx2uniQXFWqo35QdiX7w0TovlUFXfW8aPFblP5/q0jlOr2sA==}
+  /known-css-properties/0.24.0:
+    resolution: {integrity: sha512-RTSoaUAfLvpR357vWzAz/50Q/BmHfmE6ETSWfutT0AJiw10e6CmcdYRQJlLRd95B53D0Y2aD1jSxD3V3ySF+PA==}
     dev: true
 
   /levn/0.3.0:
@@ -3130,39 +3139,40 @@ packages:
     resolution: {integrity: sha1-eVjHk+R+MuB9K1yv5cC/jhLneQI=}
     dev: true
 
-  /stylelint-config-recommended/6.0.0_stylelint@14.1.0:
+  /stylelint-config-recommended/6.0.0_stylelint@14.2.0:
     resolution: {integrity: sha512-ZorSSdyMcxWpROYUvLEMm0vSZud2uB7tX1hzBZwvVY9SV/uly4AvvJPPhCcymZL3fcQhEQG5AELmrxWqtmzacw==}
     peerDependencies:
       stylelint: ^14.0.0
     dependencies:
-      stylelint: 14.1.0
+      stylelint: 14.2.0
     dev: true
 
-  /stylelint-config-standard/24.0.0_stylelint@14.1.0:
+  /stylelint-config-standard/24.0.0_stylelint@14.2.0:
     resolution: {integrity: sha512-+RtU7fbNT+VlNbdXJvnjc3USNPZRiRVp/d2DxOF/vBDDTi0kH5RX2Ny6errdtZJH3boO+bmqIYEllEmok4jiuw==}
     peerDependencies:
       stylelint: ^14.0.0
     dependencies:
-      stylelint: 14.1.0
-      stylelint-config-recommended: 6.0.0_stylelint@14.1.0
+      stylelint: 14.2.0
+      stylelint-config-recommended: 6.0.0_stylelint@14.2.0
     dev: true
 
-  /stylelint-order/5.0.0_stylelint@14.1.0:
+  /stylelint-order/5.0.0_stylelint@14.2.0:
     resolution: {integrity: sha512-OWQ7pmicXufDw5BlRqzdz3fkGKJPgLyDwD1rFY3AIEfIH/LQY38Vu/85v8/up0I+VPiuGRwbc2Hg3zLAsJaiyw==}
     peerDependencies:
       stylelint: ^14.0.0
     dependencies:
       postcss: 8.4.5
       postcss-sorting: 7.0.1_postcss@8.4.5
-      stylelint: 14.1.0
+      stylelint: 14.2.0
     dev: true
 
-  /stylelint/14.1.0:
-    resolution: {integrity: sha512-IedkssuNVA11+v++2PIV2OHOU5A3SfRcXVi56vZVSsMhGrgtwmmit69jeM+08/Tun5DTBe7BuH1Zp1mMLmtKLA==}
+  /stylelint/14.2.0:
+    resolution: {integrity: sha512-i0DrmDXFNpDsWiwx6SPRs4/pyw4kvZgqpDGvsTslQMY7hpUl6r33aQvNSn6cnTg2wtZ9rreFElI7XAKpOWi1vQ==}
     engines: {node: ^12.20.0 || ^14.13.1 || >=16.0.0}
     hasBin: true
     dependencies:
       balanced-match: 2.0.0
+      colord: 2.9.2
       cosmiconfig: 7.0.1
       debug: 4.3.3
       execall: 2.0.0
@@ -3174,11 +3184,11 @@ packages:
       globby: 11.0.4
       globjoin: 0.1.4
       html-tags: 3.1.0
-      ignore: 5.1.9
+      ignore: 5.2.0
       import-lazy: 4.0.0
       imurmurhash: 0.1.4
       is-plain-object: 5.0.0
-      known-css-properties: 0.23.0
+      known-css-properties: 0.24.0
       mathml-tag-names: 2.1.3
       meow: 9.0.0
       micromatch: 4.0.4
