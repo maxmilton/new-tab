@@ -48,16 +48,17 @@ const minifyJS = {
     if (!build.initialOptions.minify) return;
 
     build.onEnd(async (result) => {
-      if (result.outputFiles) {
-        for (let index = 0; index < result.outputFiles.length; index++) {
-          const file = result.outputFiles[index];
+      if (!result.outputFiles) return;
 
-          if (path.extname(file.path) !== '.js') return;
+      for (let index = 0; index < result.outputFiles.length; index++) {
+        const file = result.outputFiles[index];
 
+        if (path.extname(file.path) === '.js') {
           // eslint-disable-next-line no-await-in-loop
           const out = await build.esbuild.transform(decodeUTF8(file.contents), {
             loader: 'js',
             minify: true,
+            // target: build.initialOptions.target,
           });
 
           // eslint-disable-next-line no-param-reassign
