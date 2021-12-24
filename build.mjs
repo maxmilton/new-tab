@@ -30,14 +30,11 @@ const analyzeMeta = {
   name: 'analyze-meta',
   setup(build) {
     if (!build.initialOptions.metafile) return;
-    build.onEnd((result) => {
-      if (result.metafile) {
-        esbuild
-          .analyzeMetafile(result.metafile)
-          .then(console.log)
-          .catch(console.error);
-      }
-    });
+
+    build.onEnd(
+      (result) => result.metafile
+        && build.esbuild.analyzeMetafile(result.metafile).then(console.log),
+    );
   },
 };
 
