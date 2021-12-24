@@ -49,10 +49,7 @@ export const SearchResult = <T extends LinkProps>(
       append((isOpenTabs ? TabLink : Link)(item), frag);
     });
 
-    // Remove all child nodes
-    nodes.l.textContent = '';
-
-    append(frag, nodes.l);
+    nodes.l.replaceChildren(frag);
 
     root.hidden = !renderedLength;
     nodes.m.hidden = renderedLength >= listData.length;

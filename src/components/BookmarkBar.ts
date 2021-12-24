@@ -29,7 +29,7 @@ export const BookmarkBar = (): BookmarkBarComponent => {
     // Add BookmarkNodes one at a time until they can't fit in the bookmark
     // bar and then create a folder with the overflowing items
     const resize = () => {
-      // Remove all child nodes
+      // Remove child nodes
       root.textContent = '';
 
       let otherBookmarksFolder;
