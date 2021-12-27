@@ -29,7 +29,7 @@ test('renders correctly', () => {
 <a href="chrome://settings/passwords">Passwords</a>
 <hr>
 <a>New Tab Settings</a>
-<a href="https://github.com/maxmilton/new-tab/issues">Submit Bug</a>
+<a href="https://github.com/maxmilton/new-tab/issues">Report Bug</a>
 </div>
 </div>`,
   );
