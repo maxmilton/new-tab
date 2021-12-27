@@ -5,24 +5,24 @@
 
 # New Tab ![](./static/icon48.png)
 
-A high performance browser new tab page that gets you where you need to go faster. Utilises the latest tools and tech, packaged into an easy to use Chrome browser extension.
+A high-performance browser new tab page that gets you where you need to go faster. Utilises the latest tools and tech, packaged into an easy to use Chrome browser extension.
 
 [![Add to Chrome](https://storage.googleapis.com/chrome-gcs-uploader.appspot.com/image/WlD8wC6g8khYWPJUsQceQkhXSlv1/mPGKYBIR2uCP0ApchDXE.png)](https://chrome.google.com/webstore/detail/new-tab/cpcibnbdmpmcmnkhoiilpnlaepkepknb)
 
 ## Overview
 
-I was left frustrated by the default Google Chrome new tab page experience. The "top sites" feature quickly outgrew its usefulness and I found myself using bookmarks instead every time. I never used the Google web search input either, as the search bar is all I need. I wondered... "If I could design my own new tab what would it look like?"... enter the `New Tab` extension.
+I was frustrated with the default Google Chrome new tab page experience. The "top sites" feature quickly outgrew its usefulness and I found myself using bookmarks instead every time. I never used the Google web search input either, as the search bar is all I need. I wondered, "If I could design my own new tab, what would it look like?"... enter the `New Tab` extension.
 
-Originally an experimental project to give me a chance for me to play with the Chrome browser APIs and explore web performance optimisations. It grew into something that actually improved my productivity and so, now `New Tab` is available for anyone to use.
+What started as an experiment to play with the Chrome browser APIs and explore web performance optimisations, `New Tab` has grown into something that genuinely improves my productivity. Maybe it can help you too!
 
 ### Features
 
 - Fastest loading of any new tab page with all the features you expect.
 - Distraction-free, minimal design aesthetic with multiple themes.
-- List of your open tabs, recently closed tabs, and top sites.
+- A list of your open tabs, recently closed tabs, and top sites.
 - Search tabs, bookmarks, history, and top sites in one place.
 - Simple bookmarks bar.
-- Links to common places in your browser.
+- Links to frequently used destinations in your browser.
 
 ### Design goals
 
@@ -32,7 +32,7 @@ Originally an experimental project to give me a chance for me to play with the C
 | Access | Still have access to common things like the bookmarks bar etc. |
 | Speed | Near-instant access to functionality. Page load performance, runtime performance, and file size should all be scrupulously optimised. |
 | Privacy & Security | Zero user tracking (unlike most other extensions!). Very restrictive [Content Security Policy](https://developer.mozilla.org/en-US/docs/Web/HTTP/CSP). Local data only; no remote data fetching. |
-| Unobtrusive | No annoying things like distracting colours, illegible text, or entries in your right click menu. |
+| Unobtrusive | No annoying things like distracting colours, illegible text, or entries in your right-click menu. |
 
 ### Technology
 
@@ -43,16 +43,16 @@ Originally an experimental project to give me a chance for me to play with the C
 
 ## Browser support
 
-Recent versions of Google Chrome and other Chromium based browsers (e.g., Brave, Edge).
+Recent versions of Google Chrome and other Chromium-based browsers (e.g., Brave, Edge).
 
 ## Bugs
 
-Please report any bugs you encounter on the [GitHub issue tracker](https://github.com/maxmilton/new-tab/issues).
+Report any bugs you encounter on the [GitHub issue tracker](https://github.com/maxmilton/new-tab/issues).
 
 ### Known issues
 
-1. The extension's bookmarks bar functionality is limited. Chrome doesn't allow extensions to control the native bookmarks bar visibility so I've recreated a simple version. The goal is _high performance_ and quick access rather than trying to emulate the native bookmarks bar. Use the bookmark manager for access to all features.
-1. Page needs to be reloaded after adding, editing, or removing bookmarks. Bookmarks don't change often, so changes are not live.
+1. The extension's bookmarks bar functionality is limited. Browsers don't allow extensions to control the native bookmarks bar visibility, so the extension recreates a simple version. The goal is _high-performance_ and fast access rather than emulating the native bookmarks bar. Use the bookmark manager for access to all features.
+1. The page needs to be reloaded after adding, editing, or removing bookmarks. The changes are not live because bookmarks don't change so often.
 
 ## Changelog
 
