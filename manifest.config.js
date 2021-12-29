@@ -46,7 +46,7 @@ module.exports = {
   content_security_policy: [
     "default-src 'none'",
     // Hash of inline theme loader script embedded in the HTML
-    "script-src-elem 'self' 'sha256-BFOZuSP05k8UkPjXtz8XXP6Z1z3uUhX8ZQeuZNWNP5g='",
+    "script-src-elem 'self' 'sha256-tTEM8/3BDl1ZYg+4egLH8ztU+VEjQjhJbhCawNk+L2Q='",
     // App styles are embedded in the HTML for fastest load performance
     "style-src-elem 'unsafe-inline'",
     'img-src chrome://favicon',

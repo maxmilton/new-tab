@@ -152,7 +152,7 @@ await makeHTML(
   'src/css/newtab.xcss',
   // Theme loader as inline script for earliest possible execution start time +
   // use localStorage for synchronous data retrieval to prevent FOUC
-  "<script id=t>let s=document.createElement('style');s.textContent=localStorage.t;t.after(s)</script>",
+  '<script id=t>let s=document.createElement("style");s.textContent=localStorage.t;t.after(s)</script>',
 );
 await makeHTML('settings', 'src/css/settings.xcss');
 
