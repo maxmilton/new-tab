@@ -108,7 +108,7 @@ button,
 
 // overflow bookmark folder icon
 #io {
-  padding: 8px;
+  padding: 9px;
 }
 
 #b {

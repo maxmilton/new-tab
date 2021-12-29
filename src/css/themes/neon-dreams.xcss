@@ -1,0 +1,95 @@
+/**
+* Neon Dreams Theme
+*/
+
+:root {
+  --s: 0 0 0 1px #005580; // shadow
+  --b: #000a0f; // background
+  --t: #0af; // text
+  --c1: #00334d; // bookmark node hover background, hr, button border, search input border
+  --c2: #000a0f; // bookmarks bar, menu dropdown, "load more" button
+  --c3: #0af; // icons, empty folder text, text fallback (headings, etc.)
+
+  color-scheme: dark;
+}
+
+* {
+  font-family: monospace;
+  font-weight: normal;
+}
+
+a {
+  text-shadow:
+    0 0 2px #00151a,
+    0 0 3px #02a6f773,
+    0 0 5px #02a6f773,
+    0 0 8px #02a6f773;
+}
+
+img {
+  filter: sepia(1) saturate(5) hue-rotate(170deg) drop-shadow(0 0 2px var(--t));
+}
+
+svg {
+  filter: drop-shadow(0 0 3px currentColor);
+  stroke-width: 1.5px;
+}
+
+#s,
+button {
+  border-width: 1px;
+  border-radius: 0;
+  filter: drop-shadow(0 0 3px var(--c1));
+
+  &:focus,
+  &:hover {
+    filter: drop-shadow(0 0 3px var(--c3));
+  }
+}
+
+::placeholder {
+  color: transparent;
+  text-shadow: none;
+}
+
+#i {
+  top: 13px;
+}
+
+hr {
+  margin-right: -18px;
+  margin-left: -18px;
+}
+
+h2,
+.f {
+  color: #ff0080;
+  text-shadow: 0 0 2px #11001a, 0 0 4px #f7027de6, 0 0 7px #f7027de6;
+}
+
+.f:focus,
+.f:hover {
+  background-color: #33001a;
+}
+
+.sf {
+  color: var(--t);
+}
+
+body::before {
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  display: block;
+  /* prettier-ignore */
+  background-image:
+    linear-gradient(to right, #800040 1px, transparent 0),
+    linear-gradient(#800040 1px, transparent 0);
+  background-size: 5rem 1rem;
+  content: '';
+  // stylelint-disable-next-line property-no-vendor-prefix
+  -webkit-mask: linear-gradient(transparent 50%, #000 70%);
+  transform: perspective(15vh) rotateX(50deg);
+}
