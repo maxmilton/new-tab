@@ -139,7 +139,6 @@ async function makeHTML(name, stylePath, body = '') {
   const css = compileCSS(styleSrc, stylePath);
   const template = `<!doctype html>
 <meta charset=utf-8>
-<meta name=google value=notranslate>
 <title>New Tab</title>
 <script src=${name}.js defer></script>
 <style>${css}</style>
@@ -153,7 +152,7 @@ await makeHTML(
   'src/css/newtab.xcss',
   // Theme loader as inline script for earliest possible execution start time +
   // use localStorage for synchronous data retrieval to prevent FOUC
-  '<style id=t></style><script>t.textContent=localStorage.t</script>',
+  "<script id=t>let s=document.createElement('style');s.textContent=localStorage.t;t.after(s)</script>",
 );
 await makeHTML('settings', 'src/css/settings.xcss');
 
