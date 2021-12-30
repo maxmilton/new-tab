@@ -35,7 +35,7 @@
     "@types/node": "17.0.5",
     "@typescript-eslint/eslint-plugin": "5.8.1",
     "@typescript-eslint/parser": "5.8.1",
-    "c8": "7.10.0",
+    "c8": "7.11.0",
     "csso": "5.0.2",
     "ekscss": "0.0.12",
     "esbuild": "0.14.9",
