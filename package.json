@@ -43,7 +43,7 @@
     "eslint": "8.6.0",
     "eslint-config-airbnb-base": "15.0.0",
     "eslint-config-airbnb-typescript": "16.1.0",
-    "eslint-plugin-import": "2.25.3",
+    "eslint-plugin-import": "2.25.4",
     "eslint-plugin-unicorn": "40.0.0",
     "git-ref": "0.3.1",
     "jsdom": "19.0.0",
