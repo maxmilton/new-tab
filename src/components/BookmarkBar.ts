@@ -105,22 +105,22 @@ export const BookmarkBar = (): BookmarkBarComponent => {
   // Synthetic `mouseenter` and `mouseleave` event handler
   // XXX: Similar to stage1 synthetic event logic but does not stop propagating
   // once an event handler is called + extra relatedTarget checks
-  // https://github.com/maxmilton/stage1/blob/495ccf98af62fc1a1360bbf23de1ab2712eb586c/src/events.ts#L3
+  // https://github.com/maxmilton/stage1/blob/08cb3c08cb3e5513c181f768ae92c488cfe2a17a/src/events.ts#L3
   // eslint-disable-next-line no-multi-assign
   root.onmouseover = root.onmouseout = (event) => {
-    const eventKey = '__' + event.type;
+    const eventKey = ('__' + event.type) as '__mouseover' | '__mouseout';
     // null when mouse moves from/to outside the viewport
     const related = event.relatedTarget as Node | null;
-    let node = event.target as Node | null;
+    let node = event.target as
+      | (Node & {
+        __mouseover?(event: MouseEvent): void;
+        __mouseout?(event: MouseEvent): void;
+      })
+      | null;
 
     while (node) {
-      // @ts-expect-error - string indexing dom is unavoidable
-      // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
-      const eventHandler = node[eventKey];
-
-      if (eventHandler && (!related || !node.contains(related))) {
-        // eslint-disable-next-line @typescript-eslint/no-unsafe-call
-        eventHandler(event);
+      if (node[eventKey] && (!related || !node.contains(related))) {
+        node[eventKey]!(event);
       }
       node = node.parentNode;
     }
