@@ -7,7 +7,7 @@ import { handleClick } from './utils';
 declare global {
   interface HTMLElement {
     /** `stage1` synthetic click event handler. */
-    __click(event: MouseEvent): void;
+    __click?(event: MouseEvent): void;
   }
 }
 
