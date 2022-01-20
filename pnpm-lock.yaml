@@ -21,7 +21,7 @@ specifiers:
   git-ref: 0.3.1
   jsdom: 19.0.0
   kleur: 4.1.4
-  playwright-chromium: 1.17.2
+  playwright-chromium: 1.18.0
   prettier: 2.5.1
   stage1: 0.3.0
   stylelint: 14.2.0
@@ -54,7 +54,7 @@ devDependencies:
   git-ref: 0.3.1
   jsdom: 19.0.0
   kleur: 4.1.4
-  playwright-chromium: 1.17.2
+  playwright-chromium: 1.18.0
   prettier: 2.5.1
   stylelint: 14.2.0
   stylelint-config-standard: 24.0.0_stylelint@14.2.0
@@ -2409,21 +2409,21 @@ packages:
     engines: {node: '>=8.6'}
     dev: true
 
-  /playwright-chromium/1.17.2:
-    resolution: {integrity: sha512-afht0lopmJJPOGsffqTthL2MsPDm4tTGeTJWRE7jcrMD7OX9v4EtzBDzvKvs45HHzct3lBKrtVneFJab1Uo6vA==}
+  /playwright-chromium/1.18.0:
+    resolution: {integrity: sha512-GVmwsw47nyMxvnUcqswvJCFgdR3wEX4YUoz0Rrr9DRuh1zXvVac0QpJyrQp0kRvZlaV9BO95ru6Q1Hni+pz+xg==}
     engines: {node: '>=12'}
     hasBin: true
     requiresBuild: true
     dependencies:
-      playwright-core: 1.17.2
+      playwright-core: 1.18.0
     transitivePeerDependencies:
       - bufferutil
       - supports-color
       - utf-8-validate
     dev: true
 
-  /playwright-core/1.17.2:
-    resolution: {integrity: sha512-TCYIt2UNHvqGxvD79bBjBv9osDLAH1gn7AZD5kRpMNQJG6BAmJt8B4Ek8fzdKmCQOnHf9ASJmcYRszoIZxcdVA==}
+  /playwright-core/1.18.0:
+    resolution: {integrity: sha512-JTRlCVpfAFcC1nth+XIE07w6M5m6C8PaEoClv7wGWF97cyDMcHIij0xIVEKMKli7IG5N0mqjLDFc/akXSbMZ1g==}
     engines: {node: '>=12'}
     hasBin: true
     dependencies:
