@@ -16,7 +16,7 @@ body {
   // should be the same as as bookmark bar height.
   line-height: 42px;
   background: var(--b);
-  text-rendering: optimizeSpeed;
+  text-rendering: optimizespeed;
 }
 
 a,
@@ -52,7 +52,7 @@ svg {
   width: 24px;
   height: 24px;
   fill: none;
-  stroke: currentColor;
+  stroke: currentcolor;
   stroke-linecap: round;
   stroke-width: 2px;
 }

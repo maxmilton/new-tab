@@ -31,7 +31,7 @@ img {
 }
 
 svg {
-  filter: drop-shadow(0 0 3px currentColor);
+  filter: drop-shadow(0 0 3px currentcolor);
   stroke-width: 1.5px;
 }
 
