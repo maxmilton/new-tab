@@ -24,7 +24,7 @@ specifiers:
   playwright-chromium: 1.18.0
   prettier: 2.5.1
   stage1: 0.3.0
-  stylelint: 14.2.0
+  stylelint: 14.3.0
   stylelint-config-standard: 24.0.0
   tsm: 2.2.1
   typescript: 4.5.5
@@ -34,7 +34,7 @@ dependencies:
   stage1: 0.3.0
 
 devDependencies:
-  '@maxmilton/stylelint-config': 0.0.9_stylelint@14.2.0
+  '@maxmilton/stylelint-config': 0.0.9_stylelint@14.3.0
   '@types/chrome': 0.0.177
   '@types/csso': 5.0.0
   '@types/jsdom': 16.2.14
@@ -56,8 +56,8 @@ devDependencies:
   kleur: 4.1.4
   playwright-chromium: 1.18.0
   prettier: 2.5.1
-  stylelint: 14.2.0
-  stylelint-config-standard: 24.0.0_stylelint@14.2.0
+  stylelint: 14.3.0
+  stylelint-config-standard: 24.0.0_stylelint@14.3.0
   tsm: 2.2.1
   typescript: 4.5.5
   uvu: 0.5.3
@@ -139,14 +139,14 @@ packages:
     engines: {node: '>=6.0.0'}
     dev: true
 
-  /@maxmilton/stylelint-config/0.0.9_stylelint@14.2.0:
+  /@maxmilton/stylelint-config/0.0.9_stylelint@14.3.0:
     resolution: {integrity: sha512-qoJRRhlzXX6qph47mCWKHNpFtZLgF2XMQdV/JVCNIrEykTTTDn6pLvY0+CYmSdU6jsd4qqXJF++OP8jLl4WH1A==}
     peerDependencies:
       stylelint: ^14.0.0
     dependencies:
       postcss-ekscss: 0.0.5
-      stylelint: 14.2.0
-      stylelint-order: 5.0.0_stylelint@14.2.0
+      stylelint: 14.3.0
+      stylelint-order: 5.0.0_stylelint@14.3.0
     transitivePeerDependencies:
       - postcss
     dev: true
@@ -2879,35 +2879,35 @@ packages:
     resolution: {integrity: sha1-eVjHk+R+MuB9K1yv5cC/jhLneQI=}
     dev: true
 
-  /stylelint-config-recommended/6.0.0_stylelint@14.2.0:
+  /stylelint-config-recommended/6.0.0_stylelint@14.3.0:
     resolution: {integrity: sha512-ZorSSdyMcxWpROYUvLEMm0vSZud2uB7tX1hzBZwvVY9SV/uly4AvvJPPhCcymZL3fcQhEQG5AELmrxWqtmzacw==}
     peerDependencies:
       stylelint: ^14.0.0
     dependencies:
-      stylelint: 14.2.0
+      stylelint: 14.3.0
     dev: true
 
-  /stylelint-config-standard/24.0.0_stylelint@14.2.0:
+  /stylelint-config-standard/24.0.0_stylelint@14.3.0:
     resolution: {integrity: sha512-+RtU7fbNT+VlNbdXJvnjc3USNPZRiRVp/d2DxOF/vBDDTi0kH5RX2Ny6errdtZJH3boO+bmqIYEllEmok4jiuw==}
     peerDependencies:
       stylelint: ^14.0.0
     dependencies:
-      stylelint: 14.2.0
-      stylelint-config-recommended: 6.0.0_stylelint@14.2.0
+      stylelint: 14.3.0
+      stylelint-config-recommended: 6.0.0_stylelint@14.3.0
     dev: true
 
-  /stylelint-order/5.0.0_stylelint@14.2.0:
+  /stylelint-order/5.0.0_stylelint@14.3.0:
     resolution: {integrity: sha512-OWQ7pmicXufDw5BlRqzdz3fkGKJPgLyDwD1rFY3AIEfIH/LQY38Vu/85v8/up0I+VPiuGRwbc2Hg3zLAsJaiyw==}
     peerDependencies:
       stylelint: ^14.0.0
     dependencies:
       postcss: 8.4.5
       postcss-sorting: 7.0.1_postcss@8.4.5
-      stylelint: 14.2.0
+      stylelint: 14.3.0
     dev: true
 
-  /stylelint/14.2.0:
-    resolution: {integrity: sha512-i0DrmDXFNpDsWiwx6SPRs4/pyw4kvZgqpDGvsTslQMY7hpUl6r33aQvNSn6cnTg2wtZ9rreFElI7XAKpOWi1vQ==}
+  /stylelint/14.3.0:
+    resolution: {integrity: sha512-PZXSwtJe4f4qBPWBwAbHL0M0Qjrv8iHN+cLpUNsffaVMS3YzpDDRI73+2lsqLAYfQEzxRwpll6BDKImREbpHWA==}
     engines: {node: ^12.20.0 || ^14.13.1 || >=16.0.0}
     hasBin: true
     dependencies:
@@ -2946,10 +2946,11 @@ packages:
       string-width: 4.2.3
       strip-ansi: 6.0.1
       style-search: 0.1.0
+      supports-hyperlinks: 2.2.0
       svg-tags: 1.0.0
       table: 6.8.0
       v8-compile-cache: 2.3.0
-      write-file-atomic: 3.0.3
+      write-file-atomic: 4.0.0
     transitivePeerDependencies:
       - supports-color
     dev: true
@@ -2970,6 +2971,14 @@ packages:
     engines: {node: '>=8'}
     dependencies:
       has-flag: 4.0.0
+    dev: true
+
+  /supports-hyperlinks/2.2.0:
+    resolution: {integrity: sha512-6sXEzV5+I5j8Bmq9/vUphGRM/RJNT9SCURJLjwfOg51heRtguGWDzcaBlgAzKhQa0EVNpPEKzQuBwZ8S8WaCeQ==}
+    engines: {node: '>=8'}
+    dependencies:
+      has-flag: 4.0.0
+      supports-color: 7.2.0
     dev: true
 
   /supports-preserve-symlinks-flag/1.0.0:
@@ -3102,10 +3111,8 @@ packages:
     engines: {node: '>=8'}
     dev: true
 
-  /typedarray-to-buffer/3.1.5:
-    resolution: {integrity: sha512-zdu8XMNEDepKKR+XYOXAVPtWui0ly0NtohUscw+UmaHiAWT8hrV1rr//H6V+0DvJ3OQ19S979M0laLfX8rm82Q==}
-    dependencies:
-      is-typedarray: 1.0.0
+  /typedarray-to-buffer/4.0.0:
+    resolution: {integrity: sha512-6dOYeZfS3O9RtRD1caom0sMxgK59b27+IwoNy8RDPsmslSGOyU+mpTamlaIW7aNKi90ZQZ9DFaZL3YRoiSCULQ==}
     dev: true
 
   /typescript/4.5.5:
@@ -3250,13 +3257,14 @@ packages:
     resolution: {integrity: sha1-tSQ9jz7BqjXxNkYFvA0QNuMKtp8=}
     dev: true
 
-  /write-file-atomic/3.0.3:
-    resolution: {integrity: sha512-AvHcyZ5JnSfq3ioSyjrBkH9yW4m7Ayk8/9My/DD9onKeu/94fwrMocemO2QAJFAlnnDN+ZDS+ZjAR5ua1/PV/Q==}
+  /write-file-atomic/4.0.0:
+    resolution: {integrity: sha512-JhcWoKffJNF7ivO9yflBhc7tn3wKnokMUfWpBriM9yCXj4ePQnRPcWglBkkg1AHC8nsW/EfxwwhqsLtOy59djA==}
+    engines: {node: ^12.13.0 || ^14.15.0 || >=16}
     dependencies:
       imurmurhash: 0.1.4
       is-typedarray: 1.0.0
       signal-exit: 3.0.6
-      typedarray-to-buffer: 3.1.5
+      typedarray-to-buffer: 4.0.0
     dev: true
 
   /ws/7.5.6:
