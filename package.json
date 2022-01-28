@@ -48,7 +48,7 @@
     "git-ref": "0.3.1",
     "jsdom": "19.0.0",
     "kleur": "4.1.4",
-    "playwright-chromium": "1.18.0",
+    "playwright-chromium": "1.18.1",
     "prettier": "2.5.1",
     "stylelint": "14.3.0",
     "stylelint-config-standard": "24.0.0",
