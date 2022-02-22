@@ -1,0 +1,27 @@
+name: 'submit'
+on:
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-node@v2
+        with:
+          node-version: 16
+      - run: npm install --global pnpm
+      - run: pnpm install --frozen-lockfile
+        env:
+          PLAYWRIGHT_SKIP_BROWSER_DOWNLOAD: 1
+      - run: pnpm run build
+      - run: pnpm run lint
+      - run: pnpm run test
+      - run: cd dist && zip ../chrome-extension.zip *
+      - name: Browser Plugin Publish
+        uses: plasmo-corp/bpp@v1
+        with:
+          artifact: ./chrome-extension.zip
+          keys: ${{ secrets.SUBMIT_KEYS }}
