@@ -132,6 +132,7 @@ export function mocksSetup(): void {
       search: noop,
     },
     history: {
+      // @ts-expect-error - FIXME:!
       search: noop,
     },
     runtime: {
