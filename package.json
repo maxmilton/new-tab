@@ -44,7 +44,7 @@
     "eslint-config-airbnb-base": "15.0.0",
     "eslint-config-airbnb-typescript": "16.1.0",
     "eslint-plugin-import": "2.25.4",
-    "eslint-plugin-unicorn": "41.0.0",
+    "eslint-plugin-unicorn": "41.0.1",
     "git-ref": "0.3.1",
     "jsdom": "19.0.0",
     "kleur": "4.1.4",
