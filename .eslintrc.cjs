@@ -52,6 +52,8 @@ module.exports = {
     'unicorn/prefer-node-protocol': OFF,
     // indexOf is faster (in Chrome)
     'unicorn/prefer-includes': OFF,
+    // saves 3 bytes to use arrow function
+    'unicorn/prefer-native-coercion-functions': OFF,
     'unicorn/prefer-query-selector': OFF,
     'unicorn/prevent-abbreviations': OFF,
   },
