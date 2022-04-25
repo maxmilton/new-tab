@@ -10,7 +10,7 @@ specifiers:
   '@typescript-eslint/parser': 5.20.0
   c8: 7.11.2
   csso: 5.0.3
-  ekscss: 0.0.12
+  ekscss: 0.0.13
   esbuild: 0.14.38
   esbuild-minify-templates: 0.8.0
   eslint: 8.14.0
@@ -43,7 +43,7 @@ devDependencies:
   '@typescript-eslint/parser': 5.20.0_eslint@8.14.0+typescript@4.6.3
   c8: 7.11.2
   csso: 5.0.3
-  ekscss: 0.0.12
+  ekscss: 0.0.13
   esbuild: 0.14.38
   esbuild-minify-templates: 0.8.0_esbuild@0.14.38
   eslint: 8.14.0
@@ -896,12 +896,12 @@ packages:
       webidl-conversions: 7.0.0
     dev: true
 
-  /ekscss/0.0.12:
-    resolution: {integrity: sha512-WuTgu9V5mDm+KXSbr7o14FJzm2KZ+D1kUikIwwRKqbS/O246VWnBROkXwar1CwOW6z6/6DVF/+M81rMcjB7BNQ==}
+  /ekscss/0.0.13:
+    resolution: {integrity: sha512-vn04jyRhoC+Q4eCmENJV+XUc8SjpAYZnMgb7eTf2IXeux6Gxq3+vfbEbkfiCHhn8vKKFyVpTD5dN2446PdWIyg==}
     dependencies:
       '@types/stylis': 4.0.2
-      source-map: 0.7.3
-      stylis: 4.1.0
+      source-map: 0.8.0-beta.0
+      stylis: 4.1.1
     dev: true
 
   /emoji-regex/8.0.0:
@@ -2133,6 +2133,10 @@ packages:
     resolution: {integrity: sha512-0KpjqXRVvrYyCsX1swR/XTK0va6VQkQM6MNo7PqW77ByjAhoARA8EfrP1N4+KlKj8YS0ZUCtRT/YUuhyYDujIQ==}
     dev: true
 
+  /lodash.sortby/4.7.0:
+    resolution: {integrity: sha1-7dFMgk4sycHgsKG0K7UhBRakJDg=}
+    dev: true
+
   /lodash.truncate/4.4.2:
     resolution: {integrity: sha1-WjUNoLERO4N+z//VgSy+WNbq4ZM=}
     dev: true
@@ -2885,9 +2889,11 @@ packages:
     dev: true
     optional: true
 
-  /source-map/0.7.3:
-    resolution: {integrity: sha512-CkCj6giN3S+n9qrYiBTX5gystlENnRW5jZeNLHpe6aue+SrHcG5VYwujhW9s4dY31mEGsxBDrHR6oI69fTXsaQ==}
+  /source-map/0.8.0-beta.0:
+    resolution: {integrity: sha512-2ymg6oRBpebeZi9UUNsgQ89bhx01TcTkmNTGnNO88imTmbSgy4nfujrgVEFKWpMTEGA11EDkTt7mqObTPdigIA==}
     engines: {node: '>= 8'}
+    dependencies:
+      whatwg-url: 7.1.0
     dev: true
 
   /sourcemap-codec/1.4.8:
@@ -3060,8 +3066,8 @@ packages:
       - supports-color
     dev: true
 
-  /stylis/4.1.0:
-    resolution: {integrity: sha512-SrSDzNasOCBTo7C2N9geFwydg/2bmdkWXd4gJirtq82m5JBYtR2+Ialck8czmfBLIdPxCOotlgJESPa8C1RqvA==}
+  /stylis/4.1.1:
+    resolution: {integrity: sha512-lVrM/bNdhVX2OgBFNa2YJ9Lxj7kPzylieHd3TNjuGE0Re9JB7joL5VUKOVH1kdNNJTgGPpT8hmwIAPLaSyEVFQ==}
     dev: true
 
   /supports-color/5.5.0:
@@ -3137,6 +3143,12 @@ packages:
       psl: 1.8.0
       punycode: 2.1.1
       universalify: 0.1.2
+    dev: true
+
+  /tr46/1.0.1:
+    resolution: {integrity: sha1-qLE/1r/SSJUZZ0zN5VujaTtwbQk=}
+    dependencies:
+      punycode: 2.1.1
     dev: true
 
   /tr46/3.0.0:
@@ -3290,6 +3302,10 @@ packages:
       xml-name-validator: 4.0.0
     dev: true
 
+  /webidl-conversions/4.0.2:
+    resolution: {integrity: sha512-YQ+BmxuTgd6UXZW3+ICGfyqRyHXVlD5GtQr5+qjiNW7bF0cqrzX500HVXPBOvgXb5YnzDd+h0zqyv61KUD7+Sg==}
+    dev: true
+
   /webidl-conversions/7.0.0:
     resolution: {integrity: sha512-VwddBukDzu71offAQR975unBIGqfKZpM+8ZX6ySk8nYhVoo5CYaZyzt3YBvYtRtO+aoGlqxPg/B87NGVZ/fu6g==}
     engines: {node: '>=12'}
@@ -3313,6 +3329,14 @@ packages:
     dependencies:
       tr46: 3.0.0
       webidl-conversions: 7.0.0
+    dev: true
+
+  /whatwg-url/7.1.0:
+    resolution: {integrity: sha512-WUu7Rg1DroM7oQvGWfOiAK21n74Gg+T4elXEQYkOhtyLeWiJFoOGLXPKI/9gzIie9CtwVLm8wtw6YJdKyxSjeg==}
+    dependencies:
+      lodash.sortby: 4.7.0
+      tr46: 1.0.1
+      webidl-conversions: 4.0.2
     dev: true
 
   /which-boxed-primitive/1.0.2:
