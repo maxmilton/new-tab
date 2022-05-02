@@ -23,4 +23,9 @@ export const handleClick = (event: MouseEvent): void => {
       void chrome.tabs.update({ url });
     }
   }
+
+  // focus search element on bad click
+  if(target.tagName=== 'BODY') {
+    document.getElementById('s').focus();
+  }
 };
