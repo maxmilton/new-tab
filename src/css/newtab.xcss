@@ -7,14 +7,14 @@
 
 body {
   overflow-y: scroll; // prevent jump on load
-  margin: 108px 0;
+  margin: 6em 0;
   color: var(--c3);
-  font-size: 18px;
+  font-size: 1rem;
   font-variant: none;
   // Although it's best practice to use a unitless value for line-height, this
   // is a hack for alignment with the minimum possible style properties. Value
   // should be the same as as bookmark bar height.
-  line-height: 42px;
+  line-height: 2.2;
   background: var(--b);
   text-rendering: optimizespeed;
 }
@@ -46,6 +46,7 @@ img {
   width: 16px;
   height: 16px; // prevents realignment jump on load
   margin: 0 10px 0 0;
+  filter: invert(var(--i));
 }
 
 svg {
@@ -65,25 +66,17 @@ svg {
   padding: 0 18px;
 }
 
-/* "Load more" button */
-button {
-  width: initial;
-  margin-top: 9px;
-  padding: 11px 20px;
-  font-size: 18px;
-}
-
 button,
 // search input
 #s {
   box-sizing: border-box;
   width: 100%;
-  margin: 0 0 35px;
-  padding: 11px 20px 11px 58px;
+  margin: 0 0 1em;
+  padding: .5em 1em .5em 4rem;
   border: 2px solid var(--c1);
-  border-radius: 24px;
+  border-radius: 1em;
   color: var(--t);
-  font-size: 21px;
+  font-size: 1.5rem;
   background: inherit;
   outline: none;
 
@@ -93,17 +86,28 @@ button,
   }
 }
 
+
+/* "Load more" button */
+button {
+    display: block;
+    width: 100%;
+    margin-top: 1em;
+    padding: .5em 1em;
+    font-size: 1.2em;
+}
+
+
 // menu icon
 #im,
 // search icon
 #i {
-  color: var(--c3);
+  color: var(--t);
 }
 
 #i {
   position: absolute;
-  top: 14px;
-  left: 38px;
+  top: 1rem;
+  left: 2rem;
 }
 
 // overflow bookmark folder icon
@@ -118,7 +122,7 @@ button,
   right: 0;
   left: 0;
   display: flex;
-  height: 42px; // should be same as body line-height
+  height: 2.2rem; // should be same as body line-height
   background: var(--c2);
   box-shadow: var(--s);
 
@@ -194,8 +198,7 @@ hr {
 // menu dropdown
 #d {
   position: absolute;
-  top: 10px;
-  padding: 18px;
+  top: .5rem;
   background: var(--c2);
   box-shadow: var(--s);
   opacity: 0;
@@ -209,4 +212,28 @@ hr {
     transform: scale(1);
     transition-duration: 192ms;
   }
+}
+
+#d,#b {
+    a,.f {
+        display: block;
+        line-height: 1.5;
+        padding: 0.5em;
+
+        &:hover,
+        &:focus {
+            transition: text-indent 160ms;
+            text-indent: 1em;
+            text-decoration: none;
+            color: var(--c2);
+            background: var(--t);
+        }
+    }
+
+    .f,.sf {
+        &:hover,
+        &:focus {
+            text-indent: 0;
+        }
+    }
 }
