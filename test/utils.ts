@@ -88,31 +88,7 @@ export function cleanup(): void {
   });
 }
 
-type MockFn<T> = T & {
-  calledTimes(): number;
-};
-
 const noop = () => {};
-
-// TODO: See if there's anything worthwhile in https://github.com/therealparmesh/snoop/blob/master/src/index.js
-// @ts-expect-error - FIXME:!
-// eslint-disable-next-line @typescript-eslint/ban-types
-export function mockFn<T extends Function>(imlp: T = noop): MockFn<T> {
-  let callCount = 0;
-
-  // @ts-expect-error - FIXME:!
-  const fn: MockFn<T> = new Proxy(imlp, {
-    apply(target, thisArg, args) {
-      callCount += 1;
-      // eslint-disable-next-line @typescript-eslint/no-unsafe-return
-      return Reflect.apply(target, thisArg, args);
-    },
-  });
-
-  fn.calledTimes = () => callCount;
-
-  return fn;
-}
 
 export function mocksSetup(): void {
   // @ts-expect-error - partial mock
