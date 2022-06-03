@@ -11,6 +11,8 @@ declare global {
   }
 }
 
+performance.mark('Initialise Components');
+
 const frag = createFragment();
 // Create Search component first because it has asynchronous calls that can
 // execute while the remaining components are constructed
@@ -21,6 +23,8 @@ append(Search(), frag);
 append(BookmarkBar(), frag);
 append(Menu(), frag);
 append(frag, document.body);
+
+performance.measure('Initialise Components', 'Initialise Components');
 
 document.body.__click = handleClick;
 setupSyntheticEvent('click');

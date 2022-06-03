@@ -40,6 +40,8 @@ export const SearchResult = <T extends LinkProps>(
   let renderedLength: number;
 
   const renderList = (listData: T[], showCount = DEFAULT_RESULTS_AMOUNT) => {
+    performance.mark(sectionName);
+
     const partial = isOpenTabs ? listData : listData.slice(0, showCount);
     const frag = createFragment();
     renderedLength = partial.length;
@@ -53,6 +55,8 @@ export const SearchResult = <T extends LinkProps>(
 
     root.hidden = !renderedLength;
     nodes.m.hidden = renderedLength >= listData.length;
+
+    performance.measure(sectionName, sectionName);
   };
 
   const update = (newData: T[]) => {

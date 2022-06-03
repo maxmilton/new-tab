@@ -29,6 +29,8 @@ export const BookmarkBar = (): BookmarkBarComponent => {
     // Add BookmarkNodes one at a time until they can't fit in the bookmark
     // bar and then create a folder with the overflowing items
     const resize = () => {
+      performance.mark('BookmarkBar');
+
       // Remove child nodes
       root.textContent = '';
 
@@ -95,6 +97,8 @@ export const BookmarkBar = (): BookmarkBarComponent => {
           append(otherBookmarksFolder, root);
         }
       }
+
+      performance.measure('BookmarkBar', 'BookmarkBar');
     };
 
     resize();
