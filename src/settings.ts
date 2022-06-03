@@ -107,8 +107,8 @@ const settingsView = h(`
       <select #theme>
         <option value=light>Light</option>
         <option value=dark>Dark</option>
-        <option value=rich-black>Rich black</option>
-        <option value=hacker-terminal>Hacker terminal</option>
+        <option value=rich-black>Rich Black</option>
+        <option value=hacker-terminal>Hacker Terminal</option>
         <option value=neon-dreams>Neon Dreams</option>
         <option value=tilde-club>Tilde Club</option>
       </select>
