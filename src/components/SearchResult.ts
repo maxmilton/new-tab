@@ -20,7 +20,7 @@ const DEFAULT_RESULTS_AMOUNT = 12; // chrome.topSites.get returns 12 items
 const MORE_RESULTS_AMOUNT = 50;
 
 const view = h(`
-  <div>
+  <div hidden>
     <h2 #t></h2>
 
     <div #l></div>
@@ -31,7 +31,6 @@ const view = h(`
 
 export const SearchResult = <T extends LinkProps>(
   sectionName: string,
-  data: T[],
 ): SearchResultComponent => {
   const root = view.cloneNode(true) as SearchResultComponent;
   const nodes = view.collect<RefNodes>(root);
@@ -77,8 +76,6 @@ export const SearchResult = <T extends LinkProps>(
   nodes.t.textContent = sectionName;
 
   nodes.m.__click = () => renderList(rawData, renderedLength + MORE_RESULTS_AMOUNT);
-
-  update(data);
 
   return root;
 };

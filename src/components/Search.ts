@@ -67,7 +67,7 @@ export const Search = (): SearchComponent => {
     const sectionOrder = userSettings.o || DEFAULT_SECTION_ORDER;
 
     sectionOrder.forEach((name) => {
-      section[name] = append(SearchResult(name, []), root);
+      section[name] = append(SearchResult(name), root);
     });
 
     const openTabs = section[DEFAULT_SECTION_ORDER[0]];
