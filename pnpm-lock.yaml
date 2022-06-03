@@ -23,7 +23,7 @@ specifiers:
   kleur: 4.1.4
   playwright-chromium: 1.22.2
   prettier: 2.6.2
-  stage1: 0.3.0
+  stage1: 0.4.0
   stylelint: 14.8.5
   stylelint-config-standard: 25.0.0
   tsm: 2.2.1
@@ -31,7 +31,7 @@ specifiers:
   uvu: 0.5.3
 
 dependencies:
-  stage1: 0.3.0
+  stage1: 0.4.0
 
 devDependencies:
   '@maxmilton/stylelint-config': 0.0.10_stylelint@14.8.5
@@ -2801,8 +2801,8 @@ packages:
     hasBin: true
     dev: true
 
-  /stage1/0.3.0:
-    resolution: {integrity: sha512-NLydm7UXpc9HWRwxNhBOPZS7rboFABfLc0aP2NaST/7cToU6QX3O+WwQlJYQQ2f0lLxmkVBPvO0mc5rqmxkdOQ==}
+  /stage1/0.4.0:
+    resolution: {integrity: sha512-AL4xCEMYCHdbfYZCkunmPhLtgnkN/r5oVtJkgWLnkOf0SFyJgxb8QfkIDY/WxGpUzZwsNOxVrTPxGrck1kAA5Q==}
     dev: false
 
   /string-width/4.2.3:
