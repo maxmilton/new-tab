@@ -88,15 +88,6 @@ export function cleanup(): void {
   });
 }
 
-/* eslint-disable @typescript-eslint/ban-types */
-type DeepPartial<T> = T extends Function
-  ? T
-  : T extends object
-    ? { [P in keyof T]?: DeepPartial<T[P]> }
-    : T;
-/* eslint-enable @typescript-eslint/ban-types */
-type ChromeAPI = DeepPartial<typeof window.chrome>;
-
 type MockFn<T> = T & {
   calledTimes(): number;
 };
@@ -124,15 +115,13 @@ export function mockFn<T extends Function>(imlp: T = noop): MockFn<T> {
 }
 
 export function mocksSetup(): void {
-  const mockChrome: ChromeAPI = {
+  // @ts-expect-error - partial mock
+  global.chrome = {
     bookmarks: {
-      // @ts-expect-error - FIXME:!
       getTree: noop,
-      // @ts-expect-error - FIXME:!
       search: noop,
     },
     history: {
-      // @ts-expect-error - FIXME:!
       search: noop,
     },
     runtime: {
@@ -143,18 +132,14 @@ export function mocksSetup(): void {
     },
     storage: {
       local: {
-        // @ts-expect-error - FIXME:!
         get: (_keys, callback) => {
           callback({});
         },
-        // @ts-expect-error - FIXME:!
         set: noop,
       },
     },
     tabs: {
-      // @ts-expect-error - FIXME:!
       create: noop,
-      // @ts-expect-error - FIXME:!
       getCurrent: noop,
       onMoved: {
         addListener: noop,
@@ -165,26 +150,19 @@ export function mocksSetup(): void {
       onUpdated: {
         addListener: noop,
       },
-      // @ts-expect-error - FIXME:!
       query: noop,
-      // @ts-expect-error - FIXME:!
       remove: noop,
-      // @ts-expect-error - FIXME:!
       update: noop,
     },
     topSites: {
       get: noop,
     },
     windows: {
-      // @ts-expect-error - FIXME:!
       getCurrent: noop,
-      // @ts-expect-error - FIXME:!
       update: noop,
     },
-  };
-
-  // @ts-expect-error - just a partial mock
-  global.chrome = mockChrome;
+    // TODO: Remove type cast + update mocks once we update to manifest v3
+  } as typeof window.chrome;
 
   global.DocumentFragment = window.DocumentFragment;
   global.localStorage = window.localStorage;
