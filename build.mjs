@@ -73,7 +73,6 @@ await esbuild.build({
   platform: 'browser',
   target: ['chrome95'],
   define: { 'process.env.NODE_ENV': JSON.stringify(mode) },
-  banner: { js: '"use strict";' },
   plugins: [minifyTemplates(), minifyJS, writeFiles(), analyzeMeta],
   bundle: true,
   minify: !dev,
