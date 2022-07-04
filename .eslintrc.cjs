@@ -51,6 +51,7 @@ module.exports = {
     'unicorn/prefer-includes': OFF,
     // saves 3 bytes to use arrow function
     'unicorn/prefer-native-coercion-functions': OFF,
+    'unicorn/prefer-top-level-await': WARN,
     'unicorn/prefer-query-selector': OFF,
     'unicorn/prevent-abbreviations': OFF,
   },
