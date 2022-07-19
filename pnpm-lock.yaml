@@ -26,7 +26,7 @@ specifiers:
   stage1: 0.4.0
   stylelint: 14.9.1
   stylelint-config-standard: 26.0.0
-  tsm: 2.2.1
+  tsm: 2.2.2
   typescript: 4.7.4
   uvu: 0.5.6
 
@@ -58,7 +58,7 @@ devDependencies:
   prettier: 2.7.1
   stylelint: 14.9.1
   stylelint-config-standard: 26.0.0_stylelint@14.9.1
-  tsm: 2.2.1
+  tsm: 2.2.2
   typescript: 4.7.4
   uvu: 0.5.6
 
@@ -3057,8 +3057,8 @@ packages:
     resolution: {integrity: sha512-Xni35NKzjgMrwevysHTCArtLDpPvye8zV/0E4EyYn43P7/7qvQwPh9BGkHewbMulVntbigmcT7rdX3BNo9wRJg==}
     dev: true
 
-  /tsm/2.2.1:
-    resolution: {integrity: sha512-qvJB0baPnxQJolZru11mRgGTdNlx17WqgJnle7eht3Vhb+VUR4/zFA5hFl6NqRe7m8BD9w/6yu0B2XciRrdoJA==}
+  /tsm/2.2.2:
+    resolution: {integrity: sha512-bXkt675NbbqfwRHSSn8kSNEEHvoIUFDM9G6tUENkjEKpAEbrEzieO3PxUiRJylMw8fEGpcf5lSjadzzz12pc2A==}
     engines: {node: '>=12'}
     hasBin: true
     dependencies:
