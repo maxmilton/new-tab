@@ -4,7 +4,7 @@ specifiers:
   '@maxmilton/stylelint-config': 0.0.10
   '@types/chrome': 0.0.193
   '@types/csso': 5.0.0
-  '@types/jsdom': 16.2.14
+  '@types/jsdom': 16.2.15
   '@types/node': 18.0.0
   '@typescript-eslint/eslint-plugin': 5.30.7
   '@typescript-eslint/parser': 5.30.7
@@ -37,7 +37,7 @@ devDependencies:
   '@maxmilton/stylelint-config': 0.0.10_stylelint@14.9.1
   '@types/chrome': 0.0.193
   '@types/csso': 5.0.0
-  '@types/jsdom': 16.2.14
+  '@types/jsdom': 16.2.15
   '@types/node': 18.0.0
   '@typescript-eslint/eslint-plugin': 5.30.7_6wltbjakwuqm7awqswigmiuhd4
   '@typescript-eslint/parser': 5.30.7_he2ccbldppg44uulnyq4rwocfa
@@ -253,8 +253,8 @@ packages:
     resolution: {integrity: sha512-z/QT1XN4K4KYuslS23k62yDIDLwLFkzxOuMplDtObz0+y7VqJCaO2o+SPwHCvLFZh7xazvvoor2tA/hPz9ee7g==}
     dev: true
 
-  /@types/jsdom/16.2.14:
-    resolution: {integrity: sha512-6BAy1xXEmMuHeAJ4Fv4yXKwBDTGTOseExKE3OaHiNycdHdZw59KfYzrt0DkDluvwmik1HRt6QS7bImxUmpSy+w==}
+  /@types/jsdom/16.2.15:
+    resolution: {integrity: sha512-nwF87yjBKuX/roqGYerZZM0Nv1pZDMAT5YhOHYeM/72Fic+VEqJh4nyoqoapzJnW3pUlfxPY5FhgsJtM+dRnQQ==}
     dependencies:
       '@types/node': 18.0.0
       '@types/parse5': 6.0.3
