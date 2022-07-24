@@ -31,7 +31,7 @@
     "@maxmilton/stylelint-config": "0.0.10",
     "@types/chrome": "0.0.193",
     "@types/csso": "5.0.0",
-    "@types/jsdom": "16.2.15",
+    "@types/jsdom": "20.0.0",
     "@types/node": "18.0.0",
     "@typescript-eslint/eslint-plugin": "5.30.7",
     "@typescript-eslint/parser": "5.30.7",
