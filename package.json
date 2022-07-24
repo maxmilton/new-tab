@@ -32,7 +32,7 @@
     "@types/chrome": "0.0.193",
     "@types/csso": "5.0.0",
     "@types/jsdom": "20.0.0",
-    "@types/node": "18.0.0",
+    "@types/node": "18.0.6",
     "@typescript-eslint/eslint-plugin": "5.30.7",
     "@typescript-eslint/parser": "5.30.7",
     "c8": "7.12.0",
