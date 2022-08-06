@@ -1,3 +1,5 @@
+import './theme';
+
 import { append, createFragment, setupSyntheticEvent } from 'stage1';
 import { BookmarkBar } from './components/BookmarkBar';
 import { Menu } from './components/Menu';

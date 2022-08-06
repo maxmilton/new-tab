@@ -1,5 +1,3 @@
-/* eslint-disable no-multi-assign */
-
 import { append, h } from 'stage1';
 import { reconcile } from 'stage1/reconcile/non-keyed';
 import type { ThemesData, UserStorageData } from './types';
@@ -166,13 +164,9 @@ function Settings() {
   const updateTheme = async (themeName: string) => {
     theme.value = themeName;
 
-    // Save user theme setting -- it's a special case that uses localStorage so
-    // the data retrieval is synchronous/blocking (chrome.storage is async) to
-    // prevent a flash of unstyled DOM on initial page load
-    localStorage.t = (await themesData)[themeName];
-
     void chrome.storage.local.set({
-      t: themeName,
+      tn: themeName,
+      t: (await themesData)[themeName],
     });
   };
 
@@ -219,9 +213,9 @@ function Settings() {
     updateOrder([DEFAULT_SECTION_ORDER, []]);
   };
 
-  // get user settings data
+  // Get user settings data
   chrome.storage.local.get(null, (settings: UserStorageData) => {
-    const themeName = settings.t || DEFAULT_THEME;
+    const themeName = settings.tn || DEFAULT_THEME;
     const orderEnabled = settings.o || DEFAULT_SECTION_ORDER;
     const orderDisabled = DEFAULT_SECTION_ORDER.filter(
       (item) => !orderEnabled.includes(item),

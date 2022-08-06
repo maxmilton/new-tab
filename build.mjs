@@ -1,12 +1,5 @@
 /* eslint-disable import/extensions, import/no-extraneous-dependencies, no-console */
 
-// NOTE: In testing, fastest page load times are achieved by using:
-// - Main styles: Inline <style> (vs. external stylesheet)
-// - Theme: Inline <style> + textContent (vs. CSSStyleSheet + replaceSync + adoptedStyleSheets)
-//    ↳ Better cross-browser compatibility too; firefox support OK
-//    ↳ But needs CSP unsafe-inline... performance over security in this case
-// - Markup: Omit unnecessary things (vs. explicit <html>, <head>, etc.)
-
 import * as csso from 'csso';
 import xcss from 'ekscss';
 import esbuild from 'esbuild';
@@ -19,7 +12,7 @@ import {
 import fs from 'fs/promises';
 import path from 'path';
 import { performance } from 'perf_hooks';
-import manifest from './manifest.config.js';
+import manifest from './manifest.config.mjs';
 
 const mode = process.env.NODE_ENV;
 const dev = mode === 'development';
@@ -72,11 +65,13 @@ await esbuild.build({
   outdir: 'dist',
   platform: 'browser',
   target: ['chrome95'],
+  format: 'esm',
   define: { 'process.env.NODE_ENV': JSON.stringify(mode) },
   plugins: [minifyTemplates(), minifyJS, writeFiles(), analyzeMeta],
   bundle: true,
   minify: !dev,
   sourcemap: dev,
+  banner: { js: '"use strict";' },
   watch: dev,
   write: dev,
   metafile: !dev && process.stdout.isTTY,
@@ -85,9 +80,9 @@ await esbuild.build({
   pure: ['performance.mark', 'performance.measure'],
 });
 
-// Background script
+// Background service worker script
 await esbuild.build({
-  entryPoints: ['src/background.ts'],
+  entryPoints: ['src/sw.ts'],
   outdir: 'dist',
   format: 'esm',
   plugins: [analyzeMeta],
@@ -132,29 +127,23 @@ function compileCSS(src, from) {
 /**
  * Construct a HTML file and save it to disk.
  *
- * @param {string} name
+ * @param {string} pageName
  * @param {string} stylePath
  */
-async function makeHTML(name, stylePath, body = '') {
+async function makeHTML(pageName, stylePath) {
   const styleSrc = await fs.readFile(path.join(dir, stylePath), 'utf8');
   const css = compileCSS(styleSrc, stylePath);
   const template = `<!doctype html>
 <meta charset=utf-8>
 <title>New Tab</title>
-<script src=${name}.js defer></script>
-<style id=t>${css}</style>
-${body}`;
+<link href=${pageName}.css rel=stylesheet>
+<script src=${pageName}.js async></script>`;
 
-  await fs.writeFile(path.join(dir, 'dist', `${name}.html`), template);
+  await fs.writeFile(path.join(dir, 'dist', `${pageName}.css`), css);
+  await fs.writeFile(path.join(dir, 'dist', `${pageName}.html`), template);
 }
 
-await makeHTML(
-  'newtab',
-  'src/css/newtab.xcss',
-  // Theme loader as inline script for earliest possible execution start time +
-  // use localStorage for synchronous data retrieval to prevent FOUC
-  '<script>t.textContent+=localStorage.t</script>',
-);
+await makeHTML('newtab', 'src/css/newtab.xcss');
 await makeHTML('settings', 'src/css/settings.xcss');
 
 // Extension manifest
