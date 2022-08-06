@@ -42,6 +42,10 @@ button {
   color: transparent;
 }
 
+.f::first-letter {
+  color: #f70;
+}
+
 #b a,
 .f {
   &:focus,

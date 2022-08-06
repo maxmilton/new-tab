@@ -5,10 +5,10 @@
 :root {
   --s: 0 0 0 1px #1b6225; // shadow
   --b: #001104; // background
-  --t: #26ba3c; // text
+  --t: #4cd761; // text
   --c1: #113321; // bookmark node hover background, hr, button border, search input border
   --c2: #001104; // bookmarks bar, menu dropdown, "load more" button
-  --c3: #26ba3c; // icons, empty folder text, text fallback (headings, etc.)
+  --c3: #4cd761; // icons, empty folder text, text fallback (headings, etc.)
 
   color-scheme: dark;
 }
@@ -31,6 +31,19 @@ button {
   border-radius: 0;
 }
 
+// TODO: Uncomment once supported in Chromium
+//  ↳ https://www.w3.org/TR/2020/WD-css-ui-4-20200124/#propdef-caret-shape
+//  ↳ https://developer.mozilla.org/en-US/docs/Web/CSS/caret-shape
+// #s {
+//   caret-shape: block;
+// }
+
 ::placeholder {
   color: transparent;
+}
+
+#s,
+button,
+.f {
+  color: #b2fb99;
 }
