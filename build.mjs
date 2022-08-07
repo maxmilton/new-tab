@@ -70,6 +70,7 @@ await esbuild.build({
   plugins: [minifyTemplates(), minifyJS, writeFiles(), analyzeMeta],
   bundle: true,
   minify: !dev,
+  mangleProps: /_refs|collect|adjustPosition|closePopup/,
   sourcemap: dev,
   banner: { js: '"use strict";' },
   watch: dev,
