@@ -45,8 +45,7 @@ module.exports = {
     'unicorn/no-null': OFF,
     'unicorn/prefer-add-event-listener': OFF,
     'unicorn/prefer-dom-node-append': OFF,
-    'unicorn/prefer-module': OFF,
-    'unicorn/prefer-node-protocol': OFF,
+    'unicorn/prefer-module': WARN,
     // indexOf is faster (in Chrome)
     'unicorn/prefer-includes': OFF,
     // saves 3 bytes to use arrow function

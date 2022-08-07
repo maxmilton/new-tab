@@ -9,9 +9,9 @@ import {
   minifyTemplates,
   writeFiles,
 } from 'esbuild-minify-templates';
-import fs from 'fs/promises';
-import path from 'path';
-import { performance } from 'perf_hooks';
+import fs from 'node:fs/promises';
+import path from 'node:path';
+import { performance } from 'node:perf_hooks';
 import manifest from './manifest.config.mjs';
 
 const mode = process.env.NODE_ENV;

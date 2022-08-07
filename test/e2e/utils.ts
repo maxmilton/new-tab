@@ -1,9 +1,9 @@
 /* eslint-disable no-console, no-multi-assign */
 
-import fs from 'fs';
 import colors from 'kleur';
-import os from 'os';
-import path from 'path';
+import fs from 'node:fs';
+import os from 'node:os';
+import path from 'node:path';
 import {
   BrowserContext,
   chromium,

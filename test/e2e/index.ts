@@ -22,8 +22,8 @@
 // TODO: If we want to collect coverage during e2e testing, we might need
 // something custom like https://github.com/bricss/dopant/blob/master/test/fixtures/index.mjs
 
-import fs from 'fs';
-import path from 'path';
+import fs from 'node:fs';
+import path from 'node:path';
 import { suite } from 'uvu';
 import * as assert from 'uvu/assert';
 import {
@@ -93,10 +93,10 @@ test('renders newtab app', async (context) => {
     'chrome-extension://cpcibnbdmpmcmnkhoiilpnlaepkepknb/newtab.html',
   );
   // TODO: Better assertions
-  assert.ok(await page.$('#b')); // bookmarks bar
-  assert.ok(await page.$('#s')); // search input
-  assert.ok(await page.$('#m')); // menu wrapper
-  assert.ok(await page.$('#d')); // menu dropdown
+  assert.ok(await page.$('#b'), 'has bookmarks bar');
+  assert.ok(await page.$('#s'), 'has search input');
+  assert.ok(await page.$('#m'), 'has menu wrapper');
+  assert.ok(await page.$('#d'), 'has menu dropdown');
   await sleep(200);
   assert.is(context.unhandledErrors.length, 0, 'zero unhandled errors');
   assert.is(context.consoleMessages.length, 0, 'zero console messages');
