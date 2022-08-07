@@ -8,6 +8,12 @@ global.Error.stackTraceLimit = 100;
 
 const mountedContainers = new Set<HTMLDivElement>();
 
+export function sleep(ms: number): Promise<void> {
+  return new Promise((resolve) => {
+    setTimeout(resolve, ms);
+  });
+}
+
 export function setup(): void {
   if (global.window) {
     throw new Error(
@@ -108,9 +114,7 @@ export function mocksSetup(): void {
     },
     storage: {
       local: {
-        get: (_keys, callback) => {
-          callback({});
-        },
+        get: () => Promise.resolve({}),
         set: noop,
       },
     },
@@ -141,7 +145,8 @@ export function mocksSetup(): void {
   } as typeof window.chrome;
 
   global.DocumentFragment = window.DocumentFragment;
-  global.localStorage = window.localStorage;
+  global.CSSStyleSheet = window.CSSStyleSheet;
+  global.CSSStyleSheet.prototype.replaceSync ??= noop;
 
   // @ts-expect-error - just a simple mock
   global.fetch = () => Promise.resolve({
@@ -152,5 +157,5 @@ export function mocksSetup(): void {
 export function mocksTeardown(): void {
   // @ts-expect-error - cleaning up
   // eslint-disable-next-line no-multi-assign
-  global.chrome = global.DocumentFragment = global.localStorage = global.fetch = undefined;
+  global.chrome = global.DocumentFragment = global.CSSStyleSheet = global.fetch = undefined;
 }

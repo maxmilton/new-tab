@@ -1,19 +1,13 @@
 import { test } from 'uvu';
 import * as assert from 'uvu/assert';
 import {
-  mocksSetup, mocksTeardown, setup, teardown,
+  mocksSetup, mocksTeardown, setup, sleep, teardown,
 } from './utils';
 
 test.before.each(setup);
 test.before.each(mocksSetup);
 test.after.each(mocksTeardown);
 test.after.each(teardown);
-
-function sleep(ms: number) {
-  return new Promise((resolve) => {
-    setTimeout(resolve, ms);
-  });
-}
 
 test('renders entire settings app', async () => {
   // eslint-disable-next-line global-require, import/extensions
@@ -22,8 +16,8 @@ test('renders entire settings app', async () => {
   // TODO: Better assertions
   assert.is(document.body.innerHTML.length > 600, true);
 
-  // XXX: Async code in settings init fails if this test ends prematurely
-  await sleep(0);
+  // Wait for async calls in the app to finish
+  await sleep(10);
 });
 
 test.run();
