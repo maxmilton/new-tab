@@ -197,6 +197,7 @@ function Settings() {
     (event.target as SectionComponent).classList.remove('over');
   };
 
+  // eslint-disable-next-line no-multi-assign
   se.ondragover = sd.ondragover = (event) => {
     event.preventDefault();
     // eslint-disable-next-line no-param-reassign
