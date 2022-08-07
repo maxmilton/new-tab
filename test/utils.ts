@@ -114,7 +114,13 @@ export function mocksSetup(): void {
     },
     storage: {
       local: {
-        get: () => Promise.resolve({}),
+        get: (_keys, callback) => {
+          if (callback) {
+            callback({});
+          } else {
+            return Promise.resolve({});
+          }
+        },
         set: noop,
       },
     },
