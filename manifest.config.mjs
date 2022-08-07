@@ -49,6 +49,7 @@ export default {
       "script-src 'self'",
       "style-src 'self'",
       "img-src 'self'",
+      "base-uri 'none'",
     ].join(';'),
   },
   // https://chrome.google.com/webstore/detail/new-tab/cpcibnbdmpmcmnkhoiilpnlaepkepknb
