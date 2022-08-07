@@ -13,15 +13,17 @@ test('renders entire newtab app', async () => {
   // eslint-disable-next-line global-require, import/extensions
   require('../dist/newtab.js');
 
+  // Wait for async calls in the app to finish
+  await sleep(10);
+
   // TODO: Better assertions
-  assert.is(document.body.innerHTML.length > 1000, true);
+  assert.is(document.body.innerHTML.length > 1000, true, 'body has content');
   assert.ok(document.body.querySelector('#b')); // bookmarks bar
   assert.ok(document.body.querySelector('#s')); // search input
   assert.ok(document.body.querySelector('#m')); // menu wrapper
   assert.ok(document.body.querySelector('#d')); // menu dropdown
 
-  // Wait for async calls in the app to finish
-  await sleep(10);
+  await sleep(0);
 });
 
 test.run();

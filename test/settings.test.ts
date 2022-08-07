@@ -13,11 +13,13 @@ test('renders entire settings app', async () => {
   // eslint-disable-next-line global-require, import/extensions
   require('../dist/settings.js');
 
+  // Wait for async calls in the app to finish
+  await sleep(10);
+
   // TODO: Better assertions
   assert.is(document.body.innerHTML.length > 600, true);
 
-  // Wait for async calls in the app to finish
-  await sleep(10);
+  await sleep(0);
 });
 
 test.run();
