@@ -6,7 +6,7 @@ import type { UserStorageData } from './types';
 
 performance.mark('Load Theme');
 
-void chrome.storage.local.get('t').then((settings: UserStorageData) => {
+chrome.storage.local.get('t', (settings: UserStorageData) => {
   const sheet = new CSSStyleSheet();
   // @ts-expect-error - replaceSync method will be added in TypeScript v4.8
   // eslint-disable-next-line @typescript-eslint/no-unsafe-call

@@ -1,6 +1,6 @@
 /* eslint-disable import/no-extraneous-dependencies */
 
-// https://developer.chrome.com/docs/extensions/mv2/manifest/
+// https://developer.chrome.com/docs/extensions/mv3/manifest/
 // https://developer.chrome.com/docs/extensions/reference/
 
 import { gitRef } from 'git-ref';

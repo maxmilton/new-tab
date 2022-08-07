@@ -63,7 +63,9 @@ export const Search = (): SearchComponent => {
     }
   };
 
-  chrome.storage.local.get(null, (userSettings: UserStorageData) => {
+  performance.mark('Load Sections');
+
+  chrome.storage.local.get('o', (userSettings: UserStorageData) => {
     const sectionOrder = userSettings.o || DEFAULT_SECTION_ORDER;
 
     sectionOrder.forEach((name) => {
@@ -126,6 +128,8 @@ export const Search = (): SearchComponent => {
         );
       });
     }
+
+    performance.measure('Load Sections', 'Load Sections');
   });
 
   return root;
