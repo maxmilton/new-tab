@@ -15,6 +15,7 @@ test.before(() => {
   // eslint-disable-next-line @typescript-eslint/unbound-method
   oldStorageLocalGet = global.chrome.storage.local.get;
   // @ts-expect-error - mock
+  // eslint-disable-next-line consistent-return
   global.chrome.storage.local.get = (_keys, callback) => {
     if (callback) {
       callback({ t: '' });
@@ -32,7 +33,7 @@ test('renders entire newtab app', async () => {
   require('../dist/newtab.js');
 
   // Wait for async calls in the app to finish
-  await sleep(10);
+  await sleep(20);
 
   // TODO: Better assertions
   assert.is(document.body.innerHTML.length > 1000, true, 'body has content');

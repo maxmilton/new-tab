@@ -114,6 +114,7 @@ export function mocksSetup(): void {
     },
     storage: {
       local: {
+        // eslint-disable-next-line consistent-return
         get: (_keys, callback) => {
           if (callback) {
             callback({});
