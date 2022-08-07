@@ -146,6 +146,7 @@ export function mocksSetup(): void {
 
   global.DocumentFragment = window.DocumentFragment;
   global.CSSStyleSheet = window.CSSStyleSheet;
+  // @ts-expect-error - replaceSync method will be added in TypeScript v4.8
   global.CSSStyleSheet.prototype.replaceSync ??= noop;
 
   // @ts-expect-error - just a simple mock
