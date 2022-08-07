@@ -215,7 +215,7 @@ function Settings() {
   };
 
   // Get user settings data
-  chrome.storage.local.get(null, (settings: UserStorageData) => {
+  void chrome.storage.local.get(null).then((settings: UserStorageData) => {
     const themeName = settings.tn || DEFAULT_THEME;
     const orderEnabled = settings.o || DEFAULT_SECTION_ORDER;
     const orderDisabled = DEFAULT_SECTION_ORDER.filter(

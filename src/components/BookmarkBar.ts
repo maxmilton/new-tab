@@ -51,8 +51,7 @@ export const BookmarkBar = (): BookmarkBarComponent => {
         let index = 0;
 
         for (; index < len; index++) {
-          const item = bookmarks![index];
-          const node = append(BookmarkNode(item), root);
+          const node = append(BookmarkNode(bookmarks![index]), root);
           currentWidth += node.clientWidth;
 
           if (currentWidth >= maxWidth) {
@@ -70,7 +69,7 @@ export const BookmarkBar = (): BookmarkBarComponent => {
               // children: bookmarks!.slice(index),
               children: bookmarks!.slice(index).map((item) => {
                 // eslint-disable-next-line no-param-reassign
-                item.parentId = 2 as unknown as string;
+                item.parentId = '2';
                 return item;
               }),
               end: true,

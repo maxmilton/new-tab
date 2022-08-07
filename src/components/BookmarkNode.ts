@@ -94,8 +94,8 @@ export const Folder = (item: FolderProps): FolderComponent => {
 
   if (item.end) root.className += ' end';
 
-  // parentId 0 = "other bookmarks", 1 = bookmarks bar
-  if (+item.parentId! > 1) {
+  // parentId 0 = "bookmarks bar", 1 = "other bookmarks"
+  if (item.parentId! > '1') {
     append(
       (arrowView ??= h(`
         <svg class=i>
