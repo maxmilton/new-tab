@@ -10,8 +10,6 @@ test.after.each(mocksTeardown);
 test.after.each(teardown);
 
 test.before(() => {
-  // eslint-disable-next-line @typescript-eslint/unbound-method
-  oldStorageLocalGet = global.chrome.storage.local.get;
   // @ts-expect-error - mock
   // eslint-disable-next-line consistent-return
   global.chrome.storage.local.get = (_keys, callback) => {
