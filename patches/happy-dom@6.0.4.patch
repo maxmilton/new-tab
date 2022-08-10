@@ -1,0 +1,13 @@
+diff --git a/lib/tree-walker/TreeWalker.js b/lib/tree-walker/TreeWalker.js
+index 531f67321da1f9c6e206164e0a596945b8906b70..688ccc3927834a2adc92a41a66fbbdc2565bd619 100644
+--- a/lib/tree-walker/TreeWalker.js
++++ b/lib/tree-walker/TreeWalker.js
+@@ -126,7 +126,7 @@ class TreeWalker {
+      * @returns Current node.
+      */
+     nextSibling() {
+-        if (this.currentNode !== this.root && this.currentNode) {
++        if (this.currentNode !== this.root && this.currentNode && this.currentNode.parentNode) {
+             const siblings = this.currentNode.parentNode.childNodes;
+             const index = siblings.indexOf(this.currentNode);
+             if (index + 1 < siblings.length) {

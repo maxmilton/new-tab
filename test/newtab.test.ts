@@ -1,13 +1,7 @@
 import { test } from 'uvu';
 import * as assert from 'uvu/assert';
-import {
-  mocksSetup, mocksTeardown, setup, sleep, teardown,
-} from './utils';
-
-test.before.each(setup);
-test.before.each(mocksSetup);
-test.after.each(mocksTeardown);
-test.after.each(teardown);
+import { reset } from './setup';
+import { consoleSpy } from './utils';
 
 test.before(() => {
   // @ts-expect-error - mock
@@ -20,24 +14,26 @@ test.before(() => {
     }
   };
 });
+test.after(reset);
 
 test('renders entire newtab app', async () => {
+  const checkConsoleCalls = consoleSpy();
+
   // eslint-disable-next-line global-require, import/extensions
   require('../dist/newtab.js');
 
-  // Wait for async calls in the app to finish
-  await sleep(10);
+  await happyDOM.whenAsyncComplete();
 
   // TODO: Better assertions
   assert.is(document.body.innerHTML.length > 1000, true, 'body has content');
-  assert.ok(document.body.querySelector('#b')); // bookmarks bar
-  assert.ok(document.body.querySelector('#s')); // search input
-  assert.ok(document.body.querySelector('#m')); // menu wrapper
-  assert.ok(document.body.querySelector('#d')); // menu dropdown
+  assert.ok(document.body.querySelector('#b'), 'has bookmarks bar');
+  assert.ok(document.body.querySelector('#s'), 'has search input');
+  assert.ok(document.body.querySelector('#m'), 'has menu wrapper');
+  assert.ok(document.body.querySelector('#d'), 'has menu dropdown');
 
   // TODO: Check there is a h2 with text 'Open Tabs'
 
-  await sleep(0);
+  checkConsoleCalls(assert);
 });
 
 test.run();
