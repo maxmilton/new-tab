@@ -7,13 +7,12 @@ patchedDependencies:
 
 specifiers:
   '@maxmilton/stylelint-config': 0.0.10
+  '@parcel/css': 1.12.2
   '@types/chrome': 0.0.193
-  '@types/csso': 5.0.0
   '@types/node': 18.6.4
   '@typescript-eslint/eslint-plugin': 5.33.0
   '@typescript-eslint/parser': 5.33.0
   c8: 7.12.0
-  csso: 5.0.4
   ekscss: 0.0.13
   esbuild: 0.14.54
   esbuild-minify-templates: 0.9.0
@@ -40,13 +39,12 @@ dependencies:
 
 devDependencies:
   '@maxmilton/stylelint-config': 0.0.10_stylelint@14.9.1
+  '@parcel/css': 1.12.2
   '@types/chrome': 0.0.193
-  '@types/csso': 5.0.0
   '@types/node': 18.6.4
   '@typescript-eslint/eslint-plugin': 5.33.0_njno5y7ry2l2lcmiu4tywxkwnq
   '@typescript-eslint/parser': 5.33.0_qugx7qdu5zevzvxaiqyxfiwquq
   c8: 7.12.0
-  csso: 5.0.4
   ekscss: 0.0.13
   esbuild: 0.14.54
   esbuild-minify-templates: 0.9.0_esbuild@0.14.54
@@ -225,6 +223,94 @@ packages:
       fastq: 1.13.0
     dev: true
 
+  /@parcel/css-darwin-arm64/1.12.2:
+    resolution: {integrity: sha512-6VvsoYSltBiUh/uyfPzQ+I3DiTFN7tmRv6zm1LH98J7GGCDDhbYEtbQjjCs15ex6fVn1ORZK0JO+mMlsg1JwTA==}
+    engines: {node: '>= 12.0.0'}
+    cpu: [arm64]
+    os: [darwin]
+    requiresBuild: true
+    dev: true
+    optional: true
+
+  /@parcel/css-darwin-x64/1.12.2:
+    resolution: {integrity: sha512-3J0/LrDvt5vevOisnrE0q5mEcuiAY+K7OZwIv84SAnrbjlL5sshmIaaNzL869kb4thza+RClEj0mS5XTm1IUEw==}
+    engines: {node: '>= 12.0.0'}
+    cpu: [x64]
+    os: [darwin]
+    requiresBuild: true
+    dev: true
+    optional: true
+
+  /@parcel/css-linux-arm-gnueabihf/1.12.2:
+    resolution: {integrity: sha512-OsX7I3dhBvnxEbAH++08RFe7yhjRp33ulzrCvJTMOP9YkxEEJ8qId3sNzJBHIVQzHyTlPTnBRHbSDhU3TFe/eQ==}
+    engines: {node: '>= 12.0.0'}
+    cpu: [arm]
+    os: [linux]
+    requiresBuild: true
+    dev: true
+    optional: true
+
+  /@parcel/css-linux-arm64-gnu/1.12.2:
+    resolution: {integrity: sha512-R1Kqw+1Rsru9Q4+qvUEC6B8P21bpqhuF9rv8GmBmmnF1i2hMZ1JiY+uh/ej8IaRV0O3fAHeQGIyGBWx6qWDpcw==}
+    engines: {node: '>= 12.0.0'}
+    cpu: [arm64]
+    os: [linux]
+    requiresBuild: true
+    dev: true
+    optional: true
+
+  /@parcel/css-linux-arm64-musl/1.12.2:
+    resolution: {integrity: sha512-nwixgM4SEgPUQata9aAiJW0A5Q9ms+xim1tXT1i+91kOei4Fu2Wr2OuofMk+mlhbgmGKCTcu4gzMPReGxUhuRA==}
+    engines: {node: '>= 12.0.0'}
+    cpu: [arm64]
+    os: [linux]
+    requiresBuild: true
+    dev: true
+    optional: true
+
+  /@parcel/css-linux-x64-gnu/1.12.2:
+    resolution: {integrity: sha512-cJYVMHnQSGhDwQByyvjFZppjMBNlgxXl/R4cX5DwrQE0QZmK/42BYnMp92rvoprEG6LRyRoiGtCjyfYTPWajog==}
+    engines: {node: '>= 12.0.0'}
+    cpu: [x64]
+    os: [linux]
+    requiresBuild: true
+    dev: true
+    optional: true
+
+  /@parcel/css-linux-x64-musl/1.12.2:
+    resolution: {integrity: sha512-u9zdO/d831/74Tf+TdPUfaIuB9v6FD4Xz8UdWUDOXgQqaOlnJ9fAsAM39EkoWlMxPPljY3f4ay6irSe1a4XgSA==}
+    engines: {node: '>= 12.0.0'}
+    cpu: [x64]
+    os: [linux]
+    requiresBuild: true
+    dev: true
+    optional: true
+
+  /@parcel/css-win32-x64-msvc/1.12.2:
+    resolution: {integrity: sha512-kCAKr3vKqvPUv9oXBG3pGZQz5il3sEk35dpmTXFa/7eDNKR5XyLpiJs8JwWJTFfuUqroymDSXA1bCcjvNEYcAg==}
+    engines: {node: '>= 12.0.0'}
+    cpu: [x64]
+    os: [win32]
+    requiresBuild: true
+    dev: true
+    optional: true
+
+  /@parcel/css/1.12.2:
+    resolution: {integrity: sha512-Sa0PvZu5u877CupQA8IjEATqjJFynBfA7LxbcyutFe2LDCRSqB5Bm08jKFScyaz56qjZNIxZxXk2SApNkOvoAA==}
+    engines: {node: '>= 12.0.0'}
+    dependencies:
+      detect-libc: 1.0.3
+    optionalDependencies:
+      '@parcel/css-darwin-arm64': 1.12.2
+      '@parcel/css-darwin-x64': 1.12.2
+      '@parcel/css-linux-arm-gnueabihf': 1.12.2
+      '@parcel/css-linux-arm64-gnu': 1.12.2
+      '@parcel/css-linux-arm64-musl': 1.12.2
+      '@parcel/css-linux-x64-gnu': 1.12.2
+      '@parcel/css-linux-x64-musl': 1.12.2
+      '@parcel/css-win32-x64-msvc': 1.12.2
+    dev: true
+
   /@types/chrome/0.0.193:
     resolution: {integrity: sha512-R8C84oqvk8A8C8G1viBd8qLpDr86Y/jwD+KLgzUekbIT9RGds6a9GnlQyg8P7ltnGogTMHkiEQK0ZlcrvTeo3Q==}
     dependencies:
@@ -236,16 +322,6 @@ packages:
     resolution: {integrity: sha512-eHE4cQPoj6ngxBZMvVf6Hw7Mh4jMW4U9lpGmS5GBPB9RYxlFg+CHaVN7ErNY4W9XfLIEn20b4VDYaIrbq0q4uA==}
     dependencies:
       '@types/node': 18.6.4
-    dev: true
-
-  /@types/css-tree/1.0.7:
-    resolution: {integrity: sha512-Pz+DfVODpQTAV6PwPBK6kzyy7+f6EyPbr1+mYkc1YolJfl2NAJ4wbg0TC/AJPBsqn9jWfyiO19A/sgpvFLfqnw==}
-    dev: true
-
-  /@types/csso/5.0.0:
-    resolution: {integrity: sha512-EMrCTGpXRUsbFfZBzn2jcW6Sqg8kxWXkJcpvAGYSEzFqAJ2THDJSwiMeS2fPUw+0p6RQNT/n8F/skEc9hUBc0g==}
-    dependencies:
-      '@types/css-tree': 1.0.7
     dev: true
 
   /@types/estree/0.0.45:
@@ -758,14 +834,6 @@ packages:
     engines: {node: '>=12.22'}
     dev: true
 
-  /css-tree/2.0.4:
-    resolution: {integrity: sha512-b4IS9ZUMtGBiNjzYbcj9JhYbyei99R3ai2CSxlu8GQDnoPA/P+NU85hAm0eKDc/Zp660rpK6tFJQ2OSdacMHVg==}
-    engines: {node: ^10 || ^12.20.0 || ^14.13.0 || >=15.0.0, npm: '>=7.0.0'}
-    dependencies:
-      mdn-data: 2.0.23
-      source-map-js: 1.0.2
-    dev: true
-
   /css.escape/1.5.1:
     resolution: {integrity: sha512-YUifsXXuknHlUsmlgyY0PKzgPOr7/FjCePfHNt0jxm83wHZi44VDMQ7/fGNkjY3/jV1MC+1CmZbaHzugyeRtpg==}
     dev: true
@@ -774,13 +842,6 @@ packages:
     resolution: {integrity: sha512-/Tb/JcjK111nNScGob5MNtsntNM1aCNUDipB/TkwZFhyDrrE47SOx/18wF2bbjgc3ZzCSKW1T5nt5EbFoAz/Vg==}
     engines: {node: '>=4'}
     hasBin: true
-    dev: true
-
-  /csso/5.0.4:
-    resolution: {integrity: sha512-AxnuDS5yBhDT5TQMdNS+6o2OdWTKC8ioi7C+G5a30Zgo8XMAQSuMItktj/jvqh8QWOH85kDf0/S6mH1DMgyq1Q==}
-    engines: {node: ^10 || ^12.20.0 || ^14.13.0 || >=15.0.0, npm: '>=7.0.0'}
-    dependencies:
-      css-tree: 2.0.4
     dev: true
 
   /debug/2.6.9:
@@ -850,6 +911,12 @@ packages:
   /dequal/2.0.3:
     resolution: {integrity: sha512-0je+qPKHEMohvfRTCEo3CrPG6cAzAYgmzKyxRiYSSDkS6eGJdyVJm7WaYA5ECaAD9wLB2T4EEeymA5aFVcYXCA==}
     engines: {node: '>=6'}
+    dev: true
+
+  /detect-libc/1.0.3:
+    resolution: {integrity: sha512-pGjwhsmsp4kL2RTz08wcOlGN83otlqHeD/Z5T8GXZB+/YcpQ/dgo+lbU8ZsGxV0HIvqqxo9l7mqYwyYMD9bKDg==}
+    engines: {node: '>=0.10'}
+    hasBin: true
     dev: true
 
   /diff/5.1.0:
@@ -2100,10 +2167,6 @@ packages:
 
   /mathml-tag-names/2.1.3:
     resolution: {integrity: sha512-APMBEanjybaPzUrfqU0IMU5I0AswKMH7k8OTLs0vvV4KZpExkTkY87nR/zpbuTPj+gARop7aGUbl11pnDfW6xg==}
-    dev: true
-
-  /mdn-data/2.0.23:
-    resolution: {integrity: sha512-IonVb7pfla2U4zW8rc7XGrtgq11BvYeCxWN8HS+KFBnLDE7XDK9AAMVhRuG6fj9BBsjc69Fqsp6WEActEdNTDQ==}
     dev: true
 
   /meow/9.0.0:

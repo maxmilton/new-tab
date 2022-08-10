@@ -1,6 +1,6 @@
 /* eslint-disable import/extensions, import/no-extraneous-dependencies, no-console */
 
-import * as csso from 'csso';
+import * as pcss from '@parcel/css';
 import xcss from 'ekscss';
 import esbuild from 'esbuild';
 import {
@@ -64,7 +64,7 @@ await esbuild.build({
   entryPoints: ['src/newtab.ts', 'src/settings.ts'],
   outdir: 'dist',
   platform: 'browser',
-  target: ['chrome95'],
+  target: ['chrome104'],
   format: 'esm',
   define: { 'process.env.NODE_ENV': JSON.stringify(mode) },
   plugins: [minifyTemplates(), minifyJS, writeFiles(), analyzeMeta],
@@ -117,12 +117,22 @@ function compileCSS(src, from) {
     }
   }
 
-  const { css } = csso.minify(compiled.css, {
-    restructure: true,
-    forceMediaMerge: true, // unsafe!
+  const minified = pcss.transform({
+    filename: from,
+    code: Buffer.from(compiled.css),
+    minify: true,
+    sourceMap: dev,
+    targets: {
+      // eslint-disable-next-line no-bitwise
+      chrome: 104 << 16,
+    },
   });
 
-  return css;
+  for (const warning of minified.warnings) {
+    console.error('CSS WARNING:', warning.message);
+  }
+
+  return minified.code.toString();
 }
 
 /**
