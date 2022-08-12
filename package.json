@@ -24,6 +24,14 @@
       "stage1": "../stage1"
     }
   },
+  "pnpm": {
+    "overrides": {
+      "stage1": "../stage1"
+    },
+    "patchedDependencies": {
+      "happy-dom@6.0.4": "patches/happy-dom@6.0.4.patch"
+    }
+  },
   "dependencies": {
     "stage1": "0.4.0"
   },
@@ -31,7 +39,7 @@
     "@maxmilton/stylelint-config": "0.0.10",
     "@parcel/css": "1.12.2",
     "@types/chrome": "0.0.193",
-    "@types/node": "18.6.5",
+    "@types/node": "18.7.1",
     "@typescript-eslint/eslint-plugin": "5.33.0",
     "@typescript-eslint/parser": "5.33.0",
     "c8": "7.12.0",
@@ -47,10 +55,10 @@
     "happy-dom": "6.0.4",
     "kleur": "4.1.5",
     "nanospy": "0.5.0",
-    "playwright-chromium": "1.24.2",
+    "playwright-chromium": "1.25.0",
     "prettier": "2.7.1",
-    "stylelint": "14.9.1",
-    "stylelint-config-standard": "26.0.0",
+    "stylelint": "14.10.0",
+    "stylelint-config-standard": "27.0.0",
     "tsm": "2.2.2",
     "typescript": "4.7.4",
     "uvu": "0.5.6"
@@ -82,10 +90,5 @@
       "**/dist/**",
       "**/node_modules/**"
     ]
-  },
-  "pnpm": {
-    "patchedDependencies": {
-      "happy-dom@6.0.4": "patches/happy-dom@6.0.4.patch"
-    }
   }
 }
