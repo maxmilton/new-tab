@@ -28,7 +28,7 @@
     }
   },
   "dependencies": {
-    "stage1": "0.4.0"
+    "stage1": "0.4.1"
   },
   "devDependencies": {
     "@maxmilton/stylelint-config": "0.0.10",
