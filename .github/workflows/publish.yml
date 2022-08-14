@@ -1,12 +1,13 @@
 name: publish
 on:
-  push:
-    branches:
-      - master
-    tags:
-      - v*.*.*
+  workflow_run:
+    workflows: [ci]
+    types: [completed]
+    branches: [master]
+    tags: [v*.*.*]
 jobs:
   publish:
+    if: ${{ github.event.workflow_run.conclusion == 'success' && github.event_name == 'push' }}
     runs-on: ubuntu-latest
     permissions:
       contents: write
@@ -20,8 +21,6 @@ jobs:
         env:
           PLAYWRIGHT_SKIP_BROWSER_DOWNLOAD: 1
       - run: pnpm run build
-      - run: pnpm run lint
-      - run: pnpm run test
       - run: cd dist && zip ../chrome-extension.zip *
       - uses: maxmilton/action-create-release@v0
         with:

@@ -1,13 +1,9 @@
 name: ci
 on:
   push:
-    branches:
-      - master
-      - next
+    branches: [master, next]
   pull_request:
-    branches:
-      - master
-      - next
+    branches: [master, next]
 jobs:
   test:
     runs-on: ubuntu-latest
@@ -23,6 +19,7 @@ jobs:
       - run: pnpm run build
       - run: pnpm run test
       - name: Report coverage
+        if: ${{ github.repository_owner == 'maxmilton' }}
         run: |
           curl -Lo ./cc-test-reporter https://codeclimate.com/downloads/test-reporter/test-reporter-latest-linux-amd64
           chmod +x ./cc-test-reporter
