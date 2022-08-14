@@ -19,13 +19,8 @@
     "test-e2e": "node -r tsm test/e2e/index.ts",
     "zip": "sh -c 'test -z \"$(git status --porcelain)\"' && pnpm run lint && pnpm run test && pnpm run build && cd dist && zip ../chrome-extension.zip *"
   },
-  "__pnpm": {
-    "overrides": {
-      "stage1": "../stage1"
-    }
-  },
   "pnpm": {
-    "overrides": {
+    "__overrides": {
       "stage1": "../stage1"
     },
     "patchedDependencies": {
@@ -39,12 +34,12 @@
     "@maxmilton/stylelint-config": "0.0.10",
     "@parcel/css": "1.12.2",
     "@types/chrome": "0.0.193",
-    "@types/node": "18.7.1",
+    "@types/node": "18.7.3",
     "@typescript-eslint/eslint-plugin": "5.33.0",
     "@typescript-eslint/parser": "5.33.0",
     "c8": "7.12.0",
     "ekscss": "0.0.13",
-    "esbuild": "0.15.1",
+    "esbuild": "0.15.2",
     "esbuild-minify-templates": "0.9.2",
     "eslint": "8.21.0",
     "eslint-config-airbnb-base": "15.0.0",
