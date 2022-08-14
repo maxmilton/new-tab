@@ -38,11 +38,11 @@ const sectionView = h(`
 
 const searchOnlyView = h('<small class="so muted">(search only)</small>');
 
-function SectionItem(
+const SectionItem = (
   item: string,
   list: number,
   scope: SectionScope,
-): SectionComponent {
+): SectionComponent => {
   const root = sectionView.cloneNode(true) as SectionComponent;
   const { name } = sectionView.collect<SectionRefNodes>(root);
 
@@ -85,7 +85,7 @@ function SectionItem(
   };
 
   return root;
-}
+};
 
 type SettingsRefNodes = {
   theme: HTMLSelectElement;
@@ -131,7 +131,7 @@ const settingsView = h(`
   </div>
 `);
 
-function Settings() {
+const Settings = () => {
   const root = settingsView;
   const {
     theme, reset, se, sd,
@@ -227,6 +227,6 @@ function Settings() {
   });
 
   return root;
-}
+};
 
 append(Settings(), document.body);
