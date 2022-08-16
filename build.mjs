@@ -16,7 +16,7 @@ import manifest from './manifest.config.mjs';
 
 const mode = process.env.NODE_ENV;
 const dev = mode === 'development';
-const dir = path.resolve(); // loose alternative to __dirname in node ESM
+const dir = path.resolve(); // == __dirname
 
 /** @type {esbuild.Plugin} */
 const analyzeMeta = {
