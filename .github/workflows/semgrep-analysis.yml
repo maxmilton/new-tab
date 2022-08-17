@@ -17,7 +17,7 @@ jobs:
       security-events: write
     steps:
       - uses: actions/checkout@v3
-      - run: semgrep ci --sarif --output=semgrep.sarif --suppress-errors
+      - run: semgrep ci --sarif --output=semgrep.sarif || true
         env:
           SEMGREP_RULES: p/default
       - uses: github/codeql-action/upload-sarif@v2
