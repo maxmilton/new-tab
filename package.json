@@ -34,7 +34,7 @@
     "@maxmilton/stylelint-config": "0.0.10",
     "@parcel/css": "1.12.2",
     "@types/chrome": "0.0.195",
-    "@types/node": "18.7.3",
+    "@types/node": "18.7.9",
     "@typescript-eslint/eslint-plugin": "5.33.1",
     "@typescript-eslint/parser": "5.33.1",
     "c8": "7.12.0",
@@ -53,7 +53,7 @@
     "playwright-chromium": "1.25.0",
     "prettier": "2.7.1",
     "stylelint": "14.11.0",
-    "stylelint-config-standard": "27.0.0",
+    "stylelint-config-standard": "28.0.0",
     "tsm": "2.2.2",
     "typescript": "4.7.4",
     "uvu": "0.5.6"
