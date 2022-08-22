@@ -32,7 +32,7 @@
   },
   "devDependencies": {
     "@maxmilton/stylelint-config": "0.0.10",
-    "@parcel/css": "1.12.2",
+    "@parcel/css": "1.13.0",
     "@types/chrome": "0.0.195",
     "@types/node": "18.7.9",
     "@typescript-eslint/eslint-plugin": "5.33.1",
