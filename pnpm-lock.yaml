@@ -25,7 +25,7 @@ specifiers:
   happy-dom: 6.0.4
   kleur: 4.1.5
   nanospy: 0.5.0
-  playwright-chromium: 1.25.0
+  playwright-chromium: 1.25.1
   prettier: 2.7.1
   stage1: 0.4.1
   stylelint: 14.11.0
@@ -57,7 +57,7 @@ devDependencies:
   happy-dom: 6.0.4_utdby46t7j4xofl253qh5umsym
   kleur: 4.1.5
   nanospy: 0.5.0
-  playwright-chromium: 1.25.0
+  playwright-chromium: 1.25.1
   prettier: 2.7.1
   stylelint: 14.11.0
   stylelint-config-standard: 28.0.0_stylelint@14.11.0
@@ -2633,17 +2633,17 @@ packages:
     engines: {node: '>=8.6'}
     dev: true
 
-  /playwright-chromium/1.25.0:
-    resolution: {integrity: sha512-FH9ho3noAWVStCJx4XW78+D8QW0A99WDp53DDkYeVdEpJqCmAIKHCSE6dl5XtaDKrZPYC1ZG5hGXQh1K5H/p+g==}
+  /playwright-chromium/1.25.1:
+    resolution: {integrity: sha512-X/B6ycySwV4L+smHu9t+rytPnBLCLI5RAV5TpjVwInv6RPYF6TWZ62zymwiSLxYXeNkyyx0pxTS7jqeOEmMM2g==}
     engines: {node: '>=14'}
     hasBin: true
     requiresBuild: true
     dependencies:
-      playwright-core: 1.25.0
+      playwright-core: 1.25.1
     dev: true
 
-  /playwright-core/1.25.0:
-    resolution: {integrity: sha512-kZ3Jwaf3wlu0GgU0nB8UMQ+mXFTqBIFz9h1svTlNduNKjnbPXFxw7mJanLVjqxHJRn62uBfmgBj93YHidk2N5Q==}
+  /playwright-core/1.25.1:
+    resolution: {integrity: sha512-lSvPCmA2n7LawD2Hw7gSCLScZ+vYRkhU8xH0AapMyzwN+ojoDqhkH/KIEUxwNu2PjPoE/fcE0wLAksdOhJ2O5g==}
     engines: {node: '>=14'}
     hasBin: true
     dev: true
