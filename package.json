@@ -55,7 +55,7 @@
     "stylelint": "14.11.0",
     "stylelint-config-standard": "28.0.0",
     "tsm": "2.2.2",
-    "typescript": "4.7.4",
+    "typescript": "4.8.2",
     "uvu": "0.5.6"
   },
   "prettier": {
