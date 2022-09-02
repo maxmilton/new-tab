@@ -7,7 +7,7 @@ patchedDependencies:
 
 specifiers:
   '@maxmilton/stylelint-config': 0.0.10
-  '@parcel/css': 1.13.0
+  '@parcel/css': 1.13.1
   '@types/chrome': 0.0.196
   '@types/node': 18.7.13
   '@typescript-eslint/eslint-plugin': 5.36.1
@@ -39,7 +39,7 @@ dependencies:
 
 devDependencies:
   '@maxmilton/stylelint-config': 0.0.10_stylelint@14.11.0
-  '@parcel/css': 1.13.0
+  '@parcel/css': 1.13.1
   '@types/chrome': 0.0.196
   '@types/node': 18.7.13
   '@typescript-eslint/eslint-plugin': 5.36.1_lbwfnm54o3pmr3ypeqp3btnera
@@ -237,8 +237,8 @@ packages:
       fastq: 1.13.0
     dev: true
 
-  /@parcel/css-darwin-arm64/1.13.0:
-    resolution: {integrity: sha512-GqyAeNa0Bah6WuIgqeBJCBRRcGEqkRMkK1YxgaFBhJiicrJJJ1/aZetzOhwNy6JGpQ8wnKP+p+t6IX2wrklaWw==}
+  /@parcel/css-darwin-arm64/1.13.1:
+    resolution: {integrity: sha512-46LVidYcao8zurVPOZ4ZWJQ/50o4N+Z0K4CRmCCqWE+5gIWlx+md+W0h8XQTRb/GQ3j3+mlZvYCQxHpKy5M1lA==}
     engines: {node: '>= 12.0.0'}
     cpu: [arm64]
     os: [darwin]
@@ -246,8 +246,8 @@ packages:
     dev: true
     optional: true
 
-  /@parcel/css-darwin-x64/1.13.0:
-    resolution: {integrity: sha512-k7/YBwZ5nDXmyDLCo8Pf7ATqQPo34emv9Tpz2LbYUU3NCO2uhsGzjjsQiYXsAp5QeupPHgDmQeEX6WSvXxo0fQ==}
+  /@parcel/css-darwin-x64/1.13.1:
+    resolution: {integrity: sha512-vX1/Ut06UL5MQzWr5fPg51n6NYrzfjW9A+jXH3KeBloWtX+NllhLilmtcO4X1y/ZqaFjqHWpk4yrNVdtk1r4zA==}
     engines: {node: '>= 12.0.0'}
     cpu: [x64]
     os: [darwin]
@@ -255,8 +255,8 @@ packages:
     dev: true
     optional: true
 
-  /@parcel/css-linux-arm-gnueabihf/1.13.0:
-    resolution: {integrity: sha512-mBtDUkF/Gje3a7KMt2edEc9rUdKupTy49bvgGFE9dc+k9ZBQg1L8JK35mUo0Y3Y0jJmRDURY2+LRnxvOWJm3TA==}
+  /@parcel/css-linux-arm-gnueabihf/1.13.1:
+    resolution: {integrity: sha512-qxQKUeXLHqehLmuJODQ7GNp0Syj2Kl35X4YvXGoPOI7Eq/y2ny3G5NCKUWkGDwOasIP3hKvVVfJRJv9fLJWnDQ==}
     engines: {node: '>= 12.0.0'}
     cpu: [arm]
     os: [linux]
@@ -264,8 +264,8 @@ packages:
     dev: true
     optional: true
 
-  /@parcel/css-linux-arm64-gnu/1.13.0:
-    resolution: {integrity: sha512-h90mKM4SpLLHc1vd06O5SkOae9aR36CfX+NWzgwLI4VKiZGcr+D78gsF7+CDkWrf1hqx5UonguMrqlN/MVdJBQ==}
+  /@parcel/css-linux-arm64-gnu/1.13.1:
+    resolution: {integrity: sha512-FxnOONVo8WBW58uzjqv/mwSBDgGMp1qxK+fovjqLPCP3zcNgxkUG0l6ElWpqtiWWH3mTMzSHe+7hSaeVov12yQ==}
     engines: {node: '>= 12.0.0'}
     cpu: [arm64]
     os: [linux]
@@ -273,8 +273,8 @@ packages:
     dev: true
     optional: true
 
-  /@parcel/css-linux-arm64-musl/1.13.0:
-    resolution: {integrity: sha512-FGg6UyHaPwmZ+IFJmSiUzznNUsGYG1aIvKIWIaw2CgH2cUamqLORSnCIBV4LXrpZJ7I8X2845L76hzMvaetkRg==}
+  /@parcel/css-linux-arm64-musl/1.13.1:
+    resolution: {integrity: sha512-6RDhL36HBAtt1mHa/y+34fHRImEJT/rd9hy1Z2qz117WUgzpZ3m4tFw33VrG7MKACugs9C2zG1MdVfy1Rz5+Uw==}
     engines: {node: '>= 12.0.0'}
     cpu: [arm64]
     os: [linux]
@@ -282,8 +282,8 @@ packages:
     dev: true
     optional: true
 
-  /@parcel/css-linux-x64-gnu/1.13.0:
-    resolution: {integrity: sha512-QJyCKM4ms7OaklffoqleouigDAYATZcCcZkp9AUEt7lqg8i2sWFrInEwWM4QhauwML3gxdKaRVugVZCzMSp3Kg==}
+  /@parcel/css-linux-x64-gnu/1.13.1:
+    resolution: {integrity: sha512-4VsduFKs35J1I3iQJuBCTp66K5mLh8nrtfXzkBDgP9tc6cLqw9PFodby9NhW9SJSn0ZVdrciIXW0C8Lp3Ev+bw==}
     engines: {node: '>= 12.0.0'}
     cpu: [x64]
     os: [linux]
@@ -291,8 +291,8 @@ packages:
     dev: true
     optional: true
 
-  /@parcel/css-linux-x64-musl/1.13.0:
-    resolution: {integrity: sha512-V2mA8hzZaYRyMIZjEAMaZqrziYTtkjHP/jdS+qnAnHNdvIav3+3Saca3hbSnD2hQuM9iu2wzD3gHoVexlCjTOg==}
+  /@parcel/css-linux-x64-musl/1.13.1:
+    resolution: {integrity: sha512-Ws34m9fW/0UuNTkC359nbnURzvSbCsstRG6QQ3UxdeNJ+crrgEsmvHPcN3WiIz/P2seP1Hu6GobKQAnOy6g3HA==}
     engines: {node: '>= 12.0.0'}
     cpu: [x64]
     os: [linux]
@@ -300,8 +300,8 @@ packages:
     dev: true
     optional: true
 
-  /@parcel/css-win32-x64-msvc/1.13.0:
-    resolution: {integrity: sha512-0WFdh4nS5lkjLnBr0N6O7OatbjUFZdVBSlPDdTdwEYZkl8La+SnmGGMEkrE/jiQ6NjjwgLorN7xainmPWuQdDw==}
+  /@parcel/css-win32-x64-msvc/1.13.1:
+    resolution: {integrity: sha512-4yPYFQqUW4ZepIWa8rWiXnSDU6Nki2H9PB1NfTvr7IjN3WsNFrrVZFKsTg/KU2euYnasBXSZ+CMTUutvLZoVaA==}
     engines: {node: '>= 12.0.0'}
     cpu: [x64]
     os: [win32]
@@ -309,20 +309,20 @@ packages:
     dev: true
     optional: true
 
-  /@parcel/css/1.13.0:
-    resolution: {integrity: sha512-S4QD4Jd+j8QzU5ZZpfg+1cdmEXeJ71wabbV6ff3DJB/05gXWj9Qf/ZZUVtwH3V255Oif6/jcEmcWY4AmFXTyLw==}
+  /@parcel/css/1.13.1:
+    resolution: {integrity: sha512-pDv+1tPCk2ggGZ1Msl4r+lq7dPKjUBpZXJf/DMydTnYPxupwAjtmlmOd67CF3QHVLyKYB+viU4g5M8pVXCbaeA==}
     engines: {node: '>= 12.0.0'}
     dependencies:
       detect-libc: 1.0.3
     optionalDependencies:
-      '@parcel/css-darwin-arm64': 1.13.0
-      '@parcel/css-darwin-x64': 1.13.0
-      '@parcel/css-linux-arm-gnueabihf': 1.13.0
-      '@parcel/css-linux-arm64-gnu': 1.13.0
-      '@parcel/css-linux-arm64-musl': 1.13.0
-      '@parcel/css-linux-x64-gnu': 1.13.0
-      '@parcel/css-linux-x64-musl': 1.13.0
-      '@parcel/css-win32-x64-msvc': 1.13.0
+      '@parcel/css-darwin-arm64': 1.13.1
+      '@parcel/css-darwin-x64': 1.13.1
+      '@parcel/css-linux-arm-gnueabihf': 1.13.1
+      '@parcel/css-linux-arm64-gnu': 1.13.1
+      '@parcel/css-linux-arm64-musl': 1.13.1
+      '@parcel/css-linux-x64-gnu': 1.13.1
+      '@parcel/css-linux-x64-musl': 1.13.1
+      '@parcel/css-win32-x64-msvc': 1.13.1
     dev: true
 
   /@types/chrome/0.0.196:
