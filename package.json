@@ -32,7 +32,6 @@
   },
   "devDependencies": {
     "@maxmilton/stylelint-config": "0.0.10",
-    "@parcel/css": "1.14.0",
     "@types/chrome": "0.0.196",
     "@types/node": "18.7.13",
     "@typescript-eslint/eslint-plugin": "5.36.2",
@@ -49,6 +48,7 @@
     "git-ref": "0.3.1",
     "happy-dom": "6.0.4",
     "kleur": "4.1.5",
+    "lightningcss": "1.14.0",
     "nanospy": "0.5.0",
     "playwright-chromium": "1.25.2",
     "prettier": "2.7.1",

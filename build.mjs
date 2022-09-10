@@ -1,6 +1,5 @@
 /* eslint-disable import/extensions, import/no-extraneous-dependencies, no-console */
 
-import * as pcss from '@parcel/css';
 import xcss from 'ekscss';
 import esbuild from 'esbuild';
 import {
@@ -9,6 +8,7 @@ import {
   minifyTemplates,
   writeFiles,
 } from 'esbuild-minify-templates';
+import * as lightningcss from 'lightningcss';
 import fs from 'node:fs/promises';
 import path from 'node:path';
 import { performance } from 'node:perf_hooks';
@@ -117,7 +117,7 @@ function compileCSS(src, from) {
     }
   }
 
-  const minified = pcss.transform({
+  const minified = lightningcss.transform({
     filename: from,
     code: Buffer.from(compiled.css),
     minify: true,
