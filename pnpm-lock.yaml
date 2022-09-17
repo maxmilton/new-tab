@@ -7,7 +7,7 @@ patchedDependencies:
 
 specifiers:
   '@maxmilton/stylelint-config': 0.0.10
-  '@types/chrome': 0.0.196
+  '@types/chrome': 0.0.197
   '@types/node': 18.7.18
   '@typescript-eslint/eslint-plugin': 5.37.0
   '@typescript-eslint/parser': 5.37.0
@@ -39,7 +39,7 @@ dependencies:
 
 devDependencies:
   '@maxmilton/stylelint-config': 0.0.10_stylelint@14.11.0
-  '@types/chrome': 0.0.196
+  '@types/chrome': 0.0.197
   '@types/node': 18.7.18
   '@typescript-eslint/eslint-plugin': 5.37.0_22c5fnooleyfkzrkkgdmel5kmi
   '@typescript-eslint/parser': 5.37.0_irgkl5vooow2ydyo6aokmferha
@@ -237,8 +237,8 @@ packages:
       fastq: 1.13.0
     dev: true
 
-  /@types/chrome/0.0.196:
-    resolution: {integrity: sha512-LAjGIQYC0wyiYu6lVT03dBrHBfYTMsM8EmNfQ+UdZipGZe8OUiir6weoa9oQoBw3T3RLzBCp9m904T+rFtpPAg==}
+  /@types/chrome/0.0.197:
+    resolution: {integrity: sha512-m1NfS5bOjaypyqQfaX6CxmJodZVcvj5+Mt/K94EBHkflYjPNmXHAzbxfifdLMa0YM3PDyOxohoTS5ug/e6p5jA==}
     dependencies:
       '@types/filesystem': 0.0.32
       '@types/har-format': 1.2.8
