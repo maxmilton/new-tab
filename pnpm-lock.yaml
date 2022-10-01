@@ -19,7 +19,7 @@ specifiers:
   eslint-config-airbnb-base: 15.0.0
   eslint-config-airbnb-typescript: 17.0.0
   eslint-plugin-import: 2.26.0
-  eslint-plugin-unicorn: 43.0.2
+  eslint-plugin-unicorn: 44.0.0
   git-ref: 0.3.1
   happy-dom: 6.0.4
   kleur: 4.1.5
@@ -51,7 +51,7 @@ devDependencies:
   eslint-config-airbnb-base: 15.0.0_dg2pe6kqkrddxbf2funb723kue
   eslint-config-airbnb-typescript: 17.0.0_dqfqiconmwwuo6fe366ar32ati
   eslint-plugin-import: 2.26.0_gofx6msuqd4luqedfouzks2s4u
-  eslint-plugin-unicorn: 43.0.2_eslint@8.24.0
+  eslint-plugin-unicorn: 44.0.0_eslint@8.24.0
   git-ref: 0.3.1
   happy-dom: 6.0.4_utdby46t7j4xofl253qh5umsym
   kleur: 4.1.5
@@ -1482,11 +1482,11 @@ packages:
       - supports-color
     dev: true
 
-  /eslint-plugin-unicorn/43.0.2_eslint@8.24.0:
-    resolution: {integrity: sha512-DtqZ5mf/GMlfWoz1abIjq5jZfaFuHzGBZYIeuJfEoKKGWRHr2JiJR+ea+BF7Wx2N1PPRoT/2fwgiK1NnmNE3Hg==}
+  /eslint-plugin-unicorn/44.0.0_eslint@8.24.0:
+    resolution: {integrity: sha512-GbkxkdNzY7wNEfZnraAP+oA+aqqzSrNZmO37kjW1DyqnSK/ah08ySDdIecObpx46twv+zcQvH8i0CHP98Wo64w==}
     engines: {node: '>=14.18'}
     peerDependencies:
-      eslint: '>=8.18.0'
+      eslint: '>=8.23.1'
     dependencies:
       '@babel/helper-validator-identifier': 7.19.1
       ci-info: 3.4.0
