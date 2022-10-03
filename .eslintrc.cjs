@@ -1,5 +1,6 @@
 const OFF = 0;
 const WARN = 1;
+const ERROR = 2;
 
 // TODO: Types
 // eslint-disable-next-line max-len
@@ -53,5 +54,6 @@ module.exports = {
     'unicorn/prefer-top-level-await': WARN,
     'unicorn/prefer-query-selector': OFF,
     'unicorn/prevent-abbreviations': OFF,
+    'unicorn/switch-case-braces': [ERROR, 'avoid'],
   },
 };
