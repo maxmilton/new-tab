@@ -19,21 +19,13 @@
     "test-e2e": "node -r tsm test/e2e/index.ts",
     "zip": "sh -c 'test -z \"$(git status --porcelain)\"' && pnpm run lint && pnpm run test && pnpm run build && cd dist && zip ../chrome-extension.zip *"
   },
-  "pnpm": {
-    "__overrides": {
-      "stage1": "../stage1"
-    },
-    "patchedDependencies": {
-      "happy-dom@6.0.4": "patches/happy-dom@6.0.4.patch"
-    }
-  },
   "dependencies": {
     "stage1": "0.4.1"
   },
   "devDependencies": {
     "@maxmilton/stylelint-config": "0.0.10",
     "@types/chrome": "0.0.197",
-    "@types/node": "18.8.0",
+    "@types/node": "18.8.3",
     "@typescript-eslint/eslint-plugin": "5.39.0",
     "@typescript-eslint/parser": "5.39.0",
     "c8": "7.12.0",
@@ -44,9 +36,9 @@
     "eslint-config-airbnb-base": "15.0.0",
     "eslint-config-airbnb-typescript": "17.0.0",
     "eslint-plugin-import": "2.26.0",
-    "eslint-plugin-unicorn": "44.0.0",
+    "eslint-plugin-unicorn": "44.0.1",
     "git-ref": "0.3.1",
-    "happy-dom": "6.0.4",
+    "happy-dom": "7.0.6",
     "kleur": "4.1.5",
     "lightningcss": "1.16.0",
     "nanospy": "0.5.0",
