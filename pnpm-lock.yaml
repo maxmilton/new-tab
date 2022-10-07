@@ -16,7 +16,7 @@ specifiers:
   eslint-plugin-import: 2.26.0
   eslint-plugin-unicorn: 44.0.1
   git-ref: 0.3.1
-  happy-dom: 7.0.6
+  happy-dom: 7.1.1
   kleur: 4.1.5
   lightningcss: 1.16.0
   nanospy: 0.5.0
@@ -48,7 +48,7 @@ devDependencies:
   eslint-plugin-import: 2.26.0_taj4374tq64ju3xgkdrtdwfble
   eslint-plugin-unicorn: 44.0.1_eslint@8.24.0
   git-ref: 0.3.1
-  happy-dom: 7.0.6
+  happy-dom: 7.1.1
   kleur: 4.1.5
   lightningcss: 1.16.0
   nanospy: 0.5.0
@@ -1835,8 +1835,8 @@ packages:
     resolution: {integrity: sha512-bzh50DW9kTPM00T8y4o8vQg89Di9oLJVLW/KaOGIXJWP/iqCN6WKYkbNOF04vFLJhwcpYUh9ydh/+5vpOqV4YQ==}
     dev: true
 
-  /happy-dom/7.0.6:
-    resolution: {integrity: sha512-/tfDIes8V03W2RkoUo2T9t9aqN4HF6Z24URyPx0PfFoS8yghc9tmbXI5i9OPncxJ7CCucv5BMlT5FpWby24C7g==}
+  /happy-dom/7.1.1:
+    resolution: {integrity: sha512-Dg9zsjUU2lSeoln/hfw1YLujN+4/qgB4MN3HYbXcippfuSrAocSO6CWoc3z82sI3Fr7zKSG2wxRyj6pKeiEWyQ==}
     dependencies:
       css.escape: 1.5.1
       he: 1.2.0
