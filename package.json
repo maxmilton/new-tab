@@ -20,7 +20,7 @@
     "zip": "sh -c 'test -z \"$(git status --porcelain)\"' && pnpm run lint && pnpm run test && pnpm run build && cd dist && zip ../chrome-extension.zip *"
   },
   "dependencies": {
-    "stage1": "0.6.0"
+    "stage1": "0.6.2"
   },
   "devDependencies": {
     "@maxmilton/stylelint-config": "0.0.10",
