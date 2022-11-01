@@ -22,7 +22,7 @@ specifiers:
   nanospy: 0.5.0
   playwright-chromium: 1.27.1
   prettier: 2.7.1
-  stage1: 0.6.0
+  stage1: 0.6.1
   stylelint: 14.14.0
   stylelint-config-standard: 29.0.0
   tsm: 2.2.2
@@ -30,7 +30,7 @@ specifiers:
   uvu: 0.5.6
 
 dependencies:
-  stage1: 0.6.0
+  stage1: 0.6.1
 
 devDependencies:
   '@maxmilton/stylelint-config': 0.0.10_stylelint@14.14.0
@@ -2998,8 +2998,8 @@ packages:
     resolution: {integrity: sha512-rr+VVSXtRhO4OHbXUiAF7xW3Bo9DuuF6C5jH+q/x15j2jniycgKbxU09Hr0WqlSLUs4i4ltHGXqTe7VHclYWyA==}
     dev: true
 
-  /stage1/0.6.0:
-    resolution: {integrity: sha512-0fVnjMFfhCdnR4OqkMDLKwCByRruFVXKUDVf4DS4YcRvB85pvDbKEaIUVr0SoRipCPsMY0wKJH7ofnFH1w5XLA==}
+  /stage1/0.6.1:
+    resolution: {integrity: sha512-GoJcemvZpEfR5Cy6uTeh2IKL2bNpd6I4eMCdamF7abygYa3l8VqF4kVzEciaH2HzayyC75C3EqU2BBSYIfsqcA==}
     dev: false
 
   /string-width/4.2.3:
