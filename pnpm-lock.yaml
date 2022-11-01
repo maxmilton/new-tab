@@ -3,7 +3,7 @@ lockfileVersion: 5.4
 specifiers:
   '@maxmilton/stylelint-config': 0.0.10
   '@types/chrome': 0.0.200
-  '@types/node': 18.11.8
+  '@types/node': 18.11.9
   '@typescript-eslint/eslint-plugin': 5.42.0
   '@typescript-eslint/parser': 5.42.0
   c8: 7.12.0
@@ -35,7 +35,7 @@ dependencies:
 devDependencies:
   '@maxmilton/stylelint-config': 0.0.10_stylelint@14.14.0
   '@types/chrome': 0.0.200
-  '@types/node': 18.11.8
+  '@types/node': 18.11.9
   '@typescript-eslint/eslint-plugin': 5.42.0_6xw5wg2354iw4zujk2f3vyfrzu
   '@typescript-eslint/parser': 5.42.0_wyqvi574yv7oiwfeinomdzmc3m
   c8: 7.12.0
@@ -247,7 +247,7 @@ packages:
   /@types/concat-stream/1.6.1:
     resolution: {integrity: sha512-eHE4cQPoj6ngxBZMvVf6Hw7Mh4jMW4U9lpGmS5GBPB9RYxlFg+CHaVN7ErNY4W9XfLIEn20b4VDYaIrbq0q4uA==}
     dependencies:
-      '@types/node': 18.11.8
+      '@types/node': 18.11.9
     dev: true
 
   /@types/estree/0.0.45:
@@ -269,7 +269,7 @@ packages:
   /@types/form-data/0.0.33:
     resolution: {integrity: sha512-8BSvG1kGm83cyJITQMZSulnl6QV8jqAGreJsc5tPu1Jq0vTSOiY/k24Wx82JRpWwZSqrala6sd5rWi6aNXvqcw==}
     dependencies:
-      '@types/node': 18.11.8
+      '@types/node': 18.11.9
     dev: true
 
   /@types/har-format/1.2.9:
@@ -296,8 +296,8 @@ packages:
     resolution: {integrity: sha512-F0KIgDJfy2nA3zMLmWGKxcH2ZVEtCZXHHdOQs2gSaQ27+lNeEfGxzkIw90aXswATX7AZ33tahPbzy6KAfUreVw==}
     dev: true
 
-  /@types/node/18.11.8:
-    resolution: {integrity: sha512-uGwPWlE0Hj972KkHtCDVwZ8O39GmyjfMane1Z3GUBGGnkZ2USDq7SxLpVIiIHpweY9DS0QTDH0Nw7RNBsAAZ5A==}
+  /@types/node/18.11.9:
+    resolution: {integrity: sha512-CRpX21/kGdzjOpFsZSkcrXMGIBWMGNIHXXBVFSH+ggkftxg+XYP20TESbh+zFvFj3EQOl5byk0HTRn1IL6hbqg==}
     dev: true
 
   /@types/node/8.10.66:
