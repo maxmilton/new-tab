@@ -116,8 +116,8 @@ export const BookmarkBar = (): BookmarkBarComponent => {
     const related = event.relatedTarget as Node | null;
     let node = event.target as
       | (Node & {
-        __mouseover?(event: MouseEvent): void;
-        __mouseout?(event: MouseEvent): void;
+        __mouseover?(event2: MouseEvent): void;
+        __mouseout?(event2: MouseEvent): void;
       })
       | null;
 
