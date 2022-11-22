@@ -40,12 +40,12 @@ const FolderPopup = (
     window.innerHeight - top
   }px`;
 
-  if (!children.length) {
-    append((emptyPopupView ??= h('<div id=e>(empty)</div>')), root);
-  } else {
+  if (children.length) {
     children.forEach((item) => {
       append(BookmarkNode(item), root);
     });
+  } else {
+    append((emptyPopupView ??= h('<div id=e>(empty)</div>')), root);
   }
 
   // Only after the component is mounted in the DOM do we have element size
