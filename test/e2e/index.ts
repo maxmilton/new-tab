@@ -90,7 +90,8 @@ test.after.each(async (context) => {
 test('renders newtab app', async (context) => {
   const { page } = await renderPage(
     context,
-    'chrome-extension://cpcibnbdmpmcmnkhoiilpnlaepkepknb/newtab.html',
+    // 'chrome-extension://cpcibnbdmpmcmnkhoiilpnlaepkepknb/newtab.html',
+    `chrome-extension://${context.extensionId}/newtab.html`,
   );
   // TODO: Better assertions
   assert.ok(await page.$('#b'), 'has bookmarks bar');
@@ -105,7 +106,8 @@ test('renders newtab app', async (context) => {
 test('renders settings app', async (context) => {
   const { page } = await renderPage(
     context,
-    'chrome-extension://cpcibnbdmpmcmnkhoiilpnlaepkepknb/settings.html',
+    // 'chrome-extension://cpcibnbdmpmcmnkhoiilpnlaepkepknb/settings.html',
+    `chrome-extension://${context.extensionId}/settings.html`,
   );
   // TODO: Better assertions
   assert.ok(await page.$('.row > select'));
