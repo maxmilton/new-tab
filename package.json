@@ -49,7 +49,7 @@
     "jsdom": "20.0.0",
     "kleur": "4.1.5",
     "playwright-chromium": "1.24.2",
-    "prettier": "2.7.1",
+    "prettier": "2.8.0",
     "stylelint": "14.13.0",
     "stylelint-config-standard": "26.0.0",
     "tsm": "2.2.2",
