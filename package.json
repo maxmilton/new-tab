@@ -43,7 +43,7 @@
     "lightningcss": "1.17.1",
     "nanospy": "0.5.0",
     "playwright-chromium": "1.28.1",
-    "prettier": "2.8.0",
+    "prettier": "2.8.1",
     "stylelint": "14.16.0",
     "stylelint-config-standard": "29.0.0",
     "tsm": "2.3.0",
