@@ -3,7 +3,7 @@ lockfileVersion: 5.4
 specifiers:
   '@maxmilton/stylelint-config': 0.0.10
   '@types/chrome': 0.0.204
-  '@types/node': 18.11.12
+  '@types/node': 18.11.13
   '@typescript-eslint/eslint-plugin': 5.46.0
   '@typescript-eslint/parser': 5.46.0
   c8: 7.12.0
@@ -35,7 +35,7 @@ dependencies:
 devDependencies:
   '@maxmilton/stylelint-config': 0.0.10_stylelint@14.16.0
   '@types/chrome': 0.0.204
-  '@types/node': 18.11.12
+  '@types/node': 18.11.13
   '@typescript-eslint/eslint-plugin': 5.46.0_5mle7isnkfgjmrghnnczirv6iy
   '@typescript-eslint/parser': 5.46.0_ha6vam6werchizxrnqvarmz2zu
   c8: 7.12.0
@@ -479,8 +479,8 @@ packages:
     resolution: {integrity: sha512-jhuKLIRrhvCPLqwPcx6INqmKeiA5EWrsCOPhrlFSrbrmU4ZMPjj5Ul/oLCMDO98XRUIwVm78xICz4EPCektzeQ==}
     dev: true
 
-  /@types/node/18.11.12:
-    resolution: {integrity: sha512-FgD3NtTAKvyMmD44T07zz2fEf+OKwutgBCEVM8GcvMGVGaDktiLNTDvPwC/LUe3PinMW+X6CuLOF2Ui1mAlSXg==}
+  /@types/node/18.11.13:
+    resolution: {integrity: sha512-IASpMGVcWpUsx5xBOrxMj7Bl8lqfuTY7FKAnPmu5cHkfQVWF8GulWS1jbRqA934qZL35xh5xN/+Xe/i26Bod4w==}
     dev: true
 
   /@types/normalize-package-data/2.4.1:
