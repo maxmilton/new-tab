@@ -5,6 +5,11 @@ import { SearchResult, SearchResultComponent } from './SearchResult';
 
 type SectionRefs = Record<string, SearchResultComponent>;
 
+// focus to search element on new-tab reload
+document.addEventListener("DOMContentLoaded", function() {
+    document.getElementById('s').focus();
+});
+
 const runSearch = (text: string, section: SectionRefs) => {
   const openTabs = section[DEFAULT_SECTION_ORDER[0]];
   const bookmarks = section[DEFAULT_SECTION_ORDER[1]];
