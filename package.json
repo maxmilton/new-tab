@@ -35,7 +35,7 @@
     "eslint": "8.31.0",
     "eslint-config-airbnb-base": "15.0.0",
     "eslint-config-airbnb-typescript": "17.0.0",
-    "eslint-plugin-import": "2.26.0",
+    "eslint-plugin-import": "2.27.4",
     "eslint-plugin-unicorn": "45.0.2",
     "git-ref": "0.3.1",
     "happy-dom": "8.1.4",
