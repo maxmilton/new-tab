@@ -32,7 +32,7 @@
     "ekscss": "0.0.13",
     "esbuild": "0.16.17",
     "esbuild-minify-templates": "0.9.3",
-    "eslint": "8.32.0",
+    "eslint": "8.33.0",
     "eslint-config-airbnb-base": "15.0.0",
     "eslint-config-airbnb-typescript": "17.0.0",
     "eslint-plugin-import": "2.27.5",
