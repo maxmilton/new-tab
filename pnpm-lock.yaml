@@ -9,7 +9,7 @@ specifiers:
   c8: 7.12.0
   ekscss: 0.0.13
   esbuild: 0.16.17
-  esbuild-minify-templates: 0.9.3
+  esbuild-minify-templates: 0.10.0
   eslint: 8.33.0
   eslint-config-airbnb-base: 15.0.0
   eslint-config-airbnb-typescript: 17.0.0
@@ -41,7 +41,7 @@ devDependencies:
   c8: 7.12.0
   ekscss: 0.0.13
   esbuild: 0.16.17
-  esbuild-minify-templates: 0.9.3_esbuild@0.16.17
+  esbuild-minify-templates: 0.10.0_esbuild@0.16.17
   eslint: 8.33.0
   eslint-config-airbnb-base: 15.0.0_ohdts44xlqyeyrlje4qnefqeay
   eslint-config-airbnb-typescript: 17.0.0_kh22gsft6r4fkunxdzqyqzlvzy
@@ -1215,11 +1215,11 @@ packages:
     dev: true
     optional: true
 
-  /esbuild-minify-templates/0.9.3_esbuild@0.16.17:
-    resolution: {integrity: sha512-ogtHhyPSa+i0ia8PvnR1pFRpdoqYtH1Eafl66y1Ofb7eL6Qaaan1gBOJ6+JnxJzVCzgxFodp7b6gbUcdfej/jQ==}
+  /esbuild-minify-templates/0.10.0_esbuild@0.16.17:
+    resolution: {integrity: sha512-VEDDgKwRsHVeL/VbJXaoA6heccsvb48iGg4mG2jY/oA+j5ohtaQ/Klm556F7JlbN/L79YovTEPbCffLL/sr83g==}
     engines: {node: '>= 12'}
     peerDependencies:
-      esbuild: ^0.13.0 || ^0.14.0 || ^0.15.0 || ^0.16.0
+      esbuild: ^0.13.0 || ^0.14.0 || ^0.15.0 || ^0.16.0 || ^0.17.0
     dependencies:
       '@ampproject/remapping': 2.2.0
       astray: 1.1.1
