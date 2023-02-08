@@ -21,7 +21,7 @@ specifiers:
   lightningcss: 1.18.0
   nanospy: 0.5.0
   playwright-chromium: 1.30.0
-  prettier: 2.8.3
+  prettier: 2.8.4
   stage1: 0.6.2
   stylelint: 14.16.1
   stylelint-config-standard: 29.0.0
@@ -53,7 +53,7 @@ devDependencies:
   lightningcss: 1.18.0
   nanospy: 0.5.0
   playwright-chromium: 1.30.0
-  prettier: 2.8.3
+  prettier: 2.8.4
   stylelint: 14.16.1
   stylelint-config-standard: 29.0.0_stylelint@14.16.1
   tsm: 2.3.0
@@ -2715,8 +2715,8 @@ packages:
     engines: {node: '>= 0.8.0'}
     dev: true
 
-  /prettier/2.8.3:
-    resolution: {integrity: sha512-tJ/oJ4amDihPoufT5sM0Z1SKEuKay8LfVAMlbbhnnkvt6BUserZylqo2PN+p9KeljLr0OHa2rXHU1T8reeoTrw==}
+  /prettier/2.8.4:
+    resolution: {integrity: sha512-vIS4Rlc2FNh0BySk3Wkd6xmwxB0FpOndW5fisM5H8hsZSxU2VWVB5CWIkIjWvrHjIhxk2g3bfMKM87zNTrZddw==}
     engines: {node: '>=10.13.0'}
     hasBin: true
     dev: true
