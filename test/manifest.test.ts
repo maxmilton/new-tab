@@ -1,3 +1,5 @@
+/* eslint-disable unicorn/no-abusive-eslint-disable, unicorn/prefer-module */
+
 import { test } from 'uvu';
 import * as assert from 'uvu/assert';
 // eslint-disable-next-line import/extensions
@@ -16,7 +18,6 @@ test('contains expected properties', () => {
   assert.ok(manifest.name, 'has name');
   assert.ok(manifest.description, 'has description');
   assert.ok(manifest.version, 'has version');
-  assert.ok(manifest.version_name, 'has version_name');
   assert.ok(manifest.minimum_chrome_version, 'has minimum_chrome_version');
   assert.ok(manifest.homepage_url, 'has homepage_url');
   assert.ok(manifest.icons, 'has icons');
@@ -41,12 +42,27 @@ test('contains expected properties', () => {
   assert.not.ok(manifest.options_ui.open_in_tab, "doesn't have options_ui.open_in_tab");
 });
 
+test("doesn't have version_name when GITHUB_REF is set", () => {
+  process.env.GITHUB_REF = 'v1.0.0';
+  delete require.cache[require.resolve('../manifest.config.mjs')];
+  // eslint-disable-next-line
+  const manifest2 = require('../manifest.config.mjs').default as typeof manifest;
+  assert.not.ok(manifest2.version_name);
+});
+
+test('has version_name when GITHUB_REF is not set', () => {
+  delete process.env.GITHUB_REF;
+  delete require.cache[require.resolve('../manifest.config.mjs')];
+  // eslint-disable-next-line
+  const manifest2 = require('../manifest.config.mjs').default as typeof manifest;
+  assert.ok(manifest2.version_name);
+});
+
 test('properties are the correct type', () => {
   assert.type(manifest.manifest_version, 'number', 'manifest_version is a number');
   assert.type(manifest.name, 'string', 'name is a string');
   assert.type(manifest.description, 'string', 'description is a string');
   assert.type(manifest.version, 'string', 'version is a string');
-  assert.type(manifest.version_name, 'string', 'version_name is a string');
   assert.type(manifest.minimum_chrome_version, 'string', 'minimum_chrome_version is a string');
   assert.type(manifest.homepage_url, 'string', 'homepage_url is a string');
   assert.type(manifest.icons, 'object', 'icons is an object');
@@ -70,6 +86,22 @@ test('properties are the correct type', () => {
   assert.type(manifest.key, 'string', 'key is a string');
 
   assert.not.type(manifest.options_ui?.open_in_tab, 'boolean', 'options_ui.open_in_tab is not a boolean');
+});
+
+test('version_name is not a string when GITHUB_REF is set', () => {
+  process.env.GITHUB_REF = 'v1.0.0';
+  delete require.cache[require.resolve('../manifest.config.mjs')];
+  // eslint-disable-next-line
+  const manifest2 = require('../manifest.config.mjs').default as typeof manifest;
+  assert.not.type(manifest2.version_name, 'string');
+});
+
+test('version_name is a string when GITHUB_REF is not set', () => {
+  delete process.env.GITHUB_REF;
+  delete require.cache[require.resolve('../manifest.config.mjs')];
+  // eslint-disable-next-line
+  const manifest2 = require('../manifest.config.mjs').default as typeof manifest;
+  assert.type(manifest2.version_name, 'string');
 });
 
 test('manifest version is v3', () => {
