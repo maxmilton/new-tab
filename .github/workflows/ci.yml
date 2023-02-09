@@ -39,7 +39,7 @@ jobs:
       - run: pnpm install --frozen-lockfile
       - run: pnpm run build
       - run: pnpm playwright install-deps chromium
-      - run: xvfb-run --auto-servernum -- pnpm run test-e2e
+      - run: xvfb-run --auto-servernum -- pnpm run test:e2e
   lint:
     runs-on: ubuntu-latest
     steps:

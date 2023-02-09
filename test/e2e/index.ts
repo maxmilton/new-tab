@@ -1,6 +1,6 @@
 /* eslint-disable no-console, unicorn/no-process-exit */
 
-// XXX: To debug e2e set env var PWDEBUG=1 e.g., "PWDEBUG=1 pnpm run test-e2e"
+// XXX: To debug e2e set env var PWDEBUG=1 e.g., "PWDEBUG=1 pnpm run test:e2e"
 
 // TODO: Write tests to verify:
 //  - No console logs/errors -- including/especially CSP violations
