@@ -15,7 +15,7 @@ export default {
     '⚡ A high-performance new tab page that gets you where you need to go faster.',
   version: pkg.version,
   version_name: process.env.GITHUB_REF ? undefined : gitRef().replace(/^v/, ''),
-  minimum_chrome_version: '104', // due to new favicon API
+  minimum_chrome_version: '110', // v104 needed due to new favicon API
   homepage_url: pkg.homepage,
   icons: {
     16: 'icon16.png',
