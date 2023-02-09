@@ -15,7 +15,12 @@ function setupDOM() {
   global.happyDOM = dom.happyDOM;
   // @ts-expect-error - happy-dom only implements a subset of the DOM API
   global.window = dom.window.document.defaultView;
-  global.document = global.window.document;
+  global.document = window.document;
+  global.console = window.console;
+  global.setTimeout = window.setTimeout;
+  global.clearTimeout = window.clearTimeout;
+  global.DocumentFragment = window.DocumentFragment;
+  global.CSSStyleSheet = window.CSSStyleSheet;
 }
 
 function setupMocks(): void {
@@ -73,13 +78,9 @@ function setupMocks(): void {
     // TODO: Remove type cast + update mocks once we update to manifest v3
   } as typeof window.chrome;
 
-  global.console = window.console;
-  global.setTimeout = window.setTimeout;
-  global.clearTimeout = window.clearTimeout;
-  global.DocumentFragment = window.DocumentFragment;
-  global.CSSStyleSheet = window.CSSStyleSheet;
-
-  // @ts-expect-error - just a simple mock
+  // Even though node v18 has native fetch, it fails to parse relative URLs
+  // which are valid in browsers, so we need to mock it
+  // @ts-expect-error - just a simple stub
   global.fetch = () => Promise.resolve({
     json: () => Promise.resolve({}),
   });
@@ -90,5 +91,4 @@ export function reset(): void {
   setupMocks();
 }
 
-setupDOM();
-setupMocks();
+reset();
