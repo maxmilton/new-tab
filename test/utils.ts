@@ -42,8 +42,8 @@ export function render(component: Node): RenderResult {
   return {
     container,
     debug(el = container) {
-      // eslint-disable-next-line no-console
-      console.log('DEBUG:\n', el.innerHTML);
+      // eslint-disable-next-line
+      console.log('DEBUG:\n' + require('prettier').format(el.innerHTML, { parser: 'html' }));
     },
     unmount() {
       // eslint-disable-next-line unicorn/prefer-dom-node-remove

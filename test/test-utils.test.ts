@@ -64,7 +64,7 @@ describe('render', (test) => {
     const rendered = render(document.createElement('div'));
     rendered.debug();
     assert.is(logSpy.callCount, 1);
-    assert.equal(logSpy.calls[0], ['DEBUG:\n', '<div></div>']);
+    assert.equal(logSpy.calls[0], ['DEBUG:\n<div></div>\n']);
     logSpy.restore();
   });
 
