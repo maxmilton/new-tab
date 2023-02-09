@@ -1,9 +1,12 @@
-import { append, createFragment, h } from 'stage1';
+import {
+  append, createFragment, h, S1Node,
+} from 'stage1';
 import { DEFAULT_SECTION_ORDER } from '../utils';
 import { Link, LinkProps } from './Link';
 import { TabLink } from './TabLink';
 
-export type SearchResultComponent = HTMLDivElement & {
+export type SearchResultComponent = S1Node &
+HTMLDivElement & {
   update: (this: void, newData: any[]) => void;
   filter: (this: void, text: string) => void;
 };

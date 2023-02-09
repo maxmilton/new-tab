@@ -1,9 +1,13 @@
 name: ci
 on:
   push:
-    branches: [master, next]
+    branches:
+      - master
+      - next
   pull_request:
-    branches: [master, next]
+    branches:
+      - master
+      - next
 jobs:
   test:
     runs-on: ubuntu-latest
@@ -11,7 +15,7 @@ jobs:
       - uses: actions/checkout@v3
       - uses: actions/setup-node@v3
         with:
-          node-version: 19
+          node-version: 18
       - run: npm install --global pnpm
       - run: pnpm install --frozen-lockfile
         env:
@@ -19,7 +23,6 @@ jobs:
       - run: pnpm run build
       - run: pnpm run test
       - name: Report coverage
-        if: ${{ github.repository_owner == 'maxmilton' }}
         run: |
           curl -Lo ./cc-test-reporter https://codeclimate.com/downloads/test-reporter/test-reporter-latest-linux-amd64
           chmod +x ./cc-test-reporter
@@ -34,19 +37,19 @@ jobs:
       - uses: actions/checkout@v3
       - uses: actions/setup-node@v3
         with:
-          node-version: 19
+          node-version: 18
       - run: npm install --global pnpm
       - run: pnpm install --frozen-lockfile
       - run: pnpm run build
       - run: pnpm playwright install-deps chromium
-      - run: xvfb-run --auto-servernum -- pnpm run test:e2e
+      - run: xvfb-run --auto-servernum -- pnpm run test-e2e
   lint:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
       - uses: actions/setup-node@v3
         with:
-          node-version: 19
+          node-version: 18
       - run: npm install --global pnpm
       - run: pnpm install --frozen-lockfile
         env:

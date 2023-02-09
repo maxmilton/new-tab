@@ -1,23 +1,20 @@
 import { test } from 'uvu';
 import * as assert from 'uvu/assert';
-import { Menu } from '../src/components/Menu';
-import { cleanup, render } from './utils';
+// import { Menu } from '../src/components/Menu';
+import {
+  cleanup, render, setup, teardown,
+} from './utils';
 
+type MenuComponent = typeof import('../src/components/Menu');
+
+test.before(setup);
+test.after(teardown);
 test.after.each(cleanup);
 
 test('renders correctly', () => {
+  // eslint-disable-next-line @typescript-eslint/no-var-requires, global-require
+  const { Menu } = require('../src/components/Menu') as MenuComponent;
   const rendered = render(Menu());
-  assert.ok(rendered.container.querySelector('#m'));
-  assert.ok(rendered.container.querySelector('svg#im'));
-  assert.ok(rendered.container.querySelector('#d'));
-  assert.ok(rendered.container.querySelector('a[href="chrome://new-tab-page"]'));
-  assert.ok(rendered.container.querySelector('a[href="chrome://bookmarks"]'));
-  assert.ok(rendered.container.querySelector('a[href="chrome://downloads"]'));
-  assert.ok(rendered.container.querySelector('a[href="chrome://history"]'));
-  assert.ok(rendered.container.querySelector('a[href="chrome://settings/passwords"]'));
-  assert.ok(
-    rendered.container.querySelector('a[href="https://github.com/maxmilton/new-tab/issues"]'),
-  );
   assert.fixture(
     rendered.container.innerHTML,
     `<div id="m">
@@ -39,6 +36,8 @@ test('renders correctly', () => {
 });
 
 test('has expected node refs', () => {
+  // eslint-disable-next-line @typescript-eslint/no-var-requires, global-require
+  const { Menu } = require('../src/components/Menu') as MenuComponent;
   const rendered = render(Menu());
   // @ts-expect-error - FIXME:!
   // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
