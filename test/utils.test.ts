@@ -28,6 +28,8 @@ describe('DEFAULT_SECTION_ORDER', (test) => {
   });
 });
 
+// TODO: Add invarient tests for handleClick
+
 describe('handleClick', (test) => {
   test('default prevented on event when url does not start with "h"', () => {
     const event = new window.MouseEvent('click');
