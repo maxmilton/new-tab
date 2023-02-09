@@ -32,9 +32,7 @@ describe('handleClick', (test) => {
   test('default prevented on event when url does not start with "h"', () => {
     const event = new window.MouseEvent('click');
     // @ts-expect-error - _target is an implementation detail of happy-dom
-    event._target = {
-      href: 'chrome://about',
-    };
+    event._target = { href: 'chrome://about' };
     assert.not.ok(event.defaultPrevented, 'event default not prevented');
     handleClick(event);
     assert.ok(event.defaultPrevented, 'event default prevented');
@@ -43,9 +41,7 @@ describe('handleClick', (test) => {
   test('default not prevent on event when url starts with "h"', () => {
     const event = new window.MouseEvent('click');
     // @ts-expect-error - _target is an implementation detail of happy-dom
-    event._target = {
-      href: 'https://example.com',
-    };
+    event._target = { href: 'https://example.com' };
     assert.not.ok(event.defaultPrevented, 'event default not prevented');
     handleClick(event);
     assert.not.ok(event.defaultPrevented, 'event default still not prevented');
@@ -56,13 +52,10 @@ describe('handleClick', (test) => {
     const tabsUpdateSpy = spyOn(chrome.tabs, 'update');
     const event = new window.MouseEvent('click');
     // @ts-expect-error - _target is an implementation detail of happy-dom
-    event._target = {
-      href: 'chrome://about',
-      target: '_blank',
-    };
+    event._target = { href: 'chrome://about', target: '_blank' };
     handleClick(event);
-    assert.ok(tabsCreateSpy.called);
-    assert.not.ok(tabsUpdateSpy.called);
+    assert.ok(tabsCreateSpy.called, 'chrome.tabs.create called');
+    assert.not.ok(tabsUpdateSpy.called, 'chrome.tabs.update not called');
   });
 
   test('opens a new tab when url starts with chrome:// and ctrl key is pressed', () => {
@@ -70,12 +63,10 @@ describe('handleClick', (test) => {
     const tabsUpdateSpy = spyOn(chrome.tabs, 'update');
     const event = new window.MouseEvent('click', { ctrlKey: true });
     // @ts-expect-error - _target is an implementation detail of happy-dom
-    event._target = {
-      href: 'chrome://about',
-    };
+    event._target = { href: 'chrome://about' };
     handleClick(event);
-    assert.ok(tabsCreateSpy.called);
-    assert.not.ok(tabsUpdateSpy.called);
+    assert.ok(tabsCreateSpy.called, 'chrome.tabs.create called');
+    assert.not.ok(tabsUpdateSpy.called, 'chrome.tabs.update not called');
   });
 
   test('opens a current tab when url starts with chrome:// and target is not _blank', () => {
@@ -83,13 +74,10 @@ describe('handleClick', (test) => {
     const tabsUpdateSpy = spyOn(chrome.tabs, 'update');
     const event = new window.MouseEvent('click');
     // @ts-expect-error - _target is an implementation detail of happy-dom
-    event._target = {
-      href: 'chrome://about',
-      target: undefined,
-    };
+    event._target = { href: 'chrome://about', target: undefined };
     handleClick(event);
-    assert.not.ok(tabsCreateSpy.called);
-    assert.ok(tabsUpdateSpy.called);
+    assert.not.ok(tabsCreateSpy.called, 'chrome.tabs.create not called');
+    assert.ok(tabsUpdateSpy.called, 'chrome.tabs.update called');
   });
 
   test('opens a current tab when url starts with chrome:// and ctrl key is not pressed', () => {
@@ -97,11 +85,9 @@ describe('handleClick', (test) => {
     const tabsUpdateSpy = spyOn(chrome.tabs, 'update');
     const event = new window.MouseEvent('click', { ctrlKey: false });
     // @ts-expect-error - _target is an implementation detail of happy-dom
-    event._target = {
-      href: 'chrome://about',
-    };
+    event._target = { href: 'chrome://about' };
     handleClick(event);
-    assert.not.ok(tabsCreateSpy.called);
-    assert.ok(tabsUpdateSpy.called);
+    assert.not.ok(tabsCreateSpy.called, 'chrome.tabs.create not called');
+    assert.ok(tabsUpdateSpy.called, 'chrome.tabs.update called');
   });
 });
