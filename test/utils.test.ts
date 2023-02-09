@@ -47,7 +47,7 @@ describe('handleClick', (test) => {
     assert.not.ok(event.defaultPrevented, 'event default still not prevented');
   });
 
-  test('opens a new tab when url starts with chrome:// and target is _blank', () => {
+  test('opens in new tab when url starts with chrome:// and target is _blank', () => {
     const tabsCreateSpy = spyOn(chrome.tabs, 'create');
     const tabsUpdateSpy = spyOn(chrome.tabs, 'update');
     const event = new window.MouseEvent('click');
@@ -58,7 +58,7 @@ describe('handleClick', (test) => {
     assert.not.ok(tabsUpdateSpy.called, 'chrome.tabs.update not called');
   });
 
-  test('opens a new tab when url starts with chrome:// and ctrl key is pressed', () => {
+  test('opens in new tab when url starts with chrome:// and ctrl key is pressed', () => {
     const tabsCreateSpy = spyOn(chrome.tabs, 'create');
     const tabsUpdateSpy = spyOn(chrome.tabs, 'update');
     const event = new window.MouseEvent('click', { ctrlKey: true });
@@ -69,7 +69,7 @@ describe('handleClick', (test) => {
     assert.not.ok(tabsUpdateSpy.called, 'chrome.tabs.update not called');
   });
 
-  test('opens a current tab when url starts with chrome:// and target is not _blank', () => {
+  test('updates current tab when url starts with chrome:// and target is not _blank', () => {
     const tabsCreateSpy = spyOn(chrome.tabs, 'create');
     const tabsUpdateSpy = spyOn(chrome.tabs, 'update');
     const event = new window.MouseEvent('click');
@@ -80,7 +80,7 @@ describe('handleClick', (test) => {
     assert.ok(tabsUpdateSpy.called, 'chrome.tabs.update called');
   });
 
-  test('opens a current tab when url starts with chrome:// and ctrl key is not pressed', () => {
+  test('updates current tab when url starts with chrome:// and ctrl key is not pressed', () => {
     const tabsCreateSpy = spyOn(chrome.tabs, 'create');
     const tabsUpdateSpy = spyOn(chrome.tabs, 'update');
     const event = new window.MouseEvent('click', { ctrlKey: false });
