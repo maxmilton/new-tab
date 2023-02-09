@@ -1,6 +1,5 @@
 const OFF = 0;
 const WARN = 1;
-const ERROR = 2;
 
 // TODO: Types
 // eslint-disable-next-line max-len
@@ -46,7 +45,8 @@ module.exports = {
     'unicorn/no-null': OFF,
     'unicorn/prefer-add-event-listener': OFF,
     'unicorn/prefer-dom-node-append': OFF,
-    'unicorn/prefer-module': WARN,
+    'unicorn/prefer-module': OFF,
+    'unicorn/prefer-node-protocol': OFF,
     // indexOf is faster (in Chrome)
     'unicorn/prefer-includes': OFF,
     // saves 3 bytes to use arrow function
@@ -54,6 +54,5 @@ module.exports = {
     'unicorn/prefer-top-level-await': WARN,
     'unicorn/prefer-query-selector': OFF,
     'unicorn/prevent-abbreviations': OFF,
-    'unicorn/switch-case-braces': [ERROR, 'avoid'],
   },
 };

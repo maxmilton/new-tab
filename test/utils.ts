@@ -1,18 +1,40 @@
 // FIXME: This file doesn't get included in coverage reports even with `c8 --include=test/utils.ts`
 //  ↳ https://github.com/bcoe/c8/issues/250
 
-import { spyOn } from 'nanospy';
-import { suite, type Context, type Test } from 'uvu';
-import type * as _assert from 'uvu/assert';
+import { JSDOM } from 'jsdom';
 
-// https://github.com/lukeed/uvu/issues/43#issuecomment-740817223
-export function describe<T = Context>(
-  name: string,
-  fn: (test: Test<T>) => void,
-): void {
-  const test = suite<T>(name);
-  fn(test);
-  test.run();
+// increase limit from 10
+global.Error.stackTraceLimit = 100;
+
+const mountedContainers = new Set<HTMLDivElement>();
+
+export function setup(): void {
+  if (global.window) {
+    throw new Error(
+      'JSDOM globals already exist, did you forget to run teardown()?',
+    );
+  }
+
+  const dom = new JSDOM('<!DOCTYPE html>', {
+    pretendToBeVisual: true,
+    runScripts: 'dangerously',
+    url: 'http://localhost/',
+  });
+
+  global.window = dom.window.document.defaultView!;
+  global.document = global.window.document;
+}
+
+export function teardown(): void {
+  if (!global.window) {
+    throw new Error('No JSDOM globals exist, did you forget to run setup()?');
+  }
+
+  // https://github.com/jsdom/jsdom#closing-down-a-jsdom
+  global.window.close();
+  // @ts-expect-error - cleaning up
+  // eslint-disable-next-line no-multi-assign
+  global.window = global.document = undefined;
 }
 
 export interface RenderResult {
@@ -29,8 +51,6 @@ export interface RenderResult {
   unmount(): void;
 }
 
-const mountedContainers = new Set<HTMLDivElement>();
-
 export function render(component: Node): RenderResult {
   const container = document.createElement('div');
 
@@ -42,8 +62,8 @@ export function render(component: Node): RenderResult {
   return {
     container,
     debug(el = container) {
-      // eslint-disable-next-line
-      console.log('DEBUG:\n' + require('prettier').format(el.innerHTML, { parser: 'html' }));
+      // eslint-disable-next-line no-console
+      console.log('DEBUG:\n', el.innerHTML);
     },
     unmount() {
       // eslint-disable-next-line unicorn/prefer-dom-node-remove
@@ -68,26 +88,69 @@ export function cleanup(): void {
   });
 }
 
-export function consoleSpy(): (assert: typeof _assert) => void {
-  const errorSpy = spyOn(window.console, 'error');
-  const warnSpy = spyOn(window.console, 'warn');
-  const infoSpy = spyOn(window.console, 'info');
-  const logSpy = spyOn(window.console, 'log');
-  const debugSpy = spyOn(window.console, 'debug');
-  const traceSpy = spyOn(window.console, 'trace');
+const noop = () => {};
 
-  return (assert) => {
-    assert.is(errorSpy.callCount, 0, 'calls to console.error');
-    assert.is(warnSpy.callCount, 0, 'calls to console.warn');
-    assert.is(infoSpy.callCount, 0, 'calls to console.info');
-    assert.is(logSpy.callCount, 0, 'calls to console.log');
-    assert.is(debugSpy.callCount, 0, 'calls to console.debug');
-    assert.is(traceSpy.callCount, 0, 'calls to console.trace');
-    errorSpy.restore();
-    warnSpy.restore();
-    infoSpy.restore();
-    logSpy.restore();
-    debugSpy.restore();
-    traceSpy.restore();
-  };
+export function mocksSetup(): void {
+  // @ts-expect-error - partial mock
+  global.chrome = {
+    bookmarks: {
+      getTree: noop,
+      search: noop,
+    },
+    history: {
+      search: noop,
+    },
+    runtime: {
+      openOptionsPage: noop,
+    },
+    sessions: {
+      getRecentlyClosed: noop,
+    },
+    storage: {
+      local: {
+        get: (_keys, callback) => {
+          callback({});
+        },
+        set: noop,
+      },
+    },
+    tabs: {
+      create: noop,
+      getCurrent: noop,
+      onMoved: {
+        addListener: noop,
+      },
+      onRemoved: {
+        addListener: noop,
+      },
+      onUpdated: {
+        addListener: noop,
+      },
+      query: noop,
+      remove: noop,
+      update: noop,
+    },
+    topSites: {
+      get: noop,
+    },
+    windows: {
+      getCurrent: noop,
+      update: noop,
+    },
+    // TODO: Remove type cast + update mocks once we update to manifest v3
+  } as typeof window.chrome;
+
+  global.DocumentFragment = window.DocumentFragment;
+  global.localStorage = window.localStorage;
+
+  // @ts-expect-error - just a simple mock
+  global.fetch = () => Promise.resolve({
+    json: () => Promise.resolve({}),
+  });
+}
+
+export function mocksTeardown(): void {
+  // @ts-expect-error - cleaning up
+  // eslint-disable-next-line no-multi-assign
+  global.chrome = global.DocumentFragment = global.localStorage = global.fetch = undefined;
 }

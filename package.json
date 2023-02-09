@@ -9,62 +9,58 @@
   "private": true,
   "scripts": {
     "build": "pnpm run prebuild && NODE_ENV=production node build.mjs",
-    "dev": "pnpm run prebuild && NODE_ENV=development node build.mjs",
+    "dev": "NODE_ENV=development node build.mjs",
     "lint": "pnpm run lint:css && pnpm run lint:js && pnpm run lint:ts",
     "lint:css": "stylelint --ignore-path .gitignore '**/*.{css,xcss}'",
     "lint:js": "eslint --ignore-path .gitignore --ext .cjs,.js,.mjs,.ts .",
     "lint:ts": "tsc --project test",
     "prebuild": "rm -rf dist; cp -r static dist",
-    "test": "c8 --all --include=src --include=manifest.config.mjs --reporter=text --reporter=lcovonly uvu -r tsm -r \"$PWD\"/test/setup.ts test '\\.test\\.ts$'",
-    "test:e2e": "node -r tsm test/e2e/index.ts",
+    "test": "c8 --all --include=src --include=manifest.config.js --reporter=text --reporter=lcovonly uvu -r tsm test '\\.test\\.ts$'",
+    "test-e2e": "node -r tsm test/e2e/index.ts",
     "zip": "sh -c 'test -z \"$(git status --porcelain)\"' && pnpm run lint && pnpm run test && pnpm run build && cd dist && zip ../chrome-extension.zip *"
   },
+  "__pnpm": {
+    "overrides": {
+      "stage1": "../stage1"
+    }
+  },
   "dependencies": {
-    "stage1": "0.6.2"
+    "stage1": "0.4.0"
   },
   "devDependencies": {
     "@maxmilton/stylelint-config": "0.0.10",
-    "@types/chrome": "0.0.212",
-    "@types/node": "18.13.0",
-    "@typescript-eslint/eslint-plugin": "5.51.0",
-    "@typescript-eslint/parser": "5.51.0",
+    "@types/chrome": "0.0.205",
+    "@types/csso": "5.0.0",
+    "@types/jsdom": "20.0.0",
+    "@types/node": "18.11.11",
+    "@typescript-eslint/eslint-plugin": "5.33.0",
+    "@typescript-eslint/parser": "5.33.0",
     "c8": "7.12.0",
+    "csso": "5.0.4",
     "ekscss": "0.0.13",
-    "esbuild": "0.17.6",
-    "esbuild-minify-templates": "0.10.0",
-    "eslint": "8.33.0",
+    "esbuild": "0.16.11",
+    "esbuild-minify-templates": "0.9.0",
+    "eslint": "8.21.0",
     "eslint-config-airbnb-base": "15.0.0",
     "eslint-config-airbnb-typescript": "17.0.0",
-    "eslint-plugin-import": "2.27.5",
-    "eslint-plugin-unicorn": "45.0.2",
+    "eslint-plugin-import": "2.26.0",
+    "eslint-plugin-unicorn": "43.0.2",
     "git-ref": "0.3.1",
-    "happy-dom": "8.2.6",
+    "jsdom": "20.0.0",
     "kleur": "4.1.5",
-    "lightningcss": "1.18.0",
-    "nanospy": "0.5.0",
-    "playwright-chromium": "1.30.0",
-    "prettier": "2.8.4",
-    "stylelint": "14.16.1",
-    "stylelint-config-standard": "29.0.0",
-    "tsm": "2.3.0",
-    "typescript": "4.9.5",
+    "playwright-chromium": "1.24.2",
+    "prettier": "2.7.1",
+    "stylelint": "14.13.0",
+    "stylelint-config-standard": "26.0.0",
+    "tsm": "2.2.2",
+    "typescript": "4.8.3",
     "uvu": "0.5.6"
   },
   "prettier": {
     "arrowParens": "always",
     "endOfLine": "lf",
     "singleQuote": true,
-    "trailingComma": "all",
-    "overrides": [
-      {
-        "files": [
-          "*.test.ts"
-        ],
-        "options": {
-          "printWidth": 100
-        }
-      }
-    ]
+    "trailingComma": "all"
   },
   "stylelint": {
     "reportInvalidScopeDisables": true,

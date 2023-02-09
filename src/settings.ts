@@ -1,3 +1,5 @@
+/* eslint-disable no-multi-assign */
+
 import { append, h } from 'stage1';
 import { reconcile } from 'stage1/reconcile/non-keyed';
 import type { ThemesData, UserStorageData } from './types';
@@ -38,11 +40,11 @@ const sectionView = h(`
 
 const searchOnlyView = h('<small class="so muted">(search only)</small>');
 
-const SectionItem = (
+function SectionItem(
   item: string,
   list: number,
   scope: SectionScope,
-): SectionComponent => {
+): SectionComponent {
   const root = sectionView.cloneNode(true) as SectionComponent;
   const { name } = sectionView.collect<SectionRefNodes>(root);
 
@@ -85,7 +87,7 @@ const SectionItem = (
   };
 
   return root;
-};
+}
 
 type SettingsRefNodes = {
   theme: HTMLSelectElement;
@@ -131,7 +133,7 @@ const settingsView = h(`
   </div>
 `);
 
-const Settings = () => {
+function Settings() {
   const root = settingsView;
   const {
     theme, reset, se, sd,
@@ -164,9 +166,13 @@ const Settings = () => {
   const updateTheme = async (themeName: string) => {
     theme.value = themeName;
 
+    // Save user theme setting -- it's a special case that uses localStorage so
+    // the data retrieval is synchronous/blocking (chrome.storage is async) to
+    // prevent a flash of unstyled DOM on initial page load
+    localStorage.t = (await themesData)[themeName];
+
     void chrome.storage.local.set({
-      tn: themeName,
-      t: (await themesData)[themeName],
+      t: themeName,
     });
   };
 
@@ -197,7 +203,6 @@ const Settings = () => {
     (event.target as SectionComponent).classList.remove('over');
   };
 
-  // eslint-disable-next-line no-multi-assign
   se.ondragover = sd.ondragover = (event) => {
     event.preventDefault();
     // eslint-disable-next-line no-param-reassign
@@ -214,9 +219,9 @@ const Settings = () => {
     updateOrder([DEFAULT_SECTION_ORDER, []]);
   };
 
-  // Get user settings data
-  void chrome.storage.local.get(null).then((settings: UserStorageData) => {
-    const themeName = settings.tn || DEFAULT_THEME;
+  // get user settings data
+  chrome.storage.local.get(null, (settings: UserStorageData) => {
+    const themeName = settings.t || DEFAULT_THEME;
     const orderEnabled = settings.o || DEFAULT_SECTION_ORDER;
     const orderDisabled = DEFAULT_SECTION_ORDER.filter(
       (item) => !orderEnabled.includes(item),
@@ -227,6 +232,6 @@ const Settings = () => {
   });
 
   return root;
-};
+}
 
 append(Settings(), document.body);

@@ -1,21 +1,20 @@
+/* eslint-disable @typescript-eslint/no-var-requires */
 /* eslint-disable import/no-extraneous-dependencies */
 
-// https://developer.chrome.com/docs/extensions/mv3/manifest/
+// https://developer.chrome.com/docs/extensions/mv2/manifest/
 // https://developer.chrome.com/docs/extensions/reference/
 
-import { gitRef } from 'git-ref';
-import pkg from './package.json' assert { type: 'json' };
+const { gitRef } = require('git-ref');
+const pkg = require('./package.json');
 
 /** @type {chrome.runtime.Manifest} */
-// @ts-expect-error - "favicon" permission is not in upstream types yet (Chromium v104+)
-export default {
-  manifest_version: 3,
+module.exports = {
+  manifest_version: 2,
   name: 'New Tab',
   description:
     '⚡ A high-performance new tab page that gets you where you need to go faster.',
   version: pkg.version,
   version_name: process.env.GITHUB_REF ? undefined : gitRef().replace(/^v/, ''),
-  minimum_chrome_version: '110', // >= 104 needed for new favicon API
   homepage_url: pkg.homepage,
   icons: {
     16: 'icon16.png',
@@ -24,7 +23,7 @@ export default {
   },
   permissions: [
     'bookmarks',
-    'favicon',
+    'chrome://favicon/',
     'history',
     'sessions',
     'storage',
@@ -35,7 +34,8 @@ export default {
     newtab: 'newtab.html',
   },
   background: {
-    service_worker: 'sw.js',
+    scripts: ['background.js'],
+    persistent: false,
   },
   options_ui: {
     page: 'settings.html',
@@ -43,15 +43,15 @@ export default {
   },
   offline_enabled: true,
   incognito: 'not_allowed',
-  content_security_policy: {
-    extension_pages: [
-      "default-src 'none'",
-      "script-src 'self'",
-      "style-src 'self'",
-      "img-src 'self'",
-      "base-uri 'none'",
-    ].join(';'),
-  },
+  content_security_policy: [
+    "default-src 'none'",
+    // Hash of inline theme loader script embedded in the HTML
+    "script-src-elem 'self' 'sha256-8N8wUVajC/wkiqNS1NQFp9Ec/Yk+LfiZ5zE4aZwH9E8='",
+    // App styles are embedded in the HTML for fastest load performance
+    "style-src-elem 'unsafe-inline'",
+    'img-src chrome://favicon',
+  ].join(';'),
+
   // https://chrome.google.com/webstore/detail/new-tab/cpcibnbdmpmcmnkhoiilpnlaepkepknb
   key: 'MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAk9BfRa5CXuCX1ElY0yu9kJSqxFirFtSy79ZR/fyKHdOzZurQXNmhIyxVnQXd2bxHvuKUyZGahm/gwgyyzGuxhsQEue6wTD9TnOvvM2vusXpnoCr6Ili7sBwUo9vA2aPI77NB0eArXz9WWNmoDWW5WEqI/rk26Tinl8SNU9iDJISbL+dMses1QPw64oYFWB1J4JeB1MhXnzTxECpGZTn33LhgBU4J3ooT6eoqrsJdRvuc0vjPMxq/jfqLkdBbzlsnrMbgtDoJ9WiWj2lA0MzHGDAQ8HgnMEi3SpXRNnod9CCBnxmkHqv3u4u7Tvp/WLAgJ+QjCt+9yYyw3nOYHpEweQIDAQAB',
 };

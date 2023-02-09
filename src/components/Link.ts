@@ -1,11 +1,11 @@
-import { h } from 'stage1';
+import { h, S1Node } from 'stage1';
 
 export interface LinkProps {
   title: string;
   url: string;
 }
 
-export type LinkComponent = HTMLAnchorElement;
+export type LinkComponent = S1Node & HTMLAnchorElement;
 
 type RefNodes = {
   i: HTMLImageElement;
@@ -24,9 +24,9 @@ export const Link = (item: LinkProps): LinkComponent => {
   const nodes = view.collect<RefNodes>(root);
 
   root.href = item.url;
-  // eslint-disable-next-line no-multi-assign
-  root.title = nodes.t.nodeValue = item.title;
-  nodes.i.src = '_favicon?size=16&pageUrl=' + encodeURIComponent(item.url);
+  root.title = item.title;
+  nodes.i.src = 'chrome://favicon/' + item.url;
+  nodes.t.nodeValue = item.title;
 
   return root;
 };
