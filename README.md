@@ -1,4 +1,4 @@
-[![Build status](https://img.shields.io/github/workflow/status/maxmilton/new-tab/ci)](https://github.com/maxmilton/new-tab/actions)
+[![Build status](https://img.shields.io/github/actions/workflow/status/maxmilton/new-tab/ci.yml?branch=master)](https://github.com/maxmilton/new-tab/actions)
 [![Coverage status](https://img.shields.io/codeclimate/coverage/maxmilton/new-tab)](https://codeclimate.com/github/maxmilton/new-tab)
 [![Chrome Web Store version](https://img.shields.io/chrome-web-store/v/cpcibnbdmpmcmnkhoiilpnlaepkepknb.svg)](https://chrome.google.com/webstore/detail/new-tab/cpcibnbdmpmcmnkhoiilpnlaepkepknb)
 [![Licence](https://img.shields.io/github/license/maxmilton/new-tab.svg)](https://github.com/maxmilton/new-tab/blob/master/LICENSE)
