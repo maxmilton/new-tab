@@ -1,4 +1,3 @@
-// TODO: Remove disable comment and remove specificity
 // stylelint-disable no-descending-specificity
 
 /**
@@ -65,21 +64,14 @@ svg {
   padding: 0 18px;
 }
 
-/* "Load more" button */
-button {
-  width: initial;
-  margin-top: 9px;
-  padding: 11px 20px;
-  font-size: 18px;
-}
-
+// "Load more" button
 button,
 // search input
 #s {
   box-sizing: border-box;
   width: 100%;
-  margin: 0 0 35px;
-  padding: 11px 20px 11px 58px;
+  margin-top: 9px;
+  padding: 11px 20px;
   border: 2px solid var(--c1);
   border-radius: 24px;
   color: var(--t);
@@ -91,6 +83,11 @@ button,
   &:focus {
     border-color: var(--c3);
   }
+}
+
+#s {
+  margin: 0 0 35px;
+  padding-left: 58px;
 }
 
 // menu icon

@@ -51,8 +51,7 @@ export const BookmarkBar = (): BookmarkBarComponent => {
         let index = 0;
 
         for (; index < len; index++) {
-          const item = bookmarks![index];
-          const node = append(BookmarkNode(item), root);
+          const node = append(BookmarkNode(bookmarks![index]), root);
           currentWidth += node.clientWidth;
 
           if (currentWidth >= maxWidth) {
@@ -70,7 +69,7 @@ export const BookmarkBar = (): BookmarkBarComponent => {
               // children: bookmarks!.slice(index),
               children: bookmarks!.slice(index).map((item) => {
                 // eslint-disable-next-line no-param-reassign
-                item.parentId = 2 as unknown as string;
+                item.parentId = '2';
                 return item;
               }),
               end: true,
@@ -101,7 +100,19 @@ export const BookmarkBar = (): BookmarkBarComponent => {
       performance.measure('BookmarkBar', 'BookmarkBar');
     };
 
-    resize();
+    // HACK: Because this script is loaded async, there exists a race condition
+    // where the JS runs before the CSS is loaded. The styles are required to
+    // calculate the width of each bookmark node. Loading the JS script async
+    // yeilds the best load performance, but a better solution is needed.
+    const waitForStylesThenResize = () => {
+      if (document.styleSheets.length) {
+        resize();
+      } else {
+        setTimeout(waitForStylesThenResize);
+      }
+    };
+
+    waitForStylesThenResize();
 
     window.onresize = resize;
   });
@@ -117,8 +128,8 @@ export const BookmarkBar = (): BookmarkBarComponent => {
     const related = event.relatedTarget as Node | null;
     let node = event.target as
       | (Node & {
-        __mouseover?(event: MouseEvent): void;
-        __mouseout?(event: MouseEvent): void;
+        __mouseover?(event2: MouseEvent): void;
+        __mouseout?(event2: MouseEvent): void;
       })
       | null;
 

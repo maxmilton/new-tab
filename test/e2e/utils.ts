@@ -1,20 +1,23 @@
 /* eslint-disable no-console, no-multi-assign */
 
-import fs from 'fs';
 import colors from 'kleur';
-import os from 'os';
-import path from 'path';
+import fs from 'node:fs';
+import os from 'node:os';
+import path from 'node:path';
 import {
-  BrowserContext,
   chromium,
-  ConsoleMessage,
-  Page,
+  type BrowserContext,
+  type ConsoleMessage,
+  type Page,
+  type Worker,
 } from 'playwright-chromium';
 
 export interface E2ETestContext {
   tmpDir: string;
   browser: BrowserContext;
+  background: Worker;
   pages: Set<Page>;
+  extensionId: string;
   consoleMessages: ConsoleMessage[];
   unhandledErrors: Error[];
 }
@@ -56,6 +59,14 @@ export async function setup(context: E2ETestContext): Promise<void> {
     ],
     timeout: 10_000,
   });
+
+  let [background] = context.browser.serviceWorkers();
+  if (!background) {
+    background = await context.browser.waitForEvent('serviceworker');
+  }
+  context.background = background;
+  // eslint-disable-next-line prefer-destructuring
+  context.extensionId = background.url().split('/')[2];
 
   context.pages = new Set<Page>();
 }

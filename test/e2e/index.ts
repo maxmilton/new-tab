@@ -1,6 +1,6 @@
 /* eslint-disable no-console, unicorn/no-process-exit */
 
-// XXX: To debug e2e set env var PWDEBUG=1 e.g., "PWDEBUG=1 pnpm run test-e2e"
+// XXX: To debug e2e set env var PWDEBUG=1 e.g., "PWDEBUG=1 pnpm run test:e2e"
 
 // TODO: Write tests to verify:
 //  - No console logs/errors -- including/especially CSP violations
@@ -22,8 +22,8 @@
 // TODO: If we want to collect coverage during e2e testing, we might need
 // something custom like https://github.com/bricss/dopant/blob/master/test/fixtures/index.mjs
 
-import fs from 'fs';
-import path from 'path';
+import fs from 'node:fs';
+import path from 'node:path';
 import { suite } from 'uvu';
 import * as assert from 'uvu/assert';
 import {
@@ -69,15 +69,17 @@ test.after.each(async (context) => {
 });
 
 [
-  'background.js',
+  'icon128.png',
   'icon16.png',
   'icon48.png',
-  'icon128.png',
   'manifest.json',
+  'newtab.css',
   'newtab.html',
   'newtab.js',
+  'settings.css',
   'settings.html',
   'settings.js',
+  'sw.js',
 ].forEach((filename) => {
   fileTest(`dist/${filename} exists`, () => {
     const filePath = path.join(DIST_DIR, filename);
@@ -88,13 +90,14 @@ test.after.each(async (context) => {
 test('renders newtab app', async (context) => {
   const { page } = await renderPage(
     context,
-    'chrome-extension://cpcibnbdmpmcmnkhoiilpnlaepkepknb/newtab.html',
+    // 'chrome-extension://cpcibnbdmpmcmnkhoiilpnlaepkepknb/newtab.html',
+    `chrome-extension://${context.extensionId}/newtab.html`,
   );
   // TODO: Better assertions
-  assert.ok(await page.$('#b')); // bookmarks bar
-  assert.ok(await page.$('#s')); // search input
-  assert.ok(await page.$('#m')); // menu wrapper
-  assert.ok(await page.$('#d')); // menu dropdown
+  assert.ok(await page.$('#b'), 'has bookmarks bar');
+  assert.ok(await page.$('#s'), 'has search input');
+  assert.ok(await page.$('#m'), 'has menu wrapper');
+  assert.ok(await page.$('#d'), 'has menu dropdown');
   await sleep(200);
   assert.is(context.unhandledErrors.length, 0, 'zero unhandled errors');
   assert.is(context.consoleMessages.length, 0, 'zero console messages');
@@ -103,7 +106,8 @@ test('renders newtab app', async (context) => {
 test('renders settings app', async (context) => {
   const { page } = await renderPage(
     context,
-    'chrome-extension://cpcibnbdmpmcmnkhoiilpnlaepkepknb/settings.html',
+    // 'chrome-extension://cpcibnbdmpmcmnkhoiilpnlaepkepknb/settings.html',
+    `chrome-extension://${context.extensionId}/settings.html`,
   );
   // TODO: Better assertions
   assert.ok(await page.$('.row > select'));
