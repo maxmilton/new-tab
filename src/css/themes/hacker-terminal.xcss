@@ -34,6 +34,7 @@ button {
 // TODO: Uncomment once supported in Chromium
 //  ↳ https://www.w3.org/TR/2020/WD-css-ui-4-20200124/#propdef-caret-shape
 //  ↳ https://developer.mozilla.org/en-US/docs/Web/CSS/caret-shape
+//  ↳ https://github.com/Fyrd/caniuse/issues/5974
 // #s {
 //   caret-shape: block;
 // }

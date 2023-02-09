@@ -7,7 +7,7 @@ import { gitRef } from 'git-ref';
 import pkg from './package.json' assert { type: 'json' };
 
 /** @type {chrome.runtime.Manifest} */
-// @ts-expect-error - "favicon" permission is not in upstream types yet (Chromium v104)
+// @ts-expect-error - "favicon" permission is not in upstream types yet (Chromium v104+)
 export default {
   manifest_version: 3,
   name: 'New Tab',
@@ -15,7 +15,7 @@ export default {
     '⚡ A high-performance new tab page that gets you where you need to go faster.',
   version: pkg.version,
   version_name: process.env.GITHUB_REF ? undefined : gitRef().replace(/^v/, ''),
-  minimum_chrome_version: '110', // v104 needed due to new favicon API
+  minimum_chrome_version: '110', // >= 104 needed for new favicon API
   homepage_url: pkg.homepage,
   icons: {
     16: 'icon16.png',
