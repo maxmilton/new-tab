@@ -157,7 +157,7 @@ const minifyJS = {
 
 // New Tab & Settings apps
 /** @type {esbuild.BuildOptions} */
-const esbuildOptions1 = {
+const esbuildConfig1 = {
   entryPoints: ['src/newtab.ts', 'src/settings.ts'],
   outdir: 'dist',
   platform: 'browser',
@@ -179,7 +179,7 @@ const esbuildOptions1 = {
 
 // Background service worker script
 /** @type {esbuild.BuildOptions} */
-const esbuildOptions2 = {
+const esbuildConfig2 = {
   entryPoints: ['src/sw.ts'],
   outdir: 'dist',
   format: 'esm',
@@ -191,10 +191,10 @@ const esbuildOptions2 = {
 };
 
 if (dev) {
-  const context1 = await esbuild.context(esbuildOptions1);
-  const context2 = await esbuild.context(esbuildOptions2);
+  const context1 = await esbuild.context(esbuildConfig1);
+  const context2 = await esbuild.context(esbuildConfig2);
   await Promise.all([context1.watch(), context2.watch()]);
 } else {
-  await esbuild.build(esbuildOptions1);
-  await esbuild.build(esbuildOptions2);
+  await esbuild.build(esbuildConfig1);
+  await esbuild.build(esbuildConfig2);
 }
