@@ -7,7 +7,6 @@ import { gitRef } from 'git-ref';
 import pkg from './package.json' assert { type: 'json' };
 
 /** @type {chrome.runtime.Manifest} */
-// @ts-expect-error - "favicon" permission is not in upstream types yet (Chromium v104+)
 export default {
   manifest_version: 3,
   name: 'New Tab',

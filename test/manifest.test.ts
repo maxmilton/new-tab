@@ -110,7 +110,6 @@ test('manifest version is v3', () => {
 
 test('permissions contains expected values', () => {
   assert.ok(manifest.permissions?.includes('bookmarks'), 'has bookmarks');
-  // @ts-expect-error - Not in upstream types yet
   assert.ok(manifest.permissions?.includes('favicon'), 'has favicon');
   assert.ok(manifest.permissions?.includes('history'), 'has history');
   assert.ok(manifest.permissions?.includes('sessions'), 'has sessions');
