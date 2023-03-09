@@ -103,7 +103,7 @@ export const BookmarkBar = (): BookmarkBarComponent => {
     // HACK: Because this script is loaded async, there exists a race condition
     // where the JS runs before the CSS is loaded. The styles are required to
     // calculate the width of each bookmark node. Loading the JS script async
-    // yeilds the best load performance, but a better solution is needed.
+    // yeilds the best load performance but a better overall solution is needed.
     const waitForStylesThenResize = () => {
       if (document.styleSheets.length) {
         resize();
