@@ -2,7 +2,7 @@ lockfileVersion: 5.4
 
 specifiers:
   '@maxmilton/stylelint-config': 0.0.10
-  '@types/chrome': 0.0.218
+  '@types/chrome': 0.0.220
   '@types/node': 18.14.2
   '@typescript-eslint/eslint-plugin': 5.54.1
   '@typescript-eslint/parser': 5.54.1
@@ -34,7 +34,7 @@ dependencies:
 
 devDependencies:
   '@maxmilton/stylelint-config': 0.0.10_stylelint@15.2.0
-  '@types/chrome': 0.0.218
+  '@types/chrome': 0.0.220
   '@types/node': 18.14.2
   '@typescript-eslint/eslint-plugin': 5.54.1_mlk7dnz565t663n4razh6a6v6i
   '@typescript-eslint/parser': 5.54.1_ycpbpc6yetojsgtrx3mwntkhsu
@@ -466,8 +466,8 @@ packages:
       fastq: 1.15.0
     dev: true
 
-  /@types/chrome/0.0.218:
-    resolution: {integrity: sha512-GC/c9B3Eo3h3l+fV5G6A9cRMEZOYo46E21mjHHfkXz+/A5uypXstMVAMk04IeGY2DJ7PxVxbn26oFBPZOa4Dkw==}
+  /@types/chrome/0.0.220:
+    resolution: {integrity: sha512-s5Sl4M3z3+IQLvYbR1yA+UVjX+LTtodmuZjqL6LkP+MWmuoNl1yryoJVCHBqEDZTH5p5PALGgkQVSTfjfYwXlg==}
     dependencies:
       '@types/filesystem': 0.0.32
       '@types/har-format': 1.2.10
