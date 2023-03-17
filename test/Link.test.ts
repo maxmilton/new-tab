@@ -15,7 +15,11 @@ test('renders correctly', () => {
   const img = rendered.container.querySelector('img');
   assert.ok(img, 'has img element');
   assert.is(img.parentNode, link, 'img is inside anchor');
-  assert.is(img?.getAttribute('src'), '_favicon?size=16&pageUrl=https%3A%2F%2Fexample.com', 'img has correct src');
+  assert.is(
+    img?.getAttribute('src'),
+    '_favicon?size=16&pageUrl=https%3A%2F%2Fexample.com',
+    'img has correct src',
+  );
   assert.is(img?.getAttribute('decoding'), 'async', 'img has correct decoding');
   assert.snapshot(
     rendered.container.innerHTML,

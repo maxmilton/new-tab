@@ -80,10 +80,11 @@ function setupMocks(): void {
 
   // Even though node v18 has native fetch, it fails to parse relative URLs
   // which are valid in browsers, so we need to mock it
-  // @ts-expect-error - just a simple stub
-  global.fetch = () => Promise.resolve({
-    json: () => Promise.resolve({}),
-  });
+  global.fetch = () =>
+    // @ts-expect-error - just a simple stub
+    Promise.resolve({
+      json: () => Promise.resolve({}),
+    });
 }
 
 export function reset(): void {

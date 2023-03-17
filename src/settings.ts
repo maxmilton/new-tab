@@ -19,7 +19,9 @@ type SectionScope = {
 const DRAG_TYPE = 'text/plain';
 const DEFAULT_THEME = 'light';
 
-const themesData = fetch('themes.json').then((res) => res.json()) as Promise<ThemesData>;
+const themesData = fetch('themes.json').then(
+  (res) => res.json() as Promise<ThemesData>,
+);
 
 // https://tabler-icons.io/i/grip-vertical
 const sectionView = h(`
@@ -133,9 +135,7 @@ const settingsView = h(`
 
 const Settings = () => {
   const root = settingsView;
-  const {
-    theme, reset, se, sd,
-  } = settingsView.collect<SettingsRefNodes>(root);
+  const { theme, reset, se, sd } = settingsView.collect<SettingsRefNodes>(root);
 
   const state: SettingsState = {
     order: [[], []],
@@ -171,8 +171,12 @@ const Settings = () => {
   };
 
   const updateOrder = (order: SettingsState['order'], noSet?: boolean) => {
-    reconcile(se, state.order[0], order[0], (item: string) => SectionItem(item, 0, scope));
-    reconcile(sd, state.order[1], order[1], (item: string) => SectionItem(item, 1, scope));
+    reconcile(se, state.order[0], order[0], (item: string) =>
+      SectionItem(item, 0, scope),
+    );
+    reconcile(sd, state.order[1], order[1], (item: string) =>
+      SectionItem(item, 1, scope),
+    );
     state.order = order;
 
     if (!noSet) {

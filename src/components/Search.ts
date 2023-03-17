@@ -77,10 +77,11 @@ export const Search = (): SearchComponent => {
     const recentlyClosed = section[DEFAULT_SECTION_ORDER[4]];
 
     if (openTabs) {
-      const updateOpenTabs = () => chrome.tabs.query({}, (result) => {
-        openTabs.update(result);
-        if (s.value) openTabs.filter(s.value);
-      });
+      const updateOpenTabs = () =>
+        chrome.tabs.query({}, (result) => {
+          openTabs.update(result);
+          if (s.value) openTabs.filter(s.value);
+        });
 
       updateOpenTabs();
 

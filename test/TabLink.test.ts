@@ -7,9 +7,14 @@ test.after.each(cleanup);
 
 // XXX: Same as test/Link.test.ts
 test('renders correctly', () => {
-  const rendered = render(TabLink({
-    title: 'Example', url: 'https://example.com', id: 1, windowId: 1,
-  }));
+  const rendered = render(
+    TabLink({
+      title: 'Example',
+      url: 'https://example.com',
+      id: 1,
+      windowId: 1,
+    }),
+  );
   const link = rendered.container.querySelector('a');
   assert.ok(link, 'has anchor element');
   assert.is(link?.getAttribute('href'), 'https://example.com', 'has correct href');
@@ -18,7 +23,11 @@ test('renders correctly', () => {
   const img = rendered.container.querySelector('img');
   assert.ok(img, 'has img element');
   assert.is(img.parentNode, link, 'img is inside anchor');
-  assert.is(img?.getAttribute('src'), '_favicon?size=16&pageUrl=https%3A%2F%2Fexample.com', 'img has correct src');
+  assert.is(
+    img?.getAttribute('src'),
+    '_favicon?size=16&pageUrl=https%3A%2F%2Fexample.com',
+    'img has correct src',
+  );
   assert.is(img?.getAttribute('decoding'), 'async', 'img has correct decoding');
   assert.snapshot(
     rendered.container.innerHTML,

@@ -42,7 +42,7 @@ export function render(component: Node): RenderResult {
   return {
     container,
     debug(el = container) {
-      // eslint-disable-next-line
+      /* prettier-ignore */ // eslint-disable-next-line
       console.log('DEBUG:\n' + require('prettier').format(el.innerHTML, { parser: 'html' }));
     },
     unmount() {

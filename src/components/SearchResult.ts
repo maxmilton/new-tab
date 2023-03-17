@@ -62,17 +62,20 @@ export const SearchResult = <T extends LinkProps>(
 
   root.update = update;
 
-  root.filter = (text) => renderList(
-    rawData.filter(
-      (item) => (item.title + '+' + item.url)
-        .toLowerCase()
-        .indexOf(text.toLowerCase()) > -1,
-    ),
-  );
+  root.filter = (text) =>
+    renderList(
+      rawData.filter(
+        (item) =>
+          (item.title + '+' + item.url)
+            .toLowerCase()
+            .indexOf(text.toLowerCase()) > -1,
+      ),
+    );
 
   nodes.t.textContent = sectionName;
 
-  nodes.m.__click = () => renderList(rawData, renderedLength + MORE_RESULTS_AMOUNT);
+  nodes.m.__click = () =>
+    renderList(rawData, renderedLength + MORE_RESULTS_AMOUNT);
 
   return root;
 };
