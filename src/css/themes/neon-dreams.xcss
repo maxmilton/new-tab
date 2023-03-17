@@ -19,6 +19,7 @@
 }
 
 a {
+  // prettier-ignore
   text-shadow:
     0 0 2px #00151a,
     0 0 3px #02a6f773,
@@ -78,10 +79,7 @@ h2,
 
 body::before {
   position: fixed;
-  top: 0;
-  right: 0;
-  bottom: 0;
-  left: 0;
+  inset: 0;
   display: block;
   /* prettier-ignore */
   background-image:
