@@ -1,5 +1,5 @@
 import { append, create, h } from 'stage1';
-import { BookmarkNode, Folder, FolderProps } from './BookmarkNode';
+import { BookmarkNode, Folder, type FolderProps } from './BookmarkNode';
 
 declare global {
   interface HTMLElement {

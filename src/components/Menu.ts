@@ -1,4 +1,4 @@
-import { h, S1Node } from 'stage1';
+import { h, type S1Node } from 'stage1';
 
 type MenuComponent = S1Node & HTMLDivElement;
 type RefNodes = {
