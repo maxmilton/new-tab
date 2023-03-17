@@ -3,7 +3,6 @@ const WARN = 1;
 const ERROR = 2;
 
 // TODO: Types
-// eslint-disable-next-line max-len
 // /** @type {import('eslint/lib/shared/types').ConfigData & { parserOptions: import('@typescript-eslint/types').ParserOptions }} */
 module.exports = {
   root: true,
@@ -21,7 +20,9 @@ module.exports = {
     'plugin:@typescript-eslint/recommended',
     'plugin:@typescript-eslint/recommended-requiring-type-checking',
     'plugin:unicorn/recommended',
+    'prettier',
   ],
+  plugins: ['prettier'],
   rules: {
     '@typescript-eslint/explicit-module-boundary-types': WARN,
     '@typescript-eslint/no-use-before-define': WARN,
@@ -35,6 +36,7 @@ module.exports = {
     // stage1 uses underscores in synthetic event handler names
     'no-underscore-dangle': OFF,
     'no-void': OFF,
+    'prettier/prettier': WARN,
     // byte savings + faster
     'unicorn/explicit-length-check': OFF,
     'unicorn/filename-case': OFF,

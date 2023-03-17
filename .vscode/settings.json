@@ -1,7 +1,13 @@
 {
   "css.validate": false,
-  "editor.formatOnSave": true,
+  "editor.codeActionsOnSave": {
+    "source.fixAll": true
+  },
   "editor.defaultFormatter": "esbenp.prettier-vscode",
+  "editor.formatOnPaste": false,
+  "editor.formatOnSave": true,
+  "editor.formatOnType": false,
+  "eslint.lintTask.options": "--ignore-path .gitignore",
   "files.associations": {
     "*.xcss": "scss"
   },
@@ -11,34 +17,16 @@
   "scss.validate": false,
   "stylelint.validate": ["css", "scss"],
   "typescript.tsdk": "node_modules/typescript/lib",
-  "[css]": {
-    "editor.formatOnSave": false,
-    "editor.codeActionsOnSave": [
-      "source.formatDocument",
-      "source.fixAll.stylelint"
-    ]
-  },
   "[javascript]": {
-    "editor.formatOnSave": false,
-    "editor.codeActionsOnSave": [
-      "source.sortImports",
-      "source.formatDocument",
-      "source.fixAll.eslint"
-    ]
-  },
-  "[scss]": {
-    "editor.formatOnSave": false,
-    "editor.codeActionsOnSave": [
-      "source.formatDocument",
-      "source.fixAll.stylelint"
-    ]
+    "editor.codeActionsOnSave": {
+      "source.sortImports": true,
+      "source.fixAll": true
+    }
   },
   "[typescript]": {
-    "editor.formatOnSave": false,
-    "editor.codeActionsOnSave": [
-      "source.sortImports",
-      "source.formatDocument",
-      "source.fixAll.eslint"
-    ]
+    "editor.codeActionsOnSave": {
+      "source.sortImports": true,
+      "source.fixAll": true
+    }
   }
 }
