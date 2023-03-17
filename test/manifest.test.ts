@@ -35,8 +35,11 @@ test('contains expected properties', () => {
   assert.ok(manifest.offline_enabled, 'has offline_enabled');
   assert.ok(manifest.incognito, 'has incognito');
   assert.ok(manifest.content_security_policy, 'has content_security_policy');
-  // @ts-expect-error - Not in upstream types yet
-  assert.ok(manifest.content_security_policy.extension_pages, 'has content_security_policy.extension_pages');
+  assert.ok(
+    // @ts-expect-error - Not in upstream types yet
+    manifest.content_security_policy.extension_pages,
+    'has content_security_policy.extension_pages',
+  );
   assert.ok(manifest.key, 'has key');
 
   assert.not.ok(manifest.options_ui.open_in_tab, "doesn't have options_ui.open_in_tab");
@@ -72,20 +75,36 @@ test('properties are the correct type', () => {
   assert.type(manifest.permissions, 'object', 'permissions is an object');
   assert.instance(manifest.permissions, Array, 'permissions is an instance of array');
   assert.type(manifest.chrome_url_overrides, 'object', 'chrome_url_overrides is an object');
-  assert.type(manifest.chrome_url_overrides?.newtab, 'string', 'chrome_url_overrides.newtab is a string');
+  assert.type(
+    manifest.chrome_url_overrides?.newtab,
+    'string',
+    'chrome_url_overrides.newtab is a string',
+  );
   assert.type(manifest.background, 'object', 'background is an object');
-  // @ts-expect-error - Not in upstream types yet
-  assert.type(manifest.background.service_worker, 'string', 'background.service_worker is a string');
+  assert.type(
+    // @ts-expect-error - Not in upstream types yet
+    manifest.background.service_worker,
+    'string',
+    'background.service_worker is a string',
+  );
   assert.type(manifest.options_ui, 'object', 'options_ui is an object');
   assert.type(manifest.options_ui?.page, 'string', 'options_ui.page is a string');
   assert.type(manifest.offline_enabled, 'boolean', 'offline_enabled is a boolean');
   assert.type(manifest.incognito, 'string', 'incognito is a string');
   assert.type(manifest.content_security_policy, 'object', 'content_security_policy is a object');
-  // @ts-expect-error - Not in upstream types yet
-  assert.type(manifest.content_security_policy.extension_pages, 'string', 'content_security_policy.extension_pages is a string');
+  assert.type(
+    // @ts-expect-error - Not in upstream types yet
+    manifest.content_security_policy.extension_pages,
+    'string',
+    'content_security_policy.extension_pages is a string',
+  );
   assert.type(manifest.key, 'string', 'key is a string');
 
-  assert.not.type(manifest.options_ui?.open_in_tab, 'boolean', 'options_ui.open_in_tab is not a boolean');
+  assert.not.type(
+    manifest.options_ui?.open_in_tab,
+    'boolean',
+    'options_ui.open_in_tab is not a boolean',
+  );
 });
 
 test('version_name is not a string when GITHUB_REF is set', () => {

@@ -98,9 +98,11 @@ async function makeThemes() {
   const themes = await fs.readdir(themesDir);
 
   await Promise.all(
-    themes.map((theme) => fs.readFile(path.join(themesDir, theme), 'utf8').then((src) => {
-      themesData[path.basename(theme, '.xcss')] = compileCSS(src, theme);
-    })),
+    themes.map((theme) =>
+      fs.readFile(path.join(themesDir, theme), 'utf8').then((src) => {
+        themesData[path.basename(theme, '.xcss')] = compileCSS(src, theme);
+      }),
+    ),
   );
 
   await fs.writeFile(
@@ -121,8 +123,9 @@ const analyzeMeta = {
     if (!build.initialOptions.metafile) return;
 
     build.onEnd(
-      (result) => result.metafile
-        && build.esbuild.analyzeMetafile(result.metafile).then(console.log),
+      (result) =>
+        result.metafile &&
+        build.esbuild.analyzeMetafile(result.metafile).then(console.log),
     );
   },
 };
