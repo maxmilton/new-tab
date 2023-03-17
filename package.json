@@ -23,7 +23,7 @@
     "stage1": "0.6.2"
   },
   "devDependencies": {
-    "@maxmilton/stylelint-config": "0.0.11",
+    "@maxmilton/stylelint-config": "0.0.12",
     "@types/chrome": "0.0.224",
     "@types/node": "18.15.3",
     "@typescript-eslint/eslint-plugin": "5.55.0",
