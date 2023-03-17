@@ -27,13 +27,13 @@ import path from 'node:path';
 import { suite } from 'uvu';
 import * as assert from 'uvu/assert';
 import {
-  cleanupPage,
   DIST_DIR,
-  E2ETestContext,
+  cleanupPage,
   renderPage,
   setup,
   sleep,
   teardown,
+  type E2ETestContext,
 } from './utils';
 
 const fileTest = suite('file');

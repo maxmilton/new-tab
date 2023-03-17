@@ -1,7 +1,7 @@
-import { append, h, S1Node } from 'stage1';
+import { append, h, type S1Node } from 'stage1';
 import type { UserStorageData } from '../types';
 import { DEFAULT_SECTION_ORDER } from '../utils';
-import { SearchResult, SearchResultComponent } from './SearchResult';
+import { SearchResult, type SearchResultComponent } from './SearchResult';
 
 type SectionRefs = Record<string, SearchResultComponent>;
 

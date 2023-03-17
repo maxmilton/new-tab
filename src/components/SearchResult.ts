@@ -1,6 +1,6 @@
 import { append, createFragment, h } from 'stage1';
 import { DEFAULT_SECTION_ORDER } from '../utils';
-import { Link, LinkProps } from './Link';
+import { Link, type LinkProps } from './Link';
 import { TabLink } from './TabLink';
 
 export type SearchResultComponent = HTMLDivElement & {

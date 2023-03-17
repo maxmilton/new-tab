@@ -1,9 +1,7 @@
 /* eslint-disable @typescript-eslint/restrict-plus-operands */
 
-import {
-  append, create, h, S1Node,
-} from 'stage1';
-import { Link, LinkComponent, LinkProps } from './Link';
+import { append, create, h, type S1Node } from 'stage1';
+import { Link, type LinkComponent, type LinkProps } from './Link';
 
 type FolderPopupComponent = HTMLDivElement & {
   adjustPosition(): void;
