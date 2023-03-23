@@ -23,7 +23,7 @@ specifiers:
   lightningcss: 1.19.0
   nanospy: 0.5.0
   playwright-chromium: 1.31.2
-  prettier: 2.8.5
+  prettier: 2.8.6
   stage1: 0.6.2
   stylelint: 15.3.0
   stylelint-config-standard: 31.0.0
@@ -49,7 +49,7 @@ devDependencies:
   eslint-config-airbnb-typescript: 17.0.0_oqmomuwexfikifhtpi5c5p6fmi
   eslint-config-prettier: 8.7.0_eslint@8.36.0
   eslint-plugin-import: 2.27.5_cnkxirszkzb4o6ts7gbclno24e
-  eslint-plugin-prettier: 4.2.1_e4jq4ivnnnwcsomlcyj2qoljy4
+  eslint-plugin-prettier: 4.2.1_w3shflqoegspmha2z74hzwkfbm
   eslint-plugin-unicorn: 46.0.0_eslint@8.36.0
   git-ref: 0.3.1
   happy-dom: 8.9.0
@@ -57,7 +57,7 @@ devDependencies:
   lightningcss: 1.19.0
   nanospy: 0.5.0
   playwright-chromium: 1.31.2
-  prettier: 2.8.5
+  prettier: 2.8.6
   stylelint: 15.3.0
   stylelint-config-standard: 31.0.0_stylelint@15.3.0
   tsm: 2.3.0
@@ -1518,7 +1518,7 @@ packages:
       - supports-color
     dev: true
 
-  /eslint-plugin-prettier/4.2.1_e4jq4ivnnnwcsomlcyj2qoljy4:
+  /eslint-plugin-prettier/4.2.1_w3shflqoegspmha2z74hzwkfbm:
     resolution: {integrity: sha512-f/0rXLXUt0oFYs8ra4w49wYZBG5GKZpAYsJSm6rnYL5uVDjd+zowwMwVZHnAjf4edNrKpCDYfXDgmRE/Ak7QyQ==}
     engines: {node: '>=12.0.0'}
     peerDependencies:
@@ -1531,7 +1531,7 @@ packages:
     dependencies:
       eslint: 8.36.0
       eslint-config-prettier: 8.7.0_eslint@8.36.0
-      prettier: 2.8.5
+      prettier: 2.8.6
       prettier-linter-helpers: 1.0.0
     dev: true
 
@@ -2793,8 +2793,8 @@ packages:
       fast-diff: 1.2.0
     dev: true
 
-  /prettier/2.8.5:
-    resolution: {integrity: sha512-3gzuxrHbKUePRBB4ZeU08VNkUcqEHaUaouNt0m7LGP4Hti/NuB07C7PPTM/LkWqXoJYJn2McEo5+kxPNrtQkLQ==}
+  /prettier/2.8.6:
+    resolution: {integrity: sha512-mtuzdiBbHwPEgl7NxWlqOkithPyp4VN93V7VeHVWBF+ad3I5avc0RVDT4oImXQy9H/AqxA2NSQH8pSxHW6FYbQ==}
     engines: {node: '>=10.13.0'}
     hasBin: true
     dev: true
