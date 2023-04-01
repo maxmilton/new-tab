@@ -47,7 +47,7 @@
     "playwright-chromium": "1.32.1",
     "prettier": "2.8.7",
     "stylelint": "15.4.0",
-    "stylelint-config-standard": "31.0.0",
+    "stylelint-config-standard": "32.0.0",
     "tsm": "2.3.0",
     "typescript": "5.0.3",
     "uvu": "0.5.6"
