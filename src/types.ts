@@ -1,5 +1,12 @@
 import type { DEFAULT_SECTION_ORDER } from './utils';
 
+declare global {
+  interface HTMLElement {
+    /** `stage1` synthetic click event handler. */
+    __click?(event: MouseEvent): void;
+  }
+}
+
 export interface UserStorageData {
   /** Theme data; raw CSS code. */
   t?: string;
