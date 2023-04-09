@@ -6,13 +6,6 @@ import { Menu } from './components/Menu';
 import { Search } from './components/Search';
 import { handleClick } from './utils';
 
-declare global {
-  interface HTMLElement {
-    /** `stage1` synthetic click event handler. */
-    __click?(event: MouseEvent): void;
-  }
-}
-
 performance.mark('Initialise Components');
 
 const frag = createFragment();
