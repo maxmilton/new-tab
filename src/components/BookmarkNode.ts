@@ -76,7 +76,7 @@ export interface FolderProps
 const folderView = create('div');
 folderView.className = 'f';
 
-export const Folder = (item: FolderProps): FolderComponent => {
+export const Folder = (props: FolderProps): FolderComponent => {
   const root = folderView.cloneNode(true) as FolderComponent;
   let popup: FolderPopupComponent | null;
   let timer: NodeJS.Timeout;
@@ -88,12 +88,12 @@ export const Folder = (item: FolderProps): FolderComponent => {
     timer = setTimeout(root.closePopup, CLOSE_DELAY_MS);
   };
 
-  root.textContent = item.title;
+  root.textContent = props.title;
 
-  if (item.end) root.className += ' end';
+  if (props.end) root.className += ' end';
 
   // parentId 0 = "bookmarks bar", 1 = "other bookmarks"
-  if (item.parentId! > '1') {
+  if (props.parentId! > '1') {
     append(
       (arrowView ??= h(`
         <svg class=i>
@@ -124,7 +124,7 @@ export const Folder = (item: FolderProps): FolderComponent => {
 
       popup = FolderPopup(
         root,
-        item.children!,
+        props.children!,
         // BookmarkBar (bookmarks top level) has attribute id="b"
         parent.id === 'b',
       );
@@ -143,6 +143,6 @@ export const Folder = (item: FolderProps): FolderComponent => {
 };
 
 export const BookmarkNode = (
-  item: LinkProps | FolderProps,
+  props: LinkProps | FolderProps,
   // @ts-expect-error - FIXME:!
-): LinkComponent | FolderComponent => (item.url ? Link : Folder)(item);
+): LinkComponent | FolderComponent => (props.url ? Link : Folder)(props);
