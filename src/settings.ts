@@ -168,9 +168,13 @@ const Settings = () => {
       tn: themeName,
       t: (await themesData)[themeName],
     });
+
+    if (themeName === DEFAULT_THEME) {
+      void chrome.storage.local.remove('tn');
+    }
   };
 
-  const updateOrder = (order: SettingsState['order'], noSet?: boolean) => {
+  const updateOrder = (order: SettingsState['order'], skipSave?: boolean) => {
     reconcile(se, state.order[0], order[0], (item: SectionOrderItem) =>
       SectionItem(item, 0, scope),
     );
@@ -179,10 +183,15 @@ const Settings = () => {
     );
     state.order = order;
 
-    if (!noSet) {
-      void chrome.storage.local.set({
-        o: order[0],
-      });
+    if (!skipSave) {
+      // When section order is same as default, we don't need to store it
+      if (String(order[0]) === String(DEFAULT_SECTION_ORDER)) {
+        void chrome.storage.local.remove('o');
+      } else {
+        void chrome.storage.local.set({
+          o: order[0],
+        });
+      }
     }
   };
 
