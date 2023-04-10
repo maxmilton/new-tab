@@ -224,13 +224,13 @@ const Settings = () => {
 
   reset.onclick = () => {
     void updateTheme(DEFAULT_THEME);
-    updateOrder([DEFAULT_SECTION_ORDER, []]);
+    updateOrder([[...DEFAULT_SECTION_ORDER], []]);
   };
 
   // Get user settings data
   void chrome.storage.local.get(null).then((settings: UserStorageData) => {
     const themeName = settings.tn || DEFAULT_THEME;
-    const orderEnabled = settings.o || DEFAULT_SECTION_ORDER;
+    const orderEnabled = settings.o || [...DEFAULT_SECTION_ORDER];
     const orderDisabled = DEFAULT_SECTION_ORDER.filter(
       (item) => !orderEnabled.includes(item),
     );
