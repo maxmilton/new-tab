@@ -17,7 +17,7 @@ type SectionScope = {
 };
 
 const DRAG_TYPE = 'text/plain';
-const DEFAULT_THEME = 'light';
+const DEFAULT_THEME = 'dark';
 
 const themesData = fetch('themes.json').then(
   (res) => res.json() as Promise<ThemesData>,
