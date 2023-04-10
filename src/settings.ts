@@ -1,18 +1,16 @@
 import { append, h } from 'stage1';
 import { reconcile } from 'stage1/reconcile/non-keyed';
-import type { ThemesData, UserStorageData } from './types';
+import type { SectionOrderItem, ThemesData, UserStorageData } from './types';
 import { DEFAULT_SECTION_ORDER } from './utils';
 
-type SectionComponent = HTMLLIElement;
+interface SettingsState {
+  order: [SectionOrderItem[], SectionOrderItem[]];
+}
 
-type SectionRefNodes = {
-  name: Text;
-};
-
-type ItemIndex = [listIndex: number, itemIndex: number];
+type ItemIndex = [listIndex: 0 | 1, itemIndex: number];
 
 type SectionScope = {
-  indexOf(list: number, item: string): number;
+  indexOf(list: 0 | 1, item: SectionOrderItem): number;
   moveItem(from: ItemIndex, to: ItemIndex): void;
 };
 
@@ -22,6 +20,14 @@ const DEFAULT_THEME = 'dark';
 const themesData = fetch('themes.json').then(
   (res) => res.json() as Promise<ThemesData>,
 );
+
+type SectionComponent = HTMLLIElement;
+
+type SectionRefNodes = {
+  name: Text;
+};
+
+const searchOnlyView = h('<small class="so muted">(search only)</small>');
 
 // https://tabler-icons.io/i/grip-vertical
 const sectionView = h(`
@@ -38,11 +44,9 @@ const sectionView = h(`
   </li>
 `);
 
-const searchOnlyView = h('<small class="so muted">(search only)</small>');
-
 const SectionItem = (
-  item: string,
-  list: number,
+  item: SectionOrderItem,
+  list: 0 | 1,
   scope: SectionScope,
 ): SectionComponent => {
   const root = sectionView.cloneNode(true) as SectionComponent;
@@ -96,10 +100,6 @@ type SettingsRefNodes = {
   sd: HTMLUListElement;
 };
 
-interface SettingsState {
-  order: [string[], string[]];
-}
-
 const settingsView = h(`
   <div>
     <div class=row>
@@ -142,7 +142,7 @@ const Settings = () => {
   };
 
   const scope = {
-    indexOf(list: number, item: string): number {
+    indexOf(list: 0 | 1, item: SectionOrderItem): number {
       return state.order[list].indexOf(item);
     },
     moveItem(from: ItemIndex, to: ItemIndex) {
@@ -171,10 +171,10 @@ const Settings = () => {
   };
 
   const updateOrder = (order: SettingsState['order'], noSet?: boolean) => {
-    reconcile(se, state.order[0], order[0], (item: string) =>
+    reconcile(se, state.order[0], order[0], (item: SectionOrderItem) =>
       SectionItem(item, 0, scope),
     );
-    reconcile(sd, state.order[1], order[1], (item: string) =>
+    reconcile(sd, state.order[1], order[1], (item: SectionOrderItem) =>
       SectionItem(item, 1, scope),
     );
     state.order = order;
@@ -186,7 +186,7 @@ const Settings = () => {
     }
   };
 
-  const handleDrop = (list: number) => (event: DragEvent) => {
+  const handleDrop = (list: 0 | 1) => (event: DragEvent) => {
     event.preventDefault();
 
     if (state.order[list].length !== 0) return;
