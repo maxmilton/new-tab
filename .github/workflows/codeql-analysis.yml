@@ -18,6 +18,6 @@ jobs:
       - uses: github/codeql-action/init@v2
         with:
           languages: javascript
-          queries: security-extended,security-and-quality
+          queries: security-and-quality
       - uses: github/codeql-action/autobuild@v2
       - uses: github/codeql-action/analyze@v2
