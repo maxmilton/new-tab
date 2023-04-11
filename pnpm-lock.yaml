@@ -10,8 +10,8 @@ devDependencies:
     specifier: 0.0.12
     version: 0.0.12(postcss@8.4.21)(stylelint@15.4.0)
   '@types/chrome':
-    specifier: 0.0.228
-    version: 0.0.228
+    specifier: 0.0.229
+    version: 0.0.229
   '@types/node':
     specifier: 18.15.11
     version: 18.15.11
@@ -500,8 +500,8 @@ packages:
       fastq: 1.15.0
     dev: true
 
-  /@types/chrome@0.0.228:
-    resolution: {integrity: sha512-rDmyVEF+l9H+6FQYqsEGqQOjBw/uaSx6KJ6o47FwbQmPPcskmt8XlPbKjy5KeQXU3ZLiV2x45Fk4kdtRMSghfQ==}
+  /@types/chrome@0.0.229:
+    resolution: {integrity: sha512-4dg80wr/0AxRiDxqQzHLRtiEbzYCipBpQFUGpuBfsSoIYuLMm0xH11gHc/uvNwoWDXKUsLFn8GLiYdAjt09RPQ==}
     dependencies:
       '@types/filesystem': 0.0.32
       '@types/har-format': 1.2.10
