@@ -46,7 +46,7 @@
     "nanospy": "0.5.0",
     "playwright-chromium": "1.32.3",
     "prettier": "2.8.7",
-    "stylelint": "15.4.0",
+    "stylelint": "15.5.0",
     "stylelint-config-standard": "32.0.0",
     "tsm": "2.3.0",
     "typescript": "5.0.4",
