@@ -1,5 +1,4 @@
 {
   "$schema": "https://docs.renovatebot.com/renovate-schema.json",
   "extends": ["github>maxmilton/renovate-config"]
-  // "baseBranches": ["master", "next"]
 }
