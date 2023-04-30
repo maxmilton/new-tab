@@ -1,9 +1,9 @@
 import { append, h, type S1Node } from 'stage1';
-import type { UserStorageData } from '../types';
+import type { SectionOrderItem, UserStorageData } from '../types';
 import { DEFAULT_SECTION_ORDER } from '../utils';
 import { SearchResult, type SearchResultComponent } from './SearchResult';
 
-type SectionRefs = Record<string, SearchResultComponent>;
+type SectionRefs = Partial<Record<SectionOrderItem, SearchResultComponent>>;
 
 const runSearch = (text: string, section: SectionRefs) => {
   const openTabs = section[DEFAULT_SECTION_ORDER[0]];

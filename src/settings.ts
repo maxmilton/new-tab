@@ -1,7 +1,25 @@
 import { append, h } from 'stage1';
 import { reconcile } from 'stage1/reconcile/non-keyed';
-import type { ThemesData, UserStorageData } from './types';
+import type { SectionOrderItem, ThemesData, UserStorageData } from './types';
 import { DEFAULT_SECTION_ORDER } from './utils';
+
+interface SettingsState {
+  order: [SectionOrderItem[], SectionOrderItem[]];
+}
+
+type ItemIndex = [listIndex: 0 | 1, itemIndex: number];
+
+type SectionScope = {
+  indexOf(list: 0 | 1, item: SectionOrderItem): number;
+  moveItem(from: ItemIndex, to: ItemIndex): void;
+};
+
+const DRAG_TYPE = 'text/plain';
+const DEFAULT_THEME = 'dark';
+
+const themesData = fetch('themes.json').then(
+  (res) => res.json() as Promise<ThemesData>,
+);
 
 type SectionComponent = HTMLLIElement;
 
@@ -9,19 +27,7 @@ type SectionRefNodes = {
   name: Text;
 };
 
-type ItemIndex = [listIndex: number, itemIndex: number];
-
-type SectionScope = {
-  indexOf(list: number, item: string): number;
-  moveItem(from: ItemIndex, to: ItemIndex): void;
-};
-
-const DRAG_TYPE = 'text/plain';
-const DEFAULT_THEME = 'light';
-
-const themesData = fetch('themes.json').then(
-  (res) => res.json() as Promise<ThemesData>,
-);
+const searchOnlyView = h('<small class="so muted">(search only)</small>');
 
 // https://tabler-icons.io/i/grip-vertical
 const sectionView = h(`
@@ -38,11 +44,9 @@ const sectionView = h(`
   </li>
 `);
 
-const searchOnlyView = h('<small class="so muted">(search only)</small>');
-
 const SectionItem = (
-  item: string,
-  list: number,
+  item: SectionOrderItem,
+  list: 0 | 1,
   scope: SectionScope,
 ): SectionComponent => {
   const root = sectionView.cloneNode(true) as SectionComponent;
@@ -96,10 +100,6 @@ type SettingsRefNodes = {
   sd: HTMLUListElement;
 };
 
-interface SettingsState {
-  order: [string[], string[]];
-}
-
 const settingsView = h(`
   <div>
     <div class=row>
@@ -142,7 +142,7 @@ const Settings = () => {
   };
 
   const scope = {
-    indexOf(list: number, item: string): number {
+    indexOf(list: 0 | 1, item: SectionOrderItem): number {
       return state.order[list].indexOf(item);
     },
     moveItem(from: ItemIndex, to: ItemIndex) {
@@ -168,25 +168,34 @@ const Settings = () => {
       tn: themeName,
       t: (await themesData)[themeName],
     });
+
+    if (themeName === DEFAULT_THEME) {
+      void chrome.storage.local.remove('tn');
+    }
   };
 
-  const updateOrder = (order: SettingsState['order'], noSet?: boolean) => {
-    reconcile(se, state.order[0], order[0], (item: string) =>
+  const updateOrder = (order: SettingsState['order'], skipSave?: boolean) => {
+    reconcile(se, state.order[0], order[0], (item: SectionOrderItem) =>
       SectionItem(item, 0, scope),
     );
-    reconcile(sd, state.order[1], order[1], (item: string) =>
+    reconcile(sd, state.order[1], order[1], (item: SectionOrderItem) =>
       SectionItem(item, 1, scope),
     );
     state.order = order;
 
-    if (!noSet) {
-      void chrome.storage.local.set({
-        o: order[0],
-      });
+    if (!skipSave) {
+      // When section order is same as default, we don't need to store it
+      if (String(order[0]) === String(DEFAULT_SECTION_ORDER)) {
+        void chrome.storage.local.remove('o');
+      } else {
+        void chrome.storage.local.set({
+          o: order[0],
+        });
+      }
     }
   };
 
-  const handleDrop = (list: number) => (event: DragEvent) => {
+  const handleDrop = (list: 0 | 1) => (event: DragEvent) => {
     event.preventDefault();
 
     if (state.order[list].length !== 0) return;
@@ -215,13 +224,13 @@ const Settings = () => {
 
   reset.onclick = () => {
     void updateTheme(DEFAULT_THEME);
-    updateOrder([DEFAULT_SECTION_ORDER, []]);
+    updateOrder([[...DEFAULT_SECTION_ORDER], []]);
   };
 
   // Get user settings data
   void chrome.storage.local.get(null).then((settings: UserStorageData) => {
     const themeName = settings.tn || DEFAULT_THEME;
-    const orderEnabled = settings.o || DEFAULT_SECTION_ORDER;
+    const orderEnabled = settings.o || [...DEFAULT_SECTION_ORDER];
     const orderDisabled = DEFAULT_SECTION_ORDER.filter(
       (item) => !orderEnabled.includes(item),
     );
