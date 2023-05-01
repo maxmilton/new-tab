@@ -2,8 +2,8 @@ lockfileVersion: '6.0'
 
 dependencies:
   stage1:
-    specifier: 0.6.2
-    version: 0.6.2
+    specifier: 0.7.2
+    version: 0.7.2
 
 devDependencies:
   '@maxmilton/stylelint-config':
@@ -3045,8 +3045,8 @@ packages:
     resolution: {integrity: sha512-XkD+zwiqXHikFZm4AX/7JSCXA98U5Db4AFd5XUg/+9UNtnH75+Z9KxtpYiJZx36mUDVOwH83pl7yvCer6ewM3w==}
     dev: true
 
-  /stage1@0.6.2:
-    resolution: {integrity: sha512-RBNR9kL5P8+Wam2+LpLSL4rliOaO8/UPPbhakskubz96ULWDEnEuOfeXnlOUzse4+ZLQgi8PTH/MY5Y7x1KvgA==}
+  /stage1@0.7.2:
+    resolution: {integrity: sha512-0IwVSQIpGnKd74GDwvt4+xhVNGL7NxeGypB95G9RjhjLO8chttl/0M5x1qdm/z09HhX2aDdGWtiaxaHxsZoPqw==}
     dev: false
 
   /string-width@4.2.3:
