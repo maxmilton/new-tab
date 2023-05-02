@@ -58,8 +58,8 @@ devDependencies:
     specifier: 0.3.1
     version: 0.3.1
   happy-dom:
-    specifier: 9.10.1
-    version: 9.10.1
+    specifier: 9.10.6
+    version: 9.10.6
   kleur:
     specifier: 4.1.5
     version: 4.1.5
@@ -1920,8 +1920,8 @@ packages:
     resolution: {integrity: sha512-bzh50DW9kTPM00T8y4o8vQg89Di9oLJVLW/KaOGIXJWP/iqCN6WKYkbNOF04vFLJhwcpYUh9ydh/+5vpOqV4YQ==}
     dev: true
 
-  /happy-dom@9.10.1:
-    resolution: {integrity: sha512-4wEWL9jYxtjcvGJDACtcelTBD86Sv//Kwn3G/+zb0mrNF3sC/JC0lTznqLu4Vw4cNUfR4WLMjiC+jeAr8CxM2g==}
+  /happy-dom@9.10.6:
+    resolution: {integrity: sha512-jmeFeP3q3voQsoDC2MKdZXX6OPD4URfCSPwLkKtn9RuJQYH9qc6FlTa/D2Ilxm1WRQ83SF+8UfxybJnvDS9/gQ==}
     dependencies:
       css.escape: 1.5.1
       he: 1.2.0
