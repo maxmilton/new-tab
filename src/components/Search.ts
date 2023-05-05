@@ -34,7 +34,7 @@ const runSearch = (text: string, section: SectionRefs) => {
 };
 
 type SearchComponent = S1Node & HTMLDivElement;
-type RefNodes = {
+type Refs = {
   s: HTMLInputElement;
 };
 
@@ -51,7 +51,7 @@ const view = h(`
 
 export const Search = (): SearchComponent => {
   const root = view as SearchComponent;
-  const { s } = view.collect<RefNodes>(root);
+  const { s } = view.collect<Refs>(root);
   const section: SectionRefs = {};
 
   s.oninput = () => runSearch(s.value, section);

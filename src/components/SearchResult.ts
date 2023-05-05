@@ -7,7 +7,7 @@ export type SearchResultComponent = HTMLDivElement & {
   update: (this: void, newData: any[]) => void;
   filter: (this: void, text: string) => void;
 };
-type RefNodes = {
+type Refs = {
   t: Text;
   l: HTMLDivElement;
   m: HTMLButtonElement;
@@ -30,7 +30,7 @@ export const SearchResult = <T extends LinkProps>(
   sectionName: string,
 ): SearchResultComponent => {
   const root = view.cloneNode(true) as SearchResultComponent;
-  const nodes = view.collect<RefNodes>(root);
+  const nodes = view.collect<Refs>(root);
   const isOpenTabs = sectionName === DEFAULT_SECTION_ORDER[0];
   let rawData: T[];
   let renderedLength: number;

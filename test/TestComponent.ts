@@ -6,7 +6,7 @@ interface TestProps {
   text: string;
 }
 
-type RefNodes = {
+type Refs = {
   t: Text;
 };
 
@@ -18,7 +18,7 @@ const view = h(`
 
 export function Test(props: TestProps): TestComponent {
   const root = view as TestComponent;
-  const { t } = view.collect<RefNodes>(root);
+  const { t } = view.collect<Refs>(root);
 
   t.nodeValue = props.text;
 

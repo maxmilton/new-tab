@@ -7,7 +7,7 @@ export interface LinkProps {
 
 export type LinkComponent = HTMLAnchorElement;
 
-type RefNodes = {
+type Refs = {
   i: HTMLImageElement;
   t: Text;
 };
@@ -21,7 +21,7 @@ const view = h(`
 
 export const Link = (props: LinkProps): LinkComponent => {
   const root = view.cloneNode(true) as LinkComponent;
-  const nodes = view.collect<RefNodes>(root);
+  const nodes = view.collect<Refs>(root);
 
   root.href = props.url;
   // eslint-disable-next-line no-multi-assign

@@ -23,7 +23,7 @@ const themesData = fetch('themes.json').then(
 
 type SectionComponent = HTMLLIElement;
 
-type SectionRefNodes = {
+type SectionRefs = {
   name: Text;
 };
 
@@ -50,7 +50,7 @@ const SectionItem = (
   scope: SectionScope,
 ): SectionComponent => {
   const root = sectionView.cloneNode(true) as SectionComponent;
-  const { name } = sectionView.collect<SectionRefNodes>(root);
+  const { name } = sectionView.collect<SectionRefs>(root);
 
   name.nodeValue = item;
 
@@ -93,7 +93,7 @@ const SectionItem = (
   return root;
 };
 
-type SettingsRefNodes = {
+type SettingsRefs = {
   theme: HTMLSelectElement;
   reset: HTMLButtonElement;
   se: HTMLUListElement;
@@ -135,7 +135,7 @@ const settingsView = h(`
 
 const Settings = () => {
   const root = settingsView;
-  const { theme, reset, se, sd } = settingsView.collect<SettingsRefNodes>(root);
+  const { theme, reset, se, sd } = settingsView.collect<SettingsRefs>(root);
 
   const state: SettingsState = {
     order: [[], []],
