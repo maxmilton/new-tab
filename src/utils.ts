@@ -5,7 +5,7 @@ export const DEFAULT_SECTION_ORDER = [
   'History',
   'Top Sites',
   'Recently Closed Tabs',
-];
+] as const;
 
 export const handleClick = (event: MouseEvent): void => {
   const { target, ctrlKey } = event;

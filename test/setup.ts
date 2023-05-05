@@ -49,6 +49,7 @@ function setupMocks(): void {
             return Promise.resolve({});
           }
         },
+        remove: noop,
         set: noop,
       },
     },

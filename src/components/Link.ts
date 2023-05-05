@@ -19,14 +19,14 @@ const view = h(`
   </a>
 `);
 
-export const Link = (item: LinkProps): LinkComponent => {
+export const Link = (props: LinkProps): LinkComponent => {
   const root = view.cloneNode(true) as LinkComponent;
   const nodes = view.collect<RefNodes>(root);
 
-  root.href = item.url;
+  root.href = props.url;
   // eslint-disable-next-line no-multi-assign
-  root.title = nodes.t.nodeValue = item.title;
-  nodes.i.src = '_favicon?size=16&pageUrl=' + encodeURIComponent(item.url);
+  root.title = nodes.t.nodeValue = props.title;
+  nodes.i.src = '_favicon?size=16&pageUrl=' + encodeURIComponent(props.url);
 
   return root;
 };
