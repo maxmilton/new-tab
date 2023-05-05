@@ -2,8 +2,8 @@ lockfileVersion: '6.0'
 
 dependencies:
   stage1:
-    specifier: 0.6.2
-    version: 0.6.2
+    specifier: 0.7.2
+    version: 0.7.2
 
 devDependencies:
   '@maxmilton/stylelint-config':
@@ -58,8 +58,8 @@ devDependencies:
     specifier: 0.3.1
     version: 0.3.1
   happy-dom:
-    specifier: 9.10.1
-    version: 9.10.1
+    specifier: 9.10.6
+    version: 9.10.6
   kleur:
     specifier: 4.1.5
     version: 4.1.5
@@ -386,8 +386,8 @@ packages:
       eslint-visitor-keys: 3.4.0
     dev: true
 
-  /@eslint-community/regexpp@4.5.0:
-    resolution: {integrity: sha512-vITaYzIcNmjn5tF5uxcZ/ft7/RXGrMUIS9HalWckEOF6ESiwXKoMzAQf2UW0aVd6rnOeExTJVd5hmWXucBKGXQ==}
+  /@eslint-community/regexpp@4.5.1:
+    resolution: {integrity: sha512-Z5ba73P98O1KUYCCJTUeVpja9RcGoMdncZ6T49FCUl2lN38JtCJ+3WgIDBv0AuY4WChU5PmtJmOCTlN6FZTFKQ==}
     engines: {node: ^12.0.0 || ^14.0.0 || >=16.0.0}
     dev: true
 
@@ -575,7 +575,7 @@ packages:
       typescript:
         optional: true
     dependencies:
-      '@eslint-community/regexpp': 4.5.0
+      '@eslint-community/regexpp': 4.5.1
       '@typescript-eslint/parser': 5.59.1(eslint@8.39.0)(typescript@5.0.4)
       '@typescript-eslint/scope-manager': 5.59.1
       '@typescript-eslint/type-utils': 5.59.1(eslint@8.39.0)(typescript@5.0.4)
@@ -1583,7 +1583,7 @@ packages:
       lodash: 4.17.21
       pluralize: 8.0.0
       read-pkg-up: 7.0.1
-      regexp-tree: 0.1.25
+      regexp-tree: 0.1.27
       regjsparser: 0.9.1
       safe-regex: 2.1.1
       semver: 7.5.0
@@ -1617,7 +1617,7 @@ packages:
     hasBin: true
     dependencies:
       '@eslint-community/eslint-utils': 4.4.0(eslint@8.39.0)
-      '@eslint-community/regexpp': 4.5.0
+      '@eslint-community/regexpp': 4.5.1
       '@eslint/eslintrc': 2.0.2
       '@eslint/js': 8.39.0
       '@humanwhocodes/config-array': 0.11.8
@@ -1920,8 +1920,8 @@ packages:
     resolution: {integrity: sha512-bzh50DW9kTPM00T8y4o8vQg89Di9oLJVLW/KaOGIXJWP/iqCN6WKYkbNOF04vFLJhwcpYUh9ydh/+5vpOqV4YQ==}
     dev: true
 
-  /happy-dom@9.10.1:
-    resolution: {integrity: sha512-4wEWL9jYxtjcvGJDACtcelTBD86Sv//Kwn3G/+zb0mrNF3sC/JC0lTznqLu4Vw4cNUfR4WLMjiC+jeAr8CxM2g==}
+  /happy-dom@9.10.6:
+    resolution: {integrity: sha512-jmeFeP3q3voQsoDC2MKdZXX6OPD4URfCSPwLkKtn9RuJQYH9qc6FlTa/D2Ilxm1WRQ83SF+8UfxybJnvDS9/gQ==}
     dependencies:
       css.escape: 1.5.1
       he: 1.2.0
@@ -2857,8 +2857,8 @@ packages:
       strip-indent: 3.0.0
     dev: true
 
-  /regexp-tree@0.1.25:
-    resolution: {integrity: sha512-szcL3aqw+vEeuxhL1AMYRyeMP+goYF5I/guaH10uJX5xbGyeQeNPPneaj3ZWVmGLCDxrVaaYekkr5R12gk4dJw==}
+  /regexp-tree@0.1.27:
+    resolution: {integrity: sha512-iETxpjK6YoRWJG5o6hXLwvjYAoW+FEZn9os0PD/b6AP6xQwsa/Y7lCVgIixBbUPMfhu+i2LtdeAqVTgGlQarfA==}
     hasBin: true
     dev: true
 
@@ -2943,7 +2943,7 @@ packages:
   /safe-regex@2.1.1:
     resolution: {integrity: sha512-rx+x8AMzKb5Q5lQ95Zoi6ZbJqwCLkqi3XuJXp5P3rT8OEc6sZCJG5AE5dU3lsgRr/F4Bs31jSlVN+j5KrsGu9A==}
     dependencies:
-      regexp-tree: 0.1.25
+      regexp-tree: 0.1.27
     dev: true
 
   /safer-buffer@2.1.2:
@@ -3045,8 +3045,8 @@ packages:
     resolution: {integrity: sha512-XkD+zwiqXHikFZm4AX/7JSCXA98U5Db4AFd5XUg/+9UNtnH75+Z9KxtpYiJZx36mUDVOwH83pl7yvCer6ewM3w==}
     dev: true
 
-  /stage1@0.6.2:
-    resolution: {integrity: sha512-RBNR9kL5P8+Wam2+LpLSL4rliOaO8/UPPbhakskubz96ULWDEnEuOfeXnlOUzse4+ZLQgi8PTH/MY5Y7x1KvgA==}
+  /stage1@0.7.2:
+    resolution: {integrity: sha512-0IwVSQIpGnKd74GDwvt4+xhVNGL7NxeGypB95G9RjhjLO8chttl/0M5x1qdm/z09HhX2aDdGWtiaxaHxsZoPqw==}
     dev: false
 
   /string-width@4.2.3:
