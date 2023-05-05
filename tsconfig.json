@@ -14,11 +14,10 @@
     "allowUnreachableCode": false,
     "exactOptionalPropertyTypes": true,
     "forceConsistentCasingInFileNames": true,
-    "noFallthroughCasesInSwitch": true,
+    "noFallthroughCasesInSwitch": false, // covered by eslint
     "noImplicitOverride": true,
-    "noUnusedLocals": true,
-    "noUnusedParameters": true,
-    "useDefineForClassFields": true,
+    "noUnusedLocals": false, // covered by eslint
+    "noUnusedParameters": false, // covered by eslint
     "verbatimModuleSyntax": true,
 
     // TODO: Remove when lightningcss fix their package.json#exports
