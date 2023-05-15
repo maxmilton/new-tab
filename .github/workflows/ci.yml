@@ -9,15 +9,18 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
+      - uses: oven-sh/setup-bun@v1
+        with:
+          bun-version: latest
       - uses: actions/setup-node@v3
         with:
-          node-version: 19
+          node-version: 20
       - run: npm install --global pnpm
       - run: pnpm install --frozen-lockfile
         env:
           PLAYWRIGHT_SKIP_BROWSER_DOWNLOAD: 1
       - run: pnpm run build
-      - run: pnpm run test
+      - run: bun run test
       - name: Report coverage
         if: ${{ github.repository_owner == 'maxmilton' }}
         run: |
@@ -32,23 +35,36 @@ jobs:
     timeout-minutes: 10
     steps:
       - uses: actions/checkout@v3
+      - uses: oven-sh/setup-bun@v1
+        with:
+          bun-version: latest
       - uses: actions/setup-node@v3
         with:
-          node-version: 19
+          node-version: 20
       - run: npm install --global pnpm
       - run: pnpm install --frozen-lockfile
       - run: pnpm run build
-      - run: pnpm playwright install-deps chromium
-      - run: xvfb-run --auto-servernum -- pnpm run test:e2e
+      # - run: bun playwright install --with-deps chromium
+      # - run: xvfb-run --auto-servernum -- bun run test:e2e
+      - run: bun run test:e2e
+      - uses: actions/upload-artifact@v3
+        if: always()
+        with:
+          name: playwright-report
+          path: playwright-report/
+          retention-days: 30
   lint:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
+      - uses: oven-sh/setup-bun@v1
+        with:
+          bun-version: latest
       - uses: actions/setup-node@v3
         with:
-          node-version: 19
+          node-version: 20
       - run: npm install --global pnpm
       - run: pnpm install --frozen-lockfile
         env:
           PLAYWRIGHT_SKIP_BROWSER_DOWNLOAD: 1
-      - run: pnpm run lint
+      - run: bun run lint

@@ -10,6 +10,9 @@ jobs:
       contents: write
     steps:
       - uses: actions/checkout@v3
+      - uses: oven-sh/setup-bun@v1
+        with:
+          bun-version: latest
       - uses: actions/setup-node@v3
         with:
           node-version: 19
@@ -18,8 +21,8 @@ jobs:
         env:
           PLAYWRIGHT_SKIP_BROWSER_DOWNLOAD: 1
       - run: pnpm run build
-      - run: pnpm run lint
-      - run: pnpm run test
+      - run: bun run lint
+      - run: bun run test
       - run: cd dist && zip ../chrome-extension.zip *
       - uses: maxmilton/action-create-release@v0
         with:
