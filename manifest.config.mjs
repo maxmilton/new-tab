@@ -13,7 +13,7 @@ export const manifest = () => ({
   description: pkg.description,
   version: pkg.version,
   // production releases should not have a named version
-  version_name: process.env.GITHUB_REF ? undefined : gitRef().replace(/^v/, ''),
+  version_name: process.env.CI ? undefined : gitRef().replace(/^v/, ''),
   minimum_chrome_version: '113',
   homepage_url: pkg.homepage,
   icons: {

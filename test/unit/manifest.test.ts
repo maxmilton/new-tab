@@ -106,15 +106,29 @@ test('permissions contains expected values', () => {
   expect(manifest.permissions).toContain('topSites');
 });
 
-test('does not have version_name when GITHUB_REF is set', () => {
-  process.env.GITHUB_REF = 'v1.0.0';
+// test('does not have version_name when GITHUB_REF is set', () => {
+//   process.env.GITHUB_REF = 'v1.0.0';
+//   const manifest2 = getManifest();
+//   expect(manifest2.version_name).toBeUndefined();
+// });
+
+// test('has version_name when GITHUB_REF is not set', () => {
+//   delete process.env.GITHUB_REF;
+//   const manifest2 = getManifest();
+//   expect(manifest2.version_name).toBeDefined();
+// });
+
+test('does not have version_name when env var CI=true', () => {
+  process.env.CI = 'true';
   const manifest2 = getManifest();
   expect(manifest2.version_name).toBeUndefined();
+  delete process.env.CI;
 });
 
-test('has version_name when GITHUB_REF is not set', () => {
-  delete process.env.GITHUB_REF;
-  delete Bun.env.GITHUB_REF;
+test('has version_name when CI env var is not set', () => {
+  const oldCI = process.env.CI;
+  delete process.env.CI;
   const manifest2 = getManifest();
   expect(manifest2.version_name).toBeDefined();
+  process.env.CI = oldCI;
 });
