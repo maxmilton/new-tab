@@ -21,12 +21,12 @@ const view = h(`
 
 export const Link = (props: LinkProps): LinkComponent => {
   const root = view.cloneNode(true) as LinkComponent;
-  const nodes = view.collect<Refs>(root);
+  const refs = view.collect<Refs>(root);
 
   root.href = props.url;
   // eslint-disable-next-line no-multi-assign
-  root.title = nodes.t.nodeValue = props.title;
-  nodes.i.src = '_favicon?size=16&pageUrl=' + encodeURIComponent(props.url);
+  root.title = refs.t.nodeValue = props.title;
+  refs.i.src = '_favicon?size=16&pageUrl=' + encodeURIComponent(props.url);
 
   return root;
 };

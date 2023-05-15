@@ -29,9 +29,9 @@ const view = h(`
 
 export const Menu = (): MenuComponent => {
   const root = view as MenuComponent;
-  const nodes = view.collect<Refs>(root);
+  const refs = view.collect<Refs>(root);
 
-  nodes.s.__click = () => chrome.runtime.openOptionsPage();
+  refs.s.__click = () => chrome.runtime.openOptionsPage();
 
   return root;
 };

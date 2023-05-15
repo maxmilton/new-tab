@@ -52,7 +52,7 @@ export const SearchResult = <T extends LinkProps & TabItem>(
   sectionName: (typeof DEFAULT_SECTION_ORDER)[number],
 ): SearchResultComponent<T> => {
   const root = view.cloneNode(true) as SearchResultComponent<T>;
-  const nodes = view.collect<Refs>(root);
+  const refs = view.collect<Refs>(root);
   const isOpenTabs = sectionName === DEFAULT_SECTION_ORDER[0];
   let rawData: T[];
   let renderedLength: number;
@@ -71,11 +71,11 @@ export const SearchResult = <T extends LinkProps & TabItem>(
       }
     });
 
-    nodes.l.replaceChildren(frag);
+    refs.l.replaceChildren(frag);
 
     renderedLength = partial.length;
     root.hidden = !renderedLength;
-    nodes.m.hidden = renderedLength >= listData.length;
+    refs.m.hidden = renderedLength >= listData.length;
 
     performance.measure(sectionName, sectionName);
   };
@@ -97,9 +97,9 @@ export const SearchResult = <T extends LinkProps & TabItem>(
       ),
     );
 
-  nodes.t.textContent = sectionName;
+  refs.t.textContent = sectionName;
 
-  nodes.m.__click = () =>
+  refs.m.__click = () =>
     renderList(rawData, renderedLength + MORE_RESULTS_AMOUNT);
 
   return root;
