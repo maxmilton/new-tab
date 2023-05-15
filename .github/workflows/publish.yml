@@ -15,7 +15,7 @@ jobs:
           bun-version: latest
       - uses: actions/setup-node@v3
         with:
-          node-version: 19
+          node-version: 20
       - run: npm install --global pnpm
       - run: pnpm install --frozen-lockfile
         env:
