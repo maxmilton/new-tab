@@ -1,52 +1,50 @@
+import { describe, expect, test } from 'bun:test';
 import { spyOn } from 'nanospy';
-import * as assert from 'uvu/assert';
-import { DEFAULT_SECTION_ORDER, handleClick } from '../src/utils';
-import { describe } from './utils';
+import { DEFAULT_SECTION_ORDER, handleClick } from '../../src/utils';
 
-describe('DEFAULT_SECTION_ORDER', (test) => {
+describe('DEFAULT_SECTION_ORDER', () => {
   test('is an array', () => {
-    assert.type(DEFAULT_SECTION_ORDER, 'object');
-    assert.instance(DEFAULT_SECTION_ORDER, Array);
+    expect(DEFAULT_SECTION_ORDER).toBeInstanceOf(window.Array);
   });
 
   test('contains all sections', () => {
-    assert.ok(DEFAULT_SECTION_ORDER.includes('Open Tabs'));
-    assert.ok(DEFAULT_SECTION_ORDER.includes('Bookmarks'));
-    assert.ok(DEFAULT_SECTION_ORDER.includes('History'));
-    assert.ok(DEFAULT_SECTION_ORDER.includes('Top Sites'));
-    assert.ok(DEFAULT_SECTION_ORDER.includes('Recently Closed Tabs'));
-    assert.is(DEFAULT_SECTION_ORDER.length, 5);
+    expect(DEFAULT_SECTION_ORDER).toHaveLength(5);
+    expect(DEFAULT_SECTION_ORDER).toContain('Open Tabs');
+    expect(DEFAULT_SECTION_ORDER).toContain('Bookmarks');
+    expect(DEFAULT_SECTION_ORDER).toContain('History');
+    expect(DEFAULT_SECTION_ORDER).toContain('Top Sites');
+    expect(DEFAULT_SECTION_ORDER).toContain('Recently Closed Tabs');
   });
 
   test('contains no duplicates', () => {
     const uniqueSections = new Set(DEFAULT_SECTION_ORDER);
-    assert.is(uniqueSections.size, DEFAULT_SECTION_ORDER.length);
+    expect(uniqueSections.size).toBe(DEFAULT_SECTION_ORDER.length);
   });
 
   test('has "Open Tabs" as the first item', () => {
-    assert.is(DEFAULT_SECTION_ORDER[0], 'Open Tabs');
+    expect(DEFAULT_SECTION_ORDER[0]).toBe('Open Tabs');
   });
 });
 
 // TODO: Add invarient tests for handleClick
 
-describe('handleClick', (test) => {
+describe('handleClick', () => {
   test('default prevented on event when url does not start with "h"', () => {
     const event = new window.MouseEvent('click');
     // @ts-expect-error - _target is an implementation detail of happy-dom
     event._target = { href: 'chrome://about' };
-    assert.not.ok(event.defaultPrevented, 'event default not prevented');
+    expect(event.defaultPrevented).toBe(false);
     handleClick(event);
-    assert.ok(event.defaultPrevented, 'event default prevented');
+    expect(event.defaultPrevented).toBe(true);
   });
 
   test('default not prevent on event when url starts with "h"', () => {
     const event = new window.MouseEvent('click');
     // @ts-expect-error - _target is an implementation detail of happy-dom
     event._target = { href: 'https://example.com' };
-    assert.not.ok(event.defaultPrevented, 'event default not prevented');
+    expect(event.defaultPrevented).toBe(false);
     handleClick(event);
-    assert.not.ok(event.defaultPrevented, 'event default still not prevented');
+    expect(event.defaultPrevented).toBe(false);
   });
 
   test('opens in new tab when url starts with chrome:// and target is _blank', () => {
@@ -56,8 +54,8 @@ describe('handleClick', (test) => {
     // @ts-expect-error - _target is an implementation detail of happy-dom
     event._target = { href: 'chrome://about', target: '_blank' };
     handleClick(event);
-    assert.ok(tabsCreateSpy.called, 'chrome.tabs.create called');
-    assert.not.ok(tabsUpdateSpy.called, 'chrome.tabs.update not called');
+    expect(tabsCreateSpy.called).toBe(true);
+    expect(tabsUpdateSpy.called).toBe(false);
   });
 
   test('opens in new tab when url starts with chrome:// and ctrl key is pressed', () => {
@@ -67,8 +65,8 @@ describe('handleClick', (test) => {
     // @ts-expect-error - _target is an implementation detail of happy-dom
     event._target = { href: 'chrome://about' };
     handleClick(event);
-    assert.ok(tabsCreateSpy.called, 'chrome.tabs.create called');
-    assert.not.ok(tabsUpdateSpy.called, 'chrome.tabs.update not called');
+    expect(tabsCreateSpy.called).toBe(true);
+    expect(tabsUpdateSpy.called).toBe(false);
   });
 
   test('updates current tab when url starts with chrome:// and target is not _blank', () => {
@@ -78,8 +76,8 @@ describe('handleClick', (test) => {
     // @ts-expect-error - _target is an implementation detail of happy-dom
     event._target = { href: 'chrome://about', target: undefined };
     handleClick(event);
-    assert.not.ok(tabsCreateSpy.called, 'chrome.tabs.create not called');
-    assert.ok(tabsUpdateSpy.called, 'chrome.tabs.update called');
+    expect(tabsCreateSpy.called).toBe(false);
+    expect(tabsUpdateSpy.called).toBe(true);
   });
 
   test('updates current tab when url starts with chrome:// and ctrl key is not pressed', () => {
@@ -89,7 +87,7 @@ describe('handleClick', (test) => {
     // @ts-expect-error - _target is an implementation detail of happy-dom
     event._target = { href: 'chrome://about' };
     handleClick(event);
-    assert.not.ok(tabsCreateSpy.called, 'chrome.tabs.create not called');
-    assert.ok(tabsUpdateSpy.called, 'chrome.tabs.update called');
+    expect(tabsCreateSpy.called).toBe(false);
+    expect(tabsUpdateSpy.called).toBe(true);
   });
 });
