@@ -113,8 +113,8 @@ test('does not have version_name when GITHUB_REF is set', () => {
 });
 
 test('has version_name when GITHUB_REF is not set', () => {
-  // delete process.env.GITHUB_REF;
-  process.env.GITHUB_REF = '';
+  delete process.env.GITHUB_REF;
+  delete Bun.env.GITHUB_REF;
   const manifest2 = getManifest();
   expect(manifest2.version_name).toBeDefined();
 });
