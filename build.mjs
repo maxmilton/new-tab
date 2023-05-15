@@ -12,7 +12,7 @@ import * as lightningcss from 'lightningcss';
 import fs from 'node:fs/promises';
 import path from 'node:path';
 import { performance } from 'node:perf_hooks';
-import manifest from './manifest.config.mjs';
+import { manifest } from './manifest.config.mjs';
 
 const mode = process.env.NODE_ENV;
 const dev = mode === 'development';
@@ -49,7 +49,7 @@ function compileCSS(src, from) {
     sourceMap: false,
     targets: {
       // eslint-disable-next-line no-bitwise
-      chrome: 110 << 16,
+      chrome: 113 << 16,
     },
   });
 
@@ -71,9 +71,10 @@ async function makeHTML(pageName, stylePath) {
   const css = compileCSS(styleSrc, stylePath);
   const template = `<!doctype html>
 <meta charset=utf-8>
+<meta name=google value=notranslate>
 <title>New Tab</title>
 <link href=${pageName}.css rel=stylesheet>
-<script src=${pageName}.js async></script>`;
+<script src=${pageName}.js type=module></script>`;
 
   await fs.writeFile(path.join(dir, 'dist', `${pageName}.css`), css);
   await fs.writeFile(path.join(dir, 'dist', `${pageName}.html`), template);
@@ -85,7 +86,7 @@ await makeHTML('settings', 'src/css/settings.xcss');
 // Extension manifest
 await fs.writeFile(
   path.join(dir, 'dist', 'manifest.json'),
-  JSON.stringify(manifest),
+  JSON.stringify(manifest()),
 );
 
 /**
@@ -164,7 +165,7 @@ const esbuildConfig1 = {
   entryPoints: ['src/newtab.ts', 'src/settings.ts'],
   outdir: 'dist',
   platform: 'browser',
-  target: ['chrome110'],
+  target: ['chrome113'],
   format: 'esm',
   define: { 'process.env.NODE_ENV': JSON.stringify(mode) },
   plugins: [minifyTemplates(), minifyJS, writeFiles(), analyzeMeta],
@@ -172,7 +173,6 @@ const esbuildConfig1 = {
   minify: !dev,
   mangleProps: /_refs|collect|adjustPosition|closePopup/,
   sourcemap: dev,
-  banner: { js: '"use strict";' },
   write: dev,
   metafile: !dev && process.stdout.isTTY,
   logLevel: 'debug',
