@@ -1,6 +1,6 @@
 import { append, h, type S1Node } from 'stage1';
-import type { SectionOrderItem, UserStorageData } from '../types';
-import { DEFAULT_SECTION_ORDER } from '../utils';
+import type { SectionOrderItem } from '../types';
+import { DEFAULT_SECTION_ORDER, storage } from '../utils';
 import { SearchResult, type SearchResultComponent } from './SearchResult';
 
 type SectionRefs = Partial<Record<SectionOrderItem, SearchResultComponent>>;
@@ -51,87 +51,86 @@ const view = h(`
 
 export const Search = (): SearchComponent => {
   const root = view as SearchComponent;
-  const { s } = view.collect<Refs>(root);
+  const refs = view.collect<Refs>(root);
+  const searchref = refs.s;
   const section: SectionRefs = {};
 
-  s.oninput = () => runSearch(s.value, section);
+  searchref.oninput = () => runSearch(searchref.value, section);
 
-  s.onkeyup = (event) => {
+  searchref.onkeyup = (event) => {
     if (event.key === 'Escape') {
-      s.value = '';
+      searchref.value = '';
       runSearch('', section);
     }
   };
 
   performance.mark('Load Sections');
 
-  chrome.storage.local.get('o', (userSettings: UserStorageData) => {
-    const sectionOrder = userSettings.o || DEFAULT_SECTION_ORDER;
+  const sectionOrder = storage.o || DEFAULT_SECTION_ORDER;
 
-    sectionOrder.forEach((name) => {
-      section[name] = append(SearchResult(name), root);
-    });
-
-    const openTabs = section[DEFAULT_SECTION_ORDER[0]];
-    const topSites = section[DEFAULT_SECTION_ORDER[3]];
-    const recentlyClosed = section[DEFAULT_SECTION_ORDER[4]];
-
-    if (openTabs) {
-      const updateOpenTabs = () =>
-        chrome.tabs.query({}, (result) => {
-          openTabs.update(result);
-          if (s.value) openTabs.filter(s.value);
-        });
-
-      updateOpenTabs();
-
-      chrome.tabs.onUpdated.addListener(updateOpenTabs);
-      chrome.tabs.onRemoved.addListener(updateOpenTabs);
-      chrome.tabs.onMoved.addListener(updateOpenTabs);
-
-      // When opening multiple new-tab pages the browser will continue to update
-      // the "Open Tabs" section on all pages, causing a significant performance
-      // overhead. The impact is multiplied by the number of open tabs * the
-      // number of new-tab pages. The actual problem is work is done even on
-      // pages that are not visible and with execution on older pages before the
-      // current page. Additionally, the SearchResult component is implemented
-      // in a way that produces the smallest JS size and fast execution (remove
-      // entire list DOM and insert new DOM fragment) rather than for efficiency
-      // (e.g., DOM reconciliation; diff list DOM state and mutate changes
-      // minimising adding or removing DOM nodes).
-
-      // TODO: Keep? Causes significantly worse page load speed!
-
-      // // When the page isn't active stop the "Open Tabs" section from updating to
-      // // prevent performance issues when users open many new-tab pages.
-      // document.onvisibilitychange = () => {
-      //   if (document.hidden) {
-      //     // @ts-expect-error - force override to kill API method
-      //     chrome.tabs.query = () => {};
-      //     // chrome.tabs.onUpdated.removeListener(updateOpenTabs);
-      //     // chrome.tabs.onRemoved.removeListener(updateOpenTabs);
-      //     // chrome.tabs.onMoved.removeListener(updateOpenTabs);
-      //   } else {
-      //     // eslint-disable-next-line no-restricted-globals
-      //     location.reload();
-      //   }
-      // };
-    }
-
-    if (topSites) {
-      chrome.topSites.get(topSites.update);
-    }
-
-    if (recentlyClosed) {
-      chrome.sessions.getRecentlyClosed({}, (sessions) => {
-        recentlyClosed.update(
-          sessions.map((session) => session.tab).filter((tab) => tab),
-        );
-      });
-    }
-
-    performance.measure('Load Sections', 'Load Sections');
+  sectionOrder.forEach((name) => {
+    section[name] = append(SearchResult(name), root);
   });
+
+  const openTabs = section[DEFAULT_SECTION_ORDER[0]];
+  const topSites = section[DEFAULT_SECTION_ORDER[3]];
+  const recentlyClosed = section[DEFAULT_SECTION_ORDER[4]];
+
+  if (openTabs) {
+    const updateOpenTabs = () =>
+      chrome.tabs.query({}, (result) => {
+        openTabs.update(result);
+        if (searchref.value) openTabs.filter(searchref.value);
+      });
+
+    updateOpenTabs();
+
+    chrome.tabs.onUpdated.addListener(updateOpenTabs);
+    chrome.tabs.onRemoved.addListener(updateOpenTabs);
+    chrome.tabs.onMoved.addListener(updateOpenTabs);
+
+    // When opening multiple new-tab pages the browser will continue to update
+    // the "Open Tabs" section on all pages, causing a significant performance
+    // overhead. The impact is multiplied by the number of open tabs * the
+    // number of new-tab pages. The actual problem is work is done even on
+    // pages that are not visible and with execution on older pages before the
+    // current page. Additionally, the SearchResult component is implemented
+    // in a way that produces the smallest JS size and fast execution (remove
+    // entire list DOM and insert new DOM fragment) rather than for efficiency
+    // (e.g., DOM reconciliation; diff list DOM state and mutate changes
+    // minimising adding or removing DOM nodes).
+
+    // TODO: Keep? Causes significantly worse page load speed!
+
+    // // When the page isn't active stop the "Open Tabs" section from updating to
+    // // prevent performance issues when users open many new-tab pages.
+    // document.onvisibilitychange = () => {
+    //   if (document.hidden) {
+    //     // @ts-expect-error - force override to kill API method
+    //     chrome.tabs.query = () => {};
+    //     // chrome.tabs.onUpdated.removeListener(updateOpenTabs);
+    //     // chrome.tabs.onRemoved.removeListener(updateOpenTabs);
+    //     // chrome.tabs.onMoved.removeListener(updateOpenTabs);
+    //   } else {
+    //     // eslint-disable-next-line no-restricted-globals
+    //     location.reload();
+    //   }
+    // };
+  }
+
+  if (topSites) {
+    chrome.topSites.get(topSites.update);
+  }
+
+  if (recentlyClosed) {
+    chrome.sessions.getRecentlyClosed({}, (sessions) => {
+      recentlyClosed.update(
+        sessions.map((session) => session.tab).filter((tab) => tab),
+      );
+    });
+  }
+
+  performance.measure('Load Sections', 'Load Sections');
 
   return root;
 };

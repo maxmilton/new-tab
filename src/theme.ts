@@ -2,15 +2,13 @@
  * Theme Loader
  */
 
-import type { UserStorageData } from './types';
+import { storage } from './utils';
 
 performance.mark('Load Theme');
 
 // Get theme that was preloaded in sw.js
-chrome.storage.local.get('t', (settings: UserStorageData) => {
-  const sheet = new CSSStyleSheet();
-  sheet.replaceSync(settings.t!);
-  document.adoptedStyleSheets = [sheet];
+const sheet = new CSSStyleSheet();
+sheet.replaceSync(storage.t!);
+document.adoptedStyleSheets = [sheet];
 
-  performance.measure('Load Theme', 'Load Theme');
-});
+performance.measure('Load Theme', 'Load Theme');
