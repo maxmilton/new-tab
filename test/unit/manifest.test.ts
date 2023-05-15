@@ -122,12 +122,12 @@ test('does not have version_name when env var CI=true', () => {
   restoreCI();
 });
 
-test('has version_name when CI env var is not set', () => {
-  // delete process.env.CI;
-  process.env.CI = '';
-  console.log('#### CI', process.env.CI);
+// FIXME: Don't skip once bun has fixed:
+// - https://github.com/oven-sh/bun/issues/556
+// - https://github.com/oven-sh/bun/issues/2696
+test.skip('has version_name when CI env var is not set', () => {
+  delete process.env.CI;
   const manifest2 = getManifest();
   expect(manifest2.version_name).toBeDefined();
   restoreCI();
-  console.log('#### CI2', process.env.CI);
 });
