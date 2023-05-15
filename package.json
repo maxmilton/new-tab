@@ -10,25 +10,27 @@
   "scripts": {
     "build": "pnpm run prebuild && NODE_ENV=production node build.mjs",
     "dev": "pnpm run prebuild && NODE_ENV=development node build.mjs",
-    "lint": "pnpm run lint:css && pnpm run lint:js && pnpm run lint:ts",
+    "lint": "bun run lint:css && bun run lint:js && bun run lint:ts",
     "lint:css": "stylelint --ignore-path .gitignore '**/*.{css,xcss}'",
     "lint:js": "eslint --ignore-path .gitignore --ext .cjs,.js,.mjs,.ts .",
-    "lint:ts": "tsc --project test",
+    "lint:ts": "tsc --noEmit",
     "prebuild": "rm -rf dist; cp -r static dist",
-    "test": "c8 --all --include=src --include=manifest.config.mjs --reporter=text --reporter=lcovonly uvu -r tsm -r \"$PWD\"/test/setup.ts test '\\.test\\.ts$'",
-    "test:e2e": "node -r tsm test/e2e/index.ts",
-    "zip": "sh -c 'test -z \"$(git status --porcelain)\"' && pnpm run lint && pnpm run test && pnpm run build && cd dist && zip ../chrome-extension.zip *"
+    "test": "TZ=UTC bun test --preload ./test/setup.ts test/unit",
+    "test:e2e": "TZ=UTC playwright test test/e2e/*.spec.ts",
+    "test:e2e:debug": "bun run test:e2e --debug",
+    "test:e2e:ui": "bun run test:e2e --ui",
+    "zip": "sh -c 'test -z \"$(git status --porcelain)\"' && pnpm run build && bun run lint && bun run test && cd dist && zip ../chrome-extension.zip *"
   },
   "dependencies": {
     "stage1": "0.7.2"
   },
   "devDependencies": {
     "@maxmilton/stylelint-config": "0.0.12",
+    "@playwright/test": "1.33.0",
     "@types/chrome": "0.0.234",
-    "@types/node": "18.16.3",
     "@typescript-eslint/eslint-plugin": "5.59.1",
     "@typescript-eslint/parser": "5.59.1",
-    "c8": "7.13.0",
+    "bun-types": "0.5.8",
     "ekscss": "0.0.13",
     "esbuild": "0.17.18",
     "esbuild-minify-templates": "0.10.0",
@@ -41,16 +43,14 @@
     "eslint-plugin-unicorn": "46.0.0",
     "git-ref": "0.3.1",
     "happy-dom": "9.10.6",
-    "kleur": "4.1.5",
     "lightningcss": "1.20.0",
     "nanospy": "0.5.0",
     "playwright-chromium": "1.33.0",
     "prettier": "2.8.8",
     "stylelint": "15.6.0",
     "stylelint-config-standard": "33.0.0",
-    "tsm": "2.3.0",
-    "typescript": "5.0.4",
-    "uvu": "0.5.6"
+    "terser": "5.17.1",
+    "typescript": "5.0.4"
   },
   "prettier": {
     "arrowParens": "always",
@@ -60,6 +60,7 @@
     "overrides": [
       {
         "files": [
+          "*.spec.ts",
           "*.test.ts"
         ],
         "options": {
