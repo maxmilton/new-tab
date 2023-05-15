@@ -3,12 +3,10 @@
     "target": "esnext",
     "module": "esnext",
     "moduleResolution": "bundler",
-    "esModuleInterop": true,
+    "esModuleInterop": false,
     "resolveJsonModule": true,
     "skipLibCheck": true,
-    "allowJs": true,
-    "checkJs": true,
-    "noEmit": true,
+    "allowJs": false,
 
     "strict": true,
     "allowUnreachableCode": false,
@@ -20,8 +18,15 @@
     "noUnusedParameters": false, // covered by eslint
     "verbatimModuleSyntax": true,
 
+    "types": [
+      "bun-types",
+      "chrome",
+      "./node_modules/typescript/lib/lib.esnext.full.d.ts" // workaround for bun-types breaking dom types
+    ],
+
     // TODO: Remove when lightningcss fix their package.json#exports
     "resolvePackageJsonExports": false
   },
-  "exclude": ["coverage", "dist", "node_modules", "test"]
+  "include": ["src", "test"],
+  "references": [{ "path": "./tsconfig.node.json" }]
 }

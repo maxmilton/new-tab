@@ -9,7 +9,7 @@ module.exports = {
   reportUnusedDisableDirectives: true,
   parser: '@typescript-eslint/parser',
   parserOptions: {
-    project: ['./test/tsconfig.json'],
+    project: ['tsconfig.json', 'tsconfig.node.json'],
     tsconfigRootDir: __dirname,
   },
   extends: [
