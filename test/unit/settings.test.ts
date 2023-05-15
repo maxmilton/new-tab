@@ -15,5 +15,9 @@ test('renders entire settings app', async () => {
   // TODO: Better assertions
   expect(document.body.innerHTML.length).toBeGreaterThan(600);
 
+  // FIXME: fetch('themes.json') currently errors but does not fail the test
+  //  ↳ A bad fetch should fail the test (bun test bug)
+  //  ↳ It should actually get the themes.json file correctly (happy-dom bug)
+
   checkConsoleCalls(expect);
 });
