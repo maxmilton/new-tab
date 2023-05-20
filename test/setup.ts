@@ -5,10 +5,13 @@ declare global {
   var happyDOM: Window['happyDOM'];
 }
 
-// increase limit from 10
-global.Error.stackTraceLimit = 100;
+// Increase stack limit from 10 (v8 default)
+global.Error.stackTraceLimit = 50;
 
-function noop() {}
+const noop = () => {};
+const noopAsync = () => Promise.resolve();
+const noopAsyncObj = () => Promise.resolve({});
+const noopAsyncArr = () => Promise.resolve([]);
 
 function setupDOM() {
   const dom = new GlobalWindow();
@@ -27,13 +30,12 @@ function setupMocks(): void {
   global.chrome = {
     // @ts-expect-error - partial mock
     bookmarks: {
-      getTree: () => Promise.resolve([]),
-      search: () => Promise.resolve([]),
+      getTree: noopAsyncArr,
+      search: noopAsyncArr,
     },
     // @ts-expect-error - partial mock
     history: {
-      // // @ts-expect-error - stub
-      search: () => Promise.resolve([]),
+      search: noopAsyncArr,
     },
     // @ts-expect-error - partial mock
     runtime: {
@@ -41,21 +43,21 @@ function setupMocks(): void {
     },
     // @ts-expect-error - partial mock
     sessions: {
-      getRecentlyClosed: () => Promise.resolve([]),
+      getRecentlyClosed: noopAsyncArr,
     },
     storage: {
       // @ts-expect-error - partial mock
       local: {
-        get: () => Promise.resolve({}),
-        remove: () => Promise.resolve(),
-        set: () => Promise.resolve(),
+        get: () => Promise.resolve({ t: '' }),
+        remove: noopAsync,
+        set: noopAsync,
       },
     },
     tabs: {
       // @ts-expect-error - partial mock
-      create: () => Promise.resolve({}),
+      create: noopAsyncObj,
       // @ts-expect-error - partial mock
-      getCurrent: () => Promise.resolve({}),
+      getCurrent: noopAsyncObj,
       // @ts-expect-error - partial mock
       onMoved: {
         addListener: noop,
@@ -68,19 +70,19 @@ function setupMocks(): void {
       onUpdated: {
         addListener: noop,
       },
-      query: () => Promise.resolve([]),
-      remove: () => Promise.resolve(),
+      query: noopAsyncArr,
+      remove: noopAsync,
       // @ts-expect-error - partial mock
-      update: () => Promise.resolve({}),
+      update: noopAsyncObj,
     },
     topSites: {
-      get: () => Promise.resolve([]),
+      get: noopAsyncArr,
     },
     windows: {
       // @ts-expect-error - partial mock
-      getCurrent: () => Promise.resolve({}),
+      getCurrent: noopAsyncObj,
       // @ts-expect-error - partial mock
-      update: () => Promise.resolve(),
+      update: noopAsync,
     },
   };
 }

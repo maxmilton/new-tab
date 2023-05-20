@@ -6,8 +6,7 @@
 import { gitRef } from 'git-ref';
 import pkg from './package.json' assert { type: 'json' };
 
-/** @returns {chrome.runtime.Manifest} */
-export const manifest = () => ({
+export const manifest = (): chrome.runtime.ManifestV3 => ({
   manifest_version: 3,
   name: 'New Tab',
   description: pkg.description,

@@ -7,19 +7,16 @@ on:
 jobs:
   test:
     runs-on: ubuntu-latest
+    timeout-minutes: 5
     steps:
       - uses: actions/checkout@v3
       - uses: oven-sh/setup-bun@v1
         with:
           bun-version: latest
-      - uses: actions/setup-node@v3
-        with:
-          node-version: 20
-      - run: npm install --global pnpm
-      - run: pnpm install --frozen-lockfile
+      - run: bun install
         env:
           PLAYWRIGHT_SKIP_BROWSER_DOWNLOAD: 1
-      - run: pnpm run build
+      - run: bun run build
       - run: bun run test
       # FIXME: Enable coverage reporting once bun test supports it; https://github.com/oven-sh/bun/issues/2311
       # - name: Report coverage
@@ -39,12 +36,10 @@ jobs:
       - uses: oven-sh/setup-bun@v1
         with:
           bun-version: latest
-      - uses: actions/setup-node@v3
-        with:
-          node-version: 20
-      - run: npm install --global pnpm
-      - run: pnpm install --frozen-lockfile
-      - run: pnpm run build
+      - run: bun install
+      # bun doesn't run lifecycle scripts of dependencies so we manually install chromium
+      - run: bun playwright install chromium
+      - run: bun run build
       - run: bun run test:e2e
       - uses: actions/upload-artifact@v3
         if: always()
@@ -54,16 +49,13 @@ jobs:
           retention-days: 30
   lint:
     runs-on: ubuntu-latest
+    timeout-minutes: 5
     steps:
       - uses: actions/checkout@v3
       - uses: oven-sh/setup-bun@v1
         with:
           bun-version: latest
-      - uses: actions/setup-node@v3
-        with:
-          node-version: 20
-      - run: npm install --global pnpm
-      - run: pnpm install --frozen-lockfile
+      - run: bun install
         env:
           PLAYWRIGHT_SKIP_BROWSER_DOWNLOAD: 1
       - run: bun run lint

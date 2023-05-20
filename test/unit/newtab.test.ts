@@ -1,18 +1,6 @@
-import { afterAll, beforeAll, expect, test } from 'bun:test';
+import { afterAll, expect, test } from 'bun:test';
 import { reset } from '../setup';
 import { consoleSpy } from './utils';
-
-beforeAll(() => {
-  // @ts-expect-error - mock
-  // eslint-disable-next-line consistent-return
-  global.chrome.storage.local.get = (_keys, callback) => {
-    if (callback) {
-      callback({ t: '' });
-    } else {
-      return Promise.resolve({ t: '' });
-    }
-  };
-});
 
 afterAll(reset);
 
@@ -31,7 +19,7 @@ test('renders entire newtab app', async () => {
   expect(document.body.querySelector('#m')).toBeTruthy();
   expect(document.body.querySelector('#d')).toBeTruthy();
 
-  // TODO: Check there is a h2 with text 'Open Tabs'
+  // TODO: Check all section headings exist; a h2 with text 'Open Tabs' x5
 
   checkConsoleCalls(expect);
 });

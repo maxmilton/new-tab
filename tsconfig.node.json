@@ -7,12 +7,6 @@
   },
   "include": [
     ".eslintrc.cjs",
-    "build.ts",
-    "manifest.config.ts",
-    "package.json", // imported in manifest.config.ts
-
-    // TODO: Remove these once we migrate to 100% bun
-    "build.mjs",
-    "manifest.config.mjs"
+    "package.json" // imported in manifest.config.ts
   ]
 }
