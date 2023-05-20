@@ -37,6 +37,7 @@ jobs:
         with:
           bun-version: latest
       - run: bun install
+      # bun doesn't run lifecycle scripts of dependencies so we manually install chromium
       - run: bun playwright install chromium
       - run: bun run build
       - run: bun run test:e2e
