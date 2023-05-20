@@ -1,7 +1,5 @@
 import { expect, test } from 'bun:test';
-// @ts-expect-error - TODO: Remove this line after we switch to pure Bun (and convert to .ts)
-// eslint-disable-next-line import/extensions
-import { manifest as getManifest } from '../../manifest.config.mjs';
+import { manifest as getManifest } from '../../manifest.config';
 
 const manifest = getManifest();
 

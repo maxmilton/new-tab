@@ -13,14 +13,10 @@ jobs:
       - uses: oven-sh/setup-bun@v1
         with:
           bun-version: latest
-      - uses: actions/setup-node@v3
-        with:
-          node-version: 20
-      - run: npm install --global pnpm
-      - run: pnpm install --frozen-lockfile
+      - run: bun install
         env:
           PLAYWRIGHT_SKIP_BROWSER_DOWNLOAD: 1
-      - run: pnpm run build
+      - run: bun run build
       - run: bun run lint
       - run: bun run test
       - run: cd dist && zip ../chrome-extension.zip *

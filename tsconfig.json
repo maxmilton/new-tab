@@ -27,6 +27,6 @@
     // TODO: Remove when lightningcss fix their package.json#exports
     "resolvePackageJsonExports": false
   },
-  "include": ["src", "test"],
+  "include": ["src", "test", "build.ts", "manifest.config.ts"],
   "references": [{ "path": "./tsconfig.node.json" }]
 }
