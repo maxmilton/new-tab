@@ -24,6 +24,7 @@ function setupDOM() {
   global.clearTimeout = window.clearTimeout;
   global.DocumentFragment = window.DocumentFragment;
   global.CSSStyleSheet = window.CSSStyleSheet;
+  global.Text = window.Text;
 }
 
 function setupMocks(): void {
