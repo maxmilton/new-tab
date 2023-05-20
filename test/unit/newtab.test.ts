@@ -1,6 +1,11 @@
-import { afterAll, expect, test } from 'bun:test';
+import { afterAll, beforeAll, expect, test } from 'bun:test';
 import { reset } from '../setup';
 import { consoleSpy } from './utils';
+
+beforeAll(() => {
+  // Workaround for hack in src/BookmarkBar.ts that waits for styles to be loaded
+  document.head.appendChild(document.createElement('style'));
+});
 
 afterAll(reset);
 

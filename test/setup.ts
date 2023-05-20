@@ -30,7 +30,7 @@ function setupMocks(): void {
   global.chrome = {
     // @ts-expect-error - partial mock
     bookmarks: {
-      getTree: noopAsyncArr,
+      getChildren: noopAsyncArr,
       search: noopAsyncArr,
     },
     // @ts-expect-error - partial mock
@@ -85,6 +85,11 @@ function setupMocks(): void {
       update: noopAsync,
     },
   };
+
+  // global.fetch = () =>
+  //   Promise.resolve({
+  //     json: () => Promise.resolve({}),
+  //   } as Response);
 }
 
 export function reset(): void {

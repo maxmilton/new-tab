@@ -1,5 +1,5 @@
 import { append, create, h } from 'stage1';
-import { BookmarkNode, Folder, type FolderProps } from './BookmarkNode';
+import { BookmarkNode, Folder, type BookmarkTreeNode } from './BookmarkNode';
 
 declare global {
   interface HTMLElement {
@@ -22,88 +22,72 @@ export const BookmarkBar = (): BookmarkBarComponent => {
   const root = create('div');
   root.id = 'b';
 
-  chrome.bookmarks.getTree((tree) => {
-    const [{ children: bookmarks }, otherBookmarks] = tree[0].children!;
-    const len = bookmarks!.length;
+  void chrome.bookmarks.getChildren('1').then((bookmarks) => {
+    const len = bookmarks.length;
 
-    // Add BookmarkNodes one at a time until they can't fit in the bookmark
-    // bar and then create a folder with the overflowing items
+    // Since we can't determine an element's width before it's included in the
+    // DOM, we have to insert BookmarkNodes individually until no more can fit.
+    // Any leftover items are then placed in an overflow folder.
     const resize = () => {
       performance.mark('BookmarkBar');
 
-      // Remove child nodes
+      // Remove all child nodes
       root.textContent = '';
 
-      let otherBookmarksFolder;
-      // NOTE: None of the elements we're measuring have a border or margin so
-      // we can use clientWidth instead of offsetWidth for better performance
-      let currentWidth = 0;
+      // Max width is root minus overflow folder width (68 == 24px svg + 2 * 9px
+      // svg padding + 2 * 13px bookmark item padding)
+      const maxWidth = root.clientWidth - 68;
+      const otherBookmarksFolder = append(
+        Folder({ id: '2', title: 'Other Bookmarks' }),
+        root,
+      );
+      // NOTE: The elements we're measuring don't have a border or margin so
+      // we can use clientWidth instead of offsetWidth for better performance.
+      let currentWidth = otherBookmarksFolder.clientWidth;
+      let index = 0;
 
-      if (otherBookmarks.children!.length) {
-        (otherBookmarks as FolderProps).end = true;
-        otherBookmarksFolder = append(Folder(otherBookmarks), root);
-        currentWidth = otherBookmarksFolder.clientWidth;
+      for (; index < len; index++) {
+        const node = append(BookmarkNode(bookmarks[index]), root);
+        currentWidth += node.clientWidth;
+
+        if (currentWidth >= maxWidth) {
+          // Remove the node which overflowed
+          node.remove();
+          break;
+        }
       }
 
-      if (len) {
-        // minus overflow folder width (66 == 24px svg + 2*8px padding + 2*13px padding)
-        const maxWidth = root.clientWidth - 66;
-        let index = 0;
+      if (index < len) {
+        const overflowBookmarksFolder = append(
+          Folder({} as BookmarkTreeNode, false, bookmarks.slice(index)),
+          root,
+        );
+        overflowBookmarksFolder.className += ' end';
 
-        for (; index < len; index++) {
-          const node = append(BookmarkNode(bookmarks![index]), root);
-          currentWidth += node.clientWidth;
-
-          if (currentWidth >= maxWidth) {
-            // There's no way to know an element's width before adding it to the
-            // DOM so now we need to remove the added node which overflowed
-            node.remove();
-            break;
-          }
-        }
-
-        if (index < len) {
-          const overflowBookmarksFolder = append(
-            Folder({
-              // TODO: More elegant solution to show caret in overflow folder
-              // children: bookmarks!.slice(index),
-              children: bookmarks!.slice(index).map((item) => {
-                // eslint-disable-next-line no-param-reassign
-                item.parentId = '2';
-                return item;
-              }),
-              end: true,
-              title: '',
-            }),
-            root,
-          );
-
-          append(
-            // https://github.com/feathericons/feather/blob/master/icons/corner-right-down.svg
-            h(`
+        append(
+          // https://github.com/feathericons/feather/blob/master/icons/corner-right-down.svg
+          h(`
               <svg id=io>
                 <polyline points="10 15 15 20 20 15"/>
                 <path d="M4 4h7a4 4 0 0 1 4 4v12"/>
               </svg>
             `),
-            overflowBookmarksFolder,
-          );
-        }
-
-        // The "other bookmarks" folder was added first so overflow calculation
-        // is correct but now move it to its proper position at the end
-        if (otherBookmarksFolder) {
-          append(otherBookmarksFolder, root);
-        }
+          overflowBookmarksFolder,
+        );
       }
+
+      // The "Other Bookmarks" folder was added first so overflow calculation
+      // is correct but now move it to its proper position at the end
+      append(otherBookmarksFolder, root);
+      otherBookmarksFolder.className += ' end';
 
       performance.measure('BookmarkBar', 'BookmarkBar');
     };
 
-    // HACK: Because this script is loaded async, there exists a race condition
-    // where the JS runs before the CSS is loaded. The styles are required to
-    // calculate the width of each bookmark node. Loading the JS script async
-    // yeilds the best load performance but a better overall solution is needed.
+    // HACK: Workaround for race condition. This script is loaded asynchronously,
+    // which yeilds the best performance, but it means this code may execute
+    // before the CSS has loaded. Styles are needed to calculate the bookmark
+    // item widths, so wait until the CSS is ready.
     const waitForStylesThenResize = () => {
       if (document.styleSheets.length) {
         resize();
