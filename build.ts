@@ -184,7 +184,6 @@ const esbuildConfig2: esbuild.BuildOptions = {
   plugins: [analyzeMeta],
   bundle: true,
   minify: !dev,
-  write: dev,
   metafile: !dev && process.stdout.isTTY,
   logLevel: 'debug',
 };
