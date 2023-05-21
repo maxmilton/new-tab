@@ -4,7 +4,6 @@ on:
     tags: [v*.*.*]
 jobs:
   publish:
-    if: github.ref == 'refs/heads/master'
     runs-on: ubuntu-latest
     permissions:
       contents: write
