@@ -1,7 +1,7 @@
 import { expect, test } from 'bun:test';
-import { manifest as getManifest } from '../../manifest.config';
+import { makeManifest } from '../../manifest.config';
 
-const manifest = getManifest();
+const manifest = makeManifest();
 
 test('is valid JSON', () => {
   const result = JSON.parse(JSON.stringify(manifest)) as typeof manifest;
@@ -115,7 +115,7 @@ const restoreCI = () => {
 
 test('does not have version_name when env var CI=true', () => {
   process.env.CI = 'true';
-  const manifest2 = getManifest();
+  const manifest2 = makeManifest();
   expect(manifest2.version_name).toBeUndefined();
   restoreCI();
 });
@@ -125,7 +125,7 @@ test('does not have version_name when env var CI=true', () => {
 // - https://github.com/oven-sh/bun/issues/2696
 test.skip('has version_name when CI env var is not set', () => {
   delete process.env.CI;
-  const manifest2 = getManifest();
+  const manifest2 = makeManifest();
   expect(manifest2.version_name).toBeDefined();
   restoreCI();
 });

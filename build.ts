@@ -11,7 +11,7 @@ import {
 import * as lightningcss from 'lightningcss';
 import fs from 'node:fs/promises';
 import path from 'node:path';
-import { manifest } from './manifest.config';
+import { makeManifest } from './manifest.config';
 
 const mode = Bun.env.NODE_ENV;
 const dev = mode === 'development';
@@ -69,7 +69,7 @@ await makeHTML('newtab', 'src/css/newtab.xcss');
 await makeHTML('settings', 'src/css/settings.xcss');
 
 // Extension manifest
-await Bun.write('dist/manifest.json', JSON.stringify(manifest()));
+await Bun.write('dist/manifest.json', JSON.stringify(makeManifest()));
 
 /**
  * Compile all themes, combine into a single JSON file, and save it to disk.
