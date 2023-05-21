@@ -31,7 +31,7 @@
     "@typescript-eslint/eslint-plugin": "5.59.6",
     "@typescript-eslint/parser": "5.59.6",
     "bun-types": "0.6.2",
-    "ekscss": "0.0.13",
+    "ekscss": "0.0.14",
     "esbuild": "0.17.19",
     "esbuild-minify-templates": "0.10.0",
     "eslint": "8.41.0",

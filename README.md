@@ -39,7 +39,8 @@ What started as an experiment to play with the Chrome browser APIs and explore w
 - [Chrome browser APIs](https://developer.chrome.com/docs/extensions/reference/)
 - [stage1](https://github.com/maxmilton/stage1) JavaScript framework
 - [ekscss](https://github.com/maxmilton/ekscss) style preprocessor
-- [esbuild](https://esbuild.github.io/) JavaScript bundler
+- [esbuild](https://github.com/evanw/esbuild) JavaScript bundler
+- [bun](https://github.com/oven-sh/bun) JavaScript bundler and runtime
 
 ## Browser support
 

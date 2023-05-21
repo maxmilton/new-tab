@@ -1,6 +1,6 @@
 /* eslint-disable import/no-extraneous-dependencies, no-console */
 
-import xcss from 'ekscss';
+import * as xcss from 'ekscss';
 import esbuild from 'esbuild';
 import {
   decodeUTF8,
