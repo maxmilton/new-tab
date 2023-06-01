@@ -1,4 +1,8 @@
-lockfileVersion: '6.0'
+lockfileVersion: '6.1'
+
+settings:
+  autoInstallPeers: true
+  excludeLinksFromLockfile: false
 
 dependencies:
   stage1:
@@ -10,8 +14,8 @@ devDependencies:
     specifier: 0.0.12
     version: 0.0.12(postcss@8.4.23)(stylelint@15.6.0)
   '@types/chrome':
-    specifier: 0.0.234
-    version: 0.0.234
+    specifier: 0.0.237
+    version: 0.0.237
   '@types/node':
     specifier: 18.16.3
     version: 18.16.3
@@ -505,8 +509,8 @@ packages:
       fastq: 1.15.0
     dev: true
 
-  /@types/chrome@0.0.234:
-    resolution: {integrity: sha512-4JofeJBUPFf8Qy9ZiOif5jp5V4tG/WaFVPyb11E6Zmvx1q5j+X7LR/zWmj3lhbliaFxTMY/51GjMdpZOiUWjqQ==}
+  /@types/chrome@0.0.237:
+    resolution: {integrity: sha512-krsRmyfMlck5r+H1EapsrrucDRq6iRm0NAi5fapr93CgnpVMDdK+h2+z4x79GegdW7BNH9Vb//gkptORwwwVIQ==}
     dependencies:
       '@types/filesystem': 0.0.32
       '@types/har-format': 1.2.10
