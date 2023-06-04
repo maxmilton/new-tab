@@ -13,8 +13,6 @@ jobs:
         with:
           bun-version: latest
       - run: bun install
-        env:
-          PLAYWRIGHT_SKIP_BROWSER_DOWNLOAD: 1
       - run: bun run build
       - run: bun run lint
       - run: bun run test

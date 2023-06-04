@@ -15,8 +15,6 @@ jobs:
         with:
           bun-version: latest
       - run: bun install
-        env:
-          PLAYWRIGHT_SKIP_BROWSER_DOWNLOAD: 1
       - run: bun run build
       - run: bun run test
       # FIXME: Enable coverage reporting once bun test supports it; https://github.com/oven-sh/bun/issues/2311
@@ -38,7 +36,6 @@ jobs:
         with:
           bun-version: latest
       - run: bun install
-      # bun doesn't run lifecycle scripts of dependencies so we manually install chromium
       - run: bun playwright install chromium
       - run: bun run build
       - run: bun run test:e2e --reporter=dot,html
@@ -57,6 +54,4 @@ jobs:
         with:
           bun-version: latest
       - run: bun install
-        env:
-          PLAYWRIGHT_SKIP_BROWSER_DOWNLOAD: 1
       - run: bun run lint
