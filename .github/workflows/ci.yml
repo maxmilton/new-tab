@@ -41,7 +41,7 @@ jobs:
       # bun doesn't run lifecycle scripts of dependencies so we manually install chromium
       - run: bun playwright install chromium
       - run: bun run build
-      - run: bun run test:e2e
+      - run: bun run test:e2e --reporter=dot,html
       - uses: actions/upload-artifact@v3
         if: always()
         with:
