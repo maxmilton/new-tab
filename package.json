@@ -15,7 +15,7 @@
     "lint:js": "eslint --ignore-path .gitignore --ext .cjs,.js,.mjs,.ts .",
     "lint:ts": "tsc --noEmit",
     "prebuild": "rm -rf dist; cp -r static dist",
-    "test": "TZ=UTC bun test --preload ./test/setup.ts test/unit",
+    "test": "bun test --preload ./test/setup.ts test/unit",
     "test:e2e": "TZ=UTC playwright test test/e2e/*.spec.ts",
     "test:e2e:debug": "bun run test:e2e --debug",
     "test:e2e:ui": "bun run test:e2e --ui",
