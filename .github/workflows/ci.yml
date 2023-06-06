@@ -2,56 +2,53 @@ name: ci
 on:
   push:
     branches: [master, next]
-    paths-ignore: ['**.md']
   pull_request:
     branches: [master, next]
 jobs:
   test:
     runs-on: ubuntu-latest
-    timeout-minutes: 5
     steps:
       - uses: actions/checkout@v3
-      - uses: oven-sh/setup-bun@v1
+      - uses: actions/setup-node@v3
         with:
-          bun-version: latest
-      - run: bun install
-      - run: bun run build
-      - run: bun run test
-      # FIXME: Enable coverage reporting once bun test supports it; https://github.com/oven-sh/bun/issues/2311
-      # - name: Report coverage
-      #   if: ${{ github.repository_owner == 'maxmilton' }}
-      #   run: |
-      #     curl -Lo ./cc-test-reporter https://codeclimate.com/downloads/test-reporter/test-reporter-latest-linux-amd64
-      #     chmod +x ./cc-test-reporter
-      #     ./cc-test-reporter format-coverage -t lcov -o coverage/codeclimate.json coverage/lcov.info
-      #     ./cc-test-reporter upload-coverage
-      #   env:
-      #     CC_TEST_REPORTER_ID: ${{ secrets.CC_TEST_REPORTER_ID }}
+          node-version: 19
+      - run: npm install --global pnpm
+      - run: pnpm install --frozen-lockfile
+        env:
+          PLAYWRIGHT_SKIP_BROWSER_DOWNLOAD: 1
+      - run: pnpm run build
+      - run: pnpm run test
+      - name: Report coverage
+        if: ${{ github.repository_owner == 'maxmilton' }}
+        run: |
+          curl -Lo ./cc-test-reporter https://codeclimate.com/downloads/test-reporter/test-reporter-latest-linux-amd64
+          chmod +x ./cc-test-reporter
+          ./cc-test-reporter format-coverage -t lcov -o coverage/codeclimate.json coverage/lcov.info
+          ./cc-test-reporter upload-coverage
+        env:
+          CC_TEST_REPORTER_ID: ${{ secrets.CC_TEST_REPORTER_ID }}
   e2e:
     runs-on: ubuntu-latest
     timeout-minutes: 10
     steps:
       - uses: actions/checkout@v3
-      - uses: oven-sh/setup-bun@v1
+      - uses: actions/setup-node@v3
         with:
-          bun-version: latest
-      - run: bun install
-      - run: bun playwright install chromium
-      - run: bun run build
-      - run: bun run test:e2e --reporter=dot,html
-      - uses: actions/upload-artifact@v3
-        if: always()
-        with:
-          name: playwright-report
-          path: playwright-report/
-          retention-days: 30
+          node-version: 19
+      - run: npm install --global pnpm
+      - run: pnpm install --frozen-lockfile
+      - run: pnpm run build
+      - run: pnpm playwright install-deps chromium
+      - run: xvfb-run --auto-servernum -- pnpm run test:e2e
   lint:
     runs-on: ubuntu-latest
-    timeout-minutes: 5
     steps:
       - uses: actions/checkout@v3
-      - uses: oven-sh/setup-bun@v1
+      - uses: actions/setup-node@v3
         with:
-          bun-version: latest
-      - run: bun install
-      - run: bun run lint
+          node-version: 19
+      - run: npm install --global pnpm
+      - run: pnpm install --frozen-lockfile
+        env:
+          PLAYWRIGHT_SKIP_BROWSER_DOWNLOAD: 1
+      - run: pnpm run lint

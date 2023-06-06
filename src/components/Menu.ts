@@ -1,7 +1,7 @@
 import { h, type S1Node } from 'stage1';
 
 type MenuComponent = S1Node & HTMLDivElement;
-type Refs = {
+type RefNodes = {
   s: HTMLAnchorElement;
 };
 
@@ -29,9 +29,9 @@ const view = h(`
 
 export const Menu = (): MenuComponent => {
   const root = view as MenuComponent;
-  const refs = view.collect<Refs>(root);
+  const nodes = view.collect<RefNodes>(root);
 
-  refs.s.__click = () => chrome.runtime.openOptionsPage();
+  nodes.s.__click = () => chrome.runtime.openOptionsPage();
 
   return root;
 };

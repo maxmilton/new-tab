@@ -1,6 +1,6 @@
-/* eslint-disable import/no-extraneous-dependencies, no-console */
+/* eslint-disable import/extensions, import/no-extraneous-dependencies, no-console */
 
-import * as xcss from 'ekscss';
+import xcss from 'ekscss';
 import esbuild from 'esbuild';
 import {
   decodeUTF8,
@@ -11,16 +11,24 @@ import {
 import * as lightningcss from 'lightningcss';
 import fs from 'node:fs/promises';
 import path from 'node:path';
-import { makeManifest } from './manifest.config';
+import { performance } from 'node:perf_hooks';
+import manifest from './manifest.config.mjs';
 
-const mode = Bun.env.NODE_ENV;
+const mode = process.env.NODE_ENV;
 const dev = mode === 'development';
+const dir = path.resolve(); // == __dirname
 
 /**
  * Generate minified CSS from XCSS source.
+ *
+ * @param {string} src
+ * @param {string} from
  */
-function compileCSS(src: string, from: string) {
-  const compiled = xcss.compile(src, { from });
+function compileCSS(src, from) {
+  const compiled = xcss.compile(src, {
+    from,
+    map: false,
+  });
 
   for (const warning of compiled.warnings) {
     console.error('XCSS WARNING:', warning.message);
@@ -38,7 +46,11 @@ function compileCSS(src: string, from: string) {
     filename: from,
     code: Buffer.from(compiled.css),
     minify: !dev,
-    targets: { chrome: 113 << 16 }, // eslint-disable-line no-bitwise
+    sourceMap: false,
+    targets: {
+      // eslint-disable-next-line no-bitwise
+      chrome: 110 << 16,
+    },
   });
 
   for (const warning of minified.warnings) {
@@ -50,52 +62,62 @@ function compileCSS(src: string, from: string) {
 
 /**
  * Construct a HTML file and save it to disk.
+ *
+ * @param {string} pageName
+ * @param {string} stylePath
  */
-async function makeHTML(pageName: string, stylePath: string) {
-  const styleSrc = await Bun.file(stylePath).text();
+async function makeHTML(pageName, stylePath) {
+  const styleSrc = await fs.readFile(path.join(dir, stylePath), 'utf8');
   const css = compileCSS(styleSrc, stylePath);
   const template = `<!doctype html>
 <meta charset=utf-8>
-<meta name=google value=notranslate>
 <title>New Tab</title>
 <link href=${pageName}.css rel=stylesheet>
-<script src=${pageName}.js type=module async></script>`;
+<script src=${pageName}.js async></script>`;
 
-  await Bun.write(`dist/${pageName}.css`, css);
-  await Bun.write(`dist/${pageName}.html`, template);
+  await fs.writeFile(path.join(dir, 'dist', `${pageName}.css`), css);
+  await fs.writeFile(path.join(dir, 'dist', `${pageName}.html`), template);
 }
 
 await makeHTML('newtab', 'src/css/newtab.xcss');
 await makeHTML('settings', 'src/css/settings.xcss');
 
 // Extension manifest
-await Bun.write('dist/manifest.json', JSON.stringify(makeManifest()));
+await fs.writeFile(
+  path.join(dir, 'dist', 'manifest.json'),
+  JSON.stringify(manifest),
+);
 
 /**
  * Compile all themes, combine into a single JSON file, and save it to disk.
  */
 async function makeThemes() {
-  const themes = await fs.readdir('src/css/themes');
-  const themesData: Record<string, string> = {};
+  const themesDir = path.resolve('.', 'src/css/themes');
+  /** @type {Record<string, string>} */
+  const themesData = {};
+  const themes = await fs.readdir(themesDir);
 
   await Promise.all(
     themes.map((theme) =>
-      Bun.file(`src/css/themes/${theme}`)
-        .text()
-        .then((src) => {
-          themesData[path.basename(theme, '.xcss')] = compileCSS(src, theme);
-        }),
+      fs.readFile(path.join(themesDir, theme), 'utf8').then((src) => {
+        themesData[path.basename(theme, '.xcss')] = compileCSS(src, theme);
+      }),
     ),
   );
 
-  await Bun.write('dist/themes.json', JSON.stringify(themesData));
+  await fs.writeFile(
+    path.join(dir, 'dist', 'themes.json'),
+    JSON.stringify(themesData),
+  );
 }
 
-console.time('themes');
+const t0 = performance.now();
 await makeThemes();
-console.timeEnd('themes');
+const t1 = performance.now();
+console.log('\ndist/themes.json done in', (t1 - t0).toFixed(2), 'ms\n');
 
-const analyzeMeta: esbuild.Plugin = {
+/** @type {esbuild.Plugin} */
+const analyzeMeta = {
   name: 'analyze-meta',
   setup(build) {
     if (!build.initialOptions.metafile) return;
@@ -108,13 +130,8 @@ const analyzeMeta: esbuild.Plugin = {
   },
 };
 
-/**
- * Minify JavaScript output.
- *
- * Although esbuild already minifies JS when creating output bundles, it needs
- * a second pass to apply all possible optimizations.
- */
-const minifyJS: esbuild.Plugin = {
+/** @type {esbuild.Plugin} */
+const minifyJS = {
   name: 'minify-js',
   setup(build) {
     if (!build.initialOptions.minify) return;
@@ -141,27 +158,13 @@ const minifyJS: esbuild.Plugin = {
   },
 };
 
-// FIXME: Migrate from esbuild to Bun.build once it supports:
-//  ↳ All required plugin hooks; onLoad, onEnd (with outputFiles, or ideally
-//    some other way to intercept output code before it's written to disk, or
-//    else we'll need to read the files and then save to disk again possibly
-//    including sourcemaps for dev)
-//    ↳ Mainly for the `minifyTemplates` plugin
-//    ↳ It's kind of already possible to do onEnd using the build outputs
-//      BuildArtifact which have a FileRef (same thing as Bun.file() returns)
-//      ↳ Actually, BuildArtifact extends Blob, so it's possible to interact
-//        with it directly; https://bun.sh/blog/bun-bundler#build-outputs
-//  ↳ `mangleProps`
-//  ↳ `pure`
-//  ↳ Browser version targeting
-//  ↳ `metafile` for bundle size analysis is a nice to have
-
 // New Tab & Settings apps
-const esbuildConfig1: esbuild.BuildOptions = {
+/** @type {esbuild.BuildOptions} */
+const esbuildConfig1 = {
   entryPoints: ['src/newtab.ts', 'src/settings.ts'],
   outdir: 'dist',
   platform: 'browser',
-  target: ['chrome113'],
+  target: ['chrome110'],
   format: 'esm',
   define: { 'process.env.NODE_ENV': JSON.stringify(mode) },
   plugins: [minifyTemplates(), minifyJS, writeFiles(), analyzeMeta],
@@ -169,6 +172,7 @@ const esbuildConfig1: esbuild.BuildOptions = {
   minify: !dev,
   mangleProps: /_refs|collect|adjustPosition|closePopup/,
   sourcemap: dev,
+  banner: { js: '"use strict";' },
   write: dev,
   metafile: !dev && process.stdout.isTTY,
   logLevel: 'debug',
@@ -177,7 +181,8 @@ const esbuildConfig1: esbuild.BuildOptions = {
 };
 
 // Background service worker script
-const esbuildConfig2: esbuild.BuildOptions = {
+/** @type {esbuild.BuildOptions} */
+const esbuildConfig2 = {
   entryPoints: ['src/sw.ts'],
   outdir: 'dist',
   format: 'esm',
@@ -189,14 +194,10 @@ const esbuildConfig2: esbuild.BuildOptions = {
 };
 
 if (dev) {
-  // Watch for changes in dev mode
   const context1 = await esbuild.context(esbuildConfig1);
   const context2 = await esbuild.context(esbuildConfig2);
   await Promise.all([context1.watch(), context2.watch()]);
 } else {
-  console.time('esbuild');
   await esbuild.build(esbuildConfig1);
-  console.timeLog('esbuild');
   await esbuild.build(esbuildConfig2);
-  console.timeEnd('esbuild');
 }

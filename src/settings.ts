@@ -1,7 +1,7 @@
 import { append, h } from 'stage1';
 import { reconcile } from 'stage1/reconcile/non-keyed';
-import type { SectionOrderItem, ThemesData } from './types';
-import { DEFAULT_SECTION_ORDER, storage } from './utils';
+import type { SectionOrderItem, ThemesData, UserStorageData } from './types';
+import { DEFAULT_SECTION_ORDER } from './utils';
 
 interface SettingsState {
   order: [SectionOrderItem[], SectionOrderItem[]];
@@ -17,14 +17,13 @@ type SectionScope = {
 const DRAG_TYPE = 'text/plain';
 const DEFAULT_THEME = 'dark';
 
-// eslint-disable-next-line unicorn/prefer-top-level-await
 const themesData = fetch('themes.json').then(
   (res) => res.json() as Promise<ThemesData>,
 );
 
 type SectionComponent = HTMLLIElement;
 
-type SectionRefs = {
+type SectionRefNodes = {
   name: Text;
 };
 
@@ -51,7 +50,7 @@ const SectionItem = (
   scope: SectionScope,
 ): SectionComponent => {
   const root = sectionView.cloneNode(true) as SectionComponent;
-  const { name } = sectionView.collect<SectionRefs>(root);
+  const { name } = sectionView.collect<SectionRefNodes>(root);
 
   name.nodeValue = item;
 
@@ -94,7 +93,7 @@ const SectionItem = (
   return root;
 };
 
-type SettingsRefs = {
+type SettingsRefNodes = {
   theme: HTMLSelectElement;
   reset: HTMLButtonElement;
   se: HTMLUListElement;
@@ -136,7 +135,7 @@ const settingsView = h(`
 
 const Settings = () => {
   const root = settingsView;
-  const { theme, reset, se, sd } = settingsView.collect<SettingsRefs>(root);
+  const { theme, reset, se, sd } = settingsView.collect<SettingsRefNodes>(root);
 
   const state: SettingsState = {
     order: [[], []],
@@ -228,15 +227,17 @@ const Settings = () => {
     updateOrder([[...DEFAULT_SECTION_ORDER], []]);
   };
 
-  // Populate UI using user settings data from storage (chrome.storage.local)
-  const themeName = storage.tn || DEFAULT_THEME;
-  const orderEnabled = storage.o || [...DEFAULT_SECTION_ORDER];
-  const orderDisabled = DEFAULT_SECTION_ORDER.filter(
-    (item) => !orderEnabled.includes(item),
-  );
+  // Get user settings data
+  void chrome.storage.local.get(null).then((settings: UserStorageData) => {
+    const themeName = settings.tn || DEFAULT_THEME;
+    const orderEnabled = settings.o || [...DEFAULT_SECTION_ORDER];
+    const orderDisabled = DEFAULT_SECTION_ORDER.filter(
+      (item) => !orderEnabled.includes(item),
+    );
 
-  void updateTheme(themeName);
-  updateOrder([orderEnabled, orderDisabled], true);
+    void updateTheme(themeName);
+    updateOrder([orderEnabled, orderDisabled], true);
+  });
 
   return root;
 };

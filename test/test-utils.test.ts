@@ -1,27 +1,28 @@
-import { afterEach, describe, expect, test } from 'bun:test';
 import { spyOn } from 'nanospy';
-import { Test } from '../TestComponent';
-import { cleanup, render } from './utils';
+import * as assert from 'uvu/assert';
+import { Test } from './TestComponent';
+import { cleanup, describe, render } from './utils';
 
-describe('render', () => {
-  afterEach(cleanup);
+describe('render', (test) => {
+  test.after.each(cleanup);
 
   test('returns a container element', () => {
     const rendered = render(document.createElement('div'));
-    expect(rendered.container).toBeInstanceOf(window.Element);
+    assert.instance(rendered.container, window.Element);
   });
 
   test('mounts supplied element in container', () => {
     const el = document.createElement('span');
     const rendered = render(el);
-    expect(rendered.container.firstChild).toBe(el);
+    assert.is(rendered.container.firstChild, el);
   });
 
   test('mounts container div to document body', () => {
-    expect(document.body.firstChild).toBeNull();
+    assert.not.ok(document.body.firstChild);
     const rendered = render(document.createElement('div'));
-    expect(document.body.firstChild).toBe(rendered.container);
-    expect(document.body.firstChild).toBeInstanceOf(window.HTMLDivElement);
+    assert.is(document.body.firstChild, rendered.container);
+    assert.type(document.body.firstChild, 'object');
+    assert.instance(document.body.firstChild, window.HTMLDivElement);
   });
 
   test('mounts containers when other DOM elements exist on document body', () => {
@@ -30,8 +31,9 @@ describe('render', () => {
     render(document.createElement('a'));
     render(document.createElement('a'));
     document.body.append(document.createElement('span'));
-    expect(document.body.childNodes).toHaveLength(5);
-    expect(document.body.innerHTML).toBe(
+    assert.is(document.body.childNodes.length, 5);
+    assert.snapshot(
+      document.body.innerHTML,
       '<span></span><span></span><div><a></a></div><div><a></a></div><span></span>',
     );
     document.body.textContent = '';
@@ -40,29 +42,29 @@ describe('render', () => {
   test('returns an unmount function', () => {
     const rendered = render(document.createElement('div'));
     // eslint-disable-next-line @typescript-eslint/unbound-method
-    expect(rendered.unmount).toBeInstanceOf(Function);
+    assert.type(rendered.unmount, 'function');
   });
 
   test('unmount removes supplied element from container', () => {
     const rendered = render(document.createElement('div'));
-    expect(rendered.container.firstChild).toBeTruthy();
+    assert.ok(rendered.container.firstChild);
     rendered.unmount();
-    expect(rendered.container).toBeTruthy();
-    expect(rendered.container.firstChild).toBeNull();
+    assert.ok(rendered.container);
+    assert.is(rendered.container.firstChild, null);
   });
 
   test('returns a debug function', () => {
     const rendered = render(document.createElement('div'));
     // eslint-disable-next-line @typescript-eslint/unbound-method
-    expect(rendered.debug).toBeInstanceOf(Function);
+    assert.type(rendered.debug, 'function');
   });
 
   test('debug function prints to console', () => {
     const logSpy = spyOn(console, 'log', () => {});
     const rendered = render(document.createElement('div'));
     rendered.debug();
-    expect(logSpy.called).toBe(true);
-    expect(logSpy.calls[0]).toEqual(['DEBUG:\n<div></div>\n']);
+    assert.is(logSpy.callCount, 1);
+    assert.equal(logSpy.calls[0], ['DEBUG:\n<div></div>\n']);
     logSpy.restore();
   });
 
@@ -90,29 +92,29 @@ describe('render', () => {
 
   test('renders TestComponent correctly', () => {
     const rendered = render(Test({ text: 'abc' }));
-    expect(rendered.container.innerHTML).toBe('<div id="test">abc</div>');
+    assert.snapshot(rendered.container.innerHTML, '<div id="test">abc</div>');
   });
 });
 
-describe('cleanup', () => {
+describe('cleanup', (test) => {
   test('throws when there are no rendered components', () => {
-    expect(() => cleanup()).toThrow();
+    assert.throws(() => cleanup());
   });
 
   test('removes mounted container from document body', () => {
     render(document.createElement('div'));
-    expect(document.body.firstChild).toBeTruthy();
+    assert.ok(document.body.firstChild);
     cleanup();
-    expect(document.body.firstChild).toBeNull();
+    assert.not.ok(document.body.firstChild);
   });
 
   test('removes multiple mounted containers from document body', () => {
     render(document.createElement('div'));
     render(document.createElement('div'));
     render(document.createElement('div'));
-    expect(document.body.childNodes).toHaveLength(3);
+    assert.is(document.body.childNodes.length, 3);
     cleanup();
-    expect(document.body.childNodes).toHaveLength(0);
+    assert.is(document.body.childNodes.length, 0);
   });
 
   test('only removes mounted containers and not other DOM nodes', () => {
@@ -121,11 +123,11 @@ describe('cleanup', () => {
     render(document.createElement('a'));
     render(document.createElement('a'));
     document.body.append(document.createElement('span'));
-    expect(document.body.childNodes).toHaveLength(5);
+    assert.is(document.body.childNodes.length, 5);
     cleanup();
-    expect(document.body.childNodes).toHaveLength(3);
+    assert.is(document.body.childNodes.length, 3);
     for (const node of document.body.childNodes) {
-      expect(node).toBeInstanceOf(window.HTMLSpanElement);
+      assert.instance(node, window.HTMLSpanElement);
     }
     document.body.textContent = '';
   });

@@ -6,14 +6,15 @@
 import { gitRef } from 'git-ref';
 import pkg from './package.json' assert { type: 'json' };
 
-export const makeManifest = (): chrome.runtime.ManifestV3 => ({
+/** @type {chrome.runtime.Manifest} */
+export default {
   manifest_version: 3,
   name: 'New Tab',
-  description: pkg.description,
+  description:
+    '⚡ A high-performance new tab page that gets you where you need to go faster.',
   version: pkg.version,
-  // shippable releases should not have a named version
-  version_name: process.env.CI ? undefined : gitRef().replace(/^v/, ''),
-  minimum_chrome_version: '113',
+  version_name: process.env.GITHUB_REF ? undefined : gitRef().replace(/^v/, ''),
+  minimum_chrome_version: '110', // >= 104 needed for new favicon API
   homepage_url: pkg.homepage,
   icons: {
     16: 'icon16.png',
@@ -52,4 +53,4 @@ export const makeManifest = (): chrome.runtime.ManifestV3 => ({
   },
   // https://chrome.google.com/webstore/detail/new-tab/cpcibnbdmpmcmnkhoiilpnlaepkepknb
   key: 'MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAk9BfRa5CXuCX1ElY0yu9kJSqxFirFtSy79ZR/fyKHdOzZurQXNmhIyxVnQXd2bxHvuKUyZGahm/gwgyyzGuxhsQEue6wTD9TnOvvM2vusXpnoCr6Ili7sBwUo9vA2aPI77NB0eArXz9WWNmoDWW5WEqI/rk26Tinl8SNU9iDJISbL+dMses1QPw64oYFWB1J4JeB1MhXnzTxECpGZTn33LhgBU4J3ooT6eoqrsJdRvuc0vjPMxq/jfqLkdBbzlsnrMbgtDoJ9WiWj2lA0MzHGDAQ8HgnMEi3SpXRNnod9CCBnxmkHqv3u4u7Tvp/WLAgJ+QjCt+9yYyw3nOYHpEweQIDAQAB',
-});
+};
