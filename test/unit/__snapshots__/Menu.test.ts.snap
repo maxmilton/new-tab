@@ -1,0 +1,19 @@
+// Bun Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`renders correctly 1`] = `
+"<div id="m">
+<svg id="im">
+<path d="M4 6h16M4 12h16M4 18h16"></path>
+</svg>
+<div id="d">
+<a href="chrome://new-tab-page">Open Default Tab</a>
+<a href="chrome://bookmarks">Bookmarks Manager</a>
+<a href="chrome://downloads">Downloads</a>
+<a href="chrome://history">History</a>
+<a href="chrome://settings/passwords">Passwords</a>
+<hr>
+<a>New Tab Settings</a>
+<a href="https://github.com/maxmilton/new-tab/issues">Report Bug</a>
+</div>
+</div>"
+`;

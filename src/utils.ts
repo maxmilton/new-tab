@@ -1,3 +1,7 @@
+import type { UserStorageData } from './types';
+
+export const storage: UserStorageData = await chrome.storage.local.get();
+
 // NOTE: When updating also update references that get an item by index
 export const DEFAULT_SECTION_ORDER = [
   'Open Tabs',

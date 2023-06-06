@@ -1,4 +1,5 @@
 *-lock.json*
+*-lock.yaml
 *.lock
 *.log
 *.zip

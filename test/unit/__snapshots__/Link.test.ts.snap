@@ -1,0 +1,6 @@
+// Bun Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`renders correctly 1`] = `
+"<a href="https://example.com" title="Example">
+<img decoding="async" src="_favicon?size=16&amp;pageUrl=https%3A%2F%2Fexample.com">Example</a>"
+`;

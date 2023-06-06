@@ -3,6 +3,8 @@
 import { append, create, h, type S1Node } from 'stage1';
 import { Link, type LinkComponent, type LinkProps } from './Link';
 
+export type BookmarkTreeNode = chrome.bookmarks.BookmarkTreeNode;
+
 type FolderPopupComponent = HTMLDivElement & {
   adjustPosition(): void;
 };
@@ -15,23 +17,23 @@ const folderPopupView = create('div');
 folderPopupView.className = 'sf';
 
 const FolderPopup = (
-  parent: Element,
-  children: chrome.bookmarks.BookmarkTreeNode[],
-  topLevel: boolean,
+  parent: HTMLElement,
+  children: BookmarkTreeNode[],
+  nested?: boolean | undefined,
 ): FolderPopupComponent => {
   const root = folderPopupView.cloneNode(true) as FolderPopupComponent;
   const parentRect = parent.getBoundingClientRect();
   let top: number;
   let left: number;
 
-  if (topLevel) {
-    // Show top level folder popup bellow its parent
-    top = parentRect.bottom;
-    left = parentRect.left;
-  } else {
+  if (nested) {
     // Show nested folder popup beside its parent
     top = parentRect.top;
     left = parentRect.right;
+  } else {
+    // Show top level folder popup bellow its parent
+    top = parentRect.bottom;
+    left = parentRect.left;
   }
 
   root.style.cssText = `top:${top}px;left:${left}px;max-height:${
@@ -39,9 +41,7 @@ const FolderPopup = (
   }px`;
 
   if (children.length) {
-    children.forEach((item) => {
-      append(BookmarkNode(item), root);
-    });
+    children.forEach((item) => append(BookmarkNode(item, true), root));
   } else {
     append((emptyPopupView ??= h('<div id=e>(empty)</div>')), root);
   }
@@ -55,9 +55,9 @@ const FolderPopup = (
     if (left + width > viewportWidth) {
       // Show top level aligned to the right edge of the viewport
       // Show nested show to the left of its parent
-      root.style.left = topLevel
-        ? viewportWidth - width + 'px'
-        : parentRect.left - width + 'px';
+      root.style.left = nested
+        ? parentRect.left - width + 'px'
+        : viewportWidth - width + 'px';
     }
   };
 
@@ -68,15 +68,14 @@ type FolderComponent = HTMLDivElement & {
   closePopup(this: void): void;
 };
 
-export interface FolderProps
-  extends Omit<chrome.bookmarks.BookmarkTreeNode, 'id'> {
-  end?: boolean;
-}
-
 const folderView = create('div');
 folderView.className = 'f';
 
-export const Folder = (props: FolderProps): FolderComponent => {
+export const Folder = (
+  props: BookmarkTreeNode,
+  nested?: boolean,
+  children?: BookmarkTreeNode[],
+): FolderComponent => {
   const root = folderView.cloneNode(true) as FolderComponent;
   let popup: FolderPopupComponent | null;
   let timer: NodeJS.Timeout;
@@ -90,10 +89,7 @@ export const Folder = (props: FolderProps): FolderComponent => {
 
   root.textContent = props.title;
 
-  if (props.end) root.className += ' end';
-
-  // parentId 0 = "bookmarks bar", 1 = "other bookmarks"
-  if (props.parentId! > '1') {
+  if (nested) {
     append(
       (arrowView ??= h(`
         <svg class=i>
@@ -111,22 +107,20 @@ export const Folder = (props: FolderProps): FolderComponent => {
     }
   };
 
-  root.__mouseover = () => {
+  // eslint-disable-next-line @typescript-eslint/no-misused-promises
+  root.__mouseover = async () => {
     clearTimer();
 
     if (!popup) {
-      const parent = root.parentNode as Element;
-
       // Immediately close any folder popups on the parent level
-      parent
-        .querySelectorAll<FolderComponent>('.f')
+      root
+        .parentNode!.querySelectorAll<FolderComponent>('.f')
         .forEach((folder) => folder.closePopup());
 
       popup = FolderPopup(
         root,
-        props.children!,
-        // BookmarkBar (bookmarks top level) has attribute id="b"
-        parent.id === 'b',
+        children || (await chrome.bookmarks.getChildren(props.id)),
+        nested,
       );
 
       popup.__mouseover = clearTimer;
@@ -142,7 +136,9 @@ export const Folder = (props: FolderProps): FolderComponent => {
   return root;
 };
 
-export const BookmarkNode = (
-  props: LinkProps | FolderProps,
+export const BookmarkNode = <T extends LinkProps | BookmarkTreeNode>(
+  props: T,
+  nested?: boolean,
+): T extends { url: string } ? LinkComponent : FolderComponent =>
   // @ts-expect-error - FIXME:!
-): LinkComponent | FolderComponent => (props.url ? Link : Folder)(props);
+  props.url ? Link(props) : Folder(props, nested);

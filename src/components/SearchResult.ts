@@ -1,20 +1,42 @@
 import { append, createFragment, h } from 'stage1';
 import { DEFAULT_SECTION_ORDER } from '../utils';
 import { Link, type LinkProps } from './Link';
-import { TabLink } from './TabLink';
 
-export type SearchResultComponent = HTMLDivElement & {
-  update: (this: void, newData: any[]) => void;
+const DEFAULT_RESULTS_AMOUNT = 12; // chrome.topSites.get returns 12 items
+const MORE_RESULTS_AMOUNT = 50;
+
+interface TabItem {
+  /** Tab ID. */
+  id: number;
+  windowId: number;
+}
+
+const handleTabClick = (item: TabItem) => {
+  // Switch to the clicked tab
+  void chrome.tabs.update(item.id, { active: true });
+
+  // Switch active window if the tab isn't in the current window
+  chrome.windows.getCurrent({}, (currentWindow) => {
+    if (currentWindow.id !== item.windowId) {
+      void chrome.windows.update(item.windowId, { focused: true });
+    }
+  });
+
+  // Close current "new-tab" page
+  chrome.tabs.getCurrent((currentTab) => {
+    void chrome.tabs.remove(currentTab!.id!);
+  });
+};
+
+export type SearchResultComponent<T = any> = HTMLDivElement & {
+  update: (this: void, newData: T[]) => void;
   filter: (this: void, text: string) => void;
 };
-type RefNodes = {
+type Refs = {
   t: Text;
   l: HTMLDivElement;
   m: HTMLButtonElement;
 };
-
-const DEFAULT_RESULTS_AMOUNT = 12; // chrome.topSites.get returns 12 items
-const MORE_RESULTS_AMOUNT = 50;
 
 const view = h(`
   <div hidden>
@@ -26,11 +48,11 @@ const view = h(`
   </div>
 `);
 
-export const SearchResult = <T extends LinkProps>(
-  sectionName: string,
-): SearchResultComponent => {
-  const root = view.cloneNode(true) as SearchResultComponent;
-  const nodes = view.collect<RefNodes>(root);
+export const SearchResult = <T extends LinkProps & TabItem>(
+  sectionName: (typeof DEFAULT_SECTION_ORDER)[number],
+): SearchResultComponent<T> => {
+  const root = view.cloneNode(true) as SearchResultComponent<T>;
+  const refs = view.collect<Refs>(root);
   const isOpenTabs = sectionName === DEFAULT_SECTION_ORDER[0];
   let rawData: T[];
   let renderedLength: number;
@@ -40,17 +62,20 @@ export const SearchResult = <T extends LinkProps>(
 
     const partial = isOpenTabs ? listData : listData.slice(0, showCount);
     const frag = createFragment();
-    renderedLength = partial.length;
+    let link;
 
     partial.forEach((item) => {
-      // @ts-expect-error - FIXME:!
-      append((isOpenTabs ? TabLink : Link)(item), frag);
+      link = append(Link(item), frag);
+      if (isOpenTabs) {
+        link.__click = () => handleTabClick(item);
+      }
     });
 
-    nodes.l.replaceChildren(frag);
+    refs.l.replaceChildren(frag);
 
+    renderedLength = partial.length;
     root.hidden = !renderedLength;
-    nodes.m.hidden = renderedLength >= listData.length;
+    refs.m.hidden = renderedLength >= listData.length;
 
     performance.measure(sectionName, sectionName);
   };
@@ -72,9 +97,9 @@ export const SearchResult = <T extends LinkProps>(
       ),
     );
 
-  nodes.t.textContent = sectionName;
+  refs.t.textContent = sectionName;
 
-  nodes.m.__click = () =>
+  refs.m.__click = () =>
     renderList(rawData, renderedLength + MORE_RESULTS_AMOUNT);
 
   return root;

@@ -5,10 +5,13 @@ declare global {
   var happyDOM: Window['happyDOM'];
 }
 
-// increase limit from 10
-global.Error.stackTraceLimit = 100;
+// Increase stack limit from 10 (v8 default)
+global.Error.stackTraceLimit = 50;
 
-function noop() {}
+const noop = () => {};
+const noopAsync = () => Promise.resolve();
+const noopAsyncObj = () => Promise.resolve({});
+const noopAsyncArr = () => Promise.resolve([]);
 
 function setupDOM() {
   const dom = new GlobalWindow();
@@ -21,71 +24,73 @@ function setupDOM() {
   global.clearTimeout = window.clearTimeout;
   global.DocumentFragment = window.DocumentFragment;
   global.CSSStyleSheet = window.CSSStyleSheet;
+  global.Text = window.Text;
 }
 
 function setupMocks(): void {
-  // @ts-expect-error - partial mock
   global.chrome = {
+    // @ts-expect-error - partial mock
     bookmarks: {
-      getTree: noop,
-      search: noop,
+      getChildren: noopAsyncArr,
+      search: noopAsyncArr,
     },
+    // @ts-expect-error - partial mock
     history: {
-      search: noop,
+      search: noopAsyncArr,
     },
+    // @ts-expect-error - partial mock
     runtime: {
       openOptionsPage: noop,
     },
+    // @ts-expect-error - partial mock
     sessions: {
-      getRecentlyClosed: noop,
+      getRecentlyClosed: noopAsyncArr,
     },
     storage: {
+      // @ts-expect-error - partial mock
       local: {
-        // eslint-disable-next-line consistent-return
-        get: (_keys, callback) => {
-          if (callback) {
-            callback({});
-          } else {
-            return Promise.resolve({});
-          }
-        },
-        remove: noop,
-        set: noop,
+        get: () => Promise.resolve({ t: '' }),
+        remove: noopAsync,
+        set: noopAsync,
       },
     },
     tabs: {
-      create: noop,
-      getCurrent: noop,
+      // @ts-expect-error - partial mock
+      create: noopAsyncObj,
+      // @ts-expect-error - partial mock
+      getCurrent: noopAsyncObj,
+      // @ts-expect-error - partial mock
       onMoved: {
         addListener: noop,
       },
+      // @ts-expect-error - partial mock
       onRemoved: {
         addListener: noop,
       },
+      // @ts-expect-error - partial mock
       onUpdated: {
         addListener: noop,
       },
-      query: noop,
-      remove: noop,
-      update: noop,
+      query: noopAsyncArr,
+      remove: noopAsync,
+      // @ts-expect-error - partial mock
+      update: noopAsyncObj,
     },
     topSites: {
-      get: noop,
+      get: noopAsyncArr,
     },
     windows: {
-      getCurrent: noop,
-      update: noop,
+      // @ts-expect-error - partial mock
+      getCurrent: noopAsyncObj,
+      // @ts-expect-error - partial mock
+      update: noopAsync,
     },
-    // TODO: Remove type cast + update mocks once we update to manifest v3
-  } as typeof window.chrome;
+  };
 
-  // Even though node v18 has native fetch, it fails to parse relative URLs
-  // which are valid in browsers, so we need to mock it
-  global.fetch = () =>
-    // @ts-expect-error - just a simple stub
-    Promise.resolve({
-      json: () => Promise.resolve({}),
-    });
+  // global.fetch = () =>
+  //   Promise.resolve({
+  //     json: () => Promise.resolve({}),
+  //   } as Response);
 }
 
 export function reset(): void {
