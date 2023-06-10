@@ -26,5 +26,5 @@ test('renders entire newtab app', async () => {
 
   // TODO: Check all section headings exist; a h2 with text 'Open Tabs' x5
 
-  checkConsoleCalls(expect);
+  checkConsoleCalls();
 });

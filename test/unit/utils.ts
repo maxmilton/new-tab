@@ -1,5 +1,4 @@
-import type { expect as _expect } from 'bun:test';
-import { spyOn } from 'nanospy';
+import { expect, spyOn, type Mock } from 'bun:test';
 
 export interface RenderResult {
   /** A wrapper DIV which contains your mounted component. */
@@ -54,32 +53,47 @@ export function cleanup(): void {
   });
 }
 
-export function consoleSpy(): (expect: typeof _expect) => void {
-  const errorSpy = spyOn(window.console, 'error');
-  const warnSpy = spyOn(window.console, 'warn');
-  const infoSpy = spyOn(window.console, 'info');
-  const logSpy = spyOn(window.console, 'log');
-  const debugSpy = spyOn(window.console, 'debug');
-  const traceSpy = spyOn(window.console, 'trace');
+// export function consoleSpy(): () => void {
+//   const errorSpy = spyOn(window.console, 'error');
+//   const warnSpy = spyOn(window.console, 'warn');
+//   const infoSpy = spyOn(window.console, 'info');
+//   const logSpy = spyOn(window.console, 'log');
+//   const debugSpy = spyOn(window.console, 'debug');
+//   const traceSpy = spyOn(window.console, 'trace');
+//   const writeSpy = spyOn(window.console, 'write');
 
-  return (expect) => {
-    // assert.is(errorSpy.callCount, 0, 'calls to console.error');
-    // assert.is(warnSpy.callCount, 0, 'calls to console.warn');
-    // assert.is(infoSpy.callCount, 0, 'calls to console.info');
-    // assert.is(logSpy.callCount, 0, 'calls to console.log');
-    // assert.is(debugSpy.callCount, 0, 'calls to console.debug');
-    // assert.is(traceSpy.callCount, 0, 'calls to console.trace');
-    expect(errorSpy.callCount).toBe(0);
-    expect(warnSpy.callCount).toBe(0);
-    expect(infoSpy.callCount).toBe(0);
-    expect(logSpy.callCount).toBe(0);
-    expect(debugSpy.callCount).toBe(0);
-    expect(traceSpy.callCount).toBe(0);
-    errorSpy.restore();
-    warnSpy.restore();
-    infoSpy.restore();
-    logSpy.restore();
-    debugSpy.restore();
-    traceSpy.restore();
+//   return () => {
+//     expect(errorSpy).toHaveBeenCalledTimes(0);
+//     expect(warnSpy).toHaveBeenCalledTimes(0);
+//     expect(infoSpy).toHaveBeenCalledTimes(0);
+//     expect(logSpy).toHaveBeenCalledTimes(0);
+//     expect(debugSpy).toHaveBeenCalledTimes(0);
+//     expect(traceSpy).toHaveBeenCalledTimes(0);
+//     expect(writeSpy).toHaveBeenCalledTimes(0);
+//     errorSpy.mockRestore();
+//     warnSpy.mockRestore();
+//     infoSpy.mockRestore();
+//     logSpy.mockRestore();
+//     debugSpy.mockRestore();
+//     traceSpy.mockRestore();
+//     writeSpy.mockRestore();
+//   };
+// }
+const consoleMethods = Object.getOwnPropertyNames(
+  window.console,
+) as (keyof Console)[];
+
+export function consoleSpy(): () => void {
+  const spies: Mock<() => void>[] = [];
+
+  for (const method of consoleMethods) {
+    spies.push(spyOn(window.console, method));
+  }
+
+  return () => {
+    for (const spy of spies) {
+      expect(spy).toHaveBeenCalledTimes(0);
+      spy.mockRestore();
+    }
   };
 }

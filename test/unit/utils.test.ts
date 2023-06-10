@@ -1,5 +1,4 @@
-import { describe, expect, test } from 'bun:test';
-import { spyOn } from 'nanospy';
+import { describe, expect, spyOn, test } from 'bun:test';
 import { DEFAULT_SECTION_ORDER, handleClick } from '../../src/utils';
 
 describe('DEFAULT_SECTION_ORDER', () => {
@@ -54,8 +53,10 @@ describe('handleClick', () => {
     // @ts-expect-error - _target is an implementation detail of happy-dom
     event._target = { href: 'chrome://about', target: '_blank' };
     handleClick(event);
-    expect(tabsCreateSpy.called).toBe(true);
-    expect(tabsUpdateSpy.called).toBe(false);
+    expect(tabsCreateSpy).toHaveBeenCalledTimes(1);
+    expect(tabsUpdateSpy).toHaveBeenCalledTimes(0);
+    tabsCreateSpy.mockRestore();
+    tabsUpdateSpy.mockRestore();
   });
 
   test('opens in new tab when url starts with chrome:// and ctrl key is pressed', () => {
@@ -65,8 +66,10 @@ describe('handleClick', () => {
     // @ts-expect-error - _target is an implementation detail of happy-dom
     event._target = { href: 'chrome://about' };
     handleClick(event);
-    expect(tabsCreateSpy.called).toBe(true);
-    expect(tabsUpdateSpy.called).toBe(false);
+    expect(tabsCreateSpy).toHaveBeenCalledTimes(1);
+    expect(tabsUpdateSpy).toHaveBeenCalledTimes(0);
+    tabsCreateSpy.mockRestore();
+    tabsUpdateSpy.mockRestore();
   });
 
   test('updates current tab when url starts with chrome:// and target is not _blank', () => {
@@ -76,8 +79,10 @@ describe('handleClick', () => {
     // @ts-expect-error - _target is an implementation detail of happy-dom
     event._target = { href: 'chrome://about', target: undefined };
     handleClick(event);
-    expect(tabsCreateSpy.called).toBe(false);
-    expect(tabsUpdateSpy.called).toBe(true);
+    expect(tabsCreateSpy).toHaveBeenCalledTimes(0);
+    expect(tabsUpdateSpy).toHaveBeenCalledTimes(1);
+    tabsCreateSpy.mockRestore();
+    tabsUpdateSpy.mockRestore();
   });
 
   test('updates current tab when url starts with chrome:// and ctrl key is not pressed', () => {
@@ -87,7 +92,9 @@ describe('handleClick', () => {
     // @ts-expect-error - _target is an implementation detail of happy-dom
     event._target = { href: 'chrome://about' };
     handleClick(event);
-    expect(tabsCreateSpy.called).toBe(false);
-    expect(tabsUpdateSpy.called).toBe(true);
+    expect(tabsCreateSpy).toHaveBeenCalledTimes(0);
+    expect(tabsUpdateSpy).toHaveBeenCalledTimes(1);
+    tabsCreateSpy.mockRestore();
+    tabsUpdateSpy.mockRestore();
   });
 });
