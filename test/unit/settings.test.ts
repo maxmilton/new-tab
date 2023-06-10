@@ -19,5 +19,5 @@ test('renders entire settings app', async () => {
   //  ↳ A bad fetch should fail the test (bun test bug)
   //  ↳ It should actually get the themes.json file correctly (happy-dom bug)
 
-  checkConsoleCalls(expect);
+  checkConsoleCalls();
 });
