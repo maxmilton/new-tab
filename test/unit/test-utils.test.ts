@@ -1,5 +1,4 @@
-import { afterEach, describe, expect, test } from 'bun:test';
-import { spyOn } from 'nanospy';
+import { afterEach, describe, expect, spyOn, test } from 'bun:test';
 import { Test } from '../TestComponent';
 import { cleanup, render } from './utils';
 
@@ -58,35 +57,32 @@ describe('render', () => {
   });
 
   test('debug function prints to console', () => {
-    const logSpy = spyOn(console, 'log', () => {});
+    // const logSpy = spyOn(console, 'log').mockImplementation(() => {});
+    const logSpy = spyOn(console, 'log');
     const rendered = render(document.createElement('div'));
     rendered.debug();
-    expect(logSpy.called).toBe(true);
-    expect(logSpy.calls[0]).toEqual(['DEBUG:\n<div></div>\n']);
-    logSpy.restore();
+    expect(logSpy).toHaveBeenCalledTimes(1);
+    // FIXME: Uncomment when bun:test supports toHaveBeenCalledWith !!!
+    // expect(logSpy).toHaveBeenCalledWith('DEBUG:\n<div></div>\n');
+    logSpy.mockRestore();
   });
 
-  // TODO: Debug output pretty print using custom stringifier + XMLSerializer().serializeToString
-  //  ↳ https://github.com/capricorn86/happy-dom/blob/master/packages/happy-dom/src/xml-serializer/XMLSerializer.ts
-  //  ↳ https://github.com/capricorn86/happy-dom/blob/master/packages/happy-dom/src/nodes/element/Element.ts#L286
-  // test('debug function prints prettified container DOM to console', () => {
-  //   // const logSpy = spyOn(console, 'log', () => {});
-  //   const logSpy = spyOn(console, 'log');
-  //   const main = document.createElement('main');
-  //   main.append(
-  //     document.createElement('div'),
-  //     document.createElement('div'),
-  //     document.createElement('div'),
-  //   );
-  //   const rendered = render(main);
-  //   rendered.debug();
-  //   assert.is(logSpy.callCount, 1);
-  //   assert.equal(logSpy.calls[0], [
-  //     'DEBUG:\n',
-  //     '<main>\n  <div></div>\n  <div></div>\n  <div></div>\n</main>',
-  //   ]);
-  //   logSpy.restore();
-  // });
+  test('debug function prints prettified container DOM to console', () => {
+    // const logSpy = spyOn(console, 'log').mockImplementation(() => {});
+    const logSpy = spyOn(console, 'log');
+    const main = document.createElement('main');
+    main.append(
+      document.createElement('div'),
+      document.createElement('div'),
+      document.createElement('div'),
+    );
+    const rendered = render(main);
+    rendered.debug();
+    expect(logSpy).toHaveBeenCalledTimes(1);
+    // FIXME: Uncomment when bun:test supports toHaveBeenCalledWith !!!
+    // expect(logSpy).toHaveBeenCalledWith('DEBUG:\n<main>\n  <div></div>\n  <div></div>\n  <div></div>\n</main>\n');
+    logSpy.mockRestore();
+  });
 
   test('renders TestComponent correctly', () => {
     const rendered = render(Test({ text: 'abc' }));
