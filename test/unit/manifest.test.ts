@@ -34,29 +34,28 @@ test('contains expected properties', () => {
 });
 
 test('properties are the correct type', () => {
-  expect(typeof manifest.manifest_version).toBe('number');
-  expect(typeof manifest.name).toBe('string');
-  expect(typeof manifest.description).toBe('string');
-  expect(typeof manifest.version).toBe('string');
-  expect(typeof manifest.minimum_chrome_version).toBe('string');
-  expect(typeof manifest.homepage_url).toBe('string');
-  expect(typeof manifest.icons).toBe('object');
-  expect(typeof manifest.icons?.[16]).toBe('string');
-  expect(typeof manifest.icons?.[48]).toBe('string');
-  expect(typeof manifest.icons?.[128]).toBe('string');
-  expect(typeof manifest.permissions).toBe('object');
-  expect(manifest.permissions).toBeInstanceOf(Array);
-  expect(typeof manifest.chrome_url_overrides).toBe('object');
-  expect(typeof manifest.chrome_url_overrides?.newtab).toBe('string');
-  expect(typeof manifest.background).toBe('object');
-  expect(typeof manifest.background?.service_worker).toBe('string');
-  expect(typeof manifest.options_ui).toBe('object');
-  expect(typeof manifest.options_ui?.page).toBe('string');
-  expect(typeof manifest.offline_enabled).toBe('boolean');
-  expect(typeof manifest.incognito).toBe('string');
-  expect(typeof manifest.content_security_policy).toBe('object');
-  expect(typeof manifest.content_security_policy?.extension_pages).toBe('string');
-  expect(typeof manifest.key).toBe('string');
+  expect(manifest.manifest_version).toBeTypeOf('number');
+  expect(manifest.name).toBeTypeOf('string');
+  expect(manifest.description).toBeTypeOf('string');
+  expect(manifest.version).toBeTypeOf('string');
+  expect(manifest.minimum_chrome_version).toBeTypeOf('string');
+  expect(manifest.homepage_url).toBeTypeOf('string');
+  expect(manifest.icons).toBeTypeOf('object');
+  expect(manifest.icons?.[16]).toBeTypeOf('string');
+  expect(manifest.icons?.[48]).toBeTypeOf('string');
+  expect(manifest.icons?.[128]).toBeTypeOf('string');
+  expect(manifest.permissions).toBeArray();
+  expect(manifest.chrome_url_overrides).toBeTypeOf('object');
+  expect(manifest.chrome_url_overrides?.newtab).toBeTypeOf('string');
+  expect(manifest.background).toBeTypeOf('object');
+  expect(manifest.background?.service_worker).toBeTypeOf('string');
+  expect(manifest.options_ui).toBeTypeOf('object');
+  expect(manifest.options_ui?.page).toBeTypeOf('string');
+  expect(manifest.offline_enabled).toBeTypeOf('boolean');
+  expect(manifest.incognito).toBeTypeOf('string');
+  expect(manifest.content_security_policy).toBeTypeOf('object');
+  expect(manifest.content_security_policy?.extension_pages).toBeTypeOf('string');
+  expect(manifest.key).toBeTypeOf('string');
 });
 
 test('does not contain any unexpected properties', () => {
