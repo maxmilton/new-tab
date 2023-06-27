@@ -53,32 +53,6 @@ export function cleanup(): void {
   });
 }
 
-// export function consoleSpy(): () => void {
-//   const errorSpy = spyOn(window.console, 'error');
-//   const warnSpy = spyOn(window.console, 'warn');
-//   const infoSpy = spyOn(window.console, 'info');
-//   const logSpy = spyOn(window.console, 'log');
-//   const debugSpy = spyOn(window.console, 'debug');
-//   const traceSpy = spyOn(window.console, 'trace');
-//   const writeSpy = spyOn(window.console, 'write');
-
-//   return () => {
-//     expect(errorSpy).toHaveBeenCalledTimes(0);
-//     expect(warnSpy).toHaveBeenCalledTimes(0);
-//     expect(infoSpy).toHaveBeenCalledTimes(0);
-//     expect(logSpy).toHaveBeenCalledTimes(0);
-//     expect(debugSpy).toHaveBeenCalledTimes(0);
-//     expect(traceSpy).toHaveBeenCalledTimes(0);
-//     expect(writeSpy).toHaveBeenCalledTimes(0);
-//     errorSpy.mockRestore();
-//     warnSpy.mockRestore();
-//     infoSpy.mockRestore();
-//     logSpy.mockRestore();
-//     debugSpy.mockRestore();
-//     traceSpy.mockRestore();
-//     writeSpy.mockRestore();
-//   };
-// }
 const consoleMethods = Object.getOwnPropertyNames(
   window.console,
 ) as (keyof Console)[];

@@ -14,7 +14,9 @@ const noopAsyncObj = () => Promise.resolve({});
 const noopAsyncArr = () => Promise.resolve([]);
 
 function setupDOM() {
-  const dom = new GlobalWindow();
+  const dom = new GlobalWindow({
+    url: 'chrome-extension://cpcibnbdmpmcmnkhoiilpnlaepkepknb/',
+  });
   global.happyDOM = dom.happyDOM;
   // @ts-expect-error - happy-dom only implements a subset of the DOM API
   global.window = dom.window.document.defaultView;
@@ -25,6 +27,7 @@ function setupDOM() {
   global.DocumentFragment = window.DocumentFragment;
   global.CSSStyleSheet = window.CSSStyleSheet;
   global.Text = window.Text;
+  global.fetch = window.fetch;
 }
 
 function setupMocks(): void {
@@ -86,11 +89,6 @@ function setupMocks(): void {
       update: noopAsync,
     },
   };
-
-  // global.fetch = () =>
-  //   Promise.resolve({
-  //     json: () => Promise.resolve({}),
-  //   } as Response);
 }
 
 export function reset(): void {
