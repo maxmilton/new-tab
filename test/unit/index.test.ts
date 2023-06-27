@@ -2,6 +2,9 @@ import { describe, expect, test } from 'bun:test';
 import { readdir } from 'node:fs/promises';
 
 describe('dist files', () => {
+  // FIXME: The bun file type is just inferred from the file extension, not the
+  // underlying file data... so that part of this test is not very useful.
+
   // XXX: Files with unknown type (e.g., symlinks) fall back to the default
   // "application/octet-stream". Bun.file() does not resolve symlinks so it's
   // safe to infer that all these files are therefore regular files.
