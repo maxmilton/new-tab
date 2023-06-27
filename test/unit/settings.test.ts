@@ -6,6 +6,8 @@ afterAll(reset);
 
 test('renders entire settings app', async () => {
   const checkConsoleCalls = consoleSpy();
+  const oldFetch = global.fetch;
+  global.fetch = () => Promise.resolve(new Response(Bun.file('dist/themes.json')));
 
   // @ts-expect-error - no allowJs in tsconfig
   // eslint-disable-next-line import/extensions
@@ -20,4 +22,5 @@ test('renders entire settings app', async () => {
   //  ↳ It should actually get the themes.json file correctly (happy-dom bug)
 
   checkConsoleCalls();
+  global.fetch = oldFetch;
 });
