@@ -14,13 +14,13 @@ export const test = baseTest.extend<{
   extensionId: string;
 }>({
   async context({}, use) {
-    const pathToExtension = path.join(__dirname, '../../dist');
+    const extensionPath = path.join(__dirname, '../../dist');
     const context = await chromium.launchPersistentContext('', {
       args: [
         '--headless=new', // chromium 112+
         // '--virtual-time-budget=5000', // chromium 112+, fast-forward timers
-        `--disable-extensions-except=${pathToExtension}`,
-        `--load-extension=${pathToExtension}`,
+        `--disable-extensions-except=${extensionPath}`,
+        `--load-extension=${extensionPath}`,
       ],
     });
     await use(context);

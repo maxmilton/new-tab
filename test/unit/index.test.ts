@@ -32,8 +32,9 @@ describe('dist files', () => {
     // eslint-disable-next-line @typescript-eslint/no-loop-func
     test(`file "dist/${filename}" exists with correct type`, () => {
       const file = Bun.file(`dist/${filename}`);
-      expect(file.type).toBe(type);
+      expect(file.exists()).resolves.toBeTruthy();
       expect(file.size).toBeGreaterThan(0);
+      expect(file.type).toBe(type); // TODO: Keep this? Type seems to be resolved from the file extension, not the file data.
     });
   }
 
