@@ -65,7 +65,10 @@ hr {
 h2,
 .f {
   color: #ff0080;
-  text-shadow: 0 0 2px #11001a, 0 0 4px #f7027de6, 0 0 7px #f7027de6;
+  text-shadow:
+    0 0 2px #11001a,
+    0 0 4px #f7027de6,
+    0 0 7px #f7027de6;
 }
 
 .f:focus,
