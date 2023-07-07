@@ -23,7 +23,7 @@ function compileCSS(src: string, from: string) {
   const compiled = xcss.compile(src, { from });
 
   for (const warning of compiled.warnings) {
-    console.error('XCSS WARNING:', warning.message);
+    console.error('XCSS:', warning.message);
 
     if (warning.file) {
       console.log(
@@ -38,11 +38,11 @@ function compileCSS(src: string, from: string) {
     filename: from,
     code: Buffer.from(compiled.css),
     minify: !dev,
-    targets: { chrome: 113 << 16 }, // eslint-disable-line no-bitwise
+    targets: { chrome: 114 << 16 }, // eslint-disable-line no-bitwise
   });
 
   for (const warning of minified.warnings) {
-    console.error('CSS WARNING:', warning.message);
+    console.error('CSS:', warning.message);
   }
 
   return minified.code.toString();
@@ -130,7 +130,7 @@ const minifyJS: esbuild.Plugin = {
           const out = await build.esbuild.transform(decodeUTF8(file.contents), {
             loader: 'js',
             minify: true,
-            // target: build.initialOptions.target,
+            target: build.initialOptions.target!,
           });
 
           // eslint-disable-next-line no-param-reassign
@@ -161,7 +161,7 @@ const esbuildConfig1: esbuild.BuildOptions = {
   entryPoints: ['src/newtab.ts', 'src/settings.ts'],
   outdir: 'dist',
   platform: 'browser',
-  target: ['chrome113'],
+  target: ['chrome114'],
   format: 'esm',
   define: { 'process.env.NODE_ENV': JSON.stringify(mode) },
   plugins: [minifyTemplates(), minifyJS, writeFiles(), analyzeMeta],
