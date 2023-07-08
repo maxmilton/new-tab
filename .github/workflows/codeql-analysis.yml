@@ -21,5 +21,3 @@ jobs:
           queries: security-and-quality
       - uses: github/codeql-action/autobuild@v2
       - uses: github/codeql-action/analyze@v2
-        with:
-          category: '/language:javascript'
