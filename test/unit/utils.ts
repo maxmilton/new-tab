@@ -10,7 +10,7 @@ export interface RenderResult {
    *
    * @param el - An element to inspect. Default is the mounted container.
    */
-  debug(el?: Element): void;
+  debug(el?: Element): Promise<void>;
   unmount(): void;
 }
 
@@ -26,9 +26,10 @@ export function render(component: Node): RenderResult {
 
   return {
     container,
-    debug(el = container) {
-      /* prettier-ignore */ // eslint-disable-next-line
-      console.log('DEBUG:\n' + require('prettier').format(el.innerHTML, { parser: 'html' }));
+    async debug(el = container) {
+      const { format } = await import('prettier');
+      // eslint-disable-next-line no-console
+      console.log(`DEBUG:\n${await format(el.innerHTML, { parser: 'html' })}`);
     },
     unmount() {
       // eslint-disable-next-line unicorn/prefer-dom-node-remove
@@ -38,7 +39,7 @@ export function render(component: Node): RenderResult {
 }
 
 export function cleanup(): void {
-  if (!mountedContainers || mountedContainers.size === 0) {
+  if (mountedContainers.size === 0) {
     throw new Error(
       'No mounted components exist, did you forget to call render()?',
     );

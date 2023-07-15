@@ -10,7 +10,7 @@ test('renders correctly', () => {
   expect(link).toBeTruthy();
   expect(link?.getAttribute('href')).toBe('https://example.com');
   expect(link?.getAttribute('title')).toBe('Example');
-  expect(link?.textContent).toBe('\nExample');
+  expect(link?.textContent).toBe('Example');
   const img = rendered.container.querySelector('img');
   expect(img).toBeTruthy();
   expect(img?.parentNode).toBe(link);

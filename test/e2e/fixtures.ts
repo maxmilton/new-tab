@@ -28,6 +28,7 @@ export const test = baseTest.extend<{
   },
   async extensionId({ context }, use) {
     let [background] = context.serviceWorkers();
+    // eslint-disable-next-line @typescript-eslint/no-unnecessary-condition
     if (!background) background = await context.waitForEvent('serviceworker');
 
     const extensionId = background.url().split('/')[2];
