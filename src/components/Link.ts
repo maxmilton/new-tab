@@ -25,10 +25,10 @@ export const Link = (props: LinkProps): LinkComponent => {
   const root = clone(view);
   const refs = collect<Refs>(root, meta.k, meta.d);
 
-  // eslint-disable-next-line no-multi-assign
-  root.title = refs.t.nodeValue = props.title;
   refs.i.src =
     '_favicon?size=16&pageUrl=' + encodeURIComponent((root.href = props.url));
+  // eslint-disable-next-line no-multi-assign
+  root.title = refs.t.nodeValue = props.title;
 
   return root;
 };
