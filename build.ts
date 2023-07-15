@@ -1,16 +1,10 @@
 /* eslint-disable import/no-extraneous-dependencies, no-console */
 
 import * as xcss from 'ekscss';
-import esbuild from 'esbuild';
-import {
-  decodeUTF8,
-  encodeUTF8,
-  minifyTemplates,
-  writeFiles,
-} from 'esbuild-minify-templates';
 import * as lightningcss from 'lightningcss';
-import fs from 'node:fs/promises';
-import path from 'node:path';
+import { readdir } from 'node:fs/promises';
+import { basename } from 'node:path';
+import * as terser from 'terser';
 import { makeManifest } from './manifest.config';
 
 const mode = Bun.env.NODE_ENV;
@@ -49,33 +43,31 @@ function compileCSS(src: string, from: string) {
 }
 
 /**
- * Construct a HTML file and save it to disk.
+ * Construct a HTML file and a CSS file and save them to disk.
  */
 async function makeHTML(pageName: string, stylePath: string) {
   const styleSrc = await Bun.file(stylePath).text();
   const css = compileCSS(styleSrc, stylePath);
-  const template = `<!doctype html>
-<meta charset=utf-8>
-<meta name=google value=notranslate>
-<title>New Tab</title>
-<link href=${pageName}.css rel=stylesheet>
-<script src=${pageName}.js type=module async></script>`;
+  const template = `
+    <!doctype html>
+    <meta charset=utf-8>
+    <meta name=google value=notranslate>
+    <title>New Tab</title>
+    <link href=${pageName}.css rel=stylesheet>
+    <script src=${pageName}.js type=module async></script>
+  `
+    .trim()
+    .replaceAll(/\n +/g, '\n');
 
   await Bun.write(`dist/${pageName}.css`, css);
   await Bun.write(`dist/${pageName}.html`, template);
 }
 
-await makeHTML('newtab', 'src/css/newtab.xcss');
-await makeHTML('settings', 'src/css/settings.xcss');
-
-// Extension manifest
-await Bun.write('dist/manifest.json', JSON.stringify(makeManifest()));
-
 /**
  * Compile all themes, combine into a single JSON file, and save it to disk.
  */
 async function makeThemes() {
-  const themes = await fs.readdir('src/css/themes');
+  const themes = await readdir('src/css/themes');
   const themesData: Record<string, string> = {};
 
   await Promise.all(
@@ -83,7 +75,7 @@ async function makeThemes() {
       Bun.file(`src/css/themes/${theme}`)
         .text()
         .then((src) => {
-          themesData[path.basename(theme, '.xcss')] = compileCSS(src, theme);
+          themesData[basename(theme, '.xcss')] = compileCSS(src, theme);
         }),
     ),
   );
@@ -91,112 +83,75 @@ async function makeThemes() {
   await Bun.write('dist/themes.json', JSON.stringify(themesData));
 }
 
+async function minifyJS(artifact: Blob & { path: string }) {
+  let source = await artifact.text();
+
+  // Improve joining vars; terser doesn't do this so we do it manually
+  source = source.replaceAll('const ', 'let ');
+
+  const result = await terser.minify(source, {
+    ecma: 2020,
+    module: true,
+    compress: {
+      // Prevent functions being inlined
+      reduce_funcs: false,
+      // XXX: Comment out to keep performance markers in non-dev builds for debugging
+      pure_funcs: ['performance.mark', 'performance.measure'],
+    },
+    mangle: {
+      properties: {
+        // regex: /^(adjustPosition|closePopup)$/,
+        regex: /^\$\$|^(__click|adjustPosition|closePopup)$/,
+      },
+    },
+    // TODO: Performance testing to see if this makes any difference (I assume it will have a very minor negative impact, so not worth it)
+    // format: {
+    //   semicolons: false,
+    // },
+  });
+
+  await Bun.write(artifact.path, result.code!);
+}
+
+// Extension manifest
+await Bun.write('dist/manifest.json', JSON.stringify(makeManifest()));
+
+console.time('html+css');
+await makeHTML('newtab', 'src/css/newtab.xcss');
+await makeHTML('settings', 'src/css/settings.xcss');
+console.timeEnd('html+css');
+
 console.time('themes');
 await makeThemes();
 console.timeEnd('themes');
 
-const analyzeMeta: esbuild.Plugin = {
-  name: 'analyze-meta',
-  setup(build) {
-    if (!build.initialOptions.metafile) return;
-
-    build.onEnd(
-      (result) =>
-        result.metafile &&
-        build.esbuild.analyzeMetafile(result.metafile).then(console.log),
-    );
-  },
-};
-
-/**
- * Minify JavaScript output.
- *
- * Although esbuild already minifies JS when creating output bundles, it needs
- * a second pass to apply all possible optimizations.
- */
-const minifyJS: esbuild.Plugin = {
-  name: 'minify-js',
-  setup(build) {
-    if (!build.initialOptions.minify) return;
-
-    build.onEnd(async (result) => {
-      if (!result.outputFiles) return;
-
-      for (let index = 0; index < result.outputFiles.length; index++) {
-        const file = result.outputFiles[index];
-
-        if (path.extname(file.path) === '.js') {
-          // eslint-disable-next-line no-await-in-loop
-          const out = await build.esbuild.transform(decodeUTF8(file.contents), {
-            loader: 'js',
-            minify: true,
-            target: build.initialOptions.target!,
-          });
-
-          // eslint-disable-next-line no-param-reassign
-          result.outputFiles[index].contents = encodeUTF8(out.code);
-        }
-      }
-    });
-  },
-};
-
-// FIXME: Migrate from esbuild to Bun.build once it supports:
-//  ↳ All required plugin hooks; onLoad, onEnd (with outputFiles, or ideally
-//    some other way to intercept output code before it's written to disk, or
-//    else we'll need to read the files and then save to disk again possibly
-//    including sourcemaps for dev)
-//    ↳ Mainly for the `minifyTemplates` plugin
-//    ↳ It's kind of already possible to do onEnd using the build outputs
-//      BuildArtifact which have a FileRef (same thing as Bun.file() returns)
-//      ↳ Actually, BuildArtifact extends Blob, so it's possible to interact
-//        with it directly; https://bun.sh/blog/bun-bundler#build-outputs
-//  ↳ `mangleProps`
-//  ↳ `pure`
-//  ↳ Browser version targeting
-//  ↳ `metafile` for bundle size analysis is a nice to have
-
 // New Tab & Settings apps
-const esbuildConfig1: esbuild.BuildOptions = {
-  entryPoints: ['src/newtab.ts', 'src/settings.ts'],
+console.time('build');
+const out = await Bun.build({
+  entrypoints: ['src/newtab.ts', 'src/settings.ts'],
   outdir: 'dist',
-  platform: 'browser',
-  target: ['chrome114'],
-  format: 'esm',
-  define: { 'process.env.NODE_ENV': JSON.stringify(mode) },
-  plugins: [minifyTemplates(), minifyJS, writeFiles(), analyzeMeta],
-  bundle: true,
+  target: 'browser',
   minify: !dev,
-  mangleProps: /_refs|collect|adjustPosition|closePopup/,
-  sourcemap: dev,
-  write: dev,
-  metafile: !dev && process.stdout.isTTY,
-  logLevel: 'debug',
-  // XXX: Comment out to keep performance markers in non-dev builds for debugging
-  pure: ['performance.mark', 'performance.measure'],
-};
+  sourcemap: dev ? 'external' : 'none',
+});
+console.timeEnd('build');
+console.log(out);
 
 // Background service worker script
-const esbuildConfig2: esbuild.BuildOptions = {
-  entryPoints: ['src/sw.ts'],
+console.time('build2');
+const out2 = await Bun.build({
+  entrypoints: ['src/sw.ts'],
   outdir: 'dist',
-  format: 'esm',
-  plugins: [analyzeMeta],
-  bundle: true,
+  target: 'browser',
   minify: !dev,
-  metafile: !dev && process.stdout.isTTY,
-  logLevel: 'debug',
-};
+});
+console.timeEnd('build2');
+console.log(out2);
 
-if (dev) {
-  // Watch for changes in dev mode
-  const context1 = await esbuild.context(esbuildConfig1);
-  const context2 = await esbuild.context(esbuildConfig2);
-  await Promise.all([context1.watch(), context2.watch()]);
-} else {
-  console.time('esbuild');
-  await esbuild.build(esbuildConfig1);
-  console.timeLog('esbuild');
-  await esbuild.build(esbuildConfig2);
-  console.timeEnd('esbuild');
+if (!dev) {
+  console.time('minify');
+  await minifyJS(out.outputs[0]);
+  await minifyJS(out.outputs[1]);
+  await minifyJS(out2.outputs[0]);
+  console.timeEnd('minify');
 }
