@@ -1,6 +1,7 @@
-import { h, type S1Node } from 'stage1';
+import { compile } from 'stage1/macro' assert { type: 'macro' };
+import { collect, h } from 'stage1/runtime';
 
-type TestComponent = S1Node & HTMLDivElement;
+type TestComponent = HTMLDivElement;
 
 interface TestProps {
   text: string;
@@ -10,17 +11,18 @@ type Refs = {
   t: Text;
 };
 
-const view = h(`
+const meta = compile(`
   <div id=test>
-    #t
+    @t
   </div>
 `);
+const view = h<HTMLDivElement>(meta.html);
 
 export function Test(props: TestProps): TestComponent {
-  const root = view as TestComponent;
-  const { t } = view.collect<Refs>(root);
+  const root = view;
+  const refs = collect<Refs>(root, meta.k, meta.d);
 
-  t.nodeValue = props.text;
+  refs.t.nodeValue = props.text;
 
   return root;
 }

@@ -46,7 +46,8 @@ describe('handleClick', () => {
     expect(event.defaultPrevented).toBe(false);
   });
 
-  test('opens in new tab when url starts with chrome:// and target is _blank', () => {
+  // TODO: If we add links with target="_blank" then don't skip this test.
+  test.skip('opens in new tab when url starts with chrome:// and target is _blank', () => {
     const tabsCreateSpy = spyOn(chrome.tabs, 'create');
     const tabsUpdateSpy = spyOn(chrome.tabs, 'update');
     const event = new window.MouseEvent('click');

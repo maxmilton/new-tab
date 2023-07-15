@@ -56,19 +56,19 @@ describe('render', () => {
     expect(rendered.debug).toBeInstanceOf(Function);
   });
 
-  test('debug function prints to console', () => {
+  test('debug function prints to console', async () => {
     const logSpy = spyOn(console, 'log')
       // @ts-expect-error - noop mock
       .mockImplementation(() => {});
     const rendered = render(document.createElement('div'));
-    rendered.debug();
+    await rendered.debug();
     expect(logSpy).toHaveBeenCalledTimes(1);
     // FIXME: Uncomment when bun:test supports toHaveBeenCalledWith !!!
     // expect(logSpy).toHaveBeenCalledWith('DEBUG:\n<div></div>\n');
     logSpy.mockRestore();
   });
 
-  test('debug function prints prettified container DOM to console', () => {
+  test('debug function prints prettified container DOM to console', async () => {
     const logSpy = spyOn(console, 'log')
       // @ts-expect-error - noop mock
       .mockImplementation(() => {});
@@ -79,7 +79,7 @@ describe('render', () => {
       document.createElement('div'),
     );
     const rendered = render(main);
-    rendered.debug();
+    await rendered.debug();
     expect(logSpy).toHaveBeenCalledTimes(1);
     // FIXME: Uncomment when bun:test supports toHaveBeenCalledWith !!!
     // expect(logSpy).toHaveBeenCalledWith('DEBUG:\n<main>\n  <div></div>\n  <div></div>\n  <div></div>\n</main>\n');
