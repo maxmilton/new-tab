@@ -1,5 +1,6 @@
 *-lock.json*
 *-lock.yaml
+*.bak
 *.lock
 *.log
 *.zip

@@ -13,18 +13,22 @@ module.exports = {
   },
   extends: [
     'eslint:recommended',
-    'plugin:@typescript-eslint/eslint-recommended',
     'airbnb-base',
     'airbnb-typescript/base',
-    'plugin:@typescript-eslint/recommended',
-    'plugin:@typescript-eslint/recommended-requiring-type-checking',
+    'plugin:@typescript-eslint/strict-type-checked',
+    'plugin:@typescript-eslint/stylistic-type-checked',
     'plugin:unicorn/recommended',
     'prettier',
   ],
   plugins: ['prettier'],
   rules: {
+    '@typescript-eslint/consistent-type-definitions': OFF, // FIXME: Issue with stage1 collect Refs
     '@typescript-eslint/explicit-module-boundary-types': WARN,
+    '@typescript-eslint/no-confusing-void-expression': WARN,
+    '@typescript-eslint/no-non-null-assertion': WARN,
     '@typescript-eslint/no-use-before-define': WARN,
+    // alternatives offer byte savings
+    '@typescript-eslint/prefer-string-starts-ends-with': OFF,
     'import/extensions': WARN,
     'import/prefer-default-export': OFF,
     // byte savings with same performance
@@ -41,7 +45,7 @@ module.exports = {
     'unicorn/filename-case': OFF,
     'unicorn/no-abusive-eslint-disable': WARN,
     'unicorn/no-array-callback-reference': OFF,
-    // forEach is actually often faster
+    // forEach is often faster (in Chrome and Firefox but not Safari)
     'unicorn/no-array-for-each': OFF,
     'unicorn/no-await-expression-member': OFF,
     'unicorn/no-null': OFF,
