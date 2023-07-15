@@ -13,7 +13,7 @@ export const makeManifest = (): chrome.runtime.ManifestV3 => ({
   version: pkg.version,
   // shippable releases should not have a named version
   version_name: process.env.CI ? undefined : gitRef().replace(/^v/, ''),
-  minimum_chrome_version: '113',
+  minimum_chrome_version: '114',
   homepage_url: pkg.homepage,
   icons: {
     16: 'icon16.png',
