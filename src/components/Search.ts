@@ -1,4 +1,5 @@
-import { append, h, type S1Node } from 'stage1';
+import { compile } from 'stage1/macro' assert { type: 'macro' };
+import { append, collect, h } from 'stage1/runtime';
 import type { SectionOrderItem } from '../types';
 import { DEFAULT_SECTION_ORDER, storage } from '../utils';
 import { SearchResult, type SearchResultComponent } from './SearchResult';
@@ -33,25 +34,27 @@ const runSearch = (text: string, section: SectionRefs) => {
   recentlyClosed?.filter(text);
 };
 
-type SearchComponent = S1Node & HTMLDivElement;
+type SearchComponent = HTMLDivElement;
+
 type Refs = {
   s: HTMLInputElement;
 };
 
 // https://github.com/feathericons/feather/blob/master/icons/search.svg
-const view = h(`
+const meta = compile(`
   <div class=con>
-    <input id=s placeholder="Search browser..." autocomplete=off #s>
+    <input @s id=s type=search placeholder="Search browser...">
     <svg id=i>
       <circle cx=11 cy=11 r=8 />
       <line x1=24 y1=24 x2=16.65 y2=16.65 />
     </svg>
   </div>
 `);
+const view = h<SearchComponent>(meta.html);
 
 export const Search = (): SearchComponent => {
-  const root = view as SearchComponent;
-  const refs = view.collect<Refs>(root);
+  const root = view;
+  const refs = collect<Refs>(root, meta.k, meta.d);
   const searchref = refs.s;
   const section: SectionRefs = {};
 
@@ -66,7 +69,7 @@ export const Search = (): SearchComponent => {
 
   performance.mark('Load Sections');
 
-  const sectionOrder = storage.o || DEFAULT_SECTION_ORDER;
+  const sectionOrder = storage.o ?? DEFAULT_SECTION_ORDER;
 
   sectionOrder.forEach((name) => {
     section[name] = append(SearchResult(name), root);
@@ -78,13 +81,16 @@ export const Search = (): SearchComponent => {
 
   if (openTabs) {
     const updateOpenTabs = () =>
-      chrome.tabs.query({}, (result) => {
-        openTabs.update(result);
-        if (searchref.value) openTabs.filter(searchref.value);
+      chrome.tabs.query({}, (tabs) => {
+        openTabs.update(tabs);
+        if (searchref.value) {
+          openTabs.filter(searchref.value);
+        }
       });
 
     updateOpenTabs();
 
+    // TODO: Handle race condition where onUpdated is called for this tab on load
     chrome.tabs.onUpdated.addListener(updateOpenTabs);
     chrome.tabs.onRemoved.addListener(updateOpenTabs);
     chrome.tabs.onMoved.addListener(updateOpenTabs);

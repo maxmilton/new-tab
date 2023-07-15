@@ -1,6 +1,6 @@
 import './theme';
 
-import { append, createFragment, setupSyntheticEvent } from 'stage1';
+import { append, createFragment } from 'stage1/runtime';
 import { BookmarkBar } from './components/BookmarkBar';
 import { Menu } from './components/Menu';
 import { Search } from './components/Search';
@@ -21,5 +21,4 @@ append(frag, document.body);
 
 performance.measure('Initialise Components', 'Initialise Components');
 
-document.body.__click = handleClick;
-setupSyntheticEvent('click');
+document.onclick = handleClick;
