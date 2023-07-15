@@ -1,12 +1,14 @@
-import { h, type S1Node } from 'stage1';
+import { compile } from 'stage1/macro' assert { type: 'macro' };
+import { collect, h } from 'stage1/runtime';
 
-type MenuComponent = S1Node & HTMLDivElement;
+type MenuComponent = HTMLDivElement;
+
 type Refs = {
   s: HTMLAnchorElement;
 };
 
 // https://github.com/tailwindlabs/heroicons/blob/master/optimized/outline/menu.svg
-const view = h(`
+const meta = compile(`
   <div id=m>
     <svg id=im>
       <path d="M4 6h16M4 12h16M4 18h16" />
@@ -21,15 +23,16 @@ const view = h(`
 
       <hr>
 
-      <a #s>New Tab Settings</a>
+      <a @s>New Tab Settings</a>
       <a href=https://github.com/maxmilton/new-tab/issues>Report Bug</a>
     </div>
   </div>
 `);
+const view = h<MenuComponent>(meta.html);
 
 export const Menu = (): MenuComponent => {
-  const root = view as MenuComponent;
-  const refs = view.collect<Refs>(root);
+  const root = view;
+  const refs = collect<Refs>(root, meta.k, meta.d);
 
   refs.s.__click = () => chrome.runtime.openOptionsPage();
 

@@ -2,7 +2,7 @@ import type { UserStorageData } from './types';
 
 export const storage: UserStorageData = await chrome.storage.local.get();
 
-// NOTE: When updating also update references that get an item by index
+// NOTE: When updating also update references that lookup items by index
 export const DEFAULT_SECTION_ORDER = [
   'Open Tabs',
   'Bookmarks',
@@ -11,15 +11,31 @@ export const DEFAULT_SECTION_ORDER = [
   'Recently Closed Tabs',
 ] as const;
 
+// Simplified synthetic click event implementation of setupSyntheticEvent() from
+// stage1, plus special handling for browser internal links (e.g. chrome://)
+// https://github.com/maxmilton/stage1/blob/master/src/events.ts
+// eslint-disable-next-line consistent-return
 export const handleClick = (event: MouseEvent): void => {
-  const { target, ctrlKey } = event;
-  const url = (target as HTMLAnchorElement).href;
+  let node = event.target as
+    | (Node & { __click?(event: MouseEvent): void })
+    | null;
+  // const link = node as HTMLAnchorElement;
+  // const url = link.href;
+  const url = (node as Node & { href?: string }).href;
+
+  while (node) {
+    if (node.__click) {
+      return node.__click(event);
+    }
+    node = node.parentNode;
+  }
 
   // Only apply special handling to non-http links
-  if (url && !url.startsWith('h')) {
+  if (url?.[0] !== 'h') {
     event.preventDefault();
 
-    if ((target as HTMLAnchorElement).target === '_blank' || ctrlKey) {
+    // if (link.target === '_blank' || event.ctrlKey) {
+    if (event.ctrlKey) {
       // Open the location in a new tab
       void chrome.tabs.create({ url });
     } else {

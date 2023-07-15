@@ -8,6 +8,6 @@ chrome.runtime.onInstalled.addListener(async () => {
   );
   const settings: Promise<UserStorageData> = chrome.storage.local.get();
   void chrome.storage.local.set({
-    t: (await themes)[(await settings).tn || 'dark'],
+    t: (await themes)[(await settings).tn ?? 'dark'],
   });
 });

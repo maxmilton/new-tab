@@ -1,6 +1,4 @@
-/* eslint-disable @typescript-eslint/restrict-plus-operands */
-
-import { append, create, h, type S1Node } from 'stage1';
+import { append, clone, create, h } from 'stage1/runtime';
 import { Link, type LinkComponent, type LinkProps } from './Link';
 
 export type BookmarkTreeNode = chrome.bookmarks.BookmarkTreeNode;
@@ -10,10 +8,10 @@ type FolderPopupComponent = HTMLDivElement & {
 };
 
 const CLOSE_DELAY_MS = 600;
-let emptyPopupView: S1Node | undefined;
-let arrowView: S1Node | undefined;
+let emptyPopup: HTMLDivElement | undefined;
+let arrow: SVGElement | undefined;
 
-const folderPopupView = create('div');
+const folderPopupView = create('div') as FolderPopupComponent;
 folderPopupView.className = 'sf';
 
 const FolderPopup = (
@@ -21,7 +19,7 @@ const FolderPopup = (
   children: BookmarkTreeNode[],
   nested?: boolean | undefined,
 ): FolderPopupComponent => {
-  const root = folderPopupView.cloneNode(true) as FolderPopupComponent;
+  const root = clone(folderPopupView);
   const parentRect = parent.getBoundingClientRect();
   let top: number;
   let left: number;
@@ -43,7 +41,7 @@ const FolderPopup = (
   if (children.length) {
     children.forEach((item) => append(BookmarkNode(item, true), root));
   } else {
-    append((emptyPopupView ??= h('<div id=e>(empty)</div>')), root);
+    append((emptyPopup ??= h<HTMLDivElement>('<div id=e>(empty)</div>')), root);
   }
 
   // Only after the component is mounted in the DOM do we have element size
@@ -65,10 +63,11 @@ const FolderPopup = (
 };
 
 type FolderComponent = HTMLDivElement & {
+  // eslint-disable-next-line @typescript-eslint/no-invalid-void-type
   closePopup(this: void): void;
 };
 
-const folderView = create('div');
+const folderView = create('div') as FolderComponent;
 folderView.className = 'f';
 
 export const Folder = (
@@ -76,7 +75,7 @@ export const Folder = (
   nested?: boolean,
   children?: BookmarkTreeNode[],
 ): FolderComponent => {
-  const root = folderView.cloneNode(true) as FolderComponent;
+  const root = clone(folderView);
   let popup: FolderPopupComponent | null;
   let timer: NodeJS.Timeout;
 
@@ -91,11 +90,12 @@ export const Folder = (
 
   if (nested) {
     append(
-      (arrowView ??= h(`
-        <svg class=i>
-          <path d="M5 12h14M12 5l7 7-7 7"/>
-        </svg>
-      `)).cloneNode(true),
+      clone(
+        (arrow ??= h<SVGElement>(
+          // TODO: Add comment with SVG source attribution link
+          '<svg class=i><path d="M5 12h14M12 5l7 7-7 7"/></svg>',
+        )),
+      ),
       root,
     );
   }
@@ -119,7 +119,7 @@ export const Folder = (
 
       popup = FolderPopup(
         root,
-        children || (await chrome.bookmarks.getChildren(props.id)),
+        children ?? (await chrome.bookmarks.getChildren(props.id)),
         nested,
       );
 
