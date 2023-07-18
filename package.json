@@ -22,14 +22,14 @@
     "zip": "sh -c 'test -z \"$(git status --porcelain)\"' && bun run build && bun run lint && bun run test && cd dist && zip ../chrome-extension.zip *"
   },
   "dependencies": {
-    "stage1": "0.8.0-next.0"
+    "stage1": "0.8.0-next.1"
   },
   "devDependencies": {
     "@maxmilton/stylelint-config": "0.0.12",
     "@playwright/test": "1.36.1",
     "@types/chrome": "0.0.241",
-    "@typescript-eslint/eslint-plugin": "6.0.0",
-    "@typescript-eslint/parser": "6.0.0",
+    "@typescript-eslint/eslint-plugin": "6.1.0",
+    "@typescript-eslint/parser": "6.1.0",
     "bun-types": "0.6.14",
     "ekscss": "0.0.16",
     "eslint": "8.45.0",
@@ -39,12 +39,12 @@
     "eslint-plugin-import": "2.27.5",
     "eslint-plugin-prettier": "5.0.0",
     "eslint-plugin-unicorn": "48.0.0",
-    "happy-dom": "10.3.2",
+    "happy-dom": "10.5.1",
     "lightningcss": "1.21.5",
     "prettier": "3.0.0",
     "stylelint": "15.10.1",
     "stylelint-config-standard": "34.0.0",
-    "terser": "5.19.0",
+    "terser": "5.19.1",
     "typescript": "5.1.6"
   },
   "prettier": {
