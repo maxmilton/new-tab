@@ -1,4 +1,4 @@
-/* eslint-disable import/no-extraneous-dependencies, no-console */
+/* eslint-disable no-console */
 
 import * as xcss from 'ekscss';
 import * as lightningcss from 'lightningcss';
@@ -100,7 +100,6 @@ async function minifyJS(artifact: Blob & { path: string }) {
     },
     mangle: {
       properties: {
-        // regex: /^(adjustPosition|closePopup)$/,
         regex: /^\$\$|^(__click|adjustPosition|closePopup)$/,
       },
     },
