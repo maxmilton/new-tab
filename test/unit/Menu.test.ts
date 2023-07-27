@@ -42,3 +42,15 @@ test.skip('renders correctly', () => {
   // </div>`);
   expect(rendered.container.innerHTML).toMatchSnapshot();
 });
+
+// FIXME: Remove these tests. They're just here to help with debugging.
+// test.only('renders data-x attribute', () => {
+//   const container = document.createElement('div');
+//   container.innerHTML = '<div data-x=a/b></div>';
+//   expect(container.innerHTML).toBe('<div data-x="a/b"></div>');
+// });
+// test.only('renders href attribute', () => {
+//   const container = document.createElement('div');
+//   container.innerHTML = '<a href=https://example.com/foo/bar>link</a>';
+//   expect(container.innerHTML).toBe('<a href="https://example.com/foo/bar">link</a>');
+// });
