@@ -26,6 +26,7 @@ module.exports = {
     '@typescript-eslint/no-confusing-void-expression': WARN,
     '@typescript-eslint/no-non-null-assertion': WARN,
     '@typescript-eslint/no-use-before-define': WARN,
+    'import/order': OFF, // broken with prettier
     'import/prefer-default-export': OFF,
     'no-restricted-syntax': OFF,
     'no-void': OFF,
