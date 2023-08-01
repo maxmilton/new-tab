@@ -5,7 +5,7 @@ import * as lightningcss from 'lightningcss';
 import { readdir } from 'node:fs/promises';
 import { basename } from 'node:path';
 import * as terser from 'terser';
-import { makeManifest } from './manifest.config';
+import { createManifest } from './manifest.config';
 
 const mode = Bun.env.NODE_ENV;
 const dev = mode === 'development';
@@ -113,7 +113,7 @@ async function minifyJS(artifact: Blob & { path: string }) {
 }
 
 // Extension manifest
-await Bun.write('dist/manifest.json', JSON.stringify(makeManifest()));
+await Bun.write('dist/manifest.json', JSON.stringify(createManifest()));
 
 console.time('html+css');
 await makeHTML('newtab', 'src/css/newtab.xcss');

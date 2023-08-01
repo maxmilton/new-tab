@@ -16,7 +16,7 @@ function gitRef() {
     .replace(/^v/, '');
 }
 
-export const makeManifest = (): chrome.runtime.ManifestV3 => ({
+export const createManifest = (): chrome.runtime.ManifestV3 => ({
   manifest_version: 3,
   name: 'New Tab',
   description: pkg.description,
