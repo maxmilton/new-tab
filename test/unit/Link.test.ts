@@ -10,7 +10,7 @@ test('rendered DOM contains expected elements', () => {
   );
   const link = rendered.container.querySelector('a');
   expect(link).toBeTruthy();
-  expect(rendered.container.firstElementChild).toBe(link);
+  expect(rendered.container.firstChild).toBe(link);
   expect(link?.getAttribute('href')).toBe('https://example.com');
   expect(link?.getAttribute('title')).toBe('Example');
   expect(link?.textContent).toBe('Example');

@@ -22,7 +22,7 @@ test('rendered DOM contains expected elements', async () => {
   await happyDOM.whenAsyncComplete();
   const root = rendered.container.querySelector('#b');
   expect(root).toBeTruthy();
-  expect(rendered.container.firstElementChild).toBe(root);
+  expect(rendered.container.firstChild).toBe(root);
 });
 
 test('rendered DOM matches snapshot', async () => {

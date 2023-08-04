@@ -12,9 +12,9 @@ test('contains expected properties', () => {
   expect(manifest.manifest_version).toBeDefined();
   expect(manifest.name).toBeDefined();
   expect(manifest.description).toBeDefined();
+  expect(manifest.homepage_url).toBeDefined();
   expect(manifest.version).toBeDefined();
   expect(manifest.minimum_chrome_version).toBeDefined();
-  expect(manifest.homepage_url).toBeDefined();
   expect(manifest.icons).toBeDefined();
   expect(manifest.icons?.[16]).toBeDefined();
   expect(manifest.icons?.[48]).toBeDefined();
@@ -37,9 +37,9 @@ test('properties are the correct type', () => {
   expect(manifest.manifest_version).toBeTypeOf('number');
   expect(manifest.name).toBeTypeOf('string');
   expect(manifest.description).toBeTypeOf('string');
+  expect(manifest.homepage_url).toBeTypeOf('string');
   expect(manifest.version).toBeTypeOf('string');
   expect(manifest.minimum_chrome_version).toBeTypeOf('string');
-  expect(manifest.homepage_url).toBeTypeOf('string');
   expect(manifest.icons).toBeTypeOf('object');
   expect(manifest.icons?.[16]).toBeTypeOf('string');
   expect(manifest.icons?.[48]).toBeTypeOf('string');
@@ -63,10 +63,10 @@ test('does not contain any unexpected properties', () => {
     'manifest_version',
     'name',
     'description',
+    'homepage_url',
     'version',
     'version_name',
     'minimum_chrome_version',
-    'homepage_url',
     'icons',
     'permissions',
     'chrome_url_overrides',
@@ -93,7 +93,6 @@ test('manifest version is v3', () => {
 });
 
 test('permissions contains expected values', () => {
-  expect(manifest.permissions).toHaveLength(7);
   expect(manifest.permissions).toContain('bookmarks');
   expect(manifest.permissions).toContain('favicon');
   expect(manifest.permissions).toContain('history');
@@ -101,6 +100,7 @@ test('permissions contains expected values', () => {
   expect(manifest.permissions).toContain('storage');
   expect(manifest.permissions).toContain('tabs');
   expect(manifest.permissions).toContain('topSites');
+  expect(manifest.permissions).toHaveLength(7);
 });
 
 const oldCI = process.env.CI;
@@ -119,10 +119,7 @@ test('does not have version_name when env var CI=true', () => {
   restoreCI();
 });
 
-// FIXME: Don't skip once bun has fixed:
-// - https://github.com/oven-sh/bun/issues/556
-// - https://github.com/oven-sh/bun/issues/2696
-test.skip('has version_name when CI env var is not set', () => {
+test('has version_name when CI env var is not set', () => {
   delete process.env.CI;
   const manifest2 = createManifest();
   expect(manifest2.version_name).toBeDefined();
