@@ -31,6 +31,11 @@ function setupDOM() {
 }
 
 function setupMocks(): void {
+  // @ts-expect-error - noop stub
+  global.performance.mark = noop;
+  // @ts-expect-error - noop stub
+  global.performance.measure = noop;
+
   global.chrome = {
     // @ts-expect-error - partial mock
     bookmarks: {

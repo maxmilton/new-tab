@@ -1,26 +1,40 @@
-import { afterAll, expect, test } from 'bun:test';
+import { afterEach, expect, mock, test } from 'bun:test';
 import { reset } from '../setup';
 import { consoleSpy } from './utils';
 
-afterAll(reset);
+// Completely reset DOM and global state between tests
+afterEach(reset);
+
+const MODULE_PATH = import.meta.resolveSync('../../dist/settings.js');
+const themes = Bun.file('dist/themes.json');
+
+async function load() {
+  global.fetch = mock((input: RequestInfo | URL) => {
+    if (input === 'themes.json') {
+      return Promise.resolve(new Response(themes));
+    }
+    throw new Error(`Unexpected fetch call: ${String(input)}`);
+  });
+
+  // eslint-disable-next-line @typescript-eslint/no-dynamic-delete
+  delete import.meta.require.cache[MODULE_PATH];
+  await import(MODULE_PATH);
+  await happyDOM.whenAsyncComplete();
+}
 
 test('renders entire settings app', async () => {
   const checkConsoleCalls = consoleSpy();
-  const oldFetch = global.fetch;
-  global.fetch = () => Promise.resolve(new Response(Bun.file('dist/themes.json')));
-
-  // @ts-expect-error - no allowJs in tsconfig
-  // eslint-disable-next-line import/extensions
-  await import('../../dist/settings.js');
-  await happyDOM.whenAsyncComplete();
-
-  // TODO: Better assertions
+  await load();
   expect(document.body.innerHTML.length).toBeGreaterThan(600);
 
-  // FIXME: fetch('themes.json') currently errors but does not fail the test
-  //  ↳ A bad fetch should fail the test (bun test bug)
-  //  ↳ It should actually get the themes.json file correctly (happy-dom bug)
+  // TODO: More/better assertions
 
   checkConsoleCalls();
-  global.fetch = oldFetch;
+});
+
+test('fetches themes.json once and no other fetch calls', async () => {
+  await load();
+  expect(global.fetch).toHaveBeenCalledTimes(1);
+  // TODO: Uncomment once bun supports this
+  // expect(global.fetch).toHaveBeenCalledWith('themes.json');
 });
