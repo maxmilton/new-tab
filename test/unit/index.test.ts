@@ -24,11 +24,6 @@ describe('dist files', () => {
   ];
 
   for (const [filename, type] of distFiles) {
-    // test(`file "dist/${filename}" exists`, () => {
-    //   const fdStats = await fs.stat(path.join(import.meta.dir, '../../dist', filename));
-    //   expect(fdStats.isFile()).toBeTruthy();
-    // });
-
     // eslint-disable-next-line @typescript-eslint/no-loop-func
     test(`file "dist/${filename}" exists with correct type`, () => {
       const file = Bun.file(`dist/${filename}`);

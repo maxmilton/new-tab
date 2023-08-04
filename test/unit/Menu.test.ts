@@ -1,19 +1,12 @@
-import { afterEach, expect, test } from 'bun:test';
+import { afterEach, expect, spyOn, test } from 'bun:test';
+import { deleteSyntheticEvent, setupSyntheticEvent } from 'stage1/runtime';
 import { Menu } from '../../src/components/Menu';
 import { cleanup, render } from './utils';
 
 afterEach(cleanup);
 
-// TODO: Test clicking the settings link calls openOptionsPage
-
-// FIXME: Don't skip this test. Currently happy-dom can't parse hrefs correctly
-// when they're not sourrounded by quotes. This is a bug in happy-dom.
-test.skip('renders correctly', () => {
+test('rendered DOM contains expected elements', () => {
   const rendered = render(Menu());
-
-  // FIXME: REMOVE!!!!!!!!!!!!!
-  // rendered.debug();
-
   expect(rendered.container.querySelector('#m')).toBeTruthy();
   expect(rendered.container.querySelector('svg#im')).toBeTruthy();
   expect(rendered.container.querySelector('#d')).toBeTruthy();
@@ -25,32 +18,20 @@ test.skip('renders correctly', () => {
   expect(
     rendered.container.querySelector('a[href="https://github.com/maxmilton/new-tab/issues"]'),
   ).toBeTruthy();
-  //   expect(rendered.container.innerHTML).toMatchInlineSnapshot(`<div id="m">
-  // <svg id="im">
-  // <path d="M4 6h16M4 12h16M4 18h16"></path>
-  // </svg>
-  // <div id="d">
-  // <a href="chrome://new-tab-page">Open Default Tab</a>
-  // <a href="chrome://bookmarks">Bookmarks Manager</a>
-  // <a href="chrome://downloads">Downloads</a>
-  // <a href="chrome://history">History</a>
-  // <a href="chrome://settings/passwords">Passwords</a>
-  // <hr>
-  // <a>New Tab Settings</a>
-  // <a href="https://github.com/maxmilton/new-tab/issues">Report Bug</a>
-  // </div>
-  // </div>`);
+});
+
+test('rendered DOM matches snapshot', () => {
+  const rendered = render(Menu());
   expect(rendered.container.innerHTML).toMatchSnapshot();
 });
 
-// FIXME: Remove these tests. They're just here to help with debugging.
-// test.only('renders data-x attribute', () => {
-//   const container = document.createElement('div');
-//   container.innerHTML = '<div data-x=a/b></div>';
-//   expect(container.innerHTML).toBe('<div data-x="a/b"></div>');
-// });
-// test.only('renders href attribute', () => {
-//   const container = document.createElement('div');
-//   container.innerHTML = '<a href=https://example.com/foo/bar>link</a>';
-//   expect(container.innerHTML).toBe('<a href="https://example.com/foo/bar">link</a>');
-// });
+test('clicking settings link calls chrome.runtime.openOptionsPage', () => {
+  setupSyntheticEvent('click'); // same click event logic as in src/newtab.ts
+  const spy = spyOn(global.chrome.runtime, 'openOptionsPage');
+  const rendered = render(Menu());
+  // TODO: Use a less brittle selector, however currently the settings link is
+  // the only one with a href attribute...
+  rendered.container.querySelector<HTMLAnchorElement>('a:not([href])')?.click();
+  expect(spy).toHaveBeenCalledTimes(1);
+  deleteSyntheticEvent('click');
+});
