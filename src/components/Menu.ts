@@ -7,6 +7,11 @@ type Refs = {
   s: HTMLAnchorElement;
 };
 
+// TODO: Remove the quotes around href values to save bytes. Currently our
+// tests fail without them because happy-dom can't parse element attribute
+// values correctly when they're not sourrounded by quotes. See:
+// https://github.com/capricorn86/happy-dom/issues/999
+
 // https://github.com/tailwindlabs/heroicons/blob/master/optimized/outline/menu.svg
 const meta = compile(`
   <div id=m>
@@ -15,16 +20,16 @@ const meta = compile(`
     </svg>
 
     <div id=d>
-      <a href=chrome://new-tab-page>Open Default Tab</a>
-      <a href=chrome://bookmarks>Bookmarks Manager</a>
-      <a href=chrome://downloads>Downloads</a>
-      <a href=chrome://history>History</a>
-      <a href=chrome://settings/passwords>Passwords</a>
+      <a href="chrome://new-tab-page">Open Default Tab</a>
+      <a href="chrome://bookmarks">Bookmarks Manager</a>
+      <a href="chrome://downloads">Downloads</a>
+      <a href="chrome://history">History</a>
+      <a href="chrome://settings/passwords">Passwords</a>
 
       <hr>
 
       <a @s>New Tab Settings</a>
-      <a href=https://github.com/maxmilton/new-tab/issues>Report Bug</a>
+      <a href="https://github.com/maxmilton/new-tab/issues">Report Bug</a>
     </div>
   </div>
 `);
