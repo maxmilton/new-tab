@@ -1,4 +1,4 @@
-import { describe, expect, test } from 'bun:test';
+import { expect, test } from 'bun:test';
 import { createManifest } from '../../manifest.config';
 
 const manifest = createManifest();
