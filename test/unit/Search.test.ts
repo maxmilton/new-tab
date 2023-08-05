@@ -22,11 +22,11 @@ afterEach(cleanup);
 test('rendered DOM contains expected elements', async () => {
   const rendered = render(Search());
   await happyDOM.whenAsyncComplete();
-  const root = rendered.container.firstElementChild!;
+  const root = rendered.container.firstChild!;
   expect(root).toBeTruthy();
   const input = rendered.container.querySelector('input#s');
   expect(input).toBeTruthy();
-  expect(root.firstElementChild).toBe(input);
+  expect(root.firstChild).toBe(input);
   const icon = rendered.container.querySelector('svg#i')!;
   expect(icon).toBeTruthy();
   expect(icon.parentElement).toBe(root);

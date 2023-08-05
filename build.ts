@@ -43,7 +43,7 @@ function compileCSS(src: string, from: string) {
 }
 
 /**
- * Construct a HTML file and a CSS file and save them to disk.
+ * Construct HTML and CSS files and save them to disk.
  */
 async function makeHTML(pageName: string, stylePath: string) {
   const styleSrc = await Bun.file(stylePath).text();
@@ -86,16 +86,15 @@ async function makeThemes() {
 async function minifyJS(artifact: Blob & { path: string }) {
   let source = await artifact.text();
 
-  // Improve joining vars; terser doesn't do this so we do it manually
+  // Improve collapsing variables; terser doesn't do this so we do it manually.
   source = source.replaceAll('const ', 'let ');
 
   const result = await terser.minify(source, {
     ecma: 2020,
     module: true,
     compress: {
-      // Prevent functions being inlined
-      reduce_funcs: false,
-      // XXX: Comment out to keep performance markers in non-dev builds for debugging
+      reduce_funcs: false, // prevent functions being inlined
+      // XXX: Comment out to keep performance markers for debugging.
       pure_funcs: ['performance.mark', 'performance.measure'],
     },
     mangle: {
@@ -103,7 +102,8 @@ async function minifyJS(artifact: Blob & { path: string }) {
         regex: /^\$\$|^(__click|adjustPosition|closePopup)$/,
       },
     },
-    // TODO: Performance testing to see if this makes any difference (I assume it will have a very minor negative impact, so not worth it)
+    // TODO: Performance testing to see if this makes any difference (I assume
+    // it will have a minor negative impact, so not worth it).
     // format: {
     //   semicolons: false,
     // },

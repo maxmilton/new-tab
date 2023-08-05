@@ -26,7 +26,7 @@ describe('Bookmark (Link)', () => {
     );
     const root = rendered.container.querySelector('a');
     expect(root).toBeTruthy();
-    expect(rendered.container.firstElementChild).toBe(root);
+    expect(rendered.container.firstChild).toBe(root);
 
     // TODO: More/better assertions to prove it's a Link component.
   });
@@ -45,7 +45,7 @@ describe('Folder', () => {
     const rendered = render(BookmarkNode({ id: '1', title: 'Example' } satisfies BookmarkTreeNode));
     const root = rendered.container.querySelector('div.f');
     expect(root).toBeTruthy();
-    expect(rendered.container.firstElementChild).toBe(root);
+    expect(rendered.container.firstChild).toBe(root);
   });
 
   test('rendered DOM matches snapshot', () => {
