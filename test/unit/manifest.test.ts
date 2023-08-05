@@ -103,6 +103,20 @@ test('permissions contains expected values', () => {
   expect(manifest.permissions).toHaveLength(7);
 });
 
+test('has correct icons.* values', () => {
+  expect(manifest.icons?.[16]).toBe('icon16.png');
+  expect(manifest.icons?.[48]).toBe('icon48.png');
+  expect(manifest.icons?.[128]).toBe('icon128.png');
+});
+
+test('has correct chrome_url_overrides.newtab value of "newtab.html"', () => {
+  expect(manifest.chrome_url_overrides?.newtab).toBe('newtab.html');
+});
+
+test('has correct service_worker value of "sw.js"', () => {
+  expect(manifest.background?.service_worker).toBe('sw.js');
+});
+
 const oldCI = process.env.CI;
 const restoreCI = () => {
   if (oldCI === undefined) {
