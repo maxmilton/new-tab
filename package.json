@@ -39,7 +39,7 @@
     "eslint-plugin-import": "2.28.0",
     "eslint-plugin-prettier": "5.0.0",
     "eslint-plugin-unicorn": "48.0.1",
-    "happy-dom": "10.7.0",
+    "happy-dom": "10.8.0",
     "lightningcss": "1.21.5",
     "prettier": "3.0.1",
     "stylelint": "15.10.2",
