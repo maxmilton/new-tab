@@ -16,13 +16,15 @@ function gitRef() {
     .replace(/^v/, '');
 }
 
-export const createManifest = (): chrome.runtime.ManifestV3 => ({
+export const createManifest = (
+  debug = !process.env.CI,
+): chrome.runtime.ManifestV3 => ({
   manifest_version: 3,
   name: 'New Tab',
   description: pkg.description,
   version: pkg.version,
   // shippable releases should not have a named version
-  version_name: process.env.CI ? undefined : gitRef(),
+  version_name: debug ? gitRef() : undefined,
   minimum_chrome_version: '114',
   homepage_url: pkg.homepage,
   icons: {
