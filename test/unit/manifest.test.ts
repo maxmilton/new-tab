@@ -134,7 +134,7 @@ test('does not have version_name when env var CI=true', () => {
 });
 
 test('has version_name when CI env var is not set', () => {
-  delete process.env.CI;
+  process.env.CI = ''; // using "delete" doesn't work
   const manifest2 = createManifest();
   expect(manifest2.version_name).toBeDefined();
   restoreCI();
