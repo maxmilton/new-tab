@@ -127,6 +127,13 @@ test('does not have version_name when when debug option is false', () => {
   expect(manifest2.version_name).toBeUndefined();
 });
 
+// HACK: Mutating env vars that were set before the process started doesn't
+// work in bun, so we skip tests which rely on the CI env var _not_ being set.
+test.skipIf(!!process.env.CI)('has version_name when CI env var is not set', () => {
+  const manifest2 = createManifest();
+  expect(manifest2.version_name).toBeDefined();
+});
+
 const oldCI = process.env.CI;
 const restoreCI = () => {
   if (oldCI === undefined) {
@@ -138,19 +145,6 @@ const restoreCI = () => {
     process.env.CI = oldCI;
   }
 };
-
-// HACK: Mutating env vars that were set before the process started doesn't
-// work in bun, so we skip tests which rely on the CI env var _not_ being set.
-const testSkipInCI = process.env.CI
-  ? test.skip // eslint-disable-line @typescript-eslint/unbound-method
-  : test;
-
-testSkipInCI('has version_name when CI env var is not set', () => {
-  delete process.env.CI;
-  const manifest2 = createManifest();
-  expect(manifest2.version_name).toBeDefined();
-  restoreCI();
-});
 
 test('does not have version_name when env var CI=true', () => {
   process.env.CI = 'true';

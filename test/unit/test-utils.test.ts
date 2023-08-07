@@ -86,7 +86,7 @@ describe('render', () => {
     logSpy.mockRestore();
   });
 
-  test('renders TestComponent correctly', () => {
+  test('renders Test component correctly', () => {
     const rendered = render(Test({ text: 'abc' }));
     expect(rendered.container.innerHTML).toBe('<div id="test">abc</div>');
   });
