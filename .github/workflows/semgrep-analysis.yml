@@ -9,6 +9,7 @@ on:
 jobs:
   analyze:
     runs-on: ubuntu-latest
+    timeout-minutes: 5
     container:
       image: returntocorp/semgrep
     permissions:
