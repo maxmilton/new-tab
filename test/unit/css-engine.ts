@@ -1,5 +1,5 @@
 /**
- * @overview CSS engine utilities to test CSS styles.
+ * @overview CSS engine and utilities for writing CSS tests.
  */
 
 /* eslint-disable import/no-extraneous-dependencies */
