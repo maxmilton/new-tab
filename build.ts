@@ -71,7 +71,7 @@ async function makeThemes() {
   const themesData: Record<string, string> = {};
 
   await Promise.all(
-    themes.map((theme) =>
+    themes.sort().map((theme) =>
       Bun.file(`src/css/themes/${theme}`)
         .text()
         .then((src) => {

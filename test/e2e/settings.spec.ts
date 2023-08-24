@@ -11,3 +11,5 @@ test('settings page', async ({ page, extensionId }) => {
   await expect(labels[1]).toHaveText('Sections');
   await expect(labels[2]).toHaveText('Reset');
 });
+
+// TODO: Test it makes no external requests

@@ -35,7 +35,7 @@ describe('dist files', () => {
       });
 
       if (minBytes != null && maxBytes != null) {
-        test(`file size is within expected limits`, () => {
+        test(`is within expected file size limits`, () => {
           expect(file.size).toBeGreaterThan(minBytes);
           expect(file.size).toBeLessThan(maxBytes);
         });
