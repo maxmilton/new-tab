@@ -1,5 +1,6 @@
-import { afterEach, expect, spyOn, test } from 'bun:test';
+import { afterEach, describe, expect, spyOn, test } from 'bun:test';
 import { reset } from '../setup';
+import { DECLARATION, compile, lookup, walk } from './css-engine';
 import { consoleSpy } from './utils';
 
 // Completely reset DOM and global state between tests
@@ -38,5 +39,59 @@ test('gets stored user settings once', async () => {
   expect(spy).toHaveBeenCalledTimes(1);
 });
 
+test('makes no fetch() calls', async () => {
+  const spy = spyOn(global, 'fetch');
+  await load();
+  expect(spy).not.toHaveBeenCalled();
+});
+
 // TODO: Test with various settings
 // TODO: Test themes logic
+const css = await Bun.file('dist/newtab.css').text();
+
+describe('CSS', () => {
+  const ast = compile(css);
+
+  test('does not contain any @media queries', () => {
+    expect(css).not.toInclude('@media');
+  });
+
+  test('does not contain any @font-face rules', () => {
+    expect(css).not.toInclude('@font-face');
+  });
+
+  test('does not contain any @import rules', () => {
+    expect(css).not.toInclude('@import');
+  });
+
+  test('does not contain any comments', () => {
+    expect(css).not.toInclude('/*');
+    expect(css).not.toInclude('*/');
+    expect(css).not.toInclude('//');
+    expect(css).not.toInclude('<!');
+  });
+
+  test('does not contain ":root"', () => {
+    expect(css).not.toInclude(':root');
+  });
+
+  test('compiled AST is not empty', () => {
+    expect(ast).not.toBeEmpty();
+  });
+
+  test('does not have any rules with a ":root" selector', () => {
+    const elements = lookup(ast, ':root');
+    expect(elements).toBeUndefined();
+  });
+
+  // CSS custom properties (variables) should only defined in themes
+  test('does not have any CSS variable declarations', () => {
+    let found = 0;
+    walk(ast, (element) => {
+      if (element.type === DECLARATION && (element.props as string).startsWith('--')) {
+        found += 1;
+      }
+    });
+    expect(found).toBe(0);
+  });
+});

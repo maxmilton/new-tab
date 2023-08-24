@@ -13,3 +13,5 @@ test('newtab page', async ({ page, extensionId }) => {
   await expect(h2s[3]).toHaveText('Top Sites');
   await expect(h2s[4]).toHaveText('Recently Closed Tabs');
 });
+
+// TODO: Test it makes no external requests
