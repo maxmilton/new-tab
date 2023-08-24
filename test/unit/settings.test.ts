@@ -10,18 +10,21 @@ const MODULE_PATH = import.meta.resolveSync('../../dist/settings.js');
 const themes = Bun.file('dist/themes.json');
 
 async function load() {
-  // eslint-disable-next-line no-multi-assign
-  global.fetch = window.fetch = mock((input: RequestInfo | URL) => {
+  const fetchMock = mock((input: RequestInfo | URL) => {
     if (input === 'themes.json') {
       return Promise.resolve(new Response(themes));
     }
     throw new Error(`Unexpected fetch call: ${String(input)}`);
   });
+  // eslint-disable-next-line no-multi-assign
+  global.fetch = window.fetch = fetchMock;
 
   // eslint-disable-next-line @typescript-eslint/no-dynamic-delete
   delete import.meta.require.cache[MODULE_PATH];
   await import(MODULE_PATH);
   await happyDOM.whenAsyncComplete();
+
+  return fetchMock;
 }
 
 test('renders entire settings app', async () => {
@@ -41,10 +44,10 @@ test('gets stored user settings once on load', async () => {
 });
 
 test('fetches themes.json once and makes no other fetch calls', async () => {
-  await load();
-  expect(global.fetch).toHaveBeenCalledTimes(1);
+  const fetchMock = await load();
+  expect(fetchMock).toHaveBeenCalledTimes(1);
   // TODO: Uncomment once bun supports this.
-  // expect(global.fetch).toHaveBeenCalledWith('themes.json');
+  // expect(fetchMock).toHaveBeenCalledWith('themes.json');
 });
 
 const css = await Bun.file('dist/settings.css').text();
