@@ -10,7 +10,8 @@ const MODULE_PATH = import.meta.resolveSync('../../dist/settings.js');
 const themes = Bun.file('dist/themes.json');
 
 async function load() {
-  global.fetch = mock((input: RequestInfo | URL) => {
+  // eslint-disable-next-line no-multi-assign
+  global.fetch = window.fetch = mock((input: RequestInfo | URL) => {
     if (input === 'themes.json') {
       return Promise.resolve(new Response(themes));
     }
