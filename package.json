@@ -27,7 +27,7 @@
   "devDependencies": {
     "@maxmilton/stylelint-config": "0.0.12",
     "@playwright/test": "1.37.1",
-    "@types/chrome": "0.0.244",
+    "@types/chrome": "0.0.245",
     "@typescript-eslint/eslint-plugin": "6.5.0",
     "@typescript-eslint/parser": "6.5.0",
     "bun-types": "0.8.1",
