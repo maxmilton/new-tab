@@ -77,7 +77,7 @@ export const Folder = (
 ): FolderComponent => {
   const root = clone(folderView);
   let popup: FolderPopupComponent | null;
-  let timer: NodeJS.Timeout;
+  let timer: number | Timer;
 
   const clearTimer = () => clearTimeout(timer);
 
