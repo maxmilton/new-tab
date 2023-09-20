@@ -107,10 +107,8 @@ async function load(themeName?: (typeof themeNames)[number]) {
   style.textContent = newtabCSS ??= await Bun.file('dist/newtab.css').text();
   window.document.head.appendChild(style);
 
-  // eslint-disable-next-line @typescript-eslint/no-dynamic-delete
-  delete import.meta.require.cache[MODULE_PATH_THEME];
-  // eslint-disable-next-line @typescript-eslint/no-dynamic-delete
-  delete import.meta.require.cache[MODULE_PATH_UTILS];
+  Loader.registry.delete(MODULE_PATH_THEME);
+  Loader.registry.delete(MODULE_PATH_UTILS);
   await import(MODULE_PATH_THEME);
   await happyDOM.whenAsyncComplete();
 

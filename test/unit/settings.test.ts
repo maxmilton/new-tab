@@ -19,8 +19,7 @@ async function load() {
   // eslint-disable-next-line no-multi-assign
   global.fetch = window.fetch = fetchMock;
 
-  // eslint-disable-next-line @typescript-eslint/no-dynamic-delete
-  delete import.meta.require.cache[MODULE_PATH];
+  Loader.registry.delete(MODULE_PATH);
   await import(MODULE_PATH);
   await happyDOM.whenAsyncComplete();
 

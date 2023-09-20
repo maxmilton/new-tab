@@ -9,8 +9,7 @@ const MODULE_PATH = import.meta.resolveSync('../../src/components/Search');
 let Search: typeof import('../../src/components/Search').Search;
 
 beforeEach(async () => {
-  // eslint-disable-next-line @typescript-eslint/no-dynamic-delete
-  delete import.meta.require.cache[MODULE_PATH];
+  Loader.registry.delete(MODULE_PATH);
   Search = (await import('../../src/components/Search')).Search;
 });
 
