@@ -14,7 +14,7 @@ test('rendered DOM contains expected elements', () => {
   expect(rendered.container.querySelector('a[href="chrome://bookmarks"]')).toBeTruthy();
   expect(rendered.container.querySelector('a[href="chrome://downloads"]')).toBeTruthy();
   expect(rendered.container.querySelector('a[href="chrome://history"]')).toBeTruthy();
-  expect(rendered.container.querySelector('a[href="chrome://settings/passwords"]')).toBeTruthy();
+  expect(rendered.container.querySelector('a[href="chrome://password-manager"]')).toBeTruthy();
   expect(
     rendered.container.querySelector('a[href="https://github.com/maxmilton/new-tab/issues"]'),
   ).toBeTruthy();
