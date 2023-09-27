@@ -1,6 +1,16 @@
 import { afterEach, describe, expect, spyOn, test } from 'bun:test';
 import { Test } from '../TestComponent';
-import { cleanup, render } from './utils';
+import { cleanup, consoleSpy, render } from './utils';
+
+describe('render (no call)', () => {
+  test('is a function', () => {
+    expect(render).toBeInstanceOf(Function);
+  });
+
+  test('takes a single argument', () => {
+    expect(render).toHaveLength(1);
+  });
+});
 
 describe('render', () => {
   afterEach(cleanup);
@@ -89,6 +99,14 @@ describe('render', () => {
 });
 
 describe('cleanup', () => {
+  test('is a function', () => {
+    expect(cleanup).toBeInstanceOf(Function);
+  });
+
+  test('takes no arguments', () => {
+    expect(cleanup).toHaveLength(0);
+  });
+
   test('throws when there are no rendered components', () => {
     expect(() => cleanup()).toThrow();
   });
@@ -122,5 +140,41 @@ describe('cleanup', () => {
       expect(node).toBeInstanceOf(window.HTMLSpanElement);
     }
     document.body.textContent = '';
+  });
+});
+
+describe('consoleSpy', () => {
+  test('is a function', () => {
+    expect(consoleSpy).toBeInstanceOf(Function);
+  });
+
+  test('takes no arguments', () => {
+    expect(consoleSpy).toHaveLength(0);
+  });
+
+  test('returns a function', () => {
+    const checkConsoleCalls = consoleSpy();
+    expect(checkConsoleCalls).toBeInstanceOf(Function);
+    checkConsoleCalls();
+  });
+
+  test('returned function takes no arguments', () => {
+    const checkConsoleCalls = consoleSpy();
+    expect(checkConsoleCalls).toHaveLength(0);
+    checkConsoleCalls();
+  });
+
+  test('passes when no console methods are called', () => {
+    const checkConsoleCalls = consoleSpy();
+    checkConsoleCalls();
+  });
+
+  // FIXME: How to test this?
+  test.skip('fails when console methods are called', () => {
+    const checkConsoleCalls = consoleSpy();
+    console.log('a');
+    console.warn('b');
+    console.error('c');
+    checkConsoleCalls();
   });
 });
