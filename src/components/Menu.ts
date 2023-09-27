@@ -19,7 +19,7 @@ const meta = compile(`
       <a href=chrome://bookmarks>Bookmarks Manager</a>
       <a href=chrome://downloads>Downloads</a>
       <a href=chrome://history>History</a>
-      <a href=chrome://settings/passwords>Passwords</a>
+      <a href=chrome://password-manager>Passwords</a>
 
       <hr>
 
