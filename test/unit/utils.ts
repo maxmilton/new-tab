@@ -54,15 +54,15 @@ export function cleanup(): void {
   });
 }
 
-const consoleMethods = Object.getOwnPropertyNames(
-  window.console,
-) as (keyof Console)[];
+// TODO: Use `window.console` if we use the virtual console; see ../setup.ts
+const consoleMethods = Object.getOwnPropertyNames(console) as (keyof Console)[];
 
 export function consoleSpy(): () => void {
   const spies: Mock<() => void>[] = [];
 
   for (const method of consoleMethods) {
-    spies.push(spyOn(window.console, method));
+    // TODO: Use `window.console` if we use the virtual console; see ../setup.ts
+    spies.push(spyOn(console, method));
   }
 
   return () => {
