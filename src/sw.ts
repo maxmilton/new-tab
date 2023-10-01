@@ -1,3 +1,5 @@
+/// <reference lib="webworker" />
+
 import type { ThemesData, UserStorageData } from './types';
 
 // On install or subsequent update, preload the user's chosen theme into storage
