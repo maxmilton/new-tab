@@ -16,9 +16,22 @@ function gitRef() {
     .replace(/^v/, '');
 }
 
+// FIXME: Remove these once @types/chrome is updated
+// https://developer.chrome.com/docs/extensions/mv3/cross-origin-isolation/
+interface ManifestExtra {
+  /** https://developer.chrome.com/docs/extensions/mv3/manifest/cross_origin_embedder_policy/ */
+  cross_origin_embedder_policy?: {
+    value: string;
+  };
+  /** https://developer.chrome.com/docs/extensions/mv3/manifest/cross_origin_opener_policy/ */
+  cross_origin_opener_policy?: {
+    value: string;
+  };
+}
+
 export const createManifest = (
   debug = !process.env.CI,
-): chrome.runtime.ManifestV3 => ({
+): chrome.runtime.ManifestV3 & ManifestExtra => ({
   manifest_version: 3,
   name: 'New Tab',
   description: pkg.description,
