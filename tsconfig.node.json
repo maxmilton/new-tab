@@ -2,7 +2,7 @@
   "extends": "./tsconfig.json",
   "compilerOptions": {
     "composite": true,
-    "moduleResolution": "node",
+    "moduleResolution": "node10",
     "allowSyntheticDefaultImports": true
   },
   "include": [
