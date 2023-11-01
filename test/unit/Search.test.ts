@@ -21,14 +21,14 @@ afterEach(cleanup);
 test('rendered DOM contains expected elements', async () => {
   const rendered = render(Search());
   await happyDOM.whenAsyncComplete();
-  const root = rendered.container.firstChild!;
+  const root = rendered.container.firstChild as HTMLElement | null;
   expect(root).toBeTruthy();
   const input = rendered.container.querySelector('input#s');
   expect(input).toBeTruthy();
-  expect(root.firstChild).toBe(input);
-  const icon = rendered.container.querySelector('svg#i')!;
+  expect(root?.firstChild).toBe(input);
+  const icon = rendered.container.querySelector('svg#i');
   expect(icon).toBeTruthy();
-  expect(icon.parentElement).toBe(root);
+  expect(icon?.parentElement).toBe(root);
 
   // TODO: Check for other elements (but probably only those which are part of
   // the Search component and not its children?).

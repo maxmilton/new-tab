@@ -30,6 +30,7 @@ describe('themes.json', () => {
   });
 
   test('contains all themes', () => {
+    // @ts-expect-error - TODO: Fix type comparision of string[] to readonly string[].
     expect(Object.keys(themes)).toEqual(themeNames);
   });
 });
@@ -84,6 +85,7 @@ for (const theme of themeNames) {
         });
       });
       expect(found).toBe(1);
+      // @ts-expect-error - TODO: Fix type comparision of string[] to readonly string[].
       expect(variables).toEqual(cssVariables);
     });
   });
