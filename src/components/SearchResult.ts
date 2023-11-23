@@ -18,30 +18,25 @@ interface OpenTabLink extends LinkComponent {
 
 // eslint-disable-next-line func-names
 const handleTabClick = function (this: OpenTabLink) {
-  const { id, windowId } = this.$$data;
-
-  // Switch to the clicked tab
-  void chrome.tabs.update(id, { active: true });
-
-  // Switch active window if the tab isn't in the current window
-  chrome.windows.getCurrent({}, (currentWindow) => {
-    if (currentWindow.id !== windowId) {
-      void chrome.windows.update(windowId, { focused: true });
-    }
-  });
-
-  // Close current "new-tab" page
   chrome.tabs.getCurrent((currentTab) => {
+    if (currentTab!.id === this.$$data.id) return;
+
+    // Switch to the clicked tab
+    void chrome.windows.update(this.$$data.windowId, { focused: true });
+    void chrome.tabs.update(this.$$data.id, { active: true });
+
+    // Close current "new-tab" page
     void chrome.tabs.remove(currentTab!.id!);
   });
+
+  // Prevent default behaviour; shorter than `event.preventDefault()`
+  return false;
 };
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 export type SearchResultComponent<T = any> = HTMLDivElement & {
-  // eslint-disable-next-line @typescript-eslint/no-invalid-void-type
-  update: (this: void, newData: T[]) => void;
-  // eslint-disable-next-line @typescript-eslint/no-invalid-void-type
-  filter: (this: void, text: string) => void;
+  $$update: (newData: T[]) => void;
+  $$filter: (text: string) => void;
 };
 
 type Refs = {
@@ -52,7 +47,7 @@ type Refs = {
 
 const meta = compile(`
   <div hidden>
-    <h2 @t></h2>
+    <h2>@t</h2>
 
     <div @l></div>
 
@@ -66,7 +61,6 @@ export const SearchResult = <T extends LinkProps & TabItem>(
 ): SearchResultComponent<T> => {
   const root = clone<SearchResultComponent<T>>(view);
   const refs = collect<Refs>(root, meta.k, meta.d);
-  const list = refs.l;
   const isOpenTabs = sectionName === DEFAULT_SECTION_ORDER[0];
   let rawData: T[];
   let renderedLength: number;
@@ -74,19 +68,19 @@ export const SearchResult = <T extends LinkProps & TabItem>(
   const renderList = (listData: T[], showCount = DEFAULT_RESULTS_AMOUNT) => {
     performance.mark(sectionName);
 
-    const partial = isOpenTabs ? listData : listData.slice(0, showCount);
+    const list = isOpenTabs ? listData : listData.slice(0, showCount);
     let index = 0;
     let link;
 
-    renderedLength = partial.length;
+    renderedLength = list.length;
     root.hidden = !renderedLength;
     refs.m.hidden = renderedLength === listData.length;
-    list.textContent = '';
+    refs.l.textContent = '';
 
     for (; index < renderedLength; index++) {
-      link = append(Link(partial[index]), list);
+      link = append(Link(list[index]), refs.l);
       if (isOpenTabs) {
-        (link as OpenTabLink).$$data = partial[index];
+        (link as OpenTabLink).$$data = list[index];
         link.__click = handleTabClick;
       }
     }
@@ -94,12 +88,10 @@ export const SearchResult = <T extends LinkProps & TabItem>(
     performance.measure(sectionName, sectionName);
   };
 
-  root.update = (newData) => {
-    renderList(newData);
-    rawData = newData;
-  };
+  // eslint-disable-next-line no-return-assign
+  root.$$update = (newData) => renderList((rawData = newData));
 
-  root.filter = (text) =>
+  root.$$filter = (text) =>
     renderList(
       rawData.filter((item) =>
         (item.title + '[' + item.url)
@@ -108,7 +100,7 @@ export const SearchResult = <T extends LinkProps & TabItem>(
       ),
     );
 
-  refs.t.textContent = sectionName;
+  refs.t.nodeValue = sectionName;
 
   refs.m.__click = () =>
     renderList(rawData, renderedLength + MORE_RESULTS_AMOUNT);

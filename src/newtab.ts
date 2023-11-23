@@ -1,3 +1,4 @@
+// Theme loader code must run first
 import './theme';
 
 import { append, createFragment } from 'stage1/runtime';

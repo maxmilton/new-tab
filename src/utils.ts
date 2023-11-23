@@ -14,8 +14,8 @@ export const DEFAULT_SECTION_ORDER = [
 // Simplified synthetic click event implementation of setupSyntheticEvent() from
 // stage1, plus special handling for browser internal links (e.g. chrome://)
 // https://github.com/maxmilton/stage1/blob/master/src/events.ts
-// eslint-disable-next-line consistent-return
-export const handleClick = (event: MouseEvent): void => {
+// eslint-disable-next-line @typescript-eslint/no-invalid-void-type, consistent-return
+export const handleClick = (event: MouseEvent): void | false => {
   let node = event.target as
     | (Node & { __click?(event: MouseEvent): void })
     | null;
@@ -32,8 +32,6 @@ export const handleClick = (event: MouseEvent): void => {
 
   // Only apply special handling to non-http links
   if (url?.[0] !== 'h') {
-    event.preventDefault();
-
     // if (link.target === '_blank' || event.ctrlKey) {
     if (event.ctrlKey) {
       // Open the location in a new tab
@@ -42,5 +40,8 @@ export const handleClick = (event: MouseEvent): void => {
       // Update the location in the current tab
       void chrome.tabs.update({ url });
     }
+
+    // Prevent default behaviour; shorter than `event.preventDefault()`
+    return false;
   }
 };
