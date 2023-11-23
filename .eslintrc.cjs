@@ -23,7 +23,9 @@ module.exports = {
   plugins: ['prettier'],
   rules: {
     '@typescript-eslint/explicit-module-boundary-types': ERROR,
-    '@typescript-eslint/no-confusing-void-expression': WARN,
+    // TODO: Would prefer a warning rather than disabling this but auto-fix is
+    // undesirable (adds unnecessary braces leading to byte bloat).
+    // '@typescript-eslint/no-confusing-void-expression': WARN,
     '@typescript-eslint/no-non-null-assertion': WARN,
     '@typescript-eslint/no-use-before-define': WARN,
     'import/order': OFF, // broken with prettier
@@ -39,6 +41,8 @@ module.exports = {
     'unicorn/prevent-abbreviations': OFF,
 
     /* Performance and byte savings */
+    // byte savings
+    '@typescript-eslint/no-confusing-void-expression': OFF,
     // alternatives offer byte savings
     '@typescript-eslint/prefer-string-starts-ends-with': OFF,
     // byte savings with same performance
