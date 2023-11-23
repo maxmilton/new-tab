@@ -6,32 +6,32 @@ import { SearchResult, type SearchResultComponent } from './SearchResult';
 
 type SectionRefs = Partial<Record<SectionOrderItem, SearchResultComponent>>;
 
-const runSearch = (text: string, section: SectionRefs) => {
-  const openTabs = section[DEFAULT_SECTION_ORDER[0]];
-  const bookmarks = section[DEFAULT_SECTION_ORDER[1]];
-  const history = section[DEFAULT_SECTION_ORDER[2]];
-  const topSites = section[DEFAULT_SECTION_ORDER[3]];
-  const recentlyClosed = section[DEFAULT_SECTION_ORDER[4]];
+const searchFor = (text: string, sections: SectionRefs) => {
+  const openTabs = sections[DEFAULT_SECTION_ORDER[0]];
+  const bookmarks = sections[DEFAULT_SECTION_ORDER[1]];
+  const history = sections[DEFAULT_SECTION_ORDER[2]];
+  const topSites = sections[DEFAULT_SECTION_ORDER[3]];
+  const recentlyClosed = sections[DEFAULT_SECTION_ORDER[4]];
 
   if (history) {
     if (text) {
-      chrome.history.search({ text }, history.update);
+      chrome.history.search({ text }, history.$$update);
     } else {
-      history.update([]);
+      history.$$update([]);
     }
   }
 
   if (bookmarks) {
     if (text) {
-      chrome.bookmarks.search(text, bookmarks.update);
+      chrome.bookmarks.search(text, bookmarks.$$update);
     } else {
-      bookmarks.update([]);
+      bookmarks.$$update([]);
     }
   }
 
-  openTabs?.filter(text);
-  topSites?.filter(text);
-  recentlyClosed?.filter(text);
+  openTabs?.$$filter(text);
+  topSites?.$$filter(text);
+  recentlyClosed?.$$filter(text);
 };
 
 type SearchComponent = HTMLDivElement;
@@ -55,15 +55,14 @@ const view = h<SearchComponent>(meta.html);
 export const Search = (): SearchComponent => {
   const root = view;
   const refs = collect<Refs>(root, meta.k, meta.d);
-  const searchref = refs.s;
-  const section: SectionRefs = {};
+  const input = refs.s;
+  const sections: SectionRefs = {};
 
-  searchref.oninput = () => runSearch(searchref.value, section);
+  input.oninput = () => searchFor(input.value, sections);
 
-  searchref.onkeyup = (event) => {
+  input.onkeyup = (event) => {
     if (event.key === 'Escape') {
-      searchref.value = '';
-      runSearch('', section);
+      searchFor((input.value = ''), sections);
     }
   };
 
@@ -72,19 +71,19 @@ export const Search = (): SearchComponent => {
   const sectionOrder = storage.o ?? DEFAULT_SECTION_ORDER;
 
   sectionOrder.forEach((name) => {
-    section[name] = append(SearchResult(name), root);
+    sections[name] = append(SearchResult(name), root);
   });
 
-  const openTabs = section[DEFAULT_SECTION_ORDER[0]];
-  const topSites = section[DEFAULT_SECTION_ORDER[3]];
-  const recentlyClosed = section[DEFAULT_SECTION_ORDER[4]];
+  const openTabs = sections[DEFAULT_SECTION_ORDER[0]];
+  const topSites = sections[DEFAULT_SECTION_ORDER[3]];
+  const recentlyClosed = sections[DEFAULT_SECTION_ORDER[4]];
 
   if (openTabs) {
     const updateOpenTabs = () =>
       chrome.tabs.query({}, (tabs) => {
-        openTabs.update(tabs);
-        if (searchref.value) {
-          openTabs.filter(searchref.value);
+        openTabs.$$update(tabs);
+        if (input.value) {
+          openTabs.$$filter(input.value);
         }
       });
 
@@ -127,12 +126,12 @@ export const Search = (): SearchComponent => {
   }
 
   if (topSites) {
-    chrome.topSites.get(topSites.update);
+    chrome.topSites.get(topSites.$$update);
   }
 
   if (recentlyClosed) {
     chrome.sessions.getRecentlyClosed({}, (sessions) => {
-      recentlyClosed.update(
+      recentlyClosed.$$update(
         sessions.map((session) => session.tab).filter((tab) => tab),
       );
     });
