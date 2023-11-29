@@ -56,8 +56,8 @@ svg {
   stroke-width: 2px;
 }
 
-// container
-.con {
+// search results container
+#c {
   position: relative;
   max-width: 800px;
   margin: 0 auto;
