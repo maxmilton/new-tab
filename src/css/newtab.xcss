@@ -192,7 +192,7 @@ hr {
 #d {
   position: absolute;
   top: 10px;
-  padding: 18px;
+  padding: 9px 23px; // 9px = half of font-size
   background: var(--c2);
   box-shadow: var(--s);
   opacity: 0;
