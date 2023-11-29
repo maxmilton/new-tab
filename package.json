@@ -26,10 +26,10 @@
   },
   "devDependencies": {
     "@maxmilton/stylelint-config": "0.0.13",
-    "@playwright/test": "1.40.0",
+    "@playwright/test": "1.40.1",
     "@types/chrome": "0.0.253",
-    "@typescript-eslint/eslint-plugin": "6.12.0",
-    "@typescript-eslint/parser": "6.12.0",
+    "@typescript-eslint/eslint-plugin": "6.13.1",
+    "@typescript-eslint/parser": "6.13.1",
     "bun-types": "1.0.14",
     "ekscss": "0.0.17",
     "eslint": "8.54.0",
