@@ -15,11 +15,11 @@ const meta = compile(`
     </svg>
 
     <div id=d>
-      <a href=chrome://new-tab-page>Open Default Tab</a>
-      <a href=chrome://bookmarks>Bookmarks Manager</a>
+      <a href=chrome://bookmarks>Bookmarks</a>
+      <a href=chrome://password-manager>Passwords</a>
       <a href=chrome://downloads>Downloads</a>
       <a href=chrome://history>History</a>
-      <a href=chrome://password-manager>Passwords</a>
+      <a href=chrome://extensions>Extensions</a>
 
       <hr>
 

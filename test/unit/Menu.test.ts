@@ -7,17 +7,17 @@ afterEach(cleanup);
 
 test('rendered DOM contains expected elements', () => {
   const rendered = render(Menu());
-  expect(rendered.container.querySelector('#m')).toBeTruthy();
-  expect(rendered.container.querySelector('svg#im')).toBeTruthy();
-  expect(rendered.container.querySelector('#d')).toBeTruthy();
-  expect(rendered.container.querySelector('a[href="chrome://new-tab-page"]')).toBeTruthy();
-  expect(rendered.container.querySelector('a[href="chrome://bookmarks"]')).toBeTruthy();
-  expect(rendered.container.querySelector('a[href="chrome://downloads"]')).toBeTruthy();
-  expect(rendered.container.querySelector('a[href="chrome://history"]')).toBeTruthy();
-  expect(rendered.container.querySelector('a[href="chrome://password-manager"]')).toBeTruthy();
-  expect(
-    rendered.container.querySelector('a[href="https://github.com/maxmilton/new-tab/issues"]'),
-  ).toBeTruthy();
+  const root = rendered.container.firstChild as HTMLElement;
+  expect(root).toBeInstanceOf(window.HTMLDivElement);
+  expect(root.id).toBe('m');
+  expect(root.querySelector('svg#im')).toBeTruthy();
+  expect(root.querySelector('div#d')).toBeTruthy();
+  expect(root.querySelector('a[href="chrome://bookmarks"]')).toBeTruthy();
+  expect(root.querySelector('a[href="chrome://password-manager"]')).toBeTruthy();
+  expect(root.querySelector('a[href="chrome://downloads"]')).toBeTruthy();
+  expect(root.querySelector('a[href="chrome://history"]')).toBeTruthy();
+  expect(root.querySelector('a[href="chrome://extensions"]')).toBeTruthy();
+  expect(root.querySelector('a[href="https://github.com/maxmilton/new-tab/issues"]')).toBeTruthy();
 });
 
 test('rendered DOM matches snapshot', () => {

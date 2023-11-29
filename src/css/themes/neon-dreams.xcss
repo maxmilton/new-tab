@@ -58,8 +58,7 @@ button {
 }
 
 hr {
-  margin-right: -18px;
-  margin-left: -18px;
+  margin: 9px -23px; // 9px = half of font-size
 }
 
 h2,
