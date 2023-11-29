@@ -20,9 +20,9 @@ afterEach(cleanup);
 test('rendered DOM contains expected elements', async () => {
   const rendered = render(BookmarkBar());
   await happyDOM.whenAsyncComplete();
-  const root = rendered.container.querySelector('#b');
-  expect(root).toBeTruthy();
-  expect(rendered.container.firstChild).toBe(root);
+  const root = rendered.container.firstChild as HTMLElement;
+  expect(root).toBeInstanceOf(window.HTMLDivElement);
+  expect(root.id).toBe('b');
 });
 
 test('rendered DOM matches snapshot', async () => {

@@ -29,9 +29,8 @@ describe('themes.json', () => {
     expect(JSON.parse(JSON.stringify(themes))).toEqual(themes);
   });
 
-  test('contains all themes', () => {
-    // @ts-expect-error - TODO: Fix type comparision of string[] to readonly string[].
-    expect(Object.keys(themes)).toEqual(themeNames);
+  test('contains all themes and no unexpected themes', () => {
+    expect(Object.keys(themes) as readonly string[]).toEqual(themeNames);
   });
 });
 

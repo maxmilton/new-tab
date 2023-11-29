@@ -42,7 +42,7 @@ type Refs = {
 
 // https://github.com/feathericons/feather/blob/master/icons/search.svg
 const meta = compile(`
-  <div class=con>
+  <div id=c>
     <input @s id=s type=search placeholder="Search browser...">
     <svg id=i>
       <circle cx=11 cy=11 r=8 />
