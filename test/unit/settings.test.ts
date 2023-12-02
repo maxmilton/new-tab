@@ -45,8 +45,7 @@ test('gets stored user settings once on load', async () => {
 test('fetches themes.json once and makes no other fetch calls', async () => {
   const fetchMock = await load();
   expect(fetchMock).toHaveBeenCalledTimes(1);
-  // TODO: Uncomment once bun supports this.
-  // expect(fetchMock).toHaveBeenCalledWith('themes.json');
+  expect(fetchMock).toHaveBeenCalledWith('themes.json');
 });
 
 const css = await Bun.file('dist/settings.css').text();

@@ -71,8 +71,7 @@ describe('render', () => {
     const rendered = render(document.createElement('div'));
     await rendered.debug();
     expect(spy).toHaveBeenCalledTimes(1);
-    // FIXME: Uncomment when bun:test supports toHaveBeenCalledWith !!!
-    // expect(spy).toHaveBeenCalledWith('DEBUG:\n<div></div>\n');
+    expect(spy).toHaveBeenCalledWith('DEBUG:\n<div></div>\n');
     spy.mockRestore();
   });
 
@@ -87,8 +86,9 @@ describe('render', () => {
     const rendered = render(main);
     await rendered.debug();
     expect(spy).toHaveBeenCalledTimes(1);
-    // FIXME: Uncomment when bun:test supports toHaveBeenCalledWith !!!
-    // expect(spy).toHaveBeenCalledWith('DEBUG:\n<main>\n  <div></div>\n  <div></div>\n  <div></div>\n</main>\n');
+    expect(spy).toHaveBeenCalledWith(
+      'DEBUG:\n<main>\n  <div></div>\n  <div></div>\n  <div></div>\n</main>\n',
+    );
     spy.mockRestore();
   });
 
