@@ -99,7 +99,7 @@ async function minifyJS(artifact: Blob & { path: string }) {
     },
     mangle: {
       properties: {
-        regex: /^\$\$|^(__click|adjustPosition|closePopup)$/,
+        regex: /^\$\$|^__click$/,
       },
     },
     // TODO: Performance testing to see if this makes any difference (I assume

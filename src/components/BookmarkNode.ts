@@ -4,7 +4,7 @@ import { Link, type LinkComponent, type LinkProps } from './Link';
 export type BookmarkTreeNode = chrome.bookmarks.BookmarkTreeNode;
 
 type FolderPopupComponent = HTMLDivElement & {
-  adjustPosition(): void;
+  $$adjustPosition(): void;
 };
 
 const CLOSE_DELAY_MS = 600;
@@ -46,7 +46,7 @@ const FolderPopup = (
 
   // Only after the component is mounted in the DOM do we have element size
   // information so final position adjustment is split into a separate step
-  root.adjustPosition = () => {
+  root.$$adjustPosition = () => {
     const viewportWidth = document.documentElement.clientWidth;
     const width = root.offsetWidth;
 
@@ -64,7 +64,7 @@ const FolderPopup = (
 
 type FolderComponent = HTMLDivElement & {
   // eslint-disable-next-line @typescript-eslint/no-invalid-void-type
-  closePopup(this: void): void;
+  $$closePopup(this: void): void;
 };
 
 const folderView = create('div') as FolderComponent;
@@ -83,7 +83,7 @@ export const Folder = (
 
   const resetTimer = () => {
     clearTimer();
-    timer = setTimeout(root.closePopup, CLOSE_DELAY_MS);
+    timer = setTimeout(root.$$closePopup, CLOSE_DELAY_MS);
   };
 
   root.textContent = props.title;
@@ -100,7 +100,7 @@ export const Folder = (
     );
   }
 
-  root.closePopup = () => {
+  root.$$closePopup = () => {
     if (popup) {
       popup.remove();
       popup = null;
@@ -115,7 +115,7 @@ export const Folder = (
       // Immediately close any folder popups on the parent level
       root
         .parentNode!.querySelectorAll<FolderComponent>('.f')
-        .forEach((folder) => folder.closePopup());
+        .forEach((folder) => folder.$$closePopup());
 
       popup = FolderPopup(
         root,
@@ -127,7 +127,7 @@ export const Folder = (
       popup.__mouseout = resetTimer;
 
       append(popup, root);
-      popup.adjustPosition();
+      popup.$$adjustPosition();
     }
   };
 
