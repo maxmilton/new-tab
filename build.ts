@@ -57,7 +57,7 @@ async function makeHTML(pageName: string, stylePath: string) {
     <script src=${pageName}.js type=module async></script>
   `
     .trim()
-    .replaceAll(/\n +/g, '\n');
+    .replaceAll(/\n\s+/g, '\n'); // remove leading whitespace
 
   await Bun.write(`dist/${pageName}.css`, css);
   await Bun.write(`dist/${pageName}.html`, template);
@@ -67,20 +67,18 @@ async function makeHTML(pageName: string, stylePath: string) {
  * Compile all themes, combine into a single JSON file, and save it to disk.
  */
 async function makeThemes() {
-  const themes = await readdir('src/css/themes');
-  const themesData: Record<string, string> = {};
+  const themeFiles = await readdir('src/css/themes');
+  const themes: Record<string, string> = {};
 
-  await Promise.all(
-    themes.sort().map((theme) =>
-      Bun.file(`src/css/themes/${theme}`)
-        .text()
-        .then((src) => {
-          themesData[basename(theme, '.xcss')] = compileCSS(src, theme);
-        }),
-    ),
-  );
+  for (const theme of themeFiles.sort()) {
+    themes[basename(theme, '.xcss')] = compileCSS(
+      // eslint-disable-next-line no-await-in-loop
+      await Bun.file(`src/css/themes/${theme}`).text(),
+      theme,
+    );
+  }
 
-  await Bun.write('dist/themes.json', JSON.stringify(themesData));
+  await Bun.write('dist/themes.json', JSON.stringify(themes));
 }
 
 async function minifyJS(artifact: Blob & { path: string }) {
