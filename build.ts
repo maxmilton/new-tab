@@ -32,7 +32,7 @@ function compileCSS(src: string, from: string) {
     filename: from,
     code: Buffer.from(compiled.css),
     minify: !dev,
-    targets: { chrome: 114 << 16 }, // eslint-disable-line no-bitwise
+    targets: { chrome: 116 << 16 }, // eslint-disable-line no-bitwise
   });
 
   for (const warning of minified.warnings) {
