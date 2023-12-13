@@ -1,7 +1,29 @@
 import { expect, test } from 'bun:test';
 import { createManifest } from '../../manifest.config';
 
+declare module 'bun:test' {
+  interface Matchers {
+    /** Asserts that a value is a plain `object`. */
+    toBeObject(): void;
+  }
+}
+
+expect.extend({
+  toBeObject(received: unknown) {
+    return Object.prototype.toString.call(received) === '[object Object]'
+      ? { pass: true }
+      : {
+          pass: false,
+          message: () => `expected ${String(received)} to be a plain object`,
+        };
+  },
+});
+
 const manifest = createManifest();
+
+test('is an object', () => {
+  expect(manifest).toBeObject();
+});
 
 test('is valid JSON', () => {
   const result = JSON.parse(JSON.stringify(manifest)) as typeof manifest;
@@ -38,32 +60,32 @@ test('contains expected properties', () => {
 });
 
 test('properties are the correct type', () => {
-  expect(manifest.manifest_version).toBeTypeOf('number');
-  expect(manifest.name).toBeTypeOf('string');
-  expect(manifest.description).toBeTypeOf('string');
-  expect(manifest.homepage_url).toBeTypeOf('string');
-  expect(manifest.version).toBeTypeOf('string');
-  expect(manifest.minimum_chrome_version).toBeTypeOf('string');
-  expect(manifest.icons).toBeTypeOf('object');
-  expect(manifest.icons?.[16]).toBeTypeOf('string');
-  expect(manifest.icons?.[48]).toBeTypeOf('string');
-  expect(manifest.icons?.[128]).toBeTypeOf('string');
+  expect(manifest.manifest_version).toBeNumber();
+  expect(manifest.name).toBeString();
+  expect(manifest.description).toBeString();
+  expect(manifest.homepage_url).toBeString();
+  expect(manifest.version).toBeString();
+  expect(manifest.minimum_chrome_version).toBeString();
+  expect(manifest.icons).toBeObject();
+  expect(manifest.icons?.[16]).toBeString();
+  expect(manifest.icons?.[48]).toBeString();
+  expect(manifest.icons?.[128]).toBeString();
   expect(manifest.permissions).toBeArray();
-  expect(manifest.chrome_url_overrides).toBeTypeOf('object');
-  expect(manifest.chrome_url_overrides?.newtab).toBeTypeOf('string');
-  expect(manifest.background).toBeTypeOf('object');
-  expect(manifest.background?.service_worker).toBeTypeOf('string');
-  expect(manifest.options_ui).toBeTypeOf('object');
-  expect(manifest.options_ui?.page).toBeTypeOf('string');
-  expect(manifest.offline_enabled).toBeTypeOf('boolean');
-  expect(manifest.incognito).toBeTypeOf('string');
-  expect(manifest.content_security_policy).toBeTypeOf('object');
-  expect(manifest.content_security_policy?.extension_pages).toBeTypeOf('string');
-  expect(manifest.cross_origin_embedder_policy).toBeTypeOf('object');
-  expect(manifest.cross_origin_embedder_policy?.value).toBeTypeOf('string');
-  expect(manifest.cross_origin_opener_policy).toBeTypeOf('object');
-  expect(manifest.cross_origin_opener_policy?.value).toBeTypeOf('string');
-  expect(manifest.key).toBeTypeOf('string');
+  expect(manifest.chrome_url_overrides).toBeObject();
+  expect(manifest.chrome_url_overrides?.newtab).toBeString();
+  expect(manifest.background).toBeObject();
+  expect(manifest.background?.service_worker).toBeString();
+  expect(manifest.options_ui).toBeObject();
+  expect(manifest.options_ui?.page).toBeString();
+  expect(manifest.offline_enabled).toBeBoolean();
+  expect(manifest.incognito).toBeString();
+  expect(manifest.content_security_policy).toBeObject();
+  expect(manifest.content_security_policy?.extension_pages).toBeString();
+  expect(manifest.cross_origin_embedder_policy).toBeObject();
+  expect(manifest.cross_origin_embedder_policy?.value).toBeString();
+  expect(manifest.cross_origin_opener_policy).toBeObject();
+  expect(manifest.cross_origin_opener_policy?.value).toBeString();
+  expect(manifest.key).toBeString();
 });
 
 test('does not contain any unexpected properties', () => {
@@ -117,13 +139,14 @@ test('has correct icons.* values', () => {
   expect(manifest.icons?.[16]).toBe('icon16.png');
   expect(manifest.icons?.[48]).toBe('icon48.png');
   expect(manifest.icons?.[128]).toBe('icon128.png');
+  expect(Object.keys(manifest.icons!)).toHaveLength(3);
 });
 
-test('has correct chrome_url_overrides.newtab value of "newtab.html"', () => {
+test('has correct chrome_url_overrides.newtab value', () => {
   expect(manifest.chrome_url_overrides?.newtab).toBe('newtab.html');
 });
 
-test('has correct service_worker value of "sw.js"', () => {
+test('has correct service_worker value', () => {
   expect(manifest.background?.service_worker).toBe('sw.js');
 });
 
