@@ -2,8 +2,8 @@ name: semgrep
 on:
   push:
     branches: [master, next]
-  pull_request:
-    branches: [master, next]
+  pull_request: {}
+  workflow_dispatch: {}
   schedule:
     - cron: '28 6 * * 4'
 jobs:
@@ -18,10 +18,10 @@ jobs:
       security-events: write
     steps:
       - uses: actions/checkout@v4
-      - run: semgrep ci --sarif --output=semgrep.sarif || true
+      - run: semgrep ci --sarif > semgrep.sarif
         env:
           SEMGREP_RULES: p/default
-      - uses: github/codeql-action/upload-sarif@v2
+      - uses: github/codeql-action/upload-sarif@v3
         if: always()
         with:
           sarif_file: semgrep.sarif
