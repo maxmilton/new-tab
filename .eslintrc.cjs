@@ -1,3 +1,5 @@
+'use strict'; // eslint-disable-line
+
 const OFF = 0;
 const WARN = 1;
 const ERROR = 2;
@@ -59,6 +61,7 @@ module.exports = {
     'unicorn/prefer-includes': OFF,
     // saves 3 bytes to use arrow function
     'unicorn/prefer-native-coercion-functions': OFF,
+    // byte savings (minification doesn't currently automatically remove)
     'unicorn/switch-case-braces': [ERROR, 'avoid'],
 
     /* stage1 */

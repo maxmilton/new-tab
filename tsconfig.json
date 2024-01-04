@@ -16,13 +16,16 @@
     "noImplicitOverride": true,
     "noUnusedLocals": false, // covered by eslint
     "noUnusedParameters": false, // covered by eslint
-    "verbatimModuleSyntax": true,
+    "verbatimModuleSyntax": true
 
-    "types": [
-      "bun-types",
-      "chrome",
-      "./node_modules/typescript/lib/lib.esnext.full.d.ts" // workaround for bun-types breaking dom types
-    ]
+    // TODO: Remove once @types/bun pulls in bun-types v1.0.19+ (but it
+    // currently depends on in v1.0.18); when @types/bun releases new version.
+    //  ↳ Also remember to remove bun-types from package.json#overrides too!
+    // "types": [
+    //   "bun-types",
+    //   "chrome",
+    //   "./node_modules/typescript/lib/lib.esnext.full.d.ts" // workaround for bun-types breaking dom types
+    // ]
   },
   "include": ["src", "test", "build.ts", "*.config.ts"],
   "references": [{ "path": "./tsconfig.node.json" }]
