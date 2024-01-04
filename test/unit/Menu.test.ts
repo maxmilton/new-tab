@@ -37,6 +37,7 @@ test('clicking settings link calls chrome.runtime.openOptionsPage', () => {
   expect(link).toBeInstanceOf(window.HTMLAnchorElement);
   link?.click();
   expect(spy).toHaveBeenCalledTimes(1);
+  spy.mockRestore();
   // deleteSyntheticEvent('click');
   document.onclick = null;
 });
