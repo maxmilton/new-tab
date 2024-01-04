@@ -71,11 +71,13 @@ async function makeThemes() {
   const themes: Record<string, string> = {};
 
   for (const theme of themeFiles.sort()) {
-    themes[basename(theme, '.xcss')] = compileCSS(
-      // eslint-disable-next-line no-await-in-loop
-      await Bun.file(`src/css/themes/${theme}`).text(),
-      theme,
-    );
+    if (theme.endsWith('.xcss')) {
+      themes[basename(theme, '.xcss')] = compileCSS(
+        // eslint-disable-next-line no-await-in-loop
+        await Bun.file(`src/css/themes/${theme}`).text(),
+        theme,
+      );
+    }
   }
 
   await Bun.write('dist/themes.json', JSON.stringify(themes));
@@ -94,6 +96,7 @@ async function minifyJS(artifact: Blob & { path: string }) {
       reduce_funcs: false, // prevent functions being inlined
       // XXX: Comment out to keep performance markers for debugging.
       pure_funcs: ['performance.mark', 'performance.measure'],
+      passes: 3,
     },
     mangle: {
       properties: {
