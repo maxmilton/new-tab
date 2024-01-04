@@ -1,5 +1,5 @@
+import { append, collect, h } from 'stage1';
 import { compile } from 'stage1/macro' assert { type: 'macro' };
-import { append, collect, h } from 'stage1/runtime';
 import type { SectionOrderItem } from '../types';
 import { DEFAULT_SECTION_ORDER, storage } from '../utils';
 import { SearchResult, type SearchResultComponent } from './SearchResult';

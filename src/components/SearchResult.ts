@@ -1,5 +1,5 @@
+import { append, clone, collect, h } from 'stage1';
 import { compile } from 'stage1/macro' assert { type: 'macro' };
-import { append, clone, collect, h } from 'stage1/runtime';
 import { DEFAULT_SECTION_ORDER } from '../utils';
 import { Link, type LinkComponent, type LinkProps } from './Link';
 
