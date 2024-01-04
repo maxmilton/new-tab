@@ -49,34 +49,5 @@
   },
   "overrides": {
     "bun-types": "1.0.21"
-  },
-  "prettier": {
-    "arrowParens": "always",
-    "endOfLine": "lf",
-    "singleQuote": true,
-    "trailingComma": "all",
-    "overrides": [
-      {
-        "files": [
-          "*.spec.ts",
-          "*.test.ts"
-        ],
-        "options": {
-          "printWidth": 100
-        }
-      }
-    ]
-  },
-  "stylelint": {
-    "reportInvalidScopeDisables": true,
-    "reportNeedlessDisables": true,
-    "extends": [
-      "stylelint-config-standard",
-      "@maxmilton/stylelint-config"
-    ],
-    "ignoreFiles": [
-      "**/dist/**",
-      "**/node_modules/**"
-    ]
   }
 }
