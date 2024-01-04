@@ -27,13 +27,13 @@ async function load() {
 }
 
 test('renders entire settings app', async () => {
-  const checkConsoleCalls = consoleSpy();
+  const checkConsoleSpy = consoleSpy();
   await load();
   expect(document.body.innerHTML.length).toBeGreaterThan(600);
 
   // TODO: More/better assertions
 
-  checkConsoleCalls();
+  checkConsoleSpy();
 });
 
 test('gets stored user settings once on load', async () => {

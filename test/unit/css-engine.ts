@@ -14,15 +14,14 @@ export const SKIP = Symbol('SKIP');
  * Clones the element, stripping out references to other elements (e.g.,
  * "parent") for cleaner logging. **Intended for debugging only.**
  */
-export const cleanElement = <T extends Element>(element: T): T => ({
-  ...element,
-  root: undefined,
-  parent: undefined,
-  children: Array.isArray(element.children)
-    ? element.children.length
-    : element.children,
-  siblings: undefined,
-});
+export const cleanElement = <T extends Element & { siblings?: Element[] }>(
+  element: T,
+): T => {
+  const { root, parent, children, siblings, ...rest } = element;
+  // @ts-expect-error - TODO: Fix "children" prop type
+  rest.children = Array.isArray(children) ? children.length : children;
+  return rest as T;
+};
 
 // eslint-disable-next-line @typescript-eslint/no-invalid-void-type
 type VisitorFunction = (element: Element) => typeof SKIP | void;
@@ -103,7 +102,7 @@ export function lookup(
  * NOTE: `@media`, `@layer`, `@supports`, etc. rules are currently not handled.
  * All declarations will be merged regardless of their parent rules.
  *
- * FIXME: Evalute at-rules and handle them appropriately. This adds a lot of
+ * FIXME: Evaluate at-rules and handle them appropriately. This adds a lot of
  * complexity, so consider using happy-dom if they have support for it.
  */
 export function reduce(elements: Element[]): Record<string, string> {

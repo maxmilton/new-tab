@@ -17,6 +17,7 @@ describe('render', () => {
 
   test('returns a container element', () => {
     const rendered = render(document.createElement('div'));
+    expect(rendered).toHaveProperty('container');
     expect(rendered.container).toBeInstanceOf(window.Element);
   });
 
@@ -46,55 +47,72 @@ describe('render', () => {
     document.body.textContent = '';
   });
 
-  test('returns an unmount function', () => {
-    const rendered = render(document.createElement('div'));
-    // eslint-disable-next-line @typescript-eslint/unbound-method
-    expect(rendered.unmount).toBeInstanceOf(Function);
-  });
-
-  test('unmount removes supplied element from container', () => {
-    const rendered = render(document.createElement('div'));
-    expect(rendered.container.firstChild).toBeTruthy();
-    rendered.unmount();
-    expect(rendered.container).toBeTruthy();
-    expect(rendered.container.firstChild).toBeNull();
-  });
-
-  test('returns a debug function', () => {
-    const rendered = render(document.createElement('div'));
-    // eslint-disable-next-line @typescript-eslint/unbound-method
-    expect(rendered.debug).toBeInstanceOf(Function);
-  });
-
-  test('debug function prints to console', async () => {
-    const spy = spyOn(console, 'log').mockImplementation(() => {});
-    const rendered = render(document.createElement('div'));
-    await rendered.debug();
-    expect(spy).toHaveBeenCalledTimes(1);
-    expect(spy).toHaveBeenCalledWith('DEBUG:\n<div></div>\n');
-    spy.mockRestore();
-  });
-
-  test('debug function prints prettified container DOM to console', async () => {
-    const spy = spyOn(console, 'log').mockImplementation(() => {});
-    const main = document.createElement('main');
-    main.append(
-      document.createElement('div'),
-      document.createElement('div'),
-      document.createElement('div'),
-    );
-    const rendered = render(main);
-    await rendered.debug();
-    expect(spy).toHaveBeenCalledTimes(1);
-    expect(spy).toHaveBeenCalledWith(
-      'DEBUG:\n<main>\n  <div></div>\n  <div></div>\n  <div></div>\n</main>\n',
-    );
-    spy.mockRestore();
-  });
-
   test('renders Test component correctly', () => {
     const rendered = render(Test({ text: 'abc' }));
     expect(rendered.container.innerHTML).toBe('<div id="test">abc</div>');
+  });
+
+  describe('unmount method', () => {
+    test('is a function', () => {
+      const rendered = render(document.createElement('div'));
+      expect(rendered).toHaveProperty('unmount');
+      // eslint-disable-next-line @typescript-eslint/unbound-method
+      expect(rendered.unmount).toBeInstanceOf(Function);
+    });
+
+    test('removes supplied element from container', () => {
+      const rendered = render(document.createElement('div'));
+      expect(rendered.container.firstChild).toBeTruthy();
+      rendered.unmount();
+      expect(rendered.container).toBeTruthy();
+      expect(rendered.container.firstChild).toBeNull();
+    });
+  });
+
+  describe('debug method', () => {
+    test('is a function', () => {
+      const rendered = render(document.createElement('div'));
+      expect(rendered).toHaveProperty('debug');
+      // eslint-disable-next-line @typescript-eslint/unbound-method
+      expect(rendered.debug).toBeInstanceOf(Function);
+    });
+
+    test('prints to console2', async () => {
+      const spy = spyOn(console2, 'log').mockImplementation(() => {});
+      const rendered = render(document.createElement('div'));
+      await rendered.debug();
+      expect(spy).toHaveBeenCalledTimes(1);
+      expect(spy).toHaveBeenCalledWith('DEBUG:\n<div></div>\n');
+      spy.mockRestore();
+    });
+
+    test('does not print to console, only console2', async () => {
+      const spy = spyOn(console, 'log').mockImplementation(() => {});
+      const spy2 = spyOn(console2, 'log').mockImplementation(() => {});
+      const rendered = render(document.createElement('div'));
+      await rendered.debug();
+      expect(spy).not.toHaveBeenCalled();
+      expect(spy2).toHaveBeenCalledTimes(1);
+      spy.mockRestore();
+      spy2.mockRestore();
+    });
+
+    test('prints prettified container DOM to console', async () => {
+      const spy = spyOn(console2, 'log').mockImplementation(() => {});
+      const main = document.createElement('main');
+      main.append(
+        document.createElement('div'),
+        document.createElement('div'),
+        document.createElement('div'),
+      );
+      const rendered = render(main);
+      await rendered.debug();
+      expect(spy).toHaveBeenCalledTimes(1);
+      expect(spy).toHaveBeenCalledWith(
+        'DEBUG:\n<main>\n  <div></div>\n  <div></div>\n  <div></div>\n</main>\n',
+      );
+      spy.mockRestore();
+    });
   });
 });
 
@@ -153,28 +171,28 @@ describe('consoleSpy', () => {
   });
 
   test('returns a function', () => {
-    const checkConsoleCalls = consoleSpy();
-    expect(checkConsoleCalls).toBeInstanceOf(Function);
-    checkConsoleCalls();
+    const checkConsoleSpy = consoleSpy();
+    expect(checkConsoleSpy).toBeInstanceOf(Function);
+    checkConsoleSpy();
   });
 
   test('returned function takes no arguments', () => {
-    const checkConsoleCalls = consoleSpy();
-    expect(checkConsoleCalls).toHaveLength(0);
-    checkConsoleCalls();
+    const checkConsoleSpy = consoleSpy();
+    expect(checkConsoleSpy).toHaveLength(0);
+    checkConsoleSpy();
   });
 
   test('passes when no console methods are called', () => {
-    const checkConsoleCalls = consoleSpy();
-    checkConsoleCalls();
+    const checkConsoleSpy = consoleSpy();
+    checkConsoleSpy();
   });
 
   // FIXME: How to test this?
   test.skip('fails when console methods are called', () => {
-    const checkConsoleCalls = consoleSpy();
+    const checkConsoleSpy = consoleSpy();
     console.log('a');
     console.warn('b');
     console.error('c');
-    checkConsoleCalls();
+    checkConsoleSpy();
   });
 });

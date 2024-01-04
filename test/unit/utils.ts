@@ -28,8 +28,8 @@ export function render(component: Node): RenderResult {
     container,
     async debug(el = container) {
       const { format } = await import('prettier');
-      // eslint-disable-next-line no-console
-      console.log(`DEBUG:\n${await format(el.innerHTML, { parser: 'html' })}`);
+      const html = await format(el.innerHTML, { parser: 'html' });
+      console2.log(`DEBUG:\n${html}`);
     },
     unmount() {
       // eslint-disable-next-line unicorn/prefer-dom-node-remove
@@ -54,20 +54,18 @@ export function cleanup(): void {
   });
 }
 
-// TODO: Use `window.console` if we use the virtual console; see ../setup.ts
 const consoleMethods = Object.getOwnPropertyNames(console) as (keyof Console)[];
 
 export function consoleSpy(): () => void {
   const spies: Mock<() => void>[] = [];
 
   for (const method of consoleMethods) {
-    // TODO: Use `window.console` if we use the virtual console; see ../setup.ts
     spies.push(spyOn(console, method));
   }
 
-  return () => {
+  return /** check */ () => {
     for (const spy of spies) {
-      expect(spy).toHaveBeenCalledTimes(0);
+      expect(spy).not.toHaveBeenCalled();
       spy.mockRestore();
     }
   };

@@ -48,3 +48,7 @@ describe('dist files', () => {
     expect(distDir).toHaveLength(distFiles.length);
   });
 });
+
+// TODO: HTML files should be valid HTML
+// TODO: HTML files have correct title
+// TODO: HTML files have correct JS and CSS file references

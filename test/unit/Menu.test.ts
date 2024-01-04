@@ -1,7 +1,8 @@
 import { afterEach, expect, spyOn, test } from 'bun:test';
-import { deleteSyntheticEvent, setupSyntheticEvent } from 'stage1/runtime';
 import { Menu } from '../../src/components/Menu';
+import { handleClick } from '../../src/utils';
 import { cleanup, render } from './utils';
+// import { deleteSyntheticEvent, setupSyntheticEvent } from 'stage1/runtime';
 
 afterEach(cleanup);
 
@@ -26,12 +27,16 @@ test('rendered DOM matches snapshot', () => {
 });
 
 test('clicking settings link calls chrome.runtime.openOptionsPage', () => {
-  setupSyntheticEvent('click'); // same click event logic as in src/newtab.ts
-  const spy = spyOn(global.chrome.runtime, 'openOptionsPage');
+  // setupSyntheticEvent('click'); // same click event logic as in src/newtab.ts
+  document.onclick = handleClick; // same click event logic as in src/newtab.ts
+  const spy = spyOn(chrome.runtime, 'openOptionsPage');
   const rendered = render(Menu());
   // TODO: Use a less brittle selector, however currently the settings link is
-  // the only one with a href attribute...
-  rendered.container.querySelector<HTMLAnchorElement>('a:not([href])')?.click();
+  // the only one without a href attribute...
+  const link = rendered.container.querySelector<HTMLAnchorElement>('a:not([href])');
+  expect(link).toBeInstanceOf(window.HTMLAnchorElement);
+  link?.click();
   expect(spy).toHaveBeenCalledTimes(1);
-  deleteSyntheticEvent('click');
+  // deleteSyntheticEvent('click');
+  document.onclick = null;
 });

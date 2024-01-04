@@ -1,28 +1,10 @@
 import { expect, test } from 'bun:test';
 import { createManifest } from '../../manifest.config';
 
-declare module 'bun:test' {
-  interface Matchers {
-    /** Asserts that a value is a plain `object`. */
-    toBeObject(): void;
-  }
-}
-
-expect.extend({
-  toBeObject(received: unknown) {
-    return Object.prototype.toString.call(received) === '[object Object]'
-      ? { pass: true }
-      : {
-          pass: false,
-          message: () => `expected ${String(received)} to be a plain object`,
-        };
-  },
-});
-
 const manifest = createManifest();
 
 test('is an object', () => {
-  expect(manifest).toBeObject();
+  expect(manifest).toBePlainObject();
 });
 
 test('is valid JSON', () => {
@@ -66,24 +48,24 @@ test('properties are the correct type', () => {
   expect(manifest.homepage_url).toBeString();
   expect(manifest.version).toBeString();
   expect(manifest.minimum_chrome_version).toBeString();
-  expect(manifest.icons).toBeObject();
+  expect(manifest.icons).toBePlainObject();
   expect(manifest.icons?.[16]).toBeString();
   expect(manifest.icons?.[48]).toBeString();
   expect(manifest.icons?.[128]).toBeString();
   expect(manifest.permissions).toBeArray();
-  expect(manifest.chrome_url_overrides).toBeObject();
+  expect(manifest.chrome_url_overrides).toBePlainObject();
   expect(manifest.chrome_url_overrides?.newtab).toBeString();
-  expect(manifest.background).toBeObject();
+  expect(manifest.background).toBePlainObject();
   expect(manifest.background?.service_worker).toBeString();
-  expect(manifest.options_ui).toBeObject();
+  expect(manifest.options_ui).toBePlainObject();
   expect(manifest.options_ui?.page).toBeString();
   expect(manifest.offline_enabled).toBeBoolean();
   expect(manifest.incognito).toBeString();
-  expect(manifest.content_security_policy).toBeObject();
+  expect(manifest.content_security_policy).toBePlainObject();
   expect(manifest.content_security_policy?.extension_pages).toBeString();
-  expect(manifest.cross_origin_embedder_policy).toBeObject();
+  expect(manifest.cross_origin_embedder_policy).toBePlainObject();
   expect(manifest.cross_origin_embedder_policy?.value).toBeString();
-  expect(manifest.cross_origin_opener_policy).toBeObject();
+  expect(manifest.cross_origin_opener_policy).toBePlainObject();
   expect(manifest.cross_origin_opener_policy?.value).toBeString();
   expect(manifest.key).toBeString();
 });

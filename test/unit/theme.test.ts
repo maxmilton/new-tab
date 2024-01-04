@@ -96,7 +96,7 @@ let newtabCSS: string | undefined;
 
 async function load(themeName?: (typeof themeNames)[number]) {
   // mock user settings
-  global.chrome.storage.local.get = () =>
+  chrome.storage.local.get = () =>
     Promise.resolve({
       tn: themeName ?? 'dark',
       t: themes[themeName ?? 'dark'],

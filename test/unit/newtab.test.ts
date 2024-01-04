@@ -18,7 +18,7 @@ async function load() {
 }
 
 test('renders entire newtab app', async () => {
-  const checkConsoleCalls = consoleSpy();
+  const checkConsoleSpy = consoleSpy();
   await load();
   expect(document.body.innerHTML.length).toBeGreaterThan(1000);
   expect(document.body.querySelector('#b')).toBeTruthy();
@@ -29,7 +29,7 @@ test('renders entire newtab app', async () => {
   // TODO: More/better assertions
   // TODO: Check all section headings exist; a h2 with text 'Open Tabs' x5
 
-  checkConsoleCalls();
+  checkConsoleSpy();
 });
 
 test('gets stored user settings once', async () => {
