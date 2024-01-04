@@ -1,4 +1,4 @@
-import { append, clone, create, h } from 'stage1/runtime';
+import { append, clone, create, h } from 'stage1';
 import { Link, type LinkComponent, type LinkProps } from './Link';
 
 export type BookmarkTreeNode = chrome.bookmarks.BookmarkTreeNode;

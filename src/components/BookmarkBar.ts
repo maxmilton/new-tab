@@ -1,5 +1,5 @@
+import { append, create, h } from 'stage1';
 import { compile } from 'stage1/macro' assert { type: 'macro' };
-import { append, create, h } from 'stage1/runtime';
 import { BookmarkNode, Folder, type BookmarkTreeNode } from './BookmarkNode';
 
 declare global {

@@ -1,5 +1,5 @@
+import { clone, collect, h } from 'stage1';
 import { compile } from 'stage1/macro' assert { type: 'macro' };
-import { clone, collect, h } from 'stage1/runtime';
 
 export interface LinkProps {
   title: string;

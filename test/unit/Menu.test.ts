@@ -2,7 +2,7 @@ import { afterEach, expect, spyOn, test } from 'bun:test';
 import { Menu } from '../../src/components/Menu';
 import { handleClick } from '../../src/utils';
 import { cleanup, render } from './utils';
-// import { deleteSyntheticEvent, setupSyntheticEvent } from 'stage1/runtime';
+// import { deleteSyntheticEvent, setupSyntheticEvent } from 'stage1';
 
 afterEach(cleanup);
 

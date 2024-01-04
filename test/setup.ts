@@ -39,16 +39,13 @@ const noopAsyncArr = () => Promise.resolve([]);
 function setupDOM() {
   const dom = new GlobalWindow({
     url: 'chrome-extension://cpcibnbdmpmcmnkhoiilpnlaepkepknb/',
-    // TODO: Decide if we want to use the virtual console or not
-    //  ↳ https://github.com/capricorn86/happy-dom/wiki/Virtual-Console
-    // console: global.console,
   });
   global.happyDOM = dom.happyDOM;
   global.console2 = originalConsole;
   // @ts-expect-error - happy-dom only implements a subset of the DOM API
   global.window = dom.window.document.defaultView;
   global.document = window.document;
-  global.console = window.console;
+  global.console = window.console; // https://github.com/capricorn86/happy-dom/wiki/Virtual-Console
   global.setTimeout = window.setTimeout;
   global.clearTimeout = window.clearTimeout;
   global.DocumentFragment = window.DocumentFragment;

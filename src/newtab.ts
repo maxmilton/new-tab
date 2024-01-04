@@ -1,7 +1,7 @@
 // Theme loader code must run first
 import './theme';
 
-import { append, createFragment } from 'stage1/runtime';
+import { append, createFragment } from 'stage1';
 import { BookmarkBar } from './components/BookmarkBar';
 import { Menu } from './components/Menu';
 import { Search } from './components/Search';

@@ -1,6 +1,6 @@
+import { append, clone, collect, h } from 'stage1';
 import { compile } from 'stage1/macro' assert { type: 'macro' };
 import { reconcile } from 'stage1/reconcile/non-keyed';
-import { append, clone, collect, h } from 'stage1/runtime';
 import type { SectionOrderItem, ThemesData } from './types';
 import { DEFAULT_SECTION_ORDER, storage } from './utils';
 
