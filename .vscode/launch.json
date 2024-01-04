@@ -1,41 +1,21 @@
-// https://code.visualstudio.com/docs/editor/debugging#_launch-configurations
 {
   "version": "0.2.0",
   "configurations": [
     {
-      "name": "Attach by Process ID",
-      "type": "pwa-node",
-      "processId": "${command:PickProcess}",
+      "name": "Attach to Bun",
+      "type": "bun",
       "request": "attach",
-      "sourceMaps": true,
-      "skipFiles": ["<node_internals>/**"],
-      "smartStep": true
-    },
-    // https://github.com/Microsoft/vscode-recipes/tree/master/debugging-jest-tests
-    {
-      "name": "uvu All",
-      "type": "pwa-node",
-      "request": "launch",
-      "sourceMaps": true,
-      "skipFiles": [
-        "<node_internals>/**",
-        "${workspaceFolder}/node_modules/uvu/**"
-      ],
-      "program": "${workspaceFolder}/node_modules/uvu/bin.js",
-      "args": ["-r", "tsm", "./test", "\\.test\\.ts$"],
-      "console": "integratedTerminal"
+      // use `bun --inspect` to open a debug port
+      "url": "ws://localhost:6499/"
     },
     {
-      "name": "uvu Current File",
-      "type": "pwa-node",
+      "name": "bun test <CURRENT_FILE>",
+      "type": "bun",
       "request": "launch",
-      "sourceMaps": true,
-      "skipFiles": [
-        "<node_internals>/**",
-        "${workspaceFolder}/node_modules/uvu/**"
-      ],
-      "args": ["-r", "tsm", "${relativeFile}"],
-      "console": "integratedTerminal"
+      "runtimeArgs": ["test", "--preload", "${workspaceFolder}/test/setup.ts"],
+      "program": "${file}",
+      "internalConsoleOptions": "openOnSessionStart"
     }
+    // TODO: Add a way to run all tests
   ]
 }
