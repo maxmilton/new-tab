@@ -103,11 +103,6 @@ async function minifyJS(artifact: Blob & { path: string }) {
         regex: /^\$\$|^__click$/,
       },
     },
-    // TODO: Performance testing to see if this makes any difference (I assume
-    // it will have a minor negative impact, so not worth it).
-    // format: {
-    //   semicolons: false,
-    // },
   });
 
   await Bun.write(artifact.path, result.code!);
