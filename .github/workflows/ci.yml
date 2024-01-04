@@ -3,8 +3,8 @@ on:
   push:
     branches: [master, next]
     paths-ignore: ['**.md']
-  pull_request:
-    branches: [master, next]
+  pull_request: {}
+  workflow_dispatch: {}
 jobs:
   test:
     runs-on: ubuntu-latest
@@ -39,7 +39,7 @@ jobs:
       - run: bun playwright install chromium
       - run: bun run build
       - run: bun run test:e2e --reporter=dot,html
-      - uses: actions/upload-artifact@v3
+      - uses: actions/upload-artifact@v4
         if: always()
         with:
           name: playwright-report
