@@ -2,6 +2,7 @@
   "compilerOptions": {
     "target": "esnext",
     "module": "esnext",
+    "moduleDetection": "force",
     "moduleResolution": "bundler",
     "esModuleInterop": false,
     "resolveJsonModule": true,
