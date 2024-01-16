@@ -28,27 +28,27 @@
     "@ekscss/plugin-import": "0.0.12",
     "@maxmilton/stylelint-config": "0.0.15",
     "@playwright/test": "1.40.1",
-    "@types/bun": "1.0.0",
+    "@types/bun": "1.0.1",
     "@types/chrome": "0.0.256",
-    "@typescript-eslint/eslint-plugin": "6.17.0",
-    "@typescript-eslint/parser": "6.17.0",
+    "@typescript-eslint/eslint-plugin": "6.19.0",
+    "@typescript-eslint/parser": "6.19.0",
     "ekscss": "0.0.17",
     "eslint": "8.56.0",
     "eslint-config-airbnb-base": "15.0.0",
     "eslint-config-airbnb-typescript": "17.1.0",
     "eslint-config-prettier": "9.1.0",
     "eslint-plugin-import": "2.29.1",
-    "eslint-plugin-prettier": "5.1.2",
+    "eslint-plugin-prettier": "5.1.3",
     "eslint-plugin-unicorn": "50.0.1",
-    "happy-dom": "12.10.3",
-    "lightningcss": "1.22.1",
-    "prettier": "3.1.1",
+    "happy-dom": "13.1.4",
+    "lightningcss": "1.23.0",
+    "prettier": "3.2.2",
     "stylelint": "16.1.0",
     "stylelint-config-standard": "36.0.0",
     "terser": "5.26.0",
     "typescript": "5.3.3"
   },
   "overrides": {
-    "bun-types": "1.0.21"
+    "bun-types": "1.0.22"
   }
 }
