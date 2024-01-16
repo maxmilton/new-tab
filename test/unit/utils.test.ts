@@ -1,4 +1,5 @@
 import { describe, expect, mock, spyOn, test } from 'bun:test';
+import { target } from 'happy-dom/lib/PropertySymbol.js'; // eslint-disable-line import/extensions
 import { DEFAULT_SECTION_ORDER, handleClick } from '../../src/utils';
 
 describe('DEFAULT_SECTION_ORDER', () => {
@@ -25,14 +26,14 @@ describe('DEFAULT_SECTION_ORDER', () => {
   });
 });
 
-// TODO: Add invarient tests for handleClick
+// TODO: Add invariant tests for handleClick
 
 describe('handleClick', () => {
   test('triggers click handler on target', () => {
     const event = new window.MouseEvent('click');
     const handler = mock(() => {});
-    // @ts-expect-error - _target is an implementation detail of happy-dom
-    event._target = { __click: handler };
+    // @ts-expect-error - happy-dom internal target property
+    event[target] = { __click: handler };
     handleClick(event);
     expect(handler).toHaveBeenCalledTimes(1);
     expect(handler).toHaveBeenCalledWith(event);
@@ -45,8 +46,8 @@ describe('handleClick', () => {
     const parent = document.createElement('a');
     parent.__click = handler;
     parent.appendChild(child);
-    // @ts-expect-error - _target is an implementation detail of happy-dom
-    event._target = child;
+    // @ts-expect-error - happy-dom internal target property
+    event[target] = child;
     handleClick(event);
     expect(handler).toHaveBeenCalledTimes(1);
     expect(handler).toHaveBeenCalledWith(event);
@@ -64,8 +65,8 @@ describe('handleClick', () => {
     // parent2 > parent1 > child
     parent2.appendChild(parent1);
     parent1.appendChild(child);
-    // @ts-expect-error - _target is an implementation detail of happy-dom
-    event._target = child;
+    // @ts-expect-error - happy-dom internal target property
+    event[target] = child;
     handleClick(event);
     expect(handler1).toHaveBeenCalledTimes(1);
     expect(handler1).toHaveBeenCalledWith(event);
@@ -74,8 +75,8 @@ describe('handleClick', () => {
 
   // test.skip('default prevented on event when url does not start with "h"', () => {
   //   const event = new window.MouseEvent('click');
-  //   // @ts-expect-error - _target is an implementation detail of happy-dom
-  //   event._target = { href: 'chrome://about' };
+  //   // @ts-expect-error - happy-dom internal target property
+  //   event[target] = { href: 'chrome://about' };
   //   expect(event.defaultPrevented).toBe(false);
   //   handleClick(event);
   //   expect(event.defaultPrevented).toBe(true);
@@ -83,8 +84,8 @@ describe('handleClick', () => {
 
   test('default not prevented on event when url starts with "h"', () => {
     const event = new window.MouseEvent('click');
-    // @ts-expect-error - _target is an implementation detail of happy-dom
-    event._target = { href: 'https://example.com' };
+    // @ts-expect-error - happy-dom internal target property
+    event[target] = { href: 'https://example.com' };
     expect(event.defaultPrevented).toBe(false);
     handleClick(event);
     expect(event.defaultPrevented).toBe(false);
@@ -93,16 +94,16 @@ describe('handleClick', () => {
   // returning false on click events is similar to event.preventDefault()
   test('handler returns false when url does not start with "h"', () => {
     const event = new window.MouseEvent('click');
-    // @ts-expect-error - _target is an implementation detail of happy-dom
-    event._target = { href: 'chrome://about' };
+    // @ts-expect-error - happy-dom internal target property
+    event[target] = { href: 'chrome://about' };
     const result = handleClick(event);
     expect(result).toBe(false);
   });
 
   test('handler does not return false when url starts with "h"', () => {
     const event = new window.MouseEvent('click');
-    // @ts-expect-error - _target is an implementation detail of happy-dom
-    event._target = { href: 'https://example.com' };
+    // @ts-expect-error - happy-dom internal target property
+    event[target] = { href: 'https://example.com' };
     const result = handleClick(event);
     expect(result).not.toBe(false);
   });
@@ -112,8 +113,8 @@ describe('handleClick', () => {
   //   const tabsCreateSpy = spyOn(chrome.tabs, 'create');
   //   const tabsUpdateSpy = spyOn(chrome.tabs, 'update');
   //   const event = new window.MouseEvent('click');
-  //   // @ts-expect-error - _target is an implementation detail of happy-dom
-  //   event._target = { href: 'chrome://about', target: '_blank' };
+  //   // @ts-expect-error - happy-dom internal target property
+  //   event[target] = { href: 'chrome://about', target: '_blank' };
   //   handleClick(event);
   //   expect(tabsCreateSpy).toHaveBeenCalledTimes(1);
   //   expect(tabsCreateSpy).toHaveBeenCalledWith({ url: 'chrome://about' });
@@ -126,8 +127,8 @@ describe('handleClick', () => {
     const tabsCreateSpy = spyOn(chrome.tabs, 'create');
     const tabsUpdateSpy = spyOn(chrome.tabs, 'update');
     const event = new window.MouseEvent('click', { ctrlKey: true });
-    // @ts-expect-error - _target is an implementation detail of happy-dom
-    event._target = { href: 'chrome://about' };
+    // @ts-expect-error - happy-dom internal target property
+    event[target] = { href: 'chrome://about' };
     handleClick(event);
     expect(tabsCreateSpy).toHaveBeenCalledTimes(1);
     expect(tabsCreateSpy).toHaveBeenCalledWith({ url: 'chrome://about' });
@@ -140,8 +141,8 @@ describe('handleClick', () => {
     const tabsCreateSpy = spyOn(chrome.tabs, 'create');
     const tabsUpdateSpy = spyOn(chrome.tabs, 'update');
     const event = new window.MouseEvent('click');
-    // @ts-expect-error - _target is an implementation detail of happy-dom
-    event._target = { href: 'chrome://about', target: undefined };
+    // @ts-expect-error - happy-dom internal target property
+    event[target] = { href: 'chrome://about', target: undefined };
     handleClick(event);
     expect(tabsCreateSpy).toHaveBeenCalledTimes(0);
     expect(tabsUpdateSpy).toHaveBeenCalledTimes(1);
@@ -154,8 +155,8 @@ describe('handleClick', () => {
     const tabsCreateSpy = spyOn(chrome.tabs, 'create');
     const tabsUpdateSpy = spyOn(chrome.tabs, 'update');
     const event = new window.MouseEvent('click', { ctrlKey: false });
-    // @ts-expect-error - _target is an implementation detail of happy-dom
-    event._target = { href: 'chrome://about' };
+    // @ts-expect-error - happy-dom internal target property
+    event[target] = { href: 'chrome://about' };
     handleClick(event);
     expect(tabsCreateSpy).toHaveBeenCalledTimes(0);
     expect(tabsUpdateSpy).toHaveBeenCalledTimes(1);

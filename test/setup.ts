@@ -30,7 +30,6 @@ expect.extend({
 });
 
 const originalConsole = global.console;
-
 const noop = () => {};
 const noopAsync = () => Promise.resolve();
 const noopAsyncObj = () => Promise.resolve({});
@@ -120,9 +119,15 @@ function setupMocks(): void {
   };
 }
 
-export function reset(): void {
+export async function reset(): Promise<void> {
+  // eslint-disable-next-line @typescript-eslint/no-unnecessary-condition
+  if (global.happyDOM) {
+    await happyDOM.abort();
+    window.close();
+  }
+
   setupDOM();
   setupMocks();
 }
 
-reset();
+await reset();

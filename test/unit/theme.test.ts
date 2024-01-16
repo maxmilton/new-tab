@@ -66,6 +66,7 @@ for (const theme of themeNames) {
     });
 
     test('compiled AST is not empty', () => {
+      expect(ast).toBeArray();
       expect(ast).not.toBeEmpty();
     });
 
@@ -86,7 +87,7 @@ for (const theme of themeNames) {
         });
       });
       expect(found).toBe(1);
-      // @ts-expect-error - TODO: Fix type comparision of string[] to readonly string[].
+      // @ts-expect-error - TODO: Fix type comparison of string[] to readonly string[].
       expect(variables).toEqual(cssVariables);
     });
   });
@@ -112,35 +113,32 @@ async function load(themeName?: (typeof themeNames)[number]) {
 
   Loader.registry.delete(MODULE_PATH_THEME);
   Loader.registry.delete(MODULE_PATH_UTILS);
-  await import(MODULE_PATH_THEME);
-  await happyDOM.whenAsyncComplete();
-
-  // FIXME: Remove this once happy-dom supports adoptedStyleSheets correctly.
-  document.adoptedStyleSheets.forEach((sheet) => {
-    const adoptedStyle = window.document.createElement('style');
-    // @ts-expect-error - _currentText is an internal implementation detail of happy-dom
-    adoptedStyle.textContent = sheet._currentText as string;
-    window.document.head.appendChild(adoptedStyle);
-  });
+  await import(MODULE_PATH_THEME); // no exports; just side effects
+  await happyDOM.waitUntilComplete();
 }
 
 describe('theme loader', () => {
   // Completely reset DOM and global state between tests
   afterEach(reset);
 
+  test('loads expected style sheets', async () => {
+    await load();
+    expect(document.styleSheets).toHaveLength(1); // injected in load() above
+    expect(document.adoptedStyleSheets).toHaveLength(1); // from src/theme.ts
+  });
+
   test('loads dark theme by default', async () => {
     await load();
-    // expect(document.styleSheets).toHaveLength(1); // FIXME: Uncomment once adoptedStyleSheets issue is fixed.
-    expect(document.adoptedStyleSheets).toHaveLength(1);
 
-    // FIXME: Remove this and just use bodyStyles; see below.
+    // TODO: Remove this and use below.
     const htmlStyles = window.getComputedStyle(document.documentElement);
-    expect(htmlStyles.colorScheme).toBe('dark');
-    // expect(htmlStyles.getPropertyValue('color-scheme')).toBe('dark');
-
     const bodyStyles = window.getComputedStyle(document.body);
-    // FIXME: Uncomment this once happy-dom supports proper CSS inheritance.
-    // expect(bodyStyles.colorScheme).toBe('dark');
+    expect(htmlStyles.colorScheme).toBe('dark');
     expect(bodyStyles.getPropertyValue('--b')).toBe('#23252d');
+
+    // TODO: Uncomment this once happy-dom supports proper CSS inheritance.
+    // const styles = window.getComputedStyle(document.body);
+    // expect(styles.colorScheme).toBe('dark');
+    // expect(styles.getPropertyValue('--b')).toBe('#23252d');
   });
 });

@@ -20,7 +20,7 @@ afterEach(cleanup);
 
 test('rendered DOM contains expected elements', async () => {
   const rendered = render(Search());
-  await happyDOM.whenAsyncComplete();
+  await happyDOM.waitUntilComplete();
   const root = rendered.container.firstChild as HTMLElement;
   expect(root).toBeInstanceOf(window.HTMLDivElement);
   expect(root.id).toBe('c');
@@ -38,7 +38,7 @@ test('rendered DOM contains expected elements', async () => {
 
 test('rendered DOM matches snapshot', async () => {
   const rendered = render(Search());
-  await happyDOM.whenAsyncComplete();
+  await happyDOM.waitUntilComplete();
   expect(rendered.container.innerHTML).toMatchSnapshot();
 });
 
