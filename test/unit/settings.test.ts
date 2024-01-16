@@ -21,7 +21,7 @@ async function load() {
 
   Loader.registry.delete(MODULE_PATH);
   await import(MODULE_PATH);
-  await happyDOM.whenAsyncComplete();
+  await happyDOM.waitUntilComplete();
 
   return fetchMock;
 }
