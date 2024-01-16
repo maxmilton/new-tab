@@ -8,6 +8,8 @@ import { DECLARATION, RULESET, SKIP, compile, walk, type Element } from './css-e
 
 const themeNames = [
   'dark',
+  'hacker-blue',
+  'hacker-pink',
   'hacker-terminal',
   'light',
   'neon-dreams',

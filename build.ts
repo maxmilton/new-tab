@@ -1,5 +1,6 @@
 /* eslint-disable no-console */
 
+import { importPlugin } from '@ekscss/plugin-import';
 import * as xcss from 'ekscss';
 import * as lightningcss from 'lightningcss';
 import { readdir } from 'node:fs/promises';
@@ -14,7 +15,10 @@ const dev = mode === 'development';
  * Generate minified CSS from XCSS source.
  */
 function compileCSS(src: string, from: string) {
-  const compiled = xcss.compile(src, { from });
+  const compiled = xcss.compile(src, {
+    from,
+    plugins: [importPlugin],
+  });
 
   for (const warning of compiled.warnings) {
     console.error('XCSS:', warning.message);
@@ -72,11 +76,10 @@ async function makeThemes() {
 
   for (const theme of themeFiles.sort()) {
     if (theme.endsWith('.xcss')) {
-      themes[basename(theme, '.xcss')] = compileCSS(
-        // eslint-disable-next-line no-await-in-loop
-        await Bun.file(`src/css/themes/${theme}`).text(),
-        theme,
-      );
+      const path = `src/css/themes/${theme}`;
+      // eslint-disable-next-line no-await-in-loop
+      const code = await Bun.file(path).text();
+      themes[basename(theme, '.xcss')] = compileCSS(code, path);
     }
   }
 

@@ -25,6 +25,7 @@
     "stage1": "0.8.0-next.7"
   },
   "devDependencies": {
+    "@ekscss/plugin-import": "0.0.12",
     "@maxmilton/stylelint-config": "0.0.15",
     "@playwright/test": "1.40.1",
     "@types/bun": "1.0.0",
