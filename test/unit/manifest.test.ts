@@ -1,7 +1,7 @@
 import { expect, test } from 'bun:test';
 import { createManifest } from '../../manifest.config';
 
-const manifest = createManifest();
+const manifest = createManifest(true);
 
 test('is an object', () => {
   expect(manifest).toBePlainObject();
@@ -13,32 +13,33 @@ test('is valid JSON', () => {
 });
 
 test('contains expected properties', () => {
-  expect(manifest.manifest_version).toBeDefined();
-  expect(manifest.name).toBeDefined();
-  expect(manifest.description).toBeDefined();
-  expect(manifest.homepage_url).toBeDefined();
-  expect(manifest.version).toBeDefined();
-  expect(manifest.minimum_chrome_version).toBeDefined();
-  expect(manifest.icons).toBeDefined();
-  expect(manifest.icons?.[16]).toBeDefined();
-  expect(manifest.icons?.[48]).toBeDefined();
-  expect(manifest.icons?.[128]).toBeDefined();
-  expect(manifest.permissions).toBeDefined();
-  expect(manifest.chrome_url_overrides).toBeDefined();
-  expect(manifest.chrome_url_overrides?.newtab).toBeDefined();
-  expect(manifest.background).toBeDefined();
-  expect(manifest.background?.service_worker).toBeDefined();
-  expect(manifest.options_ui).toBeDefined();
-  expect(manifest.options_ui?.page).toBeDefined();
-  expect(manifest.offline_enabled).toBeDefined();
-  expect(manifest.incognito).toBeDefined();
-  expect(manifest.content_security_policy).toBeDefined();
-  expect(manifest.content_security_policy?.extension_pages).toBeDefined();
-  expect(manifest.cross_origin_embedder_policy).toBeDefined();
-  expect(manifest.cross_origin_embedder_policy?.value).toBeDefined();
-  expect(manifest.cross_origin_opener_policy).toBeDefined();
-  expect(manifest.cross_origin_opener_policy?.value).toBeDefined();
-  expect(manifest.key).toBeDefined();
+  expect(manifest).toHaveProperty('manifest_version');
+  expect(manifest).toHaveProperty('name');
+  expect(manifest).toHaveProperty('description');
+  expect(manifest).toHaveProperty('homepage_url');
+  expect(manifest).toHaveProperty('version');
+  expect(manifest).toHaveProperty('version_name');
+  expect(manifest).toHaveProperty('minimum_chrome_version');
+  expect(manifest).toHaveProperty('icons');
+  expect(manifest).toHaveProperty(['icons', '16']);
+  expect(manifest).toHaveProperty(['icons', '48']);
+  expect(manifest).toHaveProperty(['icons', '128']);
+  expect(manifest).toHaveProperty('permissions');
+  expect(manifest).toHaveProperty('chrome_url_overrides');
+  expect(manifest).toHaveProperty(['chrome_url_overrides', 'newtab']);
+  expect(manifest).toHaveProperty('background');
+  expect(manifest).toHaveProperty(['background', 'service_worker']);
+  expect(manifest).toHaveProperty('options_ui');
+  expect(manifest).toHaveProperty(['options_ui', 'page']);
+  expect(manifest).toHaveProperty('offline_enabled');
+  expect(manifest).toHaveProperty('incognito');
+  expect(manifest).toHaveProperty('content_security_policy');
+  expect(manifest).toHaveProperty(['content_security_policy', 'extension_pages']);
+  expect(manifest).toHaveProperty('cross_origin_embedder_policy');
+  expect(manifest).toHaveProperty(['cross_origin_embedder_policy', 'value']);
+  expect(manifest).toHaveProperty('cross_origin_opener_policy');
+  expect(manifest).toHaveProperty(['cross_origin_opener_policy', 'value']);
+  expect(manifest).toHaveProperty('key');
 });
 
 test('properties are the correct type', () => {
@@ -47,6 +48,7 @@ test('properties are the correct type', () => {
   expect(manifest.description).toBeString();
   expect(manifest.homepage_url).toBeString();
   expect(manifest.version).toBeString();
+  expect(manifest.version_name).toBeString();
   expect(manifest.minimum_chrome_version).toBeString();
   expect(manifest.icons).toBePlainObject();
   expect(manifest.icons?.[16]).toBeString();
