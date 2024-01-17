@@ -36,7 +36,8 @@ function compileCSS(src: string, from: string) {
     filename: from,
     code: Buffer.from(compiled.css),
     minify: !dev,
-    targets: { chrome: 116 << 16 }, // eslint-disable-line no-bitwise
+    // eslint-disable-next-line no-bitwise
+    targets: { chrome: 116 << 16 }, // matches manifest minimum_chrome_version
   });
 
   for (const warning of minified.warnings) {
