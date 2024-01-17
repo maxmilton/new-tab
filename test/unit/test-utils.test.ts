@@ -1,6 +1,23 @@
 import { afterEach, describe, expect, spyOn, test } from 'bun:test';
 import { Test } from '../TestComponent';
-import { cleanup, consoleSpy, render } from './utils';
+import * as utilsExports from './utils';
+import { cleanup, performanceSpy, render } from './utils';
+
+describe('exports', () => {
+  const exports = ['cleanup', 'performanceSpy', 'render'];
+
+  test.each(exports)('has "%s" named export', (exportName) => {
+    expect(utilsExports).toHaveProperty(exportName);
+  });
+
+  test('does not have a default export', () => {
+    expect(utilsExports).not.toHaveProperty('default');
+  });
+
+  test('does not export anything else', () => {
+    expect(Object.keys(utilsExports)).toHaveLength(exports.length);
+  });
+});
 
 describe('render (no call)', () => {
   test('is a function', () => {
@@ -161,38 +178,40 @@ describe('cleanup', () => {
   });
 });
 
-describe('consoleSpy', () => {
+describe('performanceSpy', () => {
   test('is a function', () => {
-    expect(consoleSpy).toBeInstanceOf(Function);
+    expect(performanceSpy).toBeInstanceOf(Function);
   });
 
   test('takes no arguments', () => {
-    expect(consoleSpy).toHaveLength(0);
+    expect(performanceSpy).toHaveLength(0);
   });
 
   test('returns a function', () => {
-    const checkConsoleSpy = consoleSpy();
-    expect(checkConsoleSpy).toBeInstanceOf(Function);
-    checkConsoleSpy();
+    const check = performanceSpy();
+    expect(check).toBeInstanceOf(Function);
+    check();
   });
 
   test('returned function takes no arguments', () => {
-    const checkConsoleSpy = consoleSpy();
-    expect(checkConsoleSpy).toHaveLength(0);
-    checkConsoleSpy();
+    const check = performanceSpy();
+    expect(check).toHaveLength(0);
+    check();
   });
 
-  test('passes when no console methods are called', () => {
-    const checkConsoleSpy = consoleSpy();
-    checkConsoleSpy();
+  test('passes when no performance methods are called', () => {
+    const check = performanceSpy();
+    check();
   });
 
-  // FIXME: How to test this?
-  test.skip('fails when console methods are called', () => {
-    const checkConsoleSpy = consoleSpy();
-    console.log('a');
-    console.warn('b');
-    console.error('c');
-    checkConsoleSpy();
+  // TODO: Don't skip this once test.failing() is supported in bun. We need to
+  // check that the expect() inside the performanceSpy() fails (meaning this
+  // test should then be a pass).
+  //  ↳ https://jestjs.io/docs/api#testfailingname-fn-timeout
+  test.skip('fails when performance methods are called', () => {
+    const check = performanceSpy();
+    performance.mark('a');
+    performance.measure('a', 'a');
+    check();
   });
 });
