@@ -29,7 +29,7 @@
     "@maxmilton/stylelint-config": "0.0.15",
     "@playwright/test": "1.41.0",
     "@types/bun": "1.0.2",
-    "@types/chrome": "0.0.257",
+    "@types/chrome": "0.0.258",
     "@typescript-eslint/eslint-plugin": "6.19.0",
     "@typescript-eslint/parser": "6.19.0",
     "ekscss": "0.0.17",
@@ -42,10 +42,10 @@
     "eslint-plugin-unicorn": "50.0.1",
     "happy-dom": "13.1.4",
     "lightningcss": "1.23.0",
-    "prettier": "3.2.2",
+    "prettier": "3.2.4",
     "stylelint": "16.1.0",
     "stylelint-config-standard": "36.0.0",
-    "terser": "5.26.0",
+    "terser": "5.27.0",
     "typescript": "5.3.3"
   },
   "overrides": {
