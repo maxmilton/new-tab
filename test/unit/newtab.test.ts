@@ -1,7 +1,7 @@
 import { afterEach, describe, expect, spyOn, test } from 'bun:test';
 import { reset } from '../setup';
 import { DECLARATION, compile, lookup, walk } from './css-engine';
-import { consoleSpy } from './utils';
+import { performanceSpy } from './utils';
 
 // Completely reset DOM and global state between tests
 afterEach(reset);
@@ -18,7 +18,6 @@ async function load() {
 }
 
 test('renders entire newtab app', async () => {
-  const checkConsoleSpy = consoleSpy();
   await load();
   expect(document.body.innerHTML.length).toBeGreaterThan(1000);
   expect(document.body.querySelector('#b')).toBeTruthy();
@@ -28,20 +27,29 @@ test('renders entire newtab app', async () => {
 
   // TODO: More/better assertions
   // TODO: Check all section headings exist; a h2 with text 'Open Tabs' x5
+});
 
-  checkConsoleSpy();
+test('does not call any console methods', async () => {
+  await load();
+  expect(happyDOM.virtualConsolePrinter.read()).toBeArrayOfSize(0);
+});
+
+test('does not call any performance methods', async () => {
+  const check = performanceSpy();
+  await load();
+  check();
+});
+
+test('does not call fetch()', async () => {
+  const spy = spyOn(global, 'fetch');
+  await load();
+  expect(spy).not.toHaveBeenCalled();
 });
 
 test('gets stored user settings once', async () => {
   const spy = spyOn(chrome.storage.local, 'get');
   await load();
   expect(spy).toHaveBeenCalledTimes(1);
-});
-
-test('makes no fetch() calls', async () => {
-  const spy = spyOn(global, 'fetch');
-  await load();
-  expect(spy).not.toHaveBeenCalled();
 });
 
 // TODO: Test with various settings

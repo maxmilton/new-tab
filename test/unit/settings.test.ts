@@ -1,7 +1,7 @@
 import { afterEach, describe, expect, mock, spyOn, test } from 'bun:test';
 import { reset } from '../setup';
 import { DECLARATION, compile, lookup, walk } from './css-engine';
-import { consoleSpy } from './utils';
+import { performanceSpy } from './utils';
 
 // Completely reset DOM and global state between tests
 afterEach(reset);
@@ -27,25 +27,33 @@ async function load() {
 }
 
 test('renders entire settings app', async () => {
-  const checkConsoleSpy = consoleSpy();
   await load();
   expect(document.body.innerHTML.length).toBeGreaterThan(600);
 
   // TODO: More/better assertions
+});
 
-  checkConsoleSpy();
+test('does not call any console methods', async () => {
+  await load();
+  expect(happyDOM.virtualConsolePrinter.read()).toBeArrayOfSize(0);
+});
+
+test('does not call any performance methods', async () => {
+  const check = performanceSpy();
+  await load();
+  check();
+});
+
+test('fetches themes.json once and does no other fetch calls', async () => {
+  const fetchMock = await load();
+  expect(fetchMock).toHaveBeenCalledTimes(1);
+  expect(fetchMock).toHaveBeenCalledWith('themes.json');
 });
 
 test('gets stored user settings once on load', async () => {
   const spy = spyOn(chrome.storage.local, 'get');
   await load();
   expect(spy).toHaveBeenCalledTimes(1);
-});
-
-test('fetches themes.json once and makes no other fetch calls', async () => {
-  const fetchMock = await load();
-  expect(fetchMock).toHaveBeenCalledTimes(1);
-  expect(fetchMock).toHaveBeenCalledWith('themes.json');
 });
 
 const css = await Bun.file('dist/settings.css').text();

@@ -29,6 +29,8 @@ expect.extend({
   },
 });
 
+export const originalConsoleCtor = global.console.Console;
+
 const originalConsole = global.console;
 const noop = () => {};
 const noopAsync = () => Promise.resolve();

@@ -54,13 +54,15 @@ export function cleanup(): void {
   });
 }
 
-const consoleMethods = Object.getOwnPropertyNames(console) as (keyof Console)[];
+const methods = Object.getOwnPropertyNames(
+  performance,
+) as (keyof Performance)[];
 
-export function consoleSpy(): () => void {
+export function performanceSpy(): () => void {
   const spies: Mock<() => void>[] = [];
 
-  for (const method of consoleMethods) {
-    spies.push(spyOn(console, method));
+  for (const method of methods) {
+    spies.push(spyOn(performance, method));
   }
 
   return /** check */ () => {

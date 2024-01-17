@@ -1,5 +1,23 @@
 import { describe, expect, test } from 'bun:test';
 import { VirtualConsole } from 'happy-dom';
+import * as setupExports from '../setup';
+import { originalConsoleCtor, reset } from '../setup';
+
+describe('exports', () => {
+  const exports = ['originalConsoleCtor', 'reset'];
+
+  test.each(exports)('has "%s" named export', (exportName) => {
+    expect(setupExports).toHaveProperty(exportName);
+  });
+
+  test('does not have a default export', () => {
+    expect(setupExports).not.toHaveProperty('default');
+  });
+
+  test('does not export anything else', () => {
+    expect(Object.keys(setupExports)).toHaveLength(exports.length);
+  });
+});
 
 describe('matcher: toBePlainObject', () => {
   const plainObjects = [
@@ -67,15 +85,12 @@ describe('console2', () => {
     expect(console2).toBeDefined();
   });
 
-  // TODO: How to test this? Since setup.ts is preloaded, there's no way to get
-  // the original console.
-  // test('is the original console', () => {
-  //   expect(console2).toBe(originalConsole);
-  // });
+  test('is the original console', () => {
+    expect(console2).toBeInstanceOf(originalConsoleCtor);
+  });
 
-  test('is not a happy-dom virtual console', () => {
-    expect(window.console).toBeInstanceOf(VirtualConsole);
-    expect(console).toStrictEqual(window.console);
+  test('is not the happy-dom virtual console', () => {
+    expect(console2).not.toBeInstanceOf(VirtualConsole);
     expect(console2).not.toBe(console);
     expect(console2).not.toBe(window.console);
   });
@@ -87,13 +102,12 @@ describe('happy-dom', () => {
     'window',
     'document',
     'console',
+    'fetch',
     'setTimeout',
     'clearTimeout',
     'DocumentFragment',
     'CSSStyleSheet',
     'Text',
-    'fetch',
-    'MutationObserver',
   ];
 
   test.each(globals)('"%s" global exists', (global) => {
@@ -103,6 +117,116 @@ describe('happy-dom', () => {
   test('console is a virtual console', () => {
     expect(window.console).toBeInstanceOf(VirtualConsole);
     expect(console).toBeInstanceOf(VirtualConsole);
-    expect(console).toStrictEqual(window.console);
+    expect(console).toBe(window.console); // same instance
+  });
+
+  test('console is not the original console', () => {
+    expect(console).not.toBeInstanceOf(originalConsoleCtor);
+    expect(console).not.toBe(console2);
+  });
+
+  describe('virtual console', () => {
+    test('has no log entries by default', () => {
+      const logs = happyDOM.virtualConsolePrinter.read();
+      expect(logs).toBeArray();
+      expect(logs).toHaveLength(0);
+    });
+
+    // types shouldn't include @types/node Console['Console'] property
+    const methods: (keyof Omit<Console, 'Console'>)[] = [
+      'assert',
+      // 'clear', // clears log entries so we can't test it
+      'count',
+      'countReset',
+      'debug',
+      'dir',
+      'dirxml',
+      'error',
+      // @ts-expect-error - alias for console.error
+      'exception',
+      'group',
+      'groupCollapsed',
+      // 'groupEnd', // doesn't log anything
+      'info',
+      'log',
+      // 'profile', // not implemented in happy-dom
+      // 'profileEnd',
+      'table',
+      // 'time', // doesn't log anything
+      // 'timeStamp',
+      // 'timeLog',
+      // 'timeEnd',
+      'trace',
+      'warn',
+    ];
+
+    test.each(methods)('has log entry after "%s" call', (method) => {
+      // eslint-disable-next-line no-console
+      console[method]();
+      expect(happyDOM.virtualConsolePrinter.read()).toHaveLength(1);
+    });
+
+    test('clears log entries after read', () => {
+      expect(happyDOM.virtualConsolePrinter.read()).toHaveLength(0);
+      // eslint-disable-next-line no-console
+      console.log();
+      expect(happyDOM.virtualConsolePrinter.read()).toHaveLength(1);
+      expect(happyDOM.virtualConsolePrinter.read()).toHaveLength(0);
+    });
+  });
+});
+
+describe('reset', () => {
+  test('is a function', () => {
+    expect(reset).toBeFunction();
+  });
+
+  test('takes no arguments', () => {
+    expect(reset).toHaveLength(0);
+  });
+
+  test('resets global chrome instance', async () => {
+    (chrome as typeof chrome & { foo?: string }).foo = 'bar';
+    expect(chrome).toHaveProperty('foo', 'bar');
+    await reset();
+    expect(chrome).not.toHaveProperty('foo');
+  });
+
+  test('resets global window instance', async () => {
+    (window as Window & { foo?: string }).foo = 'bar';
+    expect(window).toHaveProperty('foo', 'bar');
+    await reset();
+    expect(window).not.toHaveProperty('foo');
+  });
+
+  test('resets global document instance', async () => {
+    const h1 = document.createElement('h1');
+    h1.textContent = 'foo';
+    document.body.appendChild(h1);
+    expect(document.documentElement.innerHTML).toBe('<head></head><body><h1>foo</h1></body>');
+    await reset();
+    expect(document.documentElement.innerHTML).toBe('<head></head><body></body>');
+  });
+
+  test('resets expected globals instances', async () => {
+    const oldChrome = chrome;
+    const oldHappyDOM = happyDOM;
+    const oldWindow = window;
+    const oldDocument = document;
+    const oldConsole = console;
+    const oldFetch = fetch;
+    const oldSetTimeout = setTimeout;
+    const oldClearTimeout = clearTimeout;
+    const oldDocumentFragment = DocumentFragment;
+    await reset();
+    expect(chrome).not.toBe(oldChrome);
+    expect(happyDOM).not.toBe(oldHappyDOM);
+    expect(window).not.toBe(oldWindow);
+    expect(document).not.toBe(oldDocument);
+    expect(console).not.toBe(oldConsole);
+    expect(fetch).not.toBe(oldFetch);
+    expect(setTimeout).not.toBe(oldSetTimeout);
+    expect(clearTimeout).not.toBe(oldClearTimeout);
+    expect(DocumentFragment).not.toBe(oldDocumentFragment);
   });
 });
