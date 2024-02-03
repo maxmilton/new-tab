@@ -1,0 +1,91 @@
+{
+  "$schema": "./node_modules/@biomejs/biome/configuration_schema.json",
+  "vcs": {
+    "enabled": true,
+    "clientKind": "git",
+    "useIgnoreFile": true
+  },
+  "organizeImports": {
+    "enabled": false
+  },
+  "formatter": {
+    "formatWithErrors": true,
+    "indentStyle": "space",
+    "indentWidth": 2,
+    "lineEnding": "lf",
+    "lineWidth": 80
+  },
+  "javascript": {
+    "globals": ["chrome"],
+    "formatter": {
+      "semicolons": "always",
+      "trailingComma": "all",
+      "quoteStyle": "single"
+    }
+  },
+  "linter": {
+    "rules": {
+      "recommended": true,
+      "complexity": {
+        "noForEach": "off",
+        "useSimplifiedLogicExpression": "warn"
+      },
+      "style": {
+        "noNamespace": "error",
+        "noNegationElse": "error",
+        "noNonNullAssertion": "off",
+        "noParameterProperties": "error",
+        "noRestrictedGlobals": "error",
+        "noShoutyConstants": "error",
+        "useCollapsedElseIf": "error",
+        "useNamingConvention": {
+          "level": "error",
+          "options": { "strictCase": false }
+        },
+        "useShorthandArrayType": "error",
+        "useShorthandAssign": "error",
+        "useSingleCaseStatement": "error",
+        "useTemplate": "off"
+      },
+      "suspicious": {
+        "noApproximativeNumericConstant": "error",
+        "noAssignInExpressions": "off",
+        "noConfusingVoidType": "off",
+        "noConsoleLog": "warn",
+        "noConstEnum": "off",
+        "noExplicitAny": "off",
+        "noMisrefactoredShorthandAssign": "error"
+      }
+    }
+  },
+  "overrides": [
+    {
+      "include": [".vscode/**"],
+      "json": {
+        "parser": {
+          "allowComments": true,
+          "allowTrailingCommas": true
+        }
+      }
+    },
+    {
+      "include": ["**/*.spec.ts", "**/*.test.ts", "test/**/*.ts"],
+      "formatter": {
+        "lineWidth": 100
+      }
+    },
+    {
+      "include": ["build.ts", "manifest.config.ts"],
+      "linter": {
+        "rules": {
+          "style": {
+            "useNamingConvention": "off"
+          },
+          "suspicious": {
+            "noConsoleLog": "off"
+          }
+        }
+      }
+    }
+  ]
+}
