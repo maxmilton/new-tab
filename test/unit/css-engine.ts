@@ -14,9 +14,7 @@ export const SKIP = Symbol('SKIP');
  * Clones the element, stripping out references to other elements (e.g.,
  * "parent") for cleaner logging. **Intended for debugging only.**
  */
-export const cleanElement = <T extends Element & { siblings?: Element[] }>(
-  element: T,
-): T => {
+export const cleanElement = <T extends Element & { siblings?: Element[] }>(element: T): T => {
   const { root, parent, children, siblings, ...rest } = element;
   // @ts-expect-error - TODO: Fix "children" prop type
   rest.children = Array.isArray(children) ? children.length : children;
@@ -71,10 +69,7 @@ function load(root: Element[]): void {
 /**
  * Returns a list of elements matching the given CSS selector.
  */
-export function lookup(
-  root: Element[],
-  cssSelector: string,
-): Element[] | undefined {
+export function lookup(root: Element[], cssSelector: string): Element[] | undefined {
   if (!cache.has(root)) load(root);
 
   // parse the selector to ensure it's valid and normalized

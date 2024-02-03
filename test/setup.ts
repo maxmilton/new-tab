@@ -1,13 +1,15 @@
 import { expect } from 'bun:test';
 import { GlobalWindow, type Window } from 'happy-dom';
 
+/* eslint-disable no-var, vars-on-top */
 declare global {
   /** Real bun console. `console` is mapped to happy-dom's virtual console. */
-  // eslint-disable-next-line no-var, vars-on-top
+  // biome-ignore lint/style/noVar: define global
   var console2: Console;
-  // eslint-disable-next-line no-var, vars-on-top
+  // biome-ignore lint/style/noVar: define global
   var happyDOM: Window['happyDOM'];
 }
+/* eslint-enable */
 
 declare module 'bun:test' {
   interface Matchers {
@@ -17,8 +19,7 @@ declare module 'bun:test' {
 }
 
 expect.extend({
-  // XXX: Although bun has a `toBeObject` matcher, it's not as useful since it
-  // doesn't check for plain objects.
+  // XXX: Bun's `toBeObject` matcher is the equivalent of `typeof x === 'object'`.
   toBePlainObject(received: unknown) {
     return Object.prototype.toString.call(received) === '[object Object]'
       ? { pass: true }

@@ -136,6 +136,7 @@ export const Folder = (
   return root;
 };
 
+// eslint-disable-next-line no-confusing-arrow
 export const BookmarkNode = <T extends LinkProps | BookmarkTreeNode>(
   props: T,
   nested?: boolean,

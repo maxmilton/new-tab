@@ -2,17 +2,14 @@
 
 /* eslint-disable no-empty-pattern, unicorn/prefer-module */
 
-import {
-  test as baseTest,
-  chromium,
-  type BrowserContext,
-} from '@playwright/test';
+import { test as baseTest, chromium, type BrowserContext } from '@playwright/test';
 import path from 'node:path';
 
 export const test = baseTest.extend<{
   context: BrowserContext;
   extensionId: string;
 }>({
+  // biome-ignore lint/correctness/noEmptyPattern: empty initial context
   async context({}, use) {
     const extensionPath = path.join(__dirname, '../../dist');
     const context = await chromium.launchPersistentContext('', {
@@ -29,7 +26,7 @@ export const test = baseTest.extend<{
   async extensionId({ context }, use) {
     let [background] = context.serviceWorkers();
     // eslint-disable-next-line @typescript-eslint/no-unnecessary-condition
-    if (!background) background = await context.waitForEvent('serviceworker');
+    background ??= await context.waitForEvent('serviceworker');
 
     const extensionId = background.url().split('/')[2];
     await use(extensionId);

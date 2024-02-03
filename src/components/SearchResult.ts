@@ -70,7 +70,7 @@ export const SearchResult = <T extends LinkProps & TabItem>(
 
     const list = isOpenTabs ? listData : listData.slice(0, showCount);
     let index = 0;
-    let link;
+    let link: LinkComponent;
 
     renderedLength = list.length;
     root.hidden = !renderedLength;

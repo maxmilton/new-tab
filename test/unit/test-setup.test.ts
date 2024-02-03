@@ -40,9 +40,8 @@ describe('matcher: toBePlainObject', () => {
     new Function(),
     Function,
     Object,
+    /(?:)/,
     new Date(),
-    // eslint-disable-next-line prefer-regex-literals
-    new RegExp(''),
     // eslint-disable-next-line unicorn/error-message
     new Error(),
     new Map(),

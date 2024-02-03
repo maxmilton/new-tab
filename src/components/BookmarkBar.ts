@@ -46,7 +46,7 @@ export const BookmarkBar = (): BookmarkBarComponent => {
       // we can use clientWidth instead of offsetWidth for better performance.
       let currentWidth = otherBookmarksFolder.clientWidth;
       let index = 0;
-      let node;
+      let node: ReturnType<typeof BookmarkNode>;
 
       for (; index < len; index++) {
         node = append(BookmarkNode(bookmarks[index]), root);

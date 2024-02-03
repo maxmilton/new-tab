@@ -28,14 +28,14 @@ describe('dist files', () => {
     describe(filename, () => {
       const file = Bun.file(`dist/${filename}`);
 
-      test(`exists with correct type`, () => {
+      test('exists with correct type', () => {
         expect(file.exists()).resolves.toBeTruthy();
         expect(file.size).toBeGreaterThan(0);
         expect(file.type).toBe(type); // TODO: Keep this? Type seems to be resolved from the file extension, not the file data.
       });
 
       if (minBytes != null && maxBytes != null) {
-        test(`is within expected file size limits`, () => {
+        test('is within expected file size limits', () => {
           expect(file.size).toBeGreaterThan(minBytes);
           expect(file.size).toBeLessThan(maxBytes);
         });
