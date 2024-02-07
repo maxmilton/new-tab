@@ -23,9 +23,7 @@ module.exports = {
   ],
   rules: {
     '@typescript-eslint/explicit-module-boundary-types': ERROR,
-    // TODO: Would prefer a warning rather than disabling this but auto-fix is
-    // undesirable (adds unnecessary braces leading to byte bloat).
-    // '@typescript-eslint/no-confusing-void-expression': WARN,
+    '@typescript-eslint/no-confusing-void-expression': WARN,
     '@typescript-eslint/no-non-null-assertion': WARN,
     '@typescript-eslint/no-use-before-define': WARN,
     'import/prefer-default-export': OFF,
@@ -45,10 +43,9 @@ module.exports = {
     'max-len': OFF,
     'object-curly-newline': OFF,
     'operator-linebreak': OFF,
+    'unicorn/no-nested-ternary': OFF,
 
     /* Performance and byte savings */
-    // byte savings
-    '@typescript-eslint/no-confusing-void-expression': OFF,
     // alternatives offer byte savings
     '@typescript-eslint/prefer-string-starts-ends-with': OFF,
     // byte savings with same performance

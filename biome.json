@@ -38,13 +38,14 @@
         "noRestrictedGlobals": "error",
         "noShoutyConstants": "error",
         "useCollapsedElseIf": "error",
+        "useEnumInitializers": "off",
         "useNamingConvention": {
           "level": "error",
           "options": { "strictCase": false }
         },
         "useShorthandArrayType": "error",
         "useShorthandAssign": "error",
-        "useSingleCaseStatement": "error",
+        "useSingleCaseStatement": "off",
         "useTemplate": "off"
       },
       "suspicious": {
