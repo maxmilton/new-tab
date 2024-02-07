@@ -15,9 +15,9 @@ export const DEFAULT_SECTION_ORDER = [
 // stage1, plus special handling for browser internal links (e.g. chrome://)
 // https://github.com/maxmilton/stage1/blob/master/src/events.ts
 // eslint-disable-next-line @typescript-eslint/no-invalid-void-type, consistent-return
-export const handleClick = (event: MouseEvent): void | false => {
+export const handleClick = (event: MouseEvent): false | void => {
   let node = event.target as
-    | (Node & { __click?(event: MouseEvent): void })
+    | (Node & { __click?(event: MouseEvent): false | undefined })
     | null;
   // const link = node as HTMLAnchorElement;
   // const url = link.href;
