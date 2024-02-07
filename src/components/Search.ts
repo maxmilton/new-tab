@@ -6,12 +6,39 @@ import { SearchResult, type SearchResultComponent } from './SearchResult';
 
 type SectionRefs = Partial<Record<SectionOrderItem, SearchResultComponent>>;
 
+// FIXME: The vars should be automatically inlined by the minifier
+
+// const searchFor = (text: string, sections: SectionRefs) => {
+//   const openTabs = sections[DEFAULT_SECTION_ORDER[0]];
+//   const bookmarks = sections[DEFAULT_SECTION_ORDER[1]];
+//   const history = sections[DEFAULT_SECTION_ORDER[2]];
+//   const topSites = sections[DEFAULT_SECTION_ORDER[3]];
+//   const recentlyClosed = sections[DEFAULT_SECTION_ORDER[4]];
+//
+//   if (history) {
+//     if (text) {
+//       chrome.history.search({ text }, history.$$update);
+//     } else {
+//       history.$$update([]);
+//     }
+//   }
+//
+//   if (bookmarks) {
+//     if (text) {
+//       chrome.bookmarks.search(text, bookmarks.$$update);
+//     } else {
+//       bookmarks.$$update([]);
+//     }
+//   }
+//
+//   openTabs?.$$filter(text);
+//   topSites?.$$filter(text);
+//   recentlyClosed?.$$filter(text);
+// };
+
 const searchFor = (text: string, sections: SectionRefs) => {
-  const openTabs = sections[DEFAULT_SECTION_ORDER[0]];
-  const bookmarks = sections[DEFAULT_SECTION_ORDER[1]];
   const history = sections[DEFAULT_SECTION_ORDER[2]];
-  const topSites = sections[DEFAULT_SECTION_ORDER[3]];
-  const recentlyClosed = sections[DEFAULT_SECTION_ORDER[4]];
+  const bookmarks = sections[DEFAULT_SECTION_ORDER[1]];
 
   if (history) {
     if (text) {
@@ -29,9 +56,12 @@ const searchFor = (text: string, sections: SectionRefs) => {
     }
   }
 
-  openTabs?.$$filter(text);
-  topSites?.$$filter(text);
-  recentlyClosed?.$$filter(text);
+  // Open Tabs
+  sections[DEFAULT_SECTION_ORDER[0]]?.$$filter(text);
+  // Top Sites
+  sections[DEFAULT_SECTION_ORDER[3]]?.$$filter(text);
+  // Recently Closed Tabs
+  sections[DEFAULT_SECTION_ORDER[4]]?.$$filter(text);
 };
 
 type SearchComponent = HTMLDivElement;
