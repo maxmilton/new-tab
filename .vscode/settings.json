@@ -1,7 +1,8 @@
 {
   "css.validate": false,
   "editor.codeActionsOnSave": {
-    "source.fixAll": "explicit"
+    "source.fixAll": "explicit",
+    "source.fixAll.eslint": "never"
   },
   "editor.formatOnPaste": false,
   "editor.formatOnSave": true,
@@ -16,6 +17,7 @@
   "scss.validate": false,
   "stylelint.validate": ["css", "scss"],
   "typescript.tsdk": "node_modules/typescript/lib",
+
   "[css][html][json][jsonc][markdown][scss]": {
     "editor.defaultFormatter": "biomejs.biome"
   },
