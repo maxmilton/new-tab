@@ -3,7 +3,8 @@ import type { DEFAULT_SECTION_ORDER } from './utils';
 declare global {
   interface HTMLElement {
     /** `stage1` synthetic click event handler. */
-    __click?(event: MouseEvent): void;
+    // eslint-disable-next-line @typescript-eslint/no-invalid-void-type
+    __click?(event: MouseEvent): void | boolean | Promise<void>;
   }
 }
 

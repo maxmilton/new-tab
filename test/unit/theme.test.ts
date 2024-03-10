@@ -61,7 +61,7 @@ for (const theme of themeNames) {
     test('does not contain any comments', () => {
       expect(css).not.toInclude('/*');
       expect(css).not.toInclude('*/');
-      expect(css).not.toInclude('//');
+      expect(css).not.toInclude('//'); // inline comments or URL protocol
       expect(css).not.toInclude('<!');
     });
 

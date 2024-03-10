@@ -4,9 +4,7 @@ import { GlobalWindow, type Window } from 'happy-dom';
 /* eslint-disable no-var, vars-on-top */
 declare global {
   /** Real bun console. `console` is mapped to happy-dom's virtual console. */
-  // biome-ignore lint/style/noVar: define global
   var console2: Console;
-  // biome-ignore lint/style/noVar: define global
   var happyDOM: Window['happyDOM'];
 }
 /* eslint-enable */
@@ -74,7 +72,7 @@ function setupMocks(): void {
     },
     // @ts-expect-error - partial mock
     runtime: {
-      openOptionsPage: noop,
+      openOptionsPage: noopAsync,
     },
     // @ts-expect-error - partial mock
     sessions: {
