@@ -19,6 +19,9 @@ export const test = baseTest.extend<{
         `--disable-extensions-except=${extensionPath}`,
         `--load-extension=${extensionPath}`,
       ],
+      acceptDownloads: false,
+      strictSelectors: true,
+      offline: true, // the extension must work 100% offline
     });
     await use(context);
     await context.close();

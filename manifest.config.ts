@@ -73,7 +73,7 @@ export const createManifest = (
       "style-src 'self'",
       "img-src 'self'",
       "base-uri 'none'",
-      '',
+      '', // include trailing semicolon
     ].join(';'),
   },
   cross_origin_embedder_policy: {
