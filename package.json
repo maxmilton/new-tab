@@ -26,25 +26,25 @@
     "stage1": "0.8.0-next.8"
   },
   "devDependencies": {
-    "@biomejs/biome": "1.5.3",
+    "@biomejs/biome": "1.6.0",
     "@ekscss/plugin-import": "0.0.12",
     "@maxmilton/stylelint-config": "0.0.15",
-    "@playwright/test": "1.41.2",
-    "@types/bun": "1.0.5",
-    "@types/chrome": "0.0.260",
-    "@typescript-eslint/eslint-plugin": "6.21.0",
-    "@typescript-eslint/parser": "6.21.0",
+    "@playwright/test": "1.42.1",
+    "@types/bun": "1.0.8",
+    "@types/chrome": "0.0.263",
+    "@typescript-eslint/eslint-plugin": "7.1.1",
+    "@typescript-eslint/parser": "7.1.1",
     "ekscss": "0.0.17",
-    "eslint": "8.56.0",
+    "eslint": "8.57.0",
     "eslint-config-airbnb-base": "15.0.0",
-    "eslint-config-airbnb-typescript": "17.1.0",
+    "eslint-config-airbnb-typescript": "18.0.0",
     "eslint-plugin-import": "2.29.1",
     "eslint-plugin-unicorn": "51.0.1",
-    "happy-dom": "13.3.8",
-    "lightningcss": "1.23.0",
+    "happy-dom": "13.7.1",
+    "lightningcss": "1.24.0",
     "stylelint": "16.2.1",
     "stylelint-config-standard": "36.0.0",
-    "terser": "5.27.0",
-    "typescript": "5.3.3"
+    "terser": "5.29.1",
+    "typescript": "5.4.2"
   }
 }
