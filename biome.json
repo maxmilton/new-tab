@@ -61,7 +61,7 @@
   },
   "overrides": [
     {
-      "include": [".vscode/**"],
+      "include": [".vscode/**", "tsconfig.json", "tsconfig.node.json"],
       "json": {
         "parser": {
           "allowComments": true,
