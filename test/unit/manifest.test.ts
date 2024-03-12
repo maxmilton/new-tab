@@ -4,10 +4,12 @@ import { createManifest } from '../../manifest.config';
 const manifest = createManifest(true);
 
 test('is an object', () => {
+  expect.assertions(1);
   expect(manifest).toBePlainObject();
 });
 
 test('is valid JSON', () => {
+  expect.assertions(1);
   const result = JSON.parse(JSON.stringify(manifest)) as typeof manifest;
   expect(result).toEqual(manifest);
 });
