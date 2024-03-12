@@ -63,10 +63,10 @@ describe('matcher: toBePlainObject', () => {
     undefined,
     Symbol('sym'),
     BigInt(1234),
-    // eslint-disable-next-line unicorn/prefer-number-properties
-    NaN,
-    // eslint-disable-next-line unicorn/prefer-number-properties
-    Infinity,
+    // biome-ignore lint/style/useNumberNamespace: for tests
+    NaN, // eslint-disable-line unicorn/prefer-number-properties
+    // biome-ignore lint/style/useNumberNamespace: for tests
+    Infinity, // eslint-disable-line unicorn/prefer-number-properties
   ];
 
   test.each(plainObjects)('matches plain object %#', (item) => {
