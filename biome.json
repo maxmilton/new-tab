@@ -56,6 +56,9 @@
         "noConstEnum": "off",
         "noExplicitAny": "off",
         "noMisrefactoredShorthandAssign": "error"
+      },
+      "nursery": {
+        "noFocusedTests": "error"
       }
     }
   },
