@@ -29,6 +29,7 @@ describe('dist files', () => {
       const file = Bun.file(`dist/${filename}`);
 
       test('exists with correct type', () => {
+        expect.assertions(3);
         expect(file.exists()).resolves.toBeTruthy();
         expect(file.size).toBeGreaterThan(0);
         expect(file.type).toBe(type); // TODO: Keep this? Type seems to be resolved from the file extension, not the file data.
@@ -36,6 +37,7 @@ describe('dist files', () => {
 
       if (minBytes != null && maxBytes != null) {
         test('is within expected file size limits', () => {
+          expect.assertions(2);
           expect(file.size).toBeGreaterThan(minBytes);
           expect(file.size).toBeLessThan(maxBytes);
         });
@@ -44,6 +46,7 @@ describe('dist files', () => {
   }
 
   test('contains no extra files', async () => {
+    expect.assertions(1);
     const distDir = await readdir('dist');
     expect(distDir).toHaveLength(distFiles.length);
   });

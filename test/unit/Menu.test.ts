@@ -7,6 +7,7 @@ import { cleanup, render } from './utils';
 afterEach(cleanup);
 
 test('rendered DOM contains expected elements', () => {
+  expect.assertions(10);
   const rendered = render(Menu());
   const root = rendered.container.firstChild as HTMLElement;
   expect(root).toBeInstanceOf(window.HTMLDivElement);
@@ -22,11 +23,13 @@ test('rendered DOM contains expected elements', () => {
 });
 
 test('rendered DOM matches snapshot', () => {
+  expect.assertions(1);
   const rendered = render(Menu());
   expect(rendered.container.innerHTML).toMatchSnapshot();
 });
 
 test('clicking settings link calls chrome.runtime.openOptionsPage', () => {
+  expect.assertions(2);
   // setupSyntheticEvent('click'); // same click event logic as in src/newtab.ts
   document.onclick = handleClick; // same click event logic as in src/newtab.ts
   const spy = spyOn(chrome.runtime, 'openOptionsPage');

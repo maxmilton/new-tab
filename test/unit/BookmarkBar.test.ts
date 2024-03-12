@@ -18,6 +18,7 @@ afterEach(cleanup);
 // BookmarkBar, we need to wait for it to complete before we assert anything.
 
 test('rendered DOM contains expected elements', async () => {
+  expect.assertions(2);
   const rendered = render(BookmarkBar());
   await happyDOM.waitUntilComplete();
   const root = rendered.container.firstChild as HTMLElement;
@@ -26,6 +27,7 @@ test('rendered DOM contains expected elements', async () => {
 });
 
 test('rendered DOM matches snapshot', async () => {
+  expect.assertions(1);
   const rendered = render(BookmarkBar());
   await happyDOM.waitUntilComplete();
   expect(rendered.container.innerHTML).toMatchSnapshot();

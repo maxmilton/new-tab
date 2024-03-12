@@ -13,6 +13,7 @@ test('is valid JSON', () => {
 });
 
 test('contains expected properties', () => {
+  expect.assertions(27);
   expect(manifest).toHaveProperty('manifest_version');
   expect(manifest).toHaveProperty('name');
   expect(manifest).toHaveProperty('description');
@@ -43,6 +44,7 @@ test('contains expected properties', () => {
 });
 
 test('properties are the correct type', () => {
+  expect.assertions(27);
   expect(manifest.manifest_version).toBeNumber();
   expect(manifest.name).toBeString();
   expect(manifest.description).toBeString();
@@ -73,6 +75,7 @@ test('properties are the correct type', () => {
 });
 
 test('does not contain any unexpected properties', () => {
+  expect.assertions(19);
   const expectedProperties = [
     'manifest_version',
     'name',
@@ -101,14 +104,17 @@ test('does not contain any unexpected properties', () => {
 });
 
 test('does not contain any properties for development/debugging', () => {
+  expect.assertions(1);
   expect(manifest.options_ui?.open_in_tab).toBeUndefined();
 });
 
 test('manifest version is v3', () => {
+  expect.assertions(1);
   expect(manifest.manifest_version).toBe(3);
 });
 
 test('permissions contains expected values', () => {
+  expect.assertions(8);
   expect(manifest.permissions).toContain('bookmarks');
   expect(manifest.permissions).toContain('favicon');
   expect(manifest.permissions).toContain('history');
@@ -120,6 +126,7 @@ test('permissions contains expected values', () => {
 });
 
 test('has correct icons.* values', () => {
+  expect.assertions(4);
   expect(manifest.icons?.[16]).toBe('icon16.png');
   expect(manifest.icons?.[48]).toBe('icon48.png');
   expect(manifest.icons?.[128]).toBe('icon128.png');
@@ -127,19 +134,23 @@ test('has correct icons.* values', () => {
 });
 
 test('has correct chrome_url_overrides.newtab value', () => {
+  expect.assertions(1);
   expect(manifest.chrome_url_overrides?.newtab).toBe('newtab.html');
 });
 
 test('has correct service_worker value', () => {
+  expect.assertions(1);
   expect(manifest.background?.service_worker).toBe('sw.js');
 });
 
 test('has version_name when debug option is true', () => {
+  expect.assertions(1);
   const manifest2 = createManifest(true);
   expect(manifest2.version_name).toBeDefined();
 });
 
 test('does not have version_name when when debug option is false', () => {
+  expect.assertions(1);
   const manifest2 = createManifest(false);
   expect(manifest2.version_name).toBeUndefined();
 });
@@ -147,6 +158,7 @@ test('does not have version_name when when debug option is false', () => {
 // HACK: Mutating env vars that were set before the process started doesn't
 // work in bun, so we skip tests which rely on the CI env var _not_ being set.
 test.skipIf(!!process.env.CI)('has version_name when CI env var is not set', () => {
+  expect.assertions(1);
   const manifest2 = createManifest();
   expect(manifest2.version_name).toBeDefined();
 });
@@ -166,6 +178,7 @@ const restoreCI = () => {
 };
 
 test('does not have version_name when env var CI=true', () => {
+  expect.assertions(1);
   process.env.CI = 'true';
   const manifest2 = createManifest();
   expect(manifest2.version_name).toBeUndefined();

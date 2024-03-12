@@ -28,10 +28,12 @@ const cssVariables = [
 
 describe('themes.json', () => {
   test('is valid JSON', () => {
+    expect.assertions(1);
     expect(JSON.parse(JSON.stringify(themes))).toEqual(themes);
   });
 
   test('contains all themes and no unexpected themes', () => {
+    expect.assertions(1);
     expect(Object.keys(themes) as readonly string[]).toEqual(themeNames);
   });
 });
@@ -42,23 +44,28 @@ for (const theme of themeNames) {
     const ast = compile(css);
 
     test('is within expected size limits', () => {
+      expect.assertions(2);
       expect(css.length).toBeGreaterThan(80);
       expect(css.length).toBeLessThan(1500);
     });
 
     test('does not contain any @media queries', () => {
+      expect.assertions(1);
       expect(css).not.toInclude('@media');
     });
 
     test('does not contain any @font-face rules', () => {
+      expect.assertions(1);
       expect(css).not.toInclude('@font-face');
     });
 
     test('does not contain any @import rules', () => {
+      expect.assertions(1);
       expect(css).not.toInclude('@import');
     });
 
     test('does not contain any comments', () => {
+      expect.assertions(4);
       expect(css).not.toInclude('/*');
       expect(css).not.toInclude('*/');
       expect(css).not.toInclude('//'); // inline comments or URL protocol
@@ -66,11 +73,13 @@ for (const theme of themeNames) {
     });
 
     test('compiled AST is not empty', () => {
+      expect.assertions(2);
       expect(ast).toBeArray();
       expect(ast).not.toBeEmpty();
     });
 
     test('has single :root{} which contains all expected CSS variables', () => {
+      expect.assertions(2);
       let found = 0;
       const variables: string[] = [];
       walk(ast, (element) => {
@@ -122,12 +131,14 @@ describe('theme loader', () => {
   afterEach(reset);
 
   test('loads expected style sheets', async () => {
+    expect.assertions(2);
     await load();
     expect(document.styleSheets).toHaveLength(1); // injected in load() above
     expect(document.adoptedStyleSheets).toHaveLength(1); // from src/theme.ts
   });
 
   test('loads dark theme by default', async () => {
+    expect.assertions(2);
     await load();
 
     // TODO: Remove this and use below.

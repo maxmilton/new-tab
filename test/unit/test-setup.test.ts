@@ -7,14 +7,17 @@ describe('exports', () => {
   const exports = ['originalConsoleCtor', 'reset'];
 
   test.each(exports)('has "%s" named export', (exportName) => {
+    expect.assertions(1);
     expect(setupExports).toHaveProperty(exportName);
   });
 
   test('does not have a default export', () => {
+    expect.assertions(1);
     expect(setupExports).not.toHaveProperty('default');
   });
 
   test('does not export anything else', () => {
+    expect.assertions(1);
     expect(Object.keys(setupExports)).toHaveLength(exports.length);
   });
 });
@@ -67,28 +70,34 @@ describe('matcher: toBePlainObject', () => {
   ];
 
   test.each(plainObjects)('matches plain object %#', (item) => {
+    expect.assertions(1);
     expect(item).toBePlainObject();
   });
 
   test.each(nonPlainObjects)('does not match non-plain object %#', (item) => {
+    expect.assertions(1);
     expect(item).not.toBePlainObject();
   });
 
   test.each(nonObjects)('does not match non-object %#', (item) => {
+    expect.assertions(1);
     expect(item).not.toBePlainObject();
   });
 });
 
 describe('console2', () => {
   test('global exists', () => {
+    expect.assertions(1);
     expect(console2).toBeDefined();
   });
 
   test('is the original console', () => {
+    expect.assertions(1);
     expect(console2).toBeInstanceOf(originalConsoleCtor);
   });
 
   test('is not the happy-dom virtual console', () => {
+    expect.assertions(3);
     expect(console2).not.toBeInstanceOf(VirtualConsole);
     expect(console2).not.toBe(console);
     expect(console2).not.toBe(window.console);
@@ -110,22 +119,26 @@ describe('happy-dom', () => {
   ];
 
   test.each(globals)('"%s" global exists', (global) => {
+    expect.assertions(1);
     expect(global).toBeDefined();
   });
 
   test('console is a virtual console', () => {
+    expect.assertions(3);
     expect(window.console).toBeInstanceOf(VirtualConsole);
     expect(console).toBeInstanceOf(VirtualConsole);
     expect(console).toBe(window.console); // same instance
   });
 
   test('console is not the original console', () => {
+    expect.assertions(2);
     expect(console).not.toBeInstanceOf(originalConsoleCtor);
     expect(console).not.toBe(console2);
   });
 
   describe('virtual console', () => {
     test('has no log entries by default', () => {
+      expect.assertions(2);
       const logs = happyDOM.virtualConsolePrinter.read();
       expect(logs).toBeArray();
       expect(logs).toHaveLength(0);
@@ -160,12 +173,14 @@ describe('happy-dom', () => {
     ];
 
     test.each(methods)('has log entry after "%s" call', (method) => {
+      expect.assertions(1);
       // eslint-disable-next-line no-console
       console[method]();
       expect(happyDOM.virtualConsolePrinter.read()).toHaveLength(1);
     });
 
     test('clears log entries after read', () => {
+      expect.assertions(3);
       expect(happyDOM.virtualConsolePrinter.read()).toHaveLength(0);
       // eslint-disable-next-line no-console
       console.log();
@@ -177,14 +192,17 @@ describe('happy-dom', () => {
 
 describe('reset', () => {
   test('is a function', () => {
+    expect.assertions(1);
     expect(reset).toBeFunction();
   });
 
   test('takes no arguments', () => {
+    expect.assertions(1);
     expect(reset).toHaveLength(0);
   });
 
   test('resets global chrome instance', async () => {
+    expect.assertions(2);
     (chrome as typeof chrome & { foo?: string }).foo = 'bar';
     expect(chrome).toHaveProperty('foo', 'bar');
     await reset();
@@ -192,6 +210,7 @@ describe('reset', () => {
   });
 
   test('resets global window instance', async () => {
+    expect.assertions(2);
     (window as Window & { foo?: string }).foo = 'bar';
     expect(window).toHaveProperty('foo', 'bar');
     await reset();
@@ -199,6 +218,7 @@ describe('reset', () => {
   });
 
   test('resets global document instance', async () => {
+    expect.assertions(2);
     const h1 = document.createElement('h1');
     h1.textContent = 'foo';
     document.body.appendChild(h1);
@@ -208,6 +228,7 @@ describe('reset', () => {
   });
 
   test('resets expected globals instances', async () => {
+    expect.assertions(9);
     const oldChrome = chrome;
     const oldHappyDOM = happyDOM;
     const oldWindow = window;

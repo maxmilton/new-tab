@@ -50,6 +50,7 @@ const ast = compile(css);
 
 describe('lookup', () => {
   test('throws if selector is invalid', () => {
+    expect.assertions(6);
     expect(() => lookup(ast, '')).toThrow();
     expect(() => lookup(ast, ' ')).toThrow();
     expect(() => lookup(ast, ';')).toThrow();
@@ -63,14 +64,17 @@ describe('lookup', () => {
   });
 
   test('throws if multiple selectors are passed', () => {
+    expect.assertions(1);
     expect(() => lookup(ast, '.foo, .bar')).toThrow('Expected a single CSS selector');
   });
 
   test('throws if multiple rulesets are found', () => {
+    expect.assertions(1);
     expect(() => lookup(ast, '.bar{} .baz')).toThrow('Expected a single CSS selector');
   });
 
   test('finds all matching elements', () => {
+    expect.assertions(6);
     expect(lookup(ast, '.foo')).toHaveLength(1);
     expect(lookup(ast, '.bar')).toHaveLength(1);
     expect(lookup(ast, '.baz')).toHaveLength(3); // three rulesets have this selector
@@ -82,6 +86,7 @@ describe('lookup', () => {
 
 describe('walk', () => {
   test('visits all elements', () => {
+    expect.assertions(1);
     const selectors: string[] = [];
     walk(ast, (element) => {
       if (element.type === RULESET) {
@@ -94,11 +99,13 @@ describe('walk', () => {
 
 describe('reduce', () => {
   test('returns an object', () => {
+    expect.assertions(1);
     const reduced = reduce([ast[0]]);
     expect(reduced).toBePlainObject();
   });
 
   test('merges all elements, overriding earlier values', () => {
+    expect.assertions(2);
     const elements = lookup(ast, '.baz')!;
     expect(elements).toHaveLength(3);
     const reduced = reduce(elements);
@@ -111,6 +118,7 @@ describe('reduce', () => {
 describe('cleanElement', () => {
   for (const prop of ['root', 'parent', 'siblings'] as const) {
     test(`removes "${prop}" property without mutating original object`, () => {
+      expect.assertions(2);
       const cleaned = cleanElement(ast[0]);
       expect(ast[0]).toHaveProperty(prop);
       expect(cleaned).not.toHaveProperty(prop);
@@ -118,6 +126,7 @@ describe('cleanElement', () => {
   }
 
   test('replaces "children" property with count of child elements when children is array', () => {
+    expect.assertions(3);
     const element = lookup(ast, '.qux')![0];
     const cleaned = cleanElement(element);
     expect(element).toHaveProperty('children');
@@ -126,6 +135,7 @@ describe('cleanElement', () => {
   });
 
   test('leaves "children" property alone when children is not array', () => {
+    expect.assertions(5);
     const element = ast[0].children[0] as Element;
     expect(element).toBePlainObject();
     expect(element.type).toBe(DECLARATION);

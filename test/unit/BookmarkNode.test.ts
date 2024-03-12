@@ -1,11 +1,12 @@
 import { afterEach, describe, expect, test } from 'bun:test';
 import { BookmarkNode, type BookmarkTreeNode } from '../../src/components/BookmarkNode';
-import { type LinkProps } from '../../src/components/Link';
+import type { LinkProps } from '../../src/components/Link';
 import { cleanup, render } from './utils';
 
 afterEach(cleanup);
 
 test('renders a link when url is provided', () => {
+  expect.assertions(2);
   // @ts-expect-error - intentional partial props
   const rendered = render(BookmarkNode({ url: 'x' }));
   expect(rendered.container.querySelector('a')).toBeTruthy();
@@ -13,6 +14,7 @@ test('renders a link when url is provided', () => {
 });
 
 test('renders a folder when url is not provided', () => {
+  expect.assertions(2);
   // @ts-expect-error - intentional partial props
   const rendered = render(BookmarkNode({}));
   expect(rendered.container.querySelector('div.f')).toBeTruthy();
@@ -21,6 +23,7 @@ test('renders a folder when url is not provided', () => {
 
 describe('Bookmark (Link)', () => {
   test('rendered DOM contains expected elements', () => {
+    expect.assertions(1);
     const rendered = render(
       BookmarkNode({ title: 'Example', url: 'https://example.com' } satisfies LinkProps),
     );
@@ -31,6 +34,7 @@ describe('Bookmark (Link)', () => {
   });
 
   test('rendered DOM matches snapshot', () => {
+    expect.assertions(1);
     const rendered = render(BookmarkNode({ title: 'Example', url: 'https://example.com' }));
     expect(rendered.container.innerHTML).toMatchSnapshot();
   });
@@ -41,6 +45,7 @@ describe('Bookmark (Link)', () => {
 
 describe('Folder', () => {
   test('rendered DOM contains expected elements', () => {
+    expect.assertions(2);
     const rendered = render(BookmarkNode({ id: '1', title: 'Example' } satisfies BookmarkTreeNode));
     const root = rendered.container.firstChild as HTMLElement;
     expect(root).toBeInstanceOf(window.HTMLDivElement);
@@ -48,6 +53,7 @@ describe('Folder', () => {
   });
 
   test('rendered DOM matches snapshot', () => {
+    expect.assertions(1);
     const rendered = render(BookmarkNode({ id: '1', title: 'Example' }));
     expect(rendered.container.innerHTML).toMatchSnapshot();
   });

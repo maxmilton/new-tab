@@ -7,24 +7,29 @@ describe('exports', () => {
   const exports = ['cleanup', 'performanceSpy', 'render'];
 
   test.each(exports)('has "%s" named export', (exportName) => {
+    expect.assertions(1);
     expect(utilsExports).toHaveProperty(exportName);
   });
 
   test('does not have a default export', () => {
+    expect.assertions(1);
     expect(utilsExports).not.toHaveProperty('default');
   });
 
   test('does not export anything else', () => {
+    expect.assertions(1);
     expect(Object.keys(utilsExports)).toHaveLength(exports.length);
   });
 });
 
 describe('render (no call)', () => {
   test('is a function', () => {
+    expect.assertions(1);
     expect(render).toBeInstanceOf(Function);
   });
 
   test('takes a single argument', () => {
+    expect.assertions(1);
     expect(render).toHaveLength(1);
   });
 });
@@ -33,18 +38,21 @@ describe('render', () => {
   afterEach(cleanup);
 
   test('returns a container element', () => {
+    expect.assertions(2);
     const rendered = render(document.createElement('div'));
     expect(rendered).toHaveProperty('container');
     expect(rendered.container).toBeInstanceOf(window.Element);
   });
 
   test('mounts supplied element in container', () => {
+    expect.assertions(1);
     const el = document.createElement('span');
     const rendered = render(el);
     expect(rendered.container.firstChild).toBe(el);
   });
 
   test('mounts container div to document body', () => {
+    expect.assertions(3);
     expect(document.body.firstChild).toBeNull();
     const rendered = render(document.createElement('div'));
     expect(document.body.firstChild).toBe(rendered.container);
@@ -52,6 +60,7 @@ describe('render', () => {
   });
 
   test('mounts containers when other DOM elements exist on document body', () => {
+    expect.assertions(2);
     document.body.append(document.createElement('span'));
     document.body.append(document.createElement('span'));
     render(document.createElement('a'));
@@ -65,12 +74,14 @@ describe('render', () => {
   });
 
   test('renders Test component correctly', () => {
+    expect.assertions(1);
     const rendered = render(Test({ text: 'abc' }));
     expect(rendered.container.innerHTML).toBe('<div id="test">abc</div>');
   });
 
   describe('unmount method', () => {
     test('is a function', () => {
+      expect.assertions(2);
       const rendered = render(document.createElement('div'));
       expect(rendered).toHaveProperty('unmount');
       // eslint-disable-next-line @typescript-eslint/unbound-method
@@ -78,6 +89,7 @@ describe('render', () => {
     });
 
     test('removes supplied element from container', () => {
+      expect.assertions(3);
       const rendered = render(document.createElement('div'));
       expect(rendered.container.firstChild).toBeTruthy();
       rendered.unmount();
@@ -88,6 +100,7 @@ describe('render', () => {
 
   describe('debug method', () => {
     test('is a function', () => {
+      expect.assertions(2);
       const rendered = render(document.createElement('div'));
       expect(rendered).toHaveProperty('debug');
       // eslint-disable-next-line @typescript-eslint/unbound-method
@@ -95,6 +108,7 @@ describe('render', () => {
     });
 
     test('prints to console2', () => {
+      expect.assertions(1);
       const spy = spyOn(console2, 'log').mockImplementation(() => {});
       const rendered = render(document.createElement('div'));
       rendered.debug();
@@ -105,6 +119,7 @@ describe('render', () => {
     });
 
     test('does not print to console, only console2', () => {
+      expect.assertions(2);
       const spy = spyOn(console, 'log').mockImplementation(() => {});
       const spy2 = spyOn(console2, 'log').mockImplementation(() => {});
       const rendered = render(document.createElement('div'));
@@ -117,6 +132,7 @@ describe('render', () => {
 
     // TODO: Don't skip once biome has a HTML parser.
     test.skip('prints prettified container DOM to console', () => {
+      expect.assertions(2);
       const spy = spyOn(console2, 'log').mockImplementation(() => {});
       const main = document.createElement('main');
       main.append(
@@ -137,18 +153,22 @@ describe('render', () => {
 
 describe('cleanup', () => {
   test('is a function', () => {
+    expect.assertions(1);
     expect(cleanup).toBeInstanceOf(Function);
   });
 
   test('takes no arguments', () => {
+    expect.assertions(1);
     expect(cleanup).toHaveLength(0);
   });
 
   test('throws when there are no rendered components', () => {
+    expect.assertions(1);
     expect(() => cleanup()).toThrow();
   });
 
   test('removes mounted container from document body', () => {
+    expect.assertions(2);
     render(document.createElement('div'));
     expect(document.body.firstChild).toBeTruthy();
     cleanup();
@@ -156,6 +176,7 @@ describe('cleanup', () => {
   });
 
   test('removes multiple mounted containers from document body', () => {
+    expect.assertions(2);
     render(document.createElement('div'));
     render(document.createElement('div'));
     render(document.createElement('div'));
@@ -165,6 +186,7 @@ describe('cleanup', () => {
   });
 
   test('only removes mounted containers and not other DOM nodes', () => {
+    expect.assertions(5);
     document.body.append(document.createElement('span'));
     document.body.append(document.createElement('span'));
     render(document.createElement('a'));
@@ -182,26 +204,31 @@ describe('cleanup', () => {
 
 describe('performanceSpy', () => {
   test('is a function', () => {
+    expect.assertions(1);
     expect(performanceSpy).toBeInstanceOf(Function);
   });
 
   test('takes no arguments', () => {
+    expect.assertions(1);
     expect(performanceSpy).toHaveLength(0);
   });
 
   test('returns a function', () => {
+    expect.hasAssertions(); // variable number of assertions
     const check = performanceSpy();
     expect(check).toBeInstanceOf(Function);
     check();
   });
 
   test('returned function takes no arguments', () => {
+    expect.hasAssertions(); // variable number of assertions
     const check = performanceSpy();
     expect(check).toHaveLength(0);
     check();
   });
 
   test('passes when no performance methods are called', () => {
+    expect.hasAssertions(); // variable number of assertions
     const check = performanceSpy();
     check();
   });
@@ -211,6 +238,7 @@ describe('performanceSpy', () => {
   // test should then be a pass).
   //  ↳ https://jestjs.io/docs/api#testfailingname-fn-timeout
   test.skip('fails when performance methods are called', () => {
+    expect.hasAssertions(); // variable number of assertions
     const check = performanceSpy();
     performance.mark('a');
     performance.measure('a', 'a');

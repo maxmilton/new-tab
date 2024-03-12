@@ -5,6 +5,7 @@ import { cleanup, render } from './utils';
 afterEach(cleanup);
 
 test('rendered DOM contains expected elements', () => {
+  expect.assertions(9);
   const rendered = render(
     Link({ title: 'Example', url: 'https://example.com' } satisfies LinkProps),
   );
@@ -22,6 +23,7 @@ test('rendered DOM contains expected elements', () => {
 });
 
 test('rendered DOM matches snapshot', () => {
+  expect.assertions(1);
   const rendered = render(Link({ title: 'Example', url: 'https://example.com' }));
   expect(rendered.container.innerHTML).toMatchSnapshot();
 });

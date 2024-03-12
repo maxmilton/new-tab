@@ -20,6 +20,7 @@ afterEach(cleanup);
 // them to complete before we assert anything.
 
 test('rendered DOM contains expected elements', async () => {
+  expect.assertions(7);
   const rendered = render(Search());
   await happyDOM.waitUntilComplete();
   const root = rendered.container.firstChild as HTMLElement;
@@ -38,6 +39,7 @@ test('rendered DOM contains expected elements', async () => {
 });
 
 test('rendered DOM matches snapshot', async () => {
+  expect.assertions(1);
   const rendered = render(Search());
   await happyDOM.waitUntilComplete();
   expect(rendered.container.innerHTML).toMatchSnapshot();
