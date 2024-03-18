@@ -46,6 +46,10 @@ module.exports = {
     /* Performance and byte savings */
     // alternatives offer byte savings
     '@typescript-eslint/prefer-string-starts-ends-with': OFF,
+    // byte savings (but reduces debugging ability)
+    '@typescript-eslint/restrict-plus-operands': OFF,
+    // byte savings (but reduces debugging ability)
+    '@typescript-eslint/restrict-template-expressions': OFF,
     // byte savings with same performance
     'prefer-template': OFF,
     // byte savings

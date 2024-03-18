@@ -1,2 +1,2 @@
 // TODO
-export {};
+console2.warn('Not implemented');

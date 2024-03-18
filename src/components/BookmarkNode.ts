@@ -141,5 +141,5 @@ export const BookmarkNode = <T extends LinkProps | BookmarkTreeNode>(
   props: T,
   nested?: boolean,
 ): T extends { url: string } ? LinkComponent : FolderComponent =>
-  // @ts-expect-error - FIXME:!
+  // @ts-expect-error - FIXME: Handle type narrowing correctly
   props.url ? Link(props) : Folder(props, nested);
