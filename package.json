@@ -29,7 +29,7 @@
     "@maxmilton/stylelint-config": "0.0.15",
     "@playwright/test": "1.41.0",
     "@types/bun": "1.0.2",
-    "@types/chrome": "0.0.258",
+    "@types/chrome": "0.0.267",
     "@typescript-eslint/eslint-plugin": "6.19.0",
     "@typescript-eslint/parser": "6.19.0",
     "ekscss": "0.0.17",
