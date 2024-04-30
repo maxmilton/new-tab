@@ -28,7 +28,7 @@
     "@ekscss/plugin-import": "0.0.12",
     "@maxmilton/stylelint-config": "0.0.15",
     "@playwright/test": "1.41.0",
-    "@types/bun": "1.0.2",
+    "@types/bun": "1.1.1",
     "@types/chrome": "0.0.258",
     "@typescript-eslint/eslint-plugin": "6.19.0",
     "@typescript-eslint/parser": "6.19.0",
