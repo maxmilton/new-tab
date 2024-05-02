@@ -43,7 +43,7 @@
     "happy-dom": "13.1.4",
     "lightningcss": "1.23.0",
     "prettier": "3.2.4",
-    "stylelint": "16.1.0",
+    "stylelint": "16.5.0",
     "stylelint-config-standard": "36.0.0",
     "terser": "5.27.0",
     "typescript": "5.3.3"
