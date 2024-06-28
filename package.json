@@ -22,33 +22,39 @@
     "test:e2e:ui": "bun run test:e2e --ui",
     "zip": "sh -c 'test -z \"$(git status --porcelain)\"' && bun run build && bun run lint && bun run test && cd dist && zip ../chrome-extension.zip *"
   },
+  "patchedDependencies": {
+    "happy-dom@14.12.3": "patches/happy-dom@14.12.3.patch"
+  },
+  "overrides": {
+    "lightningcss": "1.23.0"
+  },
   "dependencies": {
-    "stage1": "0.8.0-next.8"
+    "stage1": "0.8.0-next.10"
   },
   "devDependencies": {
-    "@biomejs/biome": "1.6.3",
+    "@biomejs/biome": "1.8.3",
     "@ekscss/plugin-import": "0.0.12",
+    "@eslint/compat": "1.1.0",
+    "@eslint/eslintrc": "3.1.0",
+    "@eslint/js": "9.5.0",
     "@maxmilton/stylelint-config": "0.0.15",
-    "@playwright/test": "1.42.1",
-    "@types/bun": "1.0.11",
-    "@types/chrome": "0.0.263",
-    "@typescript-eslint/eslint-plugin": "7.4.0",
-    "@typescript-eslint/parser": "7.4.0",
+    "@playwright/test": "1.45.0",
+    "@types/bun": "1.1.6",
+    "@types/chrome": "0.0.268",
+    "@types/eslint__eslintrc": "2.1.1",
+    "@types/eslint__js": "8.42.3",
     "ekscss": "0.0.17",
-    "eslint": "8.57.0",
+    "eslint": "9.5.0",
     "eslint-config-airbnb-base": "15.0.0",
     "eslint-config-airbnb-typescript": "18.0.0",
     "eslint-plugin-import": "2.29.1",
-    "eslint-plugin-unicorn": "51.0.1",
-    "happy-dom": "14.3.9",
-    "lightningcss": "1.24.1",
-    "stylelint": "16.3.1",
-    "stylelint-config-standard": "36.0.0",
-    "terser": "5.30.0",
-    "typescript": "5.4.3"
-  },
-  "overrides": {
-    "bun-types": "canary",
-    "lightningcss": "1.23.0"
+    "eslint-plugin-unicorn": "54.0.0",
+    "happy-dom": "14.12.3",
+    "lightningcss": "1.25.1",
+    "stylelint": "16.6.1",
+    "stylelint-config-standard": "36.0.1",
+    "terser": "5.31.1",
+    "typescript": "5.5.2",
+    "typescript-eslint": "7.14.1"
   }
 }

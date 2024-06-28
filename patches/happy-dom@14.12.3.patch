@@ -1,0 +1,13 @@
+diff --git a/lib/nodes/node/Node.js b/lib/nodes/node/Node.js
+index ab306f8b520362c6c54571b7ee360fe6b0c58ba8..a45c634b54221c13e84adcc51933bb1bfd4177ed 100644
+--- a/lib/nodes/node/Node.js
++++ b/lib/nodes/node/Node.js
+@@ -436,7 +436,7 @@ class Node extends EventTarget {
+         if (this[PropertySymbol.isConnected] !== isConnected) {
+             this[PropertySymbol.isConnected] = isConnected;
+             if (!isConnected) {
+-                if (this[PropertySymbol.ownerDocument][PropertySymbol.activeElement] === this) {
++                if (this[PropertySymbol.ownerDocument]?.[PropertySymbol.activeElement] === this) {
+                     this[PropertySymbol.ownerDocument][PropertySymbol.activeElement] = null;
+                 }
+             }
