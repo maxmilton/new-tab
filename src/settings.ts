@@ -114,6 +114,7 @@ const meta = compile(`
       <select @theme>
         <option value=light>Light</option>
         <option value=dark>Dark</option>
+        <option value=black>Black</option>
         <option value=hacker-blue>Hacker Blue</option>
         <option value=hacker-pink>Hacker Pink</option>
         <option value=hacker-terminal>Hacker Terminal</option>
