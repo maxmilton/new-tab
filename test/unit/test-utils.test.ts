@@ -107,9 +107,9 @@ describe('render', () => {
       expect(rendered.debug).toBeInstanceOf(Function);
     });
 
-    test('prints to console2', () => {
+    test('prints to $console', () => {
       expect.assertions(1);
-      const spy = spyOn(console2, 'log').mockImplementation(() => {});
+      const spy = spyOn($console, 'log').mockImplementation(() => {});
       const rendered = render(document.createElement('div'));
       rendered.debug();
       expect(spy).toHaveBeenCalledTimes(1);
@@ -118,10 +118,10 @@ describe('render', () => {
       spy.mockRestore();
     });
 
-    test('does not print to console, only console2', () => {
+    test('does not print to console, only $console', () => {
       expect.assertions(2);
       const spy = spyOn(console, 'log').mockImplementation(() => {});
-      const spy2 = spyOn(console2, 'log').mockImplementation(() => {});
+      const spy2 = spyOn($console, 'log').mockImplementation(() => {});
       const rendered = render(document.createElement('div'));
       rendered.debug();
       expect(spy).not.toHaveBeenCalled();
@@ -133,7 +133,7 @@ describe('render', () => {
     // TODO: Don't skip once biome has a HTML parser.
     test.skip('prints prettified container DOM to console', () => {
       expect.assertions(2);
-      const spy = spyOn(console2, 'log').mockImplementation(() => {});
+      const spy = spyOn($console, 'log').mockImplementation(() => {});
       const main = document.createElement('main');
       main.append(
         document.createElement('div'),

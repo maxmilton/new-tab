@@ -29,10 +29,10 @@ export function render(component: Node): RenderResult {
     debug(el = container) {
       // const { format } = await import('prettier');
       // const html = await format(el.innerHTML, { parser: 'html' });
-      // console2.log(`DEBUG:\n${html}`);
+      // $console.log(`DEBUG:\n${html}`);
 
       // FIXME: Replace with biome once it has a HTML parser
-      console2.log(`DEBUG:\n${el.innerHTML}`);
+      $console.log(`DEBUG:\n${el.innerHTML}`);
     },
     unmount() {
       // eslint-disable-next-line unicorn/prefer-dom-node-remove

@@ -1,2 +1,2 @@
 // TODO
-console2.warn('Not implemented');
+$console.warn('Not implemented');

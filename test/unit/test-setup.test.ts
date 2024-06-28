@@ -85,22 +85,22 @@ describe('matcher: toBePlainObject', () => {
   });
 });
 
-describe('console2', () => {
+describe('$console', () => {
   test('global exists', () => {
     expect.assertions(1);
-    expect(console2).toBeDefined();
+    expect($console).toBeDefined();
   });
 
   test('is the original console', () => {
     expect.assertions(1);
-    expect(console2).toBeInstanceOf(originalConsoleCtor);
+    expect($console).toBeInstanceOf(originalConsoleCtor);
   });
 
   test('is not the happy-dom virtual console', () => {
     expect.assertions(3);
-    expect(console2).not.toBeInstanceOf(VirtualConsole);
-    expect(console2).not.toBe(console);
-    expect(console2).not.toBe(window.console);
+    expect($console).not.toBeInstanceOf(VirtualConsole);
+    expect($console).not.toBe(console);
+    expect($console).not.toBe(window.console);
   });
 });
 
@@ -133,7 +133,7 @@ describe('happy-dom', () => {
   test('console is not the original console', () => {
     expect.assertions(2);
     expect(console).not.toBeInstanceOf(originalConsoleCtor);
-    expect(console).not.toBe(console2);
+    expect(console).not.toBe($console);
   });
 
   describe('virtual console', () => {
