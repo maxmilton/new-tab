@@ -65,3 +65,9 @@ test('has no console calls or unhandled errors', async ({ page, extensionId }) =
   expect(unhandledErrors).toHaveLength(0);
   expect(consoleMessages).toHaveLength(0);
 });
+
+test('DEBUG', async ({ page, extensionId }) => {
+  await page.goto(`chrome-extension://${extensionId}/newtab.html`);
+  const fontFamily = await page.evaluate(() => getComputedStyle(document.body).fontFamily);
+  console.log('font-family:', fontFamily);
+});
