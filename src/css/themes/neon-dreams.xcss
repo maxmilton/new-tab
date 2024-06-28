@@ -36,8 +36,8 @@ svg {
   stroke-width: 1.5px;
 }
 
-#s,
-button {
+button,
+#s {
   border-width: 1px;
   border-radius: 0;
   filter: drop-shadow(0 0 3px var(--c1));

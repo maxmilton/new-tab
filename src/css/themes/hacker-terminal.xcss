@@ -26,8 +26,8 @@ svg {
   stroke-width: 1.5px;
 }
 
-#s,
-button {
+button,
+#s {
   border-radius: 0;
 }
 
@@ -43,8 +43,8 @@ button {
   color: transparent;
 }
 
-#s,
 button,
-.f {
+.f,
+#s {
   color: #b2fb99;
 }
