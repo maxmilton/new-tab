@@ -21,6 +21,13 @@ chrome.runtime.onInstalled.addListener(async () => {
   }
 
   void chrome.storage.local.set({
-    t: (await themes)[(await settings).tn ?? 'dark'],
+    t: (await themes)[(await settings).tn ?? 'auto'],
   });
+
+  // TODO: Open settings page on install?
+  // if (details.reason === ('install' as chrome.runtime.OnInstalledReason.INSTALL)) {
+  //   void chrome.tabs.create({
+  //     url: chrome.runtime.getURL('settings.html'),
+  //   });
+  // }
 });

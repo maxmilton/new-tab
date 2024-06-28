@@ -112,6 +112,7 @@ const meta = compile(`
     <div class=row>
       <label>Theme</label>
       <select @theme>
+        <option value=auto>Automatic (light/dark)</option>
         <option value=light>Light</option>
         <option value=dark>Dark</option>
         <option value=black>Black</option>

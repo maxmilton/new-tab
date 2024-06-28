@@ -1,0 +1,11 @@
+/**
+ * Automatic Light/Dark Theme
+ */
+
+// stylelint-disable-next-line import-notation
+@import './light.xcss';
+
+@media (prefers-color-scheme: dark) {
+  // stylelint-disable-next-line import-notation, no-invalid-position-at-import-rule
+  @import './dark.xcss';
+}
