@@ -31,7 +31,7 @@ export const handleClick = (event: MouseEvent): false | void => {
   }
 
   // Only apply special handling to non-http links
-  if (url?.[0] !== 'h') {
+  if (url && url[0] !== 'h') {
     // if (link.target === '_blank' || event.ctrlKey) {
     if (event.ctrlKey) {
       // Open the location in a new tab
