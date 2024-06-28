@@ -39,6 +39,7 @@ jobs:
           bun-version: latest
       - run: bun install --frozen-lockfile
       - run: bun playwright install chromium
+      - run: sudo apt-get install -y fonts-cantarell
       - run: bun run build
       - run: bun run test:e2e --reporter=dot,html --forbid-only
       - uses: actions/upload-artifact@v4
