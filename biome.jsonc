@@ -1,13 +1,6 @@
 {
   "$schema": "./node_modules/@biomejs/biome/configuration_schema.json",
-  "vcs": {
-    "enabled": true,
-    "clientKind": "git",
-    "useIgnoreFile": true
-  },
-  "organizeImports": {
-    "enabled": false
-  },
+  "vcs": { "enabled": true, "clientKind": "git", "useIgnoreFile": true },
   "formatter": {
     "formatWithErrors": true,
     "indentStyle": "space",
@@ -15,11 +8,12 @@
     "lineEnding": "lf",
     "lineWidth": 80
   },
+  "organizeImports": { "enabled": true },
   "javascript": {
     "globals": ["chrome"],
     "formatter": {
       "semicolons": "always",
-      "trailingComma": "all",
+      "trailingCommas": "all",
       "quoteStyle": "single"
     }
   },
@@ -28,7 +22,11 @@
       "recommended": true,
       "complexity": {
         "noForEach": "off",
-        "useSimplifiedLogicExpression": "warn"
+        "useSimplifiedLogicExpression": "info"
+      },
+      "performance": {
+        "noBarrelFile": "info",
+        "noReExportAll": "info"
       },
       "style": {
         "noNamespace": "error",
@@ -45,6 +43,7 @@
         },
         "useShorthandArrayType": "error",
         "useShorthandAssign": "error",
+        "useSingleCaseStatement": "error",
         "useTemplate": "off"
       },
       "suspicious": {
@@ -54,10 +53,8 @@
         "noConsoleLog": "warn",
         "noConstEnum": "off",
         "noExplicitAny": "off",
+        "noFocusedTests": "error",
         "noMisrefactoredShorthandAssign": "error"
-      },
-      "nursery": {
-        "noFocusedTests": "error"
       }
     }
   },
