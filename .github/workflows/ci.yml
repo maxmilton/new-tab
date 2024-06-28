@@ -33,8 +33,23 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 10
     steps:
-      - run: sudo apt-get install -y fonts-noto-core fonts-dejavu-core fonts-cantarell
-      - run: sudo fc-cache -f -v
+      - run: sudo apt-get install -y fonts-cantarell && sudo fc-cache -f
+      - name: Create font configuration file
+        run: |
+          cat <<EOF > ~/.fonts.conf
+          <?xml version="1.0"?>
+          <!DOCTYPE fontconfig SYSTEM "fonts.dtd">
+          <fontconfig>
+            <match target="pattern">
+              <test name="family" qual="any">
+                <string>sans-serif</string>
+              </test>
+              <edit name="family" mode="prepend" binding="strong">
+                <string>Cantarell</string>
+              </edit>
+            </match>
+          </fontconfig>
+          EOF
       - uses: actions/checkout@v4
       - uses: oven-sh/setup-bun@v1
         with:
