@@ -2,8 +2,8 @@
 
 /* eslint-disable no-empty-pattern, unicorn/prefer-module */
 
-import { test as baseTest, chromium, type BrowserContext } from '@playwright/test';
 import path from 'node:path';
+import { type BrowserContext, test as baseTest, chromium } from '@playwright/test';
 
 export const test = baseTest.extend<{
   context: BrowserContext;

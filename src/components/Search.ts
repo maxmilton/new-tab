@@ -1,5 +1,5 @@
 import { append, collect, h } from 'stage1';
-import { compile } from 'stage1/macro' assert { type: 'macro' };
+import { compile } from 'stage1/macro' with { type: 'macro' };
 import type { SectionOrderItem } from '../types';
 import { DEFAULT_SECTION_ORDER, storage } from '../utils';
 import { SearchResult, type SearchResultComponent } from './SearchResult';
@@ -66,9 +66,9 @@ const searchFor = (text: string, sections: SectionRefs) => {
 
 type SearchComponent = HTMLDivElement;
 
-type Refs = {
+interface Refs {
   s: HTMLInputElement;
-};
+}
 
 // https://github.com/feathericons/feather/blob/master/icons/search.svg
 const meta = compile(`

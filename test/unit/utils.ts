@@ -1,4 +1,4 @@
-import { expect, spyOn, type Mock } from 'bun:test';
+import { type Mock, expect, spyOn } from 'bun:test';
 
 export interface RenderResult {
   /** A wrapper DIV which contains your mounted component. */

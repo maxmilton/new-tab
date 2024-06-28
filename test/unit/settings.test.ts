@@ -85,7 +85,7 @@ describe('CSS', () => {
     expect.assertions(4);
     expect(css).not.toInclude('/*');
     expect(css).not.toInclude('*/');
-    expect(css).not.toInclude('//');
+    expect(css).not.toInclude('//'); // inline comments or URL protocol
     expect(css).not.toInclude('<!');
   });
 

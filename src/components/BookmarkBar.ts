@@ -1,6 +1,6 @@
 import { append, create, h } from 'stage1';
-import { compile } from 'stage1/macro' assert { type: 'macro' };
-import { BookmarkNode, Folder, type BookmarkTreeNode } from './BookmarkNode';
+import { compile } from 'stage1/macro' with { type: 'macro' };
+import { BookmarkNode, type BookmarkTreeNode, Folder } from './BookmarkNode';
 
 declare global {
   interface HTMLElement {
@@ -123,7 +123,7 @@ export const BookmarkBar = (): BookmarkBarComponent => {
 
     while (node) {
       if (node[eventKey] && (!related || !node.contains(related))) {
-        node[eventKey]!(event);
+        node[eventKey](event);
       }
       node = node.parentNode;
     }

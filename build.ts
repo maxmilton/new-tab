@@ -1,10 +1,10 @@
 /* eslint-disable no-console */
 
+import { readdir } from 'node:fs/promises';
+import { basename } from 'node:path';
 import { importPlugin } from '@ekscss/plugin-import';
 import * as xcss from 'ekscss';
 import * as lightningcss from 'lightningcss';
-import { readdir } from 'node:fs/promises';
-import { basename } from 'node:path';
 import * as terser from 'terser';
 import { createManifest } from './manifest.config';
 

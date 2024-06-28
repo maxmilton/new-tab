@@ -1,5 +1,5 @@
 import { append, clone, collect, h } from 'stage1';
-import { compile } from 'stage1/macro' assert { type: 'macro' };
+import { compile } from 'stage1/macro' with { type: 'macro' };
 import { DEFAULT_SECTION_ORDER } from '../utils';
 import { Link, type LinkComponent, type LinkProps } from './Link';
 
@@ -39,11 +39,11 @@ export type SearchResultComponent<T = any> = HTMLDivElement & {
   $$filter: (text: string) => void;
 };
 
-type Refs = {
+interface Refs {
   t: Text;
   l: HTMLDivElement;
   m: HTMLButtonElement;
-};
+}
 
 const meta = compile(`
   <div hidden>

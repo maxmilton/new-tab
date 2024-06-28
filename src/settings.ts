@@ -1,8 +1,12 @@
 import { append, clone, collect, h } from 'stage1';
-import { compile } from 'stage1/macro' assert { type: 'macro' };
+import { compile } from 'stage1/macro' with { type: 'macro' };
 import { reconcile } from 'stage1/reconcile/non-keyed';
 import type { SectionOrderItem, ThemesData } from './types';
 import { DEFAULT_SECTION_ORDER, storage } from './utils';
+
+// TODO: Show errors in the UI.
+
+// TODO: Show a message when the user has disabled all sections.
 
 interface SettingsState {
   order: [SectionOrderItem[], SectionOrderItem[]];
@@ -10,13 +14,13 @@ interface SettingsState {
 
 type ItemIndex = [listIndex: 0 | 1, itemIndex: number];
 
-type SectionScope = {
+interface SectionScope {
   indexOf(list: 0 | 1, item: SectionOrderItem): number;
   moveItem(from: ItemIndex, to: ItemIndex): void;
-};
+}
 
 const DRAG_TYPE = 'text/plain';
-const DEFAULT_THEME = 'dark';
+const DEFAULT_THEME = 'auto';
 
 // eslint-disable-next-line unicorn/prefer-top-level-await
 const themesData = fetch('themes.json').then(
@@ -25,9 +29,9 @@ const themesData = fetch('themes.json').then(
 
 type SectionComponent = HTMLLIElement;
 
-type SectionRefs = {
+interface SectionRefs {
   name: Text;
-};
+}
 
 const searchOnlyView = h('<small class="so muted">(search only)</small>');
 
@@ -96,12 +100,12 @@ const SectionItem = (
   return root;
 };
 
-type Refs = {
+interface Refs {
   theme: HTMLSelectElement;
   reset: HTMLButtonElement;
   se: HTMLUListElement;
   sd: HTMLUListElement;
-};
+}
 
 const meta = compile(`
   <div>

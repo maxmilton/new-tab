@@ -1,13 +1,13 @@
 import { describe, expect, test } from 'bun:test';
 import {
   DECLARATION,
+  type Element,
   RULESET,
   cleanElement,
   compile,
   lookup,
   reduce,
   walk,
-  type Element,
 } from './css-engine';
 
 const css = `

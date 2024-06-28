@@ -1,11 +1,11 @@
 import { collect, h } from 'stage1';
-import { compile } from 'stage1/macro' assert { type: 'macro' };
+import { compile } from 'stage1/macro' with { type: 'macro' };
 
 type MenuComponent = HTMLDivElement;
 
-type Refs = {
+interface Refs {
   s: HTMLAnchorElement;
-};
+}
 
 // https://github.com/tailwindlabs/heroicons/blob/master/optimized/outline/menu.svg
 const meta = compile(`

@@ -4,7 +4,7 @@ import { afterEach, describe, expect, test } from 'bun:test';
 import themes from '../../dist/themes.json';
 import type { UserStorageData } from '../../src/types';
 import { reset } from '../setup';
-import { DECLARATION, RULESET, SKIP, compile, walk, type Element } from './css-engine';
+import { DECLARATION, type Element, RULESET, SKIP, compile, walk } from './css-engine';
 
 const themeNames = [
   'dark',

@@ -66,7 +66,7 @@ describe('matcher: toBePlainObject', () => {
     // biome-ignore lint/style/useNumberNamespace: for tests
     NaN, // eslint-disable-line unicorn/prefer-number-properties
     // biome-ignore lint/style/useNumberNamespace: for tests
-    Infinity, // eslint-disable-line unicorn/prefer-number-properties
+    Infinity,
   ];
 
   test.each(plainObjects)('matches plain object %#', (item) => {
@@ -182,8 +182,8 @@ describe('happy-dom', () => {
     test('clears log entries after read', () => {
       expect.assertions(3);
       expect(happyDOM.virtualConsolePrinter.read()).toHaveLength(0);
-      // eslint-disable-next-line no-console
-      console.log();
+      // biome-ignore lint/suspicious/noConsoleLog: for testing
+      console.log(); // eslint-disable-line no-console
       expect(happyDOM.virtualConsolePrinter.read()).toHaveLength(1);
       expect(happyDOM.virtualConsolePrinter.read()).toHaveLength(0);
     });

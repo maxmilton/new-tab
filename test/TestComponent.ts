@@ -1,5 +1,5 @@
 import { collect, h } from 'stage1';
-import { compile } from 'stage1/macro' assert { type: 'macro' };
+import { compile } from 'stage1/macro' with { type: 'macro' };
 
 type TestComponent = HTMLDivElement;
 
@@ -7,9 +7,9 @@ interface TestProps {
   text: string;
 }
 
-type Refs = {
+interface Refs {
   t: Text;
-};
+}
 
 const meta = compile(`
   <div id=test>

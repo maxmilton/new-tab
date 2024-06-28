@@ -6,7 +6,6 @@ import { cleanup, render } from './utils';
 // state) when run, it's vital to reset its module state between tests to
 // maintain accurate test conditions.
 const MODULE_PATH = import.meta.resolveSync('../../src/components/Search');
-// biome-ignore lint/style/useNamingConvention: indirect component
 let Search: typeof import('../../src/components/Search').Search;
 
 beforeEach(async () => {
