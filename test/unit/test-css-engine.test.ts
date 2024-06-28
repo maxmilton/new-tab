@@ -1,4 +1,4 @@
-import { describe, expect, test } from 'bun:test';
+import { describe, expect, mock, test } from 'bun:test';
 import {
   DECLARATION,
   type Element,
@@ -49,6 +49,26 @@ const css = `
 const ast = compile(css);
 
 describe('lookup', () => {
+  test('is a function', () => {
+    expect.assertions(1);
+    expect(lookup).toBeInstanceOf(Function);
+  });
+
+  test('takes 2 arguments', () => {
+    expect.assertions(1);
+    expect(lookup).toHaveLength(2);
+  });
+
+  test('returns an array when has matching elements', () => {
+    expect.assertions(1);
+    expect(lookup(ast, '.foo')).toBeArray();
+  });
+
+  test('returns undefined when no matching elements', () => {
+    expect.assertions(1);
+    expect(lookup(ast, '.missing')).toBeUndefined();
+  });
+
   test('throws if selector is invalid', () => {
     expect.assertions(6);
     expect(() => lookup(ast, '')).toThrow();
@@ -85,6 +105,28 @@ describe('lookup', () => {
 });
 
 describe('walk', () => {
+  test('is a function', () => {
+    expect.assertions(1);
+    expect(walk).toBeInstanceOf(Function);
+  });
+
+  test('takes 2 arguments', () => {
+    expect.assertions(1);
+    expect(walk).toHaveLength(2);
+  });
+
+  test('has no return value', () => {
+    expect.assertions(1);
+    expect(walk(ast, () => {})).toBeUndefined();
+  });
+
+  test('calls visitor function for each AST node', () => {
+    expect.assertions(1);
+    const visitor = mock();
+    walk(ast, visitor);
+    expect(visitor).toHaveBeenCalledTimes(18);
+  });
+
   test('visits all elements', () => {
     expect.assertions(1);
     const selectors: string[] = [];
@@ -98,17 +140,34 @@ describe('walk', () => {
 });
 
 describe('reduce', () => {
+  test('is a function', () => {
+    expect.assertions(1);
+    expect(reduce).toBeInstanceOf(Function);
+  });
+
+  test('takes a single argument', () => {
+    expect.assertions(1);
+    expect(reduce).toHaveLength(1);
+  });
+
   test('returns an object', () => {
     expect.assertions(1);
     const reduced = reduce([ast[0]]);
     expect(reduced).toBePlainObject();
   });
 
+  test('throws when passed undefined', () => {
+    expect.assertions(1);
+    // @ts-expect-error - intentionally passing wrong type
+    // eslint-disable-next-line unicorn/no-useless-undefined
+    expect(() => reduce(undefined)).toThrow();
+  });
+
   test('merges all elements, overriding earlier values', () => {
     expect.assertions(2);
-    const elements = lookup(ast, '.baz')!;
+    const elements = lookup(ast, '.baz');
     expect(elements).toHaveLength(3);
-    const reduced = reduce(elements);
+    const reduced = reduce(elements!);
     // FIXME: It should be green since it's outside the media query
     // expect(reduced).toEqual({ color: 'green' }); // last one wins
     expect(reduced).toEqual({ color: 'purple' }); // last one wins
@@ -116,6 +175,22 @@ describe('reduce', () => {
 });
 
 describe('cleanElement', () => {
+  test('is a function', () => {
+    expect.assertions(1);
+    expect(cleanElement).toBeInstanceOf(Function);
+  });
+
+  test('takes a single argument', () => {
+    expect.assertions(1);
+    expect(cleanElement).toHaveLength(1);
+  });
+
+  test('returns an object', () => {
+    expect.assertions(1);
+    const cleaned = cleanElement(ast[0]);
+    expect(cleaned).toBePlainObject();
+  });
+
   for (const prop of ['root', 'parent', 'siblings'] as const) {
     test(`removes "${prop}" property without mutating original object`, () => {
       expect.assertions(2);

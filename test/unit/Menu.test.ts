@@ -2,7 +2,6 @@ import { afterEach, expect, spyOn, test } from 'bun:test';
 import { Menu } from '../../src/components/Menu';
 import { handleClick } from '../../src/utils';
 import { cleanup, render } from './utils';
-// import { deleteSyntheticEvent, setupSyntheticEvent } from 'stage1';
 
 afterEach(cleanup);
 
@@ -30,7 +29,6 @@ test('rendered DOM matches snapshot', () => {
 
 test('clicking settings link calls chrome.runtime.openOptionsPage', () => {
   expect.assertions(2);
-  // setupSyntheticEvent('click'); // same click event logic as in src/newtab.ts
   document.onclick = handleClick; // same click event logic as in src/newtab.ts
   const spy = spyOn(chrome.runtime, 'openOptionsPage');
   const rendered = render(Menu());
@@ -41,6 +39,5 @@ test('clicking settings link calls chrome.runtime.openOptionsPage', () => {
   link?.click();
   expect(spy).toHaveBeenCalledTimes(1);
   spy.mockRestore();
-  // deleteSyntheticEvent('click');
   document.onclick = null;
 });

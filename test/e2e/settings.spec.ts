@@ -1,3 +1,4 @@
+import type { ConsoleMessage } from '@playwright/test';
 import { expect, test } from './fixtures';
 
 test('settings page', async ({ page, extensionId }) => {
@@ -20,4 +21,14 @@ test('matches screenshot', async ({ page, extensionId }) => {
   await expect(page).toHaveScreenshot('settings-default.png', { fullPage: true });
 });
 
-// TODO: Test it makes no external requests
+test('has no console calls or unhandled errors', async ({ page, extensionId }) => {
+  const unhandledErrors: Error[] = [];
+  const consoleMessages: ConsoleMessage[] = [];
+  page.on('pageerror', (err) => unhandledErrors.push(err));
+  page.on('console', (msg) => consoleMessages.push(msg));
+  await page.goto(`chrome-extension://${extensionId}/settings.html`);
+  expect(unhandledErrors).toHaveLength(0);
+  expect(consoleMessages).toHaveLength(0);
+});
+
+// TODO: Test it makes no external requests (other than fetch themes)

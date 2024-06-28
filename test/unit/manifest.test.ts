@@ -10,8 +10,8 @@ test('is an object', () => {
 
 test('is valid JSON', () => {
   expect.assertions(1);
-  const result = JSON.parse(JSON.stringify(manifest)) as typeof manifest;
-  expect(result).toEqual(manifest);
+  // eslint-disable-next-line unicorn/prefer-structured-clone
+  expect(JSON.parse(JSON.stringify(manifest))).toEqual(manifest);
 });
 
 test('contains expected properties', () => {

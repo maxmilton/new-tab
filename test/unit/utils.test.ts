@@ -33,6 +33,24 @@ describe('DEFAULT_SECTION_ORDER', () => {
 // TODO: Add invariant tests for handleClick
 
 describe('handleClick', () => {
+  test('is a function', () => {
+    expect.assertions(1);
+    expect(handleClick).toBeInstanceOf(Function);
+  });
+
+  test('takes 1 argument', () => {
+    expect.assertions(1);
+    expect(handleClick).toHaveLength(1);
+  });
+
+  test('has no return value by default', () => {
+    expect.assertions(1);
+    const event = new window.MouseEvent('click');
+    // @ts-expect-error - happy-dom internal target property
+    event[target] = {};
+    expect(handleClick(event)).toBeUndefined();
+  });
+
   test('triggers click handler on target', () => {
     expect.assertions(2);
     const event = new window.MouseEvent('click');
