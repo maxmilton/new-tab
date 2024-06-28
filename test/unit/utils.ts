@@ -55,18 +55,56 @@ export function cleanup(): void {
   }
 }
 
+// TODO: Use this implementation if happy-dom removes internal performance.now calls.
+// const methods = Object.getOwnPropertyNames(performance) as (keyof Performance)[];
+//
+// export function performanceSpy(): () => void {
+//   const spies: Mock<() => void>[] = [];
+//
+//   for (const method of methods) {
+//     spies.push(spyOn(performance, method));
+//   }
+//
+//   return /** check */ () => {
+//     for (const spy of spies) {
+//       expect(spy).not.toHaveBeenCalled();
+//       spy.mockRestore();
+//     }
+//   };
+// }
+
+const originalNow = performance.now.bind(performance);
 const methods = Object.getOwnPropertyNames(performance) as (keyof Performance)[];
 
 export function performanceSpy(): () => void {
   const spies: Mock<() => void>[] = [];
+  let happydomInternalNowCalls = 0;
+
+  function now() {
+    // eslint-disable-next-line unicorn/error-message
+    const callerLocation = new Error().stack!.split('\n')[3];
+    if (callerLocation.includes('/node_modules/happy-dom/lib/')) {
+      happydomInternalNowCalls++;
+    }
+    return originalNow();
+  }
 
   for (const method of methods) {
-    spies.push(spyOn(performance, method));
+    spies.push(
+      method === 'now'
+        ? spyOn(performance, method).mockImplementation(now)
+        : spyOn(performance, method),
+    );
   }
 
   return /** check */ () => {
     for (const spy of spies) {
-      expect(spy).not.toHaveBeenCalled();
+      if (spy.getMockName() === 'now') {
+        // HACK: Workaround for happy-dom calling performance.now internally.
+        expect(spy).toHaveBeenCalledTimes(happydomInternalNowCalls);
+      } else {
+        expect(spy).not.toHaveBeenCalled();
+      }
       spy.mockRestore();
     }
   };
