@@ -179,10 +179,6 @@ const Settings = () => {
       tn: themeName,
       t: (await themesData)[themeName],
     });
-
-    if (themeName === DEFAULT_THEME) {
-      void chrome.storage.local.remove('tn');
-    }
   };
 
   const updateOrder = (order: SettingsState['order'], skipSave?: boolean) => {
