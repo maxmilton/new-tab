@@ -82,8 +82,7 @@ export const BookmarkBar = (): BookmarkBarComponent => {
 
       // The "Other Bookmarks" folder was added first so overflow calculation
       // is correct but now move it to its proper position at the end
-      append(otherBookmarksFolder, root);
-      otherBookmarksFolder.className += ' end';
+      append(otherBookmarksFolder, root).className += ' end';
 
       performance.measure('BookmarkBar', 'BookmarkBar');
     };
