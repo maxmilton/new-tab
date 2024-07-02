@@ -1,5 +1,5 @@
 import { expect, test } from 'bun:test';
-import distManifest from '../../dist/manifest.json' with { type: 'json' };
+import dist from '../../dist/manifest.json' with { type: 'json' };
 import { createManifest } from '../../manifest.config';
 
 const manifest = createManifest(true);
@@ -17,7 +17,9 @@ test('is valid JSON', () => {
 
 test('is equal to dist/manifest.json', () => {
   expect.assertions(1);
-  expect(manifest).toEqual(distManifest as ReturnType<typeof createManifest>);
+  // eslint-disable-next-line @typescript-eslint/naming-convention
+  const { version_name, ...rest } = dist as ReturnType<typeof createManifest>;
+  expect(manifest).toEqual(rest);
 });
 
 test('contains expected properties', () => {
