@@ -44,15 +44,15 @@ export const BookmarkBar = (): BookmarkBarComponent => {
       );
       // NOTE: The elements we're measuring don't have a border or margin so
       // we can use clientWidth instead of offsetWidth for better performance.
-      let currentWidth = otherBookmarksFolder.clientWidth;
+      let width = otherBookmarksFolder.clientWidth;
       let index = 0;
       let node: ReturnType<typeof BookmarkNode>;
 
       for (; index < len; index++) {
         node = append(BookmarkNode(bookmarks[index]), root);
-        currentWidth += node.clientWidth;
+        width += node.clientWidth;
 
-        if (currentWidth >= maxWidth) {
+        if (width >= maxWidth) {
           // Remove the node which overflowed
           node.remove();
           break;
@@ -88,7 +88,7 @@ export const BookmarkBar = (): BookmarkBarComponent => {
     };
 
     // HACK: Workaround for race condition. This script is loaded asynchronously,
-    // which yeilds the best performance, but it means this code may execute
+    // which yields the best performance, but it means this code may execute
     // before the CSS has loaded. Styles are needed to calculate the bookmark
     // item widths, so wait until the CSS is ready.
     const waitForStylesThenResize = () => {
