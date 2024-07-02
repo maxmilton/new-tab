@@ -63,7 +63,7 @@ describe('Folder', () => {
   // TODO: Test open/close state on top level
   // TODO: Test open/close state of sub folders ("popup")
   // TODO: Rendered DOM snapshot when popup is open
-  // TODO: Test openning another folder closes the previous one if on the same or lower level
-  // TODO: Test openned sub folder positions
-  // TODO: Test openned sub folder is scrollable when overflowing (might not be possible with happy-dom, but should definately write an e2e test for this)
+  // TODO: Test opening another folder closes the previous one if on the same or lower level
+  // TODO: Test opened sub folder positions
+  // TODO: Test opened sub folder is scrollable when overflowing (might not be possible with happy-dom, but should definitely write an e2e test for this)
 });

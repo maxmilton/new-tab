@@ -1,4 +1,5 @@
 import { expect, test } from 'bun:test';
+import distManifest from '../../dist/manifest.json' with { type: 'json' };
 import { createManifest } from '../../manifest.config';
 
 const manifest = createManifest(true);
@@ -12,6 +13,11 @@ test('is valid JSON', () => {
   expect.assertions(1);
   // eslint-disable-next-line unicorn/prefer-structured-clone
   expect(JSON.parse(JSON.stringify(manifest))).toEqual(manifest);
+});
+
+test('is equal to dist/manifest.json', () => {
+  expect.assertions(1);
+  expect(manifest).toEqual(distManifest as ReturnType<typeof createManifest>);
 });
 
 test('contains expected properties', () => {

@@ -47,6 +47,7 @@ const cache = new WeakMap<Element[], Map<string, Element[]>>();
 
 function load(root: Element[]): void {
   const map = new Map<string, Element[]>();
+  let tmp: Element[] | undefined;
   cache.set(root, map);
 
   walk(root, (element) => {
@@ -67,8 +68,9 @@ function load(root: Element[]): void {
 
     if (element.type === RULESET) {
       for (const selector of element.props) {
-        if (map.has(selector)) {
-          map.get(selector)!.push(element);
+        // eslint-disable-next-line no-cond-assign
+        if ((tmp = map.get(selector))) {
+          tmp.push(element);
         } else {
           map.set(selector, [element]);
         }

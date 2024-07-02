@@ -127,7 +127,7 @@ for (const theme of themeNames) {
           if (element.value !== ':root') return SKIP;
           found += 1;
           const variables2: string[] = [];
-          (element.children as Element[]).forEach((child) => {
+          for (const child of element.children as Element[]) {
             if (child.type === DECLARATION) {
               if ((child.props as string).startsWith('--') && child.children) {
                 variables2.push(child.props as string);
@@ -135,7 +135,7 @@ for (const theme of themeNames) {
             } else {
               throw new Error('Unexpected child element type: ' + child.type);
             }
-          });
+          }
           variables.push(variables2);
           return SKIP; // we manually iterated over the children
         });
@@ -152,7 +152,7 @@ for (const theme of themeNames) {
           if (element.type !== RULESET) return; // continue
           if (element.value !== ':root') return SKIP;
           found += 1;
-          (element.children as Element[]).forEach((child) => {
+          for (const child of element.children as Element[]) {
             if (child.type === DECLARATION) {
               if ((child.props as string).startsWith('--') && child.children) {
                 variables.push(child.props as string);
@@ -160,7 +160,7 @@ for (const theme of themeNames) {
             } else {
               throw new Error('Unexpected child element type: ' + child.type);
             }
-          });
+          }
           return SKIP; // we manually iterated over the children
         });
         expect(found).toBe(1);
