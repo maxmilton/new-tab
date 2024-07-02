@@ -112,8 +112,15 @@ async function minifyJS(artifact: Blob & { path: string }) {
   await Bun.write(artifact.path, result.code!);
 }
 
+console.time('prebuild');
+await Bun.$`rm -rf dist`;
+await Bun.$`cp -r static dist`;
+console.timeEnd('prebuild');
+
 // Extension manifest
+console.time('manifest');
 await Bun.write('dist/manifest.json', JSON.stringify(createManifest()));
+console.timeEnd('manifest');
 
 console.time('html+css');
 await makeHTML('newtab', 'src/css/newtab.xcss');
