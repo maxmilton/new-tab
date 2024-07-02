@@ -5,23 +5,22 @@ import type { ThemesData, UserStorageData } from './types';
 // On install or subsequent update, preload the user's chosen theme into storage
 // eslint-disable-next-line @typescript-eslint/no-misused-promises
 chrome.runtime.onInstalled.addListener(async () => {
-  const themes = fetch('themes.json').then(
-    (res) => res.json() as Promise<ThemesData>,
-  );
-  const settings: Promise<UserStorageData> = chrome.storage.local.get();
+  const [themes, settings] = await Promise.all([
+    fetch('themes.json').then((res) => res.json() as Promise<ThemesData>),
+    chrome.storage.local.get() as Promise<UserStorageData>,
+  ]);
 
   // TODO: Remove once most users have updated.
   // Migrate users on old rich-dark theme (removed in v0.23.0)
-  if ((await settings).tn === 'rich-dark') {
-    void chrome.storage.local.set({
-      t: (await themes).dark,
-      tn: 'dark',
+  if (settings.tn === 'rich-dark') {
+    await chrome.storage.local.set({
+      tn: (settings.tn = 'dark'),
     });
-    return;
   }
 
+  // Preload theme and default settings
   void chrome.storage.local.set({
-    t: (await themes)[(await settings).tn ?? 'auto'],
+    t: themes[settings.tn ?? 'auto'],
   });
 
   // TODO: Open settings page on install?
