@@ -1,4 +1,4 @@
-import { describe, expect, mock, spyOn, test } from 'bun:test';
+import { afterAll, beforeAll, describe, expect, mock, spyOn, test } from 'bun:test';
 import { target } from 'happy-dom/lib/PropertySymbol.js'; // eslint-disable-line import/extensions
 import { DEFAULT_SECTION_ORDER, handleClick } from '../../src/utils';
 
@@ -32,7 +32,22 @@ describe('DEFAULT_SECTION_ORDER', () => {
 
 // TODO: Add invariant tests for handleClick
 
+declare global {
+  /** Search input element with id=s defined in `src/components/Search.ts`. */
+  // eslint-disable-next-line no-var, vars-on-top
+  var s: HTMLInputElement;
+}
+
 describe('handleClick', () => {
+  beforeAll(() => {
+    if (global.s as Node | undefined) throw new Error('global.s already defined');
+    global.s = document.createElement('input');
+    document.body.appendChild(global.s);
+  });
+  afterAll(() => {
+    global.s.remove();
+  });
+
   test('is a function', () => {
     expect.assertions(1);
     expect(handleClick).toBeInstanceOf(Function);
@@ -196,5 +211,16 @@ describe('handleClick', () => {
     expect(tabsUpdateSpy).toHaveBeenCalledWith({ url: 'chrome://about' });
     tabsCreateSpy.mockRestore();
     tabsUpdateSpy.mockRestore();
+  });
+
+  test('focuses search input for non-link target', () => {
+    expect.assertions(2);
+    const focusSpy = spyOn(global.s, 'focus');
+    const event = new window.MouseEvent('click');
+    // @ts-expect-error - happy-dom internal target property
+    event[target] = {};
+    handleClick(event);
+    expect(focusSpy).toHaveBeenCalledTimes(1);
+    expect(document.activeElement).toBe(global.s as Element);
   });
 });
