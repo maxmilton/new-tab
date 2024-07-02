@@ -101,14 +101,18 @@ const SectionItem = (
 };
 
 interface Refs {
+  feedback: HTMLDivElement;
   theme: HTMLSelectElement;
-  reset: HTMLButtonElement;
+  b: HTMLInputElement;
   se: HTMLUListElement;
   sd: HTMLUListElement;
+  reset: HTMLButtonElement;
 }
 
 const meta = compile(`
   <div>
+    <div @feedback></div>
+
     <div class=row>
       <label>Theme</label>
       <select @theme>
@@ -122,6 +126,12 @@ const meta = compile(`
         <option value=neon-dreams>Neon Dreams</option>
         <option value=tilde-club>Tilde Club</option>
       </select>
+    </div>
+
+    <div class=row>
+      <label>
+        <input @b type=checkbox class=box> Show bookmarks bar
+      </label>
     </div>
 
     <div class=row>
@@ -175,10 +185,14 @@ const Settings = () => {
   const updateTheme = async (themeName: string) => {
     refs.theme.value = themeName;
 
-    void chrome.storage.local.set({
+    await chrome.storage.local.set({
       tn: themeName,
       t: (await themesData)[themeName],
     });
+
+    if (themeName === DEFAULT_THEME) {
+      void chrome.storage.local.remove('tn');
+    }
   };
 
   const updateOrder = (order: SettingsState['order'], skipSave?: boolean) => {
@@ -217,17 +231,27 @@ const Settings = () => {
     (event.target as SectionComponent).classList.remove('over');
   };
 
+  refs.theme.onchange = () => updateTheme(refs.theme.value);
+
+  refs.b.onchange = () => {
+    if (refs.b.checked) {
+      // When value is same as default, we don't need to store it
+      void chrome.storage.local.remove('b');
+    } else {
+      void chrome.storage.local.set({
+        b: true,
+      });
+    }
+  };
+
   // eslint-disable-next-line no-multi-assign
   refs.se.ondragover = refs.sd.ondragover = (event) => {
     event.preventDefault();
     // eslint-disable-next-line no-param-reassign
     event.dataTransfer!.dropEffect = 'move';
   };
-
   refs.se.ondrop = handleDrop(0);
   refs.sd.ondrop = handleDrop(1);
-
-  refs.theme.onchange = () => updateTheme(refs.theme.value);
 
   refs.reset.onclick = () => {
     void updateTheme(DEFAULT_THEME);
@@ -242,6 +266,7 @@ const Settings = () => {
   );
 
   void updateTheme(themeName);
+  refs.b.checked = !storage.b;
   updateOrder([orderEnabled, orderDisabled], true);
 
   return root;

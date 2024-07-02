@@ -15,7 +15,9 @@ export interface UserStorageData {
   t?: string;
   /** The user's selected theme name. */
   tn?: string;
-  /** User sections order preference. */
+  /** Hide bookmarks bar user preference; `true` means hidden. */
+  b?: boolean;
+  /** Sections order user preference. */
   o?: SectionOrderItem[];
 }
 

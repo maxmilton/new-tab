@@ -49,6 +49,12 @@ select {
   margin-bottom: 18px;
 }
 
+.box {
+  width: 1.1em;
+  height: 1.1em;
+  margin-right: 0.5em;
+}
+
 .item-list:empty {
   padding: 7px 0 10px;
   text-align: center;
