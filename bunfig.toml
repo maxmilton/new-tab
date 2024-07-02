@@ -1,0 +1,7 @@
+[run]
+bun = true
+
+[test]
+preload = ["./test/setup.ts"]
+root = "./test/unit"
+coverage = true

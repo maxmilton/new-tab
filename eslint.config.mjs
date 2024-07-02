@@ -88,7 +88,7 @@ export default tseslint.config(
       // byte savings + faster
       'unicorn/explicit-length-check': OFF,
       'unicorn/no-array-callback-reference': OFF,
-      // forEach is often faster (in Chrome and Bun but not Firefox)
+      // forEach is slower but more compact (for non-performance-critical code)
       'unicorn/no-array-for-each': OFF,
       'unicorn/no-await-expression-member': OFF,
       // indexOf is faster (in Chrome)

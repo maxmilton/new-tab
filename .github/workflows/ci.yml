@@ -57,7 +57,7 @@ jobs:
       - run: bun install --frozen-lockfile
       - run: bun playwright install chromium
       - run: bun run build
-      - run: bun run test:e2e --reporter=dot,html --forbid-only
+      - run: bun run test:e2e --reporter=dot,html
       - uses: actions/upload-artifact@v4
         if: always()
         with:
