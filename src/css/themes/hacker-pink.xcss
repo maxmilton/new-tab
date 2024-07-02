@@ -2,7 +2,6 @@
  * Hacker Pink Theme
  */
 
-// stylelint-disable-next-line import-notation
 @import './hacker-terminal.xcss';
 
 html {

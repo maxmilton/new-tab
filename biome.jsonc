@@ -75,7 +75,7 @@
       }
     },
     {
-      "include": ["build.ts", "manifest.config.ts"],
+      "include": ["build.ts", "*.config.ts"],
       "linter": {
         "rules": {
           "style": {
