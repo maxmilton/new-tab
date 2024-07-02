@@ -12,7 +12,7 @@
       "name": "bun test <CURRENT_FILE>",
       "type": "bun",
       "request": "launch",
-      "runtimeArgs": ["test", "--preload", "${workspaceFolder}/test/setup.ts"],
+      "runtimeArgs": ["test"],
       "program": "${file}",
       "internalConsoleOptions": "openOnSessionStart"
     }
