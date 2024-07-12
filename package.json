@@ -30,11 +30,11 @@
   "devDependencies": {
     "@biomejs/biome": "1.8.3",
     "@ekscss/plugin-import": "0.0.12",
-    "@eslint/compat": "1.1.0",
+    "@eslint/compat": "1.1.1",
     "@eslint/eslintrc": "3.1.0",
     "@eslint/js": "9.6.0",
     "@maxmilton/stylelint-config": "0.0.15",
-    "@playwright/test": "1.45.0",
+    "@playwright/test": "1.45.1",
     "@types/bun": "1.1.6",
     "@types/chrome": "0.0.268",
     "@types/eslint__eslintrc": "2.1.1",
@@ -49,8 +49,8 @@
     "lightningcss": "1.25.1",
     "stylelint": "16.6.1",
     "stylelint-config-standard": "36.0.1",
-    "terser": "5.31.1",
+    "terser": "5.31.2",
     "typescript": "5.5.3",
-    "typescript-eslint": "7.15.0"
+    "typescript-eslint": "7.16.0"
   }
 }
