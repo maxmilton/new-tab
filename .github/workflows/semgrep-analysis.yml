@@ -14,7 +14,7 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 5
     container:
-      image: returntocorp/semgrep
+      image: semgrep/semgrep
     permissions:
       actions: read
       contents: read
