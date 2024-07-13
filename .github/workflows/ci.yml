@@ -23,10 +23,13 @@ jobs:
       - name: Report coverage
         if: ${{ github.repository_owner == 'maxmilton' }}
         run: |
-          curl -Lo ./cc-test-reporter https://codeclimate.com/downloads/test-reporter/test-reporter-latest-linux-amd64
-          chmod +x ./cc-test-reporter
-          ./cc-test-reporter format-coverage -t lcov -o coverage/codeclimate.json coverage/lcov.info
-          ./cc-test-reporter upload-coverage
+          curl -LO https://codeclimate.com/downloads/test-reporter/test-reporter-latest-linux-amd64 \
+               -LO https://codeclimate.com/downloads/test-reporter/test-reporter-latest-linux-amd64.sha256
+          grep test-reporter-latest-linux-amd64 test-reporter-latest-linux-amd64.sha256 | shasum -a 256 -c -
+          mv test-reporter-latest-linux-amd64 test-reporter
+          chmod +x ./test-reporter
+          ./test-reporter format-coverage -t lcov -o coverage/codeclimate.json coverage/lcov.info
+          ./test-reporter upload-coverage
         env:
           CC_TEST_REPORTER_ID: ${{ secrets.CC_TEST_REPORTER_ID }}
   e2e:
