@@ -20,6 +20,12 @@ import { expect, test } from './fixtures';
 //  - No external requests
 
 test('newtab page', async ({ page, extensionId }) => {
+  await page.addInitScript(() => {
+    const style = document.createElement('style');
+    style.textContent = "body { font-family: 'Noto Sans', Arial, sans-serif !important; }";
+    document.head.appendChild(style);
+  });
+
   await page.goto(`chrome-extension://${extensionId}/newtab.html`);
 
   await expect(page).toHaveTitle('New Tab');
@@ -50,17 +56,20 @@ test('newtab page', async ({ page, extensionId }) => {
 
   // TODO: More and better assertions.
 
-  // console.log('Body font family:', getComputedStyle(document.body).fontFamily);
+  // FIXME: Remove!!!!!!!
   const fontFamily = await page.evaluate(() => getComputedStyle(document.body).fontFamily);
   console.log('Body font family:', fontFamily);
 });
 
 test('matches screenshot', async ({ page, extensionId }) => {
-  await page.goto(`chrome-extension://${extensionId}/newtab.html`);
-  // await expect(page).toHaveScreenshot('newtab-default.png', { fullPage: true });
-  await expect(page).toHaveScreenshot('newtab-default.png', {
-    stylePath: ['test/e2e/screenshot.css'],
+  await page.addInitScript(() => {
+    const style = document.createElement('style');
+    style.textContent = "body { font-family: 'Noto Sans', Arial, sans-serif !important; }";
+    document.head.appendChild(style);
   });
+
+  await page.goto(`chrome-extension://${extensionId}/newtab.html`);
+  await expect(page).toHaveScreenshot('newtab-default.png', { fullPage: true });
 });
 
 test('has no console calls or unhandled errors', async ({ page, extensionId }) => {
