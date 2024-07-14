@@ -54,7 +54,7 @@ test('newtab page', async ({ page, extensionId }) => {
 test.use({ bypassCSP: true });
 
 test('matches screenshot', async ({ page, extensionId }) => {
-  // page.on('console', (msg) => console.log('PAGE LOG:', msg.text()));
+  page.on('console', (msg) => console.log('PAGE LOG:', msg.text()));
   // page.on('pageerror', (err) => console.error('PAGE ERROR:', err));
   // page.on('crash', (err) => console.error('CRASH:', err));
   // page.on('request', (req) => console.log('REQUEST:', req.url()));
@@ -75,7 +75,7 @@ test('matches screenshot', async ({ page, extensionId }) => {
   await expect(page).toHaveScreenshot('newtab-default.png');
 });
 
-test.use({ bypassCSP: false });
+// test.use({ bypassCSP: false });
 
 test('has no console calls or unhandled errors', async ({ page, extensionId }) => {
   const unhandledErrors: Error[] = [];
