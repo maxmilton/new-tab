@@ -136,3 +136,26 @@ export function reduce(elements: Element[]): Record<string, string> {
 
   return decls;
 }
+
+export function isHexColor(color: string): boolean {
+  return /^#[\da-f]{6,8}$/i.test(color);
+}
+
+export function hexToRgb(hex: string): [r: number, g: number, b: number] {
+  const int = Number.parseInt(hex.slice(1, 7), 16);
+  // eslint-disable-next-line no-bitwise
+  return [(int >> 16) & 255, (int >> 8) & 255, int & 255];
+}
+
+export function linearize(color: number): number {
+  const v = color / 255; // normalize
+  return v <= 0.039_28 ? v / 12.92 : ((v + 0.055) / 1.055) ** 2.4; // gamma correction
+}
+
+export function luminance([r, g, b]: [number, number, number]): number {
+  return linearize(r) * 0.2126 + linearize(g) * 0.7152 + linearize(b) * 0.0722;
+}
+
+export function isLightOrDark(hexColor: string): 'light' | 'dark' {
+  return luminance(hexToRgb(hexColor)) > 0.179 ? 'light' : 'dark';
+}

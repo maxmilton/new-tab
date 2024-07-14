@@ -28,9 +28,9 @@ describe('render (no call)', () => {
     expect(render).toBeInstanceOf(Function);
   });
 
-  test('takes a single argument', () => {
+  test('expects 1 parameter', () => {
     expect.assertions(1);
-    expect(render).toHaveLength(1);
+    expect(render).toHaveParameters(1, 0);
   });
 });
 
@@ -84,8 +84,13 @@ describe('render', () => {
       expect.assertions(2);
       const rendered = render(document.createElement('div'));
       expect(rendered).toHaveProperty('unmount');
-      // eslint-disable-next-line @typescript-eslint/unbound-method
       expect(rendered.unmount).toBeInstanceOf(Function);
+    });
+
+    test('expects no parameters', () => {
+      expect.assertions(1);
+      const rendered = render(document.createElement('div'));
+      expect(rendered.unmount).toHaveParameters(0, 0);
     });
 
     test('removes supplied element from container', () => {
@@ -103,8 +108,13 @@ describe('render', () => {
       expect.assertions(2);
       const rendered = render(document.createElement('div'));
       expect(rendered).toHaveProperty('debug');
-      // eslint-disable-next-line @typescript-eslint/unbound-method
       expect(rendered.debug).toBeInstanceOf(Function);
+    });
+
+    test('expects 1 optional parameter', () => {
+      expect.assertions(1);
+      const rendered = render(document.createElement('div'));
+      expect(rendered.debug).toHaveParameters(0, 1);
     });
 
     test('prints to $console', () => {
@@ -157,9 +167,9 @@ describe('cleanup', () => {
     expect(cleanup).toBeInstanceOf(Function);
   });
 
-  test('takes no arguments', () => {
+  test('expects no parameters', () => {
     expect.assertions(1);
-    expect(cleanup).toHaveLength(0);
+    expect(cleanup).toHaveParameters(0, 0);
   });
 
   test('throws when there are no rendered components', () => {
@@ -208,9 +218,9 @@ describe('performanceSpy', () => {
     expect(performanceSpy).toBeInstanceOf(Function);
   });
 
-  test('takes no arguments', () => {
+  test('expects no parameters', () => {
     expect.assertions(1);
-    expect(performanceSpy).toHaveLength(0);
+    expect(performanceSpy).toHaveParameters(0, 0);
   });
 
   test('returns a function', () => {
@@ -220,10 +230,10 @@ describe('performanceSpy', () => {
     check();
   });
 
-  test('returned function takes no arguments', () => {
+  test('returned function expects no parameters', () => {
     expect.hasAssertions(); // variable number of assertions
     const check = performanceSpy();
-    expect(check).toHaveLength(0);
+    expect(check).toHaveParameters(0, 0);
     check();
   });
 

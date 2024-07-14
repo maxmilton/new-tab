@@ -5,7 +5,12 @@ import {
   RULESET,
   cleanElement,
   compile,
+  hexToRgb,
+  isHexColor,
+  isLightOrDark,
+  linearize,
   lookup,
+  luminance,
   reduce,
   walk,
 } from './css-engine';
@@ -54,9 +59,9 @@ describe('lookup', () => {
     expect(lookup).toBeInstanceOf(Function);
   });
 
-  test('takes 2 arguments', () => {
+  test('expects 2 parameters', () => {
     expect.assertions(1);
-    expect(lookup).toHaveLength(2);
+    expect(lookup).toHaveParameters(2, 0);
   });
 
   test('returns an array when has matching elements', () => {
@@ -110,9 +115,9 @@ describe('walk', () => {
     expect(walk).toBeInstanceOf(Function);
   });
 
-  test('takes 2 arguments', () => {
+  test('expects 2 parameters', () => {
     expect.assertions(1);
-    expect(walk).toHaveLength(2);
+    expect(walk).toHaveParameters(2, 0);
   });
 
   test('has no return value', () => {
@@ -145,9 +150,9 @@ describe('reduce', () => {
     expect(reduce).toBeInstanceOf(Function);
   });
 
-  test('takes a single argument', () => {
+  test('expects 1 parameter', () => {
     expect.assertions(1);
-    expect(reduce).toHaveLength(1);
+    expect(reduce).toHaveParameters(1, 0);
   });
 
   test('returns an object', () => {
@@ -180,9 +185,9 @@ describe('cleanElement', () => {
     expect(cleanElement).toBeInstanceOf(Function);
   });
 
-  test('takes a single argument', () => {
+  test('expects 1 parameter', () => {
     expect.assertions(1);
-    expect(cleanElement).toHaveLength(1);
+    expect(cleanElement).toHaveParameters(1, 0);
   });
 
   test('returns an object', () => {
@@ -218,5 +223,134 @@ describe('cleanElement', () => {
     expect(element).toHaveProperty('children', 'red');
     expect(element.children).toBeString();
     expect(cleaned).toHaveProperty('children', element.children);
+  });
+});
+
+const hexColors = [
+  '#ffffff',
+  '#ffffffff',
+  '#000000',
+  '#00000000',
+  '#ff000000',
+  '#ff0000',
+  '#00ff00',
+  '#0000ff',
+  '#000000ff',
+  '#ff00ff',
+  '#00ffff',
+  '#ffff00',
+  '#abcdef',
+];
+const notHexColors = [
+  '@000000',
+  '000000',
+  '00000',
+  '0000',
+  '000',
+  '00',
+  '0',
+  '',
+  ' ',
+  'abcdef',
+  'null',
+];
+
+describe('isHexColor', () => {
+  test('is a function', () => {
+    expect.assertions(1);
+    expect(isHexColor).toBeInstanceOf(Function);
+  });
+
+  test('expects 1 parameter', () => {
+    expect.assertions(1);
+    expect(isHexColor).toHaveParameters(1, 0);
+  });
+
+  test('returns a boolean', () => {
+    expect.assertions(1);
+    expect(isHexColor('#ffffff')).toBeBoolean();
+  });
+
+  test.each(hexColors)('returns true for %s', (value) => {
+    expect.assertions(1);
+    expect(isHexColor(value)).toBeTrue();
+  });
+
+  test.each(notHexColors)('returns false for %s', (value) => {
+    expect.assertions(1);
+    expect(isHexColor(value)).toBeFalse();
+  });
+});
+
+describe('hexToRgb', () => {
+  test('is a function', () => {
+    expect.assertions(1);
+    expect(hexToRgb).toBeInstanceOf(Function);
+  });
+
+  test('expects 1 parameter', () => {
+    expect.assertions(1);
+    expect(hexToRgb).toHaveParameters(1, 0);
+  });
+
+  test('returns an array', () => {
+    expect.assertions(1);
+    expect(hexToRgb('#ffffff')).toBeArrayOfSize(3);
+  });
+});
+
+describe('linearize', () => {
+  test('is a function', () => {
+    expect.assertions(1);
+    expect(linearize).toBeInstanceOf(Function);
+  });
+
+  test('expects 1 parameter', () => {
+    expect.assertions(1);
+    expect(linearize).toHaveParameters(1, 0);
+  });
+
+  test('returns a number', () => {
+    expect.assertions(1);
+    expect(linearize(0)).toBeNumber();
+  });
+});
+
+describe('luminance', () => {
+  test('is a function', () => {
+    expect.assertions(1);
+    expect(luminance).toBeInstanceOf(Function);
+  });
+
+  test('expects 1 parameter', () => {
+    expect.assertions(1);
+    expect(luminance).toHaveParameters(1, 0);
+  });
+
+  test('returns a number', () => {
+    expect.assertions(1);
+    expect(luminance([0, 0, 0])).toBeNumber();
+  });
+});
+
+describe('isLightOrDark', () => {
+  test('is a function', () => {
+    expect.assertions(1);
+    expect(isLightOrDark).toBeInstanceOf(Function);
+  });
+
+  test('expects 1 parameter', () => {
+    expect.assertions(1);
+    expect(isLightOrDark).toHaveParameters(1, 0);
+  });
+
+  test('returns string "light" for #ffffff', () => {
+    expect.assertions(1);
+    expect(isLightOrDark('#ffffff')).toBe('light');
+  });
+
+  test('returns string "dark" for #000000', () => {
+    expect.assertions(1);
+    expect(isLightOrDark('#000000')).toBe('dark');
   });
 });

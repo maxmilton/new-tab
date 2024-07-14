@@ -53,9 +53,9 @@ describe('handleClick', () => {
     expect(handleClick).toBeInstanceOf(Function);
   });
 
-  test('takes 1 argument', () => {
+  test('expects 1 parameter', () => {
     expect.assertions(1);
-    expect(handleClick).toHaveLength(1);
+    expect(handleClick).toHaveParameters(1, 0);
   });
 
   test('has no return value by default', () => {

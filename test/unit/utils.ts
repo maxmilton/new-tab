@@ -1,3 +1,5 @@
+/* eslint "@typescript-eslint/no-invalid-void-type": "warn" */
+
 import { type Mock, expect, spyOn } from 'bun:test';
 
 export interface RenderResult {
@@ -10,8 +12,8 @@ export interface RenderResult {
    *
    * @param element - An element to inspect. Default is the mounted container.
    */
-  debug(element?: Element): void;
-  unmount(): void;
+  debug(this: void, element?: Element): void;
+  unmount(this: void): void;
 }
 
 const mountedContainers = new Set<HTMLDivElement>();
@@ -101,8 +103,10 @@ export function performanceSpy(): () => void {
     for (const spy of spies) {
       if (spy.getMockName() === 'now') {
         // HACK: Workaround for happy-dom calling performance.now internally.
+        // biome-ignore lint/nursery/noMisplacedAssertion: only used within tests
         expect(spy).toHaveBeenCalledTimes(happydomInternalNowCalls);
       } else {
+        // biome-ignore lint/nursery/noMisplacedAssertion: only used within tests
         expect(spy).not.toHaveBeenCalled();
       }
       spy.mockRestore();

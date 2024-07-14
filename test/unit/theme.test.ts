@@ -4,7 +4,16 @@ import { afterEach, describe, expect, test } from 'bun:test';
 import themes from '../../dist/themes.json';
 import type { UserStorageData } from '../../src/types';
 import { reset } from '../setup';
-import { DECLARATION, type Element, RULESET, SKIP, compile, walk } from './css-engine';
+import {
+  DECLARATION,
+  type Element,
+  RULESET,
+  SKIP,
+  compile,
+  isHexColor,
+  isLightOrDark,
+  walk,
+} from './css-engine';
 
 const themeNames = [
   'auto',
@@ -26,29 +35,6 @@ const cssVariables = [
   '--c2', // bookmarks bar, menu dropdown, "load more" button
   '--c3', // icons, empty folder text, text fallback (headings, etc.)
 ] as const;
-
-function isHexColor(color: string): boolean {
-  return /^#[\da-f]{6,8}$/i.test(color);
-}
-
-function hexToRgb(hex: string): [r: number, g: number, b: number] {
-  const int = Number.parseInt(hex.slice(1, 7), 16);
-  // eslint-disable-next-line no-bitwise
-  return [(int >> 16) & 255, (int >> 8) & 255, int & 255];
-}
-
-function linearize(color: number): number {
-  const v = color / 255; // normalize
-  return v <= 0.039_28 ? v / 12.92 : ((v + 0.055) / 1.055) ** 2.4; // gamma correction
-}
-
-function luminance([r, g, b]: [number, number, number]): number {
-  return linearize(r) * 0.2126 + linearize(g) * 0.7152 + linearize(b) * 0.0722;
-}
-
-function isLightOrDark(hexColor: string): 'light' | 'dark' {
-  return luminance(hexToRgb(hexColor)) > 0.179 ? 'light' : 'dark';
-}
 
 describe('themes.json', () => {
   test('is valid JSON', () => {
