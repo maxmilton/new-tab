@@ -49,11 +49,18 @@ test('newtab page', async ({ page, extensionId }) => {
   // await expect(menuDropdown).not.toBeVisible();
 
   // TODO: More and better assertions.
+
+  // console.log('Body font family:', getComputedStyle(document.body).fontFamily);
+  const fontFamily = await page.evaluate(() => getComputedStyle(document.body).fontFamily);
+  console.log('Body font family:', fontFamily);
 });
 
 test('matches screenshot', async ({ page, extensionId }) => {
   await page.goto(`chrome-extension://${extensionId}/newtab.html`);
-  await expect(page).toHaveScreenshot('newtab-default.png', { fullPage: true });
+  // await expect(page).toHaveScreenshot('newtab-default.png', { fullPage: true });
+  await expect(page).toHaveScreenshot('newtab-default.png', {
+    stylePath: ['test/e2e/screenshot.css'],
+  });
 });
 
 test('has no console calls or unhandled errors', async ({ page, extensionId }) => {
@@ -64,10 +71,4 @@ test('has no console calls or unhandled errors', async ({ page, extensionId }) =
   await page.goto(`chrome-extension://${extensionId}/newtab.html`);
   expect(unhandledErrors).toHaveLength(0);
   expect(consoleMessages).toHaveLength(0);
-});
-
-test('DEBUG', async ({ page, extensionId }) => {
-  await page.goto(`chrome-extension://${extensionId}/newtab.html`);
-  const fontFamily = await page.evaluate(() => getComputedStyle(document.body).fontFamily);
-  console.log('font-family:', fontFamily);
 });

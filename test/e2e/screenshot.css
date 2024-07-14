@@ -1,0 +1,12 @@
+/* font-family: Cantarell, Arial, sans-serif !important; */
+body {
+  color: blue !important;
+  font-family: 'Noto Sans', Arial, sans-serif !important;
+  background: red !important;
+}
+
+*,
+*::before,
+*::after {
+  border: 1px solid green !important;
+}

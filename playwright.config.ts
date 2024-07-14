@@ -10,4 +10,9 @@ export default defineConfig({
     offline: true, // the extension must work 100% offline
     timezoneId: 'UTC',
   },
+  expect: {
+    toHaveScreenshot: {
+      stylePath: 'test/e2e/screenshot.css',
+    },
+  },
 });
