@@ -103,6 +103,8 @@ declare module 'bun:test' {
   interface Matchers {
     /** Asserts that a value is a plain `object`. */
     toBePlainObject(): void;
+    /** Asserts that a value is a `class`. */
+    toBeClass(): void;
     /** Asserts that a function has a specific number of parameters. */
     toHaveParameters(required: number, optional: number): void;
   }
@@ -116,6 +118,16 @@ expect.extend({
       : {
           pass: false,
           message: () => `expected ${String(received)} to be a plain object`,
+        };
+  },
+
+  toBeClass(received: unknown) {
+    return typeof received === 'function' &&
+      /^class\s/.test(Function.prototype.toString.call(received))
+      ? { pass: true }
+      : {
+          pass: false,
+          message: () => `expected ${String(received)} to be a class`,
         };
   },
 
