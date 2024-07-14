@@ -111,8 +111,8 @@ export default tseslint.config(
       '*.config.mjs',
       '*.config.ts',
       '*.d.ts',
-      '*.spec.ts',
-      '*.test.ts',
+      '**/*.spec.ts',
+      '**/*.test.ts',
       'build.ts',
       'test/**',
     ],
@@ -121,6 +121,6 @@ export default tseslint.config(
     },
   },
   {
-    ignores: ['*.bak', 'dist/**'],
+    ignores: ['**/*.bak', 'dist/**'],
   },
 );

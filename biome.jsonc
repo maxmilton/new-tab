@@ -60,7 +60,7 @@
   },
   "overrides": [
     {
-      "include": [".vscode/**", "tsconfig.json", "tsconfig.node.json"],
+      "include": [".vscode/*.json", "tsconfig*.json"],
       "json": {
         "parser": {
           "allowComments": true,
@@ -69,7 +69,7 @@
       }
     },
     {
-      "include": ["**/*.spec.ts", "**/*.test.ts", "test/**/*.ts"],
+      "include": ["**/*.spec.ts", "**/*.test.ts", "test/**"],
       "formatter": {
         "lineWidth": 100
       }
