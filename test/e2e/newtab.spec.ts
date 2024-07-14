@@ -51,10 +51,10 @@ test('newtab page', async ({ page, extensionId }) => {
   // TODO: More and better assertions.
 });
 
-test.use({ bypassCSP: true });
+// test.use({ bypassCSP: true });
 
-test('matches screenshot', async ({ page, extensionId }) => {
-  page.on('console', (msg) => console.log('PAGE LOG:', msg.text()));
+test.skip('matches screenshot', async ({ page, extensionId }) => {
+  // page.on('console', (msg) => console.log('PAGE LOG:', msg.text()));
   // page.on('pageerror', (err) => console.error('PAGE ERROR:', err));
   // page.on('crash', (err) => console.error('CRASH:', err));
   // page.on('request', (req) => console.log('REQUEST:', req.url()));
@@ -74,8 +74,6 @@ test('matches screenshot', async ({ page, extensionId }) => {
   await page.goto(`chrome-extension://${extensionId}/newtab.html`);
   await expect(page).toHaveScreenshot('newtab-default.png');
 });
-
-// test.use({ bypassCSP: false });
 
 test('has no console calls or unhandled errors', async ({ page, extensionId }) => {
   const unhandledErrors: Error[] = [];

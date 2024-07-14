@@ -5,7 +5,7 @@ export default defineConfig({
   testMatch: 'test/e2e/**/*.spec.ts',
   snapshotPathTemplate: 'test/e2e/__snapshots__/{testFilePath}/{arg}{ext}',
   forbidOnly: !!process.env.CI,
-  retries: process.env.CI ? 2 : 0,
+  retries: process.env.CI ? 1 : 0,
   use: {
     acceptDownloads: false,
     contextOptions: { strictSelectors: true },
