@@ -17,10 +17,14 @@ test('settings page', async ({ page, extensionId }) => {
   await expect(labels[3]).toHaveText('Reset');
 });
 
-test.skip('matches screenshot', async ({ page, extensionId }) => {
+test.use({ bypassCSP: true });
+
+test('matches screenshot', async ({ page, extensionId }) => {
   await page.goto(`chrome-extension://${extensionId}/settings.html`);
   await expect(page).toHaveScreenshot('settings-default.png');
 });
+
+test.use({ bypassCSP: false });
 
 test('has no console calls or unhandled errors', async ({ page, extensionId }) => {
   const unhandledErrors: Error[] = [];
