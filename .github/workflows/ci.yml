@@ -36,8 +36,8 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 10
     steps:
-      - run: sudo apt-get install -y fonts-cantarell && sudo fc-cache -fv
-      - run: cp .github/workflows/fonts.conf ~/.config/fontconfig/fonts.conf
+      # - run: sudo apt-get install -y fonts-cantarell && sudo fc-cache -fv
+      # - run: cp .github/workflows/fonts.conf ~/.config/fontconfig/fonts.conf
       - uses: actions/checkout@v4
       - uses: oven-sh/setup-bun@v2
         with:
@@ -45,8 +45,8 @@ jobs:
       - run: bun install --frozen-lockfile
       - run: bun playwright install chromium
       - run: bun run build
-      # - run: bun run test:e2e --reporter=dot,html
-      - run: xvfb-run --auto-servernum -- bun run test:e2e --reporter=dot,html
+      - run: bun run test:e2e --reporter=github,dot,html
+      # - run: xvfb-run --auto-servernum -- bun run test:e2e --reporter=dot,html
       - uses: actions/upload-artifact@v4
         if: always()
         with:
