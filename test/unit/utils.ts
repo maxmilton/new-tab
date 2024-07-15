@@ -83,8 +83,8 @@ export function performanceSpy(): () => void {
   let happydomInternalNowCalls = 0;
 
   function now() {
-    // eslint-disable-next-line unicorn/error-message
-    const callerLocation = new Error().stack!.split('\n')[3];
+    // biome-ignore lint/nursery/useErrorMessage: only used to get stack
+    const callerLocation = new Error().stack!.split('\n')[3]; // eslint-disable-line unicorn/error-message
     if (callerLocation.includes('/node_modules/happy-dom/lib/')) {
       happydomInternalNowCalls++;
     }

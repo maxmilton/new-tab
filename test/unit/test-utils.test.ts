@@ -22,7 +22,7 @@ describe('exports', () => {
   });
 });
 
-describe('render (no call)', () => {
+describe('render <no call>', () => {
   test('is a function', () => {
     expect.assertions(2);
     expect(render).toBeFunction();
@@ -178,8 +178,9 @@ describe('cleanup', () => {
 
   test('throws when there are no rendered components', () => {
     expect.assertions(1);
-    // eslint-disable-next-line @typescript-eslint/no-confusing-void-expression
-    expect(() => cleanup()).toThrow();
+    expect(() => {
+      cleanup();
+    }).toThrow();
   });
 
   test('removes mounted container from document body', () => {

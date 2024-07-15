@@ -4,6 +4,8 @@
 
 import { DECLARATION, type Element, LAYER, MEDIA, RULESET, SCOPE, SUPPORTS, compile } from 'stylis';
 
+// biome-ignore lint/performance/noBarrelFile: prefer nice DX in tests
+// biome-ignore lint/performance/noReExportAll: prefer nice DX in tests
 export * from 'stylis';
 
 export const CONTAINER = '@container';
