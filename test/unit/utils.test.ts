@@ -120,9 +120,9 @@ describe('handleClick', () => {
   //   const event = new window.MouseEvent('click');
   //   // @ts-expect-error - happy-dom internal target property
   //   event[target] = { href: 'chrome://about' };
-  //   expect(event.defaultPrevented).toBe(false);
+  //   expect(event.defaultPrevented).toBeFalse();
   //   handleClick(event);
-  //   expect(event.defaultPrevented).toBe(true);
+  //   expect(event.defaultPrevented).toBeTrue();
   // });
 
   test('default not prevented on event when url starts with "h"', () => {
@@ -130,9 +130,9 @@ describe('handleClick', () => {
     const event = new window.MouseEvent('click');
     // @ts-expect-error - happy-dom internal target property
     event[target] = { href: 'https://example.com' };
-    expect(event.defaultPrevented).toBe(false);
+    expect(event.defaultPrevented).toBeFalse();
     handleClick(event);
-    expect(event.defaultPrevented).toBe(false);
+    expect(event.defaultPrevented).toBeFalse();
   });
 
   // returning false on click events is similar to event.preventDefault()
@@ -142,7 +142,7 @@ describe('handleClick', () => {
     // @ts-expect-error - happy-dom internal target property
     event[target] = { href: 'chrome://about' };
     const result = handleClick(event);
-    expect(result).toBe(false);
+    expect(result).toBeFalse();
   });
 
   test('handler does not return false when url starts with "h"', () => {
@@ -151,7 +151,7 @@ describe('handleClick', () => {
     // @ts-expect-error - happy-dom internal target property
     event[target] = { href: 'https://example.com' };
     const result = handleClick(event);
-    expect(result).not.toBe(false);
+    expect(result).not.toBeFalse();
   });
 
   // TODO: If we add links with target="_blank" then don't skip this test.
