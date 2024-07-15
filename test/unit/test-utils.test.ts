@@ -24,8 +24,9 @@ describe('exports', () => {
 
 describe('render (no call)', () => {
   test('is a function', () => {
-    expect.assertions(1);
-    expect(render).toBeInstanceOf(Function);
+    expect.assertions(2);
+    expect(render).toBeFunction();
+    expect(render).not.toBeClass();
   });
 
   test('expects 1 parameter', () => {
@@ -81,10 +82,11 @@ describe('render', () => {
 
   describe('unmount method', () => {
     test('is a function', () => {
-      expect.assertions(2);
+      expect.assertions(3);
       const rendered = render(document.createElement('div'));
       expect(rendered).toHaveProperty('unmount');
-      expect(rendered.unmount).toBeInstanceOf(Function);
+      expect(rendered.unmount).toBeFunction();
+      expect(rendered.unmount).not.toBeClass();
     });
 
     test('expects no parameters', () => {
@@ -105,10 +107,11 @@ describe('render', () => {
 
   describe('debug method', () => {
     test('is a function', () => {
-      expect.assertions(2);
+      expect.assertions(3);
       const rendered = render(document.createElement('div'));
       expect(rendered).toHaveProperty('debug');
-      expect(rendered.debug).toBeInstanceOf(Function);
+      expect(rendered.debug).toBeFunction();
+      expect(rendered.debug).not.toBeClass();
     });
 
     test('expects 1 optional parameter', () => {
@@ -163,8 +166,9 @@ describe('render', () => {
 
 describe('cleanup', () => {
   test('is a function', () => {
-    expect.assertions(1);
-    expect(cleanup).toBeInstanceOf(Function);
+    expect.assertions(2);
+    expect(cleanup).toBeFunction();
+    expect(cleanup).not.toBeClass();
   });
 
   test('expects no parameters', () => {
@@ -174,6 +178,7 @@ describe('cleanup', () => {
 
   test('throws when there are no rendered components', () => {
     expect.assertions(1);
+    // eslint-disable-next-line @typescript-eslint/no-confusing-void-expression
     expect(() => cleanup()).toThrow();
   });
 
@@ -214,8 +219,9 @@ describe('cleanup', () => {
 
 describe('performanceSpy', () => {
   test('is a function', () => {
-    expect.assertions(1);
-    expect(performanceSpy).toBeInstanceOf(Function);
+    expect.assertions(2);
+    expect(performanceSpy).toBeFunction();
+    expect(performanceSpy).not.toBeClass();
   });
 
   test('expects no parameters', () => {
@@ -226,7 +232,8 @@ describe('performanceSpy', () => {
   test('returns a function', () => {
     expect.hasAssertions(); // variable number of assertions
     const check = performanceSpy();
-    expect(check).toBeInstanceOf(Function);
+    expect(check).toBeFunction();
+    expect(check).not.toBeClass();
     check();
   });
 

@@ -55,8 +55,9 @@ const ast = compile(css);
 
 describe('lookup', () => {
   test('is a function', () => {
-    expect.assertions(1);
-    expect(lookup).toBeInstanceOf(Function);
+    expect.assertions(2);
+    expect(lookup).toBeFunction();
+    expect(lookup).not.toBeClass();
   });
 
   test('expects 2 parameters', () => {
@@ -111,8 +112,9 @@ describe('lookup', () => {
 
 describe('walk', () => {
   test('is a function', () => {
-    expect.assertions(1);
-    expect(walk).toBeInstanceOf(Function);
+    expect.assertions(2);
+    expect(walk).toBeFunction();
+    expect(walk).not.toBeClass();
   });
 
   test('expects 2 parameters', () => {
@@ -122,6 +124,7 @@ describe('walk', () => {
 
   test('has no return value', () => {
     expect.assertions(1);
+    // eslint-disable-next-line @typescript-eslint/no-confusing-void-expression
     expect(walk(ast, () => {})).toBeUndefined();
   });
 
@@ -146,8 +149,9 @@ describe('walk', () => {
 
 describe('reduce', () => {
   test('is a function', () => {
-    expect.assertions(1);
-    expect(reduce).toBeInstanceOf(Function);
+    expect.assertions(2);
+    expect(reduce).toBeFunction();
+    expect(reduce).not.toBeClass();
   });
 
   test('expects 1 parameter', () => {
@@ -161,11 +165,12 @@ describe('reduce', () => {
     expect(reduced).toBePlainObject();
   });
 
-  test('throws when passed undefined', () => {
-    expect.assertions(1);
+  test('throws when passed null or undefined', () => {
+    expect.assertions(2);
     // @ts-expect-error - intentionally passing wrong type
-    // eslint-disable-next-line unicorn/no-useless-undefined
-    expect(() => reduce(undefined)).toThrow();
+    expect(() => reduce(null)).toThrow();
+    // @ts-expect-error - intentionally passing wrong type
+    expect(() => reduce()).toThrow();
   });
 
   test('merges all elements, overriding earlier values', () => {
@@ -181,8 +186,9 @@ describe('reduce', () => {
 
 describe('cleanElement', () => {
   test('is a function', () => {
-    expect.assertions(1);
-    expect(cleanElement).toBeInstanceOf(Function);
+    expect.assertions(2);
+    expect(cleanElement).toBeFunction();
+    expect(cleanElement).not.toBeClass();
   });
 
   test('expects 1 parameter', () => {
@@ -257,8 +263,9 @@ const notHexColors = [
 
 describe('isHexColor', () => {
   test('is a function', () => {
-    expect.assertions(1);
-    expect(isHexColor).toBeInstanceOf(Function);
+    expect.assertions(2);
+    expect(isHexColor).toBeFunction();
+    expect(isHexColor).not.toBeClass();
   });
 
   test('expects 1 parameter', () => {
@@ -284,8 +291,9 @@ describe('isHexColor', () => {
 
 describe('hexToRgb', () => {
   test('is a function', () => {
-    expect.assertions(1);
-    expect(hexToRgb).toBeInstanceOf(Function);
+    expect.assertions(2);
+    expect(hexToRgb).toBeFunction();
+    expect(hexToRgb).not.toBeClass();
   });
 
   test('expects 1 parameter', () => {
@@ -301,8 +309,9 @@ describe('hexToRgb', () => {
 
 describe('linearize', () => {
   test('is a function', () => {
-    expect.assertions(1);
-    expect(linearize).toBeInstanceOf(Function);
+    expect.assertions(2);
+    expect(linearize).toBeFunction();
+    expect(linearize).not.toBeClass();
   });
 
   test('expects 1 parameter', () => {
@@ -318,8 +327,9 @@ describe('linearize', () => {
 
 describe('luminance', () => {
   test('is a function', () => {
-    expect.assertions(1);
-    expect(luminance).toBeInstanceOf(Function);
+    expect.assertions(2);
+    expect(luminance).toBeFunction();
+    expect(luminance).not.toBeClass();
   });
 
   test('expects 1 parameter', () => {
@@ -335,8 +345,9 @@ describe('luminance', () => {
 
 describe('isLightOrDark', () => {
   test('is a function', () => {
-    expect.assertions(1);
-    expect(isLightOrDark).toBeInstanceOf(Function);
+    expect.assertions(2);
+    expect(isLightOrDark).toBeFunction();
+    expect(isLightOrDark).not.toBeClass();
   });
 
   test('expects 1 parameter', () => {

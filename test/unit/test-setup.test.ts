@@ -1,4 +1,4 @@
-/* eslint-disable @typescript-eslint/no-unused-vars, no-console, unicorn/consistent-function-scoping */
+/* eslint-disable @typescript-eslint/no-unused-vars, max-classes-per-file, no-console, unicorn/consistent-function-scoping */
 
 import { describe, expect, spyOn, test } from 'bun:test';
 import { VirtualConsole } from 'happy-dom';
@@ -33,8 +33,7 @@ describe('matcher: toBePlainObject', () => {
     // eslint-disable-next-line no-new-object
     new Object(),
   ];
-
-  const nonPlainObjects = [
+  const notPlainObjects = [
     null,
     // eslint-disable-next-line unicorn/no-new-array
     new Array(1),
@@ -47,8 +46,8 @@ describe('matcher: toBePlainObject', () => {
     Object,
     /(?:)/,
     new Date(),
-    // eslint-disable-next-line unicorn/error-message
-    new Error(),
+    // biome-ignore lint/nursery/useErrorMessage: simple test case
+    new Error(), // eslint-disable-line unicorn/error-message
     new Map(),
     new Set(),
     new WeakMap(),
@@ -56,8 +55,7 @@ describe('matcher: toBePlainObject', () => {
     new Promise(() => {}),
     new Int8Array(),
   ];
-
-  const nonObjects = [
+  const notObjects = [
     'Hello',
     123,
     true,
@@ -76,32 +74,193 @@ describe('matcher: toBePlainObject', () => {
     expect(item).toBePlainObject();
   });
 
-  test.each(nonPlainObjects)('does not match non-plain object %#', (item) => {
+  test.each(notPlainObjects)('does not match non-plain object %#', (item) => {
     expect.assertions(1);
     expect(item).not.toBePlainObject();
   });
 
-  test.each(nonObjects)('does not match non-object %#', (item) => {
+  test.each(notObjects)('does not match non-object %#', (item) => {
     expect.assertions(1);
     expect(item).not.toBePlainObject();
   });
 });
 
+describe('matcher: toBeClass', () => {
+  // eslint-disable-next-line @typescript-eslint/no-extraneous-class
+  class Foo {}
+  const classes = [
+    Foo,
+    class Bar extends Foo {},
+    // eslint-disable-next-line @typescript-eslint/no-extraneous-class
+    class {},
+    class extends Foo {},
+    Foo.prototype.constructor,
+  ];
+  const notClasses = [
+    'Hello',
+    123,
+    true,
+    false,
+    undefined,
+    Symbol('sym'),
+    BigInt(1234),
+    // biome-ignore lint/style/useNumberNamespace: for tests
+    NaN, // eslint-disable-line unicorn/prefer-number-properties
+    // biome-ignore lint/style/useNumberNamespace: for tests
+    Infinity,
+    {},
+    { foo: 'bar' },
+    Object.create(null),
+    Object.create({}),
+    // eslint-disable-next-line no-new-object
+    new Object(),
+    null,
+    // eslint-disable-next-line unicorn/no-new-array
+    new Array(1),
+    [[{}]], // double array due to quirk of bun test; resolves to [{}]
+    [[null]], // double array due to quirk of bun test; resolves to [null]
+    function foo() {},
+    () => {},
+    // eslint-disable-next-line @typescript-eslint/no-implied-eval
+    new Function(),
+    Function,
+    Object,
+    /(?:)/,
+    new Date(),
+    // biome-ignore lint/nursery/useErrorMessage: simple test case
+    new Error(), // eslint-disable-line unicorn/error-message
+    new Map(),
+    new Set(),
+    new WeakMap(),
+    new WeakSet(),
+    new Promise(() => {}),
+    new Int8Array(),
+
+    // XXX: These are built-in classes but accessing directly calls their
+    // constructor, so they behave like functions.
+    Function,
+    Object,
+    Array,
+    String,
+    Number,
+    Boolean,
+    Symbol,
+    BigInt,
+    Buffer,
+  ];
+
+  test.each(classes)('matches class %#: %p', (item) => {
+    expect.assertions(1);
+    expect(item).toBeClass();
+  });
+
+  test.each(notClasses)('does not match non-class %#: %p', (item) => {
+    expect.assertions(1);
+    expect(item).not.toBeClass();
+  });
+});
+
 describe('matcher: toHaveParameters', () => {
-  const funcs: [func: unknown, required: number, optional: number][] = [
-    [() => {}, 0, 0],
-    [(_a: unknown) => {}, 1, 0],
-    [(_a = 1) => {}, 0, 1],
-    [(_a: unknown, _b: unknown) => {}, 2, 0],
-    [(_a: unknown, _b = 1) => {}, 1, 1],
-    [(_a = 1, _b = 2) => {}, 0, 2],
+  const funcs: [required: number, optional: number, func: unknown][] = [
+    [0, 0, function foo() {}],
+    [1, 0, function foo(_a: unknown) {}],
+    [0, 1, function foo(_a = 1) {}],
+    [2, 0, function foo(_a: unknown, _b: unknown) {}],
+    [1, 1, function foo(_a: unknown, _b = 1) {}],
+    [0, 2, function foo(_a = 1, _b = 2) {}],
+    [0, 3, function foo(_a = 1, _b = 2, ..._rest: unknown[]) {}],
+    // biome-ignore lint/complexity/useArrowFunction: explicit test case
+    [0, 0, function () {}], // eslint-disable-line func-names
+    // biome-ignore lint/complexity/useArrowFunction: explicit test case
+    [1, 0, function (_a: unknown) {}], // eslint-disable-line func-names
+    // biome-ignore lint/complexity/useArrowFunction: explicit test case
+    [0, 1, function (_a = 1) {}], // eslint-disable-line func-names
+    // biome-ignore lint/complexity/useArrowFunction: explicit test case
+    [2, 0, function (_a: unknown, _b: unknown) {}], // eslint-disable-line func-names
+    // biome-ignore lint/complexity/useArrowFunction: explicit test case
+    [1, 1, function (_a: unknown, _b = 1) {}], // eslint-disable-line func-names
+    // biome-ignore lint/complexity/useArrowFunction: explicit test case
+    [0, 2, function (_a = 1, _b = 2) {}], // eslint-disable-line func-names
+    // biome-ignore lint/complexity/useArrowFunction: explicit test case
+    [0, 3, function (_a = 1, _b = 2, ..._rest: unknown[]) {}], // eslint-disable-line func-names
+    [0, 0, () => {}],
+    [1, 0, (_a: unknown) => {}],
+    [0, 1, (_a = 1) => {}],
+    [2, 0, (_a: unknown, _b: unknown) => {}],
+    [1, 1, (_a: unknown, _b = 1) => {}],
+    [0, 2, (_a = 1, _b = 2) => {}],
+    [0, 3, (_a = 1, _b = 2, ..._rest: unknown[]) => {}],
+    // eslint-disable-next-line @typescript-eslint/no-empty-function
+    [0, 0, function* foo() {}],
+    // eslint-disable-next-line @typescript-eslint/no-empty-function
+    [1, 0, function* foo(_a: unknown) {}],
+    // eslint-disable-next-line @typescript-eslint/no-empty-function
+    [0, 1, function* foo(_a = 1) {}],
+    // eslint-disable-next-line @typescript-eslint/no-empty-function
+    [2, 0, function* foo(_a: unknown, _b: unknown) {}],
+    // eslint-disable-next-line @typescript-eslint/no-empty-function
+    [1, 1, function* foo(_a: unknown, _b = 1) {}],
+    // eslint-disable-next-line @typescript-eslint/no-empty-function
+    [0, 2, function* foo(_a = 1, _b = 2) {}],
+    // eslint-disable-next-line @typescript-eslint/no-empty-function
+    [0, 3, function* foo(_a = 1, _b = 2, ..._rest: unknown[]) {}],
+    // eslint-disable-next-line @typescript-eslint/no-empty-function
+    [0, 0, async function foo() {}],
+    // eslint-disable-next-line @typescript-eslint/no-empty-function
+    [1, 0, async function foo(_a: unknown) {}],
+    // eslint-disable-next-line @typescript-eslint/no-empty-function
+    [0, 1, async function foo(_a = 1) {}],
+    // eslint-disable-next-line @typescript-eslint/no-empty-function
+    [2, 0, async function foo(_a: unknown, _b: unknown) {}],
+    // eslint-disable-next-line @typescript-eslint/no-empty-function
+    [1, 1, async function foo(_a: unknown, _b = 1) {}],
+    // eslint-disable-next-line @typescript-eslint/no-empty-function
+    [0, 2, async function foo(_a = 1, _b = 2) {}],
+    // eslint-disable-next-line @typescript-eslint/no-empty-function
+    [0, 3, async function foo(_a = 1, _b = 2, ..._rest: unknown[]) {}],
+    // eslint-disable-next-line @typescript-eslint/no-empty-function, func-names
+    [0, 0, function* () {}],
+    // eslint-disable-next-line @typescript-eslint/no-empty-function, func-names
+    [1, 0, function* (_a: unknown) {}],
+    // eslint-disable-next-line @typescript-eslint/no-empty-function, func-names
+    [0, 1, function* (_a = 1) {}],
+    // eslint-disable-next-line @typescript-eslint/no-empty-function, func-names
+    [2, 0, function* (_a: unknown, _b: unknown) {}],
+    // eslint-disable-next-line @typescript-eslint/no-empty-function, func-names
+    [1, 1, function* (_a: unknown, _b = 1) {}],
+    // eslint-disable-next-line @typescript-eslint/no-empty-function, func-names
+    [0, 2, function* (_a = 1, _b = 2) {}],
+    // eslint-disable-next-line @typescript-eslint/no-empty-function, func-names
+    [0, 3, function* (_a = 1, _b = 2, ..._rest: unknown[]) {}],
+    // biome-ignore lint/complexity/useArrowFunction: explicit test case
+    [0, 0, async function () {}], // eslint-disable-line @typescript-eslint/no-empty-function, func-names
+    // biome-ignore lint/complexity/useArrowFunction: explicit test case
+    [1, 0, async function (_a: unknown) {}], // eslint-disable-line @typescript-eslint/no-empty-function, func-names
+    // biome-ignore lint/complexity/useArrowFunction: explicit test case
+    [0, 1, async function (_a = 1) {}], // eslint-disable-line @typescript-eslint/no-empty-function, func-names
+    // biome-ignore lint/complexity/useArrowFunction: explicit test case
+    [2, 0, async function (_a: unknown, _b: unknown) {}], // eslint-disable-line @typescript-eslint/no-empty-function, func-names
+    // biome-ignore lint/complexity/useArrowFunction: explicit test case
+    [1, 1, async function (_a: unknown, _b = 1) {}], // eslint-disable-line @typescript-eslint/no-empty-function, func-names
+    // biome-ignore lint/complexity/useArrowFunction: explicit test case
+    [0, 2, async function (_a = 1, _b = 2) {}], // eslint-disable-line @typescript-eslint/no-empty-function, func-names
+    // biome-ignore lint/complexity/useArrowFunction: explicit test case
+    [0, 3, async function (_a = 1, _b = 2, ..._rest: unknown[]) {}], // eslint-disable-line @typescript-eslint/no-empty-function, func-names
+    [0, 0, async () => {}],
+    [1, 0, async (_a: unknown) => {}],
+    [0, 1, async (_a = 1) => {}],
+    [2, 0, async (_a: unknown, _b: unknown) => {}],
+    [1, 1, async (_a: unknown, _b = 1) => {}],
+    [0, 2, async (_a = 1, _b = 2) => {}],
+    [0, 3, async (_a = 1, _b = 2, ..._rest: unknown[]) => {}],
   ];
 
   test.each(funcs)(
-    'matches function with %i required and %i optional parameters',
-    (func, required, optional) => {
-      expect.assertions(1);
+    'matches function %# with %i required and %i optional parameters',
+    (required, optional, func) => {
+      expect.assertions(2);
       expect(func).toHaveParameters(required, optional);
+      expect(func).toHaveLength(required);
     },
   );
 
@@ -214,8 +373,9 @@ describe('happy-dom', () => {
 
 describe('reset', () => {
   test('is a function', () => {
-    expect.assertions(1);
+    expect.assertions(2);
     expect(reset).toBeFunction();
+    expect(reset).not.toBeClass();
   });
 
   test('expects no parameters', () => {
@@ -274,15 +434,26 @@ describe('reset', () => {
 });
 
 describe('parameters', () => {
-  test('throws when passed non-function', () => {
-    expect.assertions(1);
-    expect(() => parameters(null)).toThrow(new TypeError('Expected a function'));
-  });
-
   describe('no parameters', () => {
-    test('simple', () => {
+    test('simple function', () => {
       expect.assertions(1);
       function foo() {}
+      expect(parameters(foo)).toBe(0);
+    });
+
+    test('generator function', () => {
+      expect.assertions(1);
+      function* foo() {
+        yield null;
+      }
+      expect(parameters(foo)).toBe(0);
+    });
+
+    test('async function', () => {
+      expect.assertions(1);
+      async function foo() {
+        await Promise.resolve();
+      }
       expect(parameters(foo)).toBe(0);
     });
 
@@ -291,12 +462,28 @@ describe('parameters', () => {
       const foo = () => {};
       expect(parameters(foo)).toBe(0);
     });
+
+    test('async arrow function', () => {
+      expect.assertions(1);
+      const foo = async () => {
+        await Promise.resolve();
+      };
+      expect(parameters(foo)).toBe(0);
+    });
   });
 
   describe('default parameters', () => {
-    test('simple', () => {
+    test('basic', () => {
       expect.assertions(1);
       function foo(_a = 1, _b = 2) {}
+      expect(parameters(foo)).toBe(2);
+    });
+
+    test('scoped variables', () => {
+      expect.assertions(1);
+      const x = 1;
+      const y = 2;
+      function foo(_a = x, _b = y) {}
       expect(parameters(foo)).toBe(2);
     });
 
@@ -598,9 +785,31 @@ describe('parameters', () => {
   describe('complex combinations', () => {
     test('case 1', () => {
       expect.assertions(1);
-      // eslint-disable-next-line unicorn/no-object-as-default-parameter
-      function foo(_a = { x: 1, y: 2 }, _b = [1, 2, 3], _c = () => {}) {}
-      expect(parameters(foo)).toBe(3);
+      const z = 3;
+      async function foo(
+        /* eslint-disable @typescript-eslint/default-param-last */
+        // biome-ignore lint/style/useDefaultParameterLast: explicit test case
+        _a = { x: 1, y: 2, z }, // eslint-disable-line unicorn/no-object-as-default-parameter
+        // biome-ignore lint/style/useDefaultParameterLast: explicit test case
+        _b = [1, 2, 3],
+        // biome-ignore lint/style/useDefaultParameterLast: explicit test case
+        _c = () => {},
+        // biome-ignore lint/style/useDefaultParameterLast: explicit test case
+        _d = Date.now(),
+        // biome-ignore lint/style/useDefaultParameterLast: explicit test case
+        _e = z,
+        // biome-ignore lint/style/useDefaultParameterLast: explicit test case
+        _f = z + 1 - (2 * 3) / 4,
+        // biome-ignore lint/style/useDefaultParameterLast: explicit test case
+        _g = Number.parseInt('123.456', 10),
+        _h: unknown,
+        _i = `,${String(z)},${String(z)},${String(z)},`,
+        _j = '{{[[(())]]}}),),],],},}"""```\\\'',
+        /* eslint-enable @typescript-eslint/default-param-last */
+      ) {
+        await Promise.resolve();
+      }
+      expect(parameters(foo)).toBe(10);
     });
   });
 
@@ -667,7 +876,7 @@ describe('parameters', () => {
   // });
 
   describe('using arguments object', () => {
-    test('simple', () => {
+    test('basic', () => {
       expect.assertions(1);
       function foo(_a: unknown, _b: unknown) {
         // biome-ignore lint/suspicious/noConsoleLog: explicit test case
@@ -685,10 +894,44 @@ describe('parameters', () => {
       expect(parameters(foo)).toBe(2);
     });
 
+    test('generator function declaration and expression', () => {
+      expect.assertions(1);
+      const foo = function* foo(_a: unknown, _b: unknown) {
+        yield null;
+      };
+      expect(parameters(foo)).toBe(2);
+    });
+
+    test('async function declaration and expression', () => {
+      expect.assertions(1);
+      const foo = async function foo(_a: unknown, _b: unknown) {
+        await Promise.resolve();
+      };
+      expect(parameters(foo)).toBe(2);
+    });
+
     test('function expression', () => {
       expect.assertions(1);
       // biome-ignore lint/complexity/useArrowFunction: explicit test case
       const bar = function (_a: unknown, _b: unknown) {}; // eslint-disable-line func-names
+      expect(parameters(bar)).toBe(2);
+    });
+
+    test('generator function expression', () => {
+      expect.assertions(1);
+      // eslint-disable-next-line func-names
+      const bar = function* (_a: unknown, _b: unknown) {
+        yield null;
+      };
+      expect(parameters(bar)).toBe(2);
+    });
+
+    test('async function expression', () => {
+      expect.assertions(1);
+      // biome-ignore lint/complexity/useArrowFunction: explicit test case
+      const bar = async function (_a: unknown, _b: unknown) /* eslint-disable-line func-names */ {
+        await Promise.resolve();
+      };
       expect(parameters(bar)).toBe(2);
     });
 
@@ -698,16 +941,324 @@ describe('parameters', () => {
       expect(parameters(bar)).toBe(2);
     });
 
+    test('async arrow function expression', () => {
+      expect.assertions(1);
+      const bar = async (_a: unknown, _b: unknown) => {
+        await Promise.resolve();
+      };
+      expect(parameters(bar)).toBe(2);
+    });
+
     test('function declaration', () => {
       expect.assertions(1);
       function baz(_a: unknown, _b: unknown) {}
       expect(parameters(baz)).toBe(2);
     });
+
+    test('generator function declaration', () => {
+      expect.assertions(1);
+      function* baz(_a: unknown, _b: unknown) {
+        yield null;
+      }
+      expect(parameters(baz)).toBe(2);
+    });
+
+    test('async function declaration', () => {
+      expect.assertions(1);
+      async function baz(_a: unknown, _b: unknown) {
+        await Promise.resolve();
+      }
+      expect(parameters(baz)).toBe(2);
+    });
   });
+
+  /* eslint-disable @typescript-eslint/lines-between-class-members, @typescript-eslint/no-empty-function, @typescript-eslint/no-extraneous-class, @typescript-eslint/no-invalid-void-type, @typescript-eslint/no-useless-constructor, class-methods-use-this */
+  describe('classes', () => {
+    test('basic', () => {
+      expect.assertions(1);
+      class Foo {
+        // biome-ignore lint/complexity/noUselessConstructor: simple test case
+        constructor(_a: unknown, _b: unknown) {}
+      }
+      expect(parameters(Foo)).toBe(2);
+    });
+
+    test('no constructor parameters', () => {
+      expect.assertions(1);
+      class Foo {
+        // biome-ignore lint/complexity/noUselessConstructor: simple test case
+        constructor() {}
+      }
+      expect(parameters(Foo)).toBe(0);
+    });
+
+    test('extends', () => {
+      expect.assertions(3);
+      class Foo {
+        // biome-ignore lint/complexity/noUselessConstructor: simple test case
+        constructor(_a: unknown, _b: unknown) {}
+      }
+      class Bar extends Foo {
+        constructor(_a: unknown, _b: unknown, _c: unknown) {
+          super(_a, _b);
+        }
+      }
+      class Baz extends Bar {
+        constructor() {
+          super(null, null, null);
+        }
+      }
+      expect(parameters(Foo)).toBe(2);
+      expect(parameters(Bar)).toBe(3);
+      expect(parameters(Baz)).toBe(0);
+    });
+
+    test('anonymous', () => {
+      expect.assertions(1);
+      expect(
+        parameters(
+          class {
+            // biome-ignore lint/complexity/noUselessConstructor: simple test case
+            constructor(_a: unknown, _b: unknown) {}
+          },
+        ),
+      ).toBe(2);
+    });
+
+    test('with no constructor function throw', () => {
+      expect.assertions(4);
+      class Foo {}
+      class Bar extends Foo {}
+      const error = new Error('Invalid function signature');
+      expect(() => parameters(Foo)).toThrow(error);
+      expect(() => parameters(Bar)).toThrow(error);
+      expect(() => parameters(class {})).toThrow(error);
+      expect(() => parameters(class extends Foo {})).toThrow(error);
+    });
+
+    describe('with methods', () => {
+      test('case 1: constructor', () => {
+        expect.assertions(1);
+        class Foo {
+          // biome-ignore lint/complexity/noUselessConstructor: simple test case
+          constructor(_a: unknown, _b: unknown) {}
+          method(this: void, _c: unknown, _d: unknown, _e: unknown) {}
+        }
+        expect(parameters(Foo)).toBe(2);
+      });
+
+      test('case 2: method parameters', () => {
+        expect.assertions(1);
+        class Foo {
+          // biome-ignore lint/complexity/noUselessConstructor: simple test case
+          constructor(_a: unknown, _b: unknown) {}
+          method(this: void, _c: unknown, _d: unknown, _e: unknown) {}
+        }
+        const instance = new Foo(1, 2);
+        expect(parameters(instance.method)).toBe(3);
+      });
+
+      test('case 3: method parameters no constructor', () => {
+        expect.assertions(1);
+        class Foo {
+          method(this: void, _a: unknown, _b: unknown, _c: unknown) {}
+        }
+        const instance = new Foo();
+        expect(parameters(instance.method)).toBe(3);
+      });
+
+      test('case 4: generator method parameters', () => {
+        expect.assertions(1);
+        class Foo {
+          // biome-ignore lint/complexity/noUselessConstructor: simple test case
+          constructor(_a: unknown, _b: unknown) {}
+          // eslint-disable-next-line generator-star-spacing
+          *method(this: void, _c: unknown, _d: unknown, _e: unknown) {
+            yield null;
+          }
+        }
+        const instance = new Foo(1, 2);
+        expect(parameters(instance.method)).toBe(3);
+      });
+
+      test('case 5: async method parameters', () => {
+        expect.assertions(1);
+        class Foo {
+          // biome-ignore lint/complexity/noUselessConstructor: simple test case
+          constructor(_a: unknown, _b: unknown) {}
+          async method(this: void, _c: unknown, _d: unknown, _e: unknown) {}
+        }
+        const instance = new Foo(1, 2);
+        expect(parameters(instance.method)).toBe(3);
+      });
+
+      test('case 6: anonymous method parameters', () => {
+        expect.assertions(1);
+        const instance = new (class {
+          // biome-ignore lint/complexity/noUselessConstructor: simple test case
+          constructor(_a: unknown, _b: unknown) {}
+          method(this: void, _c: unknown, _d: unknown, _e: unknown) {}
+        })(1, 2);
+        expect(parameters(instance.method)).toBe(3);
+      });
+
+      test('case 7: field parameters', () => {
+        expect.assertions(1);
+        class Foo {
+          method = (_a: unknown, _b: unknown, _c: unknown) => {};
+        }
+        const instance = new Foo();
+        expect(parameters(instance.method)).toBe(3);
+      });
+    });
+
+    describe('with static methods', () => {
+      test('case 1: constructor', () => {
+        expect.assertions(1);
+        class Foo {
+          // biome-ignore lint/complexity/noUselessConstructor: simple test case
+          constructor(_a: unknown, _b: unknown) {}
+          static method(this: void, _c: unknown, _d: unknown, _e: unknown) {}
+        }
+        expect(parameters(Foo)).toBe(2);
+      });
+
+      test('case 2: method parameters', () => {
+        expect.assertions(1);
+        class Foo {
+          // biome-ignore lint/complexity/noUselessConstructor: simple test case
+          constructor(_a: unknown, _b: unknown) {}
+          static method(this: void, _c: unknown, _d: unknown, _e: unknown) {}
+        }
+        expect(parameters(Foo.method)).toBe(3);
+      });
+
+      test('case 3: method parameters no constructor', () => {
+        expect.assertions(1);
+        // biome-ignore lint/complexity/noStaticOnlyClass: explicit test case
+        class Foo /* eslint-disable-line unicorn/no-static-only-class */ {
+          static method(this: void, _a: unknown, _b: unknown, _c: unknown) {}
+        }
+        expect(parameters(Foo.method)).toBe(3);
+      });
+
+      test('case 4: generator method parameters', () => {
+        expect.assertions(1);
+        class Foo {
+          // biome-ignore lint/complexity/noUselessConstructor: simple test case
+          constructor(_a: unknown, _b: unknown) {}
+          // eslint-disable-next-line generator-star-spacing
+          static *method(this: void, _c: unknown, _d: unknown, _e: unknown) {
+            yield null;
+          }
+        }
+        expect(parameters(Foo.method)).toBe(3);
+      });
+
+      test('case 5: async method parameters', () => {
+        expect.assertions(1);
+        class Foo {
+          // biome-ignore lint/complexity/noUselessConstructor: simple test case
+          constructor(_a: unknown, _b: unknown) {}
+          static async method(this: void, _c: unknown, _d: unknown, _e: unknown) {}
+        }
+        expect(parameters(Foo.method)).toBe(3);
+      });
+
+      test('case 6: anonymous method parameters', () => {
+        expect.assertions(1);
+        expect(
+          parameters(
+            class {
+              // biome-ignore lint/complexity/noUselessConstructor: simple test case
+              constructor(_a: unknown, _b: unknown) {}
+              static method(this: void, _c: unknown, _d: unknown, _e: unknown) {}
+            }.method,
+          ),
+        ).toBe(3);
+      });
+
+      test('case 7: field parameters', () => {
+        expect.assertions(1);
+        // biome-ignore lint/complexity/noStaticOnlyClass: explicit test case
+        class Foo /* eslint-disable-line unicorn/no-static-only-class */ {
+          static method = (_a: unknown, _b: unknown, _c: unknown) => {};
+        }
+        expect(parameters(Foo.method)).toBe(3);
+      });
+    });
+
+    describe('with getters and setters', () => {
+      test('case 1: constructor', () => {
+        expect.assertions(1);
+        class Foo {
+          // biome-ignore lint/complexity/noUselessConstructor: simple test case
+          constructor(_a: unknown, _b: unknown) {}
+          get prop(): null {
+            return null;
+          }
+          set prop(_c: unknown) {}
+        }
+        expect(parameters(Foo)).toBe(2);
+      });
+
+      test('case 2: getter/setter throws', () => {
+        expect.assertions(1);
+        class Foo {
+          // biome-ignore lint/complexity/noUselessConstructor: simple test case
+          constructor(_a: unknown, _b: unknown) {}
+          get prop(): null {
+            return null;
+          }
+          set prop(_c: unknown) {}
+        }
+        const instance = new Foo(1, 2);
+        expect(() => parameters(instance.prop)).toThrow(new TypeError('Expected a function'));
+      });
+    });
+
+    describe('with computed property names', () => {
+      test('case 1: constructor', () => {
+        expect.assertions(1);
+        const prop = 'method';
+        class Foo {
+          // biome-ignore lint/complexity/noUselessConstructor: simple test case
+          constructor(_a: unknown, _b: unknown) {}
+          [prop](this: void, _c: unknown, _d: unknown, _e: unknown) {}
+        }
+        expect(parameters(Foo)).toBe(2);
+      });
+
+      test('case 2: method parameters', () => {
+        expect.assertions(1);
+        const prop = 'method';
+        class Foo {
+          // biome-ignore lint/complexity/noUselessConstructor: simple test case
+          constructor(_a: unknown, _b: unknown) {}
+          [prop](this: void, _c: unknown, _d: unknown, _e: unknown) {}
+        }
+        const instance = new Foo(1, 2);
+        expect(parameters(instance[prop])).toBe(3);
+      });
+    });
+  });
+  /* eslint-enable @typescript-eslint/lines-between-class-members, @typescript-eslint/no-empty-function, @typescript-eslint/no-extraneous-class, @typescript-eslint/no-invalid-void-type, @typescript-eslint/no-useless-constructor, class-methods-use-this */
 
   describe('native functions', () => {
     /* eslint-disable @typescript-eslint/unbound-method */
     const builtins: [text: string, func: (...args: never[]) => unknown, length: number][] = [
+      ['Function', Function, 1],
+      ['Object', Object, 1],
+      ['Array', Array, 1],
+      ['String', String, 1],
+      ['Number', Number, 1],
+      ['Boolean', Boolean, 1],
+      ['Symbol', Symbol, 0],
+      ['BigInt', BigInt, 1],
+      // @ts-expect-error - Buffer is callable (obsolete and deprecated Node.js API)
+      ['Buffer', Buffer, 3],
+      // @ts-expect-error - explicit test case
+      ['Function.prototype', Function.prototype, 0],
       ['Array.prototype.splice', Array.prototype.splice, 2],
       ['Array.prototype.reduce', Array.prototype.reduce, 1],
       ['Array.prototype.reduceRight', Array.prototype.reduceRight, 1],
@@ -717,6 +1268,8 @@ describe('parameters', () => {
       ['String.prototype.split', String.prototype.split, 2],
       ['String.prototype.match', String.prototype.match, 1],
       ['RegExp.prototype.exec', RegExp.prototype.exec, 1],
+      ['Number.parseInt', Number.parseInt, 2],
+      ['Symbol.for', Symbol.for, 1],
       ['JSON.parse', JSON.parse, 2],
       ['JSON.stringify', JSON.stringify, 3],
       ['Math.max', Math.max, 2],
@@ -725,7 +1278,12 @@ describe('parameters', () => {
       ['Intl.NumberFormat', Intl.NumberFormat, 0],
       ['Intl.DateTimeFormat', Intl.DateTimeFormat, 0],
       ['setTimeout', setTimeout, 1],
+      ['clearTimeout', clearTimeout, 1],
       ['setInterval', setInterval, 1],
+      ['clearInterval', clearInterval, 1],
+      ['setImmediate', setImmediate, 1],
+      ['clearImmediate', clearImmediate, 1],
+      ['fetch', fetch, 2],
     ];
     /* eslint-enable @typescript-eslint/unbound-method */
 
@@ -738,6 +1296,109 @@ describe('parameters', () => {
         'Optional parameters cannot be determined for native functions',
       );
       spy.mockRestore();
+    });
+  });
+
+  describe('non-functions', function closure(this: undefined) {
+    const notFunctions: [text: string, value: unknown][] = [
+      ['null', null],
+      ['undefined', undefined],
+      ['true', true],
+      ['false', false],
+      ['-1', -1],
+      ['0', 0],
+      ['1', 1],
+      ['Number.MAX_VALUE', Number.MAX_VALUE],
+      ['Number.POSITIVE_INFINITY', Number.POSITIVE_INFINITY],
+      ['Number.NEGATIVE_INFINITY', Number.NEGATIVE_INFINITY],
+      ['Number.NaN', Number.NaN],
+      ["Symbol('sym')", Symbol('sym')],
+      ['BigInt(1234)', BigInt(1234)],
+      ['[]', []],
+      ['{}', {}],
+      ['<empty string>', ''],
+      ['new Int8Array()', new Int8Array()],
+      ['new Uint8Array()', new Uint8Array()],
+      ['new Uint8ClampedArray()', new Uint8ClampedArray()],
+      ['new Int16Array()', new Int16Array()],
+      ['new Uint16Array()', new Uint16Array()],
+      ['new Int32Array()', new Int32Array()],
+      ['new Uint32Array()', new Uint32Array()],
+      ['new Float32Array()', new Float32Array()],
+      ['new Float64Array()', new Float64Array()],
+      ['new BigInt64Array()', new BigInt64Array()],
+      ['new BigUint64Array()', new BigUint64Array()],
+      ['new Map()', new Map()],
+      ['new Set()', new Set()],
+      ['new WeakMap()', new WeakMap()],
+      ['new WeakSet()', new WeakSet()],
+      ['new Promise(() => {})', new Promise(() => {})],
+      ['new Date()', new Date()],
+      ['/(?:)/', /(?:)/],
+      // biome-ignore lint/nursery/useErrorMessage: simple test case
+      ['new Error()', new Error()], // eslint-disable-line unicorn/error-message
+      ['Math', Math],
+      ['JSON', JSON],
+      ['Intl', Intl],
+      ['Object.prototype', Object.prototype],
+      ['Array.prototype', Array.prototype],
+      ['String.prototype', String.prototype],
+      ['Number.prototype', Number.prototype],
+      ['Boolean.prototype', Boolean.prototype],
+      ['Symbol.prototype', Symbol.prototype],
+      ['BigInt.prototype', BigInt.prototype],
+      ['console', console],
+      ['window', window],
+      ['document', document],
+      ['chrome', chrome],
+      ['process', process],
+      ['global', global],
+      ['globalThis', globalThis],
+      // eslint-disable-next-line no-restricted-globals
+      ['self', self],
+      ['this', this],
+      // biome-ignore lint/style/noArguments: explicit test case
+      ['arguments', arguments], // eslint-disable-line prefer-rest-params
+      ['new.target', new.target],
+
+      // XXX: Although these are built-in classes, they have callable
+      // constructors which make them functions when accessed directly.
+      // ['Function', Function],
+      // ['Object', Object],
+      // ['Array', Array],
+      // ['String', String],
+      // ['Number', Number],
+      // ['Boolean', Boolean],
+      // ['Symbol', Symbol],
+      // ['BigInt', BigInt],
+      // ['Buffer', Buffer],
+      // ['Function.prototype', Function.prototype],
+    ] as const;
+
+    test.each(notFunctions)('throws for %s', (_, value) => {
+      expect.assertions(1);
+      expect(() => parameters(value)).toThrow(new TypeError('Expected a function'));
+    });
+  });
+
+  describe('built-in functions', () => {
+    const builtIns: [text: string, value: unknown, length: number][] = [
+      // biome-ignore lint/security/noGlobalEval: explicit test case
+      ['eval', eval, 1], // eslint-disable-line no-eval
+      ['fetch', fetch, 2],
+      ['setTimeout', setTimeout, 1],
+      ['clearTimeout', clearTimeout, 1],
+      ['setInterval', setInterval, 1],
+      ['clearInterval', clearInterval, 1],
+      ['setImmediate', setImmediate, 1],
+      ['clearImmediate', clearImmediate, 1],
+      // eslint-disable-next-line unicorn/prefer-module
+      ['require', require, 1],
+    ];
+
+    test.each(builtIns)('has expected count for %s', (_, value, length) => {
+      expect.assertions(1);
+      expect(parameters(value)).toBe(length);
     });
   });
 });

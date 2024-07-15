@@ -4,7 +4,8 @@ import { DEFAULT_SECTION_ORDER, handleClick } from '../../src/utils';
 
 describe('DEFAULT_SECTION_ORDER', () => {
   test('is an array', () => {
-    expect.assertions(1);
+    expect.assertions(2);
+    expect(DEFAULT_SECTION_ORDER).toBeArray();
     expect(DEFAULT_SECTION_ORDER).toBeInstanceOf(window.Array);
   });
 
@@ -49,8 +50,9 @@ describe('handleClick', () => {
   });
 
   test('is a function', () => {
-    expect.assertions(1);
-    expect(handleClick).toBeInstanceOf(Function);
+    expect.assertions(2);
+    expect(handleClick).toBeFunction();
+    expect(handleClick).not.toBeClass();
   });
 
   test('expects 1 parameter', () => {

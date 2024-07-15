@@ -116,6 +116,8 @@ export function lookup(root: Element[], cssSelector: string): Element[] | undefi
 // FIXME: Evaluate at-rules and handle them appropriately. This adds a lot of
 // complexity, so consider using happy-dom if they have support for it.
 export function reduce(elements: Element[]): Record<string, string> {
+  if (elements.length === 0) return {};
+
   const decls: Record<string, string> = {};
 
   for (const element of elements) {
