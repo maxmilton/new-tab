@@ -35,15 +35,6 @@ export default tseslint.config(
         tsconfigRootDir: import.meta.dirname,
       },
     },
-    // settings: {
-    //   'import/resolver': {
-    //     typescript: {
-    //       alwaysTryTypes: true,
-    //       project: ['tsconfig.json', 'tsconfig.node.json'],
-    //       // project: true,
-    //     },
-    //   },
-    // },
     plugins: {
       import: fixupPluginRules(
         compat.plugins('eslint-plugin-import')[0].plugins?.import ?? {},
@@ -118,6 +109,13 @@ export default tseslint.config(
     ],
     rules: {
       'import/no-extraneous-dependencies': OFF,
+    },
+  },
+  {
+    files: ['build.ts'],
+    rules: {
+      'no-await-in-loop': OFF,
+      'no-console': OFF,
     },
   },
   {

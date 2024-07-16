@@ -1,8 +1,7 @@
-/* eslint-disable no-console */
-
 import { readdir } from 'node:fs/promises';
-import { basename } from 'node:path';
+import { basename } from 'node:path'; // eslint-disable-line unicorn/import-style
 import { importPlugin } from '@ekscss/plugin-import';
+import type { BuildArtifact } from 'bun';
 import * as xcss from 'ekscss';
 import * as lightningcss from 'lightningcss';
 import * as terser from 'terser';
@@ -44,7 +43,7 @@ function compileCSS(src: string, from: string) {
     console.error('CSS:', warning.message);
   }
 
-  return minified.code.toString();
+  return minified.code;
 }
 
 /**
@@ -78,16 +77,15 @@ async function makeThemes() {
   for (const theme of themeFiles.sort()) {
     if (theme.endsWith('.xcss')) {
       const path = `src/css/themes/${theme}`;
-      // eslint-disable-next-line no-await-in-loop
       const code = await Bun.file(path).text();
-      themes[basename(theme, '.xcss')] = compileCSS(code, path);
+      themes[basename(theme, '.xcss')] = compileCSS(code, path).toString();
     }
   }
 
   await Bun.write('dist/themes.json', JSON.stringify(themes));
 }
 
-async function minifyJS(artifact: Blob & { path: string }) {
+async function minifyJS(artifact: BuildArtifact) {
   let source = await artifact.text();
 
   // Improve collapsing variables; terser doesn't do this so we do it manually.
@@ -109,7 +107,7 @@ async function minifyJS(artifact: Blob & { path: string }) {
     },
   });
 
-  await Bun.write(artifact.path, result.code!);
+  await Bun.write(artifact.path, result.code ?? '');
 }
 
 console.time('prebuild');
