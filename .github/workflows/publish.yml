@@ -19,7 +19,7 @@ jobs:
       - run: bun run build
       - run: bun run lint
       - run: bun run test
-      - run: cd dist && zip ../chrome-extension.zip *
+      - run: zip -jv chrome-extension.zip dist/*
       - uses: actions/attest-build-provenance@v1
         with:
           subject-path: chrome-extension.zip
