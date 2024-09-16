@@ -34,7 +34,7 @@
     "@eslint/eslintrc": "3.1.0",
     "@eslint/js": "9.7.0",
     "@maxmilton/stylelint-config": "0.1.2",
-    "@playwright/test": "1.45.1",
+    "@playwright/test": "1.47.1",
     "@types/bun": "1.1.9",
     "@types/chrome": "0.0.271",
     "@types/eslint__eslintrc": "2.1.1",
