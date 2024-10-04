@@ -45,7 +45,7 @@
     "eslint-config-airbnb-typescript": "18.0.0",
     "eslint-plugin-import": "2.31.0",
     "eslint-plugin-unicorn": "55.0.0",
-    "happy-dom": "14.12.3",
+    "happy-dom": "15.7.4",
     "lightningcss": "1.25.1",
     "stylelint": "16.9.0",
     "stylelint-config-standard": "36.0.1",
