@@ -22,7 +22,7 @@
     "happy-dom@14.12.3": "patches/happy-dom@14.12.3.patch"
   },
   "overrides": {
-    "lightningcss": "1.23.0"
+    "lightningcss": "1.27.0"
   },
   "dependencies": {
     "stage1": "0.8.0-next.13"
@@ -46,7 +46,7 @@
     "eslint-plugin-import": "2.31.0",
     "eslint-plugin-unicorn": "55.0.0",
     "happy-dom": "14.12.3",
-    "lightningcss": "1.25.1",
+    "lightningcss": "1.27.0",
     "stylelint": "16.10.0",
     "stylelint-config-standard": "36.0.1",
     "terser": "5.34.1",
