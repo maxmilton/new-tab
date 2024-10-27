@@ -38,7 +38,7 @@ export const createManifest = (
   version: pkg.version,
   // shippable releases should not have a named version
   version_name: debug ? gitRef() : undefined,
-  minimum_chrome_version: '116', // for new password manager link
+  minimum_chrome_version: '123', // for light-dark() CSS function
   icons: {
     16: 'icon16.png',
     48: 'icon48.png',
