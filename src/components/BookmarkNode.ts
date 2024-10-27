@@ -17,7 +17,7 @@ folderPopupView.className = 'sf';
 const FolderPopup = (
   parent: HTMLElement,
   children: BookmarkTreeNode[],
-  nested?: boolean | undefined,
+  nested?: boolean,
 ): FolderPopupComponent => {
   const root = clone(folderPopupView);
   const parentRect = parent.getBoundingClientRect();
@@ -38,6 +38,7 @@ const FolderPopup = (
     window.innerHeight - top
   }px`;
 
+  // biome-ignore lint/style/useExplicitLengthCheck: byte savings
   if (children.length) {
     children.forEach((item) => append(BookmarkNode(item, true), root));
   } else {

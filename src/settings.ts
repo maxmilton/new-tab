@@ -219,7 +219,7 @@ const Settings = () => {
   const handleDrop = (list: 0 | 1) => (event: DragEvent) => {
     event.preventDefault();
 
-    if (state.order[list].length !== 0) return;
+    if (state.order[list].length > 0) return;
 
     const from = JSON.parse(
       event.dataTransfer!.getData(DRAG_TYPE),

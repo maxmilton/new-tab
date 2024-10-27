@@ -7,7 +7,7 @@ import type { ThemesData, UserStorageData } from './types';
 chrome.runtime.onInstalled.addListener(async () => {
   const [themes, settings] = await Promise.all([
     fetch('themes.json').then((res) => res.json() as Promise<ThemesData>),
-    chrome.storage.local.get() as Promise<UserStorageData>,
+    chrome.storage.local.get<UserStorageData>(),
   ]);
 
   // TODO: Remove once most users have updated.
