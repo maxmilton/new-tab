@@ -31,12 +31,13 @@ function compileCSS(src: string, from: string) {
     }
   }
 
+  // TODO: Migrate to bun CSS handling (which is based on lightningcss).
   const minified = lightningcss.transform({
     filename: from,
-    code: Buffer.from(compiled.css),
+    code: new Uint8Array(Buffer.from(compiled.css)),
     minify: !dev,
     // eslint-disable-next-line no-bitwise
-    targets: { chrome: 116 << 16 }, // matches manifest minimum_chrome_version
+    targets: { chrome: 123 << 16 }, // matches manifest minimum_chrome_version
   });
 
   for (const warning of minified.warnings) {
