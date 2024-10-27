@@ -78,7 +78,7 @@
         "noDynamicNamespaceImportAccess": "error",
         "noEnum": "error",
         "noExportedImports": "error",
-        "noSecrets": "warn", // TODO: Change to "error" when more stable
+        "noSecrets": "info", // TODO: Change to "error" when more stable
         "noSubstr": "warn",
         "noUnknownPseudoClass": "warn",
         "noUnknownPseudoElement": "warn",
