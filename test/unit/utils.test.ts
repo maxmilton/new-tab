@@ -1,5 +1,5 @@
 import { afterAll, beforeAll, describe, expect, mock, spyOn, test } from 'bun:test';
-import { target } from 'happy-dom/lib/PropertySymbol.js'; // eslint-disable-line import/extensions
+import { target } from 'happy-dom/lib/PropertySymbol.js';
 import { DEFAULT_SECTION_ORDER, handleClick } from '../../src/utils';
 
 describe('DEFAULT_SECTION_ORDER', () => {
