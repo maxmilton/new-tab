@@ -137,7 +137,7 @@ const out = await Bun.build({
   outdir: 'dist',
   target: 'browser',
   minify: !dev,
-  sourcemap: dev ? 'external' : 'none',
+  sourcemap: dev ? 'linked' : 'none',
 });
 console.timeEnd('build');
 console.log(out);
@@ -149,6 +149,7 @@ const out2 = await Bun.build({
   outdir: 'dist',
   target: 'browser',
   minify: !dev,
+  sourcemap: dev ? 'linked' : 'none',
 });
 console.timeEnd('build2');
 console.log(out2);
