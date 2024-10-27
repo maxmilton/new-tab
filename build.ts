@@ -34,7 +34,7 @@ function compileCSS(src: string, from: string) {
   // TODO: Migrate to bun CSS handling (which is based on lightningcss).
   const minified = lightningcss.transform({
     filename: from,
-    code: new Uint8Array(Buffer.from(compiled.css)),
+    code: new TextEncoder().encode(compiled.css),
     minify: !dev,
     // eslint-disable-next-line no-bitwise
     targets: { chrome: 123 << 16 }, // matches manifest minimum_chrome_version
