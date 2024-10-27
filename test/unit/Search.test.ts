@@ -1,5 +1,5 @@
 import { afterEach, beforeEach, expect, test } from 'bun:test';
-import { cleanup, render } from './utils';
+import { cleanup, render } from '@maxmilton/test-utils/dom';
 
 // HACK: The Search component is designed to be rendered once (does not clone
 // its view), for byte savings. Given its mutation of the view (affecting global

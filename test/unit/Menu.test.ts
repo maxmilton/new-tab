@@ -1,7 +1,7 @@
 import { afterEach, expect, spyOn, test } from 'bun:test';
+import { cleanup, render } from '@maxmilton/test-utils/dom';
 import { Menu } from '../../src/components/Menu';
 import { handleClick } from '../../src/utils';
-import { cleanup, render } from './utils';
 
 afterEach(cleanup);
 

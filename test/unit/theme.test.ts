@@ -1,9 +1,6 @@
 /* eslint-disable consistent-return */
 
 import { afterEach, describe, expect, test } from 'bun:test';
-import themes from '../../dist/themes.json';
-import type { UserStorageData } from '../../src/types';
-import { reset } from '../setup';
 import {
   DECLARATION,
   type Element,
@@ -13,7 +10,10 @@ import {
   isHexColor,
   isLightOrDark,
   walk,
-} from './css-engine';
+} from '@maxmilton/test-utils/css';
+import themes from '../../dist/themes.json';
+import type { UserStorageData } from '../../src/types';
+import { reset } from '../setup';
 
 const themeNames = [
   'auto',
