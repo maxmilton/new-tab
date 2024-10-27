@@ -24,7 +24,6 @@ describe('dist files', () => {
   ];
 
   for (const [filename, type, minBytes, maxBytes] of distFiles) {
-    // eslint-disable-next-line @typescript-eslint/no-loop-func
     describe(filename, () => {
       const file = Bun.file(`dist/${filename}`);
 

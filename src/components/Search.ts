@@ -139,6 +139,12 @@ export const Search = (): SearchComponent => {
 
     // TODO: Keep? Causes significantly worse page load speed!
 
+    // TODO: Alternative implementation? One of:
+    //  ↳ Simple lock to disable updates when the page isn't active
+    //  ↳ Web Locks API to prevent multiple pages from updating together
+    //  ↳ Shared worker to manage the state of the open tabs
+    //  ↳ Only update specific change from listener Event
+
     // // When the page isn't active stop the "Open Tabs" section from updating to
     // // prevent performance issues when users open many new-tab pages.
     // document.onvisibilitychange = () => {
