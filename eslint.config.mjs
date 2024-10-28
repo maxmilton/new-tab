@@ -35,6 +35,8 @@ export default ts.config(
       /* Performance and byte savings */
       // alternatives offer byte savings and better performance
       '@typescript-eslint/prefer-string-starts-ends-with': OFF,
+      // byte savings at the cost of readability
+      '@typescript-eslint/no-confusing-void-expression': OFF, // TODO: Consider removing
       // byte savings (but reduces debugging ability)
       '@typescript-eslint/restrict-plus-operands': OFF,
       // byte savings (but reduces debugging ability)
