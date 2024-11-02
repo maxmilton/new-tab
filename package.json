@@ -33,7 +33,7 @@
     "@maxmilton/test-utils": "0.0.2",
     "@playwright/test": "1.48.2",
     "@types/bun": "1.1.12",
-    "@types/chrome": "0.0.279",
+    "@types/chrome": "0.0.280",
     "ekscss": "0.0.20",
     "eslint": "9.13.0",
     "eslint-plugin-unicorn": "56.0.0",
