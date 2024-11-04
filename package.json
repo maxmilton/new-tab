@@ -28,7 +28,7 @@
     "@biomejs/biome": "1.9.4",
     "@ekscss/plugin-import": "0.0.15",
     "@eslint/js": "9.13.0",
-    "@maxmilton/eslint-config": "0.0.3",
+    "@maxmilton/eslint-config": "0.0.7",
     "@maxmilton/stylelint-config": "0.1.2",
     "@maxmilton/test-utils": "0.0.2",
     "@playwright/test": "1.48.2",
