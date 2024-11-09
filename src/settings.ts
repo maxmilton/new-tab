@@ -137,7 +137,7 @@ const meta = compile(`
 
     <div class=row>
       <label>
-        <input @backup type=checkbox class=box> Backup settings to app storage
+        <input @backup type=checkbox class=box> Backup and sync settings
       </label>
     </div>
 
@@ -262,9 +262,14 @@ const Settings = () => {
         void chrome.storage.local.set({
           backup: true,
         });
+        void chrome.storage.sync.set({
+          backup: true,
+        });
       }
     } else {
-      void chrome.storage.local.remove('backup');
+      void chrome.storage.local.set({
+        backup: false,
+      });
     }
   };
 

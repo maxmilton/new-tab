@@ -23,10 +23,10 @@ chrome.runtime.onInstalled.addListener(async () => {
     t: themes[settings.tn ?? 'auto'],
   });
 
-  // Include backup setting during installation or update
-  if (settings.backup) {
+  // Include backup and sync setting during installation or update
+  if (settings.backupSync) {
     void chrome.storage.local.set({
-      backup: settings.backup,
+      backupSync: settings.backupSync,
     });
   }
 

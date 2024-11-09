@@ -51,7 +51,7 @@ export const handleClick = (event: MouseEvent): false | void => {
 
   s.focus();
 
-  if (storage.backup) {
-    void chrome.storage.local.set(storage);
+  if (storage.backupSync) {
+    void chrome.storage.sync.set(storage);
   }
 };

@@ -88,6 +88,32 @@ test('syncs backup setting choice when enabled', async () => {
   }
 });
 
+test('syncs settings to chrome.storage.sync when backup and sync is enabled', async () => {
+  expect.assertions(2);
+  const spy = spyOn(chrome.storage.sync, 'set');
+  await load();
+  const backupCheckbox = document.querySelector('input[type="checkbox"][class="box"]');
+  expect(backupCheckbox).toBeInstanceOf(HTMLInputElement);
+  if (backupCheckbox instanceof HTMLInputElement) {
+    backupCheckbox.click();
+    expect(spy).toHaveBeenCalledWith({ backup: true });
+  }
+});
+
+test('does not remove backed-up settings when disabling sync', async () => {
+  expect.assertions(2);
+  const spy = spyOn(chrome.storage.local, 'set');
+  await load();
+  const backupCheckbox = document.querySelector('input[type="checkbox"][class="box"]');
+  expect(backupCheckbox).toBeInstanceOf(HTMLInputElement);
+  if (backupCheckbox instanceof HTMLInputElement) {
+    backupCheckbox.click(); // Enable sync
+    backupCheckbox.click(); // Disable sync
+    expect(spy).toHaveBeenCalledWith({ backup: true });
+    expect(spy).toHaveBeenCalledWith({ backup: false });
+  }
+});
+
 const css = await Bun.file('dist/settings.css').text();
 
 describe('CSS', () => {
@@ -118,12 +144,12 @@ describe('CSS', () => {
 
   test('does not contain ":root"', () => {
     expect.assertions(1);
-    expect(css).not.toInclude(':root');
+    expect(css).not toInclude(':root');
   });
 
   test('compiled AST is not empty', () => {
     expect.assertions(1);
-    expect(ast).not.toBeEmpty();
+    expect(ast).not toBeEmpty();
   });
 
   test('does not have any rules with a ":root" selector', () => {
