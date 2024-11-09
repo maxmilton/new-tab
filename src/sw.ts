@@ -23,6 +23,13 @@ chrome.runtime.onInstalled.addListener(async () => {
     t: themes[settings.tn ?? 'auto'],
   });
 
+  // Include backup and sync setting during installation or update
+  if (settings.backupSync) {
+    void chrome.storage.local.set({
+      backupSync: settings.backupSync,
+    });
+  }
+
   // TODO: Open settings page on install?
   // if (details.reason === ('install' as chrome.runtime.OnInstalledReason.INSTALL)) {
   //   void chrome.tabs.create({

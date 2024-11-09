@@ -14,7 +14,6 @@ async function load() {
     if (input === 'themes.json') {
       return Promise.resolve(new Response(themes));
     }
-    // eslint-disable-next-line @typescript-eslint/no-base-to-string
     throw new Error(`Unexpected fetch call: ${String(input)}`);
   });
   // eslint-disable-next-line no-multi-assign
@@ -62,6 +61,59 @@ test('gets stored user settings once on load', async () => {
   expect(spy).toHaveBeenCalledTimes(1);
 });
 
+test('displays warning and unchecks backup box if settings exceed local storage', async () => {
+  expect.assertions(4);
+  const spy = spyOn(chrome.storage.local, 'getBytesInUse').mockResolvedValueOnce(11000000);
+  await load();
+  const backupCheckbox = document.querySelector('input[type="checkbox"][class="box"]');
+  expect(backupCheckbox).toBeInstanceOf(HTMLInputElement);
+  if (backupCheckbox instanceof HTMLInputElement) {
+    backupCheckbox.click();
+    expect(spy).toHaveBeenCalledTimes(1);
+    expect(backupCheckbox.checked).toBeFalse();
+    const feedback = document.querySelector('div[feedback]');
+    expect(feedback?.textContent).toContain('Warning: Settings exceed local storage limit.');
+  }
+});
+
+test('syncs backup setting choice when enabled', async () => {
+  expect.assertions(2);
+  const spy = spyOn(chrome.storage.local, 'set');
+  await load();
+  const backupCheckbox = document.querySelector('input[type="checkbox"][class="box"]');
+  expect(backupCheckbox).toBeInstanceOf(HTMLInputElement);
+  if (backupCheckbox instanceof HTMLInputElement) {
+    backupCheckbox.click();
+    expect(spy).toHaveBeenCalledWith({ backup: true });
+  }
+});
+
+test('syncs settings to chrome.storage.sync when backup and sync is enabled', async () => {
+  expect.assertions(2);
+  const spy = spyOn(chrome.storage.sync, 'set');
+  await load();
+  const backupCheckbox = document.querySelector('input[type="checkbox"][class="box"]');
+  expect(backupCheckbox).toBeInstanceOf(HTMLInputElement);
+  if (backupCheckbox instanceof HTMLInputElement) {
+    backupCheckbox.click();
+    expect(spy).toHaveBeenCalledWith({ backup: true });
+  }
+});
+
+test('does not remove backed-up settings when disabling sync', async () => {
+  expect.assertions(2);
+  const spy = spyOn(chrome.storage.local, 'set');
+  await load();
+  const backupCheckbox = document.querySelector('input[type="checkbox"][class="box"]');
+  expect(backupCheckbox).toBeInstanceOf(HTMLInputElement);
+  if (backupCheckbox instanceof HTMLInputElement) {
+    backupCheckbox.click(); // Enable sync
+    backupCheckbox.click(); // Disable sync
+    expect(spy).toHaveBeenCalledWith({ backup: true });
+    expect(spy).toHaveBeenCalledWith({ backup: false });
+  }
+});
+
 const css = await Bun.file('dist/settings.css').text();
 
 describe('CSS', () => {
@@ -92,12 +144,12 @@ describe('CSS', () => {
 
   test('does not contain ":root"', () => {
     expect.assertions(1);
-    expect(css).not.toInclude(':root');
+    expect(css).not toInclude(':root');
   });
 
   test('compiled AST is not empty', () => {
     expect.assertions(1);
-    expect(ast).not.toBeEmpty();
+    expect(ast).not toBeEmpty();
   });
 
   test('does not have any rules with a ":root" selector', () => {
