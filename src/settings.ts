@@ -107,6 +107,7 @@ interface Refs {
   se: HTMLUListElement;
   sd: HTMLUListElement;
   reset: HTMLButtonElement;
+  backup: HTMLInputElement;
 }
 
 const meta = compile(`
@@ -131,6 +132,12 @@ const meta = compile(`
     <div class=row>
       <label>
         <input @b type=checkbox class=box> Show bookmarks bar
+      </label>
+    </div>
+
+    <div class=row>
+      <label>
+        <input @backup type=checkbox class=box> Backup settings to app storage
       </label>
     </div>
 
@@ -244,6 +251,23 @@ const Settings = () => {
     }
   };
 
+  refs.backup.onchange = async () => {
+    if (refs.backup.checked) {
+      const bytesInUse = await chrome.storage.local.getBytesInUse();
+      const quotaBytes = chrome.storage.local.QUOTA_BYTES;
+      if (bytesInUse > quotaBytes) {
+        refs.feedback.textContent = `Warning: Settings exceed local storage limit. Current size: ${bytesInUse} bytes, Allowed size: ${quotaBytes} bytes, Total size over: ${bytesInUse - quotaBytes} bytes.`;
+        refs.backup.checked = false;
+      } else {
+        void chrome.storage.local.set({
+          backup: true,
+        });
+      }
+    } else {
+      void chrome.storage.local.remove('backup');
+    }
+  };
+
   // eslint-disable-next-line no-multi-assign
   refs.se.ondragover = refs.sd.ondragover = (event) => {
     event.preventDefault();
@@ -267,6 +291,7 @@ const Settings = () => {
 
   void updateTheme(themeName);
   refs.b.checked = !storage.b;
+  refs.backup.checked = !!storage.backup;
   updateOrder([orderEnabled, orderDisabled], true);
 
   return root;

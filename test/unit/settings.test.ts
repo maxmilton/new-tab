@@ -61,6 +61,37 @@ test('gets stored user settings once on load', async () => {
   expect(spy).toHaveBeenCalledTimes(1);
 });
 
+test('toggles backup setting in chrome.storage.local', async () => {
+  expect.assertions(4);
+  await load();
+  const backupCheckbox = document.querySelector('input[type="checkbox"][class="box"][name="backup"]');
+  expect(backupCheckbox).toBeTruthy();
+  if (backupCheckbox) {
+    backupCheckbox.checked = true;
+    backupCheckbox.dispatchEvent(new Event('change'));
+    expect(chrome.storage.local.set).toHaveBeenCalledWith({ backup: true });
+
+    backupCheckbox.checked = false;
+    backupCheckbox.dispatchEvent(new Event('change'));
+    expect(chrome.storage.local.remove).toHaveBeenCalledWith('backup');
+  }
+});
+
+test('displays warning and unchecks backup box if settings exceed local storage', async () => {
+  expect.assertions(3);
+  const spy = spyOn(chrome.storage.local, 'getBytesInUse').mockResolvedValue(6000000); // Mock value exceeding quota
+  await load();
+  const backupCheckbox = document.querySelector('input[type="checkbox"][class="box"][name="backup"]');
+  const feedbackDiv = document.querySelector('div[feedback]');
+  expect(backupCheckbox).toBeTruthy();
+  if (backupCheckbox) {
+    backupCheckbox.checked = true;
+    backupCheckbox.dispatchEvent(new Event('change'));
+    expect(backupCheckbox.checked).toBe(false);
+    expect(feedbackDiv?.textContent).toContain('Warning: Settings exceed local storage limit.');
+  }
+});
+
 const css = await Bun.file('dist/settings.css').text();
 
 describe('CSS', () => {
