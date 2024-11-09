@@ -26,8 +26,8 @@
         "noUnusedImports": { "level": "error", "fix": "none" }
       },
       "performance": {
-        "noBarrelFile": "info",
-        "noReExportAll": "info"
+        "noBarrelFile": "error",
+        "noReExportAll": "error"
       },
       "style": {
         "noDoneCallback": "warn",
