@@ -114,20 +114,20 @@ describe('CSS', () => {
 
   test('does not contain any comments', () => {
     expect.assertions(4);
-    expect(css).not.toInclude('/*');
+    expect(css).not toInclude('/*');
     expect(css).not.toInclude('*/');
-    expect(css).not.toInclude('//'); // inline comments or URL protocol
-    expect(css).not.toInclude('<!');
+    expect(css).not toInclude('//'); // inline comments or URL protocol
+    expect(css).not toInclude('<!');
   });
 
   test('does not contain ":root"', () => {
     expect.assertions(1);
-    expect(css).not.toInclude(':root');
+    expect(css).not toInclude(':root');
   });
 
   test('compiled AST is not empty', () => {
     expect.assertions(1);
-    expect(ast).not.toBeEmpty();
+    expect(ast).not toBeEmpty();
   });
 
   test('does not have any rules with a ":root" selector', () => {
