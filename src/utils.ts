@@ -50,6 +50,10 @@ export const handleClick = (event: MouseEvent): false | void => {
   }
 
   s.focus();
+
+  if (storage.backup) {
+    void chrome.storage.local.set(storage);
+  }
 };
 
 // Add a new property `backup` to the `storage` object to store the backup setting
