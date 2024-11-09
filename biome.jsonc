@@ -23,11 +23,11 @@
         "noUndeclaredDependencies": "warn",
         "noUndeclaredVariables": "warn",
         "noUnusedFunctionParameters": "warn",
-        "noUnusedImports": "error"
+        "noUnusedImports": { "level": "error", "fix": "none" }
       },
       "performance": {
-        "noBarrelFile": "info",
-        "noReExportAll": "info"
+        "noBarrelFile": "error",
+        "noReExportAll": "error"
       },
       "style": {
         "noDoneCallback": "warn",
@@ -46,7 +46,7 @@
         "useExplicitLengthCheck": "warn",
         "useNamingConvention": {
           "level": "error",
-          "options": { "strictCase": false }
+          "options": { "enumMemberCase": "CONSTANT_CASE", "strictCase": false }
         },
         "useShorthandArrayType": "error",
         "useShorthandAssign": "error",
@@ -78,7 +78,7 @@
         "noDynamicNamespaceImportAccess": "error",
         "noEnum": "error",
         "noExportedImports": "error",
-        "noSecrets": "warn", // TODO: Change to "error" when more stable
+        "noSecrets": "info", // TODO: Change to "error" when more stable
         "noSubstr": "warn",
         "noUnknownPseudoClass": "warn",
         "noUnknownPseudoElement": "warn",
@@ -88,7 +88,7 @@
     }
   },
   "javascript": {
-    "globals": ["chrome", "Timer"], // TODO: Remove `Timer`; only used as type (from Bun globals)
+    "globals": ["chrome", "Timer"],
     "formatter": {
       "semicolons": "always",
       "trailingCommas": "all",
@@ -114,6 +114,9 @@
         "rules": {
           "correctness": {
             "noUndeclaredDependencies": "off"
+          },
+          "style": {
+            "noNamespaceImport": "off"
           }
         }
       },
