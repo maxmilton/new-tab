@@ -21,12 +21,13 @@ What started as an experiment to play with the Chrome browser APIs and explore w
 - Distraction-free, minimal design aesthetic with multiple themes.
 - A list of your open tabs, recently closed tabs, and top sites.
 - Search tabs, bookmarks, history, and top sites in one place.
-- Simple bookmarks bar.
 - Links to frequently used destinations in your browser.
+- Simple bookmarks bar.
+- Customisable UI.
+- Optional automatic or manual settings sync between browsers.
 
 ### Design goals
 
-<!-- prettier-ignore -->
 | Issue | Why / How |
 | --- | --- |
 | Access | Still have access to common things like the bookmarks bar etc. |

@@ -4,17 +4,18 @@ import { expect, test } from './fixtures';
 test('settings page', async ({ page, extensionId }) => {
   await page.goto(`chrome-extension://${extensionId}/settings.html`);
 
-  // FIXME: Better assertions
+  // FIXME: Better assertions.
 
   await expect(page).toHaveTitle('New Tab');
   await expect(page).toHaveURL(`chrome-extension://${extensionId}/settings.html`); // didn't redirect
 
   const labels = await page.locator('label').all();
-  expect(labels).toHaveLength(4);
   await expect(labels[0]).toHaveText('Theme');
   await expect(labels[1]).toHaveText('Show bookmarks bar');
   await expect(labels[2]).toHaveText('Sections');
   await expect(labels[3]).toHaveText('Reset');
+  await expect(labels[4]).toHaveText('Automatically sync settings');
+  expect(labels).toHaveLength(5);
 });
 
 test.skip('matches screenshot', async ({ page, extensionId }) => {
@@ -32,4 +33,4 @@ test('has no console calls or unhandled errors', async ({ page, extensionId }) =
   expect(consoleMessages).toHaveLength(0);
 });
 
-// TODO: Test it makes no external requests (other than fetch themes)
+// TODO: Test it makes no external requests (other than fetch themes).
