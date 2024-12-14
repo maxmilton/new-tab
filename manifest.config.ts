@@ -17,6 +17,7 @@ function gitRef() {
 }
 
 // FIXME: Remove these once @types/chrome is updated.
+// https://developer.chrome.com/docs/extensions/mv3/cross-origin-isolation/
 interface ManifestExtra {
   /** https://developer.chrome.com/docs/extensions/mv3/manifest/cross_origin_embedder_policy/ */
   cross_origin_embedder_policy?: {
@@ -35,7 +36,7 @@ export const createManifest = (
   name: 'New Tab',
   description: pkg.description,
   homepage_url: pkg.homepage,
-  version: pkg.version,
+  version: pkg.version.split('-')[0],
   // shippable releases should not have a named version
   version_name: debug ? gitRef() : undefined,
   minimum_chrome_version: '123', // for light-dark() CSS function
@@ -68,10 +69,10 @@ export const createManifest = (
   content_security_policy: {
     extension_pages: [
       "default-src 'none'",
+      "base-uri 'none'",
       "script-src 'self'",
       "style-src 'self'",
       "img-src 'self'",
-      "base-uri 'none'",
       '', // include trailing semicolon
     ].join(';'),
   },
