@@ -22,4 +22,13 @@ export interface UserStorageData {
   b?: boolean;
   /** Sections order user preference. */
   o?: SectionOrderItem[];
+  /** Settings sync enabled user preference. */
+  s?: boolean;
+}
+
+export interface SyncStorageData {
+  /** User settings data. */
+  data?: Omit<UserStorageData, 't' | 's'>;
+  /** Timestamp of the last sync.set operation. */
+  ts?: number;
 }

@@ -23,8 +23,15 @@ function setupMocks(): void {
     history: {
       search: noopAsyncArr,
     },
-    // @ts-expect-error - partial mock
     runtime: {
+      // @ts-expect-error - partial mock
+      onInstalled: {
+        addListener: noop,
+      },
+      // @ts-expect-error - partial mock
+      onStartup: {
+        addListener: noop,
+      },
       openOptionsPage: noopAsync,
     },
     // @ts-expect-error - partial mock
@@ -35,6 +42,13 @@ function setupMocks(): void {
       // @ts-expect-error - partial mock
       local: {
         get: () => Promise.resolve({ t: '' }),
+        remove: noopAsync,
+        set: noopAsync,
+      },
+      // @ts-expect-error - partial mock
+      sync: {
+        clear: noopAsync,
+        get: noopAsyncObj,
         remove: noopAsync,
         set: noopAsync,
       },

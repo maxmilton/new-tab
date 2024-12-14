@@ -1,7 +1,12 @@
 import { append, clone, collect, h } from 'stage1';
 import { compile } from 'stage1/macro' with { type: 'macro' };
 import { reconcile } from 'stage1/reconcile/non-keyed';
-import type { SectionOrderItem, ThemesData } from './types';
+import type {
+  SectionOrderItem,
+  SyncStorageData,
+  ThemesData,
+  UserStorageData,
+} from './types';
 import { DEFAULT_SECTION_ORDER, storage } from './utils';
 
 // TODO: Show errors in the UI.
@@ -10,6 +15,7 @@ import { DEFAULT_SECTION_ORDER, storage } from './utils';
 
 interface SettingsState {
   order: [SectionOrderItem[], SectionOrderItem[]];
+  pushSyncData?(forceUpdate?: boolean): Promise<void>;
 }
 
 type ItemIndex = [listIndex: 0 | 1, itemIndex: number];
@@ -27,6 +33,19 @@ const DEFAULT_THEME = 'auto';
 const themesData = fetch('themes.json').then(
   (response) => response.json() as Promise<ThemesData>,
 );
+
+const supportsSync = async (): Promise<boolean> => {
+  try {
+    await chrome.storage.sync.set({ _: 1 });
+    await chrome.storage.sync.remove('_');
+    if (chrome.runtime.lastError) {
+      return false;
+    }
+    return true;
+  } catch {
+    return false;
+  }
+};
 
 type SectionComponent = HTMLLIElement;
 
@@ -102,17 +121,23 @@ const SectionItem = (
 };
 
 interface Refs {
-  feedback: HTMLDivElement;
+  feedback: Text;
   theme: HTMLSelectElement;
   b: HTMLInputElement;
   se: HTMLUListElement;
   sd: HTMLUListElement;
   reset: HTMLButtonElement;
+
+  feedback2: Text;
+  sync: HTMLInputElement;
+  pull: HTMLButtonElement;
+  push: HTMLButtonElement;
+  clear: HTMLButtonElement;
 }
 
 const meta = compile(`
   <div>
-    <div @feedback></div>
+    <div>@feedback</div>
 
     <div class=row>
       <label>Theme</label>
@@ -150,6 +175,29 @@ const meta = compile(`
     <div class=row>
       <label>Reset</label>
       <button @reset>Reset all settings</button>
+    </div>
+
+    <hr>
+
+    <h2>Experimental</h2>
+
+    <h3>Sync Settings</h3>
+
+    <div class=row>
+      @feedback2
+    </div>
+
+    <div class=row>
+      <label>
+        <input @sync type=checkbox class=box disabled> Automatically sync settings
+      </label>
+      <small class=muted>Sync on profile startup (requires sign-in)</small>
+    </div>
+
+    <div class=row>
+      <button @pull disabled>Pull now (local ⟸ sync)</button>
+      <button @push disabled>Push now (local ⟹ sync)</button>
+      <button @clear disabled>Reset sync data</button>
     </div>
   </div>
 `);
@@ -192,8 +240,10 @@ const Settings = () => {
     });
 
     if (themeName === DEFAULT_THEME) {
-      void chrome.storage.local.remove('tn');
+      await chrome.storage.local.remove('tn');
     }
+
+    void state.pushSyncData?.();
   };
 
   const updateOrder = (order: SettingsState['order'], skipSave?: boolean) => {
@@ -214,6 +264,8 @@ const Settings = () => {
           o: order[0],
         });
       }
+
+      void state.pushSyncData?.();
     }
   };
 
@@ -234,15 +286,18 @@ const Settings = () => {
 
   refs.theme.onchange = () => updateTheme(refs.theme.value);
 
-  refs.b.onchange = () => {
+  refs.b.onchange = async () => {
+    // eslint-disable-next-line unicorn/prefer-ternary
     if (refs.b.checked) {
       // When value is same as default, we don't need to store it
-      void chrome.storage.local.remove('b');
+      await chrome.storage.local.remove('b');
     } else {
-      void chrome.storage.local.set({
+      await chrome.storage.local.set({
         b: true,
       });
     }
+
+    void state.pushSyncData?.();
   };
 
   // eslint-disable-next-line no-multi-assign
@@ -266,9 +321,83 @@ const Settings = () => {
     (item) => !orderEnabled.includes(item),
   );
 
-  void updateTheme(themeName);
+  refs.theme.value = themeName;
   refs.b.checked = !storage.b;
   updateOrder([orderEnabled, orderDisabled], true);
+
+  /* ********************************** */
+  // Experimental sync settings feature //
+  /* ********************************** */
+
+  refs.sync.checked = !!storage.s;
+
+  const updateSync = (syncData: SyncStorageData) => {
+    if (syncData.ts) {
+      refs.feedback2.nodeValue = `Sync data found (last updated: ${new Date(
+        syncData.ts,
+      ).toLocaleString()})`;
+      refs.pull.disabled = false;
+      refs.clear.disabled = false;
+    } else {
+      refs.feedback2.nodeValue = 'No sync data found';
+      refs.pull.disabled = true;
+      refs.clear.disabled = true;
+    }
+
+    refs.push.disabled = false;
+    refs.sync.disabled = false;
+
+    refs.sync.onchange = () => {
+      if (refs.sync.checked) {
+        void chrome.storage.local.set({
+          s: true,
+        });
+        // @ts-expect-error - doesn't need event argument
+        refs.pull.onclick?.();
+      } else {
+        void chrome.storage.local.remove('s');
+      }
+    };
+
+    refs.pull.onclick = () => {
+      if (syncData.data) {
+        void chrome.storage.local.set(syncData.data);
+        void updateTheme(syncData.data.tn ?? DEFAULT_THEME);
+        updateOrder([syncData.data.o ?? [...DEFAULT_SECTION_ORDER], []], true);
+      }
+    };
+
+    state.pushSyncData = async (forceUpdate?: boolean) => {
+      const { t, s, ...rest } =
+        await chrome.storage.local.get<UserStorageData>();
+
+      if (forceUpdate || s) {
+        const newSyncData: SyncStorageData = {
+          data: rest,
+          ts: Date.now(),
+        };
+        void chrome.storage.sync.set(newSyncData);
+        updateSync(newSyncData);
+      }
+    };
+
+    refs.push.onclick = () => state.pushSyncData!(true);
+
+    refs.clear.onclick = () => {
+      void chrome.storage.sync.clear();
+      updateSync({});
+    };
+  };
+
+  void supportsSync().then((canSync) => {
+    if (canSync) {
+      void chrome.storage.sync.get<SyncStorageData>().then(updateSync);
+      // TODO: Listen for sync data changes?
+      // chrome.storage.sync.onChanged.addListener((changes) => {});
+    } else {
+      refs.feedback2.nodeValue = 'Not signed in or sync not supported';
+    }
+  });
 
   return root;
 };
