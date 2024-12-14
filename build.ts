@@ -48,11 +48,9 @@ function compileCSS(src: string, from: string) {
 }
 
 /**
- * Construct HTML and CSS files and save them to disk.
+ * Construct HTML file and save it to disk.
  */
-async function makeHTML(pageName: string, stylePath: string) {
-  const styleSrc = await Bun.file(stylePath).text();
-  const css = compileCSS(styleSrc, stylePath);
+async function makeHTML(pageName: string) {
   const template = `
     <!doctype html>
     <meta charset=utf-8>
@@ -64,8 +62,16 @@ async function makeHTML(pageName: string, stylePath: string) {
     .trim()
     .replaceAll(/\n\s+/g, '\n'); // remove leading whitespace
 
-  await Bun.write(`dist/${pageName}.css`, css);
   await Bun.write(`dist/${pageName}.html`, template);
+}
+
+/**
+ * Construct CSS file and save it to disk.
+ */
+async function makeCSS(pageName: string, cssEntrypoint: string) {
+  const cssSource = await Bun.file(cssEntrypoint).text();
+  const css = compileCSS(cssSource, cssEntrypoint);
+  await Bun.write(`dist/${pageName}.css`, css);
 }
 
 /**
@@ -86,29 +92,37 @@ async function makeThemes() {
   await Bun.write('dist/themes.json', JSON.stringify(themes));
 }
 
-async function minifyJS(artifact: BuildArtifact) {
-  let source = await artifact.text();
+async function minifyJS(artifacts: BuildArtifact[]) {
+  for (const artifact of artifacts) {
+    if (artifact.kind === 'entry-point' || artifact.kind === 'chunk') {
+      const source = await artifact.text();
+      const result = await terser.minify(source, {
+        ecma: 2020,
+        module: true,
+        compress: {
+          comparisons: false,
+          negate_iife: false,
+          reduce_funcs: false, // prevent function inlining
+          passes: 3,
+          // XXX: Comment out to keep performance markers for debugging.
+          pure_funcs: ['performance.mark', 'performance.measure'],
+        },
+        mangle: {
+          properties: {
+            regex: /^\$\$|^__click$/,
+          },
+        },
+        format: {
+          wrap_func_args: true,
+          wrap_iife: true,
+        },
+      });
 
-  // Improve collapsing variables; terser doesn't do this so we do it manually.
-  source = source.replaceAll('const ', 'let ');
-
-  const result = await terser.minify(source, {
-    ecma: 2020,
-    module: true,
-    compress: {
-      reduce_funcs: false, // prevent functions being inlined
-      // XXX: Comment out to keep performance markers for debugging.
-      pure_funcs: ['performance.mark', 'performance.measure'],
-      passes: 3,
-    },
-    mangle: {
-      properties: {
-        regex: /^\$\$|^__click$/,
-      },
-    },
-  });
-
-  await Bun.write(artifact.path, result.code ?? '');
+      if (result.code) {
+        await Bun.write(artifact.path, result.code);
+      }
+    }
+  }
 }
 
 console.time('prebuild');
@@ -121,29 +135,35 @@ console.time('manifest');
 await Bun.write('dist/manifest.json', JSON.stringify(createManifest()));
 console.timeEnd('manifest');
 
-console.time('html+css');
-await makeHTML('newtab', 'src/css/newtab.xcss');
-await makeHTML('settings', 'src/css/settings.xcss');
-console.timeEnd('html+css');
+console.time('html');
+await makeHTML('newtab');
+await makeHTML('settings');
+console.timeEnd('html');
+
+console.time('css');
+await makeCSS('newtab', 'src/css/newtab.xcss');
+await makeCSS('settings', 'src/css/settings.xcss');
+console.timeEnd('css');
 
 console.time('themes');
 await makeThemes();
 console.timeEnd('themes');
 
 // New Tab & Settings apps
-console.time('build');
-const out = await Bun.build({
+console.time('build:1');
+const out1 = await Bun.build({
   entrypoints: ['src/newtab.ts', 'src/settings.ts'],
   outdir: 'dist',
   target: 'browser',
   minify: !dev,
   sourcemap: dev ? 'linked' : 'none',
 });
-console.timeEnd('build');
-console.log(out);
+console.timeEnd('build:1');
+console.log(out1.outputs);
+if (!out1.success) throw new AggregateError(out1.logs, 'Build failed');
 
 // Background service worker script
-console.time('build2');
+console.time('build:2');
 const out2 = await Bun.build({
   entrypoints: ['src/sw.ts'],
   outdir: 'dist',
@@ -151,13 +171,13 @@ const out2 = await Bun.build({
   minify: !dev,
   sourcemap: dev ? 'linked' : 'none',
 });
-console.timeEnd('build2');
-console.log(out2);
+console.timeEnd('build:2');
+console.log(out2.outputs);
+if (!out2.success) throw new AggregateError(out2.logs, 'Build failed');
 
 if (!dev) {
-  console.time('minify');
-  await minifyJS(out.outputs[0]);
-  await minifyJS(out.outputs[1]);
-  await minifyJS(out2.outputs[0]);
-  console.timeEnd('minify');
+  console.time('minify:js');
+  await minifyJS(out1.outputs);
+  await minifyJS(out2.outputs);
+  console.timeEnd('minify:js');
 }
