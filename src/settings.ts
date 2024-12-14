@@ -14,6 +14,7 @@ interface SettingsState {
 
 type ItemIndex = [listIndex: 0 | 1, itemIndex: number];
 
+/** Section drag-and-drop helper functions */
 interface SectionScope {
   indexOf(list: 0 | 1, item: SectionOrderItem): number;
   moveItem(from: ItemIndex, to: ItemIndex): void;
@@ -24,7 +25,7 @@ const DEFAULT_THEME = 'auto';
 
 // eslint-disable-next-line unicorn/prefer-top-level-await
 const themesData = fetch('themes.json').then(
-  (res) => res.json() as Promise<ThemesData>,
+  (response) => response.json() as Promise<ThemesData>,
 );
 
 type SectionComponent = HTMLLIElement;
@@ -137,7 +138,7 @@ const meta = compile(`
     <div class=row>
       <label>Sections</label>
       <fieldset>
-        <legend>DISPLAY ORDER</legend>
+        <legend>DISPLAY (in order)</legend>
         <ul @se class=item-list></ul>
       </fieldset>
       <fieldset>
