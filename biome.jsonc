@@ -117,6 +117,9 @@
           },
           "style": {
             "noNamespaceImport": "off"
+          },
+          "nursery": {
+            "noDynamicNamespaceImportAccess": "off"
           }
         }
       },
