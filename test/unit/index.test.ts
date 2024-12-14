@@ -35,7 +35,7 @@ describe('dist files', () => {
         expect(file.type).toBe(type); // TODO: Keep this? Type seems to be resolved from the file extension, not the file data.
       });
 
-      if (minBytes != null && maxBytes != null) {
+      if (minBytes !== undefined && maxBytes !== undefined) {
         test('is within expected file size limits', () => {
           expect.assertions(2);
           expect(file.size).toBeGreaterThan(minBytes);
