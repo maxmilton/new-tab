@@ -6,7 +6,7 @@ import { reset } from '../setup';
 // Completely reset DOM and global state between tests
 afterEach(reset);
 
-const MODULE_PATH = import.meta.resolveSync('../../dist/settings.js');
+const MODULE_PATH = Bun.resolveSync('./dist/settings.js', '.');
 const themes = Bun.file('dist/themes.json');
 
 async function load() {
@@ -32,7 +32,7 @@ test('renders entire settings app', async () => {
   await load();
   expect(document.body.innerHTML.length).toBeGreaterThan(600);
 
-  // TODO: More/better assertions
+  // TODO: More and better assertions.
 });
 
 test('does not call any console methods', async () => {

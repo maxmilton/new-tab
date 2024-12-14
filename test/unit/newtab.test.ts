@@ -6,7 +6,7 @@ import { reset } from '../setup';
 // Completely reset DOM and global state between tests
 afterEach(reset);
 
-const MODULE_PATH = import.meta.resolveSync('../../dist/newtab.js');
+const MODULE_PATH = Bun.resolveSync('./dist/newtab.js', '.');
 
 async function load() {
   // Workaround for hack in src/BookmarkBar.ts that waits for styles to be loaded
@@ -26,8 +26,8 @@ test('renders entire newtab app', async () => {
   expect(document.body.querySelector('#m')).toBeTruthy();
   expect(document.body.querySelector('#d')).toBeTruthy();
 
-  // TODO: More/better assertions
-  // TODO: Check all section headings exist; a h2 with text 'Open Tabs' x5
+  // TODO: More and better assertions.
+  // TODO: Check all section headings exist; a h2 with text 'Open Tabs' x5.
 });
 
 test('does not call any console methods', async () => {

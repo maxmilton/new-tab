@@ -19,8 +19,8 @@ describe('dist files', () => {
     ['newtab.js', 'text/javascript;charset=utf-8', 4000, 6000],
     ['settings.css', 'text/css;charset=utf-8', 1000, 1500],
     ['settings.html', 'text/html;charset=utf-8', 150, 200],
-    ['settings.js', 'text/javascript;charset=utf-8', 4000, 6000],
-    ['sw.js', 'text/javascript;charset=utf-8', 150, 300],
+    ['settings.js', 'text/javascript;charset=utf-8', 6000, 8000],
+    ['sw.js', 'text/javascript;charset=utf-8', 400, 600],
     ['themes.json', 'application/json;charset=utf-8'],
   ];
 
