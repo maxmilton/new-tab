@@ -13,7 +13,7 @@ export const test = baseTest.extend<{
   async context({}, use) {
     const extensionPath = path.join(__dirname, '../../dist');
     const context = await chromium.launchPersistentContext('', {
-      // headless: false,
+      headless: false,
       args: [
         '--headless=new', // chromium 112+
         // '--virtual-time-budget=5000', // chromium 112+, fast-forward timers
