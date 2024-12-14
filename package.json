@@ -1,6 +1,6 @@
 {
   "name": "new-tab",
-  "version": "0.23.0",
+  "version": "0.24.0-next.0",
   "description": "⚡ A high-performance new tab page that gets you where you need to go faster.",
   "repository": "github:maxmilton/new-tab",
   "bugs": "https://github.com/maxmilton/new-tab/issues",
