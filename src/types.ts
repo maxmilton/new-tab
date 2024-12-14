@@ -8,6 +8,9 @@ declare global {
   }
 }
 
+/** JSON object with theme name keys and raw CSS code values. */
+export type ThemesData = Record<string, string>;
+
 export type SectionOrderItem = (typeof DEFAULT_SECTION_ORDER)[number];
 
 export interface UserStorageData {
@@ -20,6 +23,3 @@ export interface UserStorageData {
   /** Sections order user preference. */
   o?: SectionOrderItem[];
 }
-
-/** JSON object with theme name keys and raw CSS code values. */
-export type ThemesData = Record<string, string>;
