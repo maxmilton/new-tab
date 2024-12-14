@@ -28,11 +28,11 @@ export const test = baseTest.extend<{
     await context.close();
   },
   async extensionId({ context }, use) {
-    let [background] = context.serviceWorkers();
+    let [sw] = context.serviceWorkers();
     // eslint-disable-next-line @typescript-eslint/no-unnecessary-condition
-    background ??= await context.waitForEvent('serviceworker');
+    sw ??= await context.waitForEvent('serviceworker', { timeout: 200 });
 
-    const extensionId = background.url().split('/')[2];
+    const extensionId = sw.url().split('/')[2];
     await use(extensionId);
   },
 });

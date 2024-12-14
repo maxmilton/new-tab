@@ -1,11 +1,9 @@
 import { expect, test } from './fixtures';
 
-test('background service worker', async ({ context }) => {
-  let [background] = context.serviceWorkers();
-  // eslint-disable-next-line @typescript-eslint/no-unnecessary-condition
-  background ??= await context.waitForEvent('serviceworker');
-
-  // FIXME: Better assertions
-
-  expect(background).toBeTruthy();
+test('has a single background service worker (sw.js)', async ({ context, extensionId }) => {
+  const workers = context.serviceWorkers();
+  expect(workers).toHaveLength(1);
+  expect(workers[0]?.url()).toBe(`chrome-extension://${extensionId}/sw.js`);
 });
+
+// TODO: Check there are no console messages or unhandled errors in the worker.
