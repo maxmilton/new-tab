@@ -1,7 +1,7 @@
 import type { UserStorageData } from './types';
 
 performance.mark('Load Storage');
-export const storage: UserStorageData = await chrome.storage.local.get();
+export const storage = await chrome.storage.local.get<UserStorageData>();
 
 // NOTE: When updating also update references that lookup items by index
 export const DEFAULT_SECTION_ORDER = [
@@ -17,7 +17,7 @@ declare const s: HTMLInputElement;
 
 // Simplified synthetic click event implementation of setupSyntheticEvent() from
 // stage1, plus special handling for browser internal links (e.g. chrome://)
-// https://github.com/maxmilton/stage1/blob/master/src/events.ts
+// @see https://github.com/maxmilton/stage1/blob/master/src/events.ts
 // eslint-disable-next-line @typescript-eslint/no-invalid-void-type, consistent-return
 export const handleClick = (event: MouseEvent): false | void => {
   let node = event.target as
