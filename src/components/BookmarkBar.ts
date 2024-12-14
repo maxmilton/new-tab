@@ -48,6 +48,7 @@ export const BookmarkBar = (): BookmarkBarComponent => {
       let index = 0;
       let node: ReturnType<typeof BookmarkNode>;
 
+      // Add one bookmark at a time until we overflow the max width
       for (; index < len; index++) {
         node = append(BookmarkNode(bookmarks[index]), root);
         width += node.clientWidth;
@@ -131,3 +132,8 @@ export const BookmarkBar = (): BookmarkBarComponent => {
 
   return root;
 };
+
+// // Improve performance of lookups on DOM nodes
+// // @ts-expect-error -- add new properties to HTMLElement
+// // eslint-disable-next-line no-multi-assign
+// Element.prototype.__mouseover = Element.prototype.__mouseout = undefined;
