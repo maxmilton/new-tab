@@ -14,7 +14,10 @@
   "css.validate": false,
   "scss.validate": false,
   "stylelint.validate": ["css", "scss"],
-  "files.associations": { "*.xcss": "scss" },
+  "files.associations": {
+    "package.json": "jsonc",
+    "*.xcss": "scss"
+  },
 
   "[css][html][json][jsonc][markdown][scss][xml]": {
     "editor.codeActionsOnSave": {
