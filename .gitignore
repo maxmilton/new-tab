@@ -2,6 +2,7 @@
 *-lock.yaml
 *.bak
 *.lock
+!bun.lock
 *.log
 *.zip
 /coverage/
