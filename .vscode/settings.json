@@ -15,8 +15,8 @@
   "scss.validate": false,
   "stylelint.validate": ["css", "scss"],
   "files.associations": {
-    "package.json": "jsonc",
-    "*.xcss": "scss"
+    "*.xcss": "scss",
+    "package.json": "jsonc"
   },
 
   "[css][html][json][jsonc][markdown][scss][xml]": {
