@@ -29,18 +29,18 @@
     "@maxmilton/eslint-config": "0.0.8",
     "@maxmilton/stylelint-config": "0.1.2",
     "@maxmilton/test-utils": "0.0.8",
-    "@playwright/test": "1.50.0",
-    "@types/bun": "1.2.1",
-    "@types/chrome": "0.0.299",
+    "@playwright/test": "1.50.1",
+    "@types/bun": "1.2.2",
+    "@types/chrome": "0.0.301",
     "ekscss": "0.0.20",
     "eslint": "9.19.0",
     "eslint-plugin-unicorn": "56.0.1",
-    "happy-dom": "16.7.3",
+    "happy-dom": "17.0.0",
     "lightningcss": "1.29.1",
     "stylelint": "16.14.1",
     "stylelint-config-standard": "37.0.0",
-    "terser": "5.37.0",
+    "terser": "5.38.0",
     "typescript": "5.7.3",
-    "typescript-eslint": "8.22.0"
+    "typescript-eslint": "8.23.0"
   }
 }
