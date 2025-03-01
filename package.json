@@ -30,7 +30,7 @@
     "@maxmilton/stylelint-config": "0.1.2",
     "@maxmilton/test-utils": "0.0.8",
     "@playwright/test": "1.49.1",
-    "@types/bun": "1.1.14",
+    "@types/bun": "1.2.4",
     "@types/chrome": "0.0.287",
     "ekscss": "0.0.20",
     "eslint": "9.17.0",
