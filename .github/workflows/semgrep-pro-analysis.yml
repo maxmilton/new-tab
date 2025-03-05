@@ -23,7 +23,7 @@ jobs:
       - uses: actions/checkout@v4
       - run: semgrep ci --sarif > semgrep.sarif
         env:
-          SEMGREP_RULES: p/default
+          SEMGREP_APP_TOKEN: ${{ secrets.SEMGREP_APP_TOKEN }}
       - uses: github/codeql-action/upload-sarif@v3
         if: always()
         with:
