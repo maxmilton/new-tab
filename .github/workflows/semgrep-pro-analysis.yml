@@ -1,4 +1,4 @@
-name: semgrep
+name: semgrep-pro
 on:
   push:
     branches: [master, next]
