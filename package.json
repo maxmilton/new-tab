@@ -25,22 +25,22 @@
   "devDependencies": {
     "@biomejs/biome": "1.9.4",
     "@ekscss/plugin-import": "0.0.15",
-    "@eslint/js": "9.21.0",
+    "@eslint/js": "9.23.0",
     "@maxmilton/eslint-config": "0.0.9",
     "@maxmilton/stylelint-config": "0.2.0",
     "@maxmilton/test-utils": "0.0.8",
-    "@playwright/test": "1.50.1",
-    "@types/bun": "1.2.4",
-    "@types/chrome": "0.0.308",
+    "@playwright/test": "1.51.1",
+    "@types/bun": "1.2.5",
+    "@types/chrome": "0.0.310",
     "ekscss": "0.0.20",
-    "eslint": "9.21.0",
+    "eslint": "9.23.0",
     "eslint-plugin-unicorn": "57.0.0",
-    "happy-dom": "17.2.2",
-    "lightningcss": "1.29.1",
-    "stylelint": "16.15.0",
+    "happy-dom": "17.4.4",
+    "lightningcss": "1.29.3",
+    "stylelint": "16.16.0",
     "stylelint-config-standard": "37.0.0",
     "terser": "5.39.0",
     "typescript": "5.8.2",
-    "typescript-eslint": "8.26.0"
+    "typescript-eslint": "8.27.0"
   }
 }
