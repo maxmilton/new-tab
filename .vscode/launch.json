@@ -9,13 +9,36 @@
       "url": "ws://localhost:6499/"
     },
     {
+      "name": "bun <CURRENT_FILE>",
+      "type": "bun",
+      "request": "launch",
+      "runtime": "bun",
+      "runtimeArgs": [], // bun exec arguments
+      "program": "${file}",
+      "args": [], // program arguments
+      "cwd": "${workspaceFolder}",
+      "env": {},
+      "strictEnv": false, // do not inherit env from the parent process
+      "watchMode": false, // same as bun --watch, or use "hot" for bun --hot
+      "stopOnEntry": false,
+      "noDebug": false // disable debugger (breakpoints will not be hit)
+    },
+    {
       "name": "bun test <CURRENT_FILE>",
       "type": "bun",
       "request": "launch",
       "runtimeArgs": ["test"],
       "program": "${file}",
       "internalConsoleOptions": "openOnSessionStart"
+    },
+    {
+      "name": "bun test (all)",
+      "type": "bun",
+      "request": "launch",
+      "runtimeArgs": ["run", "test"],
+      "program": "--", // HACK: Workaround for bun extension needing "program"
+      "cwd": "${workspaceFolder}",
+      "internalConsoleOptions": "openOnSessionStart"
     }
-    // TODO: Add a way to run all tests
   ]
 }
