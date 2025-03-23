@@ -3,7 +3,10 @@
 import { append, clone, create, h } from 'stage1';
 import { Link, type LinkComponent, type LinkProps } from './Link';
 
-export type BookmarkTreeNode = chrome.bookmarks.BookmarkTreeNode;
+export type BookmarkTreeNode = Omit<
+  chrome.bookmarks.BookmarkTreeNode,
+  'syncing'
+>;
 
 type FolderPopupComponent = HTMLDivElement & {
   $$adjustPosition(): void;
