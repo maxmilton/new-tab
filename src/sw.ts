@@ -37,27 +37,25 @@ chrome.runtime.onInstalled.addListener(async () => {
 
 // On profile startup, pull remote user settings; local <- sync
 chrome.runtime.onStartup.addListener(() => {
-  void chrome.storage.local
-    .get<UserStorageData>(['s', 'tn'])
-    .then((settings) => {
-      // Only when sync is enabled
-      if (!settings.s) return;
+  chrome.storage.local.get<UserStorageData>(['s', 'tn'], (settings) => {
+    // Only when sync is enabled
+    if (!settings.s) return;
 
-      void chrome.storage.sync.get<SyncStorageData>().then((remote) => {
-        if (remote.data) {
-          if (remote.data.tn === settings.tn) {
-            void chrome.storage.local.set(remote.data);
-          } else {
-            void fetch('themes.json')
-              .then((res) => res.json() as Promise<ThemesData>)
-              .then((themes) => {
-                void chrome.storage.local.set({
-                  t: themes[settings.tn ?? 'auto'],
-                  ...remote.data,
-                });
+    chrome.storage.sync.get<SyncStorageData>((remote) => {
+      if (remote.data) {
+        if (remote.data.tn === settings.tn) {
+          void chrome.storage.local.set(remote.data);
+        } else {
+          void fetch('themes.json')
+            .then((res) => res.json() as Promise<ThemesData>)
+            .then((themes) => {
+              void chrome.storage.local.set({
+                t: themes[settings.tn ?? 'auto'],
+                ...remote.data,
               });
-          }
+            });
         }
-      });
+      }
     });
+  });
 });
