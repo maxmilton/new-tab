@@ -391,7 +391,7 @@ const Settings = () => {
 
   void supportsSync().then((canSync) => {
     if (canSync) {
-      void chrome.storage.sync.get<SyncStorageData>().then(updateSync);
+      chrome.storage.sync.get<SyncStorageData>(updateSync);
       // TODO: Listen for sync data changes?
       // chrome.storage.sync.onChanged.addListener((changes) => {});
     } else {
