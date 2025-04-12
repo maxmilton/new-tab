@@ -11,10 +11,11 @@
   "scripts": {
     "build": "NODE_ENV=production bun build.ts",
     "dev": "NODE_ENV=development bun build.ts",
-    "lint": "bun lint:fmt && bun lint:css && bun lint:js && bun lint:ts",
+    "lint": "bun lint:fmt && bun lint:css && bun lint:js && bun lint:js2 && bun lint:ts",
     "lint:css": "stylelint '**/*.{css,xcss}'",
     "lint:fmt": "biome check --diagnostic-level=warn",
-    "lint:js": "eslint",
+    "lint:js": "oxlint --format=stylish",
+    "lint:js2": "eslint",
     "lint:ts": "tsc --noEmit",
     "test": "bun test",
     "test:e2e": "playwright test"
@@ -37,6 +38,7 @@
     "eslint-plugin-unicorn": "57.0.0",
     "happy-dom": "17.4.4",
     "lightningcss": "1.29.3",
+    "oxlint": "0.16.5",
     "stylelint": "16.16.0",
     "stylelint-config-standard": "37.0.0",
     "terser": "5.39.0",

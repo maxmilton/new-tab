@@ -23,7 +23,7 @@
         "noUndeclaredDependencies": "warn",
         "noUndeclaredVariables": "warn",
         "noUnusedFunctionParameters": "warn",
-        "noUnusedImports": { "level": "error", "fix": "none" }
+        "noUnusedImports": { "level": "warn", "fix": "none" }
       },
       "performance": {
         "noBarrelFile": "error",
@@ -59,7 +59,7 @@
         "noApproximativeNumericConstant": "error",
         "noAssignInExpressions": "off",
         "noConfusingVoidType": "off",
-        "noConsoleLog": "warn",
+        // "noConsoleLog": "warn", // covered by oxlint
         "noConstEnum": "off",
         "noDuplicateAtImportRules": "error",
         "noDuplicateFontNames": "error",
@@ -97,7 +97,7 @@
   },
   "overrides": [
     {
-      "include": [".vscode/*.json", "tsconfig*.json"],
+      "include": [".vscode/*.json", ".oxlintrc.json", "tsconfig*.json"],
       "json": {
         "parser": {
           "allowComments": true,

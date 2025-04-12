@@ -10,7 +10,7 @@ export default ts.config(
   eslint.configs.recommended,
   ...ts.configs.strictTypeChecked,
   ...ts.configs.stylisticTypeChecked,
-  unicorn.configs['flat/recommended'],
+  unicorn.configs.recommended,
   mm.configs.recommended,
   {
     linterOptions: {
@@ -26,17 +26,25 @@ export default ts.config(
       },
     },
     rules: {
-      // FIXME: Remove this once fixed upstream (incorrectly reports chrome as deprecated).
-      '@typescript-eslint/no-deprecated': OFF,
+      /* Rules not supported in oxlint yet */
+      // eslint: https://github.com/oxc-project/oxc/issues/479
+      // typescript-eslint: https://github.com/oxc-project/oxc/issues/2180
+      // eslint-plugin-import: https://github.com/oxc-project/oxc/issues/1117
+      // eslint-plugin-promise: https://github.com/oxc-project/oxc/issues/4655
+      // eslint-plugin-unicorn: https://github.com/oxc-project/oxc/issues/684
+      // eslint-plugin-jsdoc: https://github.com/oxc-project/oxc/issues/1170
+      // eslint-plugin-n: https://github.com/oxc-project/oxc/issues/493
 
+      // bad browser support
+      'unicorn/prefer-at': OFF,
       // prefer to clearly separate Bun and DOM
       'unicorn/prefer-global-this': OFF,
 
       /* Performance and byte savings */
-      // alternatives offer byte savings and better performance
-      '@typescript-eslint/prefer-string-starts-ends-with': OFF,
       // byte savings at the cost of readability
       '@typescript-eslint/no-confusing-void-expression': OFF, // TODO: Consider removing
+      // alternatives offer byte savings and better performance
+      '@typescript-eslint/prefer-string-starts-ends-with': OFF, // oxlint only has unicorn/prefer-string-starts-ends-with
       // byte savings (but reduces debugging ability)
       '@typescript-eslint/restrict-plus-operands': OFF,
       // byte savings (but reduces debugging ability)
@@ -44,33 +52,32 @@ export default ts.config(
       // byte savings with same performance
       'prefer-template': OFF,
       // byte savings
-      'no-plusplus': OFF,
-      // byte savings + faster
-      'unicorn/explicit-length-check': OFF,
       'unicorn/no-array-callback-reference': OFF,
-      // forEach is slower but more compact (for non-performance-critical code)
-      'unicorn/no-array-for-each': OFF,
-      'unicorn/no-await-expression-member': OFF,
-      // indexOf is faster (in Chrome)
-      'unicorn/prefer-includes': OFF,
-      // saves 3 bytes to use arrow function
-      'unicorn/prefer-native-coercion-functions': OFF,
-      // byte savings (minification doesn't currently automatically remove)
-      'unicorn/switch-case-braces': [ERROR, 'avoid'],
 
       /* stage1 */
       // underscores in synthetic event handler names
       'no-underscore-dangle': OFF,
-      'unicorn/prefer-add-event-listener': OFF,
-      'unicorn/prefer-dom-node-append': OFF,
-      'unicorn/prefer-query-selector': OFF,
-    },
-  },
-  {
-    files: ['build.ts'],
-    rules: {
+
+      /* Rules covered by oxlint */
+      '@typescript-eslint/no-non-null-assertion': OFF,
+      '@typescript-eslint/no-var-requires': OFF,
+      'func-names': OFF,
       'no-await-in-loop': OFF,
       'no-console': OFF,
+      'no-plusplus': OFF,
+      'unicorn/explicit-length-check': OFF,
+      'unicorn/no-array-for-each': OFF,
+      'unicorn/no-await-expression-member': OFF,
+      'unicorn/no-lonely-if': 'off',
+      'unicorn/prefer-add-event-listener': OFF,
+      'unicorn/prefer-dom-node-append': OFF,
+      'unicorn/prefer-dom-node-dataset': OFF,
+      'unicorn/prefer-dom-node-remove': OFF,
+      'unicorn/prefer-includes': OFF,
+      'unicorn/prefer-native-coercion-functions': OFF,
+      'unicorn/prefer-query-selector': OFF,
+      'unicorn/prefer-string-replace-all': OFF,
+      'unicorn/switch-case-braces': OFF,
     },
   },
   {

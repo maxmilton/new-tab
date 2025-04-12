@@ -1,0 +1,197 @@
+{
+  "$schema": "./node_modules/oxlint/configuration_schema.json",
+  "plugins": [
+    "jsdoc",
+    "node",
+    "import",
+    "promise",
+    "unicorn",
+    "typescript",
+    "oxc"
+  ],
+  "categories": {
+    "correctness": "error",
+    "nursery": "warn",
+    "pedantic": "warn",
+    "perf": "error",
+    "restriction": "error",
+    "style": "warn",
+    "suspicious": "error"
+  },
+  // https://github.com/oxc-project/javascript-globals/blob/main/src/lib.rs
+  "env": {
+    "browser": true,
+    "builtin": true,
+    "es2025": true,
+    "webextensions": true
+  },
+  "globals": {
+    "Bun": "readonly",
+    "process": "readonly"
+  },
+  "settings": {
+    "jsdoc": {
+      "ignoreInternal": true
+    }
+  },
+  "rules": {
+    /* Sane overrides for "categories" */
+    "consistent-indexed-object-style": ["warn", "record"],
+    "eqeqeq": ["error", { "null": "ignore" }],
+    "exports-last": "off",
+    "func-names": ["error", "as-needed"],
+    "func-style": ["error", "declaration", { "allowArrowFunctions": true }],
+    "init-declarations": "off",
+    "max-dependencies": "off",
+    "max-depth": "off",
+    "max-lines-per-function": "off",
+    "max-lines": "off",
+    "max-nested-callbacks": "off",
+    "max-params": "off",
+    "no-async-await": "off",
+    "no-const-enum": "off", // bun handles well
+    // "no-magic-numbers": [
+    //   "warn",
+    //   {
+    //     "ignoreArrayIndexes": true,
+    //     "ignoreDefaultValues": true,
+    //     "ignoreClassFieldInitialValues": true,
+    //     "ignoreEnums": true,
+    //     "ignoreNumericLiteralTypes": true,
+    //     "ignoreReadonlyClassProperties": true,
+    //     "ignoreTypeIndexes": true
+    //   }
+    // ],
+    "no-magic-numbers": "off",
+    "no-non-null-assertion": "warn",
+    "no-null": "off",
+    "no-optional-chaining": "off",
+    "no-rest-spread-properties": "off",
+    "no-ternary": "off",
+    "no-unused-vars": [
+      "warn",
+      {
+        "ignoreRestSiblings": true,
+        "argsIgnorePattern": "^_",
+        "varsIgnorePattern": "^_"
+      }
+    ],
+    "no-void": "off",
+    "promise/catch-or-return": ["error", { "allowThen": true }],
+    "sort-imports": "off",
+    "sort-keys": "off",
+    "unicorn/filename-case": ["error", { "case": "kebabCase" }],
+    "yoda": ["warn", "never"],
+
+    /* Performance and byte savings */
+    // forEach is slower but more compact (for non-performance-critical code)
+    "no-array-for-each": "off",
+    // byte savings
+    "no-plusplus": "off",
+    "promise/prefer-await-to-callbacks": "off",
+    // controlling promise resolve timing can lead to better performance
+    "promise/prefer-await-to-then": "off",
+    // byte savings + faster
+    "unicorn/explicit-length-check": "off",
+    "unicorn/no-await-expression-member": "off",
+    // indexOf is faster (in Chrome)
+    "unicorn/prefer-includes": "off",
+    // saves 3 bytes to use arrow function
+    "unicorn/prefer-native-coercion-functions": "off",
+    // bad browser support and slower
+    "unicorn/prefer-string-replace-all": "off",
+    // alternatives offer byte savings and better performance
+    "unicorn/prefer-string-starts-ends-with": "off",
+    // byte savings (minification doesn't currently automatically remove)
+    "unicorn/switch-case-braces": ["error", "avoid"],
+
+    /* stage1 */
+    "prefer-add-event-listener": "off",
+    "prefer-dom-node-append": "off",
+    "prefer-dom-node-remove": "off",
+
+    // TODO: Enable these once oxlint supports type checking
+    "explicit-function-return-type": "off",
+
+    /* Covered by Biome formatter */
+    "curly": "off",
+    "max-len": "off",
+    "no-undefined": "off",
+    "unicorn/no-nested-ternary": "off"
+  },
+  "overrides": [
+    {
+      "files": ["*.cjs"],
+      "env": {
+        "commonjs": true,
+        "es2025": false
+      },
+      "rules": {
+        "no-commonjs": "off",
+        "no-require-imports": "off",
+        "unambiguous": "off"
+      }
+    },
+    {
+      "files": ["*.config.ts", "*.config.mjs"],
+      "env": {
+        "node": true
+      },
+      "rules": {
+        "func-style": ["error", "declaration"],
+        "no-anonymous-default-export": "off",
+        "no-default-export": "off"
+      }
+    },
+    {
+      "files": ["*.test.ts", "*.spec.ts", "test/**"],
+      "plugins": ["jest", "vitest"],
+      "env": {
+        "jest": true,
+        "node": true,
+        "vitest": true
+      },
+      "globals": {
+        "$console": "readonly",
+        "happyDOM": "readonly",
+        "Loader": "readonly"
+      },
+      "rules": {
+        "catch-or-return": "off",
+        "func-style": "off",
+        "import/no-namespace": "off",
+        "no-empty-function": "off",
+        "no-magic-numbers": "off",
+        "unicorn/filename-case": [
+          "error",
+          { "cases": { "kebabCase": true, "pascalCase": true } }
+        ]
+      }
+    },
+    {
+      "files": ["build.ts"],
+      "env": {
+        "node": true
+      },
+      "rules": {
+        "func-style": ["error", "declaration"],
+        "import/no-namespace": "off",
+        "no-await-in-loop": "off",
+        "no-console": "off",
+        "no-magic-numbers": "off"
+      }
+    },
+    {
+      "files": ["src/components/**"],
+      "rules": {
+        "unicorn/filename-case": ["error", { "case": "pascalCase" }]
+      }
+    },
+    {
+      "files": ["src/sw.ts"],
+      "env": {
+        "serviceworker": true
+      }
+    }
+  ]
+}
