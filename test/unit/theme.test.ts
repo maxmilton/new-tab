@@ -39,7 +39,7 @@ const cssVariables = [
 describe('themes.json', () => {
   test('is valid JSON', () => {
     expect.assertions(1);
-    // eslint-disable-next-line unicorn/prefer-structured-clone
+    // oxlint-disable-next-line unicorn/prefer-structured-clone
     expect(JSON.parse(JSON.stringify(themes))).toEqual(themes);
   });
 
@@ -171,7 +171,7 @@ async function load(themeName?: (typeof themeNames)[number]) {
 
   // inject newtab.css
   const style = window.document.createElement('style');
-  // eslint-disable-next-line no-multi-assign
+  // oxlint-disable-next-line no-multi-assign
   style.textContent = newtabCSS ??= await Bun.file('dist/newtab.css').text();
   window.document.head.appendChild(style);
 

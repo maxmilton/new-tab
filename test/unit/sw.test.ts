@@ -1,6 +1,4 @@
-import { afterEach, expect, test } from 'bun:test';
-import { spyOn } from 'bun:test';
-import { describe } from 'bun:test';
+import { afterEach, describe, expect, spyOn, test } from 'bun:test';
 import { performanceSpy } from '@maxmilton/test-utils/spy';
 import { reset } from '../setup';
 

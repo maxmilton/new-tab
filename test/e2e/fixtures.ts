@@ -1,6 +1,7 @@
 // https://playwright.dev/docs/chrome-extensions
 
-/* eslint-disable no-empty-pattern, unicorn/prefer-module */
+/* eslint-disable unicorn/prefer-module */
+/* oxlint-disable no-empty-pattern */
 
 import path from 'node:path';
 import { type BrowserContext, test as baseTest, chromium } from '@playwright/test';

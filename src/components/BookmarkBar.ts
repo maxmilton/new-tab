@@ -110,7 +110,7 @@ export const BookmarkBar = (): BookmarkBarComponent => {
   // XXX: Similar to stage1 synthetic event logic but does not stop propagating
   // once an event handler is called + extra relatedTarget checks
   // https://github.com/maxmilton/stage1/blob/08cb3c08cb3e5513c181f768ae92c488cfe2a17a/src/events.ts#L3
-  // eslint-disable-next-line no-multi-assign
+  // oxlint-disable-next-line no-multi-assign
   root.onmouseover = root.onmouseout = (event) => {
     const eventKey = ('__' + event.type) as '__mouseover' | '__mouseout';
     // null when mouse moves from/to outside the viewport
@@ -135,5 +135,5 @@ export const BookmarkBar = (): BookmarkBarComponent => {
 
 // // Improve performance of lookups on DOM nodes
 // // @ts-expect-error -- add new properties to HTMLElement
-// // eslint-disable-next-line no-multi-assign
+// // oxlint-disable-next-line no-multi-assign
 // Element.prototype.__mouseover = Element.prototype.__mouseout = undefined;

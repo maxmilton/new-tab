@@ -12,6 +12,7 @@ const dev = mode === 'development';
 
 /**
  * Generate minified CSS from XCSS source.
+ * @internal
  */
 function compileCSS(src: string, from: string) {
   const compiled = xcss.compile(src, {
@@ -25,7 +26,7 @@ function compileCSS(src: string, from: string) {
     if (warning.file) {
       console.log(
         `  at ${[warning.file, warning.line, warning.column]
-          .filter((x) => x != null)
+          .filter((x) => x !== undefined)
           .join(':')}`,
       );
     }
@@ -36,7 +37,7 @@ function compileCSS(src: string, from: string) {
     filename: from,
     code: new TextEncoder().encode(compiled.css),
     minify: !dev,
-    // eslint-disable-next-line no-bitwise
+    // oxlint-disable-next-line no-bitwise
     targets: { chrome: 123 << 16 }, // matches manifest minimum_chrome_version
   });
 
@@ -49,6 +50,7 @@ function compileCSS(src: string, from: string) {
 
 /**
  * Construct HTML file and save it to disk.
+ * @internal
  */
 async function makeHTML(pageName: string) {
   const template = `
@@ -67,6 +69,7 @@ async function makeHTML(pageName: string) {
 
 /**
  * Construct CSS file and save it to disk.
+ * @internal
  */
 async function makeCSS(pageName: string, cssEntrypoint: string) {
   const cssSource = await Bun.file(cssEntrypoint).text();
@@ -76,6 +79,7 @@ async function makeCSS(pageName: string, cssEntrypoint: string) {
 
 /**
  * Compile all themes, combine into a single JSON file, and save it to disk.
+ * @internal
  */
 async function makeThemes() {
   const themeFiles = await readdir('src/css/themes');

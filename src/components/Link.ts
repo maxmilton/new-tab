@@ -28,7 +28,7 @@ const view = h<LinkComponent>(meta.html);
 //
 //   refs.i.src =
 //     '_favicon?size=16&pageUrl=' + encodeURIComponent((root.href = props.url));
-//   // eslint-disable-next-line no-multi-assign
+//   // oxlint-disable-next-line no-multi-assign
 //   root.title = refs.t.nodeValue = props.title;
 //
 //   return root;
@@ -42,7 +42,7 @@ export const Link = (props: LinkProps): LinkComponent => {
 
   (root.firstChild as HTMLImageElement).src =
     '_favicon?size=16&pageUrl=' + encodeURIComponent((root.href = props.url));
-  // eslint-disable-next-line no-multi-assign
+  // oxlint-disable-next-line no-multi-assign
   root.title = (root.lastChild as Text).nodeValue = props.title;
 
   return root;

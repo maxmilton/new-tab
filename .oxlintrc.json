@@ -121,18 +121,6 @@
   },
   "overrides": [
     {
-      "files": ["*.cjs"],
-      "env": {
-        "commonjs": true,
-        "es2025": false
-      },
-      "rules": {
-        "no-commonjs": "off",
-        "no-require-imports": "off",
-        "unambiguous": "off"
-      }
-    },
-    {
       "files": ["*.config.ts", "*.config.mjs"],
       "env": {
         "node": true

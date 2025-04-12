@@ -42,7 +42,7 @@ export default ts.config(
 
       /* Performance and byte savings */
       // byte savings at the cost of readability
-      '@typescript-eslint/no-confusing-void-expression': OFF, // TODO: Consider removing
+      '@typescript-eslint/no-confusing-void-expression': OFF,
       // alternatives offer byte savings and better performance
       '@typescript-eslint/prefer-string-starts-ends-with': OFF, // oxlint only has unicorn/prefer-string-starts-ends-with
       // byte savings (but reduces debugging ability)
@@ -59,12 +59,19 @@ export default ts.config(
       'no-underscore-dangle': OFF,
 
       /* Rules covered by oxlint */
+      '@typescript-eslint/no-explicit-any': OFF,
       '@typescript-eslint/no-non-null-assertion': OFF,
       '@typescript-eslint/no-var-requires': OFF,
       'func-names': OFF,
+      'guard-for-in': OFF,
       'no-await-in-loop': OFF,
+      'no-bitwise': OFF,
       'no-console': OFF,
+      'no-empty-pattern': OFF,
+      'no-multi-assign': OFF,
       'no-plusplus': OFF,
+      // 'no-return-assign': OFF, // currently broken in oxlint
+      'no-var': OFF,
       'unicorn/explicit-length-check': OFF,
       'unicorn/no-array-for-each': OFF,
       'unicorn/no-await-expression-member': OFF,
@@ -77,7 +84,9 @@ export default ts.config(
       'unicorn/prefer-native-coercion-functions': OFF,
       'unicorn/prefer-query-selector': OFF,
       'unicorn/prefer-string-replace-all': OFF,
+      'unicorn/prefer-structured-clone': OFF,
       'unicorn/switch-case-braces': OFF,
+      'vars-on-top': OFF,
     },
   },
   {

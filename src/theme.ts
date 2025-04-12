@@ -15,6 +15,7 @@ document.adoptedStyleSheets = [sheet];
 performance.measure('Load Theme', 'Load Theme');
 
 if (process.env.NODE_ENV === 'development') {
+  // Update theme in case it changed during development
   requestIdleCallback(() => {
     void fetch('themes.json')
       .then((res) => res.json())

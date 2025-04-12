@@ -17,8 +17,8 @@ async function load() {
     // eslint-disable-next-line @typescript-eslint/no-base-to-string
     throw new Error(`Unexpected fetch call: ${String(input)}`);
   });
-  // eslint-disable-next-line no-multi-assign
-  global.fetch = window.fetch = fetchMock;
+  // @ts-expect-error - monkey patching fetch for testing
+  global.fetch = window.fetch = fetchMock; // oxlint-disable-line no-multi-assign
 
   Loader.registry.delete(MODULE_PATH);
   await import(MODULE_PATH);

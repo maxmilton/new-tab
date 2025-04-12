@@ -300,7 +300,7 @@ const Settings = () => {
     void state.pushSyncData?.();
   };
 
-  // eslint-disable-next-line no-multi-assign
+  // oxlint-disable-next-line no-multi-assign
   refs.se.ondragover = refs.sd.ondragover = (event) => {
     event.preventDefault();
     // eslint-disable-next-line no-param-reassign
@@ -389,6 +389,7 @@ const Settings = () => {
     };
   };
 
+  // oxlint-disable-next-line prefer-await-to-then
   void supportsSync().then((canSync) => {
     if (canSync) {
       chrome.storage.sync.get<SyncStorageData>(updateSync);

@@ -16,7 +16,7 @@ interface OpenTabLink extends LinkComponent {
   $$data: TabItem;
 }
 
-// eslint-disable-next-line func-names
+// oxlint-disable-next-line func-style
 const handleTabClick = function (this: OpenTabLink) {
   chrome.tabs.getCurrent((currentTab) => {
     if (currentTab!.id === this.$$data.id) return;
@@ -33,7 +33,7 @@ const handleTabClick = function (this: OpenTabLink) {
   return false;
 };
 
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
+// oxlint-disable-next-line typescript/no-explicit-any
 export type SearchResultComponent<T = any> = HTMLDivElement & {
   $$update: (newData: T[]) => void;
   $$filter: (text: string) => void;
