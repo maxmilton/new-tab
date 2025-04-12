@@ -10,15 +10,17 @@
     "allowJs": false,
 
     "strict": true,
-    "allowUnreachableCode": false,
+    "allowUnreachableCode": false, // TODO: Set true once oxlint is type aware
     "exactOptionalPropertyTypes": true,
     "forceConsistentCasingInFileNames": true,
-    "noFallthroughCasesInSwitch": false, // covered by eslint
     "noImplicitOverride": true,
     "noUncheckedSideEffectImports": true,
-    "noUnusedLocals": false, // covered by eslint
-    "noUnusedParameters": false, // covered by eslint
-    "verbatimModuleSyntax": true
+    "verbatimModuleSyntax": true,
+
+    /* Covered by oxlint */
+    "noFallthroughCasesInSwitch": false,
+    "noUnusedLocals": false,
+    "noUnusedParameters": false
   },
   "include": [
     "*.config.mjs",
@@ -27,6 +29,5 @@
     "build.ts",
     "src",
     "test"
-  ],
-  "references": [{ "path": "./tsconfig.node.json" }]
+  ]
 }
