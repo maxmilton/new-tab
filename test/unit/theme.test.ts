@@ -157,8 +157,8 @@ for (const theme of themeNames) {
   });
 }
 
-const MODULE_PATH_THEME = import.meta.resolveSync('../../src/theme.ts');
-const MODULE_PATH_UTILS = import.meta.resolveSync('../../src/utils.ts');
+const MODULE_PATH_THEME = Bun.resolveSync('./src/theme.ts', '.');
+const MODULE_PATH_UTILS = Bun.resolveSync('./src/utils.ts', '.');
 let newtabCSS: string | undefined;
 
 async function load(themeName?: (typeof themeNames)[number]) {

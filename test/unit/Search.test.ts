@@ -1,12 +1,13 @@
 import { afterEach, beforeEach, expect, test } from 'bun:test';
 import { cleanup, render } from '@maxmilton/test-utils/dom';
+import type { Search as SearchComponent } from '../../src/components/Search';
 
 // HACK: The Search component is designed to be rendered once (does not clone
 // its view), for byte savings. Given its mutation of the view (affecting global
 // state) when run, it's vital to reset its module state between tests to
 // maintain accurate test conditions.
-const MODULE_PATH = import.meta.resolveSync('../../src/components/Search');
-let Search: typeof import('../../src/components/Search').Search;
+const MODULE_PATH = Bun.resolveSync('./src/components/Search', '.');
+let Search: typeof SearchComponent;
 
 beforeEach(async () => {
   Loader.registry.delete(MODULE_PATH);
