@@ -119,7 +119,7 @@ export const Search = (): SearchComponent => {
 
     updateOpenTabs();
 
-    // TODO: Handle race condition where onUpdated is called for this tab on load
+    // TODO: Handle race condition where onUpdated is called for this tab on load.
     chrome.tabs.onUpdated.addListener(updateOpenTabs);
     chrome.tabs.onRemoved.addListener(updateOpenTabs);
     chrome.tabs.onMoved.addListener(updateOpenTabs);

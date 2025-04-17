@@ -1,4 +1,5 @@
 {
+  "biome.enabled": true,
   "editor.formatOnPaste": false,
   "editor.formatOnSave": true,
   "editor.formatOnType": false,
@@ -19,7 +20,7 @@
     "package.json": "jsonc"
   },
 
-  "[css][html][json][jsonc][markdown][scss][xml]": {
+  "[css][html][json][jsonc][markdown][scss][xml][yaml]": {
     "editor.codeActionsOnSave": {
       "source.fixAll": "explicit",
       "quickfix.biome": "explicit"
@@ -33,6 +34,7 @@
       "source.organizeImports.biome": "explicit",
       "source.fixAll": "never",
       "source.fixAll.eslint": "never",
+      "source.fixAll.oxc": "never",
       "quickfix.biome": "explicit"
     },
     "editor.defaultFormatter": "biomejs.biome"
