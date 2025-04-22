@@ -26,7 +26,7 @@
   "devDependencies": {
     "@biomejs/biome": "1.9.4",
     "@ekscss/plugin-import": "0.0.15",
-    "@eslint/js": "9.24.0",
+    "@eslint/js": "9.25.1",
     "@maxmilton/eslint-config": "0.0.9",
     "@maxmilton/stylelint-config": "0.2.0",
     "@maxmilton/test-utils": "0.0.8",
@@ -34,7 +34,7 @@
     "@types/bun": "1.2.10",
     "@types/chrome": "0.0.315",
     "ekscss": "0.0.20",
-    "eslint": "9.24.0",
+    "eslint": "9.25.1",
     "eslint-plugin-unicorn": "58.0.0",
     "happy-dom": "17.4.4",
     "lightningcss": "1.29.3",
