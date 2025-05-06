@@ -93,7 +93,6 @@ export const BookmarkBar = (): BookmarkBarComponent => {
     // before the CSS has loaded. Styles are needed to calculate the bookmark
     // item widths, so wait until the CSS is ready.
     const waitForStylesThenResize = () => {
-      // biome-ignore lint/style/useExplicitLengthCheck: byte savings
       if (document.styleSheets.length) {
         resize();
       } else {

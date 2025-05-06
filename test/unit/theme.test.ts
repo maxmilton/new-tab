@@ -2,13 +2,13 @@
 
 import { afterEach, describe, expect, test } from 'bun:test';
 import {
+  compile,
   DECLARATION,
   type Element,
-  RULESET,
-  SKIP,
-  compile,
   isHexColor,
   isLightOrDark,
+  RULESET,
+  SKIP,
   walk,
 } from '@maxmilton/test-utils/css';
 import themes from '../../dist/themes.json';
@@ -119,7 +119,7 @@ for (const theme of themeNames) {
                 variables2.push(child.props as string);
               }
             } else {
-              throw new Error('Unexpected child element type: ' + child.type);
+              throw new Error(`Unexpected child element type: ${child.type}`);
             }
           }
           variables.push(variables2);
@@ -144,7 +144,7 @@ for (const theme of themeNames) {
                 variables.push(child.props as string);
               }
             } else {
-              throw new Error('Unexpected child element type: ' + child.type);
+              throw new Error(`Unexpected child element type: ${child.type}`);
             }
           }
           return SKIP; // we manually iterated over the children

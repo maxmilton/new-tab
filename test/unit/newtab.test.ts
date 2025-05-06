@@ -1,5 +1,5 @@
 import { afterEach, describe, expect, spyOn, test } from 'bun:test';
-import { DECLARATION, compile, lookup, walk } from '@maxmilton/test-utils/css';
+import { compile, DECLARATION, lookup, walk } from '@maxmilton/test-utils/css';
 import { performanceSpy } from '@maxmilton/test-utils/spy';
 import { reset } from '../setup';
 

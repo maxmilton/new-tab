@@ -43,7 +43,6 @@ const FolderPopup = (
     window.innerHeight - top
   }px`;
 
-  // biome-ignore lint/style/useExplicitLengthCheck: byte savings
   if (children.length) {
     children.forEach((item) => append(BookmarkNode(item, true), root));
   } else {

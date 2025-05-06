@@ -1,3 +1,4 @@
 body {
+  /* biome-ignore lint/nursery/noImportantStyles: Snapshot consistency */
   font-family: "Noto Sans", Arial, sans-serif !important;
 }
