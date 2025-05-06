@@ -42,6 +42,7 @@
     "func-names": ["error", "as-needed"],
     "func-style": ["error", "declaration", { "allowArrowFunctions": true }],
     "init-declarations": "off",
+    "group-exports": "off",
     "max-dependencies": "off",
     "max-depth": "off",
     "max-lines-per-function": "off",
@@ -49,7 +50,7 @@
     "max-nested-callbacks": "off",
     "max-params": "off",
     "no-async-await": "off",
-    "no-const-enum": "off", // bun handles well
+    "no-const-enum": "off", // bun does inlining
     // "no-magic-numbers": [
     //   "warn",
     //   {

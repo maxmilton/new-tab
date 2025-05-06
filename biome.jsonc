@@ -1,103 +1,200 @@
 {
   "$schema": "./node_modules/@biomejs/biome/configuration_schema.json",
   "vcs": { "enabled": true, "clientKind": "git", "useIgnoreFile": true },
-  "organizeImports": { "enabled": true },
+  "assist": {
+    "actions": {
+      "recommended": true,
+      "source": {
+        "useSortedProperties": "on"
+      }
+    }
+  },
   "formatter": {
+    "useEditorconfig": false,
     "formatWithErrors": true,
-    "indentStyle": "space",
-    "indentWidth": 2,
-    "lineEnding": "lf",
-    "lineWidth": 80
+    "indentStyle": "space"
   },
   "linter": {
     "rules": {
-      "recommended": true,
       "complexity": {
-        "noForEach": "off",
-        "noUselessStringConcat": "warn",
-        "noUselessUndefinedInitialization": "warn",
-        "useSimplifiedLogicExpression": "info",
-        "useDateNow": "error"
+        "noExcessiveCognitiveComplexity": {
+          "level": "on",
+          "options": { "maxAllowedComplexity": 30 }
+        },
+        "noForEach": "off", // covered by oxlint
+        "noUselessStringConcat": "on",
+        "noUselessUndefinedInitialization": "on",
+        "noVoid": "off",
+        "useDateNow": "warn",
+        "useSimplifiedLogicExpression": "on",
+        "useWhile": "on"
       },
       "correctness": {
-        "noUndeclaredDependencies": "warn",
-        "noUndeclaredVariables": "warn",
-        "noUnusedFunctionParameters": "warn",
-        "noUnusedImports": { "level": "warn", "fix": "none" }
+        "noConstantMathMinMaxClamp": "warn",
+        "noNodejsModules": "on",
+        "noUndeclaredDependencies": "on",
+        "noUndeclaredVariables": {
+          "level": "on",
+          "options": { "checkTypes": true }
+        },
+        "noUnusedFunctionParameters": "on",
+        "noUnusedImports": { "level": "on", "fix": "none" },
+        "noUnusedPrivateClassMembers": "on",
+        "noUnusedVariables": "off", // covered by oxlint
+        "useArrayLiterals": "on"
       },
       "performance": {
-        "noBarrelFile": "error",
-        "noReExportAll": "error"
+        "noBarrelFile": "on",
+        "noDelete": "on",
+        "noReExportAll": "on",
+        "useTopLevelRegex": "on"
       },
       "style": {
-        "noDoneCallback": "warn",
-        "noNamespace": "error",
-        "noNamespaceImport": "warn",
-        "noNegationElse": "error",
-        "noNonNullAssertion": "off",
-        "noParameterProperties": "error",
-        "noRestrictedGlobals": "error",
-        "noShoutyConstants": "error",
-        "noYodaExpression": "warn",
-        "useCollapsedElseIf": "error",
-        "useConsistentBuiltinInstantiation": "error",
-        "useDefaultSwitchClause": "warn",
-        "useEnumInitializers": "off",
-        "useExplicitLengthCheck": "warn",
+        "noArguments": "on",
+        "noCommaOperator": "on",
+        // "noDefaultExport": null,
+        "noDoneCallback": "on",
+        "noImplicitBoolean": "on",
+        "noInferrableTypes": "on",
+        "noNamespace": "on",
+        "noNamespaceImport": "on",
+        "noNegationElse": "on",
+        "noNonNullAssertion": "off", // covered by oxlint
+        "noParameterAssign": "on",
+        "noParameterProperties": "on",
+        "noRestrictedGlobals": "on",
+        "noShoutyConstants": "on",
+        "noUnusedTemplateLiteral": "on",
+        "noUselessElse": "on",
+        "noYodaExpression": "on",
+        "useAsConstAssertion": "on",
+        // "useBlockStatements": null,
+        "useCollapsedElseIf": "on",
+        "useConsistentArrayType": "on",
+        "useConsistentBuiltinInstantiation": "on",
+        "useConst": "on",
+        "useDefaultParameterLast": "on",
+        "useDefaultSwitchClause": "on",
+        "useEnumInitializers": "on",
+        "useExplicitLengthCheck": "off", // covered by oxlint
+        "useExponentiationOperator": "on",
+        "useExportType": "on",
+        "useFilenamingConvention": "on",
+        "useForOf": "on",
+        "useImportType": "on",
+        "useLiteralEnumMembers": "on",
         "useNamingConvention": {
-          "level": "error",
-          "options": { "enumMemberCase": "CONSTANT_CASE", "strictCase": false }
+          "level": "on",
+          "fix": "none",
+          "options": { "strictCase": false }
         },
-        "useShorthandArrayType": "error",
-        "useShorthandAssign": "error",
-        "useSingleCaseStatement": "info",
-        "useTemplate": "off",
-        "useThrowNewError": "error",
-        "useThrowOnlyError": "warn"
+        "useNodeAssertStrict": "on",
+        "useNodejsImportProtocol": "on",
+        "useNumberNamespace": "on",
+        "useNumericLiterals": "on",
+        "useSelfClosingElements": "on",
+        "useShorthandAssign": "on",
+        "useShorthandFunctionType": "on",
+        "useSingleVarDeclarator": "on",
+        "useTemplate": "off", // covered by oxlint
+        "useThrowNewError": "on",
+        "useThrowOnlyError": "on"
       },
       "suspicious": {
-        "noApproximativeNumericConstant": "error",
-        "noAssignInExpressions": "off",
-        "noConfusingVoidType": "off",
-        // "noConsoleLog": "warn", // covered by oxlint
-        "noConstEnum": "off",
-        "noDuplicateAtImportRules": "error",
-        "noDuplicateFontNames": "error",
-        "noDuplicateSelectorsKeyframeBlock": "error",
-        "noEmptyBlock": "warn",
-        "noEvolvingTypes": "warn",
-        "noExplicitAny": "off",
-        "noFocusedTests": "error",
-        "noMisplacedAssertion": "error",
-        "noMisrefactoredShorthandAssign": "error",
-        "useErrorMessage": "warn"
+        "noAssignInExpressions": "off", // covered by oxlint
+        "noConfusingVoidType": "off", // covered by oxlint
+        "noConstEnum": "off", // inlined by Bun.build
+        "noEmptyBlockStatements": "on",
+        "noEvolvingTypes": "on",
+        "noExplicitAny": "off", // covered by oxlint
+        "noMisplacedAssertion": "on",
+        "noReactSpecificProps": "on",
+        "noVar": "on",
+        "useAwait": "on",
+        "useErrorMessage": "on",
+        "useNumberToFixedDigitsArgument": "on"
       },
       "nursery": {
-        "noCommonJs": "error",
-        "noDuplicateElseIf": "error",
-        "noDynamicNamespaceImportAccess": "error",
-        "noEnum": "error",
-        "noExportedImports": "error",
-        "noSecrets": "info", // TODO: Change to "error" when more stable
-        "noSubstr": "warn",
-        "noUnknownPseudoClass": "warn",
-        "noUnknownPseudoElement": "warn",
-        "useAdjacentOverloadSignatures": "error",
-        "useValidAutocomplete": "warn"
+        "noAwaitInLoop": "off", // covered by oxlint
+        "noBitwiseOperators": "off", // covered by oxlint
+        "noCommonJs": "on",
+        "noConstantBinaryExpression": "on",
+        "noDestructuredProps": "on",
+        "noDocumentCookie": "on",
+        "noDuplicateElseIf": "on",
+        "noDynamicNamespaceImportAccess": "on",
+        "noEnum": "on",
+        "noExportedImports": "on",
+        // "noFloatingPromises": "on", // https://github.com/biomejs/biome/issues/3187
+        "noGlobalDirnameFilename": "on",
+        "noImportCycles": "off", // covered by oxlint
+        "noIrregularWhitespace": "on",
+        "noNestedTernary": "on",
+        "noNoninteractiveElementInteractions": "on",
+        "noOctalEscape": "on",
+        "noProcessEnv": "off", // used as naming convention for build-time replacements
+        "noProcessGlobal": "off",
+        "noRestrictedElements": "on",
+        "noRestrictedImports": "on",
+        "noRestrictedTypes": "on",
+        // "noSecrets": "on", // TODO: Change to "error" when more stable
+        "noStaticElementInteractions": "on",
+        "noSubstr": "on",
+        "noTemplateCurlyInString": "on",
+        "noTsIgnore": "on",
+        "noUnresolvedImports": "off", // covered by TypeScript
+        "noUselessEscapeInRegex": "on",
+        "noUselessEscapeInString": "on",
+        "noUselessStringRaw": "on",
+        "noUselessUndefined": "on",
+        "useAdjacentOverloadSignatures": "on",
+        "useAriaPropsSupportedByRole": "on",
+        "useAtIndex": "on",
+        "useCollapsedIf": "on",
+        "useComponentExportOnlyModules": "on",
+        "useConsistentCurlyBraces": "on",
+        "useConsistentMemberAccessibility": "on",
+        "useConsistentObjectDefinition": "off",
+        "useExplicitType": "off",
+        "useExportsLast": "off",
+        "useGoogleFontDisplay": "on",
+        "useGoogleFontPreconnect": "on",
+        "useGuardForIn": "off", // covered by oxlint
+        "useParseIntRadix": "on",
+        // "useSortedClasses": "on", // https://github.com/biomejs/biome/issues/1274
+        "useStrictMode": "on",
+        "useSymbolDescription": "on",
+        "useTrimStartEnd": "on",
+        "useValidAutocomplete": "on",
+
+        // CSS rules
+        "noDescendingSpecificity": "on",
+        "noDuplicateCustomProperties": "on",
+        "noDuplicateProperties": "on",
+        "noImportantStyles": "on",
+        "noMissingVarFunction": "on",
+        "noUnknownAtRule": "on",
+        "noUnknownPseudoClass": "on",
+        "noUnknownPseudoElement": "on",
+        "noUnknownTypeSelector": "on",
+        "noValueAtRule": "on"
       }
     }
   },
   "javascript": {
-    "globals": ["chrome", "Timer"],
+    "globals": ["Bun", "chrome", "Timer"],
     "formatter": {
-      "semicolons": "always",
-      "trailingCommas": "all",
       "quoteStyle": "single"
     }
   },
   "overrides": [
     {
-      "include": [".vscode/*.json", ".oxlintrc.json", "tsconfig*.json"],
+      "includes": [
+        ".vscode/*.json",
+        ".oxlintrc.json",
+        "package.json",
+        "tsconfig*.json"
+      ],
       "json": {
         "parser": {
           "allowComments": true,
@@ -106,17 +203,30 @@
       }
     },
     {
-      "include": ["**/*.spec.ts", "**/*.test.ts", "test/**"],
+      "includes": ["**/*.spec.ts", "**/*.test.ts", "test/**"],
       "formatter": {
         "lineWidth": 100
       },
       "linter": {
+        "domains": {
+          "test": "all"
+        },
         "rules": {
+          "complexity": {
+            "noExcessiveNestedTestSuites": "on"
+          },
           "correctness": {
-            "noUndeclaredDependencies": "off"
+            "noNodejsModules": "off"
           },
           "style": {
             "noNamespaceImport": "off"
+          },
+          "suspicious": {
+            "noDuplicateTestHooks": "on",
+            "noEmptyBlockStatements": "off",
+            "noExportsInTest": "on",
+            "noFocusedTests": "on",
+            "noSkippedTests": "on"
           },
           "nursery": {
             "noDynamicNamespaceImportAccess": "off"
@@ -128,23 +238,50 @@
       }
     },
     {
-      "include": ["*.config.mjs", "*.config.ts", "*.d.ts", "build.ts"],
+      "includes": ["*.config.mjs", "*.config.ts", "*.d.ts", "build.ts"],
       "linter": {
         "rules": {
           "correctness": {
-            "noUndeclaredDependencies": "off"
+            "noNodejsModules": "off"
           },
           "style": {
             "noNamespaceImport": "off",
             "useNamingConvention": "off"
-          },
-          "suspicious": {
-            "noConsoleLog": "off"
           }
         }
-      },
-      "javascript": {
-        "globals": ["Bun", "chrome"]
+      }
+    },
+    {
+      "includes": ["src/**"],
+      "linter": {
+        "rules": {
+          "correctness": {
+            "noUndeclaredDependencies": {
+              "level": "error",
+              "options": {
+                "devDependencies": false
+              }
+            }
+          },
+          "style": {
+            "useTemplate": "off" // performance
+          }
+        }
+      }
+    },
+    {
+      "includes": ["src/components/**/*.ts", "test/unit/**/*.ts"],
+      "linter": {
+        "rules": {
+          "style": {
+            "useFilenamingConvention": {
+              "level": "on",
+              "options": {
+                "filenameCases": ["PascalCase", "kebab-case"]
+              }
+            }
+          }
+        }
       }
     }
   ]

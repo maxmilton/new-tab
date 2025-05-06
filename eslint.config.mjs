@@ -89,7 +89,5 @@ export default ts.config(
       'vars-on-top': OFF,
     },
   },
-  {
-    ignores: ['**/*.bak', 'coverage/**', 'dist/**'],
-  },
+  { ignores: ['**/*.bak', 'coverage', 'dist'] },
 );
