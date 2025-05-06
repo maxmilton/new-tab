@@ -3,39 +3,26 @@
   "editor.formatOnPaste": false,
   "editor.formatOnSave": true,
   "editor.formatOnType": false,
-  "eslint.format.enable": false,
-  "eslint.useFlatConfig": true,
+  "eslint.enable": true,
   "git.branchProtection": ["master", "next"],
   "js/ts.implicitProjectConfig.checkJs": true,
   "prettier.enable": false, // use biome instead
+  "stylelint.enable": true,
   "typescript.enablePromptUseWorkspaceTsdk": true,
-  "typescript.format.enable": false,
   "typescript.tsdk": "node_modules/typescript/lib",
 
-  "css.validate": false,
-  "scss.validate": false,
-  "stylelint.validate": ["css", "scss"],
-  "files.associations": {
-    "*.xcss": "scss",
-    "package.json": "jsonc"
-  },
-
-  "[css][html][json][jsonc][markdown][scss][xml][yaml]": {
+  "[css][html][json][jsonc][markdown][scss][yaml]": {
     "editor.codeActionsOnSave": {
-      "source.fixAll": "explicit",
-      "quickfix.biome": "explicit"
+      "source.organizeImports": "explicit",
+      "source.fixAll": "explicit"
     },
     "editor.defaultFormatter": "biomejs.biome"
   },
   "[javascript][typescript]": {
     "editor.codeActionsOnSave": {
-      "source.sortImports": "never",
       "source.organizeImports": "never",
       "source.organizeImports.biome": "explicit",
-      "source.fixAll": "never",
-      "source.fixAll.eslint": "never",
-      "source.fixAll.oxc": "never",
-      "quickfix.biome": "explicit"
+      "source.fixAll": "never"
     },
     "editor.defaultFormatter": "biomejs.biome"
   }
