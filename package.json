@@ -35,7 +35,7 @@
     "@types/chrome": "0.0.320",
     "ekscss": "0.0.20",
     "eslint": "9.26.0",
-    "eslint-plugin-unicorn": "59.0.0",
+    "eslint-plugin-unicorn": "59.0.1",
     "happy-dom": "17.4.6",
     "lightningcss": "1.29.3",
     "oxlint": "0.16.9",
