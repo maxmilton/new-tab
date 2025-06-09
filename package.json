@@ -38,7 +38,7 @@
     "eslint-plugin-unicorn": "59.0.0",
     "happy-dom": "17.4.6",
     "lightningcss": "1.29.3",
-    "oxlint": "0.16.9",
+    "oxlint": "0.18.1",
     "stylelint": "16.19.1",
     "stylelint-config-standard": "38.0.0",
     "terser": "5.39.0",
