@@ -10,8 +10,9 @@
   "stylelint.enable": true,
   "typescript.enablePromptUseWorkspaceTsdk": true,
   "typescript.tsdk": "node_modules/typescript/lib",
+  "yaml.validate": true,
 
-  "[css][html][json][jsonc][markdown][scss][yaml]": {
+  "[css][html][json][jsonc][markdown]": {
     "editor.codeActionsOnSave": {
       "source.organizeImports": "explicit",
       "source.fixAll": "explicit"
@@ -25,5 +26,8 @@
       "source.fixAll": "never"
     },
     "editor.defaultFormatter": "biomejs.biome"
+  },
+  "[yaml]": {
+    "editor.defaultFormatter": "redhat.vscode-yaml"
   }
 }
