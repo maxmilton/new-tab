@@ -18,7 +18,7 @@ export interface UserStorageData {
   /** Theme data; raw CSS code. */
   t?: string;
   /** The user's selected theme name. */
-  tn?: string;
+  n?: string;
   /** Hide bookmarks bar user preference; `true` means hidden. */
   b?: boolean;
   /** Sections order user preference. */

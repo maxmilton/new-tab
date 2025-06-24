@@ -20,7 +20,7 @@ if (process.env.NODE_ENV === 'development') {
     void fetch('themes.json')
       .then((res) => res.json())
       .then((themes: ThemesData) => {
-        const theme = themes[storage.tn ?? 'auto'];
+        const theme = themes[storage.n ?? 'auto'];
         if (storage.t !== theme) {
           sheet.replaceSync(theme);
           void chrome.storage.local.set({ t: theme });

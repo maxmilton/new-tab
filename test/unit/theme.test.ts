@@ -165,7 +165,7 @@ async function load(themeName?: (typeof themeNames)[number]) {
   // mock user settings
   chrome.storage.local.get = () =>
     Promise.resolve({
-      tn: themeName ?? 'auto',
+      n: themeName ?? 'auto',
       t: themes[themeName ?? 'auto'],
     } satisfies UserStorageData);
 
