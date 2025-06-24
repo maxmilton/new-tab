@@ -54,11 +54,11 @@ export function createManifest(
     },
     permissions: [
       'bookmarks',
-      'favicon', // for favicon cache
+      'favicon', // favicon cache
       'history',
-      'sessions', // for recently closed tabs
-      'storage', // to persist user settings
-      'tabs', // to access tab title and URL
+      'sessions', // recently closed tabs
+      'storage', // persist user settings
+      'tabs', // access tab title and URL
       'topSites',
     ],
     chrome_url_overrides: {

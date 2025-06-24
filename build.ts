@@ -1,130 +1,55 @@
-import { readdir } from 'node:fs/promises';
 import { basename } from 'node:path'; // eslint-disable-line unicorn/import-style
-import { importPlugin } from '@ekscss/plugin-import';
-import type { BuildArtifact } from 'bun';
-import * as xcss from 'ekscss';
+import * as swc from '@swc/core';
 import * as lightningcss from 'lightningcss';
-import * as terser from 'terser';
-import { createManifest } from './manifest.config';
+import { createManifest } from './manifest.config.ts';
 
 const mode = Bun.env.NODE_ENV;
 const dev = mode === 'development';
 
-/**
- * Generate minified CSS from XCSS source.
- * @internal
- */
-function compileCSS(src: string, from: string) {
-  const compiled = xcss.compile(src, {
-    from,
-    plugins: [importPlugin],
-  });
-
-  for (const warning of compiled.warnings) {
-    console.error('XCSS:', warning.message);
-
-    if (warning.file) {
-      console.log(
-        `  at ${[warning.file, warning.line, warning.column]
-          .filter((x) => x !== undefined)
-          .join(':')}`,
-      );
-    }
-  }
-
-  // TODO: Migrate to bun CSS handling (which is based on lightningcss).
-  const minified = lightningcss.transform({
-    filename: from,
-    code: new TextEncoder().encode(compiled.css),
+// TODO: Use bun to bundle CSS once it's configurable e.g., targets, include.
+async function compileCSS(path: string) {
+  const source = await Bun.file(path).bytes();
+  const result = await lightningcss.bundleAsync({
+    filename: path,
+    // @ts-expect-error - bundle does accept code, same as transform
+    code: source,
     minify: !dev,
     // oxlint-disable-next-line no-bitwise
     targets: { chrome: 123 << 16 }, // matches manifest minimum_chrome_version
+    include: lightningcss.Features.Nesting,
   });
-
-  for (const warning of minified.warnings) {
-    console.error('CSS:', warning.message);
-  }
-
-  return minified.code;
+  if (result.warnings.length > 0) console.error(result.warnings);
+  return result.code;
 }
 
-/**
- * Construct HTML file and save it to disk.
- * @internal
- */
-async function makeHTML(pageName: string) {
-  const template = `
-    <!doctype html>
-    <meta charset=utf-8>
-    <meta name=google value=notranslate>
-    <title>New Tab</title>
-    <link href=${pageName}.css rel=stylesheet>
-    <script src=${pageName}.js type=module async></script>
-  `
-    .trim()
-    .replaceAll(/\n\s+/g, '\n'); // remove leading whitespace
-
-  await Bun.write(`dist/${pageName}.html`, template);
-}
-
-/**
- * Construct CSS file and save it to disk.
- * @internal
- */
-async function makeCSS(pageName: string, cssEntrypoint: string) {
-  const cssSource = await Bun.file(cssEntrypoint).text();
-  const css = compileCSS(cssSource, cssEntrypoint);
-  await Bun.write(`dist/${pageName}.css`, css);
-}
-
-/**
- * Compile all themes, combine into a single JSON file, and save it to disk.
- * @internal
- */
-async function makeThemes() {
-  const themeFiles = await readdir('src/css/themes');
+async function makeThemes(pattern: string) {
   const themes: Record<string, string> = {};
 
-  for (const theme of themeFiles.sort()) {
-    if (theme.endsWith('.xcss')) {
-      const path = `src/css/themes/${theme}`;
-      const code = await Bun.file(path).text();
-      themes[basename(theme, '.xcss')] = compileCSS(code, path).toString();
-    }
+  for await (const path of new Bun.Glob(pattern).scan()) {
+    const result = await compileCSS(path);
+    themes[basename(path, '.css')] = result.toString();
   }
 
-  await Bun.write('dist/themes.json', JSON.stringify(themes));
+  return JSON.stringify(themes);
 }
 
-async function minifyJS(artifacts: BuildArtifact[]) {
+async function minify(artifacts: Bun.BuildArtifact[]) {
   for (const artifact of artifacts) {
-    if (artifact.kind === 'entry-point' || artifact.kind === 'chunk') {
+    if (artifact.path.endsWith('.js')) {
       const source = await artifact.text();
-      const result = await terser.minify(source, {
-        ecma: 2020,
+      const result = await swc.minify(source, {
         module: true,
         compress: {
-          comparisons: false,
-          negate_iife: false,
-          reduce_funcs: false, // prevent function inlining
-          passes: 3,
           // XXX: Comment out to keep performance markers for debugging.
           pure_funcs: ['performance.mark', 'performance.measure'],
         },
         mangle: {
-          properties: {
-            regex: /^\$\$|^__click$/,
+          props: {
+            regex: String.raw`^\$\$`,
           },
         },
-        format: {
-          wrap_func_args: true,
-          wrap_iife: true,
-        },
       });
-
-      if (result.code) {
-        await Bun.write(artifact.path, result.code);
-      }
+      await Bun.write(artifact.path, result.code);
     }
   }
 }
@@ -134,40 +59,28 @@ await Bun.$`rm -rf dist`;
 await Bun.$`cp -r static dist`;
 console.timeEnd('prebuild');
 
-// Extension manifest
 console.time('manifest');
 await Bun.write('dist/manifest.json', JSON.stringify(createManifest()));
 console.timeEnd('manifest');
 
-console.time('html');
-await makeHTML('newtab');
-await makeHTML('settings');
-console.timeEnd('html');
-
-console.time('css');
-await makeCSS('newtab', 'src/css/newtab.xcss');
-await makeCSS('settings', 'src/css/settings.xcss');
-console.timeEnd('css');
-
 console.time('themes');
-await makeThemes();
+await Bun.write('dist/newtab.css', await compileCSS('src/newtab.css'));
+await Bun.write('dist/settings.css', await compileCSS('src/settings.css'));
+await Bun.write('dist/themes.json', await makeThemes('src/themes/*.css'));
 console.timeEnd('themes');
 
-// New Tab & Settings apps
-console.time('build:1');
+console.time('build:apps');
 const out1 = await Bun.build({
   entrypoints: ['src/newtab.ts', 'src/settings.ts'],
   outdir: 'dist',
+  naming: '[dir]/[name].[ext]',
   target: 'browser',
   minify: !dev,
   sourcemap: dev ? 'linked' : 'none',
 });
-console.timeEnd('build:1');
-console.log(out1.outputs);
-if (!out1.success) throw new AggregateError(out1.logs, 'Build failed');
+console.timeEnd('build:apps');
 
-// Background service worker script
-console.time('build:2');
+console.time('build:worker');
 const out2 = await Bun.build({
   entrypoints: ['src/sw.ts'],
   outdir: 'dist',
@@ -175,13 +88,11 @@ const out2 = await Bun.build({
   minify: !dev,
   sourcemap: dev ? 'linked' : 'none',
 });
-console.timeEnd('build:2');
-console.log(out2.outputs);
-if (!out2.success) throw new AggregateError(out2.logs, 'Build failed');
+console.timeEnd('build:worker');
 
 if (!dev) {
-  console.time('minify:js');
-  await minifyJS(out1.outputs);
-  await minifyJS(out2.outputs);
-  console.timeEnd('minify:js');
+  console.time('minify');
+  await minify(out1.outputs);
+  await minify(out2.outputs);
+  console.timeEnd('minify');
 }
