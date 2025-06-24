@@ -1,10 +1,11 @@
+import type { ONCLICK } from 'stage1/fast';
 import type { DEFAULT_SECTION_ORDER } from './utils.ts';
 
 declare global {
   interface HTMLElement {
     /** `stage1` synthetic click event handler. */
     // eslint-disable-next-line @typescript-eslint/no-invalid-void-type
-    __click?(event: MouseEvent): void | boolean | Promise<void>;
+    [ONCLICK]?(event: Event): false | void | Promise<void>;
   }
 }
 

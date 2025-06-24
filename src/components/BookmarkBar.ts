@@ -1,4 +1,4 @@
-import { append, create, h } from 'stage1';
+import { append, create, h } from 'stage1/fast';
 import { compile } from 'stage1/macro' with { type: 'macro' };
 import { chromeBookmarks } from '../utils.ts';
 import { BookmarkNode, type BookmarkTreeNode, Folder } from './BookmarkNode.ts';

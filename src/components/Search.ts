@@ -1,12 +1,17 @@
-import { append, collect, h } from 'stage1';
+import { append, collect, h } from 'stage1/fast';
 import { compile } from 'stage1/macro' with { type: 'macro' };
 import type { SectionOrderItem } from '../types.ts';
+import {
+  chromeBookmarks,
+  chromeTabs,
+  DEFAULT_SECTION_ORDER,
+  storage,
 } from '../utils.ts';
 import { SearchResult, type SearchResultComponent } from './SearchResult.ts';
 
 type SectionRefs = Partial<Record<SectionOrderItem, SearchResultComponent>>;
 
-// FIXME: The vars should be automatically inlined by the minifier
+// TODO: Single use vars should be automatically inlined by the minifier.
 
 // const searchFor = (text: string, sections: SectionRefs) => {
 //   const openTabs = sections[DEFAULT_SECTION_ORDER[0]];
@@ -71,7 +76,7 @@ interface Refs {
 }
 
 // https://github.com/feathericons/feather/blob/master/icons/search.svg
-const meta = compile(`
+const meta = compile<Refs>(`
   <div id=c>
     <input @s id=s type=search placeholder="Search browser...">
     <svg id=i>
@@ -84,8 +89,8 @@ const view = h<SearchComponent>(meta.html);
 
 export const Search = (): SearchComponent => {
   const root = view;
-  const refs = collect<Refs>(root, meta.k, meta.d);
-  const input = refs.s;
+  const refs = collect<Refs>(root, meta.d);
+  const input = refs[meta.ref.s];
   const sections: SectionRefs = {};
 
   input.oninput = () => searchFor(input.value, sections);

@@ -1,4 +1,4 @@
-import { collect, h } from 'stage1';
+import { collect, h, ONCLICK } from 'stage1/fast';
 import { compile } from 'stage1/macro' with { type: 'macro' };
 
 type MenuComponent = HTMLDivElement;
@@ -8,7 +8,7 @@ interface Refs {
 }
 
 // https://github.com/tailwindlabs/heroicons/blob/master/optimized/outline/menu.svg
-const meta = compile(`
+const meta = compile<Refs>(`
   <div id=m>
     <svg id=im>
       <path d="M4 6h16M4 12h16M4 18h16" />
@@ -32,9 +32,9 @@ const view = h<MenuComponent>(meta.html);
 
 export const Menu = (): MenuComponent => {
   const root = view;
-  const refs = collect<Refs>(root, meta.k, meta.d);
+  const refs = collect<Refs>(root, meta.d);
 
-  refs.s.__click = () => chrome.runtime.openOptionsPage();
+  refs[meta.ref.s][ONCLICK] = () => chrome.runtime.openOptionsPage();
 
   return root;
 };

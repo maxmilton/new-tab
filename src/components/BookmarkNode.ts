@@ -1,5 +1,6 @@
 // TODO: Rewrite the folder logic using the new anchor positioning API and/or popover APIs; https://developer.chrome.com/blog/anchor-positioning-api and https://web.dev/blog/popover-api
 
+import { append, clone, create, h } from 'stage1/fast';
 import { chromeBookmarks } from '../utils.ts';
 import { Link, type LinkComponent, type LinkProps } from './Link.ts';
 

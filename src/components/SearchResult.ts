@@ -1,4 +1,4 @@
-import { append, clone, collect, h } from 'stage1';
+import { append, clone, collect, h, ONCLICK } from 'stage1/fast';
 import { compile } from 'stage1/macro' with { type: 'macro' };
 import { chromeTabs, DEFAULT_SECTION_ORDER } from '../utils.ts';
 import { Link, type LinkComponent, type LinkProps } from './Link.ts';
@@ -17,16 +17,16 @@ interface OpenTabLink extends LinkComponent {
 }
 
 // oxlint-disable-next-line func-style
-const handleTabClick = function (this: OpenTabLink) {
-  chrome.tabs.getCurrent((currentTab) => {
+const handleTabClick = function (this: OpenTabLink): false {
+  chromeTabs.getCurrent((currentTab) => {
     if (currentTab!.id === this.$$data.id) return;
 
     // Switch to the clicked tab
     void chrome.windows.update(this.$$data.windowId, { focused: true });
-    void chrome.tabs.update(this.$$data.id, { active: true });
+    void chromeTabs.update(this.$$data.id, { active: true });
 
     // Close current "new-tab" page
-    void chrome.tabs.remove(currentTab!.id!);
+    void chromeTabs.remove(currentTab!.id!);
   });
 
   // Prevent default behaviour; shorter than `event.preventDefault()`
@@ -40,18 +40,18 @@ export type SearchResultComponent<T = any> = HTMLDivElement & {
 };
 
 interface Refs {
-  t: Text;
-  l: HTMLDivElement;
-  m: HTMLButtonElement;
+  title: Text;
+  results: HTMLDivElement;
+  more: HTMLButtonElement;
 }
 
-const meta = compile(`
+const meta = compile<Refs>(`
   <div hidden>
-    <h2>@t</h2>
+    <h2>@title</h2>
 
-    <div @l></div>
+    <div @results></div>
 
-    <button @m>Show more</button>
+    <button @more>Show more</button>
   </div>
 `);
 const view = h<SearchResultComponent>(meta.html);
@@ -60,7 +60,10 @@ export const SearchResult = <T extends LinkProps & TabItem>(
   sectionName: (typeof DEFAULT_SECTION_ORDER)[number],
 ): SearchResultComponent<T> => {
   const root = clone<SearchResultComponent<T>>(view);
-  const refs = collect<Refs>(root, meta.k, meta.d);
+  const refs = collect<Refs>(root, meta.d);
+  const title = refs[meta.ref.title];
+  const results = refs[meta.ref.results];
+  const more = refs[meta.ref.more];
   const isOpenTabs = sectionName === DEFAULT_SECTION_ORDER[0];
   let rawData: T[];
   let renderedLength: number;
@@ -74,14 +77,14 @@ export const SearchResult = <T extends LinkProps & TabItem>(
 
     renderedLength = list.length;
     root.hidden = !renderedLength;
-    refs.m.hidden = renderedLength === listData.length;
-    refs.l.textContent = '';
+    more.hidden = renderedLength === listData.length;
+    results.textContent = '';
 
     for (; index < renderedLength; index++) {
-      link = append(Link(list[index]), refs.l);
+      link = append(Link(list[index]), results);
       if (isOpenTabs) {
         (link as OpenTabLink).$$data = list[index];
-        link.__click = handleTabClick;
+        link[ONCLICK] = handleTabClick;
       }
     }
 
@@ -98,9 +101,9 @@ export const SearchResult = <T extends LinkProps & TabItem>(
       ),
     );
 
-  refs.t.nodeValue = sectionName;
+  title.nodeValue = sectionName;
 
-  refs.m.__click = () =>
+  more[ONCLICK] = () =>
     renderList(rawData, renderedLength + MORE_RESULTS_AMOUNT);
 
   return root;

@@ -1,4 +1,4 @@
-import { append, clone, collect, h } from 'stage1';
+import { append, clone, collect, h } from 'stage1/fast';
 import { compile } from 'stage1/macro' with { type: 'macro' };
 import { reconcile } from 'stage1/reconcile/non-keyed';
 import type {
@@ -56,7 +56,7 @@ interface SectionRefs {
 const searchOnlyView = h('<small class="so muted">(search only)</small>');
 
 // https://tabler-icons.io/i/grip-vertical
-const sectionMeta = compile(`
+const sectionMeta = compile<SectionRefs>(`
   <li class=item draggable=true>
     <svg viewBox="0 0 24 24" class=icon>
       <circle cx=9 cy=5 r=1 />
@@ -77,9 +77,9 @@ const SectionItem = (
   scope: SectionScope,
 ): SectionComponent => {
   const root = clone(sectionView);
-  const refs = collect<SectionRefs>(root, sectionMeta.k, sectionMeta.d);
+  const refs = collect<SectionRefs>(root, sectionMeta.d);
 
-  refs.name.nodeValue = item;
+  refs[sectionMeta.ref.name].nodeValue = item;
 
   if (item === DEFAULT_SECTION_ORDER[1] || item === DEFAULT_SECTION_ORDER[2]) {
     append(clone(searchOnlyView), root);
@@ -121,9 +121,9 @@ const SectionItem = (
 };
 
 interface Refs {
-  feedback: Text;
+  // feedback: Text;
   theme: HTMLSelectElement;
-  b: HTMLInputElement;
+  bookmarks: HTMLInputElement;
   se: HTMLUListElement;
   sd: HTMLUListElement;
   reset: HTMLButtonElement;
@@ -135,9 +135,11 @@ interface Refs {
   clear: HTMLButtonElement;
 }
 
-const meta = compile(`
+const meta = compile<Refs>(`
   <div>
+    <!--
     <div>@feedback</div>
+    -->
 
     <div class=row>
       <label>Theme</label>
@@ -156,7 +158,7 @@ const meta = compile(`
 
     <div class=row>
       <label>
-        <input @b type=checkbox class=box> Show bookmarks bar
+        <input @bookmarks type=checkbox class=box> Show bookmarks bar
       </label>
     </div>
 
@@ -205,7 +207,18 @@ const view = h<HTMLDivElement>(meta.html);
 
 const Settings = () => {
   const root = view;
-  const refs = collect<Refs>(root, meta.k, meta.d);
+  const refs = collect<Refs>(root, meta.d);
+  // const feedback = refs[meta.ref.feedback];
+  const theme = refs[meta.ref.theme];
+  const bookmarks = refs[meta.ref.bookmarks];
+  const se = refs[meta.ref.se];
+  const sd = refs[meta.ref.sd];
+  const reset = refs[meta.ref.reset];
+  const feedback2 = refs[meta.ref.feedback2];
+  const sync = refs[meta.ref.sync];
+  const pull = refs[meta.ref.pull];
+  const push = refs[meta.ref.push];
+  const clear = refs[meta.ref.clear];
 
   const state: SettingsState = {
     order: [[], []],
@@ -232,7 +245,7 @@ const Settings = () => {
   };
 
   const updateTheme = async (themeName: string) => {
-    refs.theme.value = themeName;
+    theme.value = themeName;
 
     await chrome.storage.local.set({
       tn: themeName,
@@ -247,10 +260,10 @@ const Settings = () => {
   };
 
   const updateOrder = (order: SettingsState['order'], skipSave?: boolean) => {
-    reconcile(refs.se, state.order[0], order[0], (item) =>
+    reconcile(se, state.order[0], order[0], (item) =>
       SectionItem(item, 0, scope),
     );
-    reconcile(refs.sd, state.order[1], order[1], (item) =>
+    reconcile(sd, state.order[1], order[1], (item) =>
       SectionItem(item, 1, scope),
     );
     state.order = order;
@@ -284,11 +297,11 @@ const Settings = () => {
     (event.target as SectionComponent).classList.remove('over');
   };
 
-  refs.theme.onchange = () => updateTheme(refs.theme.value);
+  theme.onchange = () => updateTheme(theme.value);
 
-  refs.b.onchange = async () => {
+  bookmarks.onchange = async () => {
     // eslint-disable-next-line unicorn/prefer-ternary
-    if (refs.b.checked) {
+    if (bookmarks.checked) {
       // When value is same as default, we don't need to store it
       await chrome.storage.local.remove('b');
     } else {
@@ -301,68 +314,68 @@ const Settings = () => {
   };
 
   // oxlint-disable-next-line no-multi-assign
-  refs.se.ondragover = refs.sd.ondragover = (event) => {
+  se.ondragover = sd.ondragover = (event) => {
     event.preventDefault();
     // eslint-disable-next-line no-param-reassign
     event.dataTransfer!.dropEffect = 'move';
   };
-  refs.se.ondrop = handleDrop(0);
-  refs.sd.ondrop = handleDrop(1);
+  se.ondrop = handleDrop(0);
+  sd.ondrop = handleDrop(1);
 
-  refs.reset.onclick = () => {
+  reset.onclick = () => {
     void updateTheme(DEFAULT_THEME);
     updateOrder([[...DEFAULT_SECTION_ORDER], []]);
   };
 
   // Populate UI using user settings data from storage (chrome.storage.local)
-  const themeName = storage.tn ?? DEFAULT_THEME;
+  const themeName = storage.n ?? DEFAULT_THEME;
   const orderEnabled = storage.o ?? [...DEFAULT_SECTION_ORDER];
   const orderDisabled = DEFAULT_SECTION_ORDER.filter(
     (item) => !orderEnabled.includes(item),
   );
 
-  refs.theme.value = themeName;
-  refs.b.checked = !storage.b;
+  theme.value = themeName;
+  bookmarks.checked = !storage.b;
   updateOrder([orderEnabled, orderDisabled], true);
 
   /* ********************************** */
   // Experimental sync settings feature //
   /* ********************************** */
 
-  refs.sync.checked = !!storage.s;
+  sync.checked = !!storage.s;
 
   const updateSync = (syncData: SyncStorageData) => {
     if (syncData.ts) {
-      refs.feedback2.nodeValue = `Sync data found (last updated: ${new Date(
+      feedback2.nodeValue = `Sync data found (last updated: ${new Date(
         syncData.ts,
       ).toLocaleString()})`;
-      refs.pull.disabled = false;
-      refs.clear.disabled = false;
+      pull.disabled = false;
+      clear.disabled = false;
     } else {
-      refs.feedback2.nodeValue = 'No sync data found';
-      refs.pull.disabled = true;
-      refs.clear.disabled = true;
+      feedback2.nodeValue = 'No sync data found';
+      pull.disabled = true;
+      clear.disabled = true;
     }
 
-    refs.push.disabled = false;
-    refs.sync.disabled = false;
+    push.disabled = false;
+    sync.disabled = false;
 
-    refs.sync.onchange = () => {
-      if (refs.sync.checked) {
-        void chrome.storage.local.set({
+    sync.onchange = () => {
+      if (sync.checked) {
+        void chrome.storage.sync.set({
           s: true,
         });
         // @ts-expect-error - doesn't need event argument
-        refs.pull.onclick?.();
+        pull.onclick?.();
       } else {
-        void chrome.storage.local.remove('s');
+        void chrome.storage.sync.remove('s');
       }
     };
 
-    refs.pull.onclick = () => {
+    pull.onclick = () => {
       if (syncData.data) {
-        void chrome.storage.local.set(syncData.data);
-        void updateTheme(syncData.data.tn ?? DEFAULT_THEME);
+        void chrome.storage.sync.set(syncData.data);
+        void updateTheme(syncData.data.n ?? DEFAULT_THEME);
         updateOrder([syncData.data.o ?? [...DEFAULT_SECTION_ORDER], []], true);
       }
     };
@@ -381,9 +394,9 @@ const Settings = () => {
       }
     };
 
-    refs.push.onclick = () => state.pushSyncData!(true);
+    push.onclick = () => state.pushSyncData!(true);
 
-    refs.clear.onclick = () => {
+    clear.onclick = () => {
       void chrome.storage.sync.clear();
       updateSync({});
     };
@@ -396,7 +409,7 @@ const Settings = () => {
       // TODO: Listen for sync data changes?
       // chrome.storage.sync.onChanged.addListener((changes) => {});
     } else {
-      refs.feedback2.nodeValue = 'Not signed in or sync not supported';
+      feedback2.nodeValue = 'Not signed in or sync not supported';
     }
   });
 

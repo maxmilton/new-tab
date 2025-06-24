@@ -1,7 +1,7 @@
 // Theme loader code must run first
-import './theme';
+import './theme.ts'; // oxlint-disable-line import/no-unassigned-import
 
-import { append, fragment } from 'stage1';
+import { append, fragment } from 'stage1/fast';
 import { BookmarkBar } from './components/BookmarkBar.ts';
 import { Menu } from './components/Menu.ts';
 import { Search } from './components/Search.ts';

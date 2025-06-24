@@ -1,5 +1,6 @@
 import { afterAll, beforeAll, describe, expect, mock, spyOn, test } from 'bun:test';
 import { target } from 'happy-dom/lib/PropertySymbol.js';
+import { ONCLICK } from 'stage1/fast';
 import { DEFAULT_SECTION_ORDER, handleClick } from '../../src/utils.ts';
 
 describe('DEFAULT_SECTION_ORDER', () => {
@@ -85,7 +86,7 @@ describe('handleClick', () => {
     const handler = mock(() => {});
     const child = document.createElement('div');
     const parent = document.createElement('a');
-    parent.__click = handler;
+    parent[ONCLICK] = handler;
     parent.appendChild(child);
     // @ts-expect-error - happy-dom internal target property
     event[target] = child;
@@ -102,8 +103,8 @@ describe('handleClick', () => {
     const child = document.createElement('div');
     const parent1 = document.createElement('a');
     const parent2 = document.createElement('a');
-    parent1.__click = handler1;
-    parent2.__click = handler2;
+    parent1[ONCLICK] = handler1;
+    parent2[ONCLICK] = handler2;
     // parent2 > parent1 > child
     parent2.appendChild(parent1);
     parent1.appendChild(child);
@@ -153,22 +154,6 @@ describe('handleClick', () => {
     const result = handleClick(event);
     expect(result).not.toBeFalse();
   });
-
-  // TODO: If we add links with target="_blank" then don't skip this test.
-  // test.skip('opens in new tab when url starts with chrome:// and target is _blank', () => {
-  //   expect.assertions(3);
-  //   const tabsCreateSpy = spyOn(chrome.tabs, 'create');
-  //   const tabsUpdateSpy = spyOn(chrome.tabs, 'update');
-  //   const event = new window.MouseEvent('click');
-  //   // @ts-expect-error - happy-dom internal target property
-  //   event[target] = { href: 'chrome://about', target: '_blank' };
-  //   handleClick(event);
-  //   expect(tabsCreateSpy).toHaveBeenCalledTimes(1);
-  //   expect(tabsCreateSpy).toHaveBeenCalledWith({ url: 'chrome://about' });
-  //   expect(tabsUpdateSpy).toHaveBeenCalledTimes(0);
-  //   tabsCreateSpy.mockRestore();
-  //   tabsUpdateSpy.mockRestore();
-  // });
 
   test('opens in new tab when url starts with chrome:// and ctrl key is pressed', () => {
     expect.assertions(3);
