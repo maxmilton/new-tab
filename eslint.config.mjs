@@ -18,7 +18,6 @@ export default ts.config(
     },
     languageOptions: {
       parserOptions: {
-        project: ['tsconfig.json', 'tsconfig.node.json'],
         projectService: {
           allowDefaultProject: ['*.mjs'],
         },
@@ -37,8 +36,6 @@ export default ts.config(
 
       // bad browser support
       'unicorn/prefer-at': OFF,
-      // prefer to clearly separate Bun and DOM
-      'unicorn/prefer-global-this': OFF,
 
       /* Performance and byte savings */
       // byte savings at the cost of readability
@@ -80,6 +77,7 @@ export default ts.config(
       'unicorn/prefer-dom-node-append': OFF,
       'unicorn/prefer-dom-node-dataset': OFF,
       'unicorn/prefer-dom-node-remove': OFF,
+      'unicorn/prefer-global-this': OFF,
       'unicorn/prefer-includes': OFF,
       'unicorn/prefer-native-coercion-functions': OFF,
       'unicorn/prefer-query-selector': OFF,

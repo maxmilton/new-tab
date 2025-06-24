@@ -3,7 +3,6 @@
 *.bak
 *.lock
 !bun.lock
-*.log
 *.zip
 /coverage/
 /dist/

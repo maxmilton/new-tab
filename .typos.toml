@@ -1,3 +1,9 @@
+[default]
+extend-ignore-re = [
+  # Custom ignore regex patterns: https://github.com/crate-ci/typos/blob/master/docs/reference.md#example-configurations
+  "(?s)//\\s*spellchecker:ignore-next-line[^\\n]*\\n[^\\n]*",
+]
+
 [default.extend-words]
 # Misspelling in upstream Biome config
 Inferrable = "Inferrable"

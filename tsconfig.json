@@ -9,6 +9,9 @@
     "skipLibCheck": true,
     "allowJs": false,
 
+    "allowImportingTsExtensions": true,
+    "noEmit": true,
+
     "strict": true,
     "allowUnreachableCode": false, // TODO: Set true once oxlint is type aware
     "exactOptionalPropertyTypes": true,

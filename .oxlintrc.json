@@ -37,38 +37,31 @@
   "rules": {
     /* Sane overrides for "categories" */
     "consistent-indexed-object-style": ["warn", "record"],
+    "curly": "off", // covered by Biome formatter
     "eqeqeq": ["error", { "null": "ignore" }],
-    "exports-last": "off",
     "func-names": ["error", "as-needed"],
     "func-style": ["error", "declaration", { "allowArrowFunctions": true }],
+    "import/consistent-type-specifier-style": "off", // covered by TypeScript
+    "import/exports-last": "off",
+    "import/group-exports": "off",
+    "import/no-unassigned-import": "off",
     "init-declarations": "off",
-    "group-exports": "off",
     "max-dependencies": "off",
     "max-depth": "off",
+    "max-len": "off", // covered by Biome formatter
     "max-lines-per-function": "off",
     "max-lines": "off",
     "max-nested-callbacks": "off",
     "max-params": "off",
     "no-async-await": "off",
-    "no-const-enum": "off", // bun does inlining
-    // "no-magic-numbers": [
-    //   "warn",
-    //   {
-    //     "ignoreArrayIndexes": true,
-    //     "ignoreDefaultValues": true,
-    //     "ignoreClassFieldInitialValues": true,
-    //     "ignoreEnums": true,
-    //     "ignoreNumericLiteralTypes": true,
-    //     "ignoreReadonlyClassProperties": true,
-    //     "ignoreTypeIndexes": true
-    //   }
-    // ],
+    "no-const-enum": "off", // bun inlines
     "no-magic-numbers": "off",
     "no-non-null-assertion": "warn",
     "no-null": "off",
     "no-optional-chaining": "off",
     "no-rest-spread-properties": "off",
     "no-ternary": "off",
+    "no-undefined": "off", // covered by Biome formatter
     "no-unused-vars": [
       "warn",
       {
@@ -82,6 +75,8 @@
     "sort-imports": "off",
     "sort-keys": "off",
     "unicorn/filename-case": ["error", { "case": "kebabCase" }],
+    "unicorn/no-nested-ternary": "off", // covered by Biome formatter
+    "unicorn/prefer-global-this": "off", // prefer to clearly separate Bun and DOM
     "yoda": ["warn", "never"],
 
     /* Performance and byte savings */
@@ -112,15 +107,24 @@
     "prefer-dom-node-remove": "off",
 
     // TODO: Enable these once oxlint supports type checking
-    "explicit-function-return-type": "off",
-
-    /* Covered by Biome formatter */
-    "curly": "off",
-    "max-len": "off",
-    "no-undefined": "off",
-    "unicorn/no-nested-ternary": "off"
+    "explicit-function-return-type": "off"
   },
   "overrides": [
+    {
+      "files": ["*.ts"],
+      "rules": {
+        "jsdoc/require-param": "off",
+        "jsdoc/require-param-type": "off",
+        "jsdoc/require-returns": "off",
+        "jsdoc/require-returns-type": "off"
+      }
+    },
+    {
+      "files": ["*.d.ts"],
+      "rules": {
+        "import/unambiguous": "off"
+      }
+    },
     {
       "files": ["*.config.ts", "*.config.mjs"],
       "env": {
@@ -149,6 +153,7 @@
         "catch-or-return": "off",
         "func-style": "off",
         "import/no-namespace": "off",
+        "jest/no-commented-out-tests": "warn",
         "no-empty-function": "off",
         "no-magic-numbers": "off",
         "unicorn/filename-case": [

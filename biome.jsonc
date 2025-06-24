@@ -15,8 +15,14 @@
     "indentStyle": "space"
   },
   "linter": {
+    "domains": {
+      "project": "all"
+    },
     "rules": {
+      "recommended": true,
       "complexity": {
+        "noArguments": "on",
+        "noCommaOperator": "on",
         "noExcessiveCognitiveComplexity": {
           "level": "on",
           "options": { "maxAllowedComplexity": 30 }
@@ -26,6 +32,7 @@
         "noUselessUndefinedInitialization": "on",
         "noVoid": "off",
         "useDateNow": "warn",
+        "useNumericLiterals": "on",
         "useSimplifiedLogicExpression": "on",
         "useWhile": "on"
       },
@@ -40,38 +47,50 @@
         "noUnusedFunctionParameters": "on",
         "noUnusedImports": { "level": "on", "fix": "none" },
         "noUnusedPrivateClassMembers": "on",
-        "noUnusedVariables": "off", // covered by oxlint
-        "useArrayLiterals": "on"
+        "noUnusedVariables": "off" // covered by oxlint
       },
       "performance": {
         "noBarrelFile": "on",
         "noDelete": "on",
+        "noDynamicNamespaceImportAccess": "on",
+        "noNamespaceImport": "on",
         "noReExportAll": "on",
-        "useTopLevelRegex": "on"
+        "useTopLevelRegex": "info"
       },
       "style": {
-        "noArguments": "on",
-        "noCommaOperator": "on",
-        // "noDefaultExport": null,
+        "noCommonJs": "on",
+        "noDefaultExport": "on",
         "noDoneCallback": "on",
+        "noEnum": "on",
+        "noExportedImports": "on",
         "noImplicitBoolean": "on",
         "noInferrableTypes": "on",
         "noNamespace": "on",
-        "noNamespaceImport": "on",
         "noNegationElse": "on",
+        "noNestedTernary": "on",
         "noNonNullAssertion": "off", // covered by oxlint
         "noParameterAssign": "on",
         "noParameterProperties": "on",
+        "noProcessEnv": "off", // used as naming convention for build-time replacements
         "noRestrictedGlobals": "on",
+        "noRestrictedImports": "on",
+        "noRestrictedTypes": "on",
         "noShoutyConstants": "on",
+        "noSubstr": "on",
         "noUnusedTemplateLiteral": "on",
         "noUselessElse": "on",
         "noYodaExpression": "on",
         "useAsConstAssertion": "on",
+        "useArrayLiterals": "on",
+        "useAtIndex": "on",
         // "useBlockStatements": null,
         "useCollapsedElseIf": "on",
+        "useCollapsedIf": "on",
+        "useComponentExportOnlyModules": "on",
         "useConsistentArrayType": "on",
         "useConsistentBuiltinInstantiation": "on",
+        "useConsistentCurlyBraces": "on",
+        "useConsistentMemberAccessibility": "on",
         "useConst": "on",
         "useDefaultParameterLast": "on",
         "useDefaultSwitchClause": "on",
@@ -91,14 +110,17 @@
         "useNodeAssertStrict": "on",
         "useNodejsImportProtocol": "on",
         "useNumberNamespace": "on",
-        "useNumericLiterals": "on",
         "useSelfClosingElements": "on",
         "useShorthandAssign": "on",
         "useShorthandFunctionType": "on",
         "useSingleVarDeclarator": "on",
         "useTemplate": "off", // covered by oxlint
         "useThrowNewError": "on",
-        "useThrowOnlyError": "on"
+        "useThrowOnlyError": "on",
+        "useTrimStartEnd": "on",
+
+        // CSS rules
+        "noValueAtRule": "on"
       },
       "suspicious": {
         "noAssignInExpressions": "off", // covered by oxlint
@@ -112,72 +134,37 @@
         "noVar": "on",
         "useAwait": "on",
         "useErrorMessage": "on",
-        "useNumberToFixedDigitsArgument": "on"
+        "useGuardForIn": "off", // covered by oxlint
+        "useNumberToFixedDigitsArgument": "on",
+        "useStrictMode": "on"
       },
       "nursery": {
         "noAwaitInLoop": "off", // covered by oxlint
         "noBitwiseOperators": "off", // covered by oxlint
-        "noCommonJs": "on",
         "noConstantBinaryExpression": "on",
         "noDestructuredProps": "on",
-        "noDocumentCookie": "on",
-        "noDuplicateElseIf": "on",
-        "noDynamicNamespaceImportAccess": "on",
-        "noEnum": "on",
-        "noExportedImports": "on",
         // "noFloatingPromises": "on", // https://github.com/biomejs/biome/issues/3187
         "noGlobalDirnameFilename": "on",
         "noImportCycles": "off", // covered by oxlint
-        "noIrregularWhitespace": "on",
-        "noNestedTernary": "on",
         "noNoninteractiveElementInteractions": "on",
-        "noOctalEscape": "on",
-        "noProcessEnv": "off", // used as naming convention for build-time replacements
-        "noProcessGlobal": "off",
+        "noProcessGlobal": "off", // used as naming convention for build-time replacements
         "noRestrictedElements": "on",
-        "noRestrictedImports": "on",
-        "noRestrictedTypes": "on",
-        // "noSecrets": "on", // TODO: Change to "error" when more stable
-        "noStaticElementInteractions": "on",
-        "noSubstr": "on",
-        "noTemplateCurlyInString": "on",
+        "noSecrets": "on", // TODO: Change to "error" when more stable
         "noTsIgnore": "on",
         "noUnresolvedImports": "off", // covered by TypeScript
-        "noUselessEscapeInRegex": "on",
         "noUselessEscapeInString": "on",
-        "noUselessStringRaw": "on",
         "noUselessUndefined": "on",
-        "useAdjacentOverloadSignatures": "on",
-        "useAriaPropsSupportedByRole": "on",
-        "useAtIndex": "on",
-        "useCollapsedIf": "on",
-        "useComponentExportOnlyModules": "on",
-        "useConsistentCurlyBraces": "on",
-        "useConsistentMemberAccessibility": "on",
-        "useConsistentObjectDefinition": "off",
-        "useExplicitType": "off",
-        "useExportsLast": "off",
-        "useGoogleFontDisplay": "on",
+        // "useConsistentObjectDefinition": "off",
+        // "useExplicitType": "off",
+        // "useExportsLast": "off",
         "useGoogleFontPreconnect": "on",
-        "useGuardForIn": "off", // covered by oxlint
         "useParseIntRadix": "on",
-        // "useSortedClasses": "on", // https://github.com/biomejs/biome/issues/1274
-        "useStrictMode": "on",
+        "useSortedClasses": "on", // https://github.com/biomejs/biome/issues/1274
         "useSymbolDescription": "on",
-        "useTrimStartEnd": "on",
-        "useValidAutocomplete": "on",
 
         // CSS rules
-        "noDescendingSpecificity": "on",
-        "noDuplicateCustomProperties": "on",
-        "noDuplicateProperties": "on",
         "noImportantStyles": "on",
-        "noMissingVarFunction": "on",
-        "noUnknownAtRule": "on",
-        "noUnknownPseudoClass": "on",
-        "noUnknownPseudoElement": "on",
-        "noUnknownTypeSelector": "on",
-        "noValueAtRule": "on"
+        "noUnknownAtRule": "on"
       }
     }
   },
@@ -218,7 +205,8 @@
           "correctness": {
             "noNodejsModules": "off"
           },
-          "style": {
+          "performance": {
+            "noDynamicNamespaceImportAccess": "off",
             "noNamespaceImport": "off"
           },
           "suspicious": {
@@ -227,9 +215,6 @@
             "noExportsInTest": "on",
             "noFocusedTests": "on",
             "noSkippedTests": "on"
-          },
-          "nursery": {
-            "noDynamicNamespaceImportAccess": "off"
           }
         }
       },
@@ -244,8 +229,11 @@
           "correctness": {
             "noNodejsModules": "off"
           },
+          "performance": {
+            "noNamespaceImport": "off"
+          },
           "style": {
-            "noNamespaceImport": "off",
+            "noDefaultExport": "off",
             "useNamingConvention": "off"
           }
         }
