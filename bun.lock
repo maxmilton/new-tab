@@ -4,7 +4,7 @@
     "": {
       "name": "new-tab",
       "dependencies": {
-        "stage1": "0.8.0-next.17",
+        "stage1": "0.9.0",
       },
       "devDependencies": {
         "@biomejs/biome": "2.0.0-beta.2",
@@ -643,7 +643,7 @@
 
     "source-map-support": ["source-map-support@0.5.21", "", { "dependencies": { "buffer-from": "^1.0.0", "source-map": "^0.6.0" } }, "sha512-uBHU3L3czsIyYXKX88fdrGovxdSCoTGDRZ6SYXtSRxLZUzHg5P/66Ht6uoUlHu9EZod+inXhKo3qQgwXUT/y1w=="],
 
-    "stage1": ["stage1@0.8.0-next.17", "", {}, "sha512-vy9Lhf0QzZK4a6oQOETDlcIAC1IkxjaUgJE0Ch+mwFUALtreepStOnORWY0N/4fIx7VvU31TlORO2HKzswQiMQ=="],
+    "stage1": ["stage1@0.9.0", "", {}, "sha512-E6AZ8Mv7spMrzd97gnpcsvt11tube92pv221BZA1UCKJ01s1c2+yYiNTFQRydZq2lmLWKS4cVGWvBuMqksmnKA=="],
 
     "statuses": ["statuses@2.0.1", "", {}, "sha512-RwNA9Z/7PrK06rYLIzFMlaF+l73iwpzsqRIFgbMLbTcLD6cOao82TaWefPXQvB2fOC4AjuYSEndS7N/mTCbkdQ=="],
 
