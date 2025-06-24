@@ -1,4 +1,4 @@
-import type { UserStorageData } from './types';
+import type { UserStorageData } from './types.ts';
 
 performance.mark('Load Storage');
 export const storage = await chrome.storage.local.get<UserStorageData>();

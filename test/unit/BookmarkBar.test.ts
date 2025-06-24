@@ -1,6 +1,6 @@
 import { afterAll, afterEach, beforeAll, expect, test } from 'bun:test';
 import { cleanup, render } from '@maxmilton/test-utils/dom';
-import { BookmarkBar } from '../../src/components/BookmarkBar';
+import { BookmarkBar } from '../../src/components/BookmarkBar.ts';
 
 let style: HTMLStyleElement;
 

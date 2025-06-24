@@ -1,6 +1,7 @@
 import { append, create, h } from 'stage1';
 import { compile } from 'stage1/macro' with { type: 'macro' };
-import { BookmarkNode, type BookmarkTreeNode, Folder } from './BookmarkNode';
+import { chromeBookmarks } from '../utils.ts';
+import { BookmarkNode, type BookmarkTreeNode, Folder } from './BookmarkNode.ts';
 
 declare global {
   interface HTMLElement {

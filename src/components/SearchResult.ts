@@ -1,7 +1,7 @@
 import { append, clone, collect, h } from 'stage1';
 import { compile } from 'stage1/macro' with { type: 'macro' };
-import { DEFAULT_SECTION_ORDER } from '../utils';
-import { Link, type LinkComponent, type LinkProps } from './Link';
+import { chromeTabs, DEFAULT_SECTION_ORDER } from '../utils.ts';
+import { Link, type LinkComponent, type LinkProps } from './Link.ts';
 
 const DEFAULT_RESULTS_AMOUNT = 12; // chrome.topSites.get returns 12 items
 const MORE_RESULTS_AMOUNT = 50;

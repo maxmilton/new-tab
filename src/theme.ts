@@ -2,8 +2,8 @@
  * Theme Loader
  */
 
-import type { ThemesData } from './types';
-import { storage } from './utils';
+import type { ThemesData } from './types.ts';
+import { storage } from './utils.ts';
 
 performance.mark('Load Theme');
 

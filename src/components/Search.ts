@@ -1,8 +1,8 @@
 import { append, collect, h } from 'stage1';
 import { compile } from 'stage1/macro' with { type: 'macro' };
-import type { SectionOrderItem } from '../types';
-import { DEFAULT_SECTION_ORDER, storage } from '../utils';
-import { SearchResult, type SearchResultComponent } from './SearchResult';
+import type { SectionOrderItem } from '../types.ts';
+} from '../utils.ts';
+import { SearchResult, type SearchResultComponent } from './SearchResult.ts';
 
 type SectionRefs = Partial<Record<SectionOrderItem, SearchResultComponent>>;
 

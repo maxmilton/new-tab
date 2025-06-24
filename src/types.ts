@@ -1,4 +1,4 @@
-import type { DEFAULT_SECTION_ORDER } from './utils';
+import type { DEFAULT_SECTION_ORDER } from './utils.ts';
 
 declare global {
   interface HTMLElement {

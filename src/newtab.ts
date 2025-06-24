@@ -2,10 +2,10 @@
 import './theme';
 
 import { append, fragment } from 'stage1';
-import { BookmarkBar } from './components/BookmarkBar';
-import { Menu } from './components/Menu';
-import { Search } from './components/Search';
-import { handleClick, storage } from './utils';
+import { BookmarkBar } from './components/BookmarkBar.ts';
+import { Menu } from './components/Menu.ts';
+import { Search } from './components/Search.ts';
+import { handleClick, storage } from './utils.ts';
 
 performance.mark('Initialise Components');
 

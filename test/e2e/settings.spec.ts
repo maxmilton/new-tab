@@ -1,5 +1,5 @@
 import type { ConsoleMessage } from '@playwright/test';
-import { expect, test } from './fixtures';
+import { expect, test } from './fixtures.ts';
 
 test('settings page', async ({ page, extensionId }) => {
   await page.goto(`chrome-extension://${extensionId}/settings.html`);

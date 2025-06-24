@@ -6,8 +6,8 @@ import type {
   SyncStorageData,
   ThemesData,
   UserStorageData,
-} from './types';
-import { DEFAULT_SECTION_ORDER, storage } from './utils';
+} from './types.ts';
+import { DEFAULT_SECTION_ORDER, storage } from './utils.ts';
 
 // TODO: Show errors in the UI.
 

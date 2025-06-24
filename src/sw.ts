@@ -1,6 +1,6 @@
 /// <reference lib="webworker" />
 
-import type { SyncStorageData, ThemesData, UserStorageData } from './types';
+import type { SyncStorageData, ThemesData, UserStorageData } from './types.ts';
 
 // On install or subsequent update, preload the user's chosen theme into storage
 // eslint-disable-next-line @typescript-eslint/no-misused-promises

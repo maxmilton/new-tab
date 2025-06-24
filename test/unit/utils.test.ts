@@ -1,6 +1,6 @@
 import { afterAll, beforeAll, describe, expect, mock, spyOn, test } from 'bun:test';
 import { target } from 'happy-dom/lib/PropertySymbol.js';
-import { DEFAULT_SECTION_ORDER, handleClick } from '../../src/utils';
+import { DEFAULT_SECTION_ORDER, handleClick } from '../../src/utils.ts';
 
 describe('DEFAULT_SECTION_ORDER', () => {
   test('is an array', () => {

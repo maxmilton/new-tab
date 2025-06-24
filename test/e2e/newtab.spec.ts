@@ -1,5 +1,5 @@
 import type { ConsoleMessage } from '@playwright/test';
-import { expect, test } from './fixtures';
+import { expect, test } from './fixtures.ts';
 
 // TODO: Write tests to verify:
 //  - No console logs/errors -- including/especially CSP violations

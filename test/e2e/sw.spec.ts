@@ -1,4 +1,4 @@
-import { expect, test } from './fixtures';
+import { expect, test } from './fixtures.ts';
 
 test('has a single background service worker (sw.js)', ({ context, extensionId }) => {
   const workers = context.serviceWorkers();

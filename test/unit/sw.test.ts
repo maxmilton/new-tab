@@ -1,6 +1,6 @@
 import { afterEach, describe, expect, spyOn, test } from 'bun:test';
 import { performanceSpy } from '@maxmilton/test-utils/spy';
-import { reset } from '../setup';
+import { reset } from '../setup.ts';
 
 // Completely reset DOM and global state between tests
 afterEach(reset);
