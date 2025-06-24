@@ -21,9 +21,9 @@ jobs:
       security-events: write
     steps:
       - uses: actions/checkout@v4
-      - run: semgrep ci --sarif > semgrep.sarif
+      - run: semgrep ci --sarif-output=semgrep.sarif
         env:
-          SEMGREP_RULES: p/default
+          SEMGREP_RULES: p/default p/owasp-top-ten p/cwe-top-25 p/gitleaks p/r2c-security-audit
       - uses: github/codeql-action/upload-sarif@v3
         if: always()
         with:

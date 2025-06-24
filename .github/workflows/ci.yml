@@ -12,6 +12,8 @@ jobs:
   test:
     runs-on: ubuntu-latest
     timeout-minutes: 5
+    permissions:
+      contents: read
     steps:
       - uses: actions/checkout@v4
       - uses: oven-sh/setup-bun@v2
@@ -21,6 +23,12 @@ jobs:
       - run: bun run build
       - run: bun run test --coverage-reporter=lcov --coverage-reporter=text
       - name: Report coverage
+        if: ${{ github.repository_owner == 'maxmilton' }}
+        uses: qltysh/qlty-action/coverage@v1
+        with:
+          token: ${{ secrets.QLTY_COVERAGE_TOKEN }}
+          files: coverage/lcov.info
+      - name: Report coverage (old)
         if: ${{ github.repository_owner == 'maxmilton' }}
         run: |
           curl -LO https://codeclimate.com/downloads/test-reporter/test-reporter-latest-linux-amd64 \
@@ -35,6 +43,8 @@ jobs:
   e2e:
     runs-on: ubuntu-latest
     timeout-minutes: 10
+    permissions:
+      contents: read
     steps:
       - uses: actions/checkout@v4
       - uses: oven-sh/setup-bun@v2
@@ -53,6 +63,8 @@ jobs:
   lint:
     runs-on: ubuntu-latest
     timeout-minutes: 5
+    permissions:
+      contents: read
     steps:
       - uses: actions/checkout@v4
       - uses: oven-sh/setup-bun@v2
