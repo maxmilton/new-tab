@@ -196,30 +196,38 @@ describe('theme loader', () => {
     expect.assertions(5);
     await load();
 
-    // const rootStyles = window.getComputedStyle(document.documentElement);
-    // const styles = window.getComputedStyle(document.body);
-    // expect(rootStyles.colorScheme).toBe('dark');
-    // expect(rootStyles.getPropertyValue('--b')).toBe('#23252d');
-    // expect(styles.backgroundColor).toBe('#23252d');
-    // expect(isHexColor(styles.backgroundColor)).toBeTrue();
-    // expect(isLightOrDark(styles.backgroundColor)).toBe('dark');
-
     const rootStyles = window.getComputedStyle(document.documentElement);
     const styles = window.getComputedStyle(document.body);
-    // TODO: Spec default value for colorScheme is 'normal' but happy-dom uses an empty string.
-    // expect(rootStyles.colorScheme).toBe('normal');
-    expect(rootStyles.colorScheme).toBe('');
+    expect(rootStyles.colorScheme).toBe('light dark');
     expect(rootStyles.getPropertyValue('--b')).toBe('#fafafa');
     expect(styles.backgroundColor).toBe('#fafafa');
     expect(isHexColor(styles.backgroundColor)).toBeTrue();
     expect(isLightOrDark(styles.backgroundColor)).toBe('light');
 
-    // TODO: Use this once happy-dom supports proper CSS inheritance.
+    // TODO: Use this once happy-dom supports proper CSS :root inheritance.
     // const styles = window.getComputedStyle(document.body);
-    // expect(styles.colorScheme).toBe('dark');
-    // expect(styles.getPropertyValue('--b')).toBe('#23252d');
-    // expect(styles.backgroundColor).toBe('#23252d');
+    // expect(styles.colorScheme).toBe('light dark');
+    // expect(styles.getPropertyValue('--b')).toBe('#fafafa');
+    // expect(styles.backgroundColor).toBe('#fafafa');
     // expect(isHexColor(styles.backgroundColor)).toBeTrue();
-    // expect(isLightOrDark(styles.backgroundColor)).toBe('dark');
+    // expect(isLightOrDark(styles.backgroundColor)).toBe('light');
+  });
+
+  // TODO: Don't skip once happy-dom supports proper CSS :root inheritance.
+  test.skip('auto theme is light when system is light', async () => {
+    expect.assertions(1);
+    happyDOM.settings.device.prefersColorScheme = 'light';
+    await load('auto');
+    const styles = window.getComputedStyle(document.body);
+    expect(isLightOrDark(styles.backgroundColor)).toBe('light');
+  });
+
+  // TODO: Don't skip once happy-dom supports proper CSS :root inheritance.
+  test.skip('auto theme is dark when system is dark', async () => {
+    expect.assertions(1);
+    happyDOM.settings.device.prefersColorScheme = 'dark';
+    await load('auto');
+    const styles = window.getComputedStyle(document.body);
+    expect(isLightOrDark(styles.backgroundColor)).toBe('dark');
   });
 });
