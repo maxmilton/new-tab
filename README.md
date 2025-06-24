@@ -1,7 +1,10 @@
-[![Build status](https://img.shields.io/github/actions/workflow/status/maxmilton/new-tab/ci.yml?branch=master)](https://github.com/maxmilton/new-tab/actions)
-[![Coverage status](https://img.shields.io/codeclimate/coverage/maxmilton/new-tab)](https://codeclimate.com/github/maxmilton/new-tab)
-[![Chrome Web Store version](https://img.shields.io/chrome-web-store/v/cpcibnbdmpmcmnkhoiilpnlaepkepknb.svg)](https://chrome.google.com/webstore/detail/new-tab/cpcibnbdmpmcmnkhoiilpnlaepkepknb)
-[![Licence](https://img.shields.io/github/license/maxmilton/new-tab.svg)](https://github.com/maxmilton/new-tab/blob/master/LICENSE)
+[![CI status](https://badgen.net/github/checks/maxmilton/new-tab?label=ci)](https://github.com/maxmilton/new-tab/actions)
+[![Coverage %](https://badgen.net/codeclimate/coverage/maxmilton/new-tab)](https://codeclimate.com/github/maxmilton/new-tab)
+[![Chrome Web Store version](https://badgen.net/chrome-web-store/v/cpcibnbdmpmcmnkhoiilpnlaepkepknb)](https://chrome.google.com/webstore/detail/new-tab/cpcibnbdmpmcmnkhoiilpnlaepkepknb)
+[![Licence](https://badgen.net/github/license/maxmilton/new-tab)](./LICENSE)
+
+<!-- TODO: Migrate to badgen.net once it supports qlty.sh -->
+<!-- [![Coverage %](https://qlty.sh/badges/bfb90576-1d44-4606-9ba0-95b4e7077333/test_coverage.svg)](https://qlty.sh/gh/maxmilton/projects/new-tab) -->
 
 # New Tab ![](./static/icon48.png)
 
