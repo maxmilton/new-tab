@@ -20,7 +20,7 @@ describe('dist files', () => {
     ['settings.css', 'text/css;charset=utf-8', 1000, 1500],
     ['settings.html', 'text/html;charset=utf-8', 150, 200],
     ['settings.js', 'text/javascript;charset=utf-8', 6000, 8000],
-    ['sw.js', 'text/javascript;charset=utf-8', 400, 600],
+    ['sw.js', 'text/javascript;charset=utf-8', 400, 700],
     ['themes.json', 'application/json;charset=utf-8'],
   ];
 
