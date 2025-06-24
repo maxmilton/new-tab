@@ -125,7 +125,7 @@ export const Folder = (
 
       popup = FolderPopup(
         root,
-        children ?? (await chrome.bookmarks.getChildren(props.id)),
+        children ?? (await chromeBookmarks.getChildren(props.id)),
         nested,
       );
 

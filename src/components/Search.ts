@@ -55,7 +55,7 @@ const searchFor = (text: string, sections: SectionRefs) => {
 
   if (bookmarks) {
     if (text) {
-      chrome.bookmarks.search(text, bookmarks.$$update);
+      chromeBookmarks.search(text, bookmarks.$$update);
     } else {
       bookmarks.$$update([]);
     }
@@ -115,7 +115,7 @@ export const Search = (): SearchComponent => {
 
   if (openTabs) {
     const updateOpenTabs = () =>
-      chrome.tabs.query({}, (tabs) => {
+      chromeTabs.query({}, (tabs) => {
         openTabs.$$update(tabs);
         if (input.value) {
           openTabs.$$filter(input.value);
@@ -125,9 +125,9 @@ export const Search = (): SearchComponent => {
     updateOpenTabs();
 
     // TODO: Handle race condition where onUpdated is called for this tab on load.
-    chrome.tabs.onUpdated.addListener(updateOpenTabs);
-    chrome.tabs.onRemoved.addListener(updateOpenTabs);
-    chrome.tabs.onMoved.addListener(updateOpenTabs);
+    chromeTabs.onUpdated.addListener(updateOpenTabs);
+    chromeTabs.onRemoved.addListener(updateOpenTabs);
+    chromeTabs.onMoved.addListener(updateOpenTabs);
 
     // When opening multiple new-tab pages the browser will continue to update
     // the "Open Tabs" section on all pages, causing a significant performance

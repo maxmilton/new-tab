@@ -24,7 +24,7 @@ export const BookmarkBar = (): BookmarkBarComponent => {
   const root = create('div');
   root.id = 'b';
 
-  void chrome.bookmarks.getChildren('1').then((bookmarks) => {
+  void chromeBookmarks.getChildren('1').then((bookmarks) => {
     const len = bookmarks.length;
 
     // Since we can't determine an element's width before it's included in the

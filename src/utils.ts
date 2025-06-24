@@ -1,6 +1,9 @@
 import { ONCLICK } from 'stage1/fast';
 import type { UserStorageData } from './types.ts';
 
+export const chromeBookmarks = chrome.bookmarks;
+export const chromeTabs = chrome.tabs;
+
 performance.mark('Load Storage');
 export const storage = await chrome.storage.local.get<UserStorageData>();
 
@@ -35,13 +38,12 @@ export const handleClick = (event: MouseEvent): false | void => {
 
   // Only apply special handling to non-http links
   if (url && url[0] !== 'h') {
-    // if (link.target === '_blank' || event.ctrlKey) {
     if (event.ctrlKey) {
       // Open the location in a new tab
-      void chrome.tabs.create({ url });
+      void chromeTabs.create({ url });
     } else {
       // Update the location in the current tab
-      void chrome.tabs.update({ url });
+      void chromeTabs.update({ url });
     }
 
     // Prevent default behaviour; shorter than `event.preventDefault()`
