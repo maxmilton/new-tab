@@ -1,0 +1,23 @@
+/**
+ * Dark Theme
+ */
+
+:root {
+  --s: 0 2px 4px #00001126; /* shadow */
+  --b: #17191e; /* background */
+  --t: #dadfe1; /* text */
+  --c1: #191d20; /* bookmark node hover background, hr, button border, search input border */
+  --c2: #21272a; /* bookmarks bar, menu dropdown, "load more" button */
+  --c3: #a1b2ba; /* icons, empty folder text, text fallback (headings, etc.) */
+
+  color-scheme: dark;
+}
+
+#s /* search input */ {
+  border: 0;
+  background: #0d0f14;
+}
+
+#i /* search icon */ {
+  top: 10px;
+}

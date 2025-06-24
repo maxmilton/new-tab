@@ -2,7 +2,7 @@
  * Hacker Blue Theme
  */
 
-@import './hacker-terminal.xcss';
+@import "./hacker-terminal.css";
 
 html {
   filter: hue-rotate(97deg);

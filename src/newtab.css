@@ -1,38 +1,40 @@
-// stylelint-disable no-descending-specificity
+/* stylelint-disable no-descending-specificity */
 
 /**
  * App styles
  */
 
 body {
-  overflow-y: scroll; // prevent jump on load
+  overflow-y: scroll; /* prevent jump on load */
   margin: 108px 0;
   color: var(--c3);
-  font-size: 18px;
+  font-size: 16px;
   font-variant: none;
-  // Although it's best practice to use a unitless value for line-height, this
-  // is a hack for alignment with the minimum possible style properties. Value
-  // should be the same as as bookmark bar height.
-  line-height: 42px;
+  /* Although it's best practice to use a unitless value for line-height, this
+   * is a hack for alignment with the minimum possible style properties. Value
+   * should be the same as as bookmark bar height. */
+  line-height: 38px;
   background: var(--b);
   text-rendering: optimizespeed;
 }
 
+h2 {
+  font-weight: normal;
+}
+
 a,
-// folder
-.f {
+.f /* folder */ {
   display: block;
   color: var(--t);
   white-space: nowrap;
 }
 
 a,
-// subfolder
-.sf .f {
+.sf .f /* subfolder */ {
   overflow: hidden;
   text-decoration: none;
   text-overflow: ellipsis;
-  cursor: pointer; // for menu settings link (without href)
+  cursor: pointer; /* for menu settings link (without href) */
 
   &:hover,
   &:focus {
@@ -40,10 +42,10 @@ a,
   }
 }
 
-// all <img> are favicons
+/* all <img> are favicons */
 img {
   width: 16px;
-  height: 16px; // prevents realignment jump on load
+  height: 16px; /* prevents realignment jump on load */
   margin: 0 10px 0 0;
 }
 
@@ -51,31 +53,30 @@ svg {
   width: 24px;
   height: 24px;
   fill: none;
-  stroke: currentcolor;
+  /* stroke: currentcolor; */
+  stroke: var(--c3);
   stroke-linecap: round;
   stroke-width: 2px;
 }
 
-// search results container
-#c {
+#c /* search results container */ {
   position: relative;
   max-width: 800px;
   margin: 0 auto;
   padding: 0 18px;
 }
 
-// "Load more" button
-button,
-// search input
-#s {
-  box-sizing: border-box;
+button /* "Load more" button */,
+#s /* search input */ {
   width: 100%;
   margin-top: 9px;
-  padding: 11px 20px;
+  padding: 4px 20px;
   border: 2px solid var(--c1);
-  border-radius: 24px;
+  border-radius: 16px;
   color: var(--t);
-  font-size: 21px;
+  font-family: inherit;
+  font-size: 18px;
+  line-height: inherit;
   background: inherit;
   outline: none;
 
@@ -85,43 +86,41 @@ button,
   }
 }
 
-#s {
+#s /* search input */ {
   margin: 0 0 35px;
-  padding-left: 58px;
+  /* padding-left: 58px; */
+  padding-left: 51px;
 }
 
-// menu icon
-#im,
-// search icon
-#i {
+#im /* menu icon */,
+#i /* search icon */ {
   color: var(--c3);
 }
 
-#i {
+#i /* search icon */ {
   position: absolute;
-  top: 14px;
-  left: 38px;
+  top: 12px;
+  left: 32px;
 }
 
-// overflow bookmark folder icon
-#io {
-  padding: 9px;
+#io /* overflow bookmark folder icon */ {
+  padding: 7px;
 }
 
-#b {
+#b /* bookmark bar */ {
   position: fixed;
   z-index: 1;
   top: 0;
   right: 0;
   left: 0;
   display: flex;
-  height: 42px; // should be same as body line-height
+  height: 38px; /* should be same as body line-height */
   background: var(--c2);
   box-shadow: var(--s);
+  contain: size layout; /* constrain reflow during resize */
 
   & > a,
-  // folder
-  & > .f {
+  & > .f /* folder */ {
     flex-shrink: 0;
     max-width: 16ch;
     padding: 0 13px;
@@ -130,20 +129,20 @@ button,
 
 #b a,
 .f {
+  /* biome-ignore lint/style/noDescendingSpecificity: TODO:! */
   &:hover,
-  &:focus {
+  /* biome-ignore lint/style/noDescendingSpecificity: TODO:! */
+    &:focus {
     background-color: var(--c1);
   }
 }
 
-// empty folder
-#e {
+#e /* empty folder */ {
   padding: 0 13px;
   color: var(--c3);
 }
 
-// subfolder
-.sf {
+.sf /* subfolder */ {
   position: fixed;
   z-index: 1;
   overflow-y: auto;
@@ -151,8 +150,7 @@ button,
   box-shadow: var(--s);
 
   a,
-  // folder
-  .f {
+  .f /* folder */ {
     min-width: 5ch;
     max-width: 38ch;
     padding: 0 13px;
@@ -164,8 +162,7 @@ button,
   }
 }
 
-// subfolder arrow icon
-.i {
+.i /* subfolder arrow icon */ {
   position: absolute;
   top: 9px;
   right: 0;
@@ -180,19 +177,17 @@ hr {
   border-bottom: 1px solid var(--c1);
 }
 
-// menu
-#m {
+#m /* menu */ {
   position: fixed;
   top: 90px;
   margin: -28px -84px -64px 0;
   padding: 10px 84px 84px 42px;
 }
 
-// menu dropdown
-#d {
+#d /* menu dropdown */ {
   position: absolute;
   top: 10px;
-  padding: 9px 23px; // 9px = half of font-size
+  padding: 9px 23px; /* 9px = half of font-size */
   background: var(--c2);
   box-shadow: var(--s);
   opacity: 0;

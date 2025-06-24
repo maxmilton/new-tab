@@ -2,7 +2,7 @@
  * Hacker Pink Theme
  */
 
-@import './hacker-terminal.xcss';
+@import "./hacker-terminal.css";
 
 html {
   filter: hue-rotate(196deg);

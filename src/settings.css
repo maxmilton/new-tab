@@ -62,7 +62,7 @@ select {
   &::after {
     display: block;
     color: #6e6e6e;
-    content: 'Drag sections here to disable them';
+    content: "Drag sections here to disable them";
   }
 }
 
@@ -91,7 +91,7 @@ select {
 
 .icon {
   margin-right: 10px;
-  // color: inherit;
+  /* color: inherit; */
 }
 
 .dragging {
@@ -116,11 +116,11 @@ select {
     width: 100%;
     padding-bottom: 8px;
     border-top: 6px solid #b255ff;
-    content: '';
+    content: "";
   }
 }
 
-// "search only"
+/* "search only" */
 .so {
   margin-left: 10px;
   font-weight: initial;

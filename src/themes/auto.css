@@ -1,0 +1,38 @@
+/**
+ * Automatic Light/Dark Theme
+ */
+
+/* Same as `light.css` */
+
+:root {
+  --s: 0 2px 4px #00001126; /* shadow */
+  --b: #fafafa; /* background */
+  --t: #383a42; /* text */
+  --c1: #e5e5e6; /* bookmark node hover background, hr, button border, search input border */
+  --c2: #fff; /* bookmarks bar, menu dropdown, "load more" button */
+  --c3: #dbdbdc; /* icons, empty folder text, text fallback (headings, etc.) */
+
+  color-scheme: light dark;
+}
+
+@media (prefers-color-scheme: dark) {
+  /* Same as `dark.css` */
+
+  :root {
+    --s: 0 2px 4px #00001126;
+    --b: #17191e;
+    --t: #dadfe1;
+    --c1: #191d20;
+    --c2: #21272a;
+    --c3: #a1b2ba;
+  }
+
+  #s /* search input */ {
+    border: 0;
+    background: #0d0f14;
+  }
+
+  #i /* search icon */ {
+    top: 10px;
+  }
+}
