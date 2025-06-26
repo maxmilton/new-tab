@@ -2,10 +2,10 @@
   "version": "0.2.0",
   "configurations": [
     {
+      // NOTE: Use `bun --inspect` to open a debug port.
       "name": "Attach to Bun",
       "type": "bun",
       "request": "attach",
-      // use `bun --inspect` to open a debug port
       "url": "ws://localhost:6499/"
     },
     {
@@ -18,8 +18,8 @@
       "args": [], // program arguments
       "cwd": "${workspaceFolder}",
       "env": {},
-      "strictEnv": false, // do not inherit env from the parent process
-      "watchMode": false, // same as bun --watch, or use "hot" for bun --hot
+      "strictEnv": false,
+      "watchMode": false,
       "stopOnEntry": false,
       "noDebug": false // disable debugger (breakpoints will not be hit)
     },
