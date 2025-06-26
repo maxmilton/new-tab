@@ -50,5 +50,6 @@ export const handleClick = (event: MouseEvent): false | void => {
     return false;
   }
 
+  // Fallback to focus search input
   s.focus();
 };

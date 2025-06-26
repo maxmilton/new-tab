@@ -13,17 +13,15 @@
     "noEmit": true,
 
     "strict": true,
-    "allowUnreachableCode": false, // TODO: Set true once oxlint is type aware
+    "allowUnreachableCode": false,
     "exactOptionalPropertyTypes": true,
     "forceConsistentCasingInFileNames": true,
+    "noFallthroughCasesInSwitch": false, // covered by oxlint
     "noImplicitOverride": true,
     "noUncheckedSideEffectImports": true,
-    "verbatimModuleSyntax": true,
-
-    /* Covered by oxlint */
-    "noFallthroughCasesInSwitch": false,
-    "noUnusedLocals": false,
-    "noUnusedParameters": false
+    "noUnusedLocals": false, // covered by oxlint
+    "noUnusedParameters": false, // covered by oxlint
+    "verbatimModuleSyntax": true
   },
   "include": [
     "*.config.mjs",
