@@ -12,7 +12,7 @@
     "build": "NODE_ENV=production bun build.ts",
     "dev": "NODE_ENV=development bun build.ts",
     "lint": "bun lint:fmt && bun lint:css && bun lint:js && bun lint:js2 && bun lint:ts",
-    "lint:css": "stylelint '**/*.{css,xcss}'",
+    "lint:css": "stylelint '**/*.css'",
     "lint:fmt": "biome check --diagnostic-level=warn",
     "lint:js": "oxlint --format=stylish",
     "lint:js2": "eslint",
