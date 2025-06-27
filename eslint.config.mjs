@@ -34,7 +34,7 @@ export default ts.config(
       // eslint-plugin-jsdoc: https://github.com/oxc-project/oxc/issues/1170
       // eslint-plugin-n: https://github.com/oxc-project/oxc/issues/493
 
-      // bad browser support
+      // Bad browser support
       'unicorn/prefer-at': OFF,
 
       /* Performance and byte savings */

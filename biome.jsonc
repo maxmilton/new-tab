@@ -4,13 +4,10 @@
   "assist": {
     "actions": {
       "recommended": true,
-      "source": {
-        "useSortedProperties": "on"
-      }
+      "source": { "useSortedProperties": "on" }
     }
   },
   "formatter": {
-    "useEditorconfig": false,
     "formatWithErrors": true,
     "indentStyle": "space"
   },
@@ -21,32 +18,22 @@
     "rules": {
       "recommended": true,
       "complexity": {
-        "noArguments": "on",
-        "noCommaOperator": "on",
         "noExcessiveCognitiveComplexity": {
           "level": "on",
           "options": { "maxAllowedComplexity": 30 }
         },
-        "noForEach": "off", // covered by oxlint
         "noUselessStringConcat": "on",
-        "noUselessUndefinedInitialization": "on",
-        "noVoid": "off",
-        "useDateNow": "warn",
-        "useNumericLiterals": "on",
         "useSimplifiedLogicExpression": "on",
         "useWhile": "on"
       },
       "correctness": {
-        "noConstantMathMinMaxClamp": "warn",
         "noNodejsModules": "on",
         "noUndeclaredDependencies": "on",
         "noUndeclaredVariables": {
           "level": "on",
           "options": { "checkTypes": true }
         },
-        "noUnusedFunctionParameters": "on",
         "noUnusedImports": { "level": "on", "fix": "none" },
-        "noUnusedPrivateClassMembers": "on",
         "noUnusedVariables": "off" // covered by oxlint
       },
       "performance": {
@@ -67,11 +54,10 @@
         "noInferrableTypes": "on",
         "noNamespace": "on",
         "noNegationElse": "on",
-        "noNestedTernary": "on",
         "noNonNullAssertion": "off", // covered by oxlint
         "noParameterAssign": "on",
         "noParameterProperties": "on",
-        "noProcessEnv": "off", // used as naming convention for build-time replacements
+        "noProcessEnv": "off", // used for build-time replacements
         "noRestrictedGlobals": "on",
         "noRestrictedImports": "on",
         "noRestrictedTypes": "on",
@@ -81,9 +67,7 @@
         "noUselessElse": "on",
         "noYodaExpression": "on",
         "useAsConstAssertion": "on",
-        "useArrayLiterals": "on",
         "useAtIndex": "on",
-        // "useBlockStatements": null,
         "useCollapsedElseIf": "on",
         "useCollapsedIf": "on",
         "useComponentExportOnlyModules": "on",
@@ -91,28 +75,21 @@
         "useConsistentBuiltinInstantiation": "on",
         "useConsistentCurlyBraces": "on",
         "useConsistentMemberAccessibility": "on",
-        "useConst": "on",
         "useDefaultParameterLast": "on",
         "useDefaultSwitchClause": "on",
         "useEnumInitializers": "on",
         "useExplicitLengthCheck": "off", // covered by oxlint
-        "useExponentiationOperator": "on",
-        "useExportType": "on",
         "useFilenamingConvention": "on",
         "useForOf": "on",
-        "useImportType": "on",
-        "useLiteralEnumMembers": "on",
         "useNamingConvention": {
           "level": "on",
           "fix": "none",
           "options": { "strictCase": false }
         },
         "useNodeAssertStrict": "on",
-        "useNodejsImportProtocol": "on",
         "useNumberNamespace": "on",
         "useSelfClosingElements": "on",
         "useShorthandAssign": "on",
-        "useShorthandFunctionType": "on",
         "useSingleVarDeclarator": "on",
         "useTemplate": "off", // covered by oxlint
         "useThrowNewError": "on",
@@ -143,23 +120,19 @@
         "noBitwiseOperators": "off", // covered by oxlint
         "noConstantBinaryExpression": "on",
         "noDestructuredProps": "on",
-        // "noFloatingPromises": "on", // https://github.com/biomejs/biome/issues/3187
+        "noFloatingPromises": "on",
         "noGlobalDirnameFilename": "on",
         "noImportCycles": "off", // covered by oxlint
         "noNoninteractiveElementInteractions": "on",
-        "noProcessGlobal": "off", // used as naming convention for build-time replacements
+        "noProcessGlobal": "off", // used for build-time replacements
         "noRestrictedElements": "on",
-        "noSecrets": "on", // TODO: Change to "error" when more stable
+        // "noSecrets": "on", // TODO: Enable when more stable
         "noTsIgnore": "on",
-        "noUnresolvedImports": "off", // covered by TypeScript
+        "noUnresolvedImports": "off", // covered by typescript
         "noUselessEscapeInString": "on",
         "noUselessUndefined": "on",
-        // "useConsistentObjectDefinition": "off",
-        // "useExplicitType": "off",
-        // "useExportsLast": "off",
-        "useGoogleFontPreconnect": "on",
         "useParseIntRadix": "on",
-        "useSortedClasses": "on", // https://github.com/biomejs/biome/issues/1274
+        "useSortedClasses": "on",
         "useSymbolDescription": "on",
 
         // CSS rules
@@ -199,9 +172,6 @@
           "test": "all"
         },
         "rules": {
-          "complexity": {
-            "noExcessiveNestedTestSuites": "on"
-          },
           "correctness": {
             "noNodejsModules": "off"
           },
@@ -210,11 +180,7 @@
             "noNamespaceImport": "off"
           },
           "suspicious": {
-            "noDuplicateTestHooks": "on",
-            "noEmptyBlockStatements": "off",
-            "noExportsInTest": "on",
-            "noFocusedTests": "on",
-            "noSkippedTests": "on"
+            "noEmptyBlockStatements": "off"
           }
         }
       },
@@ -245,7 +211,7 @@
         "rules": {
           "correctness": {
             "noUndeclaredDependencies": {
-              "level": "error",
+              "level": "on",
               "options": {
                 "devDependencies": false
               }
