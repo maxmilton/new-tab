@@ -18,7 +18,7 @@ test('settings page', async ({ page, extensionId }) => {
   expect(labels).toHaveLength(5);
 });
 
-test.skip('matches screenshot', async ({ page, extensionId }) => {
+test('matches screenshot', async ({ page, extensionId }) => {
   await page.goto(`chrome-extension://${extensionId}/settings.html`);
   await expect(page).toHaveScreenshot('settings-default.png');
 });

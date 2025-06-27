@@ -18,6 +18,7 @@ export default defineConfig({
     toHaveScreenshot: {
       scale: 'device',
       stylePath: 'test/e2e/screenshot.css',
+      maxDiffPixelRatio: 0.02, // allow for font rendering variance
     },
   },
 });

@@ -51,26 +51,7 @@ test('newtab page', async ({ page, extensionId }) => {
   // TODO: More and better assertions.
 });
 
-// test.use({ bypassCSP: true });
-
-test.skip('matches screenshot', async ({ page, extensionId }) => {
-  // page.on('console', (msg) => console.log('PAGE LOG:', msg.text()));
-  // page.on('pageerror', (err) => console.error('PAGE ERROR:', err));
-  // page.on('crash', (err) => console.error('CRASH:', err));
-  // page.on('request', (req) => console.log('REQUEST:', req.url()));
-  // page.on('response', (res) => console.log('RESPONSE:', res.url()));
-  // page.on('requestfailed', (req) => console.log('REQUEST FAILED:', req.url()));
-
-  // await page.addInitScript(() => {
-  //   // const style = document.createElement('style');
-  //   // style.textContent = "html, body { font-family: 'Noto Sans', Arial, sans-serif !important; }";
-  //   // document.head.appendChild(style);
-
-  //   const sheet = new CSSStyleSheet();
-  //   sheet.replaceSync("html, body { font-family: 'Noto Sans', Arial, sans-serif !important; }");
-  //   document.adoptedStyleSheets = [sheet];
-  // });
-
+test('matches screenshot', async ({ page, extensionId }) => {
   await page.goto(`chrome-extension://${extensionId}/newtab.html`);
   await expect(page).toHaveScreenshot('newtab-default.png');
 });
