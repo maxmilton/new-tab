@@ -10,7 +10,7 @@
         "@biomejs/biome": "2.0.5",
         "@eslint/js": "9.29.0",
         "@maxmilton/eslint-config": "0.2.1",
-        "@maxmilton/stylelint-config": "0.3.0",
+        "@maxmilton/stylelint-config": "0.4.0",
         "@maxmilton/test-utils": "0.0.12",
         "@playwright/test": "1.53.1",
         "@swc/core": "1.12.7",
@@ -93,7 +93,7 @@
 
     "@maxmilton/html-parser": ["@maxmilton/html-parser@0.0.12", "", {}, "sha512-hrmgn5evsM1OpYF+iH5IEi/Z+ZKLmYAxSTVnehxypGERNkjhhp+MDPFeXmxPNKapru5F7XfvUGCXZgjkrM2q9g=="],
 
-    "@maxmilton/stylelint-config": ["@maxmilton/stylelint-config@0.3.0", "", { "dependencies": { "postcss-ekscss": "^0.0.12", "stylelint-order": "^7.0.0" }, "peerDependencies": { "stylelint": "^16.18.0" } }, "sha512-qLZcVH4Tj5JNtlNTJjHNWc4FhNcxFQt6hJtqHNhemgfz9Mp16oPA/f3g201sORTTwGG/3ap65sUFtVdHvaDFfA=="],
+    "@maxmilton/stylelint-config": ["@maxmilton/stylelint-config@0.4.0", "", { "dependencies": { "postcss-ekscss": "^0.0.12", "stylelint-order": "^7.0.0" }, "peerDependencies": { "stylelint": "^16.18.0" } }, "sha512-9Wu0D25BkwQfqFtfuW6h1nuSvy6sD8pf2GL1ElS/rqwW6h71FbYPQmZaE4TONiu7x+r+W6NwEctkPL10biZ0DA=="],
 
     "@maxmilton/test-utils": ["@maxmilton/test-utils@0.0.12", "", { "dependencies": { "@maxmilton/html-parser": "^0.0.12", "@types/stylis": "^4.2.7", "stylis": "^4.3.6" }, "peerDependencies": { "happy-dom": ">=14.0.0 <18.0.0" }, "optionalPeers": ["happy-dom"] }, "sha512-dxI0ymDu8eMVFkE2XtaGdg5qvKgGK5uNLMcLCoMYqnR7bvlKf3bemVRVBlQ0ZQpjAaOlRPcQRC6zIIIQfMp3XQ=="],
 
@@ -261,7 +261,7 @@
 
     "dir-glob": ["dir-glob@3.0.1", "", { "dependencies": { "path-type": "^4.0.0" } }, "sha512-WkrWp9GR4KXfKGYzOLmTuGVi1UWFfws377n9cc55/tb6DuqyF6pcQ5AbiHEshaDpY9v6oaSr2XCDidGmMwdzIA=="],
 
-    "electron-to-chromium": ["electron-to-chromium@1.5.175", "", {}, "sha512-Nqpef9mOVo7pZfl9NIUhj7tgtRTsMzCzRTJDP1ccim4Wb4YHOz3Le87uxeZq68OCNwau2iQ/X7UwdAZ3ReOkmg=="],
+    "electron-to-chromium": ["electron-to-chromium@1.5.176", "", {}, "sha512-2nDK9orkm7M9ZZkjO3PjbEd3VUulQLyg5T9O3enJdFvUg46Hzd4DUvTvAuEgbdHYXyFsiG4A5sO9IzToMH1cDg=="],
 
     "emoji-regex": ["emoji-regex@8.0.0", "", {}, "sha512-MSjYzcWNOA0ewAHpz0MxpYFvwg6yjy1NG3xteoqz644VCo/RPgnr1/GGt+ic3iJTzQ8Eu3TdM14SawnVUmGE6A=="],
 
