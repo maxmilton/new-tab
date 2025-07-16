@@ -15,7 +15,7 @@
         "@playwright/test": "1.53.1",
         "@swc/core": "1.12.7",
         "@types/bun": "1.2.17",
-        "@types/chrome": "0.0.326",
+        "@types/chrome": "0.1.1",
         "eslint": "9.29.0",
         "eslint-plugin-unicorn": "59.0.1",
         "happy-dom": "18.0.1",
@@ -149,7 +149,7 @@
 
     "@types/bun": ["@types/bun@1.2.17", "", { "dependencies": { "bun-types": "1.2.17" } }, "sha512-l/BYs/JYt+cXA/0+wUhulYJB6a6p//GTPiJ7nV+QHa8iiId4HZmnu/3J/SowP5g0rTiERY2kfGKXEK5Ehltx4Q=="],
 
-    "@types/chrome": ["@types/chrome@0.0.326", "", { "dependencies": { "@types/filesystem": "*", "@types/har-format": "*" } }, "sha512-WS7jKf3ZRZFHOX7dATCZwqNJgdfiSF0qBRFxaO0LhIOvTNBrfkab26bsZwp6EBpYtqp8loMHJTnD6vDTLWPKYw=="],
+    "@types/chrome": ["@types/chrome@0.1.1", "", { "dependencies": { "@types/filesystem": "*", "@types/har-format": "*" } }, "sha512-MLtFW++/n+OPQIaf5hA6pmURd3Zn+OxuvASyf2mYh8B8pHDpbhHjwlVHMw3H/aJC9Z7Z3itO0AFaZeegrGk0yA=="],
 
     "@types/estree": ["@types/estree@1.0.8", "", {}, "sha512-dWHzHa2WqEXI/O1E9OjrocMTKJl2mSrEolh1Iomrv6U+JuNwaHXsXx9bLu5gG7BUWFIN0skIQJQ/L1rIex4X6w=="],
 
