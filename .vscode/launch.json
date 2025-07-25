@@ -6,7 +6,7 @@
       "name": "Attach to Bun",
       "type": "bun",
       "request": "attach",
-      "url": "ws://localhost:6499/"
+      "url": "ws://localhost:6499/",
     },
     {
       "name": "bun <CURRENT_FILE>",
@@ -21,7 +21,7 @@
       "strictEnv": false,
       "watchMode": false,
       "stopOnEntry": false,
-      "noDebug": false // disable debugger (breakpoints will not be hit)
+      "noDebug": false, // disable debugger (breakpoints will not be hit)
     },
     {
       "name": "bun test <CURRENT_FILE>",
@@ -29,7 +29,7 @@
       "request": "launch",
       "runtimeArgs": ["test"],
       "program": "${file}",
-      "internalConsoleOptions": "openOnSessionStart"
+      "internalConsoleOptions": "openOnSessionStart",
     },
     {
       "name": "bun test (all)",
@@ -38,7 +38,7 @@
       "runtimeArgs": ["run", "test"],
       "program": "--", // HACK: Workaround for bun extension needing "program"
       "cwd": "${workspaceFolder}",
-      "internalConsoleOptions": "openOnSessionStart"
-    }
-  ]
+      "internalConsoleOptions": "openOnSessionStart",
+    },
+  ],
 }
