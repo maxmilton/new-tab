@@ -1,7 +1,7 @@
 import { afterAll, beforeAll, describe, expect, mock, spyOn, test } from "bun:test";
 import { target } from "happy-dom/lib/PropertySymbol.js";
 import { ONCLICK } from "stage1/fast";
-import { DEFAULT_SECTION_ORDER, handleClick } from "../../src/utils.ts";
+import { chromeTabs, DEFAULT_SECTION_ORDER, handleClick } from "../../src/utils.ts";
 
 describe("DEFAULT_SECTION_ORDER", () => {
   test("is an array", () => {
@@ -74,7 +74,7 @@ describe("handleClick", () => {
     const event = new window.MouseEvent("click");
     const handler = mock(() => {});
     // @ts-expect-error - happy-dom internal target property
-    event[target] = { __click: handler };
+    event[target] = { [ONCLICK]: handler };
     handleClick(event);
     expect(handler).toHaveBeenCalledTimes(1);
     expect(handler).toHaveBeenCalledWith(event);
@@ -116,11 +116,13 @@ describe("handleClick", () => {
     expect(handler2).toHaveBeenCalledTimes(0);
   });
 
-  // test.skip('default prevented on event when url does not start with "h"', () => {
+  // XXX: We return false from events rather than call preventDefault() for
+  // byte savings, so we can't test this.
+  // test('default prevented on event when url does not start with "h"', () => {
   //   expect.assertions(2);
-  //   const event = new window.MouseEvent('click');
+  //   const event = new window.MouseEvent("click");
   //   // @ts-expect-error - happy-dom internal target property
-  //   event[target] = { href: 'chrome://about' };
+  //   event[target] = { href: "chrome://about" };
   //   expect(event.defaultPrevented).toBeFalse();
   //   handleClick(event);
   //   expect(event.defaultPrevented).toBeTrue();
@@ -136,7 +138,7 @@ describe("handleClick", () => {
     expect(event.defaultPrevented).toBeFalse();
   });
 
-  // returning false on click events is similar to event.preventDefault()
+  // Returning false on click events is similar to calling event.preventDefault()
   test('handler returns false when url does not start with "h"', () => {
     expect.assertions(1);
     const event = new window.MouseEvent("click");
@@ -157,8 +159,8 @@ describe("handleClick", () => {
 
   test("opens in new tab when url starts with chrome:// and ctrl key is pressed", () => {
     expect.assertions(3);
-    const tabsCreateSpy = spyOn(chrome.tabs, "create");
-    const tabsUpdateSpy = spyOn(chrome.tabs, "update");
+    const tabsCreateSpy = spyOn(chromeTabs, "create");
+    const tabsUpdateSpy = spyOn(chromeTabs, "update");
     const event = new window.MouseEvent("click", { ctrlKey: true });
     // @ts-expect-error - happy-dom internal target property
     event[target] = { href: "chrome://about" };
@@ -172,8 +174,8 @@ describe("handleClick", () => {
 
   test("updates current tab when url starts with chrome:// and target is not _blank", () => {
     expect.assertions(3);
-    const tabsCreateSpy = spyOn(chrome.tabs, "create");
-    const tabsUpdateSpy = spyOn(chrome.tabs, "update");
+    const tabsCreateSpy = spyOn(chromeTabs, "create");
+    const tabsUpdateSpy = spyOn(chromeTabs, "update");
     const event = new window.MouseEvent("click");
     // @ts-expect-error - happy-dom internal target property
     event[target] = { href: "chrome://about", target: null };
@@ -187,8 +189,8 @@ describe("handleClick", () => {
 
   test("updates current tab when url starts with chrome:// and ctrl key is not pressed", () => {
     expect.assertions(3);
-    const tabsCreateSpy = spyOn(chrome.tabs, "create");
-    const tabsUpdateSpy = spyOn(chrome.tabs, "update");
+    const tabsCreateSpy = spyOn(chromeTabs, "create");
+    const tabsUpdateSpy = spyOn(chromeTabs, "update");
     const event = new window.MouseEvent("click", { ctrlKey: false });
     // @ts-expect-error - happy-dom internal target property
     event[target] = { href: "chrome://about" };
