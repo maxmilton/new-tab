@@ -1,10 +1,10 @@
-import { basename } from 'node:path'; // eslint-disable-line unicorn/import-style
-import * as swc from '@swc/core';
-import * as lightningcss from 'lightningcss';
-import { createManifest } from './manifest.config.ts';
+import * as swc from "@swc/core";
+import * as lightningcss from "lightningcss";
+import { basename } from "node:path"; // eslint-disable-line unicorn/import-style
+import { createManifest } from "./manifest.config.ts";
 
 const mode = Bun.env.NODE_ENV;
-const dev = mode === 'development';
+const dev = mode === "development";
 
 // TODO: Use bun to bundle CSS once it's configurable e.g., targets, include.
 async function compileCSS(path: string) {
@@ -27,7 +27,7 @@ async function makeThemes(pattern: string) {
 
   for await (const path of new Bun.Glob(pattern).scan()) {
     const result = await compileCSS(path);
-    themes[basename(path, '.css')] = result.toString();
+    themes[basename(path, ".css")] = result.toString();
   }
 
   return JSON.stringify(themes);
@@ -35,13 +35,13 @@ async function makeThemes(pattern: string) {
 
 async function minify(artifacts: Bun.BuildArtifact[]) {
   for (const artifact of artifacts) {
-    if (artifact.path.endsWith('.js')) {
+    if (artifact.path.endsWith(".js")) {
       const source = await artifact.text();
       const result = await swc.minify(source, {
         module: true,
         compress: {
           // XXX: Comment out to keep performance markers for debugging.
-          pure_funcs: ['performance.mark', 'performance.measure'],
+          pure_funcs: ["performance.mark", "performance.measure"],
         },
         mangle: {
           props: {
@@ -54,45 +54,45 @@ async function minify(artifacts: Bun.BuildArtifact[]) {
   }
 }
 
-console.time('prebuild');
+console.time("prebuild");
 await Bun.$`rm -rf dist`;
 await Bun.$`cp -r static dist`;
-console.timeEnd('prebuild');
+console.timeEnd("prebuild");
 
-console.time('manifest');
-await Bun.write('dist/manifest.json', JSON.stringify(createManifest()));
-console.timeEnd('manifest');
+console.time("manifest");
+await Bun.write("dist/manifest.json", JSON.stringify(createManifest()));
+console.timeEnd("manifest");
 
-console.time('themes');
-await Bun.write('dist/newtab.css', await compileCSS('src/newtab.css'));
-await Bun.write('dist/settings.css', await compileCSS('src/settings.css'));
-await Bun.write('dist/themes.json', await makeThemes('src/themes/*.css'));
-console.timeEnd('themes');
+console.time("themes");
+await Bun.write("dist/newtab.css", await compileCSS("src/newtab.css"));
+await Bun.write("dist/settings.css", await compileCSS("src/settings.css"));
+await Bun.write("dist/themes.json", await makeThemes("src/themes/*.css"));
+console.timeEnd("themes");
 
-console.time('build:apps');
+console.time("build:apps");
 const out1 = await Bun.build({
-  entrypoints: ['src/newtab.ts', 'src/settings.ts'],
-  outdir: 'dist',
-  naming: '[dir]/[name].[ext]',
-  target: 'browser',
+  entrypoints: ["src/newtab.ts", "src/settings.ts"],
+  outdir: "dist",
+  naming: "[dir]/[name].[ext]",
+  target: "browser",
   minify: !dev,
-  sourcemap: dev ? 'linked' : 'none',
+  sourcemap: dev ? "linked" : "none",
 });
-console.timeEnd('build:apps');
+console.timeEnd("build:apps");
 
-console.time('build:worker');
+console.time("build:worker");
 const out2 = await Bun.build({
-  entrypoints: ['src/sw.ts'],
-  outdir: 'dist',
-  target: 'browser',
+  entrypoints: ["src/sw.ts"],
+  outdir: "dist",
+  target: "browser",
   minify: !dev,
-  sourcemap: dev ? 'linked' : 'none',
+  sourcemap: dev ? "linked" : "none",
 });
-console.timeEnd('build:worker');
+console.timeEnd("build:worker");
 
 if (!dev) {
-  console.time('minify');
+  console.time("minify");
   await minify(out1.outputs);
   await minify(out2.outputs);
-  console.timeEnd('minify');
+  console.timeEnd("minify");
 }

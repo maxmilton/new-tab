@@ -2,8 +2,9 @@
 *-lock.yaml
 *.bak
 *.lock
-!bun.lock
+*.tsbuildinfo
 *.zip
+!/bun.lock
 /coverage/
 /dist/
 /node_modules/

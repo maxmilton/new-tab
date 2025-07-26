@@ -37,18 +37,20 @@
   "rules": {
     /* Sane overrides for "categories" */
     "consistent-indexed-object-style": ["warn", "record"],
-    "curly": "off", // covered by Biome formatter
+    "curly": "off", // covered by dprint
     "eqeqeq": ["error", { "null": "ignore" }],
     "func-names": ["error", "as-needed"],
     "func-style": ["error", "declaration", { "allowArrowFunctions": true }],
-    "import/consistent-type-specifier-style": "off", // covered by TypeScript
+    "import/consistent-type-specifier-style": "off", // covered by typescript
     "import/exports-last": "off",
+    "import/extensions": "error",
     "import/group-exports": "off",
+    "import/prefer-default-export": "off",
     "import/no-unassigned-import": "off",
     "init-declarations": "off",
     "max-dependencies": "off",
     "max-depth": "off",
-    "max-len": "off", // covered by Biome formatter
+    "max-len": "off", // covered by dprint
     "max-lines-per-function": "off",
     "max-lines": "off",
     "max-nested-callbacks": "off",
@@ -61,21 +63,18 @@
     "no-optional-chaining": "off",
     "no-rest-spread-properties": "off",
     "no-ternary": "off",
-    "no-undefined": "off", // covered by Biome formatter
-    "no-unused-vars": [
-      "warn",
-      {
-        "ignoreRestSiblings": true,
-        "argsIgnorePattern": "^_",
-        "varsIgnorePattern": "^_"
-      }
-    ],
+    "no-unused-vars": ["warn", {
+      "ignoreRestSiblings": true,
+      "argsIgnorePattern": "^_",
+      "varsIgnorePattern": "^_"
+    }],
     "no-void": "off",
     "promise/catch-or-return": ["error", { "allowThen": true }],
     "sort-imports": "off",
     "sort-keys": "off",
+    "typescript/explicit-function-return-type": "off",
+    "typescript/explicit-module-boundary-types": "error",
     "unicorn/filename-case": ["error", { "case": "kebabCase" }],
-    "unicorn/no-nested-ternary": "off", // covered by Biome formatter
     "unicorn/prefer-global-this": "off", // prefer to clearly separate Bun and DOM
     "yoda": ["warn", "never"],
 
@@ -104,10 +103,7 @@
     /* stage1 */
     "prefer-add-event-listener": "off",
     "prefer-dom-node-append": "off",
-    "prefer-dom-node-remove": "off",
-
-    // TODO: Enable these once oxlint supports type checking
-    "explicit-function-return-type": "off"
+    "prefer-dom-node-remove": "off"
   },
   "overrides": [
     {

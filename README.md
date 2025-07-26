@@ -31,6 +31,7 @@ What started as an experiment to play with the Chrome browser APIs and explore w
 
 ### Design goals
 
+<!-- dprint-ignore -->
 | Issue | Why / How |
 | --- | --- |
 | Access | Still have access to common things like the bookmarks bar etc. |
