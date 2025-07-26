@@ -1,5 +1,5 @@
-import { collect, h, ONCLICK } from 'stage1/fast';
-import { compile } from 'stage1/macro' with { type: 'macro' };
+import { collect, h, ONCLICK } from "stage1/fast";
+import { compile } from "stage1/macro" with { type: "macro" };
 
 type MenuComponent = HTMLDivElement;
 

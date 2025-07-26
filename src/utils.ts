@@ -1,19 +1,19 @@
-import { ONCLICK } from 'stage1/fast';
-import type { UserStorageData } from './types.ts';
+import { ONCLICK } from "stage1/fast";
+import type { UserStorageData } from "./types.ts";
 
 export const chromeBookmarks = chrome.bookmarks;
 export const chromeTabs = chrome.tabs;
 
-performance.mark('Load Storage');
+performance.mark("Load Storage");
 export const storage = await chrome.storage.local.get<UserStorageData>();
 
 // NOTE: When updating also update references that lookup items by index
 export const DEFAULT_SECTION_ORDER = [
-  'Open Tabs',
-  'Bookmarks',
-  'History',
-  'Top Sites',
-  'Recently Closed Tabs',
+  "Open Tabs",
+  "Bookmarks",
+  "History",
+  "Top Sites",
+  "Recently Closed Tabs",
 ] as const;
 
 /** Search input element with id=s defined in `src/components/Search.ts`. */
@@ -37,7 +37,7 @@ export const handleClick = (event: MouseEvent): false | void => {
   }
 
   // Only apply special handling to non-http links
-  if (url && url[0] !== 'h') {
+  if (url && url[0] !== "h") {
     if (event.ctrlKey) {
       // Open the location in a new tab
       void chromeTabs.create({ url });

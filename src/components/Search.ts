@@ -1,13 +1,8 @@
-import { append, collect, h } from 'stage1/fast';
-import { compile } from 'stage1/macro' with { type: 'macro' };
-import type { SectionOrderItem } from '../types.ts';
-import {
-  chromeBookmarks,
-  chromeTabs,
-  DEFAULT_SECTION_ORDER,
-  storage,
-} from '../utils.ts';
-import { SearchResult, type SearchResultComponent } from './SearchResult.ts';
+import { append, collect, h } from "stage1/fast";
+import { compile } from "stage1/macro" with { type: "macro" };
+import type { SectionOrderItem } from "../types.ts";
+import { chromeBookmarks, chromeTabs, DEFAULT_SECTION_ORDER, storage } from "../utils.ts";
+import { SearchResult, type SearchResultComponent } from "./SearchResult.ts";
 
 type SectionRefs = Partial<Record<SectionOrderItem, SearchResultComponent>>;
 
@@ -96,12 +91,12 @@ export const Search = (): SearchComponent => {
   input.oninput = () => searchFor(input.value, sections);
 
   input.onkeyup = (event) => {
-    if (event.key === 'Escape') {
-      searchFor((input.value = ''), sections);
+    if (event.key === "Escape") {
+      searchFor(input.value = "", sections);
     }
   };
 
-  performance.mark('Load Sections');
+  performance.mark("Load Sections");
 
   const sectionOrder = storage.o ?? DEFAULT_SECTION_ORDER;
 
@@ -178,7 +173,7 @@ export const Search = (): SearchComponent => {
     });
   }
 
-  performance.measure('Load Sections', 'Load Sections');
+  performance.measure("Load Sections", "Load Sections");
 
   return root;
 };

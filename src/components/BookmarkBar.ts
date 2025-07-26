@@ -1,7 +1,7 @@
-import { append, create, h } from 'stage1/fast';
-import { compile } from 'stage1/macro' with { type: 'macro' };
-import { chromeBookmarks } from '../utils.ts';
-import { BookmarkNode, type BookmarkTreeNode, Folder } from './BookmarkNode.ts';
+import { append, create, h } from "stage1/fast";
+import { compile } from "stage1/macro" with { type: "macro" };
+import { chromeBookmarks } from "../utils.ts";
+import { BookmarkNode, type BookmarkTreeNode, Folder } from "./BookmarkNode.ts";
 
 declare global {
   interface HTMLElement {
@@ -21,26 +21,26 @@ declare global {
 type BookmarkBarComponent = HTMLDivElement;
 
 export const BookmarkBar = (): BookmarkBarComponent => {
-  const root = create('div');
-  root.id = 'b';
+  const root = create("div");
+  root.id = "b";
 
-  void chromeBookmarks.getChildren('1').then((bookmarks) => {
+  void chromeBookmarks.getChildren("1").then((bookmarks) => {
     const len = bookmarks.length;
 
     // Since we can't determine an element's width before it's included in the
     // DOM, we have to insert BookmarkNodes individually until no more can fit.
     // Any leftover items are then placed in an overflow folder.
     const resize = () => {
-      performance.mark('BookmarkBar');
+      performance.mark("BookmarkBar");
 
       // Remove all child nodes
-      root.textContent = '';
+      root.textContent = "";
 
       // Max width is root minus overflow folder width (68 == 24px svg + 2 * 9px
       // svg padding + 2 * 13px bookmark item padding)
       const maxWidth = root.clientWidth - 68;
       const otherBookmarksFolder = append(
-        Folder({ id: '2', title: 'Other Bookmarks' }),
+        Folder({ id: "2", title: "Other Bookmarks" }),
         root,
       );
       // NOTE: The elements we're measuring don't have a border or margin so
@@ -66,7 +66,7 @@ export const BookmarkBar = (): BookmarkBarComponent => {
           Folder({} as BookmarkTreeNode, false, bookmarks.slice(index)),
           root,
         );
-        overflowBookmarksFolder.className += ' end';
+        overflowBookmarksFolder.className += " end";
 
         append(
           h<SVGElement>(
@@ -84,9 +84,9 @@ export const BookmarkBar = (): BookmarkBarComponent => {
 
       // The "Other Bookmarks" folder was added first so overflow calculation
       // is correct but now move it to its proper position at the end
-      append(otherBookmarksFolder, root).className += ' end';
+      append(otherBookmarksFolder, root).className += " end";
 
-      performance.measure('BookmarkBar', 'BookmarkBar');
+      performance.measure("BookmarkBar", "BookmarkBar");
     };
 
     // HACK: Workaround for race condition. This script is loaded asynchronously,
@@ -112,14 +112,14 @@ export const BookmarkBar = (): BookmarkBarComponent => {
   // https://github.com/maxmilton/stage1/blob/08cb3c08cb3e5513c181f768ae92c488cfe2a17a/src/events.ts#L3
   // oxlint-disable-next-line no-multi-assign
   root.onmouseover = root.onmouseout = (event) => {
-    const eventKey = ('__' + event.type) as '__mouseover' | '__mouseout';
+    const eventKey = ("__" + event.type) as "__mouseover" | "__mouseout";
     // null when mouse moves from/to outside the viewport
     const related = event.relatedTarget as Node | null;
     let node = event.target as
       | (Node & {
-          __mouseover?(event2: MouseEvent): void;
-          __mouseout?(event2: MouseEvent): void;
-        })
+        __mouseover?(event2: MouseEvent): void;
+        __mouseout?(event2: MouseEvent): void;
+      })
       | null;
 
     while (node) {

@@ -1,13 +1,8 @@
-import { append, clone, collect, h } from 'stage1/fast';
-import { compile } from 'stage1/macro' with { type: 'macro' };
-import { reconcile } from 'stage1/reconcile/non-keyed';
-import type {
-  SectionOrderItem,
-  SyncStorageData,
-  ThemesData,
-  UserStorageData,
-} from './types.ts';
-import { DEFAULT_SECTION_ORDER, storage } from './utils.ts';
+import { append, clone, collect, h } from "stage1/fast";
+import { compile } from "stage1/macro" with { type: "macro" };
+import { reconcile } from "stage1/reconcile/non-keyed";
+import type { SectionOrderItem, SyncStorageData, ThemesData, UserStorageData } from "./types.ts";
+import { DEFAULT_SECTION_ORDER, storage } from "./utils.ts";
 
 // TODO: Show errors in the UI.
 
@@ -26,18 +21,18 @@ interface SectionScope {
   moveItem(from: ItemIndex, to: ItemIndex): void;
 }
 
-const DRAG_TYPE = 'text/plain';
-const DEFAULT_THEME = 'auto';
+const DRAG_TYPE = "text/plain";
+const DEFAULT_THEME = "auto";
 
 // eslint-disable-next-line unicorn/prefer-top-level-await
-const themesData = fetch('themes.json').then(
+const themesData = fetch("themes.json").then(
   (response) => response.json() as Promise<ThemesData>,
 );
 
 const supportsSync = async (): Promise<boolean> => {
   try {
     await chrome.storage.sync.set({ _: 1 });
-    await chrome.storage.sync.remove('_');
+    await chrome.storage.sync.remove("_");
     if (chrome.runtime.lastError) {
       return false;
     }
@@ -90,25 +85,25 @@ const SectionItem = (
       DRAG_TYPE,
       JSON.stringify([list, scope.indexOf(list, item)]),
     );
-    (event.target as SectionComponent).classList.add('dragging');
+    (event.target as SectionComponent).classList.add("dragging");
   };
 
   root.ondragend = (event) => {
-    (event.target as SectionComponent).classList.remove('dragging');
+    (event.target as SectionComponent).classList.remove("dragging");
   };
 
   root.ondragenter = (event) => {
-    (event.target as SectionComponent).classList.add('over');
+    (event.target as SectionComponent).classList.add("over");
   };
 
   root.ondragleave = (event) => {
-    (event.target as SectionComponent).classList.remove('over');
+    (event.target as SectionComponent).classList.remove("over");
   };
 
   root.ondrop = (event) => {
     event.preventDefault();
 
-    (event.target as SectionComponent).classList.remove('over');
+    (event.target as SectionComponent).classList.remove("over");
 
     const from = JSON.parse(
       event.dataTransfer!.getData(DRAG_TYPE),
@@ -229,7 +224,7 @@ const Settings = () => {
       return state.order[list].indexOf(item);
     },
     moveItem(from: ItemIndex, to: ItemIndex) {
-      const reordered: SettingsState['order'] = [
+      const reordered: SettingsState["order"] = [
         [...state.order[0]],
         [...state.order[1]],
       ];
@@ -253,25 +248,21 @@ const Settings = () => {
     });
 
     if (themeName === DEFAULT_THEME) {
-      await chrome.storage.local.remove('tn');
+      await chrome.storage.local.remove("tn");
     }
 
     void state.pushSyncData?.();
   };
 
-  const updateOrder = (order: SettingsState['order'], skipSave?: boolean) => {
-    reconcile(se, state.order[0], order[0], (item) =>
-      SectionItem(item, 0, scope),
-    );
-    reconcile(sd, state.order[1], order[1], (item) =>
-      SectionItem(item, 1, scope),
-    );
+  const updateOrder = (order: SettingsState["order"], skipSave?: boolean) => {
+    reconcile(se, state.order[0], order[0], (item) => SectionItem(item, 0, scope));
+    reconcile(sd, state.order[1], order[1], (item) => SectionItem(item, 1, scope));
     state.order = order;
 
     if (!skipSave) {
       // When section order is same as default, we don't need to store it
       if (String(order[0]) === String(DEFAULT_SECTION_ORDER)) {
-        void chrome.storage.local.remove('o');
+        void chrome.storage.local.remove("o");
       } else {
         void chrome.storage.local.set({
           o: order[0],
@@ -294,7 +285,7 @@ const Settings = () => {
     scope.moveItem(from, [list, 0]);
 
     // Remove class in case the `dragleave` event didn't fire
-    (event.target as SectionComponent).classList.remove('over');
+    (event.target as SectionComponent).classList.remove("over");
   };
 
   theme.onchange = () => updateTheme(theme.value);
@@ -303,7 +294,7 @@ const Settings = () => {
     // eslint-disable-next-line unicorn/prefer-ternary
     if (bookmarks.checked) {
       // When value is same as default, we don't need to store it
-      await chrome.storage.local.remove('b');
+      await chrome.storage.local.remove("b");
     } else {
       await chrome.storage.local.set({
         b: true,
@@ -317,7 +308,7 @@ const Settings = () => {
   se.ondragover = sd.ondragover = (event) => {
     event.preventDefault();
     // eslint-disable-next-line no-param-reassign
-    event.dataTransfer!.dropEffect = 'move';
+    event.dataTransfer!.dropEffect = "move";
   };
   se.ondrop = handleDrop(0);
   sd.ondrop = handleDrop(1);
@@ -346,13 +337,15 @@ const Settings = () => {
 
   const updateSync = (syncData: SyncStorageData) => {
     if (syncData.ts) {
-      feedback2.nodeValue = `Sync data found (last updated: ${new Date(
-        syncData.ts,
-      ).toLocaleString()})`;
+      feedback2.nodeValue = `Sync data found (last updated: ${
+        new Date(
+          syncData.ts,
+        ).toLocaleString()
+      })`;
       pull.disabled = false;
       clear.disabled = false;
     } else {
-      feedback2.nodeValue = 'No sync data found';
+      feedback2.nodeValue = "No sync data found";
       pull.disabled = true;
       clear.disabled = true;
     }
@@ -368,7 +361,7 @@ const Settings = () => {
         // @ts-expect-error - doesn't need event argument
         pull.onclick?.();
       } else {
-        void chrome.storage.sync.remove('s');
+        void chrome.storage.sync.remove("s");
       }
     };
 
@@ -381,8 +374,7 @@ const Settings = () => {
     };
 
     state.pushSyncData = async (forceUpdate?: boolean) => {
-      const { t, s, ...rest } =
-        await chrome.storage.local.get<UserStorageData>();
+      const { t, s, ...rest } = await chrome.storage.local.get<UserStorageData>();
 
       if (forceUpdate || s) {
         const newSyncData: SyncStorageData = {
@@ -409,7 +401,7 @@ const Settings = () => {
       // TODO: Listen for sync data changes?
       // chrome.storage.sync.onChanged.addListener((changes) => {});
     } else {
-      feedback2.nodeValue = 'Not signed in or sync not supported';
+      feedback2.nodeValue = "Not signed in or sync not supported";
     }
   });
 

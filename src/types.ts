@@ -20,7 +20,7 @@ export interface UserStorageData {
 
 export interface SyncStorageData {
   /** User settings data. */
-  data?: Omit<UserStorageData, 't' | 's'>;
+  data?: Omit<UserStorageData, "t" | "s">;
   /** Timestamp of the last sync.set operation. */
   ts?: number;
 }

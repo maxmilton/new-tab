@@ -1,7 +1,7 @@
-import { append, clone, collect, h, ONCLICK } from 'stage1/fast';
-import { compile } from 'stage1/macro' with { type: 'macro' };
-import { chromeTabs, DEFAULT_SECTION_ORDER } from '../utils.ts';
-import { Link, type LinkComponent, type LinkProps } from './Link.ts';
+import { append, clone, collect, h, ONCLICK } from "stage1/fast";
+import { compile } from "stage1/macro" with { type: "macro" };
+import { chromeTabs, DEFAULT_SECTION_ORDER } from "../utils.ts";
+import { Link, type LinkComponent, type LinkProps } from "./Link.ts";
 
 const DEFAULT_RESULTS_AMOUNT = 12; // chrome.topSites.get returns 12 items
 const MORE_RESULTS_AMOUNT = 50;
@@ -17,7 +17,7 @@ interface OpenTabLink extends LinkComponent {
 }
 
 // oxlint-disable-next-line func-style
-const handleTabClick = function (this: OpenTabLink): false {
+const handleTabClick = function(this: OpenTabLink): false {
   chromeTabs.getCurrent((currentTab) => {
     if (currentTab!.id === this.$$data.id) return;
 
@@ -78,7 +78,7 @@ export const SearchResult = <T extends LinkProps & TabItem>(
     renderedLength = list.length;
     root.hidden = !renderedLength;
     more.hidden = renderedLength === listData.length;
-    results.textContent = '';
+    results.textContent = "";
 
     for (; index < renderedLength; index++) {
       link = append(Link(list[index]), results);
@@ -92,19 +92,16 @@ export const SearchResult = <T extends LinkProps & TabItem>(
   };
 
   // eslint-disable-next-line no-return-assign
-  root.$$update = (newData) => renderList((rawData = newData));
+  root.$$update = (newData) => renderList(rawData = newData);
 
   root.$$filter = (text) =>
     renderList(
-      rawData.filter((item) =>
-        (item.title + item.url).toLowerCase().includes(text.toLowerCase()),
-      ),
+      rawData.filter((item) => (item.title + item.url).toLowerCase().includes(text.toLowerCase())),
     );
 
   title.nodeValue = sectionName;
 
-  more[ONCLICK] = () =>
-    renderList(rawData, renderedLength + MORE_RESULTS_AMOUNT);
+  more[ONCLICK] = () => renderList(rawData, renderedLength + MORE_RESULTS_AMOUNT);
 
   return root;
 };

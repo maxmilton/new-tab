@@ -1,13 +1,13 @@
 // Theme loader code must run first
-import './theme.ts'; // oxlint-disable-line import/no-unassigned-import
+import "./theme.ts";
 
-import { append, fragment } from 'stage1/fast';
-import { BookmarkBar } from './components/BookmarkBar.ts';
-import { Menu } from './components/Menu.ts';
-import { Search } from './components/Search.ts';
-import { handleClick, storage } from './utils.ts';
+import { append, fragment } from "stage1/fast";
+import { BookmarkBar } from "./components/BookmarkBar.ts";
+import { Menu } from "./components/Menu.ts";
+import { Search } from "./components/Search.ts";
+import { handleClick, storage } from "./utils.ts";
 
-performance.mark('Initialise Components');
+performance.mark("Initialise Components");
 
 const container = fragment();
 // Create Search component first because it has asynchronous calls that can
@@ -20,6 +20,6 @@ if (!storage.b) append(BookmarkBar(), container);
 append(Menu(), container);
 append(container, document.body);
 
-performance.measure('Initialise Components', 'Initialise Components');
+performance.measure("Initialise Components", "Initialise Components");
 
 document.onclick = handleClick;

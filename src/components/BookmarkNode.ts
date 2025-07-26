@@ -1,13 +1,10 @@
 // TODO: Rewrite the folder logic using the new anchor positioning API and/or popover APIs; https://developer.chrome.com/blog/anchor-positioning-api and https://web.dev/blog/popover-api
 
-import { append, clone, create, h } from 'stage1/fast';
-import { chromeBookmarks } from '../utils.ts';
-import { Link, type LinkComponent, type LinkProps } from './Link.ts';
+import { append, clone, create, h } from "stage1/fast";
+import { chromeBookmarks } from "../utils.ts";
+import { Link, type LinkComponent, type LinkProps } from "./Link.ts";
 
-export type BookmarkTreeNode = Omit<
-  chrome.bookmarks.BookmarkTreeNode,
-  'syncing'
->;
+export type BookmarkTreeNode = Omit<chrome.bookmarks.BookmarkTreeNode, "syncing">;
 
 type FolderPopupComponent = HTMLDivElement & {
   $$adjustPosition(): void;
@@ -17,8 +14,8 @@ const CLOSE_DELAY_MS = 600;
 let emptyPopup: HTMLDivElement | undefined;
 let arrow: SVGElement | undefined;
 
-const folderPopupView = create('div') as FolderPopupComponent;
-folderPopupView.className = 'sf';
+const folderPopupView = create("div") as FolderPopupComponent;
+folderPopupView.className = "sf";
 
 const FolderPopup = (
   parent: HTMLElement,
@@ -40,14 +37,12 @@ const FolderPopup = (
     left = parentRect.left;
   }
 
-  root.style.cssText = `top:${top}px;left:${left}px;max-height:${
-    window.innerHeight - top
-  }px`;
+  root.style.cssText = `top:${top}px;left:${left}px;max-height:${window.innerHeight - top}px`;
 
   if (children.length) {
     children.forEach((item) => append(BookmarkNode(item, true), root));
   } else {
-    append((emptyPopup ??= h<HTMLDivElement>('<div id=e>(empty)</div>')), root);
+    append(emptyPopup ??= h<HTMLDivElement>("<div id=e>(empty)</div>"), root);
   }
 
   // Only after the component is mounted in the DOM do we have element size
@@ -60,8 +55,8 @@ const FolderPopup = (
       // Show top level aligned to the right edge of the viewport
       // Show nested show to the left of its parent
       root.style.left = nested
-        ? parentRect.left - width + 'px'
-        : viewportWidth - width + 'px';
+        ? parentRect.left - width + "px"
+        : viewportWidth - width + "px";
     }
   };
 
@@ -73,8 +68,8 @@ type FolderComponent = HTMLDivElement & {
   $$closePopup(this: void): void;
 };
 
-const folderView = create('div') as FolderComponent;
-folderView.className = 'f';
+const folderView = create("div") as FolderComponent;
+folderView.className = "f";
 
 export const Folder = (
   props: BookmarkTreeNode,
@@ -97,10 +92,10 @@ export const Folder = (
   if (nested) {
     append(
       clone(
-        (arrow ??= h<SVGElement>(
+        arrow ??= h<SVGElement>(
           // TODO: Add comment with SVG source attribution link
           '<svg class=i><path d="M5 12h14M12 5l7 7-7 7"/></svg>',
-        )),
+        ),
       ),
       root,
     );
@@ -120,7 +115,7 @@ export const Folder = (
     if (!popup) {
       // Immediately close any folder popups on the parent level
       root
-        .parentNode!.querySelectorAll<FolderComponent>('.f')
+        .parentNode!.querySelectorAll<FolderComponent>(".f")
         .forEach((folder) => folder.$$closePopup());
 
       popup = FolderPopup(
