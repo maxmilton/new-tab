@@ -66,7 +66,7 @@ h2,
   text-shadow:
     0 0 2px #11001a,
     0 0 4px #f7027de6,
-    0 0 7px #f7027de6;
+    0 0 7px #f7027de6; /* dprint-ignore */
 }
 
 .f:focus,
