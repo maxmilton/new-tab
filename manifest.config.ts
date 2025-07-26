@@ -8,13 +8,13 @@ function gitRef() {
 }
 
 // TODO: Remove these once `@types/chrome` includes these types.
-/** @see https://developer.chrome.com/docs/extensions/mv3/cross-origin-isolation/ */
+/** @see https://developer.chrome.com/docs/extensions/develop/concepts/cross-origin-isolation */
 interface ManifestExtra {
-  /** @see https://developer.chrome.com/docs/extensions/mv3/manifest/cross_origin_embedder_policy/ */
+  /** @see https://developer.chrome.com/docs/extensions/reference/manifest/cross-origin-embedder-policy */
   cross_origin_embedder_policy?: {
     value: string;
   };
-  /** @see https://developer.chrome.com/docs/extensions/mv3/manifest/cross_origin_opener_policy/ */
+  /** @see https://developer.chrome.com/docs/extensions/reference/manifest/cross-origin-opener-policy */
   cross_origin_opener_policy?: {
     value: string;
   };
@@ -24,8 +24,7 @@ interface ManifestExtra {
  * Generates a browser extension manifest.
  * @param debug - Whether to include a version name for debugging.
  *
- * @see https://developer.chrome.com/docs/extensions/reference/
- * @see https://developer.chrome.com/docs/extensions/mv3/manifest/
+ * @see https://developer.chrome.com/docs/extensions/reference/manifest
  *
  * @internal
  */
@@ -39,7 +38,7 @@ export function createManifest(
     homepage_url: pkg.homepage,
     version: pkg.version.split("-")[0],
     // shippable releases should not have a named version
-    version_name: debug ? gitRef() : undefined,
+    version_name: debug ? gitRef() : undefined, // oxlint-disable-line no-undefined
     minimum_chrome_version: "134", // matches build
     icons: {
       16: "icon16.png",
@@ -77,7 +76,7 @@ export function createManifest(
         "", // include trailing semicolon
       ].join(";"),
     },
-    // https://developer.chrome.com/docs/extensions/mv3/cross-origin-isolation/
+    // https://developer.chrome.com/docs/extensions/develop/concepts/cross-origin-isolation
     cross_origin_embedder_policy: { value: "require-corp" },
     cross_origin_opener_policy: { value: "same-origin" },
 
