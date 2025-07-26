@@ -15,7 +15,7 @@ async function compileCSS(path: string) {
     code: source,
     minify: !dev,
     // oxlint-disable-next-line no-bitwise
-    targets: { chrome: 123 << 16 }, // matches manifest minimum_chrome_version
+    targets: { chrome: 134 << 16 }, // matches manifest minimum_chrome_version
     include: lightningcss.Features.Nesting,
   });
   if (result.warnings.length > 0) console.error(result.warnings);
