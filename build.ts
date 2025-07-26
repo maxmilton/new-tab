@@ -25,7 +25,7 @@ async function compileCSS(path: string) {
 async function makeThemes(pattern: string) {
   const themes: Record<string, string> = {};
 
-  for await (const path of new Bun.Glob(pattern).scan()) {
+  for (const path of new Bun.Glob(pattern).scanSync()) {
     const result = await compileCSS(path);
     themes[basename(path, ".css")] = result.toString();
   }
