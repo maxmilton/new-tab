@@ -1,26 +1,26 @@
-import { afterAll, beforeAll, describe, expect, mock, spyOn, test } from 'bun:test';
-import { target } from 'happy-dom/lib/PropertySymbol.js';
-import { ONCLICK } from 'stage1/fast';
-import { DEFAULT_SECTION_ORDER, handleClick } from '../../src/utils.ts';
+import { afterAll, beforeAll, describe, expect, mock, spyOn, test } from "bun:test";
+import { target } from "happy-dom/lib/PropertySymbol.js";
+import { ONCLICK } from "stage1/fast";
+import { DEFAULT_SECTION_ORDER, handleClick } from "../../src/utils.ts";
 
-describe('DEFAULT_SECTION_ORDER', () => {
-  test('is an array', () => {
+describe("DEFAULT_SECTION_ORDER", () => {
+  test("is an array", () => {
     expect.assertions(2);
     expect(DEFAULT_SECTION_ORDER).toBeArray();
     expect(DEFAULT_SECTION_ORDER).toBeInstanceOf(window.Array);
   });
 
-  test('contains all sections', () => {
+  test("contains all sections", () => {
     expect.assertions(6);
     expect(DEFAULT_SECTION_ORDER).toHaveLength(5);
-    expect(DEFAULT_SECTION_ORDER).toContain('Open Tabs');
-    expect(DEFAULT_SECTION_ORDER).toContain('Bookmarks');
-    expect(DEFAULT_SECTION_ORDER).toContain('History');
-    expect(DEFAULT_SECTION_ORDER).toContain('Top Sites');
-    expect(DEFAULT_SECTION_ORDER).toContain('Recently Closed Tabs');
+    expect(DEFAULT_SECTION_ORDER).toContain("Open Tabs");
+    expect(DEFAULT_SECTION_ORDER).toContain("Bookmarks");
+    expect(DEFAULT_SECTION_ORDER).toContain("History");
+    expect(DEFAULT_SECTION_ORDER).toContain("Top Sites");
+    expect(DEFAULT_SECTION_ORDER).toContain("Recently Closed Tabs");
   });
 
-  test('contains no duplicates', () => {
+  test("contains no duplicates", () => {
     expect.assertions(1);
     const uniqueSections = new Set(DEFAULT_SECTION_ORDER);
     expect(uniqueSections.size).toBe(DEFAULT_SECTION_ORDER.length);
@@ -28,7 +28,7 @@ describe('DEFAULT_SECTION_ORDER', () => {
 
   test('has "Open Tabs" as the first item', () => {
     expect.assertions(1);
-    expect(DEFAULT_SECTION_ORDER[0]).toBe('Open Tabs');
+    expect(DEFAULT_SECTION_ORDER[0]).toBe("Open Tabs");
   });
 });
 
@@ -40,38 +40,38 @@ declare global {
   var s: HTMLInputElement;
 }
 
-describe('handleClick', () => {
+describe("handleClick", () => {
   beforeAll(() => {
-    if (global.s as Node | undefined) throw new Error('global.s already defined');
-    global.s = document.createElement('input');
+    if (global.s as Node | undefined) throw new Error("global.s already defined");
+    global.s = document.createElement("input");
     document.body.appendChild(global.s);
   });
   afterAll(() => {
     global.s.remove();
   });
 
-  test('is a function', () => {
+  test("is a function", () => {
     expect.assertions(2);
     expect(handleClick).toBeFunction();
     expect(handleClick).not.toBeClass();
   });
 
-  test('expects 1 parameter', () => {
+  test("expects 1 parameter", () => {
     expect.assertions(1);
     expect(handleClick).toHaveParameters(1, 0);
   });
 
-  test('has no return value by default', () => {
+  test("has no return value by default", () => {
     expect.assertions(1);
-    const event = new window.MouseEvent('click');
+    const event = new window.MouseEvent("click");
     // @ts-expect-error - happy-dom internal target property
     event[target] = {};
     expect(handleClick(event)).toBeUndefined();
   });
 
-  test('triggers click handler on target', () => {
+  test("triggers click handler on target", () => {
     expect.assertions(2);
-    const event = new window.MouseEvent('click');
+    const event = new window.MouseEvent("click");
     const handler = mock(() => {});
     // @ts-expect-error - happy-dom internal target property
     event[target] = { __click: handler };
@@ -80,12 +80,12 @@ describe('handleClick', () => {
     expect(handler).toHaveBeenCalledWith(event);
   });
 
-  test('triggers click handler on target parent', () => {
+  test("triggers click handler on target parent", () => {
     expect.assertions(2);
-    const event = new window.MouseEvent('click');
+    const event = new window.MouseEvent("click");
     const handler = mock(() => {});
-    const child = document.createElement('div');
-    const parent = document.createElement('a');
+    const child = document.createElement("div");
+    const parent = document.createElement("a");
     parent[ONCLICK] = handler;
     parent.appendChild(child);
     // @ts-expect-error - happy-dom internal target property
@@ -95,14 +95,14 @@ describe('handleClick', () => {
     expect(handler).toHaveBeenCalledWith(event);
   });
 
-  test('only triggers the first found click handler on target parents', () => {
+  test("only triggers the first found click handler on target parents", () => {
     expect.assertions(3);
-    const event = new window.MouseEvent('click');
+    const event = new window.MouseEvent("click");
     const handler1 = mock(() => {});
     const handler2 = mock(() => {});
-    const child = document.createElement('div');
-    const parent1 = document.createElement('a');
-    const parent2 = document.createElement('a');
+    const child = document.createElement("div");
+    const parent1 = document.createElement("a");
+    const parent2 = document.createElement("a");
     parent1[ONCLICK] = handler1;
     parent2[ONCLICK] = handler2;
     // parent2 > parent1 > child
@@ -128,9 +128,9 @@ describe('handleClick', () => {
 
   test('default not prevented on event when url starts with "h"', () => {
     expect.assertions(2);
-    const event = new window.MouseEvent('click');
+    const event = new window.MouseEvent("click");
     // @ts-expect-error - happy-dom internal target property
-    event[target] = { href: 'https://example.com' };
+    event[target] = { href: "https://example.com" };
     expect(event.defaultPrevented).toBeFalse();
     handleClick(event);
     expect(event.defaultPrevented).toBeFalse();
@@ -139,71 +139,71 @@ describe('handleClick', () => {
   // returning false on click events is similar to event.preventDefault()
   test('handler returns false when url does not start with "h"', () => {
     expect.assertions(1);
-    const event = new window.MouseEvent('click');
+    const event = new window.MouseEvent("click");
     // @ts-expect-error - happy-dom internal target property
-    event[target] = { href: 'chrome://about' };
+    event[target] = { href: "chrome://about" };
     const result = handleClick(event);
     expect(result).toBeFalse();
   });
 
   test('handler does not return false when url starts with "h"', () => {
     expect.assertions(1);
-    const event = new window.MouseEvent('click');
+    const event = new window.MouseEvent("click");
     // @ts-expect-error - happy-dom internal target property
-    event[target] = { href: 'https://example.com' };
+    event[target] = { href: "https://example.com" };
     const result = handleClick(event);
     expect(result).not.toBeFalse();
   });
 
-  test('opens in new tab when url starts with chrome:// and ctrl key is pressed', () => {
+  test("opens in new tab when url starts with chrome:// and ctrl key is pressed", () => {
     expect.assertions(3);
-    const tabsCreateSpy = spyOn(chrome.tabs, 'create');
-    const tabsUpdateSpy = spyOn(chrome.tabs, 'update');
-    const event = new window.MouseEvent('click', { ctrlKey: true });
+    const tabsCreateSpy = spyOn(chrome.tabs, "create");
+    const tabsUpdateSpy = spyOn(chrome.tabs, "update");
+    const event = new window.MouseEvent("click", { ctrlKey: true });
     // @ts-expect-error - happy-dom internal target property
-    event[target] = { href: 'chrome://about' };
+    event[target] = { href: "chrome://about" };
     handleClick(event);
     expect(tabsCreateSpy).toHaveBeenCalledTimes(1);
-    expect(tabsCreateSpy).toHaveBeenCalledWith({ url: 'chrome://about' });
+    expect(tabsCreateSpy).toHaveBeenCalledWith({ url: "chrome://about" });
     expect(tabsUpdateSpy).toHaveBeenCalledTimes(0);
     tabsCreateSpy.mockRestore();
     tabsUpdateSpy.mockRestore();
   });
 
-  test('updates current tab when url starts with chrome:// and target is not _blank', () => {
+  test("updates current tab when url starts with chrome:// and target is not _blank", () => {
     expect.assertions(3);
-    const tabsCreateSpy = spyOn(chrome.tabs, 'create');
-    const tabsUpdateSpy = spyOn(chrome.tabs, 'update');
-    const event = new window.MouseEvent('click');
+    const tabsCreateSpy = spyOn(chrome.tabs, "create");
+    const tabsUpdateSpy = spyOn(chrome.tabs, "update");
+    const event = new window.MouseEvent("click");
     // @ts-expect-error - happy-dom internal target property
-    event[target] = { href: 'chrome://about', target: undefined };
+    event[target] = { href: "chrome://about", target: null };
     handleClick(event);
     expect(tabsCreateSpy).toHaveBeenCalledTimes(0);
     expect(tabsUpdateSpy).toHaveBeenCalledTimes(1);
-    expect(tabsUpdateSpy).toHaveBeenCalledWith({ url: 'chrome://about' });
+    expect(tabsUpdateSpy).toHaveBeenCalledWith({ url: "chrome://about" });
     tabsCreateSpy.mockRestore();
     tabsUpdateSpy.mockRestore();
   });
 
-  test('updates current tab when url starts with chrome:// and ctrl key is not pressed', () => {
+  test("updates current tab when url starts with chrome:// and ctrl key is not pressed", () => {
     expect.assertions(3);
-    const tabsCreateSpy = spyOn(chrome.tabs, 'create');
-    const tabsUpdateSpy = spyOn(chrome.tabs, 'update');
-    const event = new window.MouseEvent('click', { ctrlKey: false });
+    const tabsCreateSpy = spyOn(chrome.tabs, "create");
+    const tabsUpdateSpy = spyOn(chrome.tabs, "update");
+    const event = new window.MouseEvent("click", { ctrlKey: false });
     // @ts-expect-error - happy-dom internal target property
-    event[target] = { href: 'chrome://about' };
+    event[target] = { href: "chrome://about" };
     handleClick(event);
     expect(tabsCreateSpy).toHaveBeenCalledTimes(0);
     expect(tabsUpdateSpy).toHaveBeenCalledTimes(1);
-    expect(tabsUpdateSpy).toHaveBeenCalledWith({ url: 'chrome://about' });
+    expect(tabsUpdateSpy).toHaveBeenCalledWith({ url: "chrome://about" });
     tabsCreateSpy.mockRestore();
     tabsUpdateSpy.mockRestore();
   });
 
-  test('focuses search input for non-link target', () => {
+  test("focuses search input for non-link target", () => {
     expect.assertions(2);
-    const focusSpy = spyOn(global.s, 'focus');
-    const event = new window.MouseEvent('click');
+    const focusSpy = spyOn(global.s, "focus");
+    const event = new window.MouseEvent("click");
     // @ts-expect-error - happy-dom internal target property
     event[target] = {};
     handleClick(event);

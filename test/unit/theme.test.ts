@@ -1,6 +1,5 @@
 /* eslint-disable consistent-return */
 
-import { afterEach, describe, expect, test } from 'bun:test';
 import {
   compile,
   DECLARATION,
@@ -10,40 +9,41 @@ import {
   RULESET,
   SKIP,
   walk,
-} from '@maxmilton/test-utils/css';
-import themes from '../../dist/themes.json' with { type: 'json' };
-import type { UserStorageData } from '../../src/types.ts';
-import { reset } from '../setup.ts';
+} from "@maxmilton/test-utils/css";
+import { afterEach, describe, expect, test } from "bun:test";
+import themes from "../../dist/themes.json" with { type: "json" };
+import type { UserStorageData } from "../../src/types.ts";
+import { reset } from "../setup.ts";
 
 const themeNames = [
-  'auto',
-  'black',
-  'dark',
-  'hacker-blue',
-  'hacker-pink',
-  'hacker-terminal',
-  'light',
-  'neon-dreams',
-  'tilde-club',
+  "auto",
+  "black",
+  "dark",
+  "hacker-blue",
+  "hacker-pink",
+  "hacker-terminal",
+  "light",
+  "neon-dreams",
+  "tilde-club",
 ] as const;
 
 const cssVariables = [
-  '--s', // shadow
-  '--b', // background
-  '--t', // text
-  '--c1', // bookmark node hover background, hr, button border, search input border
-  '--c2', // bookmarks bar, menu dropdown, "load more" button
-  '--c3', // icons, empty folder text, text fallback (headings, etc.)
+  "--s", // shadow
+  "--b", // background
+  "--t", // text
+  "--c1", // bookmark node hover background, hr, button border, search input border
+  "--c2", // bookmarks bar, menu dropdown, "load more" button
+  "--c3", // icons, empty folder text, text fallback (headings, etc.)
 ] as const;
 
-describe('themes.json', () => {
-  test('is valid JSON', () => {
+describe("themes.json", () => {
+  test("is valid JSON", () => {
     expect.assertions(1);
     // oxlint-disable-next-line unicorn/prefer-structured-clone
     expect(JSON.parse(JSON.stringify(themes))).toEqual(themes);
   });
 
-  test('contains all themes and no unexpected themes', () => {
+  test("contains all themes and no unexpected themes", () => {
     expect.assertions(1);
     expect(Object.keys(themes) as readonly string[]).toEqual(themeNames);
   });
@@ -54,68 +54,68 @@ for (const theme of themeNames) {
     const css = themes[theme];
     const ast = compile(css);
 
-    test('is within expected size limits', () => {
+    test("is within expected size limits", () => {
       expect.assertions(2);
       expect(css.length).toBeGreaterThan(80);
       expect(css.length).toBeLessThan(1500);
     });
 
     // TODO: More elegant way to test auto theme?
-    if (theme === 'auto') {
-      test('contains exactly one @media query', () => {
+    if (theme === "auto") {
+      test("contains exactly one @media query", () => {
         expect.assertions(1);
-        expect(css).toIncludeRepeated('@media', 1);
+        expect(css).toIncludeRepeated("@media", 1);
       });
 
-      test('@media query checks prefers-color-scheme is dark', () => {
+      test("@media query checks prefers-color-scheme is dark", () => {
         expect.assertions(1);
-        expect(css).toInclude('@media (prefers-color-scheme:dark)');
+        expect(css).toInclude("@media (prefers-color-scheme:dark)");
       });
     } else {
-      test('does not contain any @media queries', () => {
+      test("does not contain any @media queries", () => {
         expect.assertions(1);
-        expect(css).not.toInclude('@media');
+        expect(css).not.toInclude("@media");
       });
     }
 
-    test('does not contain any @font-face rules', () => {
+    test("does not contain any @font-face rules", () => {
       expect.assertions(1);
-      expect(css).not.toInclude('@font-face');
+      expect(css).not.toInclude("@font-face");
     });
 
-    test('does not contain any @import rules', () => {
+    test("does not contain any @import rules", () => {
       expect.assertions(1);
-      expect(css).not.toInclude('@import');
+      expect(css).not.toInclude("@import");
     });
 
-    test('does not contain any comments', () => {
+    test("does not contain any comments", () => {
       expect.assertions(4);
-      expect(css).not.toInclude('/*');
-      expect(css).not.toInclude('*/');
-      expect(css).not.toInclude('//'); // inline comments or URL protocol
-      expect(css).not.toInclude('<!');
+      expect(css).not.toInclude("/*");
+      expect(css).not.toInclude("*/");
+      expect(css).not.toInclude("//"); // inline comments or URL protocol
+      expect(css).not.toInclude("<!");
     });
 
-    test('compiled AST is not empty', () => {
+    test("compiled AST is not empty", () => {
       expect.assertions(2);
       expect(ast).toBeArray();
       expect(ast).not.toBeEmpty();
     });
 
     // TODO: More elegant way to test auto theme?
-    if (theme === 'auto') {
-      test('has two :root{} which each contains all expected CSS variables', () => {
+    if (theme === "auto") {
+      test("has two :root{} which each contains all expected CSS variables", () => {
         expect.assertions(2);
         let found = 0;
         const variables: string[][] = [];
         walk(ast, (element) => {
           if (element.type !== RULESET) return; // continue
-          if (element.value !== ':root') return SKIP;
+          if (element.value !== ":root") return SKIP;
           found += 1;
           const variables2: string[] = [];
           for (const child of element.children as Element[]) {
             if (child.type === DECLARATION) {
-              if ((child.props as string).startsWith('--') && child.children) {
+              if ((child.props as string).startsWith("--") && child.children) {
                 variables2.push(child.props as string);
               }
             } else {
@@ -130,17 +130,17 @@ for (const theme of themeNames) {
         expect(variables).toEqual([cssVariables, cssVariables]);
       });
     } else {
-      test('has single :root{} which contains all expected CSS variables', () => {
+      test("has single :root{} which contains all expected CSS variables", () => {
         expect.assertions(2);
         let found = 0;
         const variables: string[] = [];
         walk(ast, (element) => {
           if (element.type !== RULESET) return; // continue
-          if (element.value !== ':root') return SKIP;
+          if (element.value !== ":root") return SKIP;
           found += 1;
           for (const child of element.children as Element[]) {
             if (child.type === DECLARATION) {
-              if ((child.props as string).startsWith('--') && child.children) {
+              if ((child.props as string).startsWith("--") && child.children) {
                 variables.push(child.props as string);
               }
             } else {
@@ -157,22 +157,24 @@ for (const theme of themeNames) {
   });
 }
 
-const MODULE_PATH_THEME = Bun.resolveSync('./src/theme.ts', '.');
-const MODULE_PATH_UTILS = Bun.resolveSync('./src/utils.ts', '.');
+const MODULE_PATH_THEME = Bun.resolveSync("./src/theme.ts", ".");
+const MODULE_PATH_UTILS = Bun.resolveSync("./src/utils.ts", ".");
 let newtabCSS: string | undefined;
 
 async function load(themeName?: (typeof themeNames)[number]) {
   // mock user settings
   chrome.storage.local.get = () =>
-    Promise.resolve({
-      n: themeName ?? 'auto',
-      t: themes[themeName ?? 'auto'],
-    } satisfies UserStorageData);
+    Promise.resolve(
+      {
+        n: themeName ?? "auto",
+        t: themes[themeName ?? "auto"],
+      } satisfies UserStorageData,
+    );
 
   // inject newtab.css
-  const style = window.document.createElement('style');
+  const style = window.document.createElement("style");
   // oxlint-disable-next-line no-multi-assign
-  style.textContent = newtabCSS ??= await Bun.file('dist/newtab.css').text();
+  style.textContent = newtabCSS ??= await Bun.file("dist/newtab.css").text();
   window.document.head.appendChild(style);
 
   Loader.registry.delete(MODULE_PATH_THEME);
@@ -181,53 +183,53 @@ async function load(themeName?: (typeof themeNames)[number]) {
   await happyDOM.waitUntilComplete();
 }
 
-describe('theme loader', () => {
+describe("theme loader", () => {
   // Completely reset DOM and global state between tests
   afterEach(reset);
 
-  test('loads expected style sheets', async () => {
+  test("loads expected style sheets", async () => {
     expect.assertions(2);
     await load();
     expect(document.styleSheets).toHaveLength(1); // injected in load() above
     expect(document.adoptedStyleSheets).toHaveLength(1); // from src/theme.ts
   });
 
-  test('loads auto theme by default', async () => {
+  test("loads auto theme by default", async () => {
     expect.assertions(5);
     await load();
 
     const rootStyles = window.getComputedStyle(document.documentElement);
     const styles = window.getComputedStyle(document.body);
-    expect(rootStyles.colorScheme).toBe('light dark');
-    expect(rootStyles.getPropertyValue('--b')).toBe('#fafafa');
-    expect(styles.backgroundColor).toBe('#fafafa');
+    expect(rootStyles.colorScheme).toBe("light dark");
+    expect(rootStyles.getPropertyValue("--b")).toBe("#fafafa");
+    expect(styles.backgroundColor).toBe("#fafafa");
     expect(isHexColor(styles.backgroundColor)).toBeTrue();
-    expect(isLightOrDark(styles.backgroundColor)).toBe('light');
+    expect(isLightOrDark(styles.backgroundColor)).toBe("light");
 
     // TODO: Use this once happy-dom supports proper CSS :root inheritance.
     // const styles = window.getComputedStyle(document.body);
-    // expect(styles.colorScheme).toBe('light dark');
-    // expect(styles.getPropertyValue('--b')).toBe('#fafafa');
-    // expect(styles.backgroundColor).toBe('#fafafa');
+    // expect(styles.colorScheme).toBe("light dark");
+    // expect(styles.getPropertyValue("--b")).toBe("#fafafa");
+    // expect(styles.backgroundColor).toBe("#fafafa");
     // expect(isHexColor(styles.backgroundColor)).toBeTrue();
-    // expect(isLightOrDark(styles.backgroundColor)).toBe('light');
+    // expect(isLightOrDark(styles.backgroundColor)).toBe("light");
   });
 
   // TODO: Don't skip once happy-dom supports proper CSS :root inheritance.
-  test.skip('auto theme is light when system is light', async () => {
+  test.skip("auto theme is light when system is light", async () => {
     expect.assertions(1);
-    happyDOM.settings.device.prefersColorScheme = 'light';
-    await load('auto');
+    happyDOM.settings.device.prefersColorScheme = "light";
+    await load("auto");
     const styles = window.getComputedStyle(document.body);
-    expect(isLightOrDark(styles.backgroundColor)).toBe('light');
+    expect(isLightOrDark(styles.backgroundColor)).toBe("light");
   });
 
   // TODO: Don't skip once happy-dom supports proper CSS :root inheritance.
-  test.skip('auto theme is dark when system is dark', async () => {
+  test.skip("auto theme is dark when system is dark", async () => {
     expect.assertions(1);
-    happyDOM.settings.device.prefersColorScheme = 'dark';
-    await load('auto');
+    happyDOM.settings.device.prefersColorScheme = "dark";
+    await load("auto");
     const styles = window.getComputedStyle(document.body);
-    expect(isLightOrDark(styles.backgroundColor)).toBe('dark');
+    expect(isLightOrDark(styles.backgroundColor)).toBe("dark");
   });
 });

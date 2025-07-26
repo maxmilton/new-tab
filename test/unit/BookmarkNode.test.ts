@@ -1,31 +1,31 @@
-import { afterEach, describe, expect, test } from 'bun:test';
-import { cleanup, render } from '@maxmilton/test-utils/dom';
-import { BookmarkNode, type BookmarkTreeNode } from '../../src/components/BookmarkNode.ts';
-import type { LinkProps } from '../../src/components/Link.ts';
+import { cleanup, render } from "@maxmilton/test-utils/dom";
+import { afterEach, describe, expect, test } from "bun:test";
+import { BookmarkNode, type BookmarkTreeNode } from "../../src/components/BookmarkNode.ts";
+import type { LinkProps } from "../../src/components/Link.ts";
 
 afterEach(cleanup);
 
-test('renders a link when url is provided', () => {
+test("renders a link when url is provided", () => {
   expect.assertions(2);
   // @ts-expect-error - intentional partial props
-  const rendered = render(BookmarkNode({ url: 'x' }));
-  expect(rendered.container.querySelector('a')).toBeTruthy();
-  expect(rendered.container.querySelector('div.f')).toBeFalsy();
+  const rendered = render(BookmarkNode({ url: "x" }));
+  expect(rendered.container.querySelector("a")).toBeTruthy();
+  expect(rendered.container.querySelector("div.f")).toBeFalsy();
 });
 
-test('renders a folder when url is not provided', () => {
+test("renders a folder when url is not provided", () => {
   expect.assertions(2);
   // @ts-expect-error - intentional partial props
   const rendered = render(BookmarkNode({}));
-  expect(rendered.container.querySelector('div.f')).toBeTruthy();
-  expect(rendered.container.querySelector('a')).toBeFalsy();
+  expect(rendered.container.querySelector("div.f")).toBeTruthy();
+  expect(rendered.container.querySelector("a")).toBeFalsy();
 });
 
-describe('Bookmark (Link)', () => {
-  test('rendered DOM contains expected elements', () => {
+describe("Bookmark (Link)", () => {
+  test("rendered DOM contains expected elements", () => {
     expect.assertions(1);
     const rendered = render(
-      BookmarkNode({ title: 'Example', url: 'https://example.com' } satisfies LinkProps),
+      BookmarkNode({ title: "Example", url: "https://example.com" } satisfies LinkProps),
     );
     const root = rendered.container.firstChild as HTMLElement;
     expect(root).toBeInstanceOf(window.HTMLAnchorElement);
@@ -33,9 +33,9 @@ describe('Bookmark (Link)', () => {
     // TODO: More/better assertions to prove it's a Link component.
   });
 
-  test('rendered DOM matches snapshot', () => {
+  test("rendered DOM matches snapshot", () => {
     expect.assertions(1);
-    const rendered = render(BookmarkNode({ title: 'Example', url: 'https://example.com' }));
+    const rendered = render(BookmarkNode({ title: "Example", url: "https://example.com" }));
     expect(rendered.container.innerHTML).toMatchSnapshot();
   });
 
@@ -43,18 +43,18 @@ describe('Bookmark (Link)', () => {
   //  ↳ How might we do this elegantly without duplicating the tests?
 });
 
-describe('Folder', () => {
-  test('rendered DOM contains expected elements', () => {
+describe("Folder", () => {
+  test("rendered DOM contains expected elements", () => {
     expect.assertions(2);
-    const rendered = render(BookmarkNode({ id: '1', title: 'Example' } satisfies BookmarkTreeNode));
+    const rendered = render(BookmarkNode({ id: "1", title: "Example" } satisfies BookmarkTreeNode));
     const root = rendered.container.firstChild as HTMLElement;
     expect(root).toBeInstanceOf(window.HTMLDivElement);
-    expect(root.className).toBe('f');
+    expect(root.className).toBe("f");
   });
 
-  test('rendered DOM matches snapshot', () => {
+  test("rendered DOM matches snapshot", () => {
     expect.assertions(1);
-    const rendered = render(BookmarkNode({ id: '1', title: 'Example' }));
+    const rendered = render(BookmarkNode({ id: "1", title: "Example" }));
     expect(rendered.container.innerHTML).toMatchSnapshot();
   });
 

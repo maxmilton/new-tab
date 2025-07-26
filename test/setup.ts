@@ -1,6 +1,6 @@
-import '@maxmilton/test-utils/extend';
+import "@maxmilton/test-utils/extend";
 
-import { setupDOM } from '@maxmilton/test-utils/dom';
+import { setupDOM } from "@maxmilton/test-utils/dom";
 
 const noop = () => {};
 const noopAsync = () => Promise.resolve();
@@ -41,7 +41,7 @@ function setupMocks(): void {
     storage: {
       // @ts-expect-error - partial mock
       local: {
-        get: () => Promise.resolve({ t: '' }),
+        get: () => Promise.resolve({ t: "" }),
         remove: noopAsync,
         set: noopAsync,
       },
@@ -95,7 +95,7 @@ export async function reset(): Promise<void> {
   }
 
   setupDOM({
-    url: 'chrome-extension://cpcibnbdmpmcmnkhoiilpnlaepkepknb/',
+    url: "chrome-extension://cpcibnbdmpmcmnkhoiilpnlaepkepknb/",
   });
   setupMocks();
 }
