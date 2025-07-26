@@ -4,7 +4,7 @@ import { compile } from "stage1/macro" with { type: "macro" };
 type MenuComponent = HTMLDivElement;
 
 interface Refs {
-  s: HTMLAnchorElement;
+  settings: HTMLAnchorElement;
 }
 
 // https://github.com/tailwindlabs/heroicons/blob/master/optimized/outline/menu.svg
@@ -23,7 +23,7 @@ const meta = compile<Refs>(`
 
       <hr>
 
-      <a @s>New Tab Settings</a>
+      <a @settings>New Tab Settings</a>
       <a href=https://github.com/maxmilton/new-tab/issues>Report Bug</a>
     </div>
   </div>
@@ -34,7 +34,7 @@ export const Menu = (): MenuComponent => {
   const root = view;
   const refs = collect<Refs>(root, meta.d);
 
-  refs[meta.ref.s][ONCLICK] = () => chrome.runtime.openOptionsPage();
+  refs[meta.ref.settings][ONCLICK] = () => chrome.runtime.openOptionsPage();
 
   return root;
 };

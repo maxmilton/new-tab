@@ -67,13 +67,13 @@ const searchFor = (text: string, sections: SectionRefs) => {
 type SearchComponent = HTMLDivElement;
 
 interface Refs {
-  s: HTMLInputElement;
+  search: HTMLInputElement;
 }
 
 // https://github.com/feathericons/feather/blob/master/icons/search.svg
 const meta = compile<Refs>(`
   <div id=c>
-    <input @s id=s type=search placeholder="Search browser...">
+    <input @search id=s type=search placeholder="Search browser...">
     <svg id=i>
       <circle cx=11 cy=11 r=8 />
       <line x1=24 y1=24 x2=16.65 y2=16.65 />
@@ -85,7 +85,7 @@ const view = h<SearchComponent>(meta.html);
 export const Search = (): SearchComponent => {
   const root = view;
   const refs = collect<Refs>(root, meta.d);
-  const input = refs[meta.ref.s];
+  const input = refs[meta.ref.search];
   const sections: SectionRefs = {};
 
   input.oninput = () => searchFor(input.value, sections);
