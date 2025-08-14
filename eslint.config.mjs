@@ -24,39 +24,24 @@ export default ts.config(
     },
     rules: {
       /* Rules not supported in oxlint yet */
-      // eslint: https://github.com/oxc-project/oxc/issues/479
-      // typescript-eslint: https://github.com/oxc-project/oxc/issues/2180
-      // eslint-plugin-import: https://github.com/oxc-project/oxc/issues/1117
-      // eslint-plugin-promise: https://github.com/oxc-project/oxc/issues/4655
-      // eslint-plugin-unicorn: https://github.com/oxc-project/oxc/issues/684
-      // eslint-plugin-jsdoc: https://github.com/oxc-project/oxc/issues/1170
-      // eslint-plugin-n: https://github.com/oxc-project/oxc/issues/493
+      // https://github.com/oxc-project/oxc/issues?q=%E2%98%82%EF%B8%8F
 
-      // Bad browser support
-      "unicorn/prefer-at": OFF,
+      "no-underscore-dangle": OFF, // synthetic event handler names
+      quotes: [ERROR, "double", { avoidEscape: true }],
 
       /* Performance and byte savings */
-      // byte savings at the cost of readability
-      "@typescript-eslint/no-confusing-void-expression": OFF,
-      // alternatives offer byte savings and better performance
-      "@typescript-eslint/prefer-string-starts-ends-with": OFF, // oxlint only has unicorn/prefer-string-starts-ends-with
-      // byte savings (but reduces debugging ability)
-      "@typescript-eslint/restrict-plus-operands": OFF,
-      // byte savings (but reduces debugging ability)
-      "@typescript-eslint/restrict-template-expressions": OFF,
-      // byte savings with same performance
-      "prefer-template": OFF,
-      // byte savings
-      "unicorn/no-array-callback-reference": OFF,
-
-      /* stage1 */
-      // underscores in synthetic event handler names
-      "no-underscore-dangle": OFF,
+      "@typescript-eslint/no-confusing-void-expression": OFF, // byte savings (but reduces readability)
+      "@typescript-eslint/restrict-plus-operands": OFF, // byte savings (but reduces debugging ability)
+      "@typescript-eslint/restrict-template-expressions": OFF, // byte savings (but reduces debugging ability)
+      "prefer-template": OFF, // byte savings with same performance
+      "unicorn/prefer-at": OFF, // worse performance
 
       /* Rules covered by oxlint */
       "@typescript-eslint/no-explicit-any": OFF,
+      "@typescript-eslint/no-explicit-module-boundary-types": OFF,
       "@typescript-eslint/no-non-null-assertion": OFF,
       "@typescript-eslint/no-var-requires": OFF,
+      "@typescript-eslint/prefer-string-starts-ends-with": OFF,
       "func-names": OFF,
       "guard-for-in": OFF,
       "no-await-in-loop": OFF,
@@ -65,9 +50,9 @@ export default ts.config(
       "no-empty-pattern": OFF,
       "no-multi-assign": OFF,
       "no-plusplus": OFF,
-      // 'no-return-assign': OFF, // currently broken in oxlint
       "no-var": OFF,
       "unicorn/explicit-length-check": OFF,
+      "unicorn/filename-case": OFF,
       "unicorn/no-array-for-each": OFF,
       "unicorn/no-await-expression-member": OFF,
       "unicorn/no-lonely-if": "off",
@@ -83,9 +68,6 @@ export default ts.config(
       "unicorn/prefer-structured-clone": OFF,
       "unicorn/switch-case-braces": OFF,
       "vars-on-top": OFF,
-
-      /* Migrate to dprint */
-      quotes: [ERROR, "double", { avoidEscape: true }],
     },
   },
   { ignores: ["**/*.bak", "coverage", "dist"] },
