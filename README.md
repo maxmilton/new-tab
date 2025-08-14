@@ -1,10 +1,9 @@
-[![CI status](https://badgen.net/github/checks/maxmilton/new-tab?label=ci)](https://github.com/maxmilton/new-tab/actions)
-[![Coverage %](https://badgen.net/codeclimate/coverage/maxmilton/new-tab)](https://codeclimate.com/github/maxmilton/new-tab)
-[![Chrome Web Store version](https://badgen.net/chrome-web-store/v/cpcibnbdmpmcmnkhoiilpnlaepkepknb)](https://chrome.google.com/webstore/detail/new-tab/cpcibnbdmpmcmnkhoiilpnlaepkepknb)
-[![Licence](https://badgen.net/github/license/maxmilton/new-tab)](./LICENSE)
+<!-- TODO: Migrate coverage badge to badgen.net once it supports qlty.sh -->
 
-<!-- TODO: Migrate to badgen.net once it supports qlty.sh -->
-<!-- [![Coverage %](https://qlty.sh/badges/bfb90576-1d44-4606-9ba0-95b4e7077333/test_coverage.svg)](https://qlty.sh/gh/maxmilton/projects/new-tab) -->
+[![CI status](https://badgen.net/github/checks/maxmilton/new-tab?label=ci)](https://github.com/maxmilton/new-tab/actions)
+[![Coverage %](https://qlty.sh/badges/bfb90576-1d44-4606-9ba0-95b4e7077333/test_coverage.svg)](https://qlty.sh/gh/maxmilton/projects/new-tab)
+[![Version](https://badgen.net/chrome-web-store/v/cpcibnbdmpmcmnkhoiilpnlaepkepknb)](https://chrome.google.com/webstore/detail/new-tab/cpcibnbdmpmcmnkhoiilpnlaepkepknb)
+[![Licence](https://badgen.net/github/license/maxmilton/new-tab)](./LICENSE)
 
 # New Tab ![](./static/icon48.png)
 
@@ -65,7 +64,7 @@ See [releases on GitHub](https://github.com/maxmilton/new-tab/releases).
 
 ## License
 
-MIT license. See [LICENSE](https://github.com/maxmilton/new-tab/blob/master/LICENSE).
+MIT license. See [LICENSE](./LICENSE).
 
 The [lightning bolt icon](https://github.com/twitter/twemoji/blob/master/assets/svg/26a1.svg) is from [twitter/twemoji](https://github.com/twitter/twemoji) which is licensed CC-BY 4.0.
 
