@@ -22,7 +22,7 @@ if (process.env.NODE_ENV === "development") {
       .then((themes: ThemesData) => {
         const theme = themes[storage.n ?? "auto"];
         if (storage.t !== theme) {
-          sheet.replaceSync(theme);
+          void sheet.replace(theme);
           void chrome.storage.local.set({ t: theme });
         }
       });

@@ -7,7 +7,7 @@
   --b: #000; /* background */
   --t: #666; /* text */
   --c1: #333; /* bookmark node hover background, hr, button border, search input border */
-  --c2: #000; /* bookmarks bar, menu dropdown, "load more" button */
+  --c2: #000; /* bookmarks bar, menu dropdown, "show more" button */
   --c3: #444; /* icons, empty folder text, text fallback (headings, etc.) */
 
   color-scheme: dark;
