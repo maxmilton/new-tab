@@ -11,8 +11,8 @@ jobs:
       id-token: write
       attestations: write
     steps:
-      - uses: actions/checkout@v5
-      - uses: oven-sh/setup-bun@v2
+      - uses: actions/checkout@08c6903cd8c0fde910a37f88322edcfb5dd907a8 # v5
+      - uses: oven-sh/setup-bun@735343b667d3e6f658f44d0eca948eb6282f2b76 # v2
         with:
           bun-version: latest
       - run: bun install --frozen-lockfile
@@ -20,7 +20,7 @@ jobs:
       - run: bun run lint
       - run: bun run test
       - run: zip -jv chrome-extension.zip dist/*
-      - uses: actions/attest-build-provenance@v2
+      - uses: actions/attest-build-provenance@e8998f949152b193b063cb0ec769d69d929409be # v2
         with:
           subject-path: chrome-extension.zip
       - run: gh release create "${{ github.ref_name }}" chrome-extension.zip --draft --generate-notes
