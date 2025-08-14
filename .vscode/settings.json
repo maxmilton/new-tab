@@ -1,5 +1,6 @@
 {
   "biome.enabled": false, // use dprint
+  "dprint.path": "./node_modules/.bin/dprint",
   "editor.defaultFormatter": "dprint.dprint",
   "editor.formatOnPaste": false,
   "editor.formatOnSave": true,
