@@ -32,7 +32,7 @@ const cssVariables = [
   "--b", // background
   "--t", // text
   "--c1", // bookmark node hover background, hr, button border, search input border
-  "--c2", // bookmarks bar, menu dropdown, "load more" button
+  "--c2", // bookmarks bar, menu dropdown, "show more" button
   "--c3", // icons, empty folder text, text fallback (headings, etc.)
 ] as const;
 

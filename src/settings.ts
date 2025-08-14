@@ -243,12 +243,12 @@ const Settings = () => {
     theme.value = themeName;
 
     await chrome.storage.local.set({
-      tn: themeName,
+      n: themeName,
       t: (await themesData)[themeName],
     });
 
     if (themeName === DEFAULT_THEME) {
-      await chrome.storage.local.remove("tn");
+      await chrome.storage.local.remove("n");
     }
 
     void state.pushSyncData?.();
@@ -278,9 +278,7 @@ const Settings = () => {
 
     if (state.order[list].length > 0) return;
 
-    const from = JSON.parse(
-      event.dataTransfer!.getData(DRAG_TYPE),
-    ) as ItemIndex;
+    const from = JSON.parse(event.dataTransfer!.getData(DRAG_TYPE)) as ItemIndex;
 
     scope.moveItem(from, [list, 0]);
 
@@ -296,9 +294,7 @@ const Settings = () => {
       // When value is same as default, we don't need to store it
       await chrome.storage.local.remove("b");
     } else {
-      await chrome.storage.local.set({
-        b: true,
-      });
+      await chrome.storage.local.set({ b: true });
     }
 
     void state.pushSyncData?.();
