@@ -1,12 +1,10 @@
 import js from "@eslint/js";
 import mm from "@maxmilton/eslint-config";
 import unicorn from "eslint-plugin-unicorn";
+import { defineConfig } from "eslint/config";
 import ts from "typescript-eslint";
 
-const OFF = 0;
-const ERROR = 2;
-
-export default ts.config(
+export default defineConfig(
   js.configs.recommended,
   ts.configs.strictTypeChecked,
   ts.configs.stylisticTypeChecked,
@@ -14,7 +12,7 @@ export default ts.config(
   mm.configs.recommended,
   {
     linterOptions: {
-      reportUnusedDisableDirectives: ERROR,
+      reportUnusedDisableDirectives: "error",
     },
     languageOptions: {
       parserOptions: {
@@ -26,49 +24,49 @@ export default ts.config(
       /* Rules not supported in oxlint yet */
       // https://github.com/oxc-project/oxc/issues?q=%E2%98%82%EF%B8%8F
 
-      "no-underscore-dangle": OFF, // synthetic event handler names
-      quotes: [ERROR, "double", { avoidEscape: true }],
+      "no-underscore-dangle": "off", // synthetic event handler names
+      quotes: ["error", "double", { avoidEscape: true }],
 
-      /* Performance and byte savings */
-      "@typescript-eslint/no-confusing-void-expression": OFF, // byte savings (but reduces readability)
-      "@typescript-eslint/restrict-plus-operands": OFF, // byte savings (but reduces debugging ability)
-      "@typescript-eslint/restrict-template-expressions": OFF, // byte savings (but reduces debugging ability)
-      "prefer-template": OFF, // byte savings with same performance
-      "unicorn/prefer-at": OFF, // worse performance
+      /* Performance */
+      "@typescript-eslint/no-confusing-void-expression": "off", // byte savings (but reduces readability)
+      "@typescript-eslint/restrict-plus-operands": "off", // byte savings (but worse debugging)
+      "@typescript-eslint/restrict-template-expressions": "off", // byte savings (but worse debugging)
+      "prefer-template": "off", // byte savings with same performance
+      "unicorn/prefer-at": "off", // worse performance
 
-      /* Rules covered by oxlint */
-      "@typescript-eslint/no-explicit-any": OFF,
-      "@typescript-eslint/no-explicit-module-boundary-types": OFF,
-      "@typescript-eslint/no-non-null-assertion": OFF,
-      "@typescript-eslint/no-var-requires": OFF,
-      "@typescript-eslint/prefer-string-starts-ends-with": OFF,
-      "comma-dangle": OFF,
-      "func-names": OFF,
-      "guard-for-in": OFF,
-      "no-await-in-loop": OFF,
-      "no-bitwise": OFF,
-      "no-console": OFF,
-      "no-empty-pattern": OFF,
-      "no-multi-assign": OFF,
-      "no-plusplus": OFF,
-      "no-var": OFF,
-      "unicorn/explicit-length-check": OFF,
-      "unicorn/filename-case": OFF,
-      "unicorn/no-array-for-each": OFF,
-      "unicorn/no-await-expression-member": OFF,
+      /* Covered by oxlint */
+      "@typescript-eslint/no-explicit-any": "off",
+      "@typescript-eslint/no-explicit-module-boundary-types": "off",
+      "@typescript-eslint/no-non-null-assertion": "off",
+      "@typescript-eslint/no-var-requires": "off",
+      "@typescript-eslint/prefer-string-starts-ends-with": "off",
+      "comma-dangle": "off",
+      "func-names": "off",
+      "guard-for-in": "off",
+      "no-await-in-loop": "off",
+      "no-bitwise": "off",
+      "no-console": "off",
+      "no-empty-pattern": "off",
+      "no-multi-assign": "off",
+      "no-plusplus": "off",
+      "no-var": "off",
+      "unicorn/explicit-length-check": "off",
+      "unicorn/filename-case": "off",
+      "unicorn/no-array-for-each": "off",
+      "unicorn/no-await-expression-member": "off",
       "unicorn/no-lonely-if": "off",
-      "unicorn/prefer-add-event-listener": OFF,
-      "unicorn/prefer-dom-node-append": OFF,
-      "unicorn/prefer-dom-node-dataset": OFF,
-      "unicorn/prefer-dom-node-remove": OFF,
-      "unicorn/prefer-global-this": OFF,
-      "unicorn/prefer-includes": OFF,
-      "unicorn/prefer-native-coercion-functions": OFF,
-      "unicorn/prefer-query-selector": OFF,
-      "unicorn/prefer-string-replace-all": OFF,
-      "unicorn/prefer-structured-clone": OFF,
-      "unicorn/switch-case-braces": OFF,
-      "vars-on-top": OFF,
+      "unicorn/prefer-add-event-listener": "off",
+      "unicorn/prefer-dom-node-append": "off",
+      "unicorn/prefer-dom-node-dataset": "off",
+      "unicorn/prefer-dom-node-remove": "off",
+      "unicorn/prefer-global-this": "off",
+      "unicorn/prefer-includes": "off",
+      "unicorn/prefer-native-coercion-functions": "off",
+      "unicorn/prefer-query-selector": "off",
+      "unicorn/prefer-string-replace-all": "off",
+      "unicorn/prefer-structured-clone": "off",
+      "unicorn/switch-case-braces": "off",
+      "vars-on-top": "off",
     },
   },
   { ignores: ["**/*.bak", "coverage", "dist"] },
