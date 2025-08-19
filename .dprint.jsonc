@@ -12,6 +12,7 @@
       ".vscode/extensions.json",
       ".vscode/launch.json",
       ".vscode/settings.json",
+      ".oxlintrc.json",
       "tsconfig.json",
     ],
   },

@@ -4,11 +4,11 @@
     "jsdoc",
     "node",
     "import",
-    "promise",
     "regex",
+    "promise",
     "unicorn",
     "typescript",
-    "oxc"
+    "oxc",
   ],
   "categories": {
     "correctness": "error",
@@ -17,23 +17,23 @@
     "perf": "error",
     "restriction": "error",
     "style": "warn",
-    "suspicious": "error"
+    "suspicious": "error",
   },
   // https://github.com/oxc-project/javascript-globals/blob/main/src/lib.rs
   "env": {
     "browser": true,
     "builtin": true,
     "es2025": true,
-    "webextensions": true
+    "webextensions": true,
   },
   "globals": {
     "Bun": "readonly",
-    "process": "readonly"
+    "process": "readonly",
   },
   "settings": {
     "jsdoc": {
-      "ignoreInternal": true
-    }
+      "ignoreInternal": true,
+    },
   },
   "rules": {
     /* Sane overrides for "categories" */
@@ -55,7 +55,7 @@
     "eslint/no-unused-vars": ["warn", {
       "ignoreRestSiblings": true,
       "argsIgnorePattern": "^_",
-      "varsIgnorePattern": "^_"
+      "varsIgnorePattern": "^_",
     }],
     "eslint/no-void": "off",
     "eslint/sort-imports": "off",
@@ -68,6 +68,7 @@
     "import/max-dependencies": "off",
     "import/no-unassigned-import": "off",
     "import/prefer-default-export": "off",
+    "jsdoc/empty-tags": "warn", // allow @private markers with comment
     "oxc/no-async-await": "off",
     "oxc/no-const-enum": "off", // bun inlines
     "oxc/no-optional-chaining": "off",
@@ -107,7 +108,7 @@
     /* stage1 */
     "unicorn/prefer-add-event-listener": "off",
     "unicorn/prefer-dom-node-append": "off",
-    "unicorn/prefer-dom-node-remove": "off"
+    "unicorn/prefer-dom-node-remove": "off",
   },
   "overrides": [
     {
@@ -116,25 +117,25 @@
         "jsdoc/require-param-type": "off",
         "jsdoc/require-param": "off",
         "jsdoc/require-returns-type": "off",
-        "jsdoc/require-returns": "off"
-      }
+        "jsdoc/require-returns": "off",
+      },
     },
     {
       "files": ["*.d.ts"],
       "rules": {
-        "import/unambiguous": "off"
-      }
+        "import/unambiguous": "off",
+      },
     },
     {
       "files": ["*.config.ts", "*.config.mjs"],
       "env": {
-        "node": true
+        "node": true,
       },
       "rules": {
         "eslint/func-style": ["error", "declaration"],
         "import/no-default-export": "off",
-        "import/no-anonymous-default-export": "off"
-      }
+        "import/no-anonymous-default-export": "off",
+      },
     },
     {
       "files": ["*.test.ts", "*.spec.ts", "test/**"],
@@ -142,12 +143,12 @@
       "env": {
         "jest": true,
         "node": true,
-        "vitest": true
+        "vitest": true,
       },
       "globals": {
         "$console": "readonly",
         "happyDOM": "readonly",
-        "Loader": "readonly"
+        "Loader": "readonly",
       },
       "rules": {
         "eslint/func-style": "off",
@@ -156,33 +157,33 @@
         "import/no-namespace": "off",
         "jest/no-commented-out-tests": "warn",
         "promise/catch-or-return": "off",
-        "unicorn/filename-case": ["error", { "cases": { "kebabCase": true, "pascalCase": true } }]
-      }
+        "unicorn/filename-case": ["error", { "cases": { "kebabCase": true, "pascalCase": true } }],
+      },
     },
     {
       "files": ["build.ts"],
       "env": {
-        "node": true
+        "node": true,
       },
       "rules": {
         "eslint/func-style": ["error", "declaration"],
         "eslint/no-await-in-loop": "off",
         "eslint/no-console": "off",
         "eslint/no-magic-numbers": "off",
-        "import/no-namespace": "off"
-      }
+        "import/no-namespace": "off",
+      },
     },
     {
       "files": ["src/components/**"],
       "rules": {
-        "unicorn/filename-case": ["error", { "case": "pascalCase" }]
-      }
+        "unicorn/filename-case": ["error", { "case": "pascalCase" }],
+      },
     },
     {
       "files": ["src/sw.ts"],
       "env": {
-        "serviceworker": true
-      }
-    }
-  ]
+        "serviceworker": true,
+      },
+    },
+  ],
 }
