@@ -28,7 +28,7 @@
     "@maxmilton/eslint-config": "0.2.1",
     "@maxmilton/stylelint-config": "0.4.2",
     "@maxmilton/test-utils": "0.0.12",
-    "@playwright/test": "1.54.2",
+    "@playwright/test": "1.55.0",
     "@swc/core": "1.13.3",
     "@types/bun": "1.2.20",
     "@types/chrome": "0.1.4",
