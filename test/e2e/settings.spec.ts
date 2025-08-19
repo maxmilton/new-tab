@@ -18,7 +18,10 @@ test("settings page", async ({ page, extensionId }) => {
   expect(labels).toHaveLength(5);
 });
 
-test("matches screenshot", async ({ page, extensionId }) => {
+// TODO: Either implement a platform agnostic way to handle screenshots or get
+// consistent styling in the settings app. Currently font rendering is different
+// across platforms breaking the screenshot comparison.
+test.fixme("matches screenshot", async ({ page, extensionId }) => {
   await page.goto(`chrome-extension://${extensionId}/settings.html`);
   await expect(page).toHaveScreenshot("settings-default.png");
 });
