@@ -32,6 +32,7 @@ export default defineConfig(
       "@typescript-eslint/restrict-plus-operands": "off", // byte savings (but worse debugging)
       "@typescript-eslint/restrict-template-expressions": "off", // byte savings (but worse debugging)
       "prefer-template": "off", // byte savings with same performance
+      "unicorn/no-array-sort": "off",
       "unicorn/prefer-at": "off", // worse performance
 
       /* Covered by oxlint */
