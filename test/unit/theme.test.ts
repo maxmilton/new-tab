@@ -109,12 +109,16 @@ for (const theme of themeNames) {
         let found = 0;
         const variables: string[][] = [];
         walk(ast, (element) => {
+          // oxlint-disable-next-line no-conditional-in-test
           if (element.type !== RULESET) return; // continue
+          // oxlint-disable-next-line no-conditional-in-test
           if (element.value !== ":root") return SKIP;
           found += 1;
           const variables2: string[] = [];
           for (const child of element.children as Element[]) {
+            // oxlint-disable-next-line no-conditional-in-test
             if (child.type === DECLARATION) {
+              // oxlint-disable-next-line no-conditional-in-test
               if ((child.props as string).startsWith("--") && child.children) {
                 variables2.push(child.props as string);
               }
@@ -135,11 +139,15 @@ for (const theme of themeNames) {
         let found = 0;
         const variables: string[] = [];
         walk(ast, (element) => {
+          // oxlint-disable-next-line no-conditional-in-test
           if (element.type !== RULESET) return; // continue
+          // oxlint-disable-next-line no-conditional-in-test
           if (element.value !== ":root") return SKIP;
           found += 1;
           for (const child of element.children as Element[]) {
+            // oxlint-disable-next-line no-conditional-in-test
             if (child.type === DECLARATION) {
+              // oxlint-disable-next-line no-conditional-in-test
               if ((child.props as string).startsWith("--") && child.children) {
                 variables.push(child.props as string);
               }
