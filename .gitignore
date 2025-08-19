@@ -2,8 +2,6 @@
 *-lock.yaml
 *.bak
 *.lock
-*.tsbuildinfo
-*.zip
 !/bun.lock
 /coverage/
 /dist/
