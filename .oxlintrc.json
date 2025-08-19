@@ -42,12 +42,14 @@
     "eslint/eqeqeq": ["error", { "null": "ignore" }],
     "eslint/func-names": ["error", "as-needed"],
     "eslint/func-style": ["error", "declaration", { "allowArrowFunctions": true }],
+    "eslint/id-length": "off", // TODO: Turn on once type aware and allow type names.
     "eslint/max-depth": "off",
     "eslint/max-len": "off", // covered by dprint
     "eslint/max-lines-per-function": "off",
     "eslint/max-lines": "off",
     "eslint/max-nested-callbacks": "off",
     "eslint/max-params": "off",
+    "eslint/new-cap": "off", // PascalCase stage1 component names
     "eslint/no-magic-numbers": "off",
     "eslint/no-ternary": "off",
     "eslint/no-unused-vars": ["warn", {
@@ -70,6 +72,7 @@
     "oxc/no-const-enum": "off", // bun inlines
     "oxc/no-optional-chaining": "off",
     "oxc/no-rest-spread-properties": "off",
+    "promise/always-return": ["error", { "ignoreLastCallback": true }],
     "promise/catch-or-return": ["error", { "allowThen": true }],
     "typescript/consistent-indexed-object-style": ["warn", "record"],
     "typescript/explicit-function-return-type": "off",
