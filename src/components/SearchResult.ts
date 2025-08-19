@@ -96,7 +96,11 @@ export const SearchResult = <T extends LinkProps & TabItem>(
 
   root.$$filter = (text) =>
     renderList(
-      rawData.filter((item) => (item.title + item.url).toLowerCase().includes(text.toLowerCase())),
+      rawData.filter((item) =>
+        (item.title + item.url)
+          .toLowerCase()
+          .includes(text.toLowerCase())
+      ),
     );
 
   title.nodeValue = sectionName;

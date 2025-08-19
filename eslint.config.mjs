@@ -42,6 +42,7 @@ export default ts.config(
       "@typescript-eslint/no-non-null-assertion": OFF,
       "@typescript-eslint/no-var-requires": OFF,
       "@typescript-eslint/prefer-string-starts-ends-with": OFF,
+      "comma-dangle": OFF,
       "func-names": OFF,
       "guard-for-in": OFF,
       "no-await-in-loop": OFF,

@@ -114,8 +114,8 @@ export const Folder = (
 
     if (!popup) {
       // Immediately close any folder popups on the parent level
-      root
-        .parentNode!.querySelectorAll<FolderComponent>(".f")
+      root.parentNode!
+        .querySelectorAll<FolderComponent>(".f")
         .forEach((folder) => folder.$$closePopup());
 
       popup = FolderPopup(
