@@ -5,6 +5,7 @@
     "node",
     "import",
     "promise",
+    "regex",
     "unicorn",
     "typescript",
     "oxc"
