@@ -25,6 +25,7 @@ async function compileCSS(path: string) {
 async function makeThemes(pattern: string) {
   const themes: Record<string, string> = {};
 
+  // oxlint-disable-next-line unicorn/no-array-sort
   for (const path of [...new Bun.Glob(pattern).scanSync()].sort()) {
     const result = await compileCSS(path);
     themes[basename(path, ".css")] = result.toString();
