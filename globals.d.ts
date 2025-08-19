@@ -1,4 +1,4 @@
-import { ONCLICK } from "stage1/fast";
+import type { ONCLICK } from "stage1/fast";
 
 declare global {
   interface HTMLElement {
