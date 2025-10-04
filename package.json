@@ -31,7 +31,7 @@
     "@playwright/test": "1.55.1",
     "@swc/core": "1.13.5",
     "@types/bun": "1.2.23",
-    "@types/chrome": "0.1.12",
+    "@types/chrome": "0.1.22",
     "dprint": "0.50.2",
     "eslint": "9.36.0",
     "eslint-plugin-unicorn": "61.0.2",
