@@ -66,9 +66,11 @@
     "import/extensions": "error",
     "import/group-exports": "off",
     "import/max-dependencies": "off",
+    "import/no-named-export": "off",
     "import/no-unassigned-import": "off",
     "import/prefer-default-export": "off",
     "jsdoc/empty-tags": "warn", // allow @private markers with comment
+    "node/no-process-env": "off", // used for build-time constants
     "oxc/no-async-await": "off",
     "oxc/no-const-enum": "off", // bun inlines
     "oxc/no-optional-chaining": "off",
