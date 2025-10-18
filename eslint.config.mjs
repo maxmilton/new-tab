@@ -8,6 +8,7 @@ export default defineConfig(
   js.configs.recommended,
   ts.configs.strictTypeChecked,
   ts.configs.stylisticTypeChecked,
+  // @ts-expect-error - broken upstream types
   unicorn.configs.recommended,
   mm.configs.recommended,
   {
@@ -25,7 +26,6 @@ export default defineConfig(
       // https://github.com/oxc-project/oxc/issues?q=%E2%98%82%EF%B8%8F
 
       "no-underscore-dangle": "off", // synthetic event handler names
-      quotes: ["error", "double", { avoidEscape: true }],
 
       /* Performance */
       "@typescript-eslint/no-confusing-void-expression": "off", // byte savings (but reduces readability)
