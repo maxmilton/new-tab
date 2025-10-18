@@ -4,66 +4,6 @@ import type { SectionOrderItem } from "../types.ts";
 import { chromeBookmarks, chromeTabs, DEFAULT_SECTION_ORDER, storage } from "../utils.ts";
 import { SearchResult, type SearchResultComponent } from "./SearchResult.ts";
 
-type SectionRefs = Partial<Record<SectionOrderItem, SearchResultComponent>>;
-
-// TODO: Single use vars should be automatically inlined by the minifier.
-
-// const searchFor = (text: string, sections: SectionRefs) => {
-//   const openTabs = sections[DEFAULT_SECTION_ORDER[0]];
-//   const bookmarks = sections[DEFAULT_SECTION_ORDER[1]];
-//   const history = sections[DEFAULT_SECTION_ORDER[2]];
-//   const topSites = sections[DEFAULT_SECTION_ORDER[3]];
-//   const recentlyClosed = sections[DEFAULT_SECTION_ORDER[4]];
-//
-//   if (history) {
-//     if (text) {
-//       chrome.history.search({ text }, history.$$update);
-//     } else {
-//       history.$$update([]);
-//     }
-//   }
-//
-//   if (bookmarks) {
-//     if (text) {
-//       chrome.bookmarks.search(text, bookmarks.$$update);
-//     } else {
-//       bookmarks.$$update([]);
-//     }
-//   }
-//
-//   openTabs?.$$filter(text);
-//   topSites?.$$filter(text);
-//   recentlyClosed?.$$filter(text);
-// };
-
-const searchFor = (text: string, sections: SectionRefs) => {
-  const history = sections[DEFAULT_SECTION_ORDER[2]];
-  const bookmarks = sections[DEFAULT_SECTION_ORDER[1]];
-
-  if (history) {
-    if (text) {
-      chrome.history.search({ text }, history.$$update);
-    } else {
-      history.$$update([]);
-    }
-  }
-
-  if (bookmarks) {
-    if (text) {
-      chromeBookmarks.search(text, bookmarks.$$update);
-    } else {
-      bookmarks.$$update([]);
-    }
-  }
-
-  // Open Tabs
-  sections[DEFAULT_SECTION_ORDER[0]]?.$$filter(text);
-  // Top Sites
-  sections[DEFAULT_SECTION_ORDER[3]]?.$$filter(text);
-  // Recently Closed Tabs
-  sections[DEFAULT_SECTION_ORDER[4]]?.$$filter(text);
-};
-
 type SearchComponent = HTMLDivElement;
 
 interface Refs {
@@ -86,15 +26,7 @@ export const Search = (): SearchComponent => {
   const root = view;
   const refs = collect<Refs>(root, meta.d);
   const input = refs[meta.ref.search];
-  const sections: SectionRefs = {};
-
-  input.oninput = () => searchFor(input.value, sections);
-
-  input.onkeyup = (event) => {
-    if (event.key === "Escape") {
-      searchFor(input.value = "", sections);
-    }
-  };
+  const sections: Partial<Record<SectionOrderItem, SearchResultComponent>> = {};
 
   performance.mark("Load Sections");
 
@@ -105,8 +37,32 @@ export const Search = (): SearchComponent => {
   });
 
   const openTabs = sections[DEFAULT_SECTION_ORDER[0]];
+  const bookmarks = sections[DEFAULT_SECTION_ORDER[1]];
+  const history = sections[DEFAULT_SECTION_ORDER[2]];
   const topSites = sections[DEFAULT_SECTION_ORDER[3]];
   const recentlyClosed = sections[DEFAULT_SECTION_ORDER[4]];
+
+  const query = (text: string) => {
+    if (history) {
+      if (text) {
+        chrome.history.search({ text }, history.$$update);
+      } else {
+        history.$$update([]);
+      }
+    }
+
+    if (bookmarks) {
+      if (text) {
+        chromeBookmarks.search(text, bookmarks.$$update);
+      } else {
+        bookmarks.$$update([]);
+      }
+    }
+
+    openTabs?.$$filter(text);
+    topSites?.$$filter(text);
+    recentlyClosed?.$$filter(text);
+  };
 
   if (openTabs) {
     const updateOpenTabs = () =>
@@ -119,7 +75,6 @@ export const Search = (): SearchComponent => {
 
     updateOpenTabs();
 
-    // TODO: Handle race condition where onUpdated is called for this tab on load.
     chromeTabs.onUpdated.addListener(updateOpenTabs);
     chromeTabs.onRemoved.addListener(updateOpenTabs);
     chromeTabs.onMoved.addListener(updateOpenTabs);
@@ -174,6 +129,14 @@ export const Search = (): SearchComponent => {
   }
 
   performance.measure("Load Sections", "Load Sections");
+
+  input.oninput = () => query(input.value);
+
+  input.onkeyup = (event) => {
+    if (event.key === "Escape") {
+      query(input.value = "");
+    }
+  };
 
   return root;
 };
