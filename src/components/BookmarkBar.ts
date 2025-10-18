@@ -39,13 +39,13 @@ export const BookmarkBar = (): BookmarkBarComponent => {
       // Max width is root minus overflow folder width (68 == 24px svg + 2 * 9px
       // svg padding + 2 * 13px bookmark item padding)
       const maxWidth = root.clientWidth - 68;
-      const otherBookmarksFolder = append(
-        Folder({ id: "2", title: "Other Bookmarks" }),
+      const allBookmarksFolder = append(
+        Folder({ id: "0", title: "All Bookmarks" }),
         root,
       );
       // NOTE: The elements we're measuring don't have a border or margin so
       // we can use clientWidth instead of offsetWidth for better performance.
-      let width = otherBookmarksFolder.clientWidth;
+      let width = allBookmarksFolder.clientWidth;
       let index = 0;
       let node: ReturnType<typeof BookmarkNode>;
 
@@ -84,7 +84,7 @@ export const BookmarkBar = (): BookmarkBarComponent => {
 
       // The "Other Bookmarks" folder was added first so overflow calculation
       // is correct but now move it to its proper position at the end
-      append(otherBookmarksFolder, root).className += " end";
+      append(allBookmarksFolder, root).className += " end";
 
       performance.measure("BookmarkBar", "BookmarkBar");
     };
