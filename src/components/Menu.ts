@@ -7,7 +7,7 @@ interface Refs {
   settings: HTMLAnchorElement;
 }
 
-// https://github.com/tailwindlabs/heroicons/blob/master/optimized/outline/menu.svg
+// https://github.com/tailwindlabs/heroicons/blob/master/optimized/24/outline/menu.svg
 const meta = compile<Refs>(`
   <div id=m>
     <svg id=im>

@@ -93,7 +93,7 @@ export const Folder = (
     append(
       clone(
         arrow ??= h<SVGElement>(
-          // TODO: Add comment with SVG source attribution link
+          // https://github.com/tailwindlabs/heroicons/blob/master/optimized/24/outline/arrow-right.svg
           '<svg class=i><path d="M5 12h14M12 5l7 7-7 7"/></svg>',
         ),
       ),
