@@ -1,6 +1,6 @@
-import * as swc from "@swc/core";
 import * as lightningcss from "lightningcss";
 import { basename } from "node:path"; // eslint-disable-line unicorn/import-style
+import * as terser from "terser";
 import { createManifest } from "./manifest.config.ts";
 
 const mode = Bun.env.NODE_ENV;
@@ -38,19 +38,25 @@ async function minify(artifacts: Bun.BuildArtifact[]) {
   for (const artifact of artifacts) {
     if (artifact.path.endsWith(".js")) {
       const source = await artifact.text();
-      const result = await swc.minify(source, {
+      const result = await terser.minify(source, {
+        ecma: 2020,
         module: true,
         compress: {
-          // XXX: Comment out to keep performance markers for debugging.
+          reduce_funcs: false,
+          passes: 2,
+          // NOTE: Comment out to keep performance markers for debugging.
           pure_funcs: ["performance.mark", "performance.measure"],
         },
+        format: {
+          semicolons: false,
+        },
         mangle: {
-          props: {
+          properties: {
             regex: String.raw`^\$\$`,
           },
         },
       });
-      await Bun.write(artifact.path, result.code);
+      await Bun.write(artifact.path, result.code!);
     }
   }
 }
