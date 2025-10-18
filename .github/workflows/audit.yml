@@ -4,6 +4,7 @@ on:
     branches: [master, next]
     paths: ["bun.lock", "package.json"]
   pull_request: {}
+  merge_group: {}
   workflow_dispatch: {}
   schedule:
     - cron: "28 6 * * 4"

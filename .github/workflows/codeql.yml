@@ -3,6 +3,7 @@ on:
   push:
     branches: [master, next]
   pull_request: {}
+  merge_group: {}
   workflow_dispatch: {}
   schedule:
     - cron: "28 6 * * 4"
