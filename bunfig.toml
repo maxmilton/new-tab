@@ -1,7 +1,7 @@
 telemetry = false
 
-[run]
-bun = true
+# [run]
+# bun = true
 
 [install]
 auto = "disable"
