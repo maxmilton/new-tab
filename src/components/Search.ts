@@ -92,28 +92,9 @@ export const Search = (): SearchComponent => {
     // reconciliation; diff list DOM state and mutate changes minimising adding
     // or removing DOM nodes).
 
-    // TODO: Keep? Causes significantly worse page load speed!
-
-    // TODO: Alternative implementation? One of:
-    //  ↳ Simple lock to disable updates when the page isn't active
-    //  ↳ Web Locks API to prevent multiple pages from updating together
-    //  ↳ Shared worker to manage the state of the open tabs
-    //  ↳ Only update specific change from listener Event
-
-    // // When the page isn't active stop the "Open Tabs" section from updating to
-    // // prevent performance issues when users open many new-tab pages.
-    // document.onvisibilitychange = () => {
-    //   if (document.hidden) {
-    //     // @ts-expect-error - force override to kill API method
-    //     chrome.tabs.query = () => {};
-    //     // chrome.tabs.onUpdated.removeListener(updateOpenTabs);
-    //     // chrome.tabs.onRemoved.removeListener(updateOpenTabs);
-    //     // chrome.tabs.onMoved.removeListener(updateOpenTabs);
-    //   } else {
-    //     // eslint-disable-next-line no-restricted-globals
-    //     location.reload();
-    //   }
-    // };
+    // TODO: Set up tabs event listeners once globally and update all new tab
+    // pages at once using a single debounced chrome.tabs.query() call. Maybe
+    // using queueMicrotask + an EventTarget event bus?
   }
 
   if (topSites) {
