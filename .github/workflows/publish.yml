@@ -1,9 +1,13 @@
 name: publish
+
 on:
   push:
-    tags: [v*.*.*]
+    tags:
+      - "v*.*.*"
+
 jobs:
   publish:
+    if: ${{ github.repository_owner == 'maxmilton' }}
     runs-on: ubuntu-latest
     timeout-minutes: 10
     permissions:
