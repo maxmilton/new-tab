@@ -8,7 +8,6 @@ export default defineConfig(
   js.configs.recommended,
   ts.configs.strictTypeChecked,
   ts.configs.stylisticTypeChecked,
-  // @ts-expect-error - broken upstream types
   unicorn.configs.recommended,
   mm.configs.recommended,
   {
