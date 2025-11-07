@@ -22,14 +22,7 @@
     "noUncheckedSideEffectImports": true,
     "noUnusedLocals": false, // covered by oxlint
     "noUnusedParameters": false, // covered by oxlint
-    "verbatimModuleSyntax": true,
+    "verbatimModuleSyntax": true
   },
-  "include": [
-    "*.config.mjs",
-    "*.config.ts",
-    "*.d.ts",
-    "build.ts",
-    "src",
-    "test",
-  ],
+  "include": ["*.config.js", "*.config.ts", "*.d.ts", "build.ts", "src", "test"]
 }

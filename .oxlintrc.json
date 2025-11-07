@@ -129,7 +129,7 @@
       },
     },
     {
-      "files": ["*.config.ts", "*.config.mjs"],
+      "files": ["*.config.ts", "*.config.js"],
       "env": {
         "node": true,
       },
