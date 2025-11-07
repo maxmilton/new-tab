@@ -1,5 +1,5 @@
-import { cleanup, render } from "@maxmilton/test-utils/dom";
 import { afterAll, afterEach, beforeAll, expect, test } from "bun:test";
+import { cleanup, render } from "@maxmilton/test-utils/dom";
 import { BookmarkBar } from "../../src/components/BookmarkBar.ts";
 
 let style: HTMLStyleElement;
@@ -8,11 +8,12 @@ beforeAll(() => {
   // Workaround for hack that waits for styles to be loaded
   style = document.head.appendChild(document.createElement("style"));
 });
+
+afterEach(cleanup);
+
 afterAll(() => {
   style.remove();
 });
-
-afterEach(cleanup);
 
 // XXX: Because chrome.bookmarks.getChildren is async, which is called within
 // BookmarkBar, we need to wait for it to complete before we assert anything.

@@ -1,3 +1,4 @@
 body {
+  /* biome-ignore lint/complexity/noImportantStyles: for consistent screenshot comparison */
   font-family: "Noto Sans", Arial, sans-serif !important;
 }

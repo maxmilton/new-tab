@@ -32,8 +32,8 @@ a,
 a,
 .sf .f /* subfolder */ {
   overflow: hidden;
-  text-decoration: none;
   text-overflow: ellipsis;
+  text-decoration: none;
   cursor: pointer; /* for menu settings link (without href) */
 
   &:hover,
@@ -55,30 +55,30 @@ svg {
   fill: none;
   /* stroke: currentcolor; */
   stroke: var(--c3);
-  stroke-linecap: round;
   stroke-width: 2px;
+  stroke-linecap: round;
 }
 
 #c /* search results container */ {
   position: relative;
   max-width: 800px;
-  margin: 0 auto;
   padding: 0 18px;
+  margin: 0 auto;
 }
 
 button /* "Show more" button */,
 #s /* search input */ {
   width: 100%;
-  margin-top: 9px;
   padding: 4px 20px;
-  border: 2px solid var(--c1);
-  border-radius: 16px;
-  color: var(--t);
+  margin-top: 9px;
   font-family: inherit;
   font-size: 18px;
   line-height: inherit;
-  background: inherit;
+  color: var(--t);
   outline: none;
+  background: inherit;
+  border: 2px solid var(--c1);
+  border-radius: 16px;
 
   &:hover,
   &:focus {
@@ -87,9 +87,8 @@ button /* "Show more" button */,
 }
 
 #s /* search input */ {
-  margin: 0 0 35px;
-  /* padding-left: 58px; */
   padding-left: 51px;
+  margin: 0 0 35px;
 }
 
 #im /* menu icon */,
@@ -178,8 +177,8 @@ hr {
 #m /* menu */ {
   position: fixed;
   top: 90px;
-  margin: -28px -84px -64px 0;
   padding: 10px 84px 84px 42px;
+  margin: -28px -84px -64px 0;
 }
 
 #d /* menu dropdown */ {
@@ -191,7 +190,9 @@ hr {
   opacity: 0;
   transform: scale(0.8);
   transform-origin: 0 10px;
-  transition: opacity 160ms ease-out, transform 160ms ease-out;
+  transition:
+    opacity 160ms ease-out,
+    transform 160ms ease-out;
 
   #m:hover > &,
   #m:focus > & {

@@ -82,11 +82,11 @@ body::before {
   position: fixed;
   inset: 0;
   display: block;
+  content: "";
   background-image:
     linear-gradient(to right, #800040 1px, transparent 0),
     linear-gradient(#800040 1px, transparent 0);
   background-size: 5rem 1rem;
-  content: "";
   mask: linear-gradient(transparent 50%, #000 70%);
   transform: perspective(15vh) rotateX(50deg);
 }
