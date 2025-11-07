@@ -2,15 +2,15 @@
 
 /* oxlint-disable no-empty-pattern */
 
-import { type BrowserContext, chromium, test as baseTest } from "@playwright/test";
+import { type BrowserContext, chromium, test as base } from "@playwright/test";
 import path from "node:path";
 
-export const test = baseTest.extend<{
+export const test = base.extend<{
   context: BrowserContext;
   extensionId: string;
 }>({
   async context({}, use) {
-    const extensionPath = path.join(__dirname, "../../dist");
+    const extensionPath = path.join(import.meta.dirname, "../../dist");
     const context = await chromium.launchPersistentContext("", {
       channel: "chromium", // enables headless mode with extensions
       args: [`--disable-extensions-except=${extensionPath}`, `--load-extension=${extensionPath}`],
