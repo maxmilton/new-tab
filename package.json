@@ -8,6 +8,7 @@
   "author": "Max Milton <max@2okki.com>",
   "license": "MIT",
   "private": true,
+  "type": "module",
   "scripts": {
     "build": "NODE_ENV=production bun build.ts",
     "dev": "NODE_ENV=development bun build.ts",
