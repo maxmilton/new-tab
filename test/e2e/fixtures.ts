@@ -2,16 +2,15 @@
 
 /* oxlint-disable no-empty-pattern */
 
+import { type BrowserContext, chromium, test as baseTest } from "@playwright/test";
 import path from "node:path";
-import { type BrowserContext, test as base, chromium } from "@playwright/test";
 
-export const test = base.extend<{
+export const test = baseTest.extend<{
   context: BrowserContext;
   extensionId: string;
 }>({
-  // biome-ignore lint/correctness/noEmptyPattern: needed for playwright
   async context({}, use) {
-    const extensionPath = path.join(import.meta.dirname, "../../dist");
+    const extensionPath = path.join(__dirname, "../../dist");
     const context = await chromium.launchPersistentContext("", {
       channel: "chromium", // enables headless mode with extensions
       args: [`--disable-extensions-except=${extensionPath}`, `--load-extension=${extensionPath}`],
