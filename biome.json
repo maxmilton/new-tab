@@ -36,6 +36,15 @@
   },
   "overrides": [
     {
+      "includes": ["**/*.jsonc", ".vscode/*.json", ".oxlintrc.json", "tsconfig.json"],
+      "json": {
+        "parser": {
+          "allowComments": true,
+          "allowTrailingCommas": true
+        }
+      }
+    },
+    {
       "includes": ["**/*.spec.ts", "**/*.test.ts", "test/**"],
       "linter": {
         "domains": {
