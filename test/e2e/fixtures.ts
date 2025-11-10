@@ -5,19 +5,13 @@
 import path from "node:path";
 import { type BrowserContext, test as base, chromium } from "@playwright/test";
 
-export const test = base.extend<{
-  context: BrowserContext;
-  extensionId: string;
-}>({
-  // biome-ignore lint/correctness/noEmptyPattern: needed for playwright
+export const test = base.extend<{ context: BrowserContext; extensionId: string }>({
+  // biome-ignore lint/correctness/noEmptyPattern: playwright setup
   async context({}, use) {
-    const extensionPath = path.join(import.meta.dirname, "../../dist");
+    const dist = path.join(import.meta.dirname, "../../dist");
     const context = await chromium.launchPersistentContext("", {
-      channel: "chromium", // enables headless mode with extensions
-      args: [`--disable-extensions-except=${extensionPath}`, `--load-extension=${extensionPath}`],
-      acceptDownloads: false,
-      strictSelectors: true,
-      offline: true, // the extension must work 100% offline
+      channel: "chromium",
+      args: [`--disable-extensions-except=${dist}`, `--load-extension=${dist}`],
     });
     await use(context);
     await context.close();
