@@ -47,7 +47,7 @@ jobs:
         with:
           bun-version: latest
       - run: bun install --frozen-lockfile
-      - run: bun playwright install chromium
+      - run: bun playwright install --no-shell chromium
       - run: bun run build
       - run: bun run test:e2e --reporter=github,html
       - uses: actions/upload-artifact@330a01c490aca151604b8cf639adc76d48f6c5d4 # v5
