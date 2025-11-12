@@ -70,4 +70,4 @@ The [lightning bolt icon](https://github.com/twitter/twemoji/blob/master/assets/
 
 ---
 
-© [Max Milton](https://maxmilton.com)
+© 2025 [Max Milton](https://maxmilton.com)

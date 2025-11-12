@@ -2,8 +2,7 @@
 export default {
   reportInvalidScopeDisables: true,
   reportNeedlessDisables: true,
-  reportUnscopedDisables: true,
-  extends: ["stylelint-config-standard"],
+  extends: ["stylelint-config-standard", "@maxmilton/stylelint-config"],
   ignoreFiles: ["dist/*", "node_modules/**"],
   rules: {
     "comment-empty-line-before": null,

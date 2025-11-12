@@ -1,5 +1,5 @@
-import { afterEach, expect, spyOn, test } from "bun:test";
 import { cleanup, render } from "@maxmilton/test-utils/dom";
+import { afterEach, expect, spyOn, test } from "bun:test";
 import { Menu } from "../../src/components/Menu.ts";
 import { handleClick } from "../../src/utils.ts";
 

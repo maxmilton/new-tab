@@ -1,17 +1,17 @@
 body,
 button,
 select {
-  font-size: 18px;
   color: #293742;
+  font-size: 18px;
 }
 
 svg {
   width: 24px;
   fill: none;
   stroke: currentcolor;
-  stroke-width: 2px;
   stroke-linecap: round;
   stroke-linejoin: round;
+  stroke-width: 2px;
 }
 
 label {
@@ -27,9 +27,9 @@ fieldset {
 }
 
 ul {
-  padding-left: 0;
   margin-top: 0;
   margin-bottom: 0;
+  padding-left: 0;
   list-style: none;
 }
 
@@ -70,14 +70,14 @@ select {
   position: relative;
   display: flex;
   align-items: center;
-  padding: 10px;
   margin: 0 0 6px;
-  font-weight: bold;
-  line-height: 0;
-  cursor: grab;
-  background: #ffffff8c;
+  padding: 10px;
   border: 2px solid currentcolor;
   border-radius: 4px;
+  font-weight: bold;
+  line-height: 0;
+  background: #ffffff8c;
+  cursor: grab;
 
   &:last-of-type {
     margin-bottom: 0;
@@ -85,7 +85,6 @@ select {
 
   &:hover,
   &:focus {
-    /* biome-ignore lint/complexity/noImportantStyles: TODO: Rework styles */
     color: #b255ff !important;
   }
 }
@@ -96,8 +95,8 @@ select {
 }
 
 .dragging {
-  cursor: move;
   border-style: dashed;
+  cursor: move;
   opacity: 0.4;
 
   & > .icon,
@@ -116,8 +115,8 @@ select {
     display: block;
     width: 100%;
     padding-bottom: 8px;
-    content: "";
     border-top: 6px solid #b255ff;
+    content: "";
   }
 }
 
