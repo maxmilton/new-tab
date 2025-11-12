@@ -1,5 +1,5 @@
-import * as lightningcss from "lightningcss";
 import { basename } from "node:path"; // eslint-disable-line unicorn/import-style
+import * as lightningcss from "lightningcss";
 import * as terser from "terser";
 import { createManifest } from "./manifest.config.ts";
 

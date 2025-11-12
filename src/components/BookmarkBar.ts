@@ -36,13 +36,10 @@ export const BookmarkBar = (): BookmarkBarComponent => {
       // Remove all child nodes
       root.textContent = "";
 
-      // Max width is root minus overflow folder width (68 == 24px svg + 2 * 9px
-      // svg padding + 2 * 13px bookmark item padding)
+      // Max width is root minus overflow folder width (68 == 24px SVG + 2 * 9px
+      // SVG padding + 2 * 13px bookmark item padding)
       const maxWidth = root.clientWidth - 68;
-      const allBookmarksFolder = append(
-        Folder({ id: "0", title: "All Bookmarks" }),
-        root,
-      );
+      const allBookmarksFolder = append(Folder({ id: "0", title: "All Bookmarks" }), root);
       // NOTE: The elements we're measuring don't have a border or margin so
       // we can use clientWidth instead of offsetWidth for better performance.
       let width = allBookmarksFolder.clientWidth;
@@ -107,8 +104,8 @@ export const BookmarkBar = (): BookmarkBarComponent => {
   });
 
   // Synthetic `mouseenter` and `mouseleave` event handler
-  // XXX: Similar to stage1 synthetic event logic but does not stop propagating
-  // once an event handler is called + extra relatedTarget checks
+  // NOTE: Similar to stage1 synthetic event logic but does not stop propagating
+  // once an event handler is called + extra relatedTarget checks.
   // https://github.com/maxmilton/stage1/blob/08cb3c08cb3e5513c181f768ae92c488cfe2a17a/src/events.ts#L3
   // oxlint-disable-next-line no-multi-assign
   root.onmouseover = root.onmouseout = (event) => {
@@ -117,9 +114,9 @@ export const BookmarkBar = (): BookmarkBarComponent => {
     const related = event.relatedTarget as Node | null;
     let node = event.target as
       | (Node & {
-        __mouseover?(event2: MouseEvent): void;
-        __mouseout?(event2: MouseEvent): void;
-      })
+          __mouseover?(event2: MouseEvent): void;
+          __mouseout?(event2: MouseEvent): void;
+        })
       | null;
 
     while (node) {
@@ -132,8 +129,3 @@ export const BookmarkBar = (): BookmarkBarComponent => {
 
   return root;
 };
-
-// // Improve performance of lookups on DOM nodes
-// // @ts-expect-error -- add new properties to HTMLElement
-// // oxlint-disable-next-line no-multi-assign
-// Element.prototype.__mouseover = Element.prototype.__mouseout = undefined;

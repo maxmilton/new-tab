@@ -1,4 +1,6 @@
-// TODO: Rewrite the folder logic using the new anchor positioning API and/or popover APIs; https://developer.chrome.com/blog/anchor-positioning-api and https://web.dev/blog/popover-api
+// TODO: Rewrite folder position logic using:
+// - https://developer.chrome.com/blog/anchor-positioning-api
+// - https://web.dev/blog/popover-api
 
 import { append, clone, create, h } from "stage1/fast";
 import { chromeBookmarks } from "../utils.ts";
@@ -42,7 +44,7 @@ const FolderPopup = (
   if (children.length) {
     children.forEach((item) => append(BookmarkNode(item, true), root));
   } else {
-    append(emptyPopup ??= h<HTMLDivElement>("<div id=e>(empty)</div>"), root);
+    append((emptyPopup ??= h<HTMLDivElement>("<div id=e>(empty)</div>")), root);
   }
 
   // Only after the component is mounted in the DOM do we have element size
@@ -54,9 +56,7 @@ const FolderPopup = (
     if (left + width > viewportWidth) {
       // Show top level aligned to the right edge of the viewport
       // Show nested show to the left of its parent
-      root.style.left = nested
-        ? parentRect.left - width + "px"
-        : viewportWidth - width + "px";
+      root.style.left = nested ? parentRect.left - width + "px" : viewportWidth - width + "px";
     }
   };
 
@@ -91,12 +91,8 @@ export const Folder = (
 
   if (nested) {
     append(
-      clone(
-        arrow ??= h<SVGElement>(
-          // https://github.com/tailwindlabs/heroicons/blob/master/optimized/24/outline/arrow-right.svg
-          '<svg class=i><path d="M5 12h14M12 5l7 7-7 7"/></svg>',
-        ),
-      ),
+      // https://github.com/tailwindlabs/heroicons/blob/master/optimized/24/outline/arrow-right.svg
+      clone((arrow ??= h<SVGElement>('<svg class=i><path d="M5 12h14M12 5l7 7-7 7"/></svg>'))),
       root,
     );
   }
@@ -114,15 +110,11 @@ export const Folder = (
 
     if (!popup) {
       // Immediately close any folder popups on the parent level
-      root.parentNode!
-        .querySelectorAll<FolderComponent>(".f")
+      root
+        .parentNode!.querySelectorAll<FolderComponent>(".f")
         .forEach((folder) => folder.$$closePopup());
 
-      popup = FolderPopup(
-        root,
-        children ?? (await chromeBookmarks.getChildren(props.id)),
-        nested,
-      );
+      popup = FolderPopup(root, children ?? (await chromeBookmarks.getChildren(props.id)), nested);
 
       popup.__mouseover = clearTimer;
       popup.__mouseout = resetTimer;
@@ -142,5 +134,5 @@ export const BookmarkNode = <T extends LinkProps | BookmarkTreeNode>(
   props: T,
   nested?: boolean,
 ): T extends { url: string } ? LinkComponent : FolderComponent =>
-  // @ts-expect-error - FIXME: Handle type narrowing correctly
+  // @ts-expect-error - TODO: Handle type narrowing correctly.
   props.url ? Link(props) : Folder(props, nested);

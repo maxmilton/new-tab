@@ -17,19 +17,12 @@
     "allowUnreachableCode": false,
     "exactOptionalPropertyTypes": true,
     "forceConsistentCasingInFileNames": true,
-    "noFallthroughCasesInSwitch": false, // covered by oxlint
+    "noFallthroughCasesInSwitch": false, // covered by linters
     "noImplicitOverride": true,
     "noUncheckedSideEffectImports": true,
-    "noUnusedLocals": false, // covered by oxlint
-    "noUnusedParameters": false, // covered by oxlint
-    "verbatimModuleSyntax": true,
+    "noUnusedLocals": false, // covered by linters
+    "noUnusedParameters": false, // covered by linters
+    "verbatimModuleSyntax": true
   },
-  "include": [
-    "*.config.mjs",
-    "*.config.ts",
-    "*.d.ts",
-    "build.ts",
-    "src",
-    "test",
-  ],
+  "include": ["*.config.js", "*.config.ts", "*.d.ts", "build.ts", "src", "test"]
 }

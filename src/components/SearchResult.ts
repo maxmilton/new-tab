@@ -17,7 +17,7 @@ interface OpenTabLink extends LinkComponent {
 }
 
 // oxlint-disable-next-line func-style
-const handleTabClick = function(this: OpenTabLink): false {
+const handleTabClick = function (this: OpenTabLink): false {
   chromeTabs.getCurrent((currentTab) => {
     if (currentTab!.id === this.$$data.id) return;
 
@@ -92,15 +92,11 @@ export const SearchResult = <T extends LinkProps & TabItem>(
   };
 
   // eslint-disable-next-line no-return-assign
-  root.$$update = (newData) => renderList(rawData = newData);
+  root.$$update = (newData) => renderList((rawData = newData));
 
   root.$$filter = (text) =>
     renderList(
-      rawData.filter((item) =>
-        (item.title + item.url)
-          .toLowerCase()
-          .includes(text.toLowerCase())
-      ),
+      rawData.filter((item) => (item.title + item.url).toLowerCase().includes(text.toLowerCase())),
     );
 
   title.nodeValue = sectionName;

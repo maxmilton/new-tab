@@ -1,5 +1,5 @@
-import { cleanup, render } from "@maxmilton/test-utils/dom";
 import { afterEach, describe, expect, test } from "bun:test";
+import { cleanup, render } from "@maxmilton/test-utils/dom";
 import { BookmarkNode, type BookmarkTreeNode } from "../../src/components/BookmarkNode.ts";
 import type { LinkProps } from "../../src/components/Link.ts";
 

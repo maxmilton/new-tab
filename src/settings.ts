@@ -25,9 +25,7 @@ const DRAG_TYPE = "text/plain";
 const DEFAULT_THEME = "auto";
 
 // eslint-disable-next-line unicorn/prefer-top-level-await
-const themesData = fetch("themes.json").then(
-  (response) => response.json() as Promise<ThemesData>,
-);
+const themesData = fetch("themes.json").then((response) => response.json() as Promise<ThemesData>);
 
 const supportsSync = async (): Promise<boolean> => {
   try {
@@ -81,10 +79,7 @@ const SectionItem = (
   }
 
   root.ondragstart = (event) => {
-    event.dataTransfer!.setData(
-      DRAG_TYPE,
-      JSON.stringify([list, scope.indexOf(list, item)]),
-    );
+    event.dataTransfer!.setData(DRAG_TYPE, JSON.stringify([list, scope.indexOf(list, item)]));
     (event.target as SectionComponent).classList.add("dragging");
   };
 
@@ -105,9 +100,7 @@ const SectionItem = (
 
     (event.target as SectionComponent).classList.remove("over");
 
-    const from = JSON.parse(
-      event.dataTransfer!.getData(DRAG_TYPE),
-    ) as ItemIndex;
+    const from = JSON.parse(event.dataTransfer!.getData(DRAG_TYPE)) as ItemIndex;
 
     scope.moveItem(from, [list, scope.indexOf(list, item)]);
   };
@@ -224,10 +217,7 @@ const Settings = () => {
       return state.order[list].indexOf(item);
     },
     moveItem(from: ItemIndex, to: ItemIndex) {
-      const reordered: SettingsState["order"] = [
-        [...state.order[0]],
-        [...state.order[1]],
-      ];
+      const reordered: SettingsState["order"] = [[...state.order[0]], [...state.order[1]]];
 
       // remove from previous location
       const item = reordered[from[0]].splice(from[1], 1)[0];
@@ -264,9 +254,7 @@ const Settings = () => {
       if (String(order[0]) === String(DEFAULT_SECTION_ORDER)) {
         void chrome.storage.local.remove("o");
       } else {
-        void chrome.storage.local.set({
-          o: order[0],
-        });
+        void chrome.storage.local.set({ o: order[0] });
       }
 
       void state.pushSyncData?.();
@@ -317,9 +305,7 @@ const Settings = () => {
   // Populate UI using user settings data from storage (chrome.storage.local)
   const themeName = storage.n ?? DEFAULT_THEME;
   const orderEnabled = storage.o ?? [...DEFAULT_SECTION_ORDER];
-  const orderDisabled = DEFAULT_SECTION_ORDER.filter(
-    (item) => !orderEnabled.includes(item),
-  );
+  const orderDisabled = DEFAULT_SECTION_ORDER.filter((item) => !orderEnabled.includes(item));
 
   theme.value = themeName;
   bookmarks.checked = !storage.b;
@@ -333,11 +319,7 @@ const Settings = () => {
 
   const updateSync = (syncData: SyncStorageData) => {
     if (syncData.ts) {
-      feedback2.nodeValue = `Sync data found (last updated: ${
-        new Date(
-          syncData.ts,
-        ).toLocaleString()
-      })`;
+      feedback2.nodeValue = `Sync data found (last updated: ${new Date(syncData.ts).toLocaleString()})`;
       pull.disabled = false;
       clear.disabled = false;
     } else {
@@ -370,7 +352,8 @@ const Settings = () => {
     };
 
     state.pushSyncData = async (forceUpdate?: boolean) => {
-      const { t, s, ...rest } = await chrome.storage.local.get<UserStorageData>();
+      // eslint-disable-next-line @typescript-eslint/naming-convention
+      const { t: _t, s, ...rest } = await chrome.storage.local.get<UserStorageData>();
 
       if (forceUpdate || s) {
         const newSyncData: SyncStorageData = {
