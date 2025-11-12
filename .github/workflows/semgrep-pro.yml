@@ -20,7 +20,7 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 10
     container:
-      image: semgrep/semgrep@sha256:ee3c01c9d33a975209d6bcda050520a45366d79e2919c15baca4014e8634a9ac
+      image: semgrep/semgrep@sha256:142b5fbdd9427ebdda0fe796168f83ae85679a5f9a5683e70bd7ddfd88533600
     permissions:
       actions: read
       contents: read
@@ -30,7 +30,7 @@ jobs:
       - run: semgrep ci --sarif-output=semgrep.sarif
         env:
           SEMGREP_APP_TOKEN: ${{ secrets.SEMGREP_APP_TOKEN }}
-      - uses: github/codeql-action/upload-sarif@f443b600d91635bebf5b0d9ebc620189c0d6fba5 # v4
+      - uses: github/codeql-action/upload-sarif@0499de31b99561a6d14a36a5f662c2a54f91beee # v4
         if: always()
         with:
           sarif_file: semgrep.sarif

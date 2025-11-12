@@ -1,6 +1,6 @@
-import { validate } from "@maxmilton/test-utils/html";
 import { describe, expect, test } from "bun:test";
 import { readdir } from "node:fs/promises";
+import { validate } from "@maxmilton/test-utils/html";
 
 describe("dist files", () => {
   // TODO: The bun file type is just inferred from the file extension, not the

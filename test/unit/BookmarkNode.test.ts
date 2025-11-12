@@ -1,5 +1,5 @@
-import { cleanup, render } from "@maxmilton/test-utils/dom";
 import { afterEach, describe, expect, test } from "bun:test";
+import { cleanup, render } from "@maxmilton/test-utils/dom";
 import { BookmarkNode, type BookmarkTreeNode } from "../../src/components/BookmarkNode.ts";
 import type { LinkProps } from "../../src/components/Link.ts";
 
@@ -25,7 +25,10 @@ describe("Bookmark (Link)", () => {
   test("rendered DOM contains expected elements", () => {
     expect.assertions(1);
     const rendered = render(
-      BookmarkNode({ title: "Example", url: "https://example.com" } satisfies LinkProps),
+      BookmarkNode({
+        title: "Example",
+        url: "https://example.com",
+      } satisfies LinkProps),
     );
     const root = rendered.container.firstChild as HTMLElement;
     expect(root).toBeInstanceOf(window.HTMLAnchorElement);

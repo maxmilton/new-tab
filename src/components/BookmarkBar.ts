@@ -39,10 +39,7 @@ export const BookmarkBar = (): BookmarkBarComponent => {
       // Max width is root minus overflow folder width (68 == 24px svg + 2 * 9px
       // svg padding + 2 * 13px bookmark item padding)
       const maxWidth = root.clientWidth - 68;
-      const allBookmarksFolder = append(
-        Folder({ id: "0", title: "All Bookmarks" }),
-        root,
-      );
+      const allBookmarksFolder = append(Folder({ id: "0", title: "All Bookmarks" }), root);
       // NOTE: The elements we're measuring don't have a border or margin so
       // we can use clientWidth instead of offsetWidth for better performance.
       let width = allBookmarksFolder.clientWidth;
@@ -117,9 +114,9 @@ export const BookmarkBar = (): BookmarkBarComponent => {
     const related = event.relatedTarget as Node | null;
     let node = event.target as
       | (Node & {
-        __mouseover?(event2: MouseEvent): void;
-        __mouseout?(event2: MouseEvent): void;
-      })
+          __mouseover?(event2: MouseEvent): void;
+          __mouseout?(event2: MouseEvent): void;
+        })
       | null;
 
     while (node) {
