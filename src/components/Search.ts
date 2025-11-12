@@ -103,7 +103,9 @@ export const Search = (): SearchComponent => {
 
   if (recentlyClosed) {
     chrome.sessions.getRecentlyClosed({}, (sessions) => {
-      recentlyClosed.$$update(sessions.map((session) => session.tab).filter(Boolean));
+      recentlyClosed.$$update(
+        sessions.map((session) => session.tab).filter(Boolean),
+      );
     });
   }
 
@@ -113,7 +115,7 @@ export const Search = (): SearchComponent => {
 
   input.onkeyup = (event) => {
     if (event.key === "Escape") {
-      query((input.value = ""));
+      query(input.value = "");
     }
   };
 

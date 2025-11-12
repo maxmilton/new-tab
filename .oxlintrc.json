@@ -1,6 +1,15 @@
 {
   "$schema": "./node_modules/oxlint/configuration_schema.json",
-  "plugins": ["jsdoc", "node", "import", "regex", "promise", "unicorn", "typescript", "oxc"],
+  "plugins": [
+    "jsdoc",
+    "node",
+    "import",
+    "regex",
+    "promise",
+    "unicorn",
+    "typescript",
+    "oxc",
+  ],
   "categories": {
     "correctness": "error",
     "nursery": "warn",
@@ -8,34 +17,34 @@
     "perf": "error",
     "restriction": "error",
     "style": "warn",
-    "suspicious": "error"
+    "suspicious": "error",
   },
   // https://github.com/oxc-project/javascript-globals/blob/main/src/lib.rs
   "env": {
     "browser": true,
     "builtin": true,
     "es2025": true,
-    "webextensions": true
+    "webextensions": true,
   },
   "globals": {
     "Bun": "readonly",
-    "process": "readonly"
+    "process": "readonly",
   },
   "settings": {
     "jsdoc": {
-      "ignoreInternal": true
-    }
+      "ignoreInternal": true,
+    },
   },
   "rules": {
     /* Sane overrides for "categories" */
     // https://oxc.rs/docs/guide/usage/linter/rules
-    "eslint/curly": "off", // covered by biome
+    "eslint/curly": "off", // covered by dprint
     "eslint/eqeqeq": ["error", { "null": "ignore" }],
     "eslint/func-names": ["error", "as-needed"],
     "eslint/func-style": ["error", "declaration", { "allowArrowFunctions": true }],
     "eslint/id-length": "off", // TODO: Turn on once type aware and allow type names.
     "eslint/max-depth": "off",
-    "eslint/max-len": "off", // covered by biome
+    "eslint/max-len": "off", // covered by dprint
     "eslint/max-lines-per-function": "off",
     "eslint/max-lines": "off",
     "eslint/max-nested-callbacks": "off",
@@ -43,14 +52,11 @@
     "eslint/new-cap": "off", // PascalCase stage1 component names
     "eslint/no-magic-numbers": "off",
     "eslint/no-ternary": "off",
-    "eslint/no-unused-vars": [
-      "warn",
-      {
-        "ignoreRestSiblings": true,
-        "argsIgnorePattern": "^_",
-        "varsIgnorePattern": "^_"
-      }
-    ],
+    "eslint/no-unused-vars": ["warn", {
+      "ignoreRestSiblings": true,
+      "argsIgnorePattern": "^_",
+      "varsIgnorePattern": "^_",
+    }],
     "eslint/no-void": "off",
     "eslint/sort-imports": "off",
     "eslint/sort-keys": "off",
@@ -79,12 +85,9 @@
     "unicorn/no-null": "off",
     "unicorn/prefer-global-this": "off", // prefer to clearly separate Bun and DOM
 
-    "eslint/no-warning-comments": "off", // TODO: Remove once we have less FIXME/TODO comments.
-
     /* Performance and byte savings */
     // byte savings
     "eslint/no-plusplus": "off",
-    "eslint/prefer-template": "off",
     // controlling promise resolve timing can lead to better performance
     "promise/prefer-await-to-callbacks": "off",
     "promise/prefer-await-to-then": "off",
@@ -107,7 +110,7 @@
     /* stage1 */
     "unicorn/prefer-add-event-listener": "off",
     "unicorn/prefer-dom-node-append": "off",
-    "unicorn/prefer-dom-node-remove": "off"
+    "unicorn/prefer-dom-node-remove": "off",
   },
   "overrides": [
     {
@@ -116,25 +119,25 @@
         "jsdoc/require-param-type": "off",
         "jsdoc/require-param": "off",
         "jsdoc/require-returns-type": "off",
-        "jsdoc/require-returns": "off"
-      }
+        "jsdoc/require-returns": "off",
+      },
     },
     {
       "files": ["*.d.ts"],
       "rules": {
-        "import/unambiguous": "off"
-      }
+        "import/unambiguous": "off",
+      },
     },
     {
-      "files": ["*.config.ts", "*.config.js"],
+      "files": ["*.config.ts", "*.config.mjs"],
       "env": {
-        "node": true
+        "node": true,
       },
       "rules": {
         "eslint/func-style": ["error", "declaration"],
         "import/no-default-export": "off",
-        "import/no-anonymous-default-export": "off"
-      }
+        "import/no-anonymous-default-export": "off",
+      },
     },
     {
       "files": ["*.test.ts", "*.spec.ts", "test/**"],
@@ -142,12 +145,12 @@
       "env": {
         "jest": true,
         "node": true,
-        "vitest": true
+        "vitest": true,
       },
       "globals": {
         "$console": "readonly",
         "happyDOM": "readonly",
-        "Loader": "readonly"
+        "Loader": "readonly",
       },
       "rules": {
         "eslint/func-style": "off",
@@ -156,33 +159,33 @@
         "import/no-namespace": "off",
         "jest/no-commented-out-tests": "warn",
         "promise/catch-or-return": "off",
-        "unicorn/filename-case": ["error", { "cases": { "kebabCase": true, "pascalCase": true } }]
-      }
+        "unicorn/filename-case": ["error", { "cases": { "kebabCase": true, "pascalCase": true } }],
+      },
     },
     {
       "files": ["build.ts"],
       "env": {
-        "node": true
+        "node": true,
       },
       "rules": {
         "eslint/func-style": ["error", "declaration"],
         "eslint/no-await-in-loop": "off",
         "eslint/no-console": "off",
         "eslint/no-magic-numbers": "off",
-        "import/no-namespace": "off"
-      }
+        "import/no-namespace": "off",
+      },
     },
     {
       "files": ["src/components/**"],
       "rules": {
-        "unicorn/filename-case": ["error", { "case": "pascalCase" }]
-      }
+        "unicorn/filename-case": ["error", { "case": "pascalCase" }],
+      },
     },
     {
       "files": ["src/sw.ts"],
       "env": {
-        "serviceworker": true
-      }
-    }
-  ]
+        "serviceworker": true,
+      },
+    },
+  ],
 }

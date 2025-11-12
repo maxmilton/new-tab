@@ -27,8 +27,7 @@ export const Link = (props: LinkProps): LinkComponent => {
   // Access DOM nodes directly (without stage1 collect function) to improve
   // performance. This component is rendered frequently so keep overhead low.
 
-  (root.firstChild as Refs["img"]).src =
-    "_favicon?size=16&pageUrl=" + encodeURIComponent((root.href = props.url));
+  (root.firstChild as Refs["img"]).src = "_favicon?size=16&pageUrl=" + encodeURIComponent(root.href = props.url);
   // oxlint-disable-next-line no-multi-assign
   root.title = (root.lastChild as Refs["text"]).nodeValue = props.title;
 

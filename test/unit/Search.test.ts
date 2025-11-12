@@ -1,5 +1,5 @@
-import { afterEach, beforeEach, expect, test } from "bun:test";
 import { cleanup, render } from "@maxmilton/test-utils/dom";
+import { afterEach, beforeEach, expect, test } from "bun:test";
 import type { Search as SearchComponent } from "../../src/components/Search.ts";
 
 // HACK: The Search component is designed to be rendered once (does not clone

@@ -1,5 +1,5 @@
-import { afterEach, describe, expect, spyOn, test } from "bun:test";
 import { performanceSpy } from "@maxmilton/test-utils/spy";
+import { afterEach, describe, expect, spyOn, test } from "bun:test";
 import { reset } from "../setup.ts";
 
 // Completely reset DOM and global state between tests
@@ -22,9 +22,7 @@ async function load(noMocks?: boolean) {
     };
 
     chrome.runtime.onInstalled.addListener = (callback) => {
-      callback({
-        reason: "install" as chrome.runtime.OnInstalledReason.INSTALL,
-      });
+      callback({ reason: "install" as chrome.runtime.OnInstalledReason.INSTALL });
     };
     chrome.runtime.onStartup.addListener = (callback) => {
       callback();

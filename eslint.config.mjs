@@ -1,7 +1,7 @@
 import js from "@eslint/js";
 import mm from "@maxmilton/eslint-config";
-import { defineConfig } from "eslint/config";
 import unicorn from "eslint-plugin-unicorn";
+import { defineConfig } from "eslint/config";
 import ts from "typescript-eslint";
 
 export default defineConfig(

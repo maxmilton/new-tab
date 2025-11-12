@@ -22,9 +22,11 @@ declare const s: HTMLInputElement;
 // Simplified synthetic click event implementation from stage1, plus special
 // handling for browser internal links (e.g. chrome://)
 // @see https://github.com/maxmilton/stage1/blob/master/src/events.ts
-// eslint-disable-next-line consistent-return
-export const handleClick = (event: MouseEvent): false | undefined => {
-  let node = event.target as (Node & { [ONCLICK]?(event: Event): false | undefined }) | null;
+// eslint-disable-next-line @typescript-eslint/no-invalid-void-type, consistent-return
+export const handleClick = (event: MouseEvent): false | void => {
+  let node = event.target as
+    | (Node & { [ONCLICK]?(event: Event): false | undefined })
+    | null;
   const url = (node as Node & { href?: string }).href;
 
   while (node) {
