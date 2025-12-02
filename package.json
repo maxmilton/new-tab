@@ -15,7 +15,7 @@
     "lint": "bun lint:fmt && bun lint:css && bun lint:js && bun lint:js2 && bun lint:ts",
     "lint:css": "stylelint **.css",
     "lint:fmt": "biome check",
-    "lint:js": "oxlint --format=stylish",
+    "lint:js": "oxlint --format=stylish --report-unused-disable-directives",
     "lint:js2": "eslint",
     "lint:ts": "tsc --noEmit",
     "test": "bun test --only-failures",

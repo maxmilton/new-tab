@@ -4,9 +4,9 @@ export default {
   reportNeedlessDisables: true,
   reportUnscopedDisables: true,
   extends: ["stylelint-config-standard"],
-  ignoreFiles: ["dist/*", "node_modules/**"],
   rules: {
     "comment-empty-line-before": null,
     "import-notation": null,
   },
+  ignoreFiles: ["dist/*", "node_modules/**"],
 };

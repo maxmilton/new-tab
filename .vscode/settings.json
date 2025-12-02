@@ -5,6 +5,7 @@
   "editor.formatOnType": false,
   "eslint.enable": true,
   "git.branchProtection": ["master", "next"],
+  "oxc.unusedDisableDirectives": "deny",
   "prettier.enable": false, // use biome
   "stylelint.enable": true,
   "typescript.enablePromptUseWorkspaceTsdk": true,
@@ -25,8 +26,5 @@
       "source.fixAll": "never"
     },
     "editor.defaultFormatter": "biomejs.biome"
-  },
-  "[yaml]": {
-    "editor.defaultFormatter": "redhat.vscode-yaml"
   }
 }
