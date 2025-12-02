@@ -1,9 +1,12 @@
-<!-- TODO: Migrate coverage badge to badgen.net once it supports qlty.sh -->
-
 [![CI status](https://badgen.net/github/checks/maxmilton/new-tab?label=ci)](https://github.com/maxmilton/new-tab/actions)
 [![Coverage %](https://qlty.sh/badges/bfb90576-1d44-4606-9ba0-95b4e7077333/test_coverage.svg)](https://qlty.sh/gh/maxmilton/projects/new-tab)
-[![Version](https://badgen.net/chrome-web-store/v/cpcibnbdmpmcmnkhoiilpnlaepkepknb)](https://chrome.google.com/webstore/detail/new-tab/cpcibnbdmpmcmnkhoiilpnlaepkepknb)
 [![Licence](https://badgen.net/github/license/maxmilton/new-tab)](./LICENSE)
+
+[
+![Version](https://badgen.net/chrome-web-store/v/cpcibnbdmpmcmnkhoiilpnlaepkepknb)
+![Users](https://badgen.net/chrome-web-store/users/cpcibnbdmpmcmnkhoiilpnlaepkepknb)
+![Rating](https://badgen.net/chrome-web-store/rating/cpcibnbdmpmcmnkhoiilpnlaepkepknb)
+](https://chrome.google.com/webstore/detail/new-tab/cpcibnbdmpmcmnkhoiilpnlaepkepknb)
 
 # New Tab ![](./static/icon48.png)
 
@@ -41,9 +44,8 @@ What started as an experiment to play with the Chrome browser APIs and explore w
 ### Technology
 
 - [Chrome browser APIs](https://developer.chrome.com/docs/extensions/reference/)
-- [stage1](https://github.com/maxmilton/stage1) JavaScript framework
-- [ekscss](https://github.com/maxmilton/ekscss) style preprocessor
-- [bun](https://github.com/oven-sh/bun) JavaScript bundler and runtime
+- [stage1](https://github.com/maxmilton/stage1) JS micro framework
+- [bun](https://github.com/oven-sh/bun) JS runtime and bundler
 
 ## Browser support
 
