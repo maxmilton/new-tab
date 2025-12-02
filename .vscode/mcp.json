@@ -1,0 +1,12 @@
+{
+  "servers": {
+    "filesystem": {
+      "command": "bunx",
+      "args": ["@modelcontextprotocol/server-filesystem", "${workspaceFolder}"]
+    },
+    "playwright": {
+      "command": "bunx",
+      "args": ["@playwright/mcp", "--isolated"]
+    }
+  }
+}
