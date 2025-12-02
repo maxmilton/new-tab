@@ -1,16 +1,18 @@
 {
   "$schema": "./node_modules/oxlint/configuration_schema.json",
-  "plugins": ["jsdoc", "node", "import", "regex", "promise", "unicorn", "typescript", "oxc"],
+  "extends": [
+    "./node_modules/@maxmilton/oxlint-config/recommended.json",
+    "./node_modules/@maxmilton/oxlint-config/stage1.json"
+  ],
   "categories": {
     "correctness": "error",
-    "nursery": "warn",
+    "suspicious": "error",
     "pedantic": "warn",
     "perf": "error",
-    "restriction": "error",
     "style": "warn",
-    "suspicious": "error"
+    "restriction": "error",
+    "nursery": "warn"
   },
-  // https://github.com/oxc-project/javascript-globals/blob/main/src/lib.rs
   "env": {
     "browser": true,
     "builtin": true,
@@ -21,159 +23,34 @@
     "Bun": "readonly",
     "process": "readonly"
   },
-  "settings": {
-    "jsdoc": {
-      "ignoreInternal": true
-    }
-  },
   "rules": {
-    /* Sane overrides for "categories" */
-    // https://oxc.rs/docs/guide/usage/linter/rules
-    "eslint/curly": "off", // covered by biome
-    "eslint/eqeqeq": ["error", { "null": "ignore" }],
-    "eslint/func-names": ["error", "as-needed"],
-    "eslint/func-style": ["error", "declaration", { "allowArrowFunctions": true }],
-    "eslint/id-length": "off", // TODO: Turn on once type aware and allow type names.
-    "eslint/max-depth": "off",
-    "eslint/max-len": "off", // covered by biome
-    "eslint/max-lines-per-function": "off",
-    "eslint/max-lines": "off",
-    "eslint/max-nested-callbacks": "off",
-    "eslint/max-params": "off",
-    "eslint/new-cap": "off", // PascalCase stage1 component names
-    "eslint/no-magic-numbers": "off",
-    "eslint/no-ternary": "off",
-    "eslint/no-unused-vars": [
-      "warn",
+    "eslint/id-length": [
+      "error",
       {
-        "ignoreRestSiblings": true,
-        "argsIgnorePattern": "^_",
-        "varsIgnorePattern": "^_"
+        "exceptionPatterns": ["^[A-Z]$"], // single uppercase letter type names
+        "exceptions": ["_", /* UserStorageData keys */ "n", "t", "b", "o", "s"]
       }
     ],
-    "eslint/no-void": "off",
-    "eslint/sort-imports": "off",
-    "eslint/sort-keys": "off",
-    "eslint/yoda": ["warn", "never"],
-    "import/consistent-type-specifier-style": "off", // covered by typescript
-    "import/exports-last": "off",
-    "import/extensions": "error",
-    "import/group-exports": "off",
-    "import/max-dependencies": "off",
-    "import/no-named-export": "off",
-    "import/no-unassigned-import": "off",
-    "import/prefer-default-export": "off",
-    "jsdoc/empty-tags": "warn", // allow @private markers with comment
-    "node/no-process-env": "off", // used for build-time constants
-    "oxc/no-async-await": "off",
-    "oxc/no-const-enum": "off", // bun inlines
-    "oxc/no-optional-chaining": "off",
-    "oxc/no-rest-spread-properties": "off",
-    "promise/always-return": ["error", { "ignoreLastCallback": true }],
-    "promise/catch-or-return": ["error", { "allowThen": true }],
-    "typescript/consistent-indexed-object-style": ["warn", "record"],
-    "typescript/explicit-function-return-type": "off",
-    "typescript/init-declarations": "off",
-    "typescript/no-non-null-assertion": "warn",
-    "unicorn/filename-case": ["error", { "case": "kebabCase" }],
-    "unicorn/no-null": "off",
-    "unicorn/prefer-global-this": "off", // prefer to clearly separate Bun and DOM
 
     /* Performance and byte savings */
-    // byte savings
-    "eslint/no-plusplus": "off",
     "eslint/prefer-template": "off",
-    // controlling promise resolve timing can lead to better performance
-    "promise/prefer-await-to-callbacks": "off",
+    "promise/prefer-await-to-callbacks": "off", // control resolve timing for better performance
     "promise/prefer-await-to-then": "off",
-    // forEach is slower but more compact (for non-performance-critical code)
-    "unicorn/no-array-for-each": "off",
-    // byte savings + faster
-    "unicorn/explicit-length-check": "off",
+    "unicorn/explicit-length-check": "off", // byte savings + faster
+    "unicorn/no-array-for-each": "off", // forEach is more compact (slower but; for non-performance-critical code)
+    "unicorn/no-array-sort": "off", // faster to mutate arrays in place
     "unicorn/no-await-expression-member": "off",
-    // indexOf is faster (in Chrome)
-    "unicorn/prefer-includes": "off",
-    // saves 3 bytes to use arrow function
-    "unicorn/prefer-native-coercion-functions": "off",
-    // bad browser support and slower
-    "unicorn/prefer-string-replace-all": "off",
-    // alternatives offer byte savings and better performance
-    "unicorn/prefer-string-starts-ends-with": "off",
-    // byte savings when minification doesn't automatically remove
-    "unicorn/switch-case-braces": ["error", "avoid"],
-
-    /* stage1 */
-    "unicorn/prefer-add-event-listener": "off",
-    "unicorn/prefer-dom-node-append": "off",
-    "unicorn/prefer-dom-node-remove": "off"
+    "unicorn/prefer-includes": "off", // indexOf is faster in some cases
+    "unicorn/prefer-native-coercion-functions": "off", // arrow function saves 3 bytes
+    "unicorn/prefer-string-starts-ends-with": "off" // byte savings + faster
   },
   "overrides": [
     {
-      "files": ["*.ts"],
-      "rules": {
-        "jsdoc/require-param-type": "off",
-        "jsdoc/require-param": "off",
-        "jsdoc/require-returns-type": "off",
-        "jsdoc/require-returns": "off"
-      }
-    },
-    {
-      "files": ["*.d.ts"],
-      "rules": {
-        "import/unambiguous": "off"
-      }
-    },
-    {
-      "files": ["*.config.ts", "*.config.js"],
-      "env": {
-        "node": true
-      },
-      "rules": {
-        "eslint/func-style": ["error", "declaration"],
-        "import/no-default-export": "off",
-        "import/no-anonymous-default-export": "off"
-      }
-    },
-    {
-      "files": ["*.test.ts", "*.spec.ts", "test/**"],
-      "plugins": ["jest", "vitest"],
-      "env": {
-        "jest": true,
-        "node": true,
-        "vitest": true
-      },
+      "files": ["test/**"],
       "globals": {
         "$console": "readonly",
         "happyDOM": "readonly",
         "Loader": "readonly"
-      },
-      "rules": {
-        "eslint/func-style": "off",
-        "eslint/no-empty-function": "off",
-        "eslint/no-magic-numbers": "off",
-        "import/no-namespace": "off",
-        "jest/no-commented-out-tests": "warn",
-        "promise/catch-or-return": "off",
-        "unicorn/filename-case": ["error", { "cases": { "kebabCase": true, "pascalCase": true } }]
-      }
-    },
-    {
-      "files": ["build.ts"],
-      "env": {
-        "node": true
-      },
-      "rules": {
-        "eslint/func-style": ["error", "declaration"],
-        "eslint/no-await-in-loop": "off",
-        "eslint/no-console": "off",
-        "eslint/no-magic-numbers": "off",
-        "import/no-namespace": "off"
-      }
-    },
-    {
-      "files": ["src/components/**"],
-      "rules": {
-        "unicorn/filename-case": ["error", { "case": "pascalCase" }]
       }
     },
     {
