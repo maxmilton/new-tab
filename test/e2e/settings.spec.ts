@@ -1,13 +1,25 @@
-import type { ConsoleMessage } from "@playwright/test";
+// oxlint-disable no-conditional-in-test
+
 import { expect, test } from "./fixtures.ts";
 
 test("settings page", async ({ page, extensionId }) => {
   await page.goto(`chrome-extension://${extensionId}/settings.html`);
 
-  // FIXME: Better assertions.
-
   await expect(page).toHaveTitle("New Tab");
   await expect(page).toHaveURL(`chrome-extension://${extensionId}/settings.html`); // didn't redirect
+
+  const h1 = await page.locator("h1").all();
+  expect(h1).toHaveLength(0);
+
+  const h2 = await page.locator("h2").all();
+  await expect(h2[0]).toHaveText("Experimental");
+  await expect(h2[0]).toBeAttached();
+  expect(h2).toHaveLength(1);
+
+  const h3 = await page.locator("h3").all();
+  await expect(h3[0]).toHaveText("Sync Settings");
+  await expect(h3[0]).toBeAttached();
+  expect(h3).toHaveLength(1);
 
   const labels = await page.locator("label").all();
   await expect(labels[0]).toHaveText("Theme");
@@ -15,25 +27,48 @@ test("settings page", async ({ page, extensionId }) => {
   await expect(labels[2]).toHaveText("Sections");
   await expect(labels[3]).toHaveText("Reset");
   await expect(labels[4]).toHaveText("Automatically sync settings");
+  await expect(labels[0]).toBeAttached();
+  await expect(labels[1]).toBeAttached();
+  await expect(labels[2]).toBeAttached();
+  await expect(labels[3]).toBeAttached();
+  await expect(labels[4]).toBeAttached();
   expect(labels).toHaveLength(5);
 });
 
-// TODO: Either implement a platform agnostic way to handle screenshots or get
-// consistent styling in the settings app. Currently font rendering is different
-// across platforms breaking the screenshot comparison.
-test.fixme("matches screenshot", async ({ page, extensionId }) => {
+test("matches screenshot", async ({ page, extensionId }) => {
   await page.goto(`chrome-extension://${extensionId}/settings.html`);
   await expect(page).toHaveScreenshot("settings-default.png");
 });
 
-test("has no console calls or unhandled errors", async ({ page, extensionId }) => {
-  const unhandledErrors: Error[] = [];
-  const consoleMessages: ConsoleMessage[] = [];
-  page.on("pageerror", (err) => unhandledErrors.push(err));
-  page.on("console", (msg) => consoleMessages.push(msg));
+test("has no console messages or unhandled errors", async ({ page, extensionId }) => {
   await page.goto(`chrome-extension://${extensionId}/settings.html`);
-  expect(unhandledErrors).toHaveLength(0);
-  expect(consoleMessages).toHaveLength(0);
+  expect(await page.consoleMessages()).toHaveLength(0);
+  expect(await page.pageErrors()).toHaveLength(0);
 });
 
-// TODO: Test it makes no external requests (other than fetch themes).
+test("makes no external or unexpected requests", async ({ page, extensionId }) => {
+  await page.goto(`chrome-extension://${extensionId}/settings.html`, {
+    waitUntil: "networkidle",
+  });
+  const requests = await page.requests();
+  const expected = [];
+  const unexpected = [];
+
+  for (const request of requests) {
+    const url = request.url();
+    const type = request.resourceType();
+    if (
+      (url === `chrome-extension://${extensionId}/settings.html` && type === "document")
+      || (url === `chrome-extension://${extensionId}/settings.css` && type === "stylesheet")
+      || (url === `chrome-extension://${extensionId}/settings.js` && type === "script")
+      || (url === `chrome-extension://${extensionId}/themes.json` && type === "fetch")
+    ) {
+      expected.push({ url, type });
+    } else {
+      unexpected.push({ url, type });
+    }
+  }
+
+  expect(unexpected).toHaveLength(0);
+  expect(expected).toHaveLength(4);
+});
