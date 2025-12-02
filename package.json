@@ -18,7 +18,8 @@
     "lint:js": "oxlint --format=stylish",
     "lint:js2": "eslint",
     "lint:ts": "tsc --noEmit",
-    "test": "bun test",
+    "test": "bun test --only-failures",
+    "test:ci": "bun test --coverage --randomize --rerun-each=3",
     "test:e2e": "playwright test"
   },
   "dependencies": {

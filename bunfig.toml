@@ -4,4 +4,3 @@ auto = "disable"
 [test]
 preload = ["./test/setup.ts"]
 root = "./test/unit"
-coverage = true
