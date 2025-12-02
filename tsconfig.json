@@ -1,5 +1,5 @@
 {
-  "$schema": "https://json.schemastore.org/tsconfig",
+  "$schema": "https://www.schemastore.org/tsconfig.json",
   "compilerOptions": {
     "target": "esnext",
     "module": "esnext",
@@ -24,5 +24,5 @@
     "noUnusedParameters": false, // covered by linters
     "verbatimModuleSyntax": true
   },
-  "include": ["*.config.js", "*.config.ts", "*.d.ts", "build.ts", "src", "test"]
+  "include": ["*.config.js", "*.ts", "src", "test"]
 }
