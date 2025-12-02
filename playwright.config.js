@@ -19,7 +19,8 @@ export default defineConfig({
     toHaveScreenshot: {
       scale: "device",
       stylePath: "test/e2e/screenshot.css",
-      maxDiffPixelRatio: 0.02, // allow for font rendering variance
+      // FIXME: Use 0.02 once we have a good way to do cross-platform snapshots.
+      maxDiffPixelRatio: 0.1, // allow for font rendering variance
     },
   },
 });
