@@ -1,3 +1,7 @@
-// Bun Snapshot v1, https://goo.gl/fbAQLP
+// Bun Snapshot v1, https://bun.sh/docs/test/snapshots
 
 exports[`rendered DOM matches snapshot 1`] = `"<div id="b"><div class="f end">All Bookmarks</div></div>"`;
+
+exports[`rendered DOM matches snapshot 2`] = `"<div id="b"><div class="f end">All Bookmarks</div></div>"`;
+
+exports[`rendered DOM matches snapshot 3`] = `"<div id="b"><div class="f end">All Bookmarks</div></div>"`;

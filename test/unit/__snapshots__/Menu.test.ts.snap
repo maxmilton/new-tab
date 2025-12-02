@@ -1,3 +1,7 @@
-// Bun Snapshot v1, https://goo.gl/fbAQLP
+// Bun Snapshot v1, https://bun.sh/docs/test/snapshots
 
 exports[`rendered DOM matches snapshot 1`] = `"<div id="m"><svg id="im"><path d="M4 6h16M4 12h16M4 18h16"></path></svg><div id="d"><a href="chrome://bookmarks">Bookmarks</a><a href="chrome://password-manager">Passwords</a><a href="chrome://downloads">Downloads</a><a href="chrome://history">History</a><a href="chrome://extensions">Extensions</a><hr><a>New Tab Settings</a><a href="https://github.com/maxmilton/new-tab/issues">Report Bug</a></div></div>"`;
+
+exports[`rendered DOM matches snapshot 2`] = `"<div id="m"><svg id="im"><path d="M4 6h16M4 12h16M4 18h16"></path></svg><div id="d"><a href="chrome://bookmarks">Bookmarks</a><a href="chrome://password-manager">Passwords</a><a href="chrome://downloads">Downloads</a><a href="chrome://history">History</a><a href="chrome://extensions">Extensions</a><hr><a>New Tab Settings</a><a href="https://github.com/maxmilton/new-tab/issues">Report Bug</a></div></div>"`;
+
+exports[`rendered DOM matches snapshot 3`] = `"<div id="m"><svg id="im"><path d="M4 6h16M4 12h16M4 18h16"></path></svg><div id="d"><a href="chrome://bookmarks">Bookmarks</a><a href="chrome://password-manager">Passwords</a><a href="chrome://downloads">Downloads</a><a href="chrome://history">History</a><a href="chrome://extensions">Extensions</a><hr><a>New Tab Settings</a><a href="https://github.com/maxmilton/new-tab/issues">Report Bug</a></div></div>"`;
