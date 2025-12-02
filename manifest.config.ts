@@ -1,4 +1,4 @@
-import pkg from "./package.json" with { type: "json" };
+import pkg from "./package.json" with { type: "jsonc" };
 
 function gitRef() {
   return Bun.spawnSync(["git", "describe", "--always", "--dirty=-dev", "--broken"])
@@ -25,8 +25,6 @@ interface ManifestExtra {
  * @param debug - Whether to include a version name for debugging.
  *
  * @see https://developer.chrome.com/docs/extensions/reference/manifest
- *
- * @internal
  */
 export function createManifest(debug = !process.env.CI): chrome.runtime.ManifestV3 & ManifestExtra {
   return {

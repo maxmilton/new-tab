@@ -11,6 +11,7 @@ let Search: typeof SearchComponent;
 
 beforeEach(async () => {
   Loader.registry.delete(MODULE_PATH);
+  // oxlint-disable-next-line prefer-destructuring
   Search = (await import("../../src/components/Search.ts")).Search;
 });
 

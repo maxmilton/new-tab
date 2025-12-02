@@ -17,9 +17,7 @@ test("is valid JSON", () => {
 
 test("is equal to dist/manifest.json (excluding version_name)", () => {
   expect.assertions(1);
-  // eslint-disable-next-line @typescript-eslint/naming-convention
   const { version_name: _vn1, ...restSrc } = manifest;
-  // eslint-disable-next-line @typescript-eslint/naming-convention
   const { version_name: _vn2, ...restDist } = dist as ReturnType<typeof createManifest>;
   expect(restSrc).toEqual(restDist);
 });

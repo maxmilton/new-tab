@@ -31,12 +31,12 @@ const FolderPopup = (
 
   if (nested) {
     // Show nested folder popup beside its parent
-    top = parentRect.top;
+    top = parentRect.top; // oxlint-disable-line prefer-destructuring
     left = parentRect.right;
   } else {
     // Show top level folder popup bellow its parent
     top = parentRect.bottom;
-    left = parentRect.left;
+    left = parentRect.left; // oxlint-disable-line prefer-destructuring
   }
 
   root.style.cssText = `top:${top}px;left:${left}px;max-height:${window.innerHeight - top}px`;

@@ -24,7 +24,7 @@ interface SectionScope {
 const DRAG_TYPE = "text/plain";
 const DEFAULT_THEME = "auto";
 
-// eslint-disable-next-line unicorn/prefer-top-level-await
+// oxlint-disable-next-line prefer-top-level-await
 const themesData = fetch("themes.json").then((response) => response.json() as Promise<ThemesData>);
 
 const supportsSync = async (): Promise<boolean> => {
@@ -220,7 +220,7 @@ const Settings = () => {
       const reordered: SettingsState["order"] = [[...state.order[0]], [...state.order[1]]];
 
       // remove from previous location
-      const item = reordered[from[0]].splice(from[1], 1)[0];
+      const [item] = reordered[from[0]].splice(from[1], 1);
 
       // add to new location
       reordered[to[0]].splice(to[1], 0, item);
@@ -291,7 +291,6 @@ const Settings = () => {
   // oxlint-disable-next-line no-multi-assign
   se.ondragover = sd.ondragover = (event) => {
     event.preventDefault();
-    // eslint-disable-next-line no-param-reassign
     event.dataTransfer!.dropEffect = "move";
   };
   se.ondrop = handleDrop(0);
@@ -352,7 +351,6 @@ const Settings = () => {
     };
 
     state.pushSyncData = async (forceUpdate?: boolean) => {
-      // eslint-disable-next-line @typescript-eslint/naming-convention
       const { t: _t, s, ...rest } = await chrome.storage.local.get<UserStorageData>();
 
       if (forceUpdate || s) {
@@ -373,7 +371,6 @@ const Settings = () => {
     };
   };
 
-  // oxlint-disable-next-line prefer-await-to-then
   void supportsSync().then((canSync) => {
     if (canSync) {
       chrome.storage.sync.get<SyncStorageData>(updateSync);

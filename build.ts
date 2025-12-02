@@ -1,4 +1,4 @@
-import { basename } from "node:path"; // eslint-disable-line unicorn/import-style
+import { basename } from "node:path";
 import * as lightningcss from "lightningcss";
 import * as terser from "terser";
 import { createManifest } from "./manifest.config.ts";
@@ -23,15 +23,10 @@ async function compileCSS(path: string) {
 }
 
 async function makeThemes(pattern: string) {
-  const themes: Record<string, string> = {};
-
-  // oxlint-disable-next-line unicorn/no-array-sort
-  for (const path of [...new Bun.Glob(pattern).scanSync()].sort()) {
-    const result = await compileCSS(path);
-    themes[basename(path, ".css")] = result.toString();
-  }
-
-  return JSON.stringify(themes);
+  const paths = [...new Bun.Glob(pattern).scanSync()].sort();
+  const compiled = await Promise.all(paths.map(compileCSS));
+  const entries = paths.map((path, index) => [basename(path, ".css"), compiled[index].toString()]);
+  return JSON.stringify(Object.fromEntries(entries));
 }
 
 async function minify(artifacts: Bun.BuildArtifact[]) {

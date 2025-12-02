@@ -91,7 +91,6 @@ export const SearchResult = <T extends LinkProps & TabItem>(
     performance.measure(sectionName, sectionName);
   };
 
-  // eslint-disable-next-line no-return-assign
   root.$$update = (newData) => renderList((rawData = newData));
 
   root.$$filter = (text) =>

@@ -1,3 +1,5 @@
+"$schema" = "https://www.schemastore.org/bunfig.json"
+
 [install]
 auto = "disable"
 
