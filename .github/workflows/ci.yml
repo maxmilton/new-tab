@@ -50,7 +50,7 @@ jobs:
       - run: bun playwright install --no-shell chromium
       - run: bun run build
       - run: bun run test:e2e --reporter=github,html
-      - uses: actions/upload-artifact@330a01c490aca151604b8cf639adc76d48f6c5d4 # v5
+      - uses: actions/upload-artifact@b7c566a772e6b6bfb58ed0dc250532a479d7789f # v6
         if: always()
         with:
           name: playwright-report
