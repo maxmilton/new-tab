@@ -30,7 +30,7 @@ jobs:
       - run: semgrep ci --sarif-output=semgrep.sarif
         env:
           SEMGREP_RULES: p/default p/owasp-top-ten p/cwe-top-25 p/gitleaks p/r2c-security-audit
-      - uses: github/codeql-action/upload-sarif@fdbfb4d2750291e159f0156def62b853c2798ca2 # v4
+      - uses: github/codeql-action/upload-sarif@5d4e8d1aca955e8d8589aabd499c5cae939e33c7 # v4
         if: always()
         with:
           sarif_file: semgrep.sarif
