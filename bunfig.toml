@@ -2,6 +2,7 @@
 
 [install]
 auto = "disable"
+linker = "isolated"
 
 [test]
 preload = ["./test/setup.ts"]

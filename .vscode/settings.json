@@ -8,6 +8,8 @@
   "editor.formatOnSave": true,
   "editor.formatOnType": false,
   "editor.tabSize": 2,
+  "editor.unicodeHighlight.ambiguousCharacters": true,
+  "editor.unicodeHighlight.invisibleCharacters": true,
   "eslint.enable": true,
   "git.branchProtection": ["master", "next"],
   "oxc.enable": true,
