@@ -3,6 +3,9 @@
 [install]
 auto = "disable"
 linker = "isolated"
+peer = false
+minimumReleaseAge = 604800 # 7 days
+minimumReleaseAgeExcludes = ["@maxmilton/*", "stage1"]
 
 [test]
 preload = ["./test/setup.ts"]
