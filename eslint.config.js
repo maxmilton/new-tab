@@ -30,6 +30,7 @@ export default defineConfig(
 
       "no-underscore-dangle": "off", // synthetic event handler names
       "unicorn/import-style": "off",
+      "unicorn/no-top-level-assignment-in-function": "off", // used carefully
 
       /* Performance */
       "@typescript-eslint/no-confusing-void-expression": "off", // byte savings (but reduces readability)
@@ -38,14 +39,23 @@ export default defineConfig(
 
       // TODO: Remove these once buildFromOxlintConfigFile correctly disables them.
       "@typescript-eslint/naming-convention": "off",
+      "@typescript-eslint/no-misused-promises": "off",
       "@typescript-eslint/prefer-string-starts-ends-with": "off",
+      "no-confusing-arrow": "off",
       "unicorn/explicit-length-check": "off",
       "unicorn/no-array-for-each": "off",
       "unicorn/no-array-sort": "off",
       "unicorn/no-await-expression-member": "off",
+      "unicorn/no-for-each": "off",
       "unicorn/prefer-add-event-listener": "off",
       "unicorn/prefer-dom-node-append": "off",
       "unicorn/prefer-global-this": "off",
+    },
+  },
+  {
+    files: ["test/**"],
+    rules: {
+      "unicorn/no-global-object-property-assignment": "off",
     },
   },
   { ignores: ["dist"] },

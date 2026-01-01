@@ -4,6 +4,9 @@
     "./node_modules/@maxmilton/oxlint-config/recommended.json",
     "./node_modules/@maxmilton/oxlint-config/stage1.json"
   ],
+  "options": {
+    "reportUnusedDisableDirectives": "error"
+  },
   "categories": {
     "correctness": "error",
     "suspicious": "error",
@@ -31,6 +34,7 @@
         "exceptions": ["_", /* UserStorageData keys */ "n", "t", "b", "o", "s"]
       }
     ],
+    "eslint/no-underscore-dangle": "off",
 
     /* Performance and byte savings */
     "eslint/prefer-template": "off",
@@ -49,8 +53,7 @@
       "files": ["test/**"],
       "globals": {
         "$console": "readonly",
-        "happyDOM": "readonly",
-        "Loader": "readonly"
+        "happyDOM": "readonly"
       }
     },
     {

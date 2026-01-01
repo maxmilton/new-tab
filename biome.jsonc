@@ -3,20 +3,28 @@
   "vcs": { "enabled": true, "clientKind": "git", "useIgnoreFile": true },
   "assist": {
     "actions": {
-      "recommended": true,
-      "source": { "useSortedProperties": "on" }
+      "preset": "recommended",
+      "source": {
+        "useSortedPackageJson": "on",
+        "useSortedProperties": "on"
+      }
     }
   },
   "formatter": {
+    "enabled": true,
     "indentStyle": "space",
     "lineWidth": 100
   },
   "linter": {
+    "enabled": true,
     "domains": {
       "project": "all"
     },
     "rules": {
-      "recommended": true,
+      "preset": "recommended",
+      "correctness": {
+        "noUnresolvedImports": "off" // covered by typescript
+      },
       "style": {
         "noNonNullAssertion": "off",
         "useTemplate": "off"
@@ -36,7 +44,7 @@
   },
   "overrides": [
     {
-      "includes": ["**/*.jsonc", ".vscode/*.json", "tsconfig.json"],
+      "includes": ["**/*.jsonc", ".vscode/*.json", ".oxlintrc.json", "tsconfig.json"],
       "json": {
         "parser": {
           "allowComments": true,
@@ -52,7 +60,7 @@
         }
       },
       "javascript": {
-        "globals": ["$console", "Bun", "happyDOM", "Loader"]
+        "globals": ["$console", "Bun", "happyDOM"]
       }
     }
   ]
