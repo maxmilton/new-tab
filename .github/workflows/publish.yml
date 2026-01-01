@@ -27,7 +27,7 @@ jobs:
       - uses: actions/attest@v4
         with:
           subject-path: chrome-extension.zip
-      - run: gh release create "${{ github.ref_name }}" chrome-extension.zip --draft --generate-notes
+      - run: gh release create "$GITHUB_REF_NAME" chrome-extension.zip --draft --generate-notes
         shell: bash
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
