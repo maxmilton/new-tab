@@ -4,6 +4,7 @@
 *.lock
 *.zip
 !/bun.lock
+/.claude/
 /coverage/
 /dist/
 /node_modules/
