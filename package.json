@@ -9,6 +9,9 @@
   "license": "MIT",
   "author": "Max Milton <max@2okki.com>",
   "type": "module",
+  "imports": {
+    "#*": "./src/*"
+  },
   "scripts": {
     "build": "NODE_ENV=production bun build.ts",
     "dev": "NODE_ENV=development bun build.ts",

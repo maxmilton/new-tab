@@ -1,7 +1,7 @@
 import { append, collect, h } from "stage1/fast";
 import { compile } from "stage1/macro" with { type: "macro" };
-import type { SectionOrderItem } from "../types.ts";
-import { chromeBookmarks, chromeTabs, DEFAULT_SECTION_ORDER, storage } from "../utils.ts";
+import type { SectionOrderItem } from "#types.ts";
+import { chromeBookmarks, chromeTabs, DEFAULT_SECTION_ORDER, storage } from "#utils.ts";
 import { SearchResult, type SearchResultComponent } from "./SearchResult.ts";
 
 type SearchComponent = HTMLDivElement;

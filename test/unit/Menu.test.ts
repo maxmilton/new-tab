@@ -1,7 +1,7 @@
 import { afterEach, expect, spyOn, test } from "bun:test";
 import { cleanup, render } from "@maxmilton/test-utils/dom";
-import { Menu } from "../../src/components/Menu.ts";
-import { handleClick } from "../../src/utils.ts";
+import { Menu } from "#components/Menu.ts";
+import { handleClick } from "#utils.ts";
 
 afterEach(cleanup);
 

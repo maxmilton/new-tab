@@ -1,7 +1,7 @@
 import { afterAll, beforeAll, describe, expect, mock, spyOn, test } from "bun:test";
 import { target } from "happy-dom/lib/PropertySymbol.js";
 import { ONCLICK } from "stage1/fast";
-import { chromeTabs, DEFAULT_SECTION_ORDER, handleClick } from "../../src/utils.ts";
+import { chromeTabs, DEFAULT_SECTION_ORDER, handleClick } from "#utils.ts";
 
 describe("DEFAULT_SECTION_ORDER", () => {
   test("is an array", () => {

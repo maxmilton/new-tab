@@ -3,7 +3,7 @@
 // - https://web.dev/blog/popover-api
 
 import { append, clone, create, h } from "stage1/fast";
-import { chromeBookmarks } from "../utils.ts";
+import { chromeBookmarks } from "#utils.ts";
 import { Link, type LinkComponent, type LinkProps } from "./Link.ts";
 
 export type BookmarkTreeNode = Omit<chrome.bookmarks.BookmarkTreeNode, "syncing">;

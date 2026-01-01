@@ -22,7 +22,10 @@
     "noUncheckedSideEffectImports": true,
     "noUnusedLocals": false, // covered by linters
     "noUnusedParameters": false, // covered by linters
-    "verbatimModuleSyntax": true
+    "verbatimModuleSyntax": true,
+    "paths": {
+      "#*": ["./src/*"]
+    }
   },
   "include": ["*.config.js", "*.ts", "src", "test"]
 }

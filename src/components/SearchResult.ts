@@ -1,6 +1,6 @@
 import { append, clone, collect, h, ONCLICK } from "stage1/fast";
 import { compile } from "stage1/macro" with { type: "macro" };
-import { chromeTabs, DEFAULT_SECTION_ORDER } from "../utils.ts";
+import { chromeTabs, DEFAULT_SECTION_ORDER } from "#utils.ts";
 import { Link, type LinkComponent, type LinkProps } from "./Link.ts";
 
 const DEFAULT_RESULTS_AMOUNT = 12; // chrome.topSites.get returns 12 items

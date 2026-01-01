@@ -11,8 +11,8 @@ import {
   SKIP,
   walk,
 } from "@maxmilton/test-utils/css";
+import type { UserStorageData } from "#types.ts";
 import themes from "../../dist/themes.json" with { type: "json" };
-import type { UserStorageData } from "../../src/types.ts";
 import { reset } from "../setup.ts";
 
 const themeNames = [

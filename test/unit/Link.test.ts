@@ -1,6 +1,6 @@
 import { afterEach, expect, test } from "bun:test";
 import { cleanup, render } from "@maxmilton/test-utils/dom";
-import { Link, type LinkProps } from "../../src/components/Link.ts";
+import { Link, type LinkProps } from "#components/Link.ts";
 
 afterEach(cleanup);
 
