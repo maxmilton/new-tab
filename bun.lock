@@ -12,7 +12,7 @@
         "@eslint/js": "9.39.2",
         "@maxmilton/eslint-config": "0.3.0",
         "@maxmilton/oxlint-config": "0.0.1",
-        "@maxmilton/test-utils": "0.0.14",
+        "@maxmilton/test-utils": "0.0.15",
         "@playwright/test": "1.57.0",
         "@types/bun": "1.3.5",
         "@types/chrome": "0.1.32",
@@ -115,7 +115,7 @@
 
     "@maxmilton/oxlint-config": ["@maxmilton/oxlint-config@0.0.1", "", { "peerDependencies": { "oxlint": "^1.32.0" } }, "sha512-aFoRZIMzhmL6uEZ6T683FYYVcNaq+E6rf0ugNHKZzZ5+fW2tGPBFSSZvQ4mHPTpAsVjJ5RIRJkyXqKZ8keeC+g=="],
 
-    "@maxmilton/test-utils": ["@maxmilton/test-utils@0.0.14", "", { "dependencies": { "@maxmilton/html-parser": "^0.0.12", "@types/stylis": "^4.2.7", "stylis": "^4.3.6" }, "peerDependencies": { "happy-dom": ">=14.0.0 <21.0.0" }, "optionalPeers": ["happy-dom"] }, "sha512-qLPGiZgW6YjXVfuJaFmQKmk07ZNSHEpgQvpiV9om7XZvyrTCcPWgNBn58eCKgVFR2uQm8n2w0+WoBOPc7HdfwQ=="],
+    "@maxmilton/test-utils": ["@maxmilton/test-utils@0.0.15", "", { "dependencies": { "@maxmilton/html-parser": "^0.0.12", "@types/stylis": "^4.2.7", "stylis": "^4.3.6" }, "peerDependencies": { "happy-dom": ">=14.0.0 <21.0.0" }, "optionalPeers": ["happy-dom"] }, "sha512-eOmrOCq11tHtfYm91VHNM5VOMUgbGHi5gnnSEwgnWQi39kvbaezylgHFmmYvXGIGqv4z8YzfgEyW4dZLYTsxBQ=="],
 
     "@nodelib/fs.scandir": ["@nodelib/fs.scandir@2.1.5", "", { "dependencies": { "@nodelib/fs.stat": "2.0.5", "run-parallel": "^1.1.9" } }, "sha512-vq24Bq3ym5HEQm2NKCr3yXDwjc7vTsEThRDnkp2DK9p1uqLR+DHurm/NOTo0KG7HYHU7eppKZj3MyqYuMBf62g=="],
 
