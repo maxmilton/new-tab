@@ -24,7 +24,7 @@ jobs:
       - run: bun run lint
       - run: bun run test
       - run: zip -jv chrome-extension.zip dist/*
-      - uses: actions/attest-build-provenance@977bb373ede98d70efdf65b84cb5f73e068dcc2a # v3
+      - uses: actions/attest-build-provenance@0f67c3f4856b2e3261c31976d6725780e5e4c373 # v4
         with:
           subject-path: chrome-extension.zip
       - run: gh release create "${{ github.ref_name }}" chrome-extension.zip --draft --generate-notes
