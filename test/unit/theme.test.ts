@@ -227,8 +227,7 @@ describe("theme loader", () => {
     // expect(isLightOrDark(styles.backgroundColor)).toBe("light");
   });
 
-  // TODO: Don't skip once happy-dom supports proper CSS :root inheritance.
-  test.skip("auto theme is light when system is light", async () => {
+  test("auto theme is light when system is light", async () => {
     expect.assertions(1);
     happyDOM.settings.device.prefersColorScheme = "light";
     await load("auto");
@@ -236,8 +235,7 @@ describe("theme loader", () => {
     expect(isLightOrDark(styles.backgroundColor)).toBe("light");
   });
 
-  // TODO: Don't skip once happy-dom supports proper CSS :root inheritance.
-  test.skip("auto theme is dark when system is dark", async () => {
+  test("auto theme is dark when system is dark", async () => {
     expect.assertions(1);
     happyDOM.settings.device.prefersColorScheme = "dark";
     await load("auto");
