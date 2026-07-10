@@ -6,7 +6,7 @@ Chrome MV3 ext replaces new tab page ∴ fast unified search across open tabs, b
 ## §C CONSTRAINTS
 - bun for all build/test/dev cmds, bunx ! npx (⊥ node/npm directly)
 - stage1 micro framework: HTML templates compiled to raw DOM ops @ build time via `stage1/macro`
-- Manifest V3, min Chrome 150 (`manifest.config.ts` + `build.ts` lightningcss targets locked together)
+- Manifest V3, min Chrome 149 — buffer above actual feature floor (CSS Anchor Positioning needs 125+, §R1) since release ships well after today (`manifest.config.ts` + `build.ts` lightningcss targets locked together)
 - perf-first: ⊥ DOM reconciliation in hot paths (`SearchResult` deletes+reinserts full list); `BookmarkBar` sync layout measurement by design (! synchronous, ! layout-triggering)
 - prod build: terser mangles `$$`-prefixed props, strips `performance.mark/measure` calls
 - TS strict; path alias `#*` → `./src/*`
@@ -36,11 +36,11 @@ Chrome MV3 ext replaces new tab page ∴ fast unified search across open tabs, b
 
 ## §R RESEARCH
 id|topic|finding|src
-R1|anchor-pos & popover API support|CSS Anchor Positioning native Chrome 125+; Popover API native Chrome 114+; both ≤ manifest min_chrome_version 150 ∴ T2 (BookmarkNode popup rewrite) safe to build now w/ no polyfill|caniuse.com/css-anchor-positioning, caniuse.com/mdn-api_htmlelement_popover
+R1|anchor-pos & popover API support|CSS Anchor Positioning native Chrome 125+; Popover API native Chrome 114+; both ≤ manifest min_chrome_version 149 ∴ T2 (BookmarkNode popup rewrite) safe to build now w/ no polyfill|caniuse.com/css-anchor-positioning, caniuse.com/mdn-api_htmlelement_popover
 R2|Bun.build native CSS bundling|Bun core bundler ⊥ configurable browser-targets/browserslist for CSS; only 3rd-party plugin (bun-style-loader) adds that & it just wraps lightningcss anyway ∴ T8 (build.ts TODO) stays open, direct lightningcss call still required|bun.sh/docs/bundler
 R3|chrome.storage.sync quotas|QUOTA_BYTES=102400B total, QUOTA_BYTES_PER_ITEM=8192B, MAX_ITEMS=512, MAX_WRITE_OPERATIONS_PER_HOUR=1800 (per-minute cap deprecated ⊥ enforced) ∴ current UserStorageData (minus t,s) well under limits, sync feature viable to ship as-is|developer.chrome.com/docs/extensions/reference/api/storage
-R4|color-mix() browser support|`color-mix()` native unflagged Chrome 111+ (≪ min_chrome 150) ∴ CSS-native derivation technically viable|developer.chrome.com/docs/css-ui/css-color-mix
-R5|CSS relative color syntax support|relative color syntax (`oklch(from ...)` etc.) native unflagged Chrome 119+ (≪ min_chrome 150) ∴ CSS-native derivation technically viable|developer.chrome.com/blog/css-relative-color-syntax
+R4|color-mix() browser support|`color-mix()` native unflagged Chrome 111+ (≪ min_chrome 149) ∴ CSS-native derivation technically viable|developer.chrome.com/docs/css-ui/css-color-mix
+R5|CSS relative color syntax support|relative color syntax (`oklch(from ...)` etc.) native unflagged Chrome 119+ (≪ min_chrome 149) ∴ CSS-native derivation technically viable|developer.chrome.com/blog/css-relative-color-syntax
 R6|prior art: seed-color palette derivation|Material Design 3 (HCT algorithm) & Radix Colors both precompute full palette from seed color (JS/build-time lib), ⊥ runtime CSS math, despite `color-mix()` being framed as CSS-native "best practice" for simple cases per MDN blog ∴ precomputed/JS-baked approach matches this project's existing "theme = static resolved CSS string" constraint (§C) & has production prior art; CSS-native runtime derivation is lighter-weight but less proven at scale|m3.material.io/styles/color/system/how-the-system-works, radix-ui.com/colors/docs/overview/custom-palettes, developer.mozilla.org/en-US/blog/color-palettes-css-color-mix
 
 ## §V INVARIANTS
@@ -58,6 +58,8 @@ V11: `createManifest(isDebug)` → `version_name` defined iff `isDebug` true (ar
 V12: BookmarkBar resize → insert nodes one-by-one until cumulative width ≥ `root.clientWidth - 68`, overflow items ∴ move into trailing "All Bookmarks"-adjacent overflow folder; "All Bookmarks" folder always last (`.end` class)
 V13: `sectionOrder` from `storage.o` (fallback `DEFAULT_SECTION_ORDER`) drives which `SearchResult` sections mount + their DOM order in Search
 V14: test files needing fresh module state per test ! cache-bust dynamic `import()` via query string (`?bust=N`); ⊥ rely on undocumented Bun internals (`Loader.registry` — removed, doesn't exist in Bun 1.4.0)
+V15: `minimum_chrome_version` ! justified in §C — either ≡ max §R-verified feature-floor, or set higher w/ explicit reasoning (e.g. release lead time) written inline, ⊥ silently ratcheted
+V16: `dist/`-dependent tests (`manifest.test.ts`, `newtab.test.ts`, `settings.test.ts`, `theme.test.ts`, `index.test.ts`) require fresh `dist/` — `bun run build` ! run before `bun test` for correct results; documented in CLAUDE.md
 
 ## §T TASKS
 id|status|task|cites
@@ -70,7 +72,7 @@ T6|.|sw.ts TODO — remove storage-migration code (`tn`→`n`, `rich-dark`→`da
 T7|.|decide fate of `test/unit/newtab_EXPERIMENT.test.ts.bak` — disabled happy-dom Browser experiment, currently dead file|-
 T8|.|build.ts TODO — replace lightningcss CSS bundling w/ bun native bundler once configurable (targets/include)|C.build
 T9|.|settings.ts UI copy — drop "Experimental" heading + qualifiers around Sync Settings section, now committed stable per §C|C.sync,I.settings
-T10|.|`/research` color-mix()/relative color syntax support @ Chrome 150 + prior art on minimal-seed theme derivation, to decide CSS-native vs JS-computed mechanism|C.theme-custom
+T10|.|`/research` color-mix()/relative color syntax support @ Chrome 149 + prior art on minimal-seed theme derivation, to decide CSS-native vs JS-computed mechanism|C.theme-custom
 T11|.|redesign CSS var set (naming + seed-derivation mechanism from T10) across 13 theme files|T10,C.theme-custom
 T12|.|build color-token override UI in settings (pickers, live re-theme, bake-into-string-on-change)|T11,C.theme-custom
 

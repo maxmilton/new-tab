@@ -6,6 +6,10 @@ Guidance for Claude Code (claude.ai/code) working in this repo.
 
 Use bun for all commands & dev, not node. Use bunx, not npx.
 
+`bun run build` must be run (or re-run after touching `manifest.config.ts`/`src/`) before `bun test` —
+several test files (`manifest.test.ts`, `newtab.test.ts`, `settings.test.ts`, `theme.test.ts`,
+`index.test.ts`) read directly from `dist/` and will show stale or misleading failures otherwise.
+
 ```bash
 # Build for production
 bun run build
@@ -50,7 +54,7 @@ Chrome extension (Manifest V3), replaces new tab page. Built with [bun](https://
 
 `build.ts` orchestrates:
 1. Clears `dist/`, copies `static/` assets.
-2. Compiles CSS via `lightningcss` (nesting, vendor prefixes for Chrome 150+).
+2. Compiles CSS via `lightningcss` (nesting, vendor prefixes for Chrome 149+).
 3. Compiles all `src/themes/*.css` into single `dist/themes.json` keyed by theme name.
 4. Bundles TypeScript via `bun build` (two passes: apps and service worker).
 5. Production: post-processes JS with `terser` (mangles `$$`-prefixed properties, strips `performance.mark/measure` calls).
