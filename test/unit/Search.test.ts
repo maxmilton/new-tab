@@ -8,11 +8,13 @@ import type { Search as SearchComponent } from "#components/Search.ts";
 // maintain accurate test conditions.
 const MODULE_PATH = Bun.resolveSync("#components/Search.ts", ".");
 let Search: typeof SearchComponent;
+let loadCount = 0;
 
 beforeEach(async () => {
-  Loader.registry.delete(MODULE_PATH);
+  // Cache-bust the dynamic import so each test gets a fresh module instance
+  // (re-running its top-level side effects against this test's fresh mocks).
   // oxlint-disable-next-line prefer-destructuring
-  Search = (await import("../../src/components/Search.ts")).Search;
+  Search = (await import(`${MODULE_PATH}?bust=${loadCount++}`)).Search; // eslint-disable-line @typescript-eslint/no-unsafe-assignment, @typescript-eslint/no-unsafe-member-access
 });
 
 afterEach(cleanup);

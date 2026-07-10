@@ -8,6 +8,7 @@ afterEach(reset);
 
 const MODULE_PATH = Bun.resolveSync("./dist/settings.js", ".");
 const themes = Bun.file("dist/themes.json");
+let loadCount = 0;
 
 async function load() {
   const fetchMock = mock((input: RequestInfo | URL) => {
@@ -20,8 +21,9 @@ async function load() {
   // @ts-expect-error - monkey patching fetch for testing
   global.fetch = window.fetch = fetchMock; // oxlint-disable-line no-multi-assign
 
-  Loader.registry.delete(MODULE_PATH);
-  await import(MODULE_PATH);
+  // Cache-bust the dynamic import so each test gets a fresh module instance
+  // (re-running its top-level side effects against this test's fresh mocks).
+  await import(`${MODULE_PATH}?bust=${loadCount++}`);
   await happyDOM.waitUntilComplete();
 
   return fetchMock;

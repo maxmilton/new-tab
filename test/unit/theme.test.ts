@@ -181,9 +181,17 @@ async function load(themeName?: (typeof themeNames)[number]) {
   style.textContent = newtabCSS ??= await Bun.file("dist/newtab.css").text();
   window.document.head.appendChild(style);
 
-  Loader.registry.delete(MODULE_PATH_THEME);
-  Loader.registry.delete(MODULE_PATH_UTILS);
-  await import(MODULE_PATH_THEME); // no exports; just side effects
+  // NOTE: `theme.ts` statically imports `./utils.ts`, so both need their
+  // require.cache entry cleared for a fresh `storage` read on every test —
+  // a query-busted dynamic import would only refresh `theme.ts` itself, not
+  // the module it statically imports.
+  // oxlint-disable-next-line typescript/no-dynamic-delete unicorn/prefer-module
+  delete require.cache[MODULE_PATH_THEME];
+  // oxlint-disable-next-line typescript/no-dynamic-delete unicorn/prefer-module
+  delete require.cache[MODULE_PATH_UTILS];
+  // oxlint-disable-next-line import/no-dynamic-require typescript/no-require-imports unicorn/prefer-module
+  require(MODULE_PATH_THEME); // eslint-disable-line global-require
+
   await happyDOM.waitUntilComplete();
 }
 

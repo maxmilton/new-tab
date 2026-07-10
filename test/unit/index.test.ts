@@ -58,3 +58,22 @@ describe("dist files", () => {
     expect(result.valid).toBeTrue();
   });
 });
+
+// V14: `Loader.registry` is an undocumented Bun internal that no longer exists
+// (removed by 1.3.14) — cache-bust dynamic imports via a query string instead.
+test("no test file relies on the removed Bun `Loader` internal", async () => {
+  expect.assertions(1);
+  const files = await readdir("test/unit");
+  const contents = await Promise.all(
+    files
+      .filter((filename) => filename.endsWith(".test.ts") && filename !== "index.test.ts")
+      .map((filename) => Bun.file(`test/unit/${filename}`).text()),
+  );
+  // eslint-disable-next-line unicorn/consistent-boolean-name
+  const usesLoaderRegistry = contents.some((content) =>
+    content
+      .split("\n")
+      .some((line) => line.includes("Loader.registry") && !line.trim().startsWith("//")),
+  );
+  expect(usesLoaderRegistry).toBeFalse();
+});

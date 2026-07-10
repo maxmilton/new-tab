@@ -6,14 +6,17 @@ import { reset } from "../setup.ts";
 // Completely reset DOM and global state between tests
 afterEach(reset);
 
-const MODULE_PATH = Bun.resolveSync("./dist/newtab.js", ".");
+const SCRIPT_PATH = Bun.resolveSync("./dist/newtab.js", ".");
+let loadCount = 0;
 
 async function load() {
   // Workaround for hack in src/BookmarkBar.ts that waits for styles to be loaded
   document.head.appendChild(document.createElement("style"));
 
-  Loader.registry.delete(MODULE_PATH);
-  await import(MODULE_PATH);
+  // Cache-bust the dynamic import so each test gets a fresh module instance
+  // (re-running its top-level side effects against this test's fresh mocks).
+  await import(`${SCRIPT_PATH}?bust=${loadCount++}`);
+
   await happyDOM.waitUntilComplete();
 }
 
