@@ -117,15 +117,15 @@ describe("handleClick", () => {
 
   // XXX: We return false from events rather than call preventDefault() for
   // byte savings, so we can't test this.
-  // test('default prevented on event when url does not start with "h"', () => {
-  //   expect.assertions(2);
-  //   const event = new window.MouseEvent("click");
-  //   // @ts-expect-error - happy-dom internal target property
-  //   event[target] = { href: "chrome://about" };
-  //   expect(event.defaultPrevented).toBeFalse();
-  //   handleClick(event);
-  //   expect(event.defaultPrevented).toBeTrue();
-  // });
+  test.skip('default prevented on event when url does not start with "h"', () => {
+    expect.assertions(2);
+    const event = new window.MouseEvent("click");
+    // @ts-expect-error - happy-dom internal target property
+    event[target] = { href: "chrome://about" };
+    expect(event.defaultPrevented).toBeFalse();
+    handleClick(event);
+    expect(event.defaultPrevented).toBeTrue();
+  });
 
   test('default not prevented on event when url starts with "h"', () => {
     expect.assertions(2);
