@@ -8,8 +8,8 @@ afterEach(reset);
 const MODULE_PATH = Bun.resolveSync("./dist/sw.js", ".");
 let loadCount = 0;
 
-async function load(noMocks?: boolean) {
-  if (!noMocks) {
+async function load(shouldSkipMocks?: boolean) {
+  if (!shouldSkipMocks) {
     const originalFetch = global.fetch;
 
     // @ts-expect-error - monkey patching fetch for testing
@@ -23,7 +23,7 @@ async function load(noMocks?: boolean) {
     };
 
     chrome.runtime.onInstalled.addListener = (callback) => {
-      callback({ reason: "install" as chrome.runtime.OnInstalledReason.INSTALL });
+      callback({ reason: "install" });
     };
     chrome.runtime.onStartup.addListener = (callback) => {
       callback();
