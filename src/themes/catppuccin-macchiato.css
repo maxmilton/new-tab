@@ -1,0 +1,19 @@
+/**
+ * Catppuccin Macchiato Theme
+ * @see https://catppuccin.com/palette/
+ */
+
+:root {
+  --s: 0 2px 4px #181926; /* shadow */
+  --b: #24273a; /* background */
+  --t: #cad3f5; /* text */
+  --c1: #494d64; /* bookmark node hover background, hr, button border, search input border */
+  --c2: #1e2030; /* bookmarks bar, menu dropdown, "show more" button */
+  --c3: #a5adcb; /* icons, empty folder text, text fallback (headings, etc.) */
+
+  color-scheme: dark;
+}
+
+a {
+  color: #8aadf4;
+}

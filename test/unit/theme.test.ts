@@ -18,6 +18,10 @@ import { reset } from "../setup.ts";
 const themeNames = [
   "auto",
   "black",
+  "catppuccin-frappe",
+  "catppuccin-latte",
+  "catppuccin-macchiato",
+  "catppuccin-mocha",
   "dark",
   "hacker-blue",
   "hacker-pink",

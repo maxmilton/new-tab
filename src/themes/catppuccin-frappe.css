@@ -1,0 +1,19 @@
+/**
+ * Catppuccin Frappe Theme
+ * @see https://catppuccin.com/palette/
+ */
+
+:root {
+  --s: 0 2px 4px #232634; /* shadow */
+  --b: #303446; /* background */
+  --t: #c6d0f5; /* text */
+  --c1: #51576d; /* bookmark node hover background, hr, button border, search input border */
+  --c2: #292c3c; /* bookmarks bar, menu dropdown, "show more" button */
+  --c3: #a5adce; /* icons, empty folder text, text fallback (headings, etc.) */
+
+  color-scheme: dark;
+}
+
+a {
+  color: #8caaee;
+}
