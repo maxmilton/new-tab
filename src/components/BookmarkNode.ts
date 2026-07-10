@@ -131,10 +131,7 @@ export const Folder = (
   return root;
 };
 
-// eslint-disable-next-line no-confusing-arrow
-export const BookmarkNode = <T extends LinkProps | BookmarkTreeNode>(
-  props: T,
-  nested?: boolean,
-): T extends { url: string } ? LinkComponent : FolderComponent =>
-  // @ts-expect-error - TODO: Handle type narrowing correctly.
-  props.url ? Link(props) : Folder(props, nested);
+export const BookmarkNode = (
+  props: LinkProps | Omit<BookmarkTreeNode, "url">,
+  isNested?: boolean,
+): LinkComponent | FolderComponent => ("url" in props ? Link(props) : Folder(props, isNested));
