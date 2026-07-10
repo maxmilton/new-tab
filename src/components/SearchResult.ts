@@ -1,3 +1,6 @@
+// oxlint-disable func-style
+/* eslint-disable unicorn/no-this-outside-of-class */
+
 import { append, clone, collect, h, ONCLICK } from "stage1/fast";
 import { compile } from "stage1/macro" with { type: "macro" };
 import { chromeTabs, DEFAULT_SECTION_ORDER } from "#utils.ts";
@@ -16,7 +19,7 @@ interface OpenTabLink extends LinkComponent {
   $$data: TabItem;
 }
 
-// oxlint-disable-next-line func-style
+// eslint-disable-next-line unicorn/consistent-boolean-name
 const handleTabClick = function (this: OpenTabLink): false {
   chromeTabs.getCurrent((currentTab) => {
     if (currentTab!.id === this.$$data.id) return;
@@ -73,6 +76,7 @@ export const SearchResult = <T extends LinkProps & TabItem>(
 
     const list = isOpenTabs ? listData : listData.slice(0, showCount);
     let index = 0;
+    // eslint-disable-next-line unicorn/prefer-smaller-scope
     let link: LinkComponent;
 
     renderedLength = list.length;

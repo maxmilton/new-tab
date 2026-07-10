@@ -9,7 +9,7 @@ import { Link, type LinkComponent, type LinkProps } from "./Link.ts";
 export type BookmarkTreeNode = Omit<chrome.bookmarks.BookmarkTreeNode, "syncing">;
 
 type FolderPopupComponent = HTMLDivElement & {
-  $$adjustPosition(): void;
+  $$adjustPosition: () => void;
 };
 
 const CLOSE_DELAY_MS = 600;
@@ -22,14 +22,14 @@ folderPopupView.className = "sf";
 const FolderPopup = (
   parent: HTMLElement,
   children: BookmarkTreeNode[],
-  nested?: boolean,
+  isNested?: boolean,
 ): FolderPopupComponent => {
   const root = clone(folderPopupView);
   const parentRect = parent.getBoundingClientRect();
   let top: number;
   let left: number;
 
-  if (nested) {
+  if (isNested) {
     // Show nested folder popup beside its parent
     top = parentRect.top; // oxlint-disable-line prefer-destructuring
     left = parentRect.right;
@@ -42,6 +42,7 @@ const FolderPopup = (
   root.style.cssText = `top:${top}px;left:${left}px;max-height:${window.innerHeight - top}px`;
 
   if (children.length) {
+    // oxlint-disable-next-line no-use-before-define
     children.forEach((item) => append(BookmarkNode(item, true), root));
   } else {
     append((emptyPopup ??= h<HTMLDivElement>("<div id=e>(empty)</div>")), root);
@@ -56,7 +57,7 @@ const FolderPopup = (
     if (left + width > viewportWidth) {
       // Show top level aligned to the right edge of the viewport
       // Show nested show to the left of its parent
-      root.style.left = nested ? parentRect.left - width + "px" : viewportWidth - width + "px";
+      root.style.left = (isNested ? parentRect.left : viewportWidth) - width + "px";
     }
   };
 
@@ -64,8 +65,7 @@ const FolderPopup = (
 };
 
 type FolderComponent = HTMLDivElement & {
-  // eslint-disable-next-line @typescript-eslint/no-invalid-void-type
-  $$closePopup(this: void): void;
+  $$closePopup: () => void;
 };
 
 const folderView = create("div") as FolderComponent;
@@ -73,7 +73,7 @@ folderView.className = "f";
 
 export const Folder = (
   props: BookmarkTreeNode,
-  nested?: boolean,
+  isNested?: boolean,
   children?: BookmarkTreeNode[],
 ): FolderComponent => {
   const root = clone(folderView);
@@ -89,7 +89,7 @@ export const Folder = (
 
   root.textContent = props.title;
 
-  if (nested) {
+  if (isNested) {
     append(
       // https://github.com/tailwindlabs/heroicons/blob/master/optimized/24/outline/arrow-right.svg
       clone((arrow ??= h<SVGElement>('<svg class=i><path d="M5 12h14M12 5l7 7-7 7"/></svg>'))),
@@ -98,13 +98,11 @@ export const Folder = (
   }
 
   root.$$closePopup = () => {
-    if (popup) {
-      popup.remove();
-      popup = null;
-    }
+    if (!popup) return;
+    popup.remove();
+    popup = null;
   };
 
-  // eslint-disable-next-line @typescript-eslint/no-misused-promises
   root.__mouseover = async () => {
     clearTimer();
 
@@ -114,7 +112,11 @@ export const Folder = (
         .parentNode!.querySelectorAll<FolderComponent>(".f")
         .forEach((folder) => folder.$$closePopup());
 
-      popup = FolderPopup(root, children ?? (await chromeBookmarks.getChildren(props.id)), nested);
+      popup = FolderPopup(
+        root,
+        children ?? (await chromeBookmarks.getChildren(props.id)),
+        isNested,
+      );
 
       popup.__mouseover = clearTimer;
       popup.__mouseout = resetTimer;

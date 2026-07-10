@@ -4,7 +4,7 @@ import * as terser from "terser";
 import { createManifest } from "./manifest.config.ts";
 
 const mode = Bun.env.NODE_ENV;
-const dev = mode === "development";
+const isDev = mode === "development";
 
 // TODO: Use bun to bundle CSS once it's configurable e.g., targets, include.
 async function compileCSS(path: string) {
@@ -13,7 +13,7 @@ async function compileCSS(path: string) {
     filename: path,
     // @ts-expect-error - bundle does accept code, same as transform
     code: source,
-    minify: !dev,
+    minify: !isDev,
     // oxlint-disable-next-line no-bitwise
     targets: { chrome: 149 << 16 }, // matches manifest minimum_chrome_version
     include: lightningcss.Features.Nesting,
@@ -23,6 +23,7 @@ async function compileCSS(path: string) {
 }
 
 async function makeThemes(pattern: string) {
+  // eslint-disable-next-line unicorn/require-array-sort-compare
   const paths = [...new Bun.Glob(pattern).scanSync()].sort();
   const compiled = await Promise.all(paths.map(compileCSS));
   const entries = paths.map((path, index) => [basename(path, ".css"), compiled[index].toString()]);
@@ -31,6 +32,7 @@ async function makeThemes(pattern: string) {
 
 async function minify(artifacts: Bun.BuildArtifact[]) {
   for (const artifact of artifacts) {
+    // eslint-disable-next-line unicorn/prefer-continue
     if (artifact.path.endsWith(".js")) {
       const source = await artifact.text();
       const result = await terser.minify(source, {
@@ -77,8 +79,8 @@ const out1 = await Bun.build({
   outdir: "dist",
   naming: "[dir]/[name].[ext]",
   target: "browser",
-  minify: !dev,
-  sourcemap: dev ? "linked" : "none",
+  minify: !isDev,
+  sourcemap: isDev ? "linked" : "none",
 });
 console.timeEnd("build:apps");
 
@@ -87,12 +89,12 @@ const out2 = await Bun.build({
   entrypoints: ["src/sw.ts"],
   outdir: "dist",
   target: "browser",
-  minify: !dev,
-  sourcemap: dev ? "linked" : "none",
+  minify: !isDev,
+  sourcemap: isDev ? "linked" : "none",
 });
 console.timeEnd("build:worker");
 
-if (!dev) {
+if (!isDev) {
   console.time("minify");
   await minify(out1.outputs);
   await minify(out2.outputs);

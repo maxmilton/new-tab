@@ -100,4 +100,5 @@ export async function reset(): Promise<void> {
   setupMocks();
 }
 
+// eslint-disable-next-line unicorn/no-top-level-side-effects
 await reset();

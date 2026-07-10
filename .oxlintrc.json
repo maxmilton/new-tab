@@ -5,6 +5,8 @@
     "./node_modules/@maxmilton/oxlint-config/stage1.json"
   ],
   "options": {
+    "maxWarnings": 100,
+    "respectEslintDisableDirectives": false,
     "reportUnusedDisableDirectives": "error"
   },
   "categories": {
@@ -34,7 +36,10 @@
         "exceptions": ["_", /* UserStorageData keys */ "n", "t", "b", "o", "s"]
       }
     ],
+    "eslint/no-plusplus": "off",
     "eslint/no-underscore-dangle": "off",
+    "eslint/require-unicode-regexp": "off",
+    "node/no-sync": "off",
 
     /* Performance and byte savings */
     "eslint/prefer-template": "off",

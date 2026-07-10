@@ -36,7 +36,6 @@ describe("DEFAULT_SECTION_ORDER", () => {
 
 declare global {
   /** Search input element with id=s defined in `src/components/Search.ts`. */
-  // oxlint-disable-next-line no-var, vars-on-top
   var s: HTMLInputElement;
 }
 

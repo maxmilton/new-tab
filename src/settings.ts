@@ -10,7 +10,7 @@ import { DEFAULT_SECTION_ORDER, storage } from "./utils.ts";
 
 interface SettingsState {
   order: [SectionOrderItem[], SectionOrderItem[]];
-  pushSyncData?(forceUpdate?: boolean): Promise<void>;
+  pushSyncData?(shouldForceUpdate?: boolean): Promise<void>;
 }
 
 type ItemIndex = [listIndex: 0 | 1, itemIndex: number];
@@ -24,17 +24,14 @@ interface SectionScope {
 const DRAG_TYPE = "text/plain";
 const DEFAULT_THEME = "auto";
 
-// oxlint-disable-next-line prefer-top-level-await
+// eslint-disable-next-line unicorn/prefer-await
 const themesData = fetch("themes.json").then((response) => response.json() as Promise<ThemesData>);
 
 const supportsSync = async (): Promise<boolean> => {
   try {
     await chrome.storage.sync.set({ _: 1 });
     await chrome.storage.sync.remove("_");
-    if (chrome.runtime.lastError) {
-      return false;
-    }
-    return true;
+    return !chrome.runtime.lastError;
   } catch {
     return false;
   }
@@ -225,6 +222,7 @@ const Settings = () => {
       // add to new location
       reordered[to[0]].splice(to[1], 0, item);
 
+      // oxlint-disable-next-line no-use-before-define
       updateOrder(reordered);
     },
   };
@@ -244,12 +242,11 @@ const Settings = () => {
     void state.pushSyncData?.();
   };
 
-  const updateOrder = (order: SettingsState["order"], skipSave?: boolean) => {
     reconcile(se, state.order[0], order[0], (item) => SectionItem(item, 0, scope));
     reconcile(sd, state.order[1], order[1], (item) => SectionItem(item, 1, scope));
     state.order = order;
 
-    if (!skipSave) {
+    if (!shouldSkipSave) {
       // When section order is same as default, we don't need to store it
       if (String(order[0]) === String(DEFAULT_SECTION_ORDER)) {
         void chrome.storage.local.remove("o");
@@ -277,7 +274,7 @@ const Settings = () => {
   theme.onchange = () => updateTheme(theme.value);
 
   bookmarks.onchange = async () => {
-    // eslint-disable-next-line unicorn/prefer-ternary
+    // oxlint-disable-next-line unicorn/prefer-ternary
     if (bookmarks.checked) {
       // When value is same as default, we don't need to store it
       await chrome.storage.local.remove("b");
@@ -314,7 +311,7 @@ const Settings = () => {
   // Experimental sync settings feature //
   /* ********************************** */
 
-  sync.checked = !!storage.s;
+  sync.checked = Boolean(storage.s);
 
   const updateSync = (syncData: SyncStorageData) => {
     if (syncData.ts) {
@@ -343,6 +340,7 @@ const Settings = () => {
     };
 
     pull.onclick = () => {
+      // eslint-disable-next-line unicorn/prefer-early-return
       if (syncData.data) {
         void chrome.storage.sync.set(syncData.data);
         void updateTheme(syncData.data.n ?? DEFAULT_THEME);
@@ -350,10 +348,10 @@ const Settings = () => {
       }
     };
 
-    state.pushSyncData = async (forceUpdate?: boolean) => {
+    state.pushSyncData = async (shouldForceUpdate?: boolean) => {
       const { t: _t, s, ...rest } = await chrome.storage.local.get<UserStorageData>();
 
-      if (forceUpdate || s) {
+      if (shouldForceUpdate || s) {
         const newSyncData: SyncStorageData = {
           data: rest,
           ts: Date.now(),

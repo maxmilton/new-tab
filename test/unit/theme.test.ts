@@ -168,14 +168,14 @@ const MODULE_PATH_UTILS = Bun.resolveSync("./src/utils.ts", ".");
 let newtabCSS: string | undefined;
 
 async function load(themeName?: (typeof themeNames)[number]) {
-  // mock user settings
+  // Mock user settings
   chrome.storage.local.get = () =>
     Promise.resolve({
       n: themeName ?? "auto",
       t: themes[themeName ?? "auto"],
     } satisfies UserStorageData);
 
-  // inject newtab.css
+  // Inject newtab.css
   const style = window.document.createElement("style");
   // oxlint-disable-next-line no-multi-assign
   style.textContent = newtabCSS ??= await Bun.file("dist/newtab.css").text();

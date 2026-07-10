@@ -22,7 +22,7 @@ export const test = base.extend<{ context: BrowserContext; extensionId: string }
     sw ??= await context.waitForEvent("serviceworker", { timeout: 200 });
 
     // oxlint-disable-next-line prefer-destructuring
-    const extensionId = sw.url().split("/")[2];
+    const extensionId = sw.url().split("/", 3)[2];
     await use(extensionId);
   },
 });

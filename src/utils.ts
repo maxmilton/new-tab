@@ -4,6 +4,7 @@ import type { UserStorageData } from "./types.ts";
 export const chromeBookmarks = chrome.bookmarks;
 export const chromeTabs = chrome.tabs;
 
+// eslint-disable-next-line unicorn/no-top-level-side-effects
 performance.mark("Load Storage");
 export const storage = await chrome.storage.local.get<UserStorageData>();
 
@@ -28,6 +29,7 @@ export const handleClick = (event: MouseEvent): false | undefined => {
   const url = (node as Node & { href?: string }).href;
 
   while (node) {
+    // eslint-disable-next-line unicorn/no-computed-property-existence-check
     if (node[ONCLICK]) {
       return node[ONCLICK](event);
     }

@@ -19,7 +19,7 @@ export function createManifest(isDebug = !process.env.CI): chrome.runtime.Manife
     name: "New Tab",
     description: pkg.description,
     homepage_url: pkg.homepage,
-    version: pkg.version.split("-")[0],
+    version: pkg.version.split("-", 1)[0],
     // Shippable releases should not have a named version
     version_name: isDebug ? gitRef() : undefined, // oxlint-disable-line no-undefined
     minimum_chrome_version: "149", // matches build
