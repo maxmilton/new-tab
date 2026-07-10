@@ -45,7 +45,7 @@ export function createManifest(isDebug = !process.env.CI): chrome.runtime.Manife
     },
     options_ui: {
       page: "settings.html",
-      // open_in_tab: true, // dev only
+      open_in_tab: true,
     },
     offline_enabled: true,
     incognito: "not_allowed",

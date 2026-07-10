@@ -113,9 +113,9 @@ test("does not contain any unexpected properties", () => {
   expect(Object.keys(manifest)).toHaveLength(expectedProperties.length);
 });
 
-test("does not contain any properties for development/debugging", () => {
+test("opens settings in a dedicated full tab", () => {
   expect.assertions(1);
-  expect(manifest.options_ui?.open_in_tab).toBeUndefined();
+  expect(manifest.options_ui?.open_in_tab).toBeTrue();
 });
 
 test("manifest version is v3", () => {
