@@ -242,6 +242,7 @@ const Settings = () => {
     void state.pushSyncData?.();
   };
 
+  const updateOrder = (order: SettingsState["order"], shouldSkipSave?: boolean) => {
     reconcile(se, state.order[0], order[0], (item) => SectionItem(item, 0, scope));
     reconcile(sd, state.order[1], order[1], (item) => SectionItem(item, 1, scope));
     state.order = order;
