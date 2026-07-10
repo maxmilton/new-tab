@@ -5,15 +5,15 @@
  */
 
 body {
-  overflow-y: scroll; /* prevent jump on load */
   margin: 108px 0;
-  color: var(--c3);
+  overflow-y: scroll; /* prevent jump on load */
   font-size: 16px;
   font-variant: none;
   /* Although it's best practice to use a unitless value for line-height, this
    * is a hack for alignment with the minimum possible style properties. Value
    * should be the same as as bookmark bar height. */
   line-height: 38px;
+  color: var(--c3);
   background: var(--b);
   text-rendering: optimizespeed;
 }
@@ -108,15 +108,15 @@ button /* "Show more" button */,
 
 #b /* bookmark bar */ {
   position: fixed;
-  z-index: 1;
   top: 0;
   right: 0;
   left: 0;
+  z-index: 1;
   display: flex;
   height: 38px; /* should be same as body line-height */
+  contain: size layout; /* constrain reflow during resize */
   background: var(--c2);
   box-shadow: var(--s);
-  contain: size layout; /* constrain reflow during resize */
 
   & > a,
   & > .f /* folder */ {
