@@ -22,7 +22,7 @@
     "lint:js": "oxlint",
     "lint:ts": "tsc --noEmit",
     "test": "bun test --only-failures",
-    "test:ci": "bun test --coverage --randomize --rerun-each=3",
+    "test:ci": "bun test --coverage --randomize --rerun-each=10",
     "test:e2e": "playwright test"
   },
   "dependencies": {
