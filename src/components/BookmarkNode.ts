@@ -1,45 +1,20 @@
-// TODO: Rewrite folder position logic using:
-// - https://developer.chrome.com/blog/anchor-positioning-api
-// - https://web.dev/blog/popover-api
-
 import { append, clone, create, h } from "stage1/fast";
 import { chromeBookmarks } from "#utils.ts";
 import { Link, type LinkComponent, type LinkProps } from "./Link.ts";
 
 export type BookmarkTreeNode = Omit<chrome.bookmarks.BookmarkTreeNode, "syncing">;
 
-type FolderPopupComponent = HTMLDivElement & {
-  $$adjustPosition: () => void;
-};
+type FolderPopupComponent = HTMLDivElement;
 
 const CLOSE_DELAY_MS = 600;
 let emptyPopup: HTMLDivElement | undefined;
 let arrow: SVGElement | undefined;
 
-const folderPopupView = create("div") as FolderPopupComponent;
-folderPopupView.className = "sf";
+const folderPopupView = create("div");
+folderPopupView.className = "p";
 
-const FolderPopup = (
-  parent: HTMLElement,
-  children: BookmarkTreeNode[],
-  isNested?: boolean,
-): FolderPopupComponent => {
+const FolderPopup = (children: BookmarkTreeNode[]): FolderPopupComponent => {
   const root = clone(folderPopupView);
-  const parentRect = parent.getBoundingClientRect();
-  let top: number;
-  let left: number;
-
-  if (isNested) {
-    // Show nested folder popup beside its parent
-    top = parentRect.top; // oxlint-disable-line prefer-destructuring
-    left = parentRect.right;
-  } else {
-    // Show top level folder popup bellow its parent
-    top = parentRect.bottom;
-    left = parentRect.left; // oxlint-disable-line prefer-destructuring
-  }
-
-  root.style.cssText = `top:${top}px;left:${left}px;max-height:${window.innerHeight - top}px`;
 
   if (children.length) {
     // oxlint-disable-next-line no-use-before-define
@@ -47,19 +22,6 @@ const FolderPopup = (
   } else {
     append((emptyPopup ??= h<HTMLDivElement>("<div id=e>(empty)</div>")), root);
   }
-
-  // Only after the component is mounted in the DOM do we have element size
-  // information so final position adjustment is split into a separate step
-  root.$$adjustPosition = () => {
-    const viewportWidth = document.documentElement.clientWidth;
-    const width = root.offsetWidth;
-
-    if (left + width > viewportWidth) {
-      // Show top level aligned to the right edge of the viewport
-      // Show nested show to the left of its parent
-      root.style.left = (isNested ? parentRect.left : viewportWidth) - width + "px";
-    }
-  };
 
   return root;
 };
@@ -103,7 +65,7 @@ export const Folder = (
     popup = null;
   };
 
-  root.__mouseover = async () => {
+  root.onmouseover = async () => {
     clearTimer();
 
     if (!popup) {
@@ -112,21 +74,16 @@ export const Folder = (
         .parentNode!.querySelectorAll<FolderComponent>(".f")
         .forEach((folder) => folder.$$closePopup());
 
-      popup = FolderPopup(
-        root,
-        children ?? (await chromeBookmarks.getChildren(props.id)),
-        isNested,
-      );
+      popup = FolderPopup(children ?? (await chromeBookmarks.getChildren(props.id)));
 
-      popup.__mouseover = clearTimer;
-      popup.__mouseout = resetTimer;
+      popup.onmouseover = clearTimer;
+      popup.onmouseout = resetTimer;
 
       append(popup, root);
-      popup.$$adjustPosition();
     }
   };
 
-  root.__mouseout = resetTimer;
+  root.onmouseout = resetTimer;
 
   return root;
 };

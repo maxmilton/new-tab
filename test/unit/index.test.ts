@@ -14,9 +14,9 @@ describe("dist files", () => {
     ["icon48.png", "image/png"],
     ["icon128.png", "image/png"],
     ["manifest.json", "application/json;charset=utf-8"],
-    ["newtab.css", "text/css;charset=utf-8", 1500, 2000],
+    ["newtab.css", "text/css;charset=utf-8", 1500, 2500],
     ["newtab.html", "text/html;charset=utf-8", 150, 200],
-    ["newtab.js", "text/javascript;charset=utf-8", 4000, 6000],
+    ["newtab.js", "text/javascript;charset=utf-8", 3500, 5000],
     ["settings.css", "text/css;charset=utf-8", 1000, 1500],
     ["settings.html", "text/html;charset=utf-8", 150, 200],
     ["settings.js", "text/javascript;charset=utf-8", 6000, 8000],
@@ -59,21 +59,16 @@ describe("dist files", () => {
   });
 });
 
-// V14: `Loader.registry` is an undocumented Bun internal that no longer exists
-// (removed by 1.3.14) — cache-bust dynamic imports via a query string instead.
 test("no test file relies on the removed Bun `Loader` internal", async () => {
   expect.assertions(1);
   const files = await readdir("test/unit");
   const contents = await Promise.all(
     files
+      // oxlint-disable-next-line vitest/no-conditional-in-test
       .filter((filename) => filename.endsWith(".test.ts") && filename !== "index.test.ts")
       .map((filename) => Bun.file(`test/unit/${filename}`).text()),
   );
   // eslint-disable-next-line unicorn/consistent-boolean-name
-  const usesLoaderRegistry = contents.some((content) =>
-    content
-      .split("\n")
-      .some((line) => line.includes("Loader.registry") && !line.trim().startsWith("//")),
-  );
+  const usesLoaderRegistry = contents.some((content) => content.includes("Loader.registry"));
   expect(usesLoaderRegistry).toBeFalse();
 });

@@ -30,7 +30,7 @@ a,
 }
 
 a,
-.sf .f /* subfolder */ {
+.p .f /* popup subfolder */ {
   overflow: hidden;
   text-overflow: ellipsis;
   text-decoration: none;
@@ -114,7 +114,7 @@ button /* "Show more" button */,
   z-index: 1;
   display: flex;
   height: 38px; /* should be same as body line-height */
-  contain: size layout; /* constrain reflow during resize */
+  contain: size;
   background: var(--c2);
   box-shadow: var(--s);
 
@@ -139,12 +139,26 @@ button /* "Show more" button */,
   color: var(--c3);
 }
 
-.sf /* subfolder */ {
+.f /* folder */ {
+  anchor-name: --f;
+  anchor-scope: --f;
+}
+
+.p /* folder popup */ {
   position: fixed;
+  position-anchor: --f;
+  position-area: bottom span-right;
+  position-try-fallbacks: flip-inline;
+  max-height: 100%;
   z-index: 1;
   overflow-y: auto;
   background: var(--c2);
   box-shadow: var(--s);
+
+  & & {
+    position-area: right;
+    position-try-fallbacks: flip-block, flip-inline;
+  }
 
   a,
   .f /* folder */ {

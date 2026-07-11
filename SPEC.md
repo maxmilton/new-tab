@@ -42,6 +42,9 @@ R3|chrome.storage.sync quotas|QUOTA_BYTES=102400B total, QUOTA_BYTES_PER_ITEM=81
 R4|color-mix() browser support|`color-mix()` native unflagged Chrome 111+ (≪ min_chrome 149) ∴ CSS-native derivation technically viable|developer.chrome.com/docs/css-ui/css-color-mix
 R5|CSS relative color syntax support|relative color syntax (`oklch(from ...)` etc.) native unflagged Chrome 119+ (≪ min_chrome 149) ∴ CSS-native derivation technically viable|developer.chrome.com/blog/css-relative-color-syntax
 R6|prior art: seed-color palette derivation|Material Design 3 (HCT algorithm) & Radix Colors both precompute full palette from seed color (JS/build-time lib), ⊥ runtime CSS math, despite `color-mix()` being framed as CSS-native "best practice" for simple cases per MDN blog ∴ precomputed/JS-baked approach matches this project's existing "theme = static resolved CSS string" constraint (§C) & has production prior art; CSS-native runtime derivation is lighter-weight but less proven at scale|m3.material.io/styles/color/system/how-the-system-works, radix-ui.com/colors/docs/overview/custom-palettes, developer.mozilla.org/en-US/blog/color-palettes-css-color-mix
+R7|relative-color var-chain reliability|var()-to-var() chains in relative color syntax (`oklch(from var(--seed) ...)`) resolve normally, recompute on cascade, ⊥ @property registration needed; only unrelated gotcha is @property fallback-value quirk when property IS registered|developer.mozilla.org/en-US/docs/Web/CSS/Guides/Colors/Using_relative_colors, developer.chrome.com/blog/css-relative-color-syntax
+R8|why MD3/Radix use JS ! CSS-native derivation|MD3 needs HCT/CAM16 perceptual math (contrast-guaranteed tonal steps) w/ no CSS equivalent; Radix precomputes sRGB-fallback + P3 + alpha variants for determinism/portability ∴ CSS relative-color fits simple 1-step shifts only, ⊥ full accessible-palette gen — inferred from lib architecture/docs, ⊥ explicit "rejected CSS" source found ?|github.com/material-foundation/material-color-utilities, radix-ui.com/colors/docs/overview/custom-palettes
+R9|JS palette lib bundle cost|@material/material-color-utilities@0.3.0 = 68.2KB min / 19.2KB gzip, 0 deps, vs $0 for pure-CSS derivation; `@latest` tag gave anomalous smaller bundlephobia figures (unreliable), use 0.3.0 as reference ?|bundlephobia.com/api/size?package=@material/material-color-utilities@0.3.0
 
 ## §V INVARIANTS
 V1: sw.ts install/startup handlers → ⊥ console calls, ⊥ performance.mark/measure calls
@@ -60,11 +63,14 @@ V13: `sectionOrder` from `storage.o` (fallback `DEFAULT_SECTION_ORDER`) drives w
 V14: test files needing fresh module state per test ! cache-bust dynamic `import()` via query string (`?bust=N`); ⊥ rely on undocumented Bun internals (`Loader.registry` — removed, doesn't exist in Bun 1.4.0)
 V15: `minimum_chrome_version` ! justified in §C — either ≡ max §R-verified feature-floor, or set higher w/ explicit reasoning (e.g. release lead time) written inline, ⊥ silently ratcheted
 V16: `dist/`-dependent tests (`manifest.test.ts`, `newtab.test.ts`, `settings.test.ts`, `theme.test.ts`, `index.test.ts`) require fresh `dist/` — `bun run build` ! run before `bun test` for correct results; documented in CLAUDE.md
+V17: sw.ts onStartup sync-merge, when `remote.data.n ≠` local `settings.n` → `t` ! keyed by `remote.data.n` (incoming), ⊥ stale local `settings.n` — else storage.t/n desync (wrong theme CSS shown under new theme name)
+V18: `#b` (bookmark bar) `contain` ⊥ include `layout`|`paint` — both establish containing block for its `position:fixed` `.p` folder popups ∴ popups pin to `#b` top:0 instead of anchoring below folder (Anchor Positioning breaks); `size`/`inline-size` only (height-lock w/o CB)
+V19: top-level `.p` popup (⊥ `.p .p`) `position-try-fallbacks` ⊥ include `flip-block` (⊥ vertical flip — always below folder anchor); `max-height:100%` (= position-area region = space below anchor) + `overflow-y:auto` ∴ long list scrolls in place, ⊥ flips onto folder in short viewport. Nested `.p .p` EXEMPT: MAY `flip-block` + `max-height:100vh` (repositions vertically, may cover bar) since anchored beside a folder that can sit low
 
 ## §T TASKS
 id|status|task|cites
 T1|.|resolve `?` open items below w/ user, confirm inferred goal/constraints|-
-T2|.|decide fate of `src/components/BookmarkNode.ts` TODO — rewrite folder-popup positioning via Anchor Positioning API / Popover API|I.BookmarkNode
+T2|x|folder-popup positioning rewritten to Anchor Positioning API (`.f` scoped anchor + `.p` position-area/try-fallbacks); Popover API declined (poor fit for hover-cascade menus); JS layout math deleted|I.BookmarkNode
 T3|.|decide fate of `src/components/Search.ts` TODO — single global debounced tabs listener instead of per-newtab-page listeners (perf issue w/ many open new-tab pages)|C.perf-first
 T4|.|settings.ts TODO — surface errors in UI (currently swallowed)|I.settings
 T5|.|settings.ts TODO — message when user disables all sections|I.settings
@@ -80,7 +86,15 @@ T12|.|build color-token override UI in settings (pickers, live re-theme, bake-in
 id|date|cause|fix
 B1|2026-07-10|`sw.test.ts`/`settings.test.ts`/`Search.test.ts` called `Loader.registry.delete(MODULE_PATH)` to bust the module cache between tests — `Loader` is an undocumented Bun internal that no longer exists (Bun 1.4.0), threw `ReferenceError` before each test's `import()`, silently breaking test isolation (12 tests failing, +1 knock-on failure in `newtab.test.ts` from leaked spy state across files)|V14
 B2|2026-07-10|initially misread `options_ui.open_in_tab` as an accidental leak of a dev-only toggle & "fixed" it by omitting the value; owner clarified it's a deliberate permanent choice (dedicated full tab, ahead of settings UI growth) — V10 amended to require `true` instead of `⊥ set`, test updated to match|V10
+B3|2026-07-11|sw.ts:63 onStartup sync-merge differ-branch keyed fetched theme CSS by stale local `settings.n` instead of incoming `remote.data.n`; `...remote.data` spread updates `n` but not `t` (SyncStorageData omits t) ∴ storage.t/n desync after any cross-device sync w/ differing themes — found via /ck:review, untested per sw.test.ts:79-80 TODO, undermines §C "sync = committed stable" claim, blocks T9|V17
+B4|2026-07-11|T2 anchor-positioning rewrite: `#b { contain: size layout }` — `layout` made `#b` the containing block for its `position:fixed` `.p` popups ∴ Anchor Positioning ignored, popups rendered at `#b` top:0 instead of below folder anchor; browser-verified `layout`/`paint` break placement while `size`/`inline-size` don't; fix `contain: size`|V18
+B5|2026-07-11|T2 anchor-positioning rewrite: `.p` had `position-try-fallbacks: flip-block` + `max-height:100vh` ∴ in short viewport popup couldn't fit below, flipped up ONTO folder anchor; fix drop `flip-block` (keep `flip-inline`) + `max-height:100%` (space below anchor) + `overflow-y:auto` ∴ stays below & scrolls; browser-verified|V19
 
 ---
 ? uncertain / needs confirmation (DISTILL mode, flag per FORMAT.md):
-- theme var redesign: naming + minimal-seed direction settled; derivation *mechanism* (CSS-native `color-mix()`/relative color syntax vs JS-computed) still open, blocks T11/T12 — next step is `/research` (T10), not a guess
+- theme var redesign: naming + minimal-seed direction settled; derivation *mechanism* (CSS-native `color-mix()`/relative color syntax vs JS-computed) still open, blocks T11/T12 —
+  R7-R9 now cover it: CSS-native (relative color syntax) is technically sound
+  for simple 1-step shifts (R7) but MD3/Radix precompute in JS for perceptual/
+  contrast guarantees CSS math can't express (R8), @ ~19.2KB gzip cost (R9) —
+  tradeoff is informed now, user still picks: CSS-native (lighter, simpler
+  shifts) vs JS-computed (HCT-grade palettes, heavier)
