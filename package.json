@@ -26,20 +26,20 @@
     "test:e2e": "playwright test"
   },
   "dependencies": {
-    "stage1": "0.10.0"
+    "stage1": "0.11.0-next.0"
   },
   "devDependencies": {
-    "@biomejs/biome": "2.5.12",
+    "@biomejs/biome": "2.5.14",
     "@maxmilton/oxlint-config": "0.0.20",
     "@maxmilton/test-utils": "0.0.18",
     "@playwright/test": "1.63.0",
     "@types/bun": "1.4.2",
-    "@types/chrome": "0.2.9",
-    "happy-dom": "20.14.3",
+    "@types/chrome": "0.3.0",
+    "happy-dom": "20.14.5",
     "lightningcss": "1.33.0",
-    "oxfmt": "0.67.0",
-    "oxlint": "1.82.0",
-    "oxlint-tsgolint": "7.0.2001",
+    "oxfmt": "0.68.0",
+    "oxlint": "1.83.0",
+    "oxlint-tsgolint": "7.0.2002",
     "stylelint": "17.15.0",
     "stylelint-config-standard": "40.0.0",
     "terser": "5.51.2",
