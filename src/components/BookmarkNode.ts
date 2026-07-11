@@ -74,6 +74,7 @@ export const Folder = (
 
     if (!popup) {
       // Immediately close any folder popups on the parent level
+      // oxlint-disable-next-line typescript/no-non-null-assertion
       root
         .parentNode!.querySelectorAll<FolderComponent>(".f")
         .forEach((folder) => folder.$$closePopup());

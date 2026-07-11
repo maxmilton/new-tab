@@ -41,6 +41,7 @@
     "node/no-sync": "off",
     "node/no-top-level-await": "off",
     "typescript/promise-function-async": "off",
+    "typescript/no-unsafe-type-assertion": "off",
 
     /* Performance and byte savings */
     "eslint/no-plusplus": "off", // byte savings
@@ -72,9 +73,6 @@
       "files": ["test/**/*.test.ts", "test/**/*.spec.ts"],
       "rules": {
         "unicorn/consistent-function-scoping": "off", // tests may define scoped helpers
-
-        // TODO: Remove when we can fix all the issues.
-        "typescript/no-unsafe-type-assertion": "off",
       },
     },
     {

@@ -9,6 +9,7 @@ performance.mark("Load Theme");
 
 // Use theme that was preloaded in sw.js
 const sheet = new CSSStyleSheet();
+// oxlint-disable-next-line typescript/no-non-null-assertion
 sheet.replaceSync(storage.t!);
 document.adoptedStyleSheets = [sheet];
 

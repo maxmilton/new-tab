@@ -3,7 +3,7 @@
 /* oxlint-disable no-empty-pattern */
 
 import path from "node:path";
-import { type BrowserContext, test as base, chromium } from "@playwright/test";
+import { test as base, type BrowserContext, chromium } from "@playwright/test";
 
 export const test = base.extend<{ context: BrowserContext; extensionId: string }>({
   // biome-ignore lint/correctness/noEmptyPattern: playwright setup

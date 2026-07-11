@@ -20,14 +20,14 @@ interface OpenTabLink extends LinkComponent {
 
 const handleTabClick = function (this: OpenTabLink): false {
   chromeTabs.getCurrent((currentTab) => {
-    if (currentTab!.id === this.$$data.id) return;
+    if (currentTab!.id === this.$$data.id) return; // oxlint-disable-line typescript/no-non-null-assertion
 
     // Switch to the clicked tab
     void chrome.windows.update(this.$$data.windowId, { focused: true });
     void chromeTabs.update(this.$$data.id, { active: true });
 
     // Close current "new-tab" page
-    void chromeTabs.remove(currentTab!.id!);
+    void chromeTabs.remove(currentTab!.id!); // oxlint-disable-line typescript/no-non-null-assertion
   });
 
   // Prevent default behaviour; shorter than `event.preventDefault()`

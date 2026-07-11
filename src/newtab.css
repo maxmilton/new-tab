@@ -1,4 +1,4 @@
-/* stylelint-disable no-descending-specificity */
+/* biome-ignore-all lint/style/noDescendingSpecificity: preserve stylelint order */
 
 /**
  * App styles
@@ -27,6 +27,19 @@ a,
   display: block;
   color: var(--t);
   white-space: nowrap;
+}
+
+.f /* folder */ {
+  anchor-name: --f;
+  anchor-scope: --f;
+}
+
+#b a /* bookmark bar link */,
+.f /* folder */ {
+  &:hover,
+  &:focus {
+    background-color: var(--c1);
+  }
 }
 
 a,
@@ -116,31 +129,6 @@ button /* "Show more" button */,
   height: 38px; /* should be same as body line-height */
   background: var(--c2);
   box-shadow: var(--s);
-
-  & > a,
-  & > .f /* folder */ {
-    flex-shrink: 0;
-    max-width: 16ch;
-    padding: 0 13px;
-  }
-}
-
-#b a,
-.f {
-  &:hover,
-  &:focus {
-    background-color: var(--c1);
-  }
-}
-
-#e /* empty folder */ {
-  padding: 0 13px;
-  color: var(--c3);
-}
-
-.f /* folder */ {
-  anchor-name: --f;
-  anchor-scope: --f;
 }
 
 .p /* folder popup */ {
@@ -170,6 +158,18 @@ button /* "Show more" button */,
     position: relative;
     padding-right: 24px;
   }
+}
+
+#b > a /* bookmark bar link */,
+#b > .f /* bookmark bar folder */ {
+  flex-shrink: 0;
+  max-width: 16ch;
+  padding: 0 13px;
+}
+
+#e /* empty folder */ {
+  padding: 0 13px;
+  color: var(--c3);
 }
 
 .i /* subfolder arrow icon */ {

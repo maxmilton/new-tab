@@ -24,7 +24,6 @@ interface SectionScope {
 const DRAG_TYPE = "text/plain";
 const DEFAULT_THEME = "auto";
 
-// oxlint-disable-next-line typescript/no-unsafe-type-assertion
 const themesData = fetch("themes.json").then((response) => response.json() as Promise<ThemesData>);
 
 const hasStorageSync = async (): Promise<boolean> => {
@@ -76,29 +75,30 @@ const SectionItem = (
   }
 
   root.ondragstart = (event) => {
+    // oxlint-disable-next-line typescript/no-non-null-assertion
     event.dataTransfer!.setData(DRAG_TYPE, JSON.stringify([list, scope.indexOf(list, item)]));
-    (event.target as SectionComponent).classList.add("dragging");
+    root.classList.add("dragging");
   };
 
-  root.ondragend = (event) => {
-    (event.target as SectionComponent).classList.remove("dragging");
+  root.ondragend = () => {
+    root.classList.remove("dragging");
   };
 
-  root.ondragenter = (event) => {
-    (event.target as SectionComponent).classList.add("over");
+  root.ondragenter = () => {
+    root.classList.add("over");
   };
 
-  root.ondragleave = (event) => {
-    (event.target as SectionComponent).classList.remove("over");
+  root.ondragleave = () => {
+    root.classList.remove("over");
   };
 
   root.ondrop = (event) => {
     event.preventDefault();
 
-    (event.target as SectionComponent).classList.remove("over");
+    root.classList.remove("over");
 
+    // oxlint-disable-next-line typescript/no-non-null-assertion
     const from = JSON.parse(event.dataTransfer!.getData(DRAG_TYPE)) as ItemIndex;
-
     scope.moveItem(from, [list, scope.indexOf(list, item)]);
   };
 
@@ -268,6 +268,7 @@ const Settings = () => {
 
     if (state.order[list].length > 0) return;
 
+    // oxlint-disable-next-line typescript/no-non-null-assertion
     const from = JSON.parse(event.dataTransfer!.getData(DRAG_TYPE)) as ItemIndex;
 
     scope.moveItem(from, [list, 0]);
@@ -293,6 +294,7 @@ const Settings = () => {
   // oxlint-disable-next-line no-multi-assign
   se.ondragover = sd.ondragover = (event) => {
     event.preventDefault();
+    // oxlint-disable-next-line typescript/no-non-null-assertion
     event.dataTransfer!.dropEffect = "move";
   };
   se.ondrop = handleDrop(0);
@@ -365,6 +367,7 @@ const Settings = () => {
       }
     };
 
+    // oxlint-disable-next-line typescript/no-non-null-assertion
     push.onclick = () => state.pushSyncData!(true);
 
     clear.onclick = () => {

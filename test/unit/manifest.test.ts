@@ -140,7 +140,7 @@ test("has correct icons.* values", () => {
   expect(manifest.icons?.[16]).toBe("icon16.png");
   expect(manifest.icons?.[48]).toBe("icon48.png");
   expect(manifest.icons?.[128]).toBe("icon128.png");
-  expect(Object.keys(manifest.icons!)).toHaveLength(3);
+  expect(Object.keys(manifest.icons ?? {})).toHaveLength(3);
 });
 
 test("has correct chrome_url_overrides.newtab value", () => {
