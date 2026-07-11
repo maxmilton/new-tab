@@ -14,9 +14,7 @@
   "git.branchProtection": ["master", "next"],
   "js/ts.tsdk.path": "node_modules/typescript/lib",
   "js/ts.tsdk.promptToUseWorkspaceVersion": true,
-  "oxc.enable": true,
-  "oxc.unusedDisableDirectives": "deny",
-  "prettier.enable": false, // use biome
+  "oxc.enable.oxlint": true,
   "stylelint.enable": true,
 
   "[css]": {
