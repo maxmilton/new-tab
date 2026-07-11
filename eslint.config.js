@@ -11,7 +11,7 @@ export default defineConfig(
   ts.configs.stylisticTypeChecked,
   unicorn.configs.recommended,
   mm.configs.recommended,
-  ...oxlint.buildFromOxlintConfigFile(".oxlintrc.json"),
+  ...oxlint.buildFromOxlintConfigFile(".oxlintrc.jsonc"),
   {
     linterOptions: {
       reportUnusedDisableDirectives: "error",
@@ -28,16 +28,15 @@ export default defineConfig(
       // https://github.com/oxc-project/oxc/issues/481
       // https://github.com/oxc-project/oxc/issues?q=%E2%98%82%EF%B8%8F
 
-      "@typescript-eslint/no-confusing-void-expression": "off", // byte savings (but reduces readability)
-      "@typescript-eslint/restrict-plus-operands": "off", // byte savings (but harder to debug)
-      "@typescript-eslint/restrict-template-expressions": "off", // byte savings (but harder to debug)
       "unicorn/import-style": "off",
       "unicorn/no-top-level-assignment-in-function": "off", // used carefully
+      "unicorn/single-line-block-comment-style": "off",
 
       // TODO: Remove these once buildFromOxlintConfigFile correctly disables them.
       "@typescript-eslint/naming-convention": "off",
-      "@typescript-eslint/no-misused-promises": "off",
-      "@typescript-eslint/prefer-string-starts-ends-with": "off",
+      "@typescript-eslint/no-unnecessary-condition": "off",
+      "consistent-return": "off",
+      "global-require": "off",
       "unicorn/explicit-length-check": "off",
       "unicorn/no-array-sort": "off",
       "unicorn/no-await-expression-member": "off",

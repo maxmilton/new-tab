@@ -5,42 +5,49 @@
     "actions": {
       "preset": "recommended",
       "source": {
-        "useSortedPackageJson": "on",
-        "useSortedProperties": "on"
-      }
-    }
+        "organizeImports": "off", // use oxfmt
+        "useSortedProperties": "on",
+      },
+    },
   },
   "formatter": {
     "enabled": true,
     "indentStyle": "space",
-    "lineWidth": 100
+    "lineWidth": 100,
   },
   "linter": {
     "enabled": true,
     "domains": {
-      "project": "all"
+      "project": "all",
     },
     "rules": {
       "preset": "recommended",
       "correctness": {
-        "noUnresolvedImports": "off" // covered by typescript
+        "noUnresolvedImports": "off", // covered by typescript
       },
       "style": {
         "noNonNullAssertion": "off",
-        "useTemplate": "off"
+        "useTemplate": "off",
       },
       "suspicious": {
         "noAssignInExpressions": "off",
         "noConstEnum": "off",
-        "useIterableCallbackReturn": "off" // byte savings
-      }
-    }
+        "noExplicitAny": "off", // covered by oxlint
+        "useIterableCallbackReturn": "off", // byte savings
+      },
+    },
+  },
+  "json": {
+    "formatter": {
+      "enabled": false, // use oxfmt
+    },
   },
   "javascript": {
     "globals": ["Bun"],
     "formatter": {
-      "operatorLinebreak": "before"
-    }
+      "enabled": false, // use oxfmt
+      "operatorLinebreak": "before",
+    },
   },
   "overrides": [
     {
@@ -48,20 +55,20 @@
       "json": {
         "parser": {
           "allowComments": true,
-          "allowTrailingCommas": true
-        }
-      }
+          "allowTrailingCommas": true,
+        },
+      },
     },
     {
       "includes": ["**/*.spec.ts", "**/*.test.ts", "test/**"],
       "linter": {
         "domains": {
-          "test": "all"
-        }
+          "test": "all",
+        },
       },
       "javascript": {
-        "globals": ["$console", "Bun", "happyDOM"]
-      }
-    }
-  ]
+        "globals": ["$console", "Bun", "happyDOM"],
+      },
+    },
+  ],
 }

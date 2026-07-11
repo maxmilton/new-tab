@@ -1,5 +1,4 @@
 {
-  "biome.enabled": true,
   "editor.codeActionsOnSave": {
     "source.organizeImports": "explicit",
     "source.fixAll": "explicit",
@@ -9,20 +8,24 @@
   "editor.formatOnSave": true,
   "editor.formatOnType": false,
   "editor.tabSize": 2,
-  "editor.unicodeHighlight.ambiguousCharacters": true,
-  "editor.unicodeHighlight.invisibleCharacters": true,
   "eslint.enable": true,
   "git.branchProtection": ["master", "next"],
-  "js/ts.tsdk.path": "node_modules/typescript/lib",
+  "git.detectWorktrees": true,
+  "git.worktreeIncludeFiles": ["node_modules/**"],
+  "js/ts.experimental.useTsgo": true, // TODO: Remove once tsgo is stable
+  "js/ts.tsdk.path": "node_modules/typescript",
   "js/ts.tsdk.promptToUseWorkspaceVersion": true,
+  "oxc.disableNestedConfig": true,
   "oxc.enable.oxlint": true,
+  "oxc.enable.oxfmt": true,
+  "oxc.path.node": "bun",
   "stylelint.enable": true,
 
   "[css]": {
-    "editor.defaultFormatter": "biomejs.biome"
+    "editor.defaultFormatter": "oxc.oxc-vscode"
   },
   "[html]": {
-    "editor.defaultFormatter": "biomejs.biome"
+    "editor.defaultFormatter": "oxc.oxc-vscode"
   },
   "[javascript]": {
     "editor.codeActionsOnSave": {
@@ -30,22 +33,25 @@
       "source.fixAll.eslint": "never",
       "source.fixAll.oxc": "never"
     },
-    "editor.defaultFormatter": "biomejs.biome"
+    "editor.defaultFormatter": "oxc.oxc-vscode"
   },
   "[json]": {
-    "editor.defaultFormatter": "biomejs.biome"
+    "editor.defaultFormatter": "oxc.oxc-vscode"
   },
   "[jsonc]": {
-    "editor.defaultFormatter": "biomejs.biome"
+    "editor.defaultFormatter": "oxc.oxc-vscode"
   },
   "[markdown]": {
-    "editor.defaultFormatter": "biomejs.biome",
+    "editor.defaultFormatter": "oxc.oxc-vscode",
     "editor.unicodeHighlight.ambiguousCharacters": true,
     "editor.unicodeHighlight.invisibleCharacters": true,
     "files.trimTrailingWhitespace": false
   },
   "[tailwindcss]": {
-    "editor.defaultFormatter": "biomejs.biome"
+    "editor.defaultFormatter": "oxc.oxc-vscode"
+  },
+  "[toml]": {
+    "editor.defaultFormatter": "oxc.oxc-vscode"
   },
   "[typescript]": {
     "editor.codeActionsOnSave": {
@@ -53,9 +59,9 @@
       "source.fixAll.eslint": "never",
       "source.fixAll.oxc": "never"
     },
-    "editor.defaultFormatter": "biomejs.biome"
+    "editor.defaultFormatter": "oxc.oxc-vscode"
   },
   "[yaml]": {
-    "editor.defaultFormatter": "biomejs.biome"
+    "editor.defaultFormatter": "oxc.oxc-vscode"
   }
 }

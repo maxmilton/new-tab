@@ -1,0 +1,101 @@
+{
+  "$schema": "./node_modules/oxlint/configuration_schema.json",
+  "jsPlugins": ["oxclippy"],
+  "extends": [
+    "./node_modules/oxclippy/presets/all.json",
+    "./node_modules/@maxmilton/oxlint-config/recommended.json",
+    "./node_modules/@maxmilton/oxlint-config/stage1.json",
+  ],
+  "options": {
+    "maxWarnings": 100,
+    "reportUnusedDisableDirectives": "error",
+    "respectEslintDisableDirectives": false,
+    "typeAware": true,
+  },
+  "categories": {
+    "correctness": "error",
+    "suspicious": "error",
+    "pedantic": "warn",
+    "perf": "error",
+    "style": "warn",
+    "restriction": "error",
+    "nursery": "warn",
+  },
+  // https://github.com/oxc-project/javascript-globals/blob/main/src/lib.rs
+  "env": {
+    "builtin": true,
+    "es2026": true, // TODO: es2027 once in oxc.
+    "bun": true,
+    "commonjs": false,
+    "browser": true,
+    "webextensions": true,
+  },
+  "rules": {
+    "eslint/id-length": [
+      "error",
+      {
+        "exceptionPatterns": ["^[A-Z]$"], // type names
+        "exceptions": ["_" /* UserStorageData keys */, "n", "t", "b", "o", "s"],
+      },
+    ],
+    "eslint/no-underscore-dangle": "off",
+    "eslint/require-unicode-regexp": "off",
+    "node/no-sync": "off",
+    "node/no-top-level-await": "off",
+    "typescript/promise-function-async": "off",
+
+    /* Performance and byte savings */
+    "eslint/no-plusplus": "off", // byte savings
+    "eslint/prefer-template": "off",
+    "promise/prefer-await-to-callbacks": "off", // control resolve timing for better performance
+    "promise/prefer-await-to-then": "off",
+    "typescript/prefer-string-starts-ends-with": "off",
+    "typescript/strict-boolean-expressions": "off",
+    "unicorn/explicit-length-check": "off", // byte savings + faster
+    "unicorn/explicit-timer-delay": "off",
+    "unicorn/no-array-for-each": "off", // forEach is more compact (slower but; for non-performance-critical code)
+    "unicorn/no-array-sort": "off", // faster to mutate arrays in place
+    "unicorn/no-await-expression-member": "off",
+    "unicorn/prefer-includes": "off", // indexOf is faster in some cases
+    "unicorn/prefer-native-coercion-functions": "off", // arrow function saves 3 bytes
+    "unicorn/prefer-string-starts-ends-with": "off", // byte savings + faster
+
+    // TODO: Remove when we can fix all the issues.
+    "typescript/no-unsafe-type-assertion": "warn",
+
+    // TODO: These are buggy. Remove after future oxlint updates.
+    "typescript/prefer-readonly-parameter-types": "off",
+  },
+  "overrides": [
+    {
+      "files": ["src/sw.ts"],
+      "env": {
+        "serviceworker": true,
+      },
+    },
+    {
+      "files": ["test/**/*.test.ts", "test/**/*.spec.ts"],
+      "rules": {
+        "unicorn/consistent-function-scoping": "off", // tests may define scoped helpers
+      },
+    },
+    {
+      "files": ["test/unit/**"],
+      "globals": {
+        "$console": "readonly",
+        "happyDOM": "readonly",
+      },
+    },
+    {
+      "files": ["test/e2e/**"],
+      "env": {
+        "browser": false,
+        "webextensions": false,
+      },
+      "plugins": ["vitest"],
+      "rules": {
+        "vitest/consistent-test-filename": ["error", { "pattern": ".*\\.spec\\.ts$" }],
+      },
+    },
+  ],
+}
