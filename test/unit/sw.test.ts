@@ -3,18 +3,18 @@ import { performanceSpy } from "@maxmilton/test-utils/spy";
 import type { SyncStorageData, UserStorageData } from "#types.ts";
 import { reset } from "./setup.ts";
 
-const originalFetch = global.fetch;
-
-afterEach(async () => {
-  global.fetch = originalFetch;
-  await reset();
-});
+afterEach(reset);
 
 const MODULE_PATH = Bun.resolveSync("./dist/sw.js", ".");
 
 async function load() {
-  // Cache-bust the dynamic import so each test gets a fresh module instance
-  // (re-running its top-level side effects against this test's fresh mocks).
+  window.close();
+  // @ts-expect-error - service workers have no window
+  global.window = undefined;
+  // @ts-expect-error - service workers have no document
+  global.document = undefined;
+
+  // Cache-bust the dynamic import so each test gets a fresh module instance.
   await import(`${MODULE_PATH}?bust=${Bun.nanoseconds()}`);
 }
 
@@ -40,11 +40,14 @@ async function loadStartup() {
 }
 
 function mockThemes(themes: Record<string, string> = {}) {
-  global.fetch = Object.assign(
-    (input: URL | RequestInfo, init?: BunFetchRequestInit | RequestInit) =>
-      input === "themes.json" ? Promise.resolve(Response.json(themes)) : originalFetch(input, init),
-    originalFetch,
-  );
+  // @ts-expect-error - monkey patch fetch for testing
+  global.fetch = (input: RequestInfo | URL) => {
+    if (input === "themes.json") {
+      return Promise.resolve(Response.json(themes));
+    }
+    // oxlint-disable-next-line typescript/no-base-to-string typescript/restrict-template-expressions
+    throw new Error(`Unexpected fetch call: ${input}`);
+  };
 }
 
 test("does not call any console methods", async () => {
@@ -63,7 +66,6 @@ test("does not call any performance methods", async () => {
 test("does not call fetch()", async () => {
   expect.assertions(1);
   using spy = spyOn(global, "fetch");
-  mockThemes();
   await load();
   expect(spy).toHaveBeenCalledTimes(0);
 });
@@ -199,7 +201,6 @@ describe("onStartup", () => {
 
   test("does not call fetch() when no settings", async () => {
     expect.assertions(1);
-    mockThemes();
     using spy = spyOn(global, "fetch");
     const listener = await loadStartup();
     listener();

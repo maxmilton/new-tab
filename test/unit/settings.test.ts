@@ -14,14 +14,13 @@ async function load() {
     if (input === "themes.json") {
       return Promise.resolve(new Response(themes));
     }
-    // oxlint-disable-next-line typescript/no-base-to-string
-    throw new Error(`Unexpected fetch call: ${String(input)}`);
+    // oxlint-disable-next-line typescript/no-base-to-string typescript/restrict-template-expressions
+    throw new Error(`Unexpected fetch call: ${input}`);
   });
-  // @ts-expect-error - monkey patching fetch for testing
+  // @ts-expect-error - monkey patch fetch for testing
   global.fetch = window.fetch = fetchMock; // oxlint-disable-line no-multi-assign
 
-  // Cache-bust the dynamic import so each test gets a fresh module instance
-  // (re-running its top-level side effects against this test's fresh mocks).
+  // Cache-bust the dynamic import so each test gets a fresh module instance.
   await import(`${MODULE_PATH}?bust=${Bun.nanoseconds()}`);
   await happyDOM.waitUntilComplete();
 

@@ -104,7 +104,8 @@ export async function reset(): Promise<void> {
   // oxlint-disable-next-line typescript/no-unnecessary-condition
   if (global.happyDOM) {
     await happyDOM.abort();
-    window.close();
+    // oxlint-disable-next-line typescript/no-unnecessary-condition
+    window?.close();
   }
 
   setupDOM({ url: "chrome-extension://cpcibnbdmpmcmnkhoiilpnlaepkepknb/" });
