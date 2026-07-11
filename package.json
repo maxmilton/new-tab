@@ -30,7 +30,7 @@
   },
   "devDependencies": {
     "@biomejs/biome": "2.5.14",
-    "@maxmilton/oxlint-config": "0.0.20",
+    "@maxmilton/oxlint-config": "0.0.21",
     "@maxmilton/test-utils": "0.0.18",
     "@playwright/test": "1.63.0",
     "@types/bun": "1.4.2",
