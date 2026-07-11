@@ -29,7 +29,6 @@ export const BookmarkBar = (): BookmarkBarComponent => {
       // we can use clientWidth instead of offsetWidth for better performance.
       let width = allBookmarksFolder.clientWidth;
       let index = 0;
-      // eslint-disable-next-line unicorn/prefer-smaller-scope
       let node: ReturnType<typeof BookmarkNode>;
 
       // Add one bookmark at a time until we overflow the max width
@@ -86,7 +85,6 @@ export const BookmarkBar = (): BookmarkBarComponent => {
 
     waitForStylesThenResize();
 
-    // eslint-disable-next-line unicorn/no-global-object-property-assignment
     window.onresize = resize;
   });
 

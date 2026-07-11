@@ -24,7 +24,7 @@ interface SectionScope {
 const DRAG_TYPE = "text/plain";
 const DEFAULT_THEME = "auto";
 
-// eslint-disable-next-line unicorn/prefer-await
+// oxlint-disable-next-line typescript/no-unsafe-type-assertion
 const themesData = fetch("themes.json").then((response) => response.json() as Promise<ThemesData>);
 
 const hasStorageSync = async (): Promise<boolean> => {
@@ -345,7 +345,6 @@ const Settings = () => {
     };
 
     pull.onclick = () => {
-      // eslint-disable-next-line unicorn/prefer-early-return
       if (syncData.data) {
         void chrome.storage.sync.set(syncData.data);
         void updateTheme(syncData.data.n ?? DEFAULT_THEME);

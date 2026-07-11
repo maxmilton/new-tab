@@ -18,7 +18,6 @@ interface OpenTabLink extends LinkComponent {
   $$data: TabItem;
 }
 
-// eslint-disable-next-line unicorn/consistent-boolean-name
 const handleTabClick = function (this: OpenTabLink): false {
   chromeTabs.getCurrent((currentTab) => {
     if (currentTab!.id === this.$$data.id) return;
@@ -75,7 +74,6 @@ export const SearchResult = <T extends LinkProps & TabItem>(
 
     const list = isOpenTabs ? listData : listData.slice(0, showCount);
     let index = 0;
-    // eslint-disable-next-line unicorn/prefer-smaller-scope
     let link: LinkComponent;
 
     renderedLength = list.length;

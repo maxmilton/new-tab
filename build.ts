@@ -23,16 +23,14 @@ async function compileCSS(path: string) {
 }
 
 async function makeThemes(pattern: string) {
-  // eslint-disable-next-line unicorn/require-array-sort-compare
   const paths = [...new Bun.Glob(pattern).scanSync()].sort();
-  const compiled = await Promise.all(paths.map(compileCSS));
+  const compiled = await Promise.all(paths.map((path) => compileCSS(path)));
   const entries = paths.map((path, index) => [basename(path, ".css"), compiled[index].toString()]);
   return JSON.stringify(Object.fromEntries(entries));
 }
 
 async function minify(artifacts: Bun.BuildArtifact[]) {
   for (const artifact of artifacts) {
-    // eslint-disable-next-line unicorn/prefer-continue
     if (artifact.path.endsWith(".js")) {
       const source = await artifact.text();
       const result = await terser.minify(source, {
@@ -53,7 +51,7 @@ async function minify(artifacts: Bun.BuildArtifact[]) {
           },
         },
       });
-      await Bun.write(artifact.path, result.code!);
+      await Bun.write(artifact.path, result.code ?? "");
     }
   }
 }

@@ -1,5 +1,3 @@
-// oxlint-disable no-conditional-in-test
-
 import { expect, test } from "./fixtures.ts";
 
 test("settings page", async ({ page, extensionId }) => {

@@ -1,4 +1,4 @@
-// oxlint-disable typescript/consistent-return vitest/no-conditional-in-test
+// oxlint-disable typescript/consistent-return
 
 import { afterEach, describe, expect, test } from "bun:test";
 import {
@@ -117,9 +117,7 @@ describe.each(themeNames.map((t) => [t]))("theme: %s", (theme) => {
         found += 1;
         const variables2: string[] = [];
         for (const child of element.children as Element[]) {
-          // oxlint-disable-next-line no-conditional-in-test
           if (child.type === DECLARATION) {
-            // oxlint-disable-next-line no-conditional-in-test
             if ((child.props as string).startsWith("--") && child.children) {
               variables2.push(child.props as string);
             }
