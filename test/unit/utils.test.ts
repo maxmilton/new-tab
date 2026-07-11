@@ -32,8 +32,6 @@ describe("DEFAULT_SECTION_ORDER", () => {
   });
 });
 
-// TODO: Add invariant tests for handleClick
-
 declare global {
   /** Search input element with id=s defined in `src/components/Search.ts`. */
   var s: HTMLInputElement;
@@ -148,12 +146,13 @@ describe("handleClick", () => {
   });
 
   test('handler does not return false when url starts with "h"', () => {
-    expect.assertions(1);
+    expect.assertions(2);
     const event = new window.MouseEvent("click");
     // @ts-expect-error - happy-dom internal target property
     event[target] = { href: "https://example.com" };
     const result = handleClick(event);
     expect(result).not.toBeFalse();
+    expect(result).toBeUndefined();
   });
 
   test("opens in new tab when url starts with chrome:// and ctrl key is pressed", () => {

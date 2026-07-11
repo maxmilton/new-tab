@@ -28,13 +28,14 @@ test("rendered DOM matches snapshot", () => {
 });
 
 test("clicking settings link calls chrome.runtime.openOptionsPage", () => {
-  expect.assertions(2);
+  expect.assertions(3);
   document.onclick = handleClick; // same click event logic as in src/newtab.ts
   const spy = spyOn(chrome.runtime, "openOptionsPage");
   const rendered = render(Menu());
   // TODO: Use a less brittle selector, however currently the settings link is
   // the only one without a href attribute...
   const link = rendered.container.querySelector<HTMLAnchorElement>("a:not([href])");
+  expect(link?.textContent).toBe("New Tab Settings");
   expect(link).toBeInstanceOf(window.HTMLAnchorElement);
   link?.click();
   expect(spy).toHaveBeenCalledTimes(1);

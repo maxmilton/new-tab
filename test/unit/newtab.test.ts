@@ -7,16 +7,19 @@ import { reset } from "../setup.ts";
 afterEach(reset);
 
 const SCRIPT_PATH = Bun.resolveSync("./dist/newtab.js", ".");
-let loadCount = 0;
 
-async function load() {
+async function load(mockUserSettings?: UserStorageData) {
+  if (mockUserSettings) {
+    mockUserSettings.t ??= "";
+    chrome.storage.local.get = () => Promise.resolve(mockUserSettings);
+  }
+
   // Workaround for hack in src/BookmarkBar.ts that waits for styles to be loaded
   document.head.appendChild(document.createElement("style"));
 
   // Cache-bust the dynamic import so each test gets a fresh module instance
   // (re-running its top-level side effects against this test's fresh mocks).
-  await import(`${SCRIPT_PATH}?bust=${loadCount++}`);
-
+  await import(`${SCRIPT_PATH}?bust=${Bun.nanoseconds()}`);
   await happyDOM.waitUntilComplete();
 }
 
@@ -29,8 +32,9 @@ test("renders entire newtab app", async () => {
   expect(document.body.querySelector("#m")).toBeTruthy();
   expect(document.body.querySelector("#d")).toBeTruthy();
 
-  // TODO: More and better assertions.
-  // TODO: Check all section headings exist; a h2 with text 'Open Tabs' x5.
+  const headings = [...document.body.querySelectorAll("h2")].map((h2) => h2.textContent);
+  expect(headings).toHaveLength(DEFAULT_SECTION_ORDER.length);
+  expect(headings).toEqual([...DEFAULT_SECTION_ORDER]);
 });
 
 test("does not call any console methods", async () => {
@@ -60,7 +64,26 @@ test("gets stored user settings once", async () => {
   expect(spy).toHaveBeenCalledTimes(1);
 });
 
-// TODO: Test with various settings
+test("hides bookmark bar when storage.b is true", async () => {
+  expect.assertions(1);
+  await load({ t: "", b: true });
+  expect(document.body.querySelector("#b")).toBeFalsy();
+});
+
+test("shows bookmark bar when storage.b is false", async () => {
+  expect.assertions(1);
+  await load({ t: "", b: false });
+  expect(document.body.querySelector("#b")).toBeTruthy();
+});
+
+test("renders sections in the order given by storage.o", async () => {
+  expect.assertions(1);
+  const order = DEFAULT_SECTION_ORDER.toReversed();
+  await load({ t: "", o: order });
+  const headings = [...document.body.querySelectorAll("h2")].map((h2) => h2.textContent);
+  expect(headings).toEqual(order);
+});
+
 // TODO: Test themes logic
 const css = await Bun.file("dist/newtab.css").text();
 

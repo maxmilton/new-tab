@@ -23,14 +23,14 @@ test("renders a folder when url is not provided", () => {
 
 describe("Bookmark (Link)", () => {
   test("rendered DOM contains expected elements", () => {
-    expect.assertions(1);
+    expect.assertions(3);
     const rendered = render(
       BookmarkNode({ title: "Example", url: "https://example.com" } satisfies LinkProps),
     );
     const root = rendered.container.firstChild as HTMLAnchorElement;
     expect(root).toBeInstanceOf(window.HTMLAnchorElement);
-
-    // TODO: More/better assertions to prove it's a Link component.
+    expect(root.href).toBe("https://example.com/");
+    expect(root.querySelector("img")).toBeTruthy(); // favicon
   });
 
   test("rendered DOM matches snapshot", () => {
@@ -38,9 +38,6 @@ describe("Bookmark (Link)", () => {
     const rendered = render(BookmarkNode({ title: "Example", url: "https://example.com" }));
     expect(rendered.container.getHTML()).toMatchSnapshot();
   });
-
-  // TODO: Consider running the same tests as for Link component.
-  //  ↳ How might we do this elegantly without duplicating the tests?
 });
 
 describe("Folder", () => {

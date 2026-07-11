@@ -8,13 +8,12 @@ import type { Search as SearchComponent } from "#components/Search.ts";
 // maintain accurate test conditions.
 const MODULE_PATH = Bun.resolveSync("#components/Search.ts", ".");
 let Search: typeof SearchComponent;
-let loadCount = 0;
 
 beforeEach(async () => {
   // Cache-bust the dynamic import so each test gets a fresh module instance
   // (re-running its top-level side effects against this test's fresh mocks).
-  // oxlint-disable-next-line prefer-destructuring
-  Search = (await import(`${MODULE_PATH}?bust=${loadCount++}`)).Search; // eslint-disable-line @typescript-eslint/no-unsafe-assignment, @typescript-eslint/no-unsafe-member-access
+  // oxlint-disable-next-line prefer-destructuring typescript/no-unsafe-assignment typescript/no-unsafe-member-access
+  Search = (await import(`${MODULE_PATH}?bust=${Bun.nanoseconds()}`)).Search;
 });
 
 afterEach(cleanup);
@@ -23,22 +22,21 @@ afterEach(cleanup);
 // them to complete before we assert anything.
 
 test("rendered DOM contains expected elements", async () => {
-  expect.assertions(7);
+  expect.assertions(9);
   const rendered = render(Search());
   await happyDOM.waitUntilComplete();
   const root = rendered.container.firstChild as HTMLElement;
   expect(root).toBeInstanceOf(window.HTMLDivElement);
   expect(root.id).toBe("c");
-  const input = root.querySelector("input#s");
+  const input = root.querySelector<HTMLInputElement>("input#s");
   expect(input).toBeTruthy();
   expect(root.firstChild).toBe(input);
   expect(input?.parentElement).toBe(root);
+  expect(input?.type).toBe("search");
+  expect(input?.placeholder).toBe("Search browser...");
   const icon = root.querySelector("svg#i");
   expect(icon).toBeTruthy();
   expect(icon?.parentElement).toBe(root);
-
-  // TODO: Check for other elements (but probably only those which are part of
-  // the Search component and not its children?).
 });
 
 test("rendered DOM matches snapshot", async () => {

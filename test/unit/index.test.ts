@@ -1,6 +1,6 @@
 import { describe, expect, test } from "bun:test";
-import { readdir } from "node:fs/promises";
 import { validate } from "@maxmilton/test-utils/html";
+import pkg from "../../package.json" with { type: "json" };
 
 describe("dist files", () => {
   // TODO: Remove the file MIME type checks? Bun inferrs it from the file
@@ -29,7 +29,7 @@ describe("dist files", () => {
 
     test("exists with correct MIME type", () => {
       expect.assertions(3);
-      expect(file.exists()).resolves.toBeTruthy();
+      expect(file.exists()).resolves.toBeTrue();
       expect(file.size).toBeGreaterThan(0);
       expect(file.type).toBe(type);
     });
@@ -43,10 +43,11 @@ describe("dist files", () => {
     }
   });
 
-  test("contains no extra files", async () => {
+  test("contains no unexpected files", () => {
     expect.assertions(1);
-    const distDir = await readdir("dist");
-    expect(distDir).toHaveLength(distFiles.length);
+    const expectedFiles = new Set(distFiles.map(([filename]) => filename));
+    const actualFiles = new Set(new Bun.Glob("**").scanSync({ cwd: "dist" }));
+    expect(actualFiles.difference(expectedFiles)).toBeEmpty();
   });
 
   test.each(distFiles.filter(([filename]) => filename.endsWith(".html")))(
@@ -60,16 +61,38 @@ describe("dist files", () => {
   );
 });
 
+describe("package.json", () => {
+  const file = Bun.file("package.json");
+
+  test("exists with correct MIME type", () => {
+    expect.assertions(2);
+    expect(file.exists()).resolves.toBeTrue();
+    expect(file.type).toBe("application/json;charset=utf-8");
+  });
+
+  test("contains valid JSON", async () => {
+    expect.assertions(1);
+    const text = await file.text();
+    expect(JSON.parse(text)).toBePlainObject();
+  });
+
+  test("contains properties used in manifest", () => {
+    expect.assertions(6);
+    expect(pkg).toHaveProperty("description", expect.any(String));
+    expect(pkg).toHaveProperty("version", expect.any(String));
+    expect(pkg).toHaveProperty("homepage", expect.any(String));
+    expect(pkg.description.length).toBeGreaterThan(0);
+    expect(pkg.version.length).toBeGreaterThan(0);
+    expect(pkg.homepage.length).toBeGreaterThan(0);
+  });
+});
+
 test("no test file relies on the removed Bun `Loader` internal", async () => {
   expect.assertions(1);
-  const files = await readdir("test/unit");
   const contents = await Promise.all(
-    files
-      // oxlint-disable-next-line vitest/no-conditional-in-test
-      .filter((filename) => filename.endsWith(".test.ts") && filename !== "index.test.ts")
+    [...new Bun.Glob("**/*.ts").scanSync({ cwd: "test/unit" })]
+      .filter((filename) => filename !== "index.test.ts")
       .map((filename) => Bun.file(`test/unit/${filename}`).text()),
   );
-  // eslint-disable-next-line unicorn/consistent-boolean-name
-  const usesLoaderRegistry = contents.some((content) => content.includes("Loader.registry"));
-  expect(usesLoaderRegistry).toBeFalse();
+  expect(contents.join("\n")).not.toContain("Loader.registry");
 });
