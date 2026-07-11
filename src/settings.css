@@ -85,7 +85,7 @@ select {
 
   &:hover,
   &:focus {
-    color: #b255ff !important;
+    color: #b255ff;
   }
 }
 

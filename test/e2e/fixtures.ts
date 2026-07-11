@@ -18,7 +18,7 @@ export const test = base.extend<{ context: BrowserContext; extensionId: string }
   },
   async extensionId({ context }, use) {
     let [sw] = context.serviceWorkers();
-    // eslint-disable-next-line @typescript-eslint/no-unnecessary-condition
+    // oxlint-disable-next-line typescript/no-unnecessary-condition
     sw ??= await context.waitForEvent("serviceworker", { timeout: 200 });
 
     // oxlint-disable-next-line prefer-destructuring

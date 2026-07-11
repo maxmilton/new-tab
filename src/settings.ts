@@ -27,7 +27,7 @@ const DEFAULT_THEME = "auto";
 // eslint-disable-next-line unicorn/prefer-await
 const themesData = fetch("themes.json").then((response) => response.json() as Promise<ThemesData>);
 
-const supportsSync = async (): Promise<boolean> => {
+const hasStorageSync = async (): Promise<boolean> => {
   try {
     await chrome.storage.sync.set({ _: 1 });
     await chrome.storage.sync.remove("_");
@@ -374,7 +374,7 @@ const Settings = () => {
     };
   };
 
-  void supportsSync().then((canSync) => {
+  void hasStorageSync().then((canSync) => {
     if (canSync) {
       chrome.storage.sync.get<SyncStorageData>(updateSync);
       // TODO: Listen for sync data changes?

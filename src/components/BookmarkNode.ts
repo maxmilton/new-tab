@@ -20,7 +20,7 @@ const FolderPopup = (children: BookmarkTreeNode[]): FolderPopupComponent => {
     // oxlint-disable-next-line no-use-before-define
     children.forEach((item) => append(BookmarkNode(item, true), root));
   } else {
-    append((emptyPopup ??= h<HTMLDivElement>("<div id=e>(empty)</div>")), root);
+    append((emptyPopup ??= h<HTMLDivElement>(/* html */ "<div id=e>(empty)</div>")), root);
   }
 
   return root;
@@ -52,9 +52,13 @@ export const Folder = (
   root.textContent = props.title;
 
   if (isNested) {
+    // https://github.com/tailwindlabs/heroicons/blob/master/optimized/24/outline/arrow-right.svg
     append(
-      // https://github.com/tailwindlabs/heroicons/blob/master/optimized/24/outline/arrow-right.svg
-      clone((arrow ??= h<SVGElement>('<svg class=i><path d="M5 12h14M12 5l7 7-7 7"/></svg>'))),
+      clone(
+        (arrow ??= h<SVGElement>(
+          /* html */ '<svg class=i><path d="M5 12h14M12 5l7 7-7 7"/></svg>',
+        )),
+      ),
       root,
     );
   }

@@ -11,7 +11,7 @@ interface Refs {
 }
 
 // https://github.com/feathericons/feather/blob/master/icons/search.svg
-const meta = compile<Refs>(`
+const meta = compile<Refs>(/* html */ `
   <div id=c>
     <input @search id=s type=search placeholder="Search browser...">
     <svg id=i>

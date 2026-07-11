@@ -167,7 +167,7 @@ test("does not have version_name when when debug option is false", () => {
 
 // HACK: Mutating env vars that were set before the process started doesn't
 // work in bun, so we skip tests which rely on the CI env var _not_ being set.
-test.skipIf(!!process.env.CI)("has version_name when CI env var is not set", () => {
+test.skipIf(Boolean(process.env.CI))("has version_name when CI env var is not set", () => {
   expect.assertions(1);
   const manifest2 = createManifest();
   expect(manifest2.version_name).toBeDefined();

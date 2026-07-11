@@ -8,7 +8,7 @@ interface Refs {
 }
 
 // https://github.com/tailwindlabs/heroicons/blob/master/optimized/24/outline/menu.svg
-const meta = compile<Refs>(`
+const meta = compile<Refs>(/* html */ `
   <div id=m>
     <svg id=im>
       <path d="M4 6h16M4 12h16M4 18h16" />

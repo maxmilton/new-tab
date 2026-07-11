@@ -27,7 +27,7 @@ describe("Bookmark (Link)", () => {
     const rendered = render(
       BookmarkNode({ title: "Example", url: "https://example.com" } satisfies LinkProps),
     );
-    const root = rendered.container.firstChild as HTMLElement;
+    const root = rendered.container.firstChild as HTMLAnchorElement;
     expect(root).toBeInstanceOf(window.HTMLAnchorElement);
 
     // TODO: More/better assertions to prove it's a Link component.

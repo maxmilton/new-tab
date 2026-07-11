@@ -5,6 +5,7 @@ import type { SyncStorageData, ThemesData, UserStorageData } from "./types.ts";
 // declare const self: WorkerGlobalScope & typeof globalThis;
 
 // On install or subsequent update, preload the user's chosen theme into storage
+// oxlint-disable-next-line typescript/no-misused-promises typescript/strict-void-return
 chrome.runtime.onInstalled.addListener(async () => {
   // TODO: Remove once most users have updated.
   // Migrate users to new storage schema (tn -> n) (v0.24.0)
@@ -36,7 +37,7 @@ chrome.runtime.onInstalled.addListener(async () => {
   // TODO: Open settings page on install?
   // if (details.reason === ('install' as chrome.runtime.OnInstalledReason.INSTALL)) {
   //   void chrome.tabs.create({
-  //     url: chrome.runtime.getURL('settings.html'),
+  //     url: chrome.runtime.getURL('settings.html?firstRun=true'),
   //   });
   // }
 });

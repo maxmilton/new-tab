@@ -1,4 +1,4 @@
-/* eslint-disable consistent-return */
+// oxlint-disable typescript/consistent-return vitest/no-conditional-in-test
 
 import { afterEach, describe, expect, test } from "bun:test";
 import {
@@ -112,9 +112,7 @@ describe.each(themeNames.map((t) => [t]))("theme: %s", (theme) => {
       let found = 0;
       const variables: string[][] = [];
       walk(ast, (element) => {
-        // oxlint-disable-next-line no-conditional-in-test
         if (element.type !== RULESET) return; // continue
-        // oxlint-disable-next-line no-conditional-in-test
         if (element.value !== ":root") return SKIP;
         found += 1;
         const variables2: string[] = [];
@@ -130,6 +128,7 @@ describe.each(themeNames.map((t) => [t]))("theme: %s", (theme) => {
           }
         }
         variables.push(variables2);
+        // oxlint-disable-next-line typescript/consistent-return
         return SKIP; // we manually iterated over the children
       });
       expect(found).toBe(2);
@@ -142,15 +141,11 @@ describe.each(themeNames.map((t) => [t]))("theme: %s", (theme) => {
       let found = 0;
       const variables: string[] = [];
       walk(ast, (element) => {
-        // oxlint-disable-next-line no-conditional-in-test
         if (element.type !== RULESET) return; // continue
-        // oxlint-disable-next-line no-conditional-in-test
         if (element.value !== ":root") return SKIP;
         found += 1;
         for (const child of element.children as Element[]) {
-          // oxlint-disable-next-line no-conditional-in-test
           if (child.type === DECLARATION) {
-            // oxlint-disable-next-line no-conditional-in-test
             if ((child.props as string).startsWith("--") && child.children) {
               variables.push(child.props as string);
             }
@@ -193,8 +188,8 @@ async function load(themeName?: (typeof themeNames)[number]) {
   delete require.cache[MODULE_PATH_THEME];
   // oxlint-disable-next-line typescript/no-dynamic-delete unicorn/prefer-module
   delete require.cache[MODULE_PATH_UTILS];
-  // oxlint-disable-next-line import/no-dynamic-require typescript/no-require-imports unicorn/prefer-module
-  require(MODULE_PATH_THEME); // eslint-disable-line global-require
+  // oxlint-disable-next-line import/no-dynamic-require node/global-require typescript/no-require-imports unicorn/prefer-module
+  require(MODULE_PATH_THEME);
 
   await happyDOM.waitUntilComplete();
 }

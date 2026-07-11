@@ -4,7 +4,7 @@ function gitRef() {
   return Bun.spawnSync(["git", "describe", "--always", "--dirty=-dev", "--broken"])
     .stdout.toString()
     .trim()
-    .replace(/^v/, "");
+    .replace(/^v/u, "");
 }
 
 /**

@@ -15,7 +15,7 @@ async function load() {
     if (input === "themes.json") {
       return Promise.resolve(new Response(themes));
     }
-    // eslint-disable-next-line @typescript-eslint/no-base-to-string
+    // oxlint-disable-next-line typescript/no-base-to-string
     throw new Error(`Unexpected fetch call: ${String(input)}`);
   });
   // @ts-expect-error - monkey patching fetch for testing

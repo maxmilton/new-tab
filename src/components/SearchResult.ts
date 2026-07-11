@@ -1,5 +1,4 @@
 // oxlint-disable func-style
-/* eslint-disable unicorn/no-this-outside-of-class */
 
 import { append, clone, collect, h, ONCLICK } from "stage1/fast";
 import { compile } from "stage1/macro" with { type: "macro" };
@@ -48,7 +47,7 @@ interface Refs {
   more: HTMLButtonElement;
 }
 
-const meta = compile<Refs>(`
+const meta = compile<Refs>(/* html */ `
   <div hidden>
     <h2>@title</h2>
 
