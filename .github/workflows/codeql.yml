@@ -9,14 +9,23 @@ on:
   merge_group:
   workflow_dispatch:
   schedule:
-    - cron: "28 6 * * 4"
+    - cron: "25 14 * * 3"
 
 concurrency:
-  group: ${{ github.workflow }}-${{ github.event.pull_request.number || github.run_id }}
-  cancel-in-progress: true
+  group: ${{ github.workflow }}-${{ github.event.pull_request.number || github.ref }}
+  cancel-in-progress: ${{ github.event_name == 'pull_request' }}
+
+permissions: {}
 
 jobs:
   analyze:
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - language: actions
+          - language: javascript-typescript
+            packs: githubsecuritylab/codeql-javascript-queries
     name: analyze (${{ matrix.language }})
     runs-on: ubuntu-latest
     timeout-minutes: 10
@@ -25,20 +34,18 @@ jobs:
       contents: read
       packages: read
       security-events: write
-    strategy:
-      fail-fast: false
-      matrix:
-        include:
-          - language: actions
-            build-mode: none
-          - language: javascript-typescript
-            build-mode: none
     steps:
-      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
-      - uses: github/codeql-action/init@2892aa5e19bbd11bc0cff5427e3b750a04d9e3c2 # v4
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+      - uses: github/codeql-action/init@24c54180a607b1449ed407dd24f251e4e9147c8d # v4.38.3
         with:
           languages: ${{ matrix.language }}
-          build-mode: ${{ matrix.build-mode }}
+          build-mode: none
           queries: security-and-quality
-      - uses: github/codeql-action/autobuild@2892aa5e19bbd11bc0cff5427e3b750a04d9e3c2 # v4
-      - uses: github/codeql-action/analyze@2892aa5e19bbd11bc0cff5427e3b750a04d9e3c2 # v4
+          # https://github.com/GitHubSecurityLab/CodeQL-Community-Packs/blob/main/configs/synthetics.yml
+          packs: ${{ matrix.packs }}
+          # https://docs.github.com/en/code-security/reference/code-scanning/workflow-configuration-options#extending-codeql-coverage-with-threat-models
+          config: |
+            threat-models: local
+      - uses: github/codeql-action/analyze@24c54180a607b1449ed407dd24f251e4e9147c8d # v4.38.3

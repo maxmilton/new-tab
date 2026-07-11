@@ -1,0 +1,58 @@
+name: osv-scanner
+
+on:
+  push:
+    branches:
+      - master
+      - next
+  pull_request:
+  workflow_dispatch:
+  schedule:
+    - cron: "25 14 * * 3"
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.event.pull_request.number || github.ref }}
+  cancel-in-progress: ${{ github.event_name == 'pull_request' }}
+
+permissions: {}
+
+jobs:
+  analyze:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    permissions:
+      actions: read
+      contents: read
+      security-events: write
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+      # Runs the binary directly, bypassing the image's exit_code_redirect.sh
+      # (raw exit codes, no 128→0 rewrite).
+      # Gating: PRs → "Require code scanning results" ruleset (tool: osv-scanner);
+      # push → upload only (refreshes alerts + ruleset base); schedule/dispatch → fail on vulns.
+      - name: Scan
+        id: scan
+        env:
+          OSV_IMAGE: ghcr.io/google/osv-scanner-action:v2.7.0@sha256:d54770fe0b09493894e76a02aaed9f51a0513fa57c5186452a755d257b0068a6
+        run: |
+          out="$RUNNER_TEMP/osv"
+          mkdir -p "$out"
+          rc=0
+          docker run --rm -e GOTOOLCHAIN=auto \
+            -v "$GITHUB_WORKSPACE:/github/workspace:ro" -w "/github/workspace" \
+            -v "$out:/out" \
+            --entrypoint /root/osv-scanner "$OSV_IMAGE" \
+            --include-git-root \
+            --x-flag-deprecated-packages \
+            --format=sarif --output=/out/results.sarif -r . || rc=$?
+          echo "rc=$rc" >> "$GITHUB_OUTPUT"
+          [ "$rc" -le 1 ] || { echo "::error::osv-scanner exited $rc (127=error, 128=no packages, 129=OSV API failure, 130=invalid config; 125-127 may also be docker)"; exit "$rc"; }
+      - uses: github/codeql-action/upload-sarif@24c54180a607b1449ed407dd24f251e4e9147c8d # v4.38.3
+        with:
+          sarif_file: ${{ runner.temp }}/osv/results.sarif
+          category: osv-scanner
+      - name: Fail on vulnerabilities
+        if: steps.scan.outputs.rc == '1' && (github.event_name == 'schedule' || github.event_name == 'workflow_dispatch')
+        run: exit 1
