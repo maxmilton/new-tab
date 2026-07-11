@@ -137,10 +137,11 @@ test("permissions contains expected values", () => {
 
 test("has correct icons.* values", () => {
   expect.assertions(4);
-  expect(manifest.icons?.[16]).toBe("icon16.png");
-  expect(manifest.icons?.[48]).toBe("icon48.png");
-  expect(manifest.icons?.[128]).toBe("icon128.png");
-  expect(Object.keys(manifest.icons ?? {})).toHaveLength(3);
+  expect(manifest.icons).toHaveProperty("16", "icon16.png");
+  expect(manifest.icons).toHaveProperty("48", "icon48.png");
+  expect(manifest.icons).toHaveProperty("128", "icon128.png");
+  // oxlint-disable-next-line typescript/no-non-null-assertion
+  expect(Object.keys(manifest.icons!)).toHaveLength(3);
 });
 
 test("has correct chrome_url_overrides.newtab value", () => {
