@@ -9,7 +9,13 @@ auto = "disable"
 linker = "isolated"
 peer = false
 minimumReleaseAge = 604800 # 7 days
-minimumReleaseAgeExcludes = ["@maxmilton/*", "stage1"]
+minimumReleaseAgeExcludes = [
+  "@maxmilton/*",
+  "stage1",
+  # TODO: Remove these once bun support wildcards.
+  "@maxmilton/oxlint-config",
+  "@maxmilton/test-utils",
+]
 
 [test]
 preload = ["./test/setup.ts"]
