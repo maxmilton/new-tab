@@ -2,6 +2,7 @@
 
 [run]
 bun = true
+noOrphans = true
 
 [install]
 auto = "disable"
