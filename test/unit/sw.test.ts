@@ -1,6 +1,6 @@
 import { afterEach, describe, expect, spyOn, test } from "bun:test";
 import { performanceSpy } from "@maxmilton/test-utils/spy";
-import type { SyncStorageData, UserStorageData } from "#types.ts";
+import type { SyncStorageData, UserStorageData } from "#/types.ts";
 import { reset } from "../setup.ts";
 
 afterEach(reset);

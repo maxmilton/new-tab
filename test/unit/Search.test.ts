@@ -1,13 +1,13 @@
 import { afterEach, expect, onTestFinished, test } from "bun:test";
 import { cleanup, render } from "@maxmilton/test-utils/dom";
-import type { Search as SearchComponent } from "#components/Search.ts";
-import { chromeBookmarks, chromeTabs, DEFAULT_SECTION_ORDER, storage } from "#utils.ts";
+import type { Search as SearchComponent } from "#/components/Search.ts";
+import { chromeBookmarks, chromeTabs, DEFAULT_SECTION_ORDER, storage } from "#/utils.ts";
 
 // HACK: The Search component is designed to be rendered once (does not clone
 // its view), for byte savings. Given its mutation of the view (affecting global
 // state) when run, it's vital to reset its module state between tests to
 // maintain accurate test conditions.
-const MODULE_PATH = Bun.resolveSync("#components/Search.ts", ".");
+const MODULE_PATH = Bun.resolveSync("#/components/Search.ts", ".");
 const defaultTabsQuery = chromeTabs.query;
 const defaultTopSitesGet = chrome.topSites.get;
 const defaultRecentlyClosedGet = chrome.sessions.getRecentlyClosed;

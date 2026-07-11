@@ -1,6 +1,6 @@
 import { afterEach, expect, test } from "bun:test";
 import { cleanup, render } from "@maxmilton/test-utils/dom";
-import { SearchResult } from "#components/SearchResult.ts";
+import { SearchResult } from "#/components/SearchResult.ts";
 
 afterEach(cleanup);
 

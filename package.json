@@ -10,7 +10,7 @@
   "repository": "github:maxmilton/new-tab",
   "type": "module",
   "imports": {
-    "#*": "./src/*"
+    "#/*": "./src/*"
   },
   "scripts": {
     "build": "NODE_ENV=production bun build.ts",

@@ -1,7 +1,7 @@
 import { afterEach, describe, expect, onTestFinished, test } from "bun:test";
 import { cleanup, render } from "@maxmilton/test-utils/dom";
-import { BookmarkNode, type BookmarkTreeNode, Folder } from "#components/BookmarkNode.ts";
-import type { LinkProps } from "#components/Link.ts";
+import { BookmarkNode, type BookmarkTreeNode, Folder } from "#/components/BookmarkNode.ts";
+import type { LinkProps } from "#/components/Link.ts";
 
 afterEach(cleanup);
 
