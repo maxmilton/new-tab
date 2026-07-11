@@ -3,14 +3,14 @@
 Use bun not node, bunx not npx.
 
 ```bash
-bun build    # production
-bun dev      # unminified + source maps
-bun test     # unit
+bun run build # production
+bun dev       # unminified + source maps
+bun test      # unit
 bun test test/unit/sw.test.ts # one file
 bun test -t "name pattern"    # one case
-bun test:ci  # catch flakiness + coverage
+bun test:ci   # catch flakiness + coverage
 bun test:e2e
-bun lint     # lint:fmt (oxfmt), lint:css (stylelint), lint:js (oxlint), lint:ts (tsc)
+bun lint      # lint:fmt (oxfmt), lint:css (stylelint), lint:js (oxlint), lint:ts (tsc)
 ```
 
 ## Constraints
