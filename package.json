@@ -29,7 +29,7 @@
     "stage1": "0.10.0"
   },
   "devDependencies": {
-    "@biomejs/biome": "2.5.1",
+    "@biomejs/biome": "2.5.2",
     "@eslint/js": "10.0.1",
     "@maxmilton/eslint-config": "0.3.3",
     "@maxmilton/oxlint-config": "0.0.3",
