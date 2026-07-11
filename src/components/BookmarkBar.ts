@@ -3,21 +3,6 @@ import { compile } from "stage1/macro" with { type: "macro" };
 import { chromeBookmarks } from "#utils.ts";
 import { BookmarkNode, type BookmarkTreeNode, Folder } from "./BookmarkNode.ts";
 
-declare global {
-  interface HTMLElement {
-    /**
-     * BookmarkBar synthetic `mouseenter` event handler. Note the property is
-     * named `__mouseover` but it actually works like `mouseenter`.
-     */
-    __mouseover(event: MouseEvent): void;
-    /**
-     * BookmarkBar synthetic `mouseleave` event handler. Note the property is
-     * named `__mouseout` but it actually works like `mouseleave`.
-     */
-    __mouseout(event: MouseEvent): void;
-  }
-}
-
 type BookmarkBarComponent = HTMLDivElement;
 
 export const BookmarkBar = (): BookmarkBarComponent => {
@@ -104,31 +89,6 @@ export const BookmarkBar = (): BookmarkBarComponent => {
     // eslint-disable-next-line unicorn/no-global-object-property-assignment
     window.onresize = resize;
   });
-
-  // Synthetic `mouseenter` and `mouseleave` event handler
-  // NOTE: Similar to stage1 synthetic event logic but does not stop propagating
-  // once an event handler is called + extra relatedTarget checks.
-  // https://github.com/maxmilton/stage1/blob/08cb3c08cb3e5513c181f768ae92c488cfe2a17a/src/events.ts#L3
-  // oxlint-disable-next-line no-multi-assign
-  root.onmouseover = root.onmouseout = (event) => {
-    const eventKey = ("__" + event.type) as "__mouseover" | "__mouseout";
-    // null when mouse moves from/to outside the viewport
-    const related = event.relatedTarget as Node | null;
-    let node = event.target as
-      | (Node & {
-          __mouseover?(event2: MouseEvent): void;
-          __mouseout?(event2: MouseEvent): void;
-        })
-      | null;
-
-    while (node) {
-      // eslint-disable-next-line unicorn/no-computed-property-existence-check
-      if (node[eventKey] && (!related || !node.contains(related))) {
-        node[eventKey](event);
-      }
-      node = node.parentNode;
-    }
-  };
 
   return root;
 };

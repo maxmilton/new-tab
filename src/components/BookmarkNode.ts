@@ -103,7 +103,7 @@ export const Folder = (
     popup = null;
   };
 
-  root.__mouseover = async () => {
+  root.onmouseover = async () => {
     clearTimer();
 
     if (!popup) {
@@ -118,15 +118,15 @@ export const Folder = (
         isNested,
       );
 
-      popup.__mouseover = clearTimer;
-      popup.__mouseout = resetTimer;
+      popup.onmouseover = clearTimer;
+      popup.onmouseout = resetTimer;
 
       append(popup, root);
       popup.$$adjustPosition();
     }
   };
 
-  root.__mouseout = resetTimer;
+  root.onmouseout = resetTimer;
 
   return root;
 };
