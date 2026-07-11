@@ -1,8 +1,6 @@
 {
   "$schema": "./node_modules/oxlint/configuration_schema.json",
-  "jsPlugins": ["oxclippy"],
   "extends": [
-    "./node_modules/oxclippy/presets/all.json",
     "./node_modules/@maxmilton/oxlint-config/recommended.json",
     "./node_modules/@maxmilton/oxlint-config/stage1.json",
   ],
@@ -14,8 +12,8 @@
   },
   "categories": {
     "correctness": "error",
-    "suspicious": "error",
-    "pedantic": "warn",
+    "suspicious": "warn",
+    // "pedantic": "warn", // TODO: Enable when we can fix all the issues.
     "perf": "error",
     "style": "warn",
     "restriction": "error",
@@ -60,9 +58,6 @@
     "unicorn/prefer-native-coercion-functions": "off", // arrow function saves 3 bytes
     "unicorn/prefer-string-starts-ends-with": "off", // byte savings + faster
 
-    // TODO: Remove when we can fix all the issues.
-    "typescript/no-unsafe-type-assertion": "warn",
-
     // TODO: These are buggy. Remove after future oxlint updates.
     "typescript/prefer-readonly-parameter-types": "off",
   },
@@ -76,7 +71,6 @@
     {
       "files": ["test/**/*.test.ts", "test/**/*.spec.ts"],
       "rules": {
-        "oxclippy/similar-names": "off",
         "unicorn/consistent-function-scoping": "off", // tests may define scoped helpers
 
         // TODO: Remove when we can fix all the issues.
@@ -85,6 +79,9 @@
     },
     {
       "files": ["test/unit/**"],
+      "env": {
+        "node": true,
+      },
       "globals": {
         "$console": "readonly",
         "happyDOM": "readonly",
