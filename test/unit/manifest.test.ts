@@ -86,7 +86,7 @@ test("properties are the correct type", () => {
 
 test("does not contain any unexpected properties", () => {
   expect.assertions(19);
-  const expectedProperties = [
+  const expectedProperties: readonly string[] = [
     "manifest_version",
     "name",
     "description",

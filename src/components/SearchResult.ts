@@ -10,8 +10,8 @@ const MORE_RESULTS_AMOUNT = 50;
 
 interface TabItem {
   /** Tab ID. */
-  id: number;
-  windowId: number;
+  readonly id: number;
+  readonly windowId: number;
 }
 
 interface OpenTabLink extends LinkComponent {

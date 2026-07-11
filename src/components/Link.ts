@@ -2,8 +2,8 @@ import { clone, h } from "stage1/fast";
 import { compile } from "stage1/macro" with { type: "macro" };
 
 export interface LinkProps {
-  title: string;
-  url: string;
+  readonly title: string;
+  readonly url: string;
 }
 
 export type LinkComponent = HTMLAnchorElement;

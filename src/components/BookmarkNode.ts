@@ -13,7 +13,7 @@ let arrow: SVGElement | undefined;
 const folderPopupView = create("div");
 folderPopupView.className = "p";
 
-const FolderPopup = (children: BookmarkTreeNode[]): FolderPopupComponent => {
+const FolderPopup = (children: readonly BookmarkTreeNode[]): FolderPopupComponent => {
   const root = clone(folderPopupView);
 
   if (children.length) {
@@ -36,7 +36,7 @@ folderView.className = "f";
 export const Folder = (
   props: BookmarkTreeNode,
   isNested?: boolean,
-  children?: BookmarkTreeNode[],
+  children?: readonly BookmarkTreeNode[],
 ): FolderComponent => {
   const root = clone(folderView);
   let popup: FolderPopupComponent | null;

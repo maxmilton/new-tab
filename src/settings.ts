@@ -9,16 +9,16 @@ import { DEFAULT_SECTION_ORDER, storage } from "./utils.ts";
 // TODO: Show a message when the user has disabled all sections.
 
 interface SettingsState {
-  order: [SectionOrderItem[], SectionOrderItem[]];
+  order: readonly [SectionOrderItem[], SectionOrderItem[]];
   pushSyncData?: (shouldForceUpdate?: boolean) => Promise<void>;
 }
 
-type ItemIndex = [listIndex: 0 | 1, itemIndex: number];
+type ItemIndex = readonly [listIndex: 0 | 1, itemIndex: number];
 
 /** Section drag-and-drop helper functions */
 interface SectionScope {
-  indexOf: (list: 0 | 1, item: SectionOrderItem) => number;
-  moveItem: (from: ItemIndex, to: ItemIndex) => void;
+  readonly indexOf: (list: 0 | 1, item: SectionOrderItem) => number;
+  readonly moveItem: (from: ItemIndex, to: ItemIndex) => void;
 }
 
 const DRAG_TYPE = "text/plain";
@@ -46,7 +46,7 @@ interface SectionRefs {
 const searchOnlyView = h('<small class="so muted">(search only)</small>');
 
 // https://tabler-icons.io/i/grip-vertical
-const sectionMeta = compile<SectionRefs>(`
+const sectionMeta = compile<SectionRefs>(/*html*/ `
   <li class=item draggable=true>
     <svg viewBox="0 0 24 24" class=icon>
       <circle cx=9 cy=5 r=1 />
@@ -121,7 +121,7 @@ interface Refs {
   clear: HTMLButtonElement;
 }
 
-const meta = compile<Refs>(`
+const meta = compile<Refs>(/*html*/ `
   <div>
     <!--
     <div>@feedback</div>
@@ -321,7 +321,7 @@ const Settings = () => {
 
   sync.checked = Boolean(storage.s);
 
-  const updateSync = (syncData: SyncStorageData) => {
+  const updateSync = (syncData: Readonly<SyncStorageData>) => {
     if (syncData.ts) {
       feedback2.nodeValue = `Sync data found (last updated: ${new Date(syncData.ts).toLocaleString()})`;
       pull.disabled = false;
