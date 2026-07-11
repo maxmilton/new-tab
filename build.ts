@@ -15,7 +15,7 @@ async function compileCSS(path: string) {
     code: source,
     minify: !isDev,
     // oxlint-disable-next-line no-bitwise
-    targets: { chrome: 149 << 16 }, // matches manifest minimum_chrome_version
+    targets: { chrome: 152 << 16 }, // matches manifest minimum_chrome_version
     include: lightningcss.Features.Nesting,
   });
   if (result.warnings.length > 0) console.error(result.warnings);
@@ -36,7 +36,7 @@ async function minify(artifacts: Bun.BuildArtifact[]) {
     if (artifact.path.endsWith(".js")) {
       const source = await artifact.text();
       const result = await terser.minify(source, {
-        ecma: 2020,
+        ecma: 2025,
         module: true,
         compress: {
           reduce_funcs: false,
