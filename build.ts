@@ -78,6 +78,7 @@ const out1 = await Bun.build({
   outdir: "dist",
   naming: "[dir]/[name].[ext]",
   target: "browser",
+  allowUnresolved: [],
   minify: !isDev,
   sourcemap: isDev ? "linked" : "none",
 });
@@ -88,6 +89,7 @@ const out2 = await Bun.build({
   entrypoints: ["src/sw.ts"],
   outdir: "dist",
   target: "browser",
+  allowUnresolved: [],
   minify: !isDev,
   sourcemap: isDev ? "linked" : "none",
 });
