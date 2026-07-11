@@ -1,7 +1,9 @@
 import { afterEach, describe, expect, spyOn, test } from "bun:test";
 import { compile, DECLARATION, lookup, walk } from "@maxmilton/test-utils/css";
 import { performanceSpy } from "@maxmilton/test-utils/spy";
-import { reset } from "../setup.ts";
+import type { UserStorageData } from "#types.ts";
+import { DEFAULT_SECTION_ORDER } from "#utils.ts";
+import { reset } from "./setup.ts";
 
 // Completely reset DOM and global state between tests
 afterEach(reset);
@@ -24,7 +26,7 @@ async function load(mockUserSettings?: UserStorageData) {
 }
 
 test("renders entire newtab app", async () => {
-  expect.assertions(5);
+  expect.assertions(7);
   await load();
   expect(document.body.getHTML().length).toBeGreaterThan(1000);
   expect(document.body.querySelector("#b")).toBeTruthy();

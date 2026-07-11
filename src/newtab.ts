@@ -1,6 +1,5 @@
 // Theme loader code must run first
 import "./theme.ts";
-
 import { append, fragment } from "stage1/fast";
 import { BookmarkBar } from "./components/BookmarkBar.ts";
 import { Menu } from "./components/Menu.ts";

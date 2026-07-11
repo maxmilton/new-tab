@@ -76,7 +76,11 @@
     {
       "files": ["test/**/*.test.ts", "test/**/*.spec.ts"],
       "rules": {
+        "oxclippy/similar-names": "off",
         "unicorn/consistent-function-scoping": "off", // tests may define scoped helpers
+
+        // TODO: Remove when we can fix all the issues.
+        "typescript/no-unsafe-type-assertion": "off",
       },
     },
     {

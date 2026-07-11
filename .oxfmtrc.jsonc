@@ -1,6 +1,6 @@
 {
   "$schema": "./node_modules/oxfmt/configuration_schema.json",
-  "ignorePatterns": ["CLAUDE.md", "SPEC.md"],
+  "ignorePatterns": ["CLAUDE.md", "SPEC.md", "static/*.html"],
   "sortImports": { "newlinesBetween": false },
   "sortPackageJson": true,
   "sortTailwindcss": true,
