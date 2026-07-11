@@ -2,7 +2,7 @@
   "servers": {
     "playwright": {
       "command": "bunx",
-      "args": ["@playwright/mcp", "--isolated"]
+      "args": ["@playwright/mcp"]
     }
   }
 }

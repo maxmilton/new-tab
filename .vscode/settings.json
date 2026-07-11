@@ -2,7 +2,8 @@
   "biome.enabled": true,
   "editor.codeActionsOnSave": {
     "source.organizeImports": "explicit",
-    "source.fixAll": "explicit"
+    "source.fixAll": "explicit",
+    "source.fixAllDangerous": "never"
   },
   "editor.formatOnPaste": false,
   "editor.formatOnSave": true,
@@ -26,7 +27,8 @@
   "[javascript]": {
     "editor.codeActionsOnSave": {
       "source.organizeImports": "never",
-      "source.fixAll.eslint": "never"
+      "source.fixAll.eslint": "never",
+      "source.fixAll.oxc": "never"
     },
     "editor.defaultFormatter": "biomejs.biome"
   },
@@ -48,7 +50,8 @@
   "[typescript]": {
     "editor.codeActionsOnSave": {
       "source.organizeImports": "never",
-      "source.fixAll.eslint": "never"
+      "source.fixAll.eslint": "never",
+      "source.fixAll.oxc": "never"
     },
     "editor.defaultFormatter": "biomejs.biome"
   },
