@@ -5,7 +5,7 @@
     "./node_modules/@maxmilton/oxlint-config/stage1.json",
   ],
   "options": {
-    "maxWarnings": 100,
+    "maxWarnings": 20,
     "reportUnusedDisableDirectives": "error",
     "respectEslintDisableDirectives": false,
     "typeAware": true,
@@ -13,13 +13,13 @@
   "categories": {
     "correctness": "error",
     "suspicious": "warn",
-    // "pedantic": "warn", // TODO: Enable when we can fix all the issues.
+    "pedantic": "warn",
     "perf": "error",
     "style": "warn",
     "restriction": "error",
     "nursery": "warn",
   },
-  // https://github.com/oxc-project/javascript-globals/blob/main/src/lib.rs
+  // https://github.com/oxc-project/javascript-globals/blob/main/src/generated/mod.rs#L213
   "env": {
     "builtin": true,
     "es2026": true, // TODO: es2027 once in oxc.
@@ -36,33 +36,30 @@
         "exceptions": ["_" /* UserStorageData keys */, "n", "t", "b", "o", "s"],
       },
     ],
-    "eslint/no-underscore-dangle": "off",
-    "eslint/require-unicode-regexp": "off",
-    "node/no-sync": "off",
-    "node/no-top-level-await": "off",
     "typescript/promise-function-async": "off",
+    "typescript/strict-boolean-expressions": "off",
+
+    // TODO: Remove when we can fix all the issues.
     "typescript/no-unsafe-type-assertion": "off",
 
-    /* Performance and byte savings */
-    "eslint/no-plusplus": "off", // byte savings
-    "eslint/prefer-template": "off",
-    "promise/prefer-await-to-callbacks": "off", // control resolve timing for better performance
-    "promise/prefer-await-to-then": "off",
-    "typescript/prefer-string-starts-ends-with": "off",
-    "typescript/strict-boolean-expressions": "off",
-    "unicorn/explicit-length-check": "off", // byte savings + faster
-    "unicorn/explicit-timer-delay": "off",
-    "unicorn/no-array-for-each": "off", // forEach is more compact (slower but; for non-performance-critical code)
-    "unicorn/no-array-sort": "off", // faster to mutate arrays in place
-    "unicorn/no-await-expression-member": "off",
-    "unicorn/prefer-includes": "off", // indexOf is faster in some cases
-    "unicorn/prefer-native-coercion-functions": "off", // arrow function saves 3 bytes
-    "unicorn/prefer-string-starts-ends-with": "off", // byte savings + faster
-
-    // TODO: These are buggy. Remove after future oxlint updates.
-    "typescript/prefer-readonly-parameter-types": "off",
+    // TODO: Remove after future oxlint updates.
+    "typescript/prefer-readonly-parameter-types": "off", // buggy
   },
   "overrides": [
+    {
+      "files": ["src/**"],
+      "rules": {
+        "eslint/prefer-template": "off",
+        "node/no-sync": ["error", { "ignores": ["hasStorageSync", "updateSync"] }],
+        "promise/prefer-await-to-then": "off", // byte savings
+        "typescript/no-confusing-void-expression": "off", // byte savings
+        "typescript/prefer-string-starts-ends-with": "off", // byte savings + faster
+        "typescript/strict-void-return": "off", // byte savings
+        "unicorn/explicit-length-check": "off", // byte savings + faster
+        "unicorn/no-array-for-each": "off", // more compact + may be faster for cold code
+        "unicorn/no-await-expression-member": "off", // byte savings
+      },
+    },
     {
       "files": ["src/sw.ts"],
       "env": {
@@ -72,7 +69,11 @@
     {
       "files": ["test/**/*.test.ts", "test/**/*.spec.ts"],
       "rules": {
+        "promise/prefer-await-to-callbacks": "off",
         "unicorn/consistent-function-scoping": "off", // tests may define scoped helpers
+
+        // TODO: Remove when we can fix all the issues.
+        "eslint/no-warning-comments": "off",
       },
     },
     {
@@ -87,10 +88,6 @@
     },
     {
       "files": ["test/e2e/**"],
-      "env": {
-        "browser": false,
-        "webextensions": false,
-      },
       "plugins": ["vitest"],
       "rules": {
         "vitest/consistent-test-filename": ["error", { "pattern": ".*\\.spec\\.ts$" }],

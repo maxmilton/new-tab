@@ -1,7 +1,8 @@
 {
   "$schema": "./node_modules/oxfmt/configuration_schema.json",
-  "ignorePatterns": ["SPEC.md", "static/*.html"],
+  "ignorePatterns": ["static/*.html", "SPEC.md"],
   "sortImports": { "newlinesBetween": false },
-  "sortPackageJson": true,
+  "sortPackageJson": { "sortScripts": true },
   "sortTailwindcss": true,
+  "experimentalOperatorPosition": "start",
 }
