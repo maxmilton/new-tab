@@ -58,10 +58,10 @@ test("makes no external or unexpected requests", async ({ page, extensionId }) =
     const url = request.url();
     const type = request.resourceType();
     if (
-      (url === `chrome-extension://${extensionId}/settings.html` && type === "document")
-      || (url === `chrome-extension://${extensionId}/settings.css` && type === "stylesheet")
-      || (url === `chrome-extension://${extensionId}/settings.js` && type === "script")
-      || (url === `chrome-extension://${extensionId}/themes.json` && type === "fetch")
+      (type === "document" && url === `chrome-extension://${extensionId}/settings.html`)
+      || (type === "stylesheet" && url === `chrome-extension://${extensionId}/settings.css`)
+      || (type === "script" && url === `chrome-extension://${extensionId}/settings.js`)
+      || (type === "fetch" && url === `chrome-extension://${extensionId}/themes.json`)
     ) {
       expected.push({ url, type });
     } else {

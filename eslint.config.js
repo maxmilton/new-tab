@@ -28,22 +28,17 @@ export default defineConfig(
       // https://github.com/oxc-project/oxc/issues/481
       // https://github.com/oxc-project/oxc/issues?q=%E2%98%82%EF%B8%8F
 
-      "no-underscore-dangle": "off", // synthetic event handler names
-      "unicorn/import-style": "off",
-      "unicorn/no-top-level-assignment-in-function": "off", // used carefully
-
-      /* Performance */
       "@typescript-eslint/no-confusing-void-expression": "off", // byte savings (but reduces readability)
       "@typescript-eslint/restrict-plus-operands": "off", // byte savings (but harder to debug)
       "@typescript-eslint/restrict-template-expressions": "off", // byte savings (but harder to debug)
+      "unicorn/import-style": "off",
+      "unicorn/no-top-level-assignment-in-function": "off", // used carefully
 
       // TODO: Remove these once buildFromOxlintConfigFile correctly disables them.
       "@typescript-eslint/naming-convention": "off",
       "@typescript-eslint/no-misused-promises": "off",
       "@typescript-eslint/prefer-string-starts-ends-with": "off",
-      "no-confusing-arrow": "off",
       "unicorn/explicit-length-check": "off",
-      "unicorn/no-array-for-each": "off",
       "unicorn/no-array-sort": "off",
       "unicorn/no-await-expression-member": "off",
       "unicorn/no-for-each": "off",

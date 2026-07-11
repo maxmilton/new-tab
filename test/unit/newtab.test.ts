@@ -23,7 +23,7 @@ async function load() {
 test("renders entire newtab app", async () => {
   expect.assertions(5);
   await load();
-  expect(document.body.innerHTML.length).toBeGreaterThan(1000);
+  expect(document.body.getHTML().length).toBeGreaterThan(1000);
   expect(document.body.querySelector("#b")).toBeTruthy();
   expect(document.body.querySelector("#s")).toBeTruthy();
   expect(document.body.querySelector("#m")).toBeTruthy();

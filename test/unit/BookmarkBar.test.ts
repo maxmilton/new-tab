@@ -31,5 +31,5 @@ test("rendered DOM matches snapshot", async () => {
   expect.assertions(1);
   const rendered = render(BookmarkBar());
   await happyDOM.waitUntilComplete();
-  expect(rendered.container.innerHTML).toMatchSnapshot();
+  expect(rendered.container.getHTML()).toMatchSnapshot();
 });

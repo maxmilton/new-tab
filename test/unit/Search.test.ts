@@ -45,8 +45,8 @@ test("rendered DOM matches snapshot", async () => {
   expect.assertions(1);
   const rendered = render(Search());
   await happyDOM.waitUntilComplete();
-  expect(rendered.container.innerHTML).toMatchSnapshot();
 });
 
 // TODO: Test with various settings, especially section order
 // TODO: Test the search functionality
+  expect(rendered.container.getHTML()).toMatchSnapshot();

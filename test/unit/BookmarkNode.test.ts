@@ -36,7 +36,7 @@ describe("Bookmark (Link)", () => {
   test("rendered DOM matches snapshot", () => {
     expect.assertions(1);
     const rendered = render(BookmarkNode({ title: "Example", url: "https://example.com" }));
-    expect(rendered.container.innerHTML).toMatchSnapshot();
+    expect(rendered.container.getHTML()).toMatchSnapshot();
   });
 
   // TODO: Consider running the same tests as for Link component.
@@ -55,7 +55,6 @@ describe("Folder", () => {
   test("rendered DOM matches snapshot", () => {
     expect.assertions(1);
     const rendered = render(BookmarkNode({ id: "1", title: "Example" }));
-    expect(rendered.container.innerHTML).toMatchSnapshot();
   });
 
   // TODO: Consider running the most tests twice, once for BookmarkNode and again for Folder directly (except for tests which use the Folder 3rd argument; "children").
@@ -66,4 +65,5 @@ describe("Folder", () => {
   // TODO: Test opening another folder closes the previous one if on the same or lower level
   // TODO: Test opened sub folder positions
   // TODO: Test opened sub folder is scrollable when overflowing (might not be possible with happy-dom, but should definitely write an e2e test for this)
+    expect(rendered.container.getHTML()).toMatchSnapshot();
 });

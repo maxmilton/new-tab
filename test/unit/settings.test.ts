@@ -32,7 +32,7 @@ async function load() {
 test("renders entire settings app", async () => {
   expect.assertions(1);
   await load();
-  expect(document.body.innerHTML.length).toBeGreaterThan(600);
+  expect(document.body.getHTML().length).toBeGreaterThan(600);
 
   // TODO: More and better assertions.
 });

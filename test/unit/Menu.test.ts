@@ -24,7 +24,7 @@ test("rendered DOM contains expected elements", () => {
 test("rendered DOM matches snapshot", () => {
   expect.assertions(1);
   const rendered = render(Menu());
-  expect(rendered.container.innerHTML).toMatchSnapshot();
+  expect(rendered.container.getHTML()).toMatchSnapshot();
 });
 
 test("clicking settings link calls chrome.runtime.openOptionsPage", () => {

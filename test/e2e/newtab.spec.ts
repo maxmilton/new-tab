@@ -81,10 +81,10 @@ test("has no external or unexpected requests", async ({ page, extensionId }) => 
     const url = request.url();
     const type = request.resourceType();
     if (
-      (url === `chrome-extension://${extensionId}/newtab.html` && type === "document")
-      || (url === `chrome-extension://${extensionId}/newtab.css` && type === "stylesheet")
-      || (url === `chrome-extension://${extensionId}/newtab.js` && type === "script")
-      || (url.startsWith(`chrome-extension://${extensionId}/_favicon?`) && type === "image")
+      (type === "document" && url === `chrome-extension://${extensionId}/newtab.html`)
+      || (type === "stylesheet" && url === `chrome-extension://${extensionId}/newtab.css`)
+      || (type === "script" && url === `chrome-extension://${extensionId}/newtab.js`)
+      || (type === "image" && url.startsWith(`chrome-extension://${extensionId}/_favicon?`))
     ) {
       expected.push({ url, type });
     } else {
