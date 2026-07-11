@@ -1,6 +1,4 @@
-/**
- * Theme Loader
- */
+/** @file Theme Loader */
 
 import type { ThemesData } from "./types.ts";
 import { storage } from "./utils.ts";

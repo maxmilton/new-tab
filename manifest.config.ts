@@ -9,8 +9,8 @@ function gitRef() {
 
 /**
  * Generates a browser extension manifest.
- * @param isDebug - Whether to include a version name for debugging.
  *
+ * @param isDebug - Whether to include a version name for debugging.
  * @see https://developer.chrome.com/docs/extensions/reference/manifest
  */
 export function createManifest(isDebug = !process.env.CI): chrome.runtime.ManifestV3 {
