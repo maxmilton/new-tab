@@ -53,6 +53,7 @@ describe("dist files", () => {
   test.each(distFiles.filter(([filename]) => filename.endsWith(".html")))(
     "%s contains valid HTML",
     async (filename) => {
+      expect.assertions(1);
       const file = Bun.file(`dist/${filename}`);
       const html = await file.text();
       const result = validate(html);
