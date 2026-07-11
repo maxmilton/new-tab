@@ -26,16 +26,16 @@
     "test:e2e": "playwright test"
   },
   "dependencies": {
-    "stage1": "0.11.0-next.0"
+    "stage1": "0.11.0"
   },
   "devDependencies": {
     "@biomejs/biome": "2.5.15",
     "@maxmilton/oxlint-config": "0.0.22",
     "@maxmilton/test-utils": "0.0.18",
-    "@playwright/test": "1.63.0",
+    "@playwright/test": "1.64.0",
     "@types/bun": "1.4.2",
     "@types/chrome": "0.3.4",
-    "happy-dom": "20.14.5",
+    "happy-dom": "20.14.6",
     "lightningcss": "1.33.0",
     "oxfmt": "0.72.0",
     "oxlint": "1.87.0",
