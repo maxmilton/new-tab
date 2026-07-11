@@ -114,7 +114,6 @@ button /* "Show more" button */,
   z-index: 1;
   display: flex;
   height: 38px; /* should be same as body line-height */
-  contain: size;
   background: var(--c2);
   box-shadow: var(--s);
 
