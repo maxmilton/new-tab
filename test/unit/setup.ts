@@ -1,87 +1,82 @@
 import "@maxmilton/test-utils/extend";
 import { setupDOM } from "@maxmilton/test-utils/dom";
 
-const noop = () => {};
-const noopAsync = () => Promise.resolve();
-const noopAsyncObj = () => Promise.resolve({});
-const noopAsyncArr = () => Promise.resolve([]);
-
 function setupMocks(): void {
   // @ts-expect-error - noop stub
-  global.performance.mark = noop;
+  global.performance.mark = () => {};
   // @ts-expect-error - noop stub
-  global.performance.measure = noop;
+  global.performance.measure = () => {};
 
   global.chrome = {
     // @ts-expect-error - partial mock
     bookmarks: {
-      getChildren: noopAsyncArr,
-      search: noopAsyncArr,
+      getChildren: () => Promise.resolve([]),
+      search: () => Promise.resolve([]),
     },
     // @ts-expect-error - partial mock
     history: {
-      search: noopAsyncArr,
+      search: () => Promise.resolve([]),
     },
     runtime: {
       // @ts-expect-error - partial mock
       onInstalled: {
-        addListener: noop,
+        addListener: () => {},
       },
       // @ts-expect-error - partial mock
       onStartup: {
-        addListener: noop,
+        addListener: () => {},
       },
-      openOptionsPage: noopAsync,
+      openOptionsPage: () => Promise.resolve(),
     },
     // @ts-expect-error - partial mock
     sessions: {
-      getRecentlyClosed: noopAsyncArr,
+      getRecentlyClosed: () => Promise.resolve([]),
     },
     storage: {
       // @ts-expect-error - partial mock
       local: {
         get: () => Promise.resolve({ t: "" }),
-        remove: noopAsync,
-        set: noopAsync,
+        remove: () => Promise.resolve(),
+        set: () => Promise.resolve(),
       },
       // @ts-expect-error - partial mock
       sync: {
-        clear: noopAsync,
-        get: noopAsyncObj,
-        remove: noopAsync,
-        set: noopAsync,
+        clear: () => Promise.resolve(),
+        get: () => Promise.resolve({}),
+        remove: () => Promise.resolve(),
+        set: () => Promise.resolve(),
       },
     },
     tabs: {
       // @ts-expect-error - partial mock
-      create: noopAsyncObj,
+      create: () => Promise.resolve({}),
       // @ts-expect-error - partial mock
-      getCurrent: noopAsyncObj,
+      getCurrent: () => Promise.resolve({}),
       // @ts-expect-error - partial mock
       onMoved: {
-        addListener: noop,
+        addListener: () => {},
       },
       // @ts-expect-error - partial mock
       onRemoved: {
-        addListener: noop,
+        addListener: () => {},
       },
       // @ts-expect-error - partial mock
       onUpdated: {
-        addListener: noop,
+        addListener: () => {},
       },
-      query: noopAsyncArr,
-      remove: noopAsync,
+      query: () => Promise.resolve([]),
+      remove: () => Promise.resolve(),
       // @ts-expect-error - partial mock
-      update: noopAsyncObj,
+      update: () => Promise.resolve({}),
     },
     topSites: {
-      get: noopAsyncArr,
+      get: () => Promise.resolve([]),
     },
     windows: {
       // @ts-expect-error - partial mock
-      getCurrent: noopAsyncObj,
+      getCurrent: () => Promise.resolve({}),
       // @ts-expect-error - partial mock
-      update: noopAsync,
+      update: () => Promise.resolve(),
     },
   };
 }
@@ -93,9 +88,7 @@ export async function reset(): Promise<void> {
     window.close();
   }
 
-  setupDOM({
-    url: "chrome-extension://cpcibnbdmpmcmnkhoiilpnlaepkepknb/",
-  });
+  setupDOM({ url: "chrome-extension://cpcibnbdmpmcmnkhoiilpnlaepkepknb/" });
   setupMocks();
 }
 
