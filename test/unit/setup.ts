@@ -1,21 +1,42 @@
 import "@maxmilton/test-utils/extend";
 import { setupDOM } from "@maxmilton/test-utils/dom";
 
+function asyncReturn<T>(value: T) {
+  function call(...args: [...unknown[], (result: T) => void]): void;
+  function call(...args: unknown[]): Promise<T>;
+  function call(...args: unknown[]): Promise<T> | undefined {
+    const callback = args.at(-1);
+
+    if (typeof callback === "function") {
+      // oxlint-disable-next-line promise/prefer-await-to-callbacks
+      (callback as (result: T) => void)(value);
+      return;
+    }
+
+    return Promise.resolve(value);
+  }
+
+  return call;
+}
+
 function setupMocks(): void {
   // @ts-expect-error - noop stub
   global.performance.mark = () => {};
   // @ts-expect-error - noop stub
   global.performance.measure = () => {};
 
+  // oxlint-disable-next-line unicorn/no-useless-undefined
+  const noReturnValue = asyncReturn(undefined);
+
   global.chrome = {
     // @ts-expect-error - partial mock
     bookmarks: {
-      getChildren: () => Promise.resolve([]),
-      search: () => Promise.resolve([]),
+      getChildren: asyncReturn<chrome.bookmarks.BookmarkTreeNode[]>([]),
+      search: asyncReturn<chrome.bookmarks.BookmarkTreeNode[]>([]),
     },
     // @ts-expect-error - partial mock
     history: {
-      search: () => Promise.resolve([]),
+      search: asyncReturn<chrome.history.HistoryItem[]>([]),
     },
     runtime: {
       // @ts-expect-error - partial mock
@@ -26,32 +47,32 @@ function setupMocks(): void {
       onStartup: {
         addListener: () => {},
       },
-      openOptionsPage: () => Promise.resolve(),
+      openOptionsPage: noReturnValue,
     },
     // @ts-expect-error - partial mock
     sessions: {
-      getRecentlyClosed: () => Promise.resolve([]),
+      getRecentlyClosed: asyncReturn<chrome.sessions.Session[]>([]),
     },
     storage: {
       // @ts-expect-error - partial mock
       local: {
-        get: () => Promise.resolve({ t: "" }),
-        remove: () => Promise.resolve(),
-        set: () => Promise.resolve(),
+        get: asyncReturn({ t: "" }),
+        remove: noReturnValue,
+        set: noReturnValue,
       },
       // @ts-expect-error - partial mock
       sync: {
-        clear: () => Promise.resolve(),
-        get: () => Promise.resolve({}),
-        remove: () => Promise.resolve(),
-        set: () => Promise.resolve(),
+        clear: noReturnValue,
+        get: asyncReturn({}),
+        remove: noReturnValue,
+        set: noReturnValue,
       },
     },
     tabs: {
       // @ts-expect-error - partial mock
-      create: () => Promise.resolve({}),
+      create: asyncReturn({}),
       // @ts-expect-error - partial mock
-      getCurrent: () => Promise.resolve({}),
+      getCurrent: asyncReturn({}),
       // @ts-expect-error - partial mock
       onMoved: {
         addListener: () => {},
@@ -64,19 +85,17 @@ function setupMocks(): void {
       onUpdated: {
         addListener: () => {},
       },
-      query: () => Promise.resolve([]),
-      remove: () => Promise.resolve(),
+      query: asyncReturn<chrome.tabs.Tab[]>([]),
+      remove: noReturnValue,
       // @ts-expect-error - partial mock
-      update: () => Promise.resolve({}),
+      update: asyncReturn<chrome.tabs.Tab>({}),
     },
     topSites: {
-      get: () => Promise.resolve([]),
+      get: asyncReturn<chrome.topSites.MostVisitedURL[]>([]),
     },
     windows: {
       // @ts-expect-error - partial mock
-      getCurrent: () => Promise.resolve({}),
-      // @ts-expect-error - partial mock
-      update: () => Promise.resolve(),
+      update: asyncReturn({}),
     },
   };
 }
