@@ -6,6 +6,7 @@ export default defineConfig({
   snapshotPathTemplate: "test/e2e/__snapshots__/{testFilePath}/{arg}{ext}",
   failOnFlakyTests: Boolean(process.env.CI),
   forbidOnly: Boolean(process.env.CI),
+  fullyParallel: true,
   retries: process.env.CI ? 1 : 0,
   use: {
     acceptDownloads: false,
