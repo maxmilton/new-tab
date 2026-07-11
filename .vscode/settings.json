@@ -8,7 +8,6 @@
   "editor.formatOnSave": true,
   "editor.formatOnType": false,
   "editor.tabSize": 2,
-  "eslint.enable": true,
   "git.branchProtection": ["master", "next"],
   "git.detectWorktrees": true,
   "git.worktreeIncludeFiles": ["node_modules/**"],
@@ -22,6 +21,9 @@
   "stylelint.enable": true,
 
   "[css]": {
+    "editor.defaultFormatter": "oxc.oxc-vscode"
+  },
+  "[github-actions-workflow]": {
     "editor.defaultFormatter": "oxc.oxc-vscode"
   },
   "[html]": {
