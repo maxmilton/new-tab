@@ -45,6 +45,8 @@ describe("handleClick", () => {
   });
   afterAll(() => {
     global.s.remove();
+    // @ts-expect-error - global.s is defined in this test file
+    delete global.s;
   });
 
   test("is a function", () => {
