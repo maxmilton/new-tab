@@ -61,6 +61,12 @@
       },
     },
     {
+      "files": ["apps/*/src/components/**"],
+      "rules": {
+        "unicorn/filename-case": ["error", { "case": "pascalCase" }],
+      },
+    },
+    {
       "files": ["src/sw.ts"],
       "env": {
         "serviceworker": true,
