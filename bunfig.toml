@@ -7,6 +7,7 @@ noOrphans = true
 [install]
 auto = "disable"
 linker = "isolated"
+hoistPattern = ["@csstools/*", "postcss-*"] # no phantom dependencies
 peer = false
 minimumReleaseAge = 604800 # 7 days
 minimumReleaseAgeExcludes = [
