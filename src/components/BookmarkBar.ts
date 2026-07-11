@@ -79,6 +79,7 @@ export const BookmarkBar = (): BookmarkBarComponent => {
       if (document.styleSheets.length) {
         resize();
       } else {
+        // oxlint-disable-next-line unicorn/explicit-timer-delay
         setTimeout(waitForStylesThenResize);
       }
     };

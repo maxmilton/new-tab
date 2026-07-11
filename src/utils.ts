@@ -5,6 +5,7 @@ export const chromeBookmarks = chrome.bookmarks;
 export const chromeTabs = chrome.tabs;
 
 performance.mark("Load Storage");
+// oxlint-disable-next-line node/no-top-level-await
 export const storage = await chrome.storage.local.get<UserStorageData>();
 
 // NOTE: When updating also update references that lookup items by index

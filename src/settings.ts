@@ -24,6 +24,7 @@ interface SectionScope {
 const DRAG_TYPE = "text/plain";
 const DEFAULT_THEME = "auto";
 
+// oxlint-disable-next-line unicorn/prefer-top-level-await
 const themesData = fetch("themes.json").then((response) => response.json() as Promise<ThemesData>);
 
 const hasStorageSync = async (): Promise<boolean> => {

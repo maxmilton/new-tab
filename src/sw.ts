@@ -5,6 +5,7 @@ import type { SyncStorageData, ThemesData, UserStorageData } from "./types.ts";
 // declare const self: WorkerGlobalScope & typeof globalThis;
 
 // On install or subsequent update, preload the user's chosen theme into storage
+// oxlint-disable-next-line typescript/no-misused-promises
 chrome.runtime.onInstalled.addListener(async () => {
   // TODO: Remove once most users have updated.
   // Migrate users to new storage schema (tn -> n) (v0.24.0)

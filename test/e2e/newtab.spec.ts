@@ -78,16 +78,18 @@ test("has no external or unexpected requests", async ({ page, extensionId }) => 
   for (const request of requests) {
     const url = request.url();
     const type = request.resourceType();
+    // oxlint-disable vitest/no-conditional-in-test
     if (
-      (type === "document" && url === `chrome-extension://${extensionId}/newtab.html`) ||
-      (type === "stylesheet" && url === `chrome-extension://${extensionId}/newtab.css`) ||
-      (type === "script" && url === `chrome-extension://${extensionId}/newtab.js`) ||
-      (type === "image" && url.startsWith(`chrome-extension://${extensionId}/_favicon?`))
+      (type === "document" && url === `chrome-extension://${extensionId}/newtab.html`)
+      || (type === "stylesheet" && url === `chrome-extension://${extensionId}/newtab.css`)
+      || (type === "script" && url === `chrome-extension://${extensionId}/newtab.js`)
+      || (type === "image" && url.startsWith(`chrome-extension://${extensionId}/_favicon?`))
     ) {
       expected.push({ url, type });
     } else {
       unexpected.push({ url, type });
     }
+    // oxlint-enable vitest/no-conditional-in-test
   }
 
   expect(unexpected).toHaveLength(0);

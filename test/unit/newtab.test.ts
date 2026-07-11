@@ -136,6 +136,7 @@ describe("CSS", () => {
     expect.assertions(1);
     let found = 0;
     walk(ast, (element) => {
+      // oxlint-disable-next-line vitest/no-conditional-in-test
       if (element.type === DECLARATION && (element.props as string).startsWith("--")) {
         found += 1;
       }

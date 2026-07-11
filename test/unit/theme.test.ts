@@ -105,6 +105,7 @@ describe.each(themeNames.map((t) => [t]))("theme: %s", (theme) => {
     expect(ast).not.toBeEmpty();
   });
 
+  // oxlint-disable vitest/no-conditional-in-test
   // TODO: More elegant way to test auto theme?
   if (theme === "auto") {
     test("has two :root{} which each contains all expected CSS variables", () => {
@@ -158,6 +159,7 @@ describe.each(themeNames.map((t) => [t]))("theme: %s", (theme) => {
       expect(variables).toEqual(cssVariables);
     });
   }
+  // oxlint-enable vitest/no-conditional-in-test
 });
 
 const MODULE_PATH_THEME = Bun.resolveSync("./src/theme.ts", ".");
