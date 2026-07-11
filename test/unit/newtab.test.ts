@@ -3,7 +3,7 @@ import { compile, DECLARATION, lookup, walk } from "@maxmilton/test-utils/css";
 import { performanceSpy } from "@maxmilton/test-utils/spy";
 import type { UserStorageData } from "#types.ts";
 import { DEFAULT_SECTION_ORDER } from "#utils.ts";
-import { reset } from "./setup.ts";
+import { reset } from "../setup.ts";
 
 // Completely reset DOM and global state between tests
 afterEach(reset);

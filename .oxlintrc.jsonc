@@ -83,7 +83,7 @@
       },
     },
     {
-      "files": ["test/unit/**"],
+      "files": ["test/unit/**", "test/setup.ts"],
       "env": {
         "node": true,
       },
