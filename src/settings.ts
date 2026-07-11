@@ -10,15 +10,15 @@ import { DEFAULT_SECTION_ORDER, storage } from "./utils.ts";
 
 interface SettingsState {
   order: [SectionOrderItem[], SectionOrderItem[]];
-  pushSyncData?(shouldForceUpdate?: boolean): Promise<void>;
+  pushSyncData?: (shouldForceUpdate?: boolean) => Promise<void>;
 }
 
 type ItemIndex = [listIndex: 0 | 1, itemIndex: number];
 
 /** Section drag-and-drop helper functions */
 interface SectionScope {
-  indexOf(list: 0 | 1, item: SectionOrderItem): number;
-  moveItem(from: ItemIndex, to: ItemIndex): void;
+  indexOf: (list: 0 | 1, item: SectionOrderItem) => number;
+  moveItem: (from: ItemIndex, to: ItemIndex) => void;
 }
 
 const DRAG_TYPE = "text/plain";

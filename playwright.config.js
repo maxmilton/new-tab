@@ -4,8 +4,8 @@ export default defineConfig({
   testDir: "test/e2e",
   testMatch: "test/e2e/**/*.spec.ts",
   snapshotPathTemplate: "test/e2e/__snapshots__/{testFilePath}/{arg}{ext}",
-  failOnFlakyTests: !!process.env.CI,
-  forbidOnly: !!process.env.CI,
+  failOnFlakyTests: Boolean(process.env.CI),
+  forbidOnly: Boolean(process.env.CI),
   retries: process.env.CI ? 1 : 0,
   use: {
     acceptDownloads: false,
