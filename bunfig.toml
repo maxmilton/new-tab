@@ -1,5 +1,8 @@
 "$schema" = "https://www.schemastore.org/bunfig.json"
 
+[run]
+bun = true
+
 [install]
 auto = "disable"
 linker = "isolated"
