@@ -21,7 +21,7 @@ export function createManifest(isDebug = !process.env.CI): chrome.runtime.Manife
     homepage_url: pkg.homepage,
     version: pkg.version.split("-", 1)[0],
     // Shippable releases should not have a named version
-    version_name: isDebug ? gitRef() : undefined, // oxlint-disable-line no-undefined
+    version_name: isDebug ? gitRef() : undefined,
     minimum_chrome_version: "149", // matches build
     icons: {
       16: "icon16.png",

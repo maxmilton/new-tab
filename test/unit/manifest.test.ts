@@ -175,7 +175,6 @@ test.skipIf(!!process.env.CI)("has version_name when CI env var is not set", () 
 
 const oldCI = process.env.CI;
 const restoreCI = () => {
-  // oxlint-disable-next-line no-undefined
   if (oldCI === undefined) {
     // TODO: Consider setting to undefined instead. Delete does not currently
     // work in bun for env vars that were set before the process started.

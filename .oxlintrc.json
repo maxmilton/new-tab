@@ -18,10 +18,12 @@
     "restriction": "error",
     "nursery": "warn"
   },
+  // https://github.com/oxc-project/javascript-globals/blob/main/src/lib.rs
   "env": {
     "browser": true,
     "builtin": true,
     "es2025": true,
+    "es2026": true,
     "webextensions": true
   },
   "globals": {
@@ -40,6 +42,7 @@
     "eslint/no-underscore-dangle": "off",
     "eslint/require-unicode-regexp": "off",
     "node/no-sync": "off",
+    "node/no-top-level-await": "off",
 
     /* Performance and byte savings */
     "eslint/prefer-template": "off",
