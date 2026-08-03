@@ -1,8 +1,8 @@
 {
   "recommendations": [
     "biomejs.biome",
+    "ms-playwright.playwright",
     "dbaeumer.vscode-eslint",
-    "MylesMurphy.prettify-ts",
     "oven.bun-vscode",
     "oxc.oxc-vscode",
     "stylelint.vscode-stylelint",
