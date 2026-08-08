@@ -20,7 +20,7 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 5
     container:
-      image: semgrep/semgrep@sha256:59fbed6127ea7c5dde3ba6a85142733bb20ea9aaa36120c953904f1539aaf66e
+      image: semgrep/semgrep@sha256:bdf7013b2c3634a487671158da77c554f531742326b543a9464d2adf6c433ac8
     permissions:
       actions: read
       contents: read
@@ -30,7 +30,7 @@ jobs:
       - run: semgrep ci --sarif-output=semgrep.sarif
         env:
           SEMGREP_RULES: p/default p/owasp-top-ten p/cwe-top-25 p/gitleaks p/r2c-security-audit
-      - uses: github/codeql-action/upload-sarif@99df26d4f13ea111d4ec1a7dddef6063f76b97e9 # v4
+      - uses: github/codeql-action/upload-sarif@5595ccaf912efad79be6eef63a5619ff05969be3 # v4
         if: always()
         with:
           sarif_file: semgrep.sarif
