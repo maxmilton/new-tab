@@ -12,7 +12,7 @@
         "@eslint/js": "10.0.1",
         "@maxmilton/eslint-config": "0.3.4",
         "@maxmilton/oxlint-config": "0.0.5",
-        "@maxmilton/test-utils": "0.0.15",
+        "@maxmilton/test-utils": "0.0.18",
         "@playwright/test": "1.62.0",
         "@types/bun": "1.3.14",
         "@types/chrome": "0.2.2",
@@ -115,11 +115,11 @@
 
     "@maxmilton/eslint-config": ["@maxmilton/eslint-config@0.3.4", "", { "peerDependencies": { "@eslint/js": "^10.0.0", "eslint": "^10.0.0", "eslint-plugin-unicorn": ">=72.0.0", "typescript-eslint": "^8.64.0" }, "optionalPeers": ["eslint-plugin-unicorn"] }, "sha512-wPHznKfkq5kcxtY1ykeCSGFQ+HMPaJ1yCi0lQ1ckh4nwGCKKWMalrCk84WY5yCubR1Ng/VeOxut5X2v/DZWQfg=="],
 
-    "@maxmilton/html-parser": ["@maxmilton/html-parser@0.0.12", "", {}, "sha512-hrmgn5evsM1OpYF+iH5IEi/Z+ZKLmYAxSTVnehxypGERNkjhhp+MDPFeXmxPNKapru5F7XfvUGCXZgjkrM2q9g=="],
+    "@maxmilton/html-parser": ["@maxmilton/html-parser@0.0.13", "", {}, "sha512-YngrbqbZF7/vyU5dyjzsrrBn6+LMwp6jN2bkNt2ZrQICkyjdZTqIh7fRbjKKKJYjZbiRX+JvKlwGRek437TtVQ=="],
 
     "@maxmilton/oxlint-config": ["@maxmilton/oxlint-config@0.0.5", "", { "peerDependencies": { "oxlint": "^1.74.0" } }, "sha512-TK1jN+0YOEjBaOX2vQKUOXkb0mVkh33P8o7xDzha3THGQ73G+ae5lpmFTguQOc6YWq9Y4b/os+PogHD/y1DZPw=="],
 
-    "@maxmilton/test-utils": ["@maxmilton/test-utils@0.0.15", "", { "dependencies": { "@maxmilton/html-parser": "^0.0.12", "@types/stylis": "^4.2.7", "stylis": "^4.3.6" }, "peerDependencies": { "happy-dom": ">=14.0.0 <21.0.0" }, "optionalPeers": ["happy-dom"] }, "sha512-eOmrOCq11tHtfYm91VHNM5VOMUgbGHi5gnnSEwgnWQi39kvbaezylgHFmmYvXGIGqv4z8YzfgEyW4dZLYTsxBQ=="],
+    "@maxmilton/test-utils": ["@maxmilton/test-utils@0.0.18", "", { "dependencies": { "@maxmilton/html-parser": "^0.0.13", "@types/stylis": "^4.2.7", "stylis": "^4.3.6" }, "peerDependencies": { "happy-dom": ">=14.0.0 <21.0.0" }, "optionalPeers": ["happy-dom"] }, "sha512-ou2ooZXHjF0buX89cqcsMe1lcuVIJrAfLr9TbQHVhFW5GzpWZxKUbEew4KNkUCHG+n0pOP6ctJSpBzDyMM5P0Q=="],
 
     "@nodelib/fs.scandir": ["@nodelib/fs.scandir@2.1.5", "", { "dependencies": { "@nodelib/fs.stat": "2.0.5", "run-parallel": "^1.1.9" } }, "sha512-vq24Bq3ym5HEQm2NKCr3yXDwjc7vTsEThRDnkp2DK9p1uqLR+DHurm/NOTo0KG7HYHU7eppKZj3MyqYuMBf62g=="],
 
