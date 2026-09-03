@@ -34,7 +34,7 @@
     "@maxmilton/eslint-config": "0.3.4",
     "@maxmilton/oxlint-config": "0.0.5",
     "@maxmilton/test-utils": "0.0.15",
-    "@playwright/test": "1.62.0",
+    "@playwright/test": "1.62.1",
     "@types/bun": "1.3.14",
     "@types/chrome": "0.2.2",
     "eslint": "10.8.0",
