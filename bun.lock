@@ -10,7 +10,7 @@
       "devDependencies": {
         "@biomejs/biome": "2.5.5",
         "@eslint/js": "10.0.1",
-        "@maxmilton/eslint-config": "0.3.4",
+        "@maxmilton/eslint-config": "0.3.5",
         "@maxmilton/oxlint-config": "0.0.5",
         "@maxmilton/test-utils": "0.0.15",
         "@playwright/test": "1.62.0",
@@ -113,7 +113,7 @@
 
     "@keyv/serialize": ["@keyv/serialize@1.1.1", "", {}, "sha512-dXn3FZhPv0US+7dtJsIi2R+c7qWYiReoEh5zUntWCf4oSpMNib8FDhSoed6m3QyZdx5hK7iLFkYk3rNxwt8vTA=="],
 
-    "@maxmilton/eslint-config": ["@maxmilton/eslint-config@0.3.4", "", { "peerDependencies": { "@eslint/js": "^10.0.0", "eslint": "^10.0.0", "eslint-plugin-unicorn": ">=72.0.0", "typescript-eslint": "^8.64.0" }, "optionalPeers": ["eslint-plugin-unicorn"] }, "sha512-wPHznKfkq5kcxtY1ykeCSGFQ+HMPaJ1yCi0lQ1ckh4nwGCKKWMalrCk84WY5yCubR1Ng/VeOxut5X2v/DZWQfg=="],
+    "@maxmilton/eslint-config": ["@maxmilton/eslint-config@0.3.5", "", { "peerDependencies": { "@eslint/js": "^10.0.0", "eslint": "^10.0.0", "eslint-plugin-unicorn": ">=73.0.0", "typescript-eslint": "^8.67.0" }, "optionalPeers": ["eslint-plugin-unicorn"] }, "sha512-Gi7w8V8fUlxZqFora63NqZKXFW6X23uJhjHey6ELdnPwHMAWNe0zY5zTL6SNHKkNbggNI53MAt/+EGMOacwEgA=="],
 
     "@maxmilton/html-parser": ["@maxmilton/html-parser@0.0.12", "", {}, "sha512-hrmgn5evsM1OpYF+iH5IEi/Z+ZKLmYAxSTVnehxypGERNkjhhp+MDPFeXmxPNKapru5F7XfvUGCXZgjkrM2q9g=="],
 
