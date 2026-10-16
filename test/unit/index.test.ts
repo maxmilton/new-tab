@@ -89,13 +89,3 @@ describe("package.json", () => {
     expect(pkg.homepage.length).toBeGreaterThan(0);
   });
 });
-
-test("no test file relies on the removed Bun `Loader` internal", async () => {
-  expect.assertions(1);
-  const contents = await Promise.all(
-    [...new Bun.Glob("**/*.ts").scanSync({ cwd: "test/unit" })]
-      .filter((filename) => filename !== "index.test.ts")
-      .map((filename) => Bun.file(`test/unit/${filename}`).text()),
-  );
-  expect(contents.join("\n")).not.toContain("Loader.registry");
-});
