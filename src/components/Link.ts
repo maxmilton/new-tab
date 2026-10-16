@@ -13,7 +13,7 @@ interface Refs {
   text: Text;
 }
 
-const meta = compile(/* html */ `
+const meta = compile<Refs>(/* html */ `
   <a>
     <img @img decoding=async>
     @text

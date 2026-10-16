@@ -67,7 +67,7 @@ const SectionItem = (
   scope: SectionScope,
 ): SectionComponent => {
   const root = clone(sectionView);
-  const refs = collect<SectionRefs>(root, sectionMeta.d);
+  const refs = collect(root, sectionMeta.d);
 
   refs[sectionMeta.ref.name].nodeValue = item;
 
@@ -197,7 +197,7 @@ const view = h<HTMLDivElement>(meta.html);
 
 const Settings = () => {
   const root = view;
-  const refs = collect<Refs>(root, meta.d);
+  const refs = collect(root, meta.d);
   // const feedback = refs[meta.ref.feedback];
   const theme = refs[meta.ref.theme];
   const bookmarks = refs[meta.ref.bookmarks];

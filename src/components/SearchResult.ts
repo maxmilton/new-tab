@@ -61,7 +61,7 @@ export const SearchResult = <T extends LinkProps & TabItem>(
   sectionName: (typeof DEFAULT_SECTION_ORDER)[number],
 ): SearchResultComponent<T> => {
   const root = clone<SearchResultComponent<T>>(view);
-  const refs = collect<Refs>(root, meta.d);
+  const refs = collect(root, meta.d);
   const title = refs[meta.ref.title];
   const results = refs[meta.ref.results];
   const more = refs[meta.ref.more];

@@ -32,7 +32,7 @@ const view = h<MenuComponent>(meta.html);
 
 export const Menu = (): MenuComponent => {
   const root = view;
-  const refs = collect<Refs>(root, meta.d);
+  const refs = collect(root, meta.d);
 
   refs[meta.ref.settings][ONCLICK] = () => chrome.runtime.openOptionsPage();
 

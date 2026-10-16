@@ -24,7 +24,7 @@ const view = h<SearchComponent>(meta.html);
 
 export const Search = (): SearchComponent => {
   const root = view;
-  const refs = collect<Refs>(root, meta.d);
+  const refs = collect(root, meta.d);
   const input = refs[meta.ref.search];
   const sections: Partial<Record<SectionOrderItem, SearchResultComponent>> = {};
 
