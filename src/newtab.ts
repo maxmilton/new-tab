@@ -1,6 +1,7 @@
 // Theme loader code must run first
 import "./theme.ts";
-import { append, fragment } from "stage1/fast";
+
+import { append } from "stage1/fast";
 import { BookmarkBar } from "./components/BookmarkBar.ts";
 import { Menu } from "./components/Menu.ts";
 import { Search } from "./components/Search.ts";
@@ -8,7 +9,7 @@ import { handleClick, storage } from "./utils.ts";
 
 performance.mark("Initialise Components");
 
-const container = fragment();
+const container = document.body;
 // Create Search component first because it has asynchronous calls that can
 // execute while the remaining components are constructed
 append(Search(), container);
@@ -17,7 +18,6 @@ append(Search(), container);
 // could cause reflow in extreme situations, so paint the rest of the app first
 if (!storage.b) append(BookmarkBar(), container);
 append(Menu(), container);
-append(container, document.body);
 
 performance.measure("Initialise Components", "Initialise Components");
 
