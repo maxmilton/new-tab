@@ -1,4 +1,4 @@
-import { afterEach, expect, onTestFinished, test } from "bun:test";
+import { afterEach, describe, expect, onTestFinished, spyOn, test } from "bun:test";
 import { cleanup, render } from "@maxmilton/test-utils/dom";
 import type { Search as SearchComponent } from "#/components/Search.ts";
 import { chromeBookmarks, chromeTabs, DEFAULT_SECTION_ORDER, storage } from "#/utils.ts";
@@ -164,4 +164,99 @@ test("Escape clears the input and its results", async () => {
   input.dispatchEvent(new window.KeyboardEvent("keyup", { key: "Escape" }));
   expect(input.value).toBe("");
   expect(root.textContent).not.toInclude("Needle history");
+});
+
+describe("open tabs", () => {
+  const TAB_EVENTS = ["onUpdated", "onRemoved", "onMoved"] as const;
+
+  /** Renders Search with tab events, animation frames, and tab queries under manual control. */
+  async function renderTabs() {
+    const Search = await load();
+    const stack = new DisposableStack();
+    const frames: FrameRequestCallback[] = [];
+    const queries: ((tabs: chrome.tabs.Tab[]) => void)[] = [];
+    const listeners = {} as Record<(typeof TAB_EVENTS)[number], () => void>;
+    stack.use(
+      spyOn(globalThis, "requestAnimationFrame").mockImplementation((callback) =>
+        frames.push(callback),
+      ),
+    );
+    for (const event of TAB_EVENTS) {
+      stack.use(
+        spyOn(chromeTabs[event], "addListener").mockImplementation((callback: () => void) => {
+          listeners[event] = callback;
+        }),
+      );
+    }
+    stack.use(
+      spyOn(chromeTabs, "query").mockImplementation(((
+        _query: chrome.tabs.QueryInfo,
+        callback: (tabs: chrome.tabs.Tab[]) => void,
+      ) => {
+        queries.push(callback);
+      }) as typeof chromeTabs.query),
+    );
+    const rendered = render(Search());
+    return {
+      container: rendered.container,
+      initialQueries: queries.splice(0),
+      queries,
+      listeners,
+      flush() {
+        for (const frame of frames.splice(0)) frame(0);
+      },
+      [Symbol.dispose]() {
+        stack.dispose();
+      },
+    };
+  }
+
+  test.serial("queries open tabs immediately on render", async () => {
+    expect.assertions(1);
+    using fixture = await renderTabs();
+    expect(fixture.initialQueries).toHaveLength(1);
+  });
+
+  test.serial.each(TAB_EVENTS)("%s refreshes open tabs on the next frame", async (event) => {
+    expect.assertions(2);
+    using fixture = await renderTabs();
+    fixture.listeners[event]();
+    expect(fixture.queries).toHaveLength(0);
+    fixture.flush();
+    expect(fixture.queries).toHaveLength(1);
+  });
+
+  test.serial("a burst of tab events refreshes once per frame", async () => {
+    expect.assertions(1);
+    using fixture = await renderTabs();
+    for (const listener of Object.values(fixture.listeners)) listener();
+    fixture.listeners.onUpdated();
+    fixture.flush();
+    expect(fixture.queries).toHaveLength(1);
+  });
+
+  test.serial("tab events after a frame schedule another refresh", async () => {
+    expect.assertions(1);
+    using fixture = await renderTabs();
+    fixture.listeners.onUpdated();
+    fixture.flush();
+    fixture.listeners.onUpdated();
+    fixture.flush();
+    expect(fixture.queries).toHaveLength(2);
+  });
+
+  test.serial("refreshed open tabs keep the current search filter", async () => {
+    expect.assertions(2);
+    using fixture = await renderTabs();
+    const input = fixture.container.querySelector("input#s") as HTMLInputElement;
+    input.value = "needle";
+    fixture.listeners.onUpdated();
+    fixture.flush();
+    fixture.queries[0]?.([
+      { id: 1, title: "Needle tab", url: "https://needle.test" } as chrome.tabs.Tab,
+      { id: 2, title: "Other tab", url: "https://other.test" } as chrome.tabs.Tab,
+    ]);
+    expect(fixture.container.textContent).not.toInclude("Other tab");
+    expect(fixture.container.textContent).toInclude("Needle tab");
+  });
 });

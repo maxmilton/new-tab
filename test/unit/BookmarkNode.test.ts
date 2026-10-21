@@ -1,7 +1,8 @@
-import { afterEach, describe, expect, onTestFinished, test } from "bun:test";
+import { afterEach, describe, expect, onTestFinished, spyOn, test } from "bun:test";
 import { cleanup, render } from "@maxmilton/test-utils/dom";
 import { BookmarkNode, type BookmarkTreeNode, Folder } from "#/components/BookmarkNode.ts";
 import type { LinkProps } from "#/components/Link.ts";
+import { chromeBookmarks } from "#/utils.ts";
 
 afterEach(cleanup);
 
@@ -104,7 +105,7 @@ describe("Folder", () => {
   test("hovering a nested folder inside an open popup opens its own subfolder popup", async () => {
     expect.assertions(2);
     const rendered = render(
-      Folder({ id: "1", title: "Parent" }, false, [{ id: "2", title: "Child" }]),
+      Folder({ id: "1", title: "Parent" }, false, () => [{ id: "2", title: "Child" }]),
     );
     const root = rendered.container.firstChild as HTMLElement;
     root.dispatchEvent(new window.Event("mouseover"));
@@ -142,6 +143,37 @@ describe("Folder", () => {
     await happyDOM.waitUntilComplete();
     expect(folderA.querySelector(".p")).toBeFalsy();
     expect(folderB.querySelector(".p")).toBeTruthy();
+  });
+
+  test.serial("renders children fetched by the folder's ID on hover", async () => {
+    expect.assertions(1);
+    using _ = spyOn(chromeBookmarks, "getChildren").mockImplementation((id: string) =>
+      Promise.resolve(
+        id === "nested"
+          ? [{ id: "child", title: "Fetched", url: "https://fetched.example", syncing: false }]
+          : [],
+      ),
+    );
+    const rendered = render(Folder({ id: "nested", title: "Folder" }));
+    const root = rendered.container.firstChild as HTMLElement;
+    root.dispatchEvent(new window.Event("mouseover"));
+    await happyDOM.waitUntilComplete();
+    expect(root.querySelector('a[href="https://fetched.example"]')?.textContent).toBe("Fetched");
+  });
+
+  test.serial("renders supplied popup children without fetching", async () => {
+    expect.assertions(2);
+    using getChildren = spyOn(chromeBookmarks, "getChildren");
+    const rendered = render(
+      Folder({ title: "Other Bookmarks" } as BookmarkTreeNode, false, () => [
+        { id: "child", title: "Supplied", url: "https://supplied.example" },
+      ]),
+    );
+    const root = rendered.container.firstChild as HTMLElement;
+    root.dispatchEvent(new window.Event("mouseover"));
+    await happyDOM.waitUntilComplete();
+    expect(root.querySelector('a[href="https://supplied.example"]')?.textContent).toBe("Supplied");
+    expect(getChildren).not.toHaveBeenCalled();
   });
 
   // TODO: Test opened sub folder positions (as e2e test; happy-dom doesn't support layout)
