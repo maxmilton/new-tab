@@ -9,7 +9,7 @@
     "stylelint.vscode-stylelint",
     "tekumara.typos-vscode",
     "typescriptteam.native-preview",
-    "YoavBls.pretty-ts-errors",
+    "yoavbls.pretty-ts-errors",
     "zizmor.zizmor-vscode"
   ],
   "unwantedRecommendations": ["dprint.dprint", "esbenp.prettier-vscode", "prettier.prettier-vscode"]
