@@ -65,7 +65,7 @@ jobs:
       - run: pipx install "ruff==${RUFF_VERSION}"
         env:
           # renovate: datasource=pypi depName=ruff
-          RUFF_VERSION: 0.17.0
+          RUFF_VERSION: 0.17.3
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
         with:
           persist-credentials: false

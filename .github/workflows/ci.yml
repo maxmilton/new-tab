@@ -34,7 +34,7 @@ jobs:
       - run: bun run test:ci --coverage-reporter=text --coverage-reporter=lcov
       - name: Report coverage
         if: ${{ github.repository_owner == 'maxmilton' }}
-        uses: qltysh/qlty-action/coverage@c9b09987143d1e4ac955f4803c7bea742102feb5 # v2.4.0
+        uses: qltysh/qlty-action/coverage@ebcd284bf32e36a030afe15f1e136c7be08b9506 # v2.5.0
         with:
           oidc: true
           files: coverage/lcov.info
@@ -54,7 +54,7 @@ jobs:
       - run: bun install --frozen-lockfile
       - run: bun playwright install --no-shell chromium
       - run: bun run build
-      - run: bun run test:e2e --reporter=github,html
+      - run: bun run test:e2e --reporter=github,html --workers=100%
       - uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2
         if: ${{ !cancelled() }}
         with:

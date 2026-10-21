@@ -38,7 +38,7 @@ jobs:
         with:
           bun-version-file: .bun-version
           no-cache: true
-      - run: bun install --frozen-lockfile
+      - run: bun install --frozen-lockfile --ignore-scripts
       - run: bun run build
       - run: bun run lint
       - run: bun run test
