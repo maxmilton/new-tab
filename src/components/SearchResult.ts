@@ -99,7 +99,7 @@ export const SearchResult = <T extends LinkProps & TabItem>(
       rawData.filter((item) => (item.title + item.url).toLowerCase().includes(text.toLowerCase())),
     );
 
-  title.nodeValue = sectionName;
+  title.data = sectionName;
 
   more[ONCLICK] = () => renderList(rawData, renderedLength + MORE_RESULTS_AMOUNT);
 

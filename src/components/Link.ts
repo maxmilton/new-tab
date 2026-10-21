@@ -30,7 +30,7 @@ export const Link = (props: LinkProps): LinkComponent => {
   (root.firstChild as Refs["img"]).src =
     "_favicon?size=16&pageUrl=" + encodeURIComponent((root.href = props.url));
   // oxlint-disable-next-line no-multi-assign
-  root.title = (root.lastChild as Refs["text"]).nodeValue = props.title;
+  root.title = (root.lastChild as Refs["text"]).data = props.title;
 
   return root;
 };

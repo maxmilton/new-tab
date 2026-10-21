@@ -69,7 +69,7 @@ const SectionItem = (
   const root = clone(sectionView);
   const refs = collect(root, sectionMeta.d);
 
-  refs[sectionMeta.ref.name].nodeValue = item;
+  refs[sectionMeta.ref.name].data = item;
 
   if (item === DEFAULT_SECTION_ORDER[1] || item === DEFAULT_SECTION_ORDER[2]) {
     append(clone(searchOnlyView), root);
@@ -323,11 +323,11 @@ const Settings = () => {
 
   const updateSync = (syncData: Readonly<SyncStorageData>) => {
     if (syncData.ts) {
-      feedback2.nodeValue = `Sync data found (last updated: ${new Date(syncData.ts).toLocaleString()})`;
+      feedback2.data = `Sync data found (last updated: ${new Date(syncData.ts).toLocaleString()})`;
       pull.disabled = false;
       clear.disabled = false;
     } else {
-      feedback2.nodeValue = "No sync data found";
+      feedback2.data = "No sync data found";
       pull.disabled = true;
       clear.disabled = true;
     }
@@ -383,7 +383,7 @@ const Settings = () => {
       // TODO: Listen for sync data changes?
       // chrome.storage.sync.onChanged.addListener((changes) => {});
     } else {
-      feedback2.nodeValue = "Not signed in or sync not supported";
+      feedback2.data = "Not signed in or sync not supported";
     }
   });
 
