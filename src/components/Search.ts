@@ -65,36 +65,29 @@ export const Search = (): SearchComponent => {
   };
 
   if (openTabs) {
-    const updateOpenTabs = () =>
+    let pending: boolean;
+
+    const updateOpenTabs = () => {
+      pending = false;
       chromeTabs.query({}, (tabs) => {
         openTabs.$$update(tabs);
         if (input.value) {
           openTabs.$$filter(input.value);
         }
       });
+    };
+
+    const schedule = () => {
+      if (pending) return;
+      pending = true;
+      requestAnimationFrame(updateOpenTabs);
+    };
 
     updateOpenTabs();
 
-    chromeTabs.onUpdated.addListener(updateOpenTabs);
-    chromeTabs.onRemoved.addListener(updateOpenTabs);
-    chromeTabs.onMoved.addListener(updateOpenTabs);
-
-    // When opening multiple new-tab pages the browser will continue to update
-    // the "Open Tabs" section on all pages, causing a significant performance
-    // overhead. The impact is multiplied by the number of open tabs * the
-    // number of new-tab pages. On top of that, it seems the browser reuses the
-    // same process for all new-tab pages, causing resource contention for all
-    // these updates. The actual problem is work is done even on pages that are
-    // not visible and with execution on older pages before the/ current page.
-    // Additionally, the SearchResult component is implemented in a way that
-    // produces the smallest JS size and fast execution (remove entire list DOM
-    // and insert new DOM fragment) rather than for efficiency (e.g., DOM
-    // reconciliation; diff list DOM state and mutate changes minimising adding
-    // or removing DOM nodes).
-
-    // TODO: Set up tabs event listeners once globally and update all new tab
-    // pages at once using a single debounced chrome.tabs.query() call. Maybe
-    // using queueMicrotask + an EventTarget event bus?
+    chromeTabs.onUpdated.addListener(schedule);
+    chromeTabs.onRemoved.addListener(schedule);
+    chromeTabs.onMoved.addListener(schedule);
   }
 
   if (topSites) {
