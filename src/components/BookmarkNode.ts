@@ -55,11 +55,7 @@ export const Folder = (
   if (isNested) {
     // https://github.com/tailwindlabs/heroicons/blob/master/optimized/24/outline/arrow-right.svg
     append(
-      clone(
-        (arrow ??= h<SVGElement>(
-          /* html */ '<svg class=i><path d="M5 12h14M12 5l7 7-7 7"/></svg>',
-        )),
-      ),
+      clone((arrow ??= h<SVGElement>(/* html */ '<svg class=i><path d="M12 5l7 7-7 7m7-7H5"/></svg>'))),
       root,
     );
   }
@@ -79,12 +75,10 @@ export const Folder = (
         .parentNode!.querySelectorAll<FolderComponent>(".f")
         .forEach((folder) => folder.$$closePopup());
 
-      popup = FolderPopup(await children());
+      popup = append(FolderPopup(await children()), root);
 
       popup.onmouseover = clearTimer;
       popup.onmouseout = resetTimer;
-
-      append(popup, root);
     }
   };
 

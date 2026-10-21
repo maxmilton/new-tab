@@ -9,12 +9,15 @@ export const BookmarkBar = (): BookmarkBarComponent => {
   const root = create("div");
   root.id = "b";
 
-  chromeBookmarks.getChildren("0").then(async (roots) => {
-    const getChildren = (isBar?: boolean) =>
+  // oxlint-disable-next-line @typescript-eslint/no-misused-promises
+  chromeBookmarks.getChildren("0", async (roots) => {
+    const getChildren = (isBar = false) =>
       Promise.all(
-        roots
-          .filter((node) => (node.folderType === "bookmarks-bar") === isBar)
-          .map((node) => chromeBookmarks.getChildren(node.id)),
+        roots.flatMap((node) =>
+          (node.folderType === "bookmarks-bar") === isBar
+            ? chromeBookmarks.getChildren(node.id)
+            : [],
+        ),
       ).then((children) => children.flat());
     const bookmarks = await getChildren(true);
     const len = bookmarks.length;
@@ -22,7 +25,8 @@ export const BookmarkBar = (): BookmarkBarComponent => {
     // Since we can't determine an element's width before it's included in the
     // DOM, we have to insert BookmarkNodes individually until no more can fit.
     // Any leftover items are then placed in an overflow folder.
-    const resize = () => {
+    // oxlint-disable-next-line no-multi-assign
+    const resize = (window.onresize = () => {
       performance.mark("BookmarkBar");
 
       // Remove all child nodes
@@ -49,54 +53,47 @@ export const BookmarkBar = (): BookmarkBarComponent => {
         if (width >= maxWidth) {
           // Remove the node which overflowed
           node.remove();
+
+          const overflowBookmarksFolder = append(
+            // oxlint-disable-next-line no-loop-func
+            Folder({} as BookmarkTreeNode, false, () => bookmarks.slice(index)),
+            root,
+          );
+          overflowBookmarksFolder.className = "f end";
+
+          append(
+            h<SVGElement>(
+              // https://github.com/feathericons/feather/blob/master/icons/corner-right-down.svg
+              compile(/* html */ `
+                <svg id=io>
+                  <path d="M4 4h7a4 4 0 014 4v12m-5-5 5 5 5-5"/>
+                </svg>
+              `).html,
+            ),
+            overflowBookmarksFolder,
+          );
           break;
         }
       }
 
-      if (index < len) {
-        const overflowBookmarksFolder = append(
-          Folder({} as BookmarkTreeNode, false, () => bookmarks.slice(index)),
-          root,
-        );
-        overflowBookmarksFolder.className += " end";
-
-        append(
-          h<SVGElement>(
-            // https://github.com/feathericons/feather/blob/master/icons/corner-right-down.svg
-            compile(/* html */ `
-              <svg id=io>
-                <polyline points="10 15 15 20 20 15"/>
-                <path d="M4 4h7a4 4 0 0 1 4 4v12"/>
-              </svg>
-            `).html,
-          ),
-          overflowBookmarksFolder,
-        );
-      }
-
       // The "Other Bookmarks" folder was added first so overflow calculation
       // is correct but now move it to its proper position at the end
-      append(otherBookmarksFolder, root).className += " end";
+      append(otherBookmarksFolder, root).className = "f end";
 
       performance.measure("BookmarkBar", "BookmarkBar");
-    };
+    });
 
     // HACK: Workaround for race condition. This script is loaded asynchronously,
     // which yields the best performance, but it means this code may execute
     // before the CSS has loaded. Styles are needed to calculate the bookmark
     // item widths, so wait until the CSS is ready.
-    const waitForStylesThenResize = () => {
-      if (document.styleSheets.length) {
-        resize();
-      } else {
-        // oxlint-disable-next-line unicorn/explicit-timer-delay
-        setTimeout(waitForStylesThenResize);
-      }
-    };
+    const waitForStylesThenResize = () =>
+      document.styleSheets.length
+        ? resize()
+        : // oxlint-disable-next-line unicorn/explicit-timer-delay
+          setTimeout(waitForStylesThenResize);
 
     waitForStylesThenResize();
-
-    window.onresize = resize;
   });
 
   return root;
