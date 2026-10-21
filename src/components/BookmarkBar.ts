@@ -9,7 +9,14 @@ export const BookmarkBar = (): BookmarkBarComponent => {
   const root = create("div");
   root.id = "b";
 
-  chromeBookmarks.getChildren("1", (bookmarks) => {
+  chromeBookmarks.getChildren("0").then(async (roots) => {
+    const getChildren = (isBar?: boolean) =>
+      Promise.all(
+        roots
+          .filter((node) => (node.folderType === "bookmarks-bar") === isBar)
+          .map((node) => chromeBookmarks.getChildren(node.id)),
+      ).then((children) => children.flat());
+    const bookmarks = await getChildren(true);
     const len = bookmarks.length;
 
     // Since we can't determine an element's width before it's included in the
@@ -24,10 +31,13 @@ export const BookmarkBar = (): BookmarkBarComponent => {
       // Max width is root minus overflow folder width (68 == 24px SVG + 2 * 9px
       // SVG padding + 2 * 13px bookmark item padding)
       const maxWidth = root.clientWidth - 68;
-      const allBookmarksFolder = append(Folder({ id: "0", title: "All Bookmarks" }), root);
+      const otherBookmarksFolder = append(
+        Folder({ title: "Other Bookmarks" } as BookmarkTreeNode, false, getChildren),
+        root,
+      );
       // NOTE: The elements we're measuring don't have a border or margin so
       // we can use clientWidth instead of offsetWidth for better performance.
-      let width = allBookmarksFolder.clientWidth;
+      let width = otherBookmarksFolder.clientWidth;
       let index = 0;
       let node: ReturnType<typeof BookmarkNode>;
 
@@ -45,7 +55,7 @@ export const BookmarkBar = (): BookmarkBarComponent => {
 
       if (index < len) {
         const overflowBookmarksFolder = append(
-          Folder({} as BookmarkTreeNode, false, bookmarks.slice(index)),
+          Folder({} as BookmarkTreeNode, false, () => bookmarks.slice(index)),
           root,
         );
         overflowBookmarksFolder.className += " end";
@@ -66,7 +76,7 @@ export const BookmarkBar = (): BookmarkBarComponent => {
 
       // The "Other Bookmarks" folder was added first so overflow calculation
       // is correct but now move it to its proper position at the end
-      append(allBookmarksFolder, root).className += " end";
+      append(otherBookmarksFolder, root).className += " end";
 
       performance.measure("BookmarkBar", "BookmarkBar");
     };

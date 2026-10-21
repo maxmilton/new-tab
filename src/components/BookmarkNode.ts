@@ -36,7 +36,8 @@ folderView.className = "f";
 export const Folder = (
   props: BookmarkTreeNode,
   isNested?: boolean,
-  children?: readonly BookmarkTreeNode[],
+  children: () => readonly BookmarkTreeNode[] | Promise<readonly BookmarkTreeNode[]> = () =>
+    chromeBookmarks.getChildren(props.id),
 ): FolderComponent => {
   const root = clone(folderView);
   let popup: FolderPopupComponent | null;
@@ -64,8 +65,7 @@ export const Folder = (
   }
 
   root.$$closePopup = () => {
-    if (!popup) return;
-    popup.remove();
+    popup?.remove();
     popup = null;
   };
 
@@ -79,7 +79,7 @@ export const Folder = (
         .parentNode!.querySelectorAll<FolderComponent>(".f")
         .forEach((folder) => folder.$$closePopup());
 
-      popup = FolderPopup(children ?? (await chromeBookmarks.getChildren(props.id)));
+      popup = FolderPopup(await children());
 
       popup.onmouseover = clearTimer;
       popup.onmouseout = resetTimer;
