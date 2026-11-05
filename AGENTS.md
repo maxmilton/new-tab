@@ -1,18 +1,6 @@
 ## Commands
 
-- Use bun not node, bunx not npx.
-- Always use bun `-b` flag for lint; `bun run -b lint`.
-
-```bash
-bun run build # production
-bun dev       # unminified + source maps
-bun -b lint   # lint:fmt (oxfmt), lint:fmt2 (biome), lint:css (stylelint), lint:js (oxlint), lint:ts (tsc)
-bun test      # unit
-bun test test/unit/sw.test.ts # one file
-bun test -t "name pattern"    # one case
-bun test:ci   # coverage + catch flakiness
-bun test:e2e
-```
+- Use `bun`, never `node` or `npx`.
 
 ## Constraints
 

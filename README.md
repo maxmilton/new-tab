@@ -1,6 +1,6 @@
 [![CI status](https://badgen.net/github/checks/maxmilton/new-tab?label=ci)](https://github.com/maxmilton/new-tab/actions)
 [![Coverage %](https://qlty.sh/badges/bfb90576-1d44-4606-9ba0-95b4e7077333/test_coverage.svg)](https://qlty.sh/gh/maxmilton/projects/new-tab)
-[![Licence](https://badgen.net/github/license/maxmilton/new-tab)](./LICENSE)
+[![Licence](https://badgen.net/github/license/maxmilton/new-tab)](LICENSE)
 
 [
 ![Version](https://badgen.net/chrome-web-store/v/cpcibnbdmpmcmnkhoiilpnlaepkepknb)
@@ -8,7 +8,7 @@
 ![Rating](https://badgen.net/chrome-web-store/rating/cpcibnbdmpmcmnkhoiilpnlaepkepknb)
 ](https://chrome.google.com/webstore/detail/new-tab/cpcibnbdmpmcmnkhoiilpnlaepkepknb)
 
-# New Tab ![](./static/icon48.png)
+# New Tab ![](static/icon48.png)
 
 A high-performance browser new tab page that gets you where you need to go faster. Utilises the latest tools and tech, packaged into an easy to use Chrome browser extension.
 
@@ -66,10 +66,6 @@ See [releases on GitHub](https://github.com/maxmilton/new-tab/releases).
 
 ## License
 
-MIT license. See [LICENSE](./LICENSE).
+[MIT License](LICENSE) · © [Max Milton](https://maxmilton.com)
 
 The [lightning bolt icon](https://github.com/twitter/twemoji/blob/master/assets/svg/26a1.svg) is from [twitter/twemoji](https://github.com/twitter/twemoji) which is licensed CC-BY 4.0.
-
----
-
-© [Max Milton](https://maxmilton.com)
