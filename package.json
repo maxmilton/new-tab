@@ -33,7 +33,7 @@
     "@maxmilton/oxlint-config": "0.0.22",
     "@maxmilton/test-utils": "0.0.18",
     "@playwright/test": "1.64.0",
-    "@types/bun": "1.4.3",
+    "@types/bun": "1.4.4",
     "@types/chrome": "0.3.5",
     "happy-dom": "21.0.1",
     "lightningcss": "1.33.0",
