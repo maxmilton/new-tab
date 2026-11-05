@@ -7,14 +7,16 @@ export default defineConfig({
   failOnFlakyTests: Boolean(process.env.CI),
   forbidOnly: Boolean(process.env.CI),
   fullyParallel: true,
-  retries: process.env.CI ? 1 : 0,
+  globalTimeout: 8 * 60 * 1000, // 8 minutes (keep under CI timeout)
+  // repeatEach: 3, // uncomment to detect flaky tests
+  retries: 0, // a flake is a bug; fix it, never retry it
   use: {
     acceptDownloads: false,
     contextOptions: { strictSelectors: true },
     locale: "en-US",
     offline: true, // the extension must work 100% offline
     timezoneId: "UTC",
-    trace: "on-first-retry",
+    trace: "retain-on-failure",
   },
   expect: {
     toHaveScreenshot: {
