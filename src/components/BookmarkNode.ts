@@ -55,7 +55,9 @@ export const Folder = (
   if (isNested) {
     // https://github.com/tailwindlabs/heroicons/blob/master/optimized/24/outline/arrow-right.svg
     append(
-      clone((arrow ??= h<SVGElement>(/* html */ '<svg class=i><path d="M12 5l7 7-7 7m7-7H5"/></svg>'))),
+      clone(
+        (arrow ??= h<SVGElement>(/* html */ '<svg class=i><path d="M12 5l7 7-7 7m7-7H5"/></svg>')),
+      ),
       root,
     );
   }
