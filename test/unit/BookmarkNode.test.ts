@@ -34,6 +34,7 @@ describe("Bookmark (Link)", () => {
     expect(root.querySelector("img")).toBeTruthy(); // favicon
   });
 
+  // accepted tradeoff: snapshot of own output
   test("rendered DOM matches snapshot", () => {
     expect.assertions(1);
     const rendered = render(BookmarkNode({ title: "Example", url: "https://example.com" }));
@@ -50,13 +51,20 @@ describe("Folder", () => {
     expect(root.className).toBe("f");
   });
 
+  test("labels a folder with its title", () => {
+    expect.assertions(1);
+    const rendered = render(BookmarkNode({ id: "1", title: "Example" }));
+    expect(rendered.container.firstChild?.textContent).toBe("Example");
+  });
+
+  // accepted tradeoff: snapshot of own output
   test("rendered DOM matches snapshot", () => {
     expect.assertions(1);
     const rendered = render(BookmarkNode({ id: "1", title: "Example" }));
     expect(rendered.container.getHTML()).toMatchSnapshot();
   });
 
-  test("2nd argument (isNested) toggles the subfolder arrow icon", () => {
+  test("shows a subfolder arrow only when nested", () => {
     expect.assertions(2);
     const rendered1 = render(BookmarkNode({ id: "1", title: "Example" }));
     const rendered2 = render(BookmarkNode({ id: "1", title: "Example" }, true));
@@ -75,7 +83,7 @@ describe("Folder", () => {
     expect(root.querySelector(".p")).toBeTruthy();
   });
 
-  test("closes an open popup after mouseout", async () => {
+  test.serial("closes an open popup after mouseout", async () => {
     expect.assertions(2);
     const originalSetTimeout = global.setTimeout;
     onTestFinished(() => {
@@ -84,7 +92,6 @@ describe("Folder", () => {
     let close: (() => void) | undefined;
     // @ts-expect-error - controlled timer
     global.setTimeout = (callback: () => void) => {
-      // oxlint-disable-next-line vitest/no-conditional-in-test
       if (typeof callback === "function") {
         close = () => {
           callback();

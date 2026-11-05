@@ -37,7 +37,7 @@ declare global {
   var s: HTMLInputElement;
 }
 
-describe("handleClick", () => {
+describe.serial("handleClick", () => {
   beforeAll(() => {
     if (global.s as Node | undefined) throw new Error("global.s already defined");
     global.s = document.createElement("input");
@@ -60,7 +60,7 @@ describe("handleClick", () => {
     expect(handleClick).toHaveParameters(1, 0);
   });
 
-  test("has no return value by default", () => {
+  test("returns undefined for a non-link target", () => {
     expect.assertions(1);
     const event = new window.MouseEvent("click");
     // @ts-expect-error - happy-dom internal target property
@@ -160,8 +160,8 @@ describe("handleClick", () => {
 
   test("opens in new tab when url starts with chrome:// and ctrl key is pressed", () => {
     expect.assertions(3);
-    const tabsCreateSpy = spyOn(chromeTabs, "create");
-    const tabsUpdateSpy = spyOn(chromeTabs, "update");
+    using tabsCreateSpy = spyOn(chromeTabs, "create");
+    using tabsUpdateSpy = spyOn(chromeTabs, "update");
     const event = new window.MouseEvent("click", { ctrlKey: true });
     // @ts-expect-error - happy-dom internal target property
     event[target] = { href: "chrome://about" };
@@ -169,14 +169,12 @@ describe("handleClick", () => {
     expect(tabsCreateSpy).toHaveBeenCalledTimes(1);
     expect(tabsCreateSpy).toHaveBeenCalledWith({ url: "chrome://about" });
     expect(tabsUpdateSpy).toHaveBeenCalledTimes(0);
-    tabsCreateSpy.mockRestore();
-    tabsUpdateSpy.mockRestore();
   });
 
   test("updates current tab when url starts with chrome:// and target is not _blank", () => {
     expect.assertions(3);
-    const tabsCreateSpy = spyOn(chromeTabs, "create");
-    const tabsUpdateSpy = spyOn(chromeTabs, "update");
+    using tabsCreateSpy = spyOn(chromeTabs, "create");
+    using tabsUpdateSpy = spyOn(chromeTabs, "update");
     const event = new window.MouseEvent("click");
     // @ts-expect-error - happy-dom internal target property
     event[target] = { href: "chrome://about", target: null };
@@ -184,14 +182,12 @@ describe("handleClick", () => {
     expect(tabsCreateSpy).toHaveBeenCalledTimes(0);
     expect(tabsUpdateSpy).toHaveBeenCalledTimes(1);
     expect(tabsUpdateSpy).toHaveBeenCalledWith({ url: "chrome://about" });
-    tabsCreateSpy.mockRestore();
-    tabsUpdateSpy.mockRestore();
   });
 
   test("updates current tab when url starts with chrome:// and ctrl key is not pressed", () => {
     expect.assertions(3);
-    const tabsCreateSpy = spyOn(chromeTabs, "create");
-    const tabsUpdateSpy = spyOn(chromeTabs, "update");
+    using tabsCreateSpy = spyOn(chromeTabs, "create");
+    using tabsUpdateSpy = spyOn(chromeTabs, "update");
     const event = new window.MouseEvent("click", { ctrlKey: false });
     // @ts-expect-error - happy-dom internal target property
     event[target] = { href: "chrome://about" };
@@ -199,13 +195,11 @@ describe("handleClick", () => {
     expect(tabsCreateSpy).toHaveBeenCalledTimes(0);
     expect(tabsUpdateSpy).toHaveBeenCalledTimes(1);
     expect(tabsUpdateSpy).toHaveBeenCalledWith({ url: "chrome://about" });
-    tabsCreateSpy.mockRestore();
-    tabsUpdateSpy.mockRestore();
   });
 
   test("focuses search input for non-link target", () => {
     expect.assertions(2);
-    const focusSpy = spyOn(global.s, "focus");
+    using focusSpy = spyOn(global.s, "focus");
     const event = new window.MouseEvent("click");
     // @ts-expect-error - happy-dom internal target property
     event[target] = {};

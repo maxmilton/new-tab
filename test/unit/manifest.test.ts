@@ -1,8 +1,84 @@
-import { expect, test } from "bun:test";
+import { describe, expect, onTestFinished, test } from "bun:test";
+import { browserslistToTargets } from "lightningcss";
 import dist from "../../dist/manifest.json" with { type: "json" };
-import { createManifest } from "../../manifest.config.ts";
+import { createManifest, cssTarget, MIN_CHROME_VERSION } from "../../manifest.config.ts";
+
+// MAJOR[.MINOR[.BUILD[.PATCH]]] without leading zeros, e.g., "152" or "152.0.7000.12"
+// https://www.chromium.org/developers/version-numbers/
+const CHROME_VERSION_RE = /^[1-9]\d*(?:\.(?:0|[1-9]\d*)){0,3}$/u;
+// Independent oracle: lightningcss's own encoding of a major-only Chrome target.
+const browserslistTarget = (major: number | string) =>
+  // oxlint-disable-next-line typescript/no-non-null-assertion
+  browserslistToTargets([`chrome ${major}`]).chrome!;
 
 const manifest = createManifest(true);
+
+describe("MIN_CHROME_VERSION", () => {
+  const [major] = MIN_CHROME_VERSION.split(".", 1);
+
+  test("is a valid Chrome version", () => {
+    expect.assertions(1);
+    expect(MIN_CHROME_VERSION).toMatch(CHROME_VERSION_RE);
+  });
+
+  test("is at least Chrome 88 (manifest v3 minimum)", () => {
+    expect.assertions(1);
+    expect(Number(major)).toBeGreaterThanOrEqual(88);
+  });
+
+  test("is the manifest minimum_chrome_version", () => {
+    expect.assertions(2);
+    expect(manifest.minimum_chrome_version).toBe(MIN_CHROME_VERSION);
+    expect(dist.minimum_chrome_version).toBe(MIN_CHROME_VERSION);
+  });
+
+  test("build CSS target is its major version", () => {
+    expect.assertions(1);
+    expect(cssTarget(MIN_CHROME_VERSION)).toBe(browserslistTarget(major));
+  });
+});
+
+describe("Chrome browser version", () => {
+  // Oracle validation: the "is valid"/"is invalid" cases check CHROME_VERSION_RE
+  // against Chromium's version spec, not product code.
+  describe.each([
+    ["152", 152],
+    ["152.0", 152],
+    ["152.0.7000", 152],
+    ["152.0.7000.12", 152],
+    ["1", 1],
+    ["1000.10.100000.1", 1000],
+  ])("%s", (version, major) => {
+    test("is valid", () => {
+      expect.assertions(1);
+      expect(version).toMatch(CHROME_VERSION_RE);
+    });
+
+    test(`build CSS target is chrome ${major}`, () => {
+      expect.assertions(1);
+      expect(cssTarget(version)).toBe(browserslistTarget(major));
+    });
+  });
+
+  test.each([
+    "",
+    " ",
+    "-1",
+    "0",
+    "0152",
+    "152.",
+    ".152",
+    "152..0",
+    "152.01",
+    "152.0.7000.12.1",
+    "v152",
+    "152.0-beta",
+    " 152",
+  ])("%p is invalid", (version) => {
+    expect.assertions(1);
+    expect(version).not.toMatch(CHROME_VERSION_RE);
+  });
+});
 
 test("is an object", () => {
   expect.assertions(1);
@@ -166,31 +242,67 @@ test("does not have version_name when when debug option is false", () => {
   expect(manifest2.version_name).toBeUndefined();
 });
 
-// HACK: Mutating env vars that were set before the process started doesn't
-// work in bun, so we skip tests which rely on the CI env var _not_ being set.
-test.skipIf(Boolean(process.env.CI))("has version_name when CI env var is not set", () => {
+/** Pins `process.env.CI` for one test. */
+function pinCI(value: string) {
+  const old = process.env.CI;
+  onTestFinished(() => {
+    if (old === undefined) delete process.env.CI;
+    else process.env.CI = old;
+  });
+  process.env.CI = value;
+}
+
+test.serial("has version_name when CI env var is empty", () => {
   expect.assertions(1);
+  pinCI(""); // empty is falsy, same as unset for `!process.env.CI`
   const manifest2 = createManifest();
   expect(manifest2.version_name).toBeDefined();
 });
 
-const oldCI = process.env.CI;
-const restoreCI = () => {
-  if (oldCI === undefined) {
-    // TODO: Consider setting to undefined instead. Delete does not currently
-    // work in bun for env vars that were set before the process started.
-    //  ↳ https://github.com/oven-sh/bun/issues/1559#issuecomment-1440507885
-    //  ↳ May be fixed, need to investigate; https://github.com/oven-sh/bun/pull/7614
-    delete process.env.CI;
-  } else {
-    process.env.CI = oldCI;
-  }
-};
-
-test("does not have version_name when env var CI=true", () => {
+test.serial("does not have version_name when env var CI=true", () => {
   expect.assertions(1);
-  process.env.CI = "true";
+  pinCI("true");
   const manifest2 = createManifest();
   expect(manifest2.version_name).toBeUndefined();
-  restoreCI();
+});
+
+test("has a strict content security policy for extension pages", () => {
+  expect.assertions(1);
+  expect(manifest.content_security_policy?.extension_pages).toBe(
+    "default-src 'none';base-uri 'none';script-src 'self';style-src 'self';img-src 'self';",
+  );
+});
+
+// https://developer.chrome.com/docs/extensions/develop/concepts/cross-origin-isolation
+test("is cross-origin isolated", () => {
+  expect.assertions(2);
+  expect(manifest.cross_origin_embedder_policy).toEqual({ value: "require-corp" });
+  expect(manifest.cross_origin_opener_policy).toEqual({ value: "same-origin" });
+});
+
+test("is enabled offline", () => {
+  expect.assertions(1);
+  expect(manifest.offline_enabled).toBeTrue();
+});
+
+test("is not allowed in incognito", () => {
+  expect.assertions(1);
+  expect(manifest.incognito).toBe("not_allowed");
+});
+
+// https://developer.chrome.com/docs/extensions/reference/manifest/version
+// 1-4 dot-separated integers in 0..65535, no leading zeros, not all zero.
+test("version is a valid extension version", () => {
+  expect.assertions(3);
+  const parts = manifest.version.split(".");
+  expect(manifest.version).toMatch(/^(?:0|[1-9]\d*)(?:\.(?:0|[1-9]\d*)){0,3}$/u);
+  expect(Math.max(...parts.map(Number))).toBeLessThanOrEqual(65_535);
+  expect(parts.some((part) => part !== "0")).toBeTrue();
+});
+
+// https://developer.chrome.com/docs/extensions/reference/manifest/description
+test("description is non-empty and at most 132 characters", () => {
+  expect.assertions(2);
+  expect(manifest.description?.length).toBeGreaterThan(0);
+  expect(manifest.description?.length).toBeLessThanOrEqual(132);
 });

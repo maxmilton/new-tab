@@ -75,6 +75,7 @@ test("rendered DOM contains expected elements", async () => {
   expect(root.id).toBe("b");
 });
 
+// accepted tradeoff: snapshot of own output
 test("rendered DOM matches snapshot", async () => {
   expect.assertions(1);
   const rendered = render(BookmarkBar());

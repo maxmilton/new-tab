@@ -53,33 +53,13 @@ describe("themes.json", () => {
   });
 });
 
-describe.each(themeNames.map((t) => [t]))("theme: %s", (theme) => {
-  const css = themes[theme];
-  const ast = compile(css);
-
+/** Tests every theme shares; registered inside each theme's describe. */
+function commonThemeTests(css: string, ast: Element[]) {
   test("is within expected size limits", () => {
     expect.assertions(2);
     expect(css.length).toBeGreaterThan(80);
     expect(css.length).toBeLessThan(1500);
   });
-
-  // TODO: More elegant way to test auto theme?
-  if (theme === "auto") {
-    test("contains exactly one @media query", () => {
-      expect.assertions(1);
-      expect(css).toIncludeRepeated("@media", 1);
-    });
-
-    test("@media query checks prefers-color-scheme is dark", () => {
-      expect.assertions(1);
-      expect(css).toInclude("@media (prefers-color-scheme:dark)");
-    });
-  } else {
-    test("does not contain any @media queries", () => {
-      expect.assertions(1);
-      expect(css).not.toInclude("@media");
-    });
-  }
 
   test("does not contain any @font-face rules", () => {
     expect.assertions(1);
@@ -104,62 +84,72 @@ describe.each(themeNames.map((t) => [t]))("theme: %s", (theme) => {
     expect(ast).toBeArray();
     expect(ast).not.toBeEmpty();
   });
+}
 
-  // oxlint-disable vitest/no-conditional-in-test
-  // TODO: More elegant way to test auto theme?
-  if (theme === "auto") {
-    test("has two :root{} which each contains all expected CSS variables", () => {
-      expect.assertions(2);
-      let found = 0;
-      const variables: string[][] = [];
-      walk(ast, (element) => {
-        if (element.type !== RULESET) return; // continue
-        if (element.value !== ":root") return SKIP;
-        found += 1;
-        const variables2: string[] = [];
-        for (const child of element.children as Element[]) {
-          if (child.type === DECLARATION) {
-            if ((child.props as string).startsWith("--") && child.children) {
-              variables2.push(child.props as string);
-            }
-          } else {
-            throw new Error(`Unexpected child element type: ${child.type}`);
-          }
-        }
-        variables.push(variables2);
-        // oxlint-disable-next-line typescript/consistent-return
-        return SKIP; // we manually iterated over the children
-      });
-      expect(found).toBe(2);
-      // @ts-expect-error - TODO: Fix type comparison of string[] to readonly string[].
-      expect(variables).toEqual([cssVariables, cssVariables]);
-    });
-  } else {
-    test("has single :root{} which contains all expected CSS variables", () => {
-      expect.assertions(2);
-      let found = 0;
-      const variables: string[] = [];
-      walk(ast, (element) => {
-        if (element.type !== RULESET) return; // continue
-        if (element.value !== ":root") return SKIP;
-        found += 1;
-        for (const child of element.children as Element[]) {
-          if (child.type === DECLARATION) {
-            if ((child.props as string).startsWith("--") && child.children) {
-              variables.push(child.props as string);
-            }
-          } else {
-            throw new Error(`Unexpected child element type: ${child.type}`);
-          }
-        }
-        return SKIP; // we manually iterated over the children
-      });
-      expect(found).toBe(1);
-      // @ts-expect-error - TODO: Fix type comparison of string[] to readonly string[].
-      expect(variables).toEqual(cssVariables);
-    });
-  }
-  // oxlint-enable vitest/no-conditional-in-test
+/** CSS variable names declared in each `:root {}` rule, in source order. */
+function rootVariables(ast: Element[]): string[][] {
+  const roots: string[][] = [];
+  walk(ast, (element) => {
+    if (element.type !== RULESET) return; // continue
+    if (element.value !== ":root") return SKIP;
+    const variables: string[] = [];
+    for (const child of element.children as Element[]) {
+      if (child.type !== DECLARATION) {
+        throw new Error(`Unexpected child element type: ${child.type}`);
+      }
+      if ((child.props as string).startsWith("--") && child.children) {
+        variables.push(child.props as string);
+      }
+    }
+    roots.push(variables);
+    return SKIP; // we manually iterated over the children
+  });
+  return roots;
+}
+
+describe.each(themeNames.filter((t) => t !== "auto").map((t) => [t]))("theme: %s", (theme) => {
+  const css = themes[theme];
+  const ast = compile(css);
+
+  // oxlint-disable-next-line vitest/require-hook
+  commonThemeTests(css, ast);
+
+  test("does not contain any @media queries", () => {
+    expect.assertions(1);
+    expect(css).not.toInclude("@media");
+  });
+
+  test("has single :root{} which contains all expected CSS variables", () => {
+    expect.assertions(2);
+    const roots = rootVariables(ast);
+    expect(roots).toHaveLength(1);
+    expect(roots[0]).toEqual([...cssVariables]);
+  });
+});
+
+describe("theme: auto", () => {
+  const css = themes.auto;
+  const ast = compile(css);
+
+  // oxlint-disable-next-line vitest/require-hook
+  commonThemeTests(css, ast);
+
+  test("contains exactly one @media query", () => {
+    expect.assertions(1);
+    expect(css).toIncludeRepeated("@media", 1);
+  });
+
+  test("@media query checks prefers-color-scheme is dark", () => {
+    expect.assertions(1);
+    expect(css).toInclude("@media (prefers-color-scheme:dark)");
+  });
+
+  test("has two :root{} which each contains all expected CSS variables", () => {
+    expect.assertions(2);
+    const roots = rootVariables(ast);
+    expect(roots).toHaveLength(2);
+    expect(roots).toEqual([[...cssVariables], [...cssVariables]]);
+  });
 });
 
 const MODULE_PATH_THEME = Bun.resolveSync("./src/theme.ts", ".");
@@ -194,7 +184,7 @@ async function load(themeName?: (typeof themeNames)[number]) {
   await happyDOM.waitUntilComplete();
 }
 
-describe("theme loader", () => {
+describe.serial("theme loader", () => {
   // Completely reset DOM and global state between tests
   afterEach(reset);
 
@@ -205,25 +195,28 @@ describe("theme loader", () => {
     expect(document.adoptedStyleSheets).toHaveLength(1); // from src/theme.ts
   });
 
-  test("loads auto theme by default", async () => {
-    expect.assertions(5);
+  test("applies the preloaded auto theme color-scheme", async () => {
+    expect.assertions(1);
     await load();
+    expect(window.getComputedStyle(document.documentElement).colorScheme).toBe("light dark");
+  });
 
-    const rootStyles = window.getComputedStyle(document.documentElement);
+  test("applies the preloaded auto theme background", async () => {
+    expect.assertions(2);
+    await load();
+    // TODO: Read both from document.body once happy-dom supports proper CSS :root inheritance.
+    expect(window.getComputedStyle(document.documentElement).getPropertyValue("--b")).toBe(
+      "#fafafa",
+    );
+    expect(window.getComputedStyle(document.body).backgroundColor).toBe("#fafafa");
+  });
+
+  test("applies the preloaded auto theme as a light hex background", async () => {
+    expect.assertions(2);
+    await load();
     const styles = window.getComputedStyle(document.body);
-    expect(rootStyles.colorScheme).toBe("light dark");
-    expect(rootStyles.getPropertyValue("--b")).toBe("#fafafa");
-    expect(styles.backgroundColor).toBe("#fafafa");
     expect(isHexColor(styles.backgroundColor)).toBeTrue();
     expect(isLightOrDark(styles.backgroundColor)).toBe("light");
-
-    // TODO: Use this once happy-dom supports proper CSS :root inheritance.
-    // const styles = window.getComputedStyle(document.body);
-    // expect(styles.colorScheme).toBe("light dark");
-    // expect(styles.getPropertyValue("--b")).toBe("#fafafa");
-    // expect(styles.backgroundColor).toBe("#fafafa");
-    // expect(isHexColor(styles.backgroundColor)).toBeTrue();
-    // expect(isLightOrDark(styles.backgroundColor)).toBe("light");
   });
 
   test("auto theme is light when system is light", async () => {
@@ -240,5 +233,13 @@ describe("theme loader", () => {
     await load("auto");
     const styles = window.getComputedStyle(document.body);
     expect(isLightOrDark(styles.backgroundColor)).toBe("dark");
+  });
+
+  test("applies the stored theme instead of auto", async () => {
+    expect.assertions(1);
+    happyDOM.settings.device.prefersColorScheme = "dark";
+    await load("light");
+    const styles = window.getComputedStyle(document.body);
+    expect(isLightOrDark(styles.backgroundColor)).toBe("light");
   });
 });

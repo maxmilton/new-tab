@@ -27,39 +27,41 @@ async function load() {
   return fetchMock;
 }
 
-test("renders entire settings app", async () => {
-  expect.assertions(1);
-  await load();
-  expect(document.body.getHTML().length).toBeGreaterThan(600);
+describe.serial("settings app", () => {
+  test("renders entire settings app", async () => {
+    expect.assertions(1);
+    await load();
+    expect(document.body.getHTML().length).toBeGreaterThan(600);
 
-  // TODO: More and better assertions.
-});
+    // TODO: More and better assertions.
+  });
 
-test("does not call any console methods", async () => {
-  expect.assertions(1);
-  await load();
-  expect(happyDOM.virtualConsolePrinter.read()).toBeArrayOfSize(0);
-});
+  test("does not call any console methods", async () => {
+    expect.assertions(1);
+    await load();
+    expect(happyDOM.virtualConsolePrinter.read()).toBeArrayOfSize(0);
+  });
 
-test("does not call any performance methods", async () => {
-  expect.hasAssertions(); // variable number of assertions
-  const check = performanceSpy();
-  await load();
-  check();
-});
+  test("does not call any performance methods", async () => {
+    expect.assertions(10); // one per spied performance method
+    const check = performanceSpy();
+    await load();
+    check();
+  });
 
-test("fetches themes.json once and does no other fetch calls", async () => {
-  expect.assertions(2);
-  const fetchMock = await load();
-  expect(fetchMock).toHaveBeenCalledTimes(1);
-  expect(fetchMock).toHaveBeenCalledWith("themes.json");
-});
+  test("fetches only themes.json, once", async () => {
+    expect.assertions(2);
+    const fetchMock = await load();
+    expect(fetchMock).toHaveBeenCalledTimes(1);
+    expect(fetchMock).toHaveBeenCalledWith("themes.json");
+  });
 
-test("gets stored user settings once on load", async () => {
-  expect.assertions(1);
-  const spy = spyOn(chrome.storage.local, "get");
-  await load();
-  expect(spy).toHaveBeenCalledTimes(1);
+  test("gets stored user settings once on load", async () => {
+    expect.assertions(1);
+    using spy = spyOn(chrome.storage.local, "get");
+    await load();
+    expect(spy).toHaveBeenCalledTimes(1);
+  });
 });
 
 const css = await Bun.file("dist/settings.css").text();

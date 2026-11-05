@@ -24,65 +24,82 @@ async function load(mockUserSettings?: UserStorageData) {
   await happyDOM.waitUntilComplete();
 }
 
-test("renders entire newtab app", async () => {
-  expect.assertions(7);
-  await load();
-  expect(document.body.getHTML().length).toBeGreaterThan(1000);
-  expect(document.body.querySelector("#b")).toBeTruthy();
-  expect(document.body.querySelector("#s")).toBeTruthy();
-  expect(document.body.querySelector("#m")).toBeTruthy();
-  expect(document.body.querySelector("#d")).toBeTruthy();
+describe.serial("newtab app", () => {
+  test("renders a non-trivial body", async () => {
+    expect.assertions(1);
+    await load();
+    expect(document.body.getHTML().length).toBeGreaterThan(1000);
+  });
 
-  const headings = [...document.body.querySelectorAll("h2")].map((h2) => h2.textContent);
-  expect(headings).toHaveLength(DEFAULT_SECTION_ORDER.length);
-  expect(headings).toEqual([...DEFAULT_SECTION_ORDER]);
-});
+  test("mounts search, bookmark bar and menu", async () => {
+    expect.assertions(4);
+    await load();
+    expect(document.body.querySelector("#b")).toBeTruthy();
+    expect(document.body.querySelector("#s")).toBeTruthy();
+    expect(document.body.querySelector("#m")).toBeTruthy();
+    expect(document.body.querySelector("#d")).toBeTruthy();
+  });
 
-test("does not call any console methods", async () => {
-  expect.assertions(1);
-  await load();
-  expect(happyDOM.virtualConsolePrinter.read()).toBeArrayOfSize(0);
-});
+  test("renders sections in default order", async () => {
+    expect.assertions(2);
+    await load();
+    const headings = [...document.body.querySelectorAll("h2")].map((h2) => h2.textContent);
+    expect(headings).toHaveLength(5);
+    expect(headings).toEqual([
+      "Open Tabs",
+      "Bookmarks",
+      "History",
+      "Top Sites",
+      "Recently Closed Tabs",
+    ]);
+  });
 
-test("does not call any performance methods", async () => {
-  expect.hasAssertions(); // variable number of assertions
-  const check = performanceSpy();
-  await load();
-  check();
-});
+  test("does not call any console methods", async () => {
+    expect.assertions(1);
+    await load();
+    expect(happyDOM.virtualConsolePrinter.read()).toBeArrayOfSize(0);
+  });
 
-test("does not call fetch()", async () => {
-  expect.assertions(1);
-  const spy = spyOn(global, "fetch");
-  await load();
-  expect(spy).not.toHaveBeenCalled();
-});
+  test("does not call any performance methods", async () => {
+    expect.assertions(10); // one per spied performance method
+    const check = performanceSpy();
+    await load();
+    check();
+  });
 
-test("gets stored user settings once", async () => {
-  expect.assertions(1);
-  const spy = spyOn(chrome.storage.local, "get");
-  await load();
-  expect(spy).toHaveBeenCalledTimes(1);
-});
+  test("does not call fetch()", async () => {
+    expect.assertions(1);
+    using spy = spyOn(global, "fetch");
+    await load();
+    expect(spy).not.toHaveBeenCalled();
+  });
 
-test("hides bookmark bar when storage.b is true", async () => {
-  expect.assertions(1);
-  await load({ t: "", b: true });
-  expect(document.body.querySelector("#b")).toBeFalsy();
-});
+  test("gets stored user settings once", async () => {
+    expect.assertions(1);
+    using spy = spyOn(chrome.storage.local, "get");
+    await load();
+    expect(spy).toHaveBeenCalledTimes(1);
+  });
 
-test("shows bookmark bar when storage.b is false", async () => {
-  expect.assertions(1);
-  await load({ t: "", b: false });
-  expect(document.body.querySelector("#b")).toBeTruthy();
-});
+  test("hides bookmark bar when storage.b is true", async () => {
+    expect.assertions(1);
+    await load({ t: "", b: true });
+    expect(document.body.querySelector("#b")).toBeFalsy();
+  });
 
-test("renders sections in the order given by storage.o", async () => {
-  expect.assertions(1);
-  const order = DEFAULT_SECTION_ORDER.toReversed();
-  await load({ t: "", o: order });
-  const headings = [...document.body.querySelectorAll("h2")].map((h2) => h2.textContent);
-  expect(headings).toEqual(order);
+  test("shows bookmark bar when storage.b is false", async () => {
+    expect.assertions(1);
+    await load({ t: "", b: false });
+    expect(document.body.querySelector("#b")).toBeTruthy();
+  });
+
+  test("renders sections in the order given by storage.o", async () => {
+    expect.assertions(1);
+    const order = DEFAULT_SECTION_ORDER.toReversed();
+    await load({ t: "", o: order });
+    const headings = [...document.body.querySelectorAll("h2")].map((h2) => h2.textContent);
+    expect(headings).toEqual(order);
+  });
 });
 
 // TODO: Test themes logic
