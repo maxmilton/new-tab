@@ -1,5 +1,16 @@
 import pkg from "./package.json" with { type: "jsonc" };
 
+export const MIN_CHROME_VERSION = "152";
+
+/**
+ * Converts a Chrome version to a lightningcss target. Only the major is kept;
+ * Chrome's BUILD/PATCH don't fit lightningcss's 8-bit minor/patch fields.
+ */
+export function cssTarget(version: string): number {
+  // oxlint-disable-next-line no-bitwise, unicorn/prefer-number-coercion
+  return Number.parseInt(version, 10) << 16;
+}
+
 function gitRef() {
   return Bun.spawnSync(["git", "describe", "--always", "--dirty=-dev", "--broken"])
     .stdout.toString()
@@ -22,7 +33,7 @@ export function createManifest(isDebug = !process.env.CI): chrome.runtime.Manife
     version: pkg.version.split("-", 1)[0],
     // Shippable releases should not have a named version
     version_name: isDebug ? gitRef() : undefined,
-    minimum_chrome_version: "152", // matches build
+    minimum_chrome_version: MIN_CHROME_VERSION,
     icons: {
       16: "icon16.png",
       48: "icon48.png",

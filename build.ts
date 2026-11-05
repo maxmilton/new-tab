@@ -1,12 +1,11 @@
 import { basename } from "node:path";
 import * as lightningcss from "lightningcss";
 import * as terser from "terser";
-import { createManifest } from "./manifest.config.ts";
+import { createManifest, cssTarget, MIN_CHROME_VERSION } from "./manifest.config.ts";
 
 const mode = Bun.env.NODE_ENV;
 const isDev = mode === "development";
 
-// TODO: Use bun to bundle CSS once it's configurable e.g., targets, include.
 async function compileCSS(path: string) {
   const source = await Bun.file(path).bytes();
   const result = await lightningcss.bundleAsync({
@@ -14,9 +13,7 @@ async function compileCSS(path: string) {
     // @ts-expect-error - bundle does accept code, same as transform
     code: source,
     minify: !isDev,
-    // oxlint-disable-next-line no-bitwise
-    targets: { chrome: 152 << 16 }, // matches manifest minimum_chrome_version
-    include: lightningcss.Features.Nesting,
+    targets: { chrome: cssTarget(MIN_CHROME_VERSION) },
   });
   if (result.warnings.length > 0) console.error(result.warnings);
   return result.code;
@@ -79,6 +76,7 @@ const out1 = await Bun.build({
   naming: "[dir]/[name].[ext]",
   target: "browser",
   allowUnresolved: [],
+  env: "disable",
   minify: !isDev,
   sourcemap: isDev ? "linked" : "none",
 });
@@ -90,6 +88,7 @@ const out2 = await Bun.build({
   outdir: "dist",
   target: "browser",
   allowUnresolved: [],
+  env: "disable",
   minify: !isDev,
   sourcemap: isDev ? "linked" : "none",
 });
