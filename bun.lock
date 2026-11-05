@@ -9,7 +9,7 @@
       },
       "devDependencies": {
         "@biomejs/biome": "2.5.15",
-        "@maxmilton/oxlint-config": "0.0.22",
+        "@maxmilton/oxlint-config": "0.0.24",
         "@maxmilton/test-utils": "0.0.18",
         "@playwright/test": "1.64.0",
         "@types/bun": "1.4.3",
@@ -83,7 +83,7 @@
 
     "@maxmilton/html-parser": ["@maxmilton/html-parser@0.0.13", "", {}, "sha512-YngrbqbZF7/vyU5dyjzsrrBn6+LMwp6jN2bkNt2ZrQICkyjdZTqIh7fRbjKKKJYjZbiRX+JvKlwGRek437TtVQ=="],
 
-    "@maxmilton/oxlint-config": ["@maxmilton/oxlint-config@0.0.22", "", { "peerDependencies": { "oxlint": "^1.86.0" } }, "sha512-E2M6nU0ypGHZgp6VojOEIh8AonnyMwRizmhocbl8MnZMT5eZ01MDs2Jh+4hQow0jXVo3GNR3Hg9NYyviICCYKw=="],
+    "@maxmilton/oxlint-config": ["@maxmilton/oxlint-config@0.0.24", "", { "peerDependencies": { "oxlint": "^1.88.0" }, "optionalPeers": ["oxlint"] }, "sha512-qu6urzOpAuTGW5pwwnYte9an3JIJT4cBLn5seR0Xj7/fy9X1F5le0QgOnMTF8FHV5Xz+8DiHgciDYqBsSmW7xw=="],
 
     "@maxmilton/test-utils": ["@maxmilton/test-utils@0.0.18", "", { "dependencies": { "@maxmilton/html-parser": "^0.0.13", "@types/stylis": "^4.2.7", "stylis": "^4.3.6" }, "peerDependencies": { "happy-dom": ">=14.0.0 <21.0.0" }, "optionalPeers": ["happy-dom"] }, "sha512-ou2ooZXHjF0buX89cqcsMe1lcuVIJrAfLr9TbQHVhFW5GzpWZxKUbEew4KNkUCHG+n0pOP6ctJSpBzDyMM5P0Q=="],
 
