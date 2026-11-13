@@ -37,7 +37,7 @@
     "@types/chrome": "0.3.5",
     "happy-dom": "21.0.1",
     "lightningcss": "1.33.0",
-    "oxfmt": "0.73.0",
+    "oxfmt": "0.77.0",
     "oxlint": "1.88.0",
     "oxlint-tsgolint": "7.0.2004",
     "stylelint": "17.16.0",
